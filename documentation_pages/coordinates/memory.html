@@ -185,7 +185,7 @@ extracted from a DCD
 <span class="n">universe</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 
 <span class="n">coordinates</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">timeseries</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
-<span class="n">universe2</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">)</span>
+<span class="n">universe2</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;afc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="rubric">Creating an in-memory trajectory with
@@ -204,17 +204,9 @@ same functionality for any supported trajectory format:</p>
 <span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
 
 <span class="n">coordinates</span> <span class="o">=</span> <span class="n">AnalysisFromFunction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">ag</span><span class="p">:</span> <span class="n">ag</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
-                                   <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                                   <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span><span class="o">.</span><span class="n">results</span>
 <span class="n">u2</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">)</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">By default the <a class="reference internal" href="#MDAnalysis.coordinates.memory.MemoryReader" title="MDAnalysis.coordinates.memory.MemoryReader"><code class="xref py py-class docutils literal"><span class="pre">MemoryReader</span></code></a> reads an array in <em>afc</em>
-(atom, frame, coordinates) order and therefore the first two axes
-of <code class="docutils literal"><span class="pre">results</span></code> (in <em>fac</em> order) have to be swapped with
-<code class="docutils literal"><span class="pre">results.swapaxes(0,</span> <span class="pre">1)</span></code>. This might be changed in the
-future.</p>
 </div>
 </div>
 <div class="section" id="creating-an-in-memory-trajectory-of-a-sub-system">
@@ -237,7 +229,7 @@ only the protein is created:</p>
 <span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
 
 <span class="n">coordinates</span> <span class="o">=</span> <span class="n">AnalysisFromFunction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">ag</span><span class="p">:</span> <span class="n">ag</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
-                                   <span class="n">protein</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                                   <span class="n">protein</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span><span class="o">.</span><span class="n">results</span>
 <span class="n">u2</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Merge</span><span class="p">(</span><span class="n">protein</span><span class="p">)</span>            <span class="c1"># create the protein-only Universe</span>
 <span class="n">u2</span><span class="o">.</span><span class="n">load_new</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">)</span>
 </pre></div>
@@ -247,7 +239,7 @@ the in-memory trajectory is loaded from these coordinates. In
 principle, this could have all be done in one line:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u2</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Merge</span><span class="p">(</span><span class="n">protein</span><span class="p">)</span><span class="o">.</span><span class="n">load_new</span><span class="p">(</span>
          <span class="n">AnalysisFromFunction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">ag</span><span class="p">:</span> <span class="n">ag</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
-                              <span class="n">protein</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                              <span class="n">protein</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span><span class="o">.</span><span class="n">results</span><span class="p">,</span>
          <span class="n">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -597,7 +589,7 @@ weren&#8217;t originally present.</p>
 
 <dl class="class">
 <dt id="MDAnalysis.coordinates.memory.MemoryReader">
-<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.memory.</code><code class="descname">MemoryReader</code><span class="sig-paren">(</span><em>coordinate_array</em>, <em>format='afc'</em>, <em>dimensions=None</em>, <em>dt=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/memory.html#MemoryReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.memory.</code><code class="descname">MemoryReader</code><span class="sig-paren">(</span><em>coordinate_array</em>, <em>order='fac'</em>, <em>dimensions=None</em>, <em>dt=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/memory.html#MemoryReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>MemoryReader works with trajectories represented as numpy arrays.</p>
 <p>A trajectory reader interface to a numpy array of the coordinates.
 For compatibility with the timeseries interface, support is provided for
@@ -607,8 +599,8 @@ specifying the order of columns through the format option.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>coordinate_array</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.11)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a> object) &#8211; The underlying array of coordinates</li>
-<li><strong>format</strong> (<em>str, optional</em>) &#8211; the order/shape of the return data array, corresponding
+<li><strong>coordinate_array</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a> object) &#8211; The underlying array of coordinates</li>
+<li><strong>order</strong> (<em>str, optional</em>) &#8211; the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
@@ -1169,15 +1161,15 @@ If the name <em>new</em> is already in use by an existing auxiliary.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.memory.MemoryReader.set_array">
-<code class="descname">set_array</code><span class="sig-paren">(</span><em>coordinate_array</em>, <em>format='afc'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/memory.html#MemoryReader.set_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader.set_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set underlying array in desired column format.</p>
+<code class="descname">set_array</code><span class="sig-paren">(</span><em>coordinate_array</em>, <em>order='fac'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/memory.html#MemoryReader.set_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader.set_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set underlying array in desired column order.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>coordinate_array</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.11)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a> object) &#8211; The underlying array of coordinates</li>
-<li><strong>format</strong> &#8211; The order/shape of the return data array, corresponding
+<li><strong>coordinate_array</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a> object) &#8211; The underlying array of coordinates</li>
+<li><strong>order</strong> &#8211; The order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
@@ -1224,7 +1216,7 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 <dt id="MDAnalysis.coordinates.memory.MemoryReader.timeseries">
 <code class="descname">timeseries</code><span class="sig-paren">(</span><em>asel=None</em>, <em>start=0</em>, <em>stop=-1</em>, <em>step=1</em>, <em>format='afc'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/memory.html#MemoryReader.timeseries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader.timeseries" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a subset of coordinate data for an AtomGroup in desired
-column format. If no selection is given, it will return a view of
+column order/format. If no selection is given, it will return a view of
 the underlying array, while a copy is returned otherwise.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1240,7 +1232,7 @@ data is returned whenever asel is different from None.</li>
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
-coordinates)</li>
+coordinates).</li>
 </ul>
 </td>
 </tr>

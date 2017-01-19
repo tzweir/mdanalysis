@@ -801,8 +801,8 @@
     <span class="k">for</span> <span class="n">s</span><span class="p">,</span><span class="n">sl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">slices_n</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="n">tmp_ensembles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span>
             <span class="n">ensemble</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
-            <span class="n">ensemble</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">timeseries</span><span class="p">()</span>
-            <span class="p">[:,</span> <span class="n">slices_n</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span><span class="n">slices_n</span><span class="p">[</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="p">:],</span>
+            <span class="n">ensemble</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">timeseries</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s1">&#39;fac&#39;</span><span class="p">)</span>
+            <span class="p">[</span><span class="n">slices_n</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span><span class="n">slices_n</span><span class="p">[</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="p">:,</span> <span class="p">:],</span>
             <span class="n">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">tmp_ensembles</span></div>

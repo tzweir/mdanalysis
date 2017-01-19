@@ -177,7 +177,7 @@
 <span class="sd">    universe = mda.Universe(PSF, DCD)</span>
 
 <span class="sd">    coordinates = universe.trajectory.timeseries(universe.atoms)</span>
-<span class="sd">    universe2 = mda.Universe(PSF, coordinates, format=MemoryReader)</span>
+<span class="sd">    universe2 = mda.Universe(PSF, coordinates, format=MemoryReader, order=&#39;afc&#39;)</span>
 
 
 <span class="sd">.. rubric:: Creating an in-memory trajectory with</span>
@@ -198,14 +198,8 @@
 <span class="sd">  u = mda.Universe(PDB, XTC)</span>
 
 <span class="sd">  coordinates = AnalysisFromFunction(lambda ag: ag.positions.copy(),</span>
-<span class="sd">                                     u.atoms).run().results.swapaxes(0, 1)</span>
+<span class="sd">                                     u.atoms).run().results</span>
 <span class="sd">  u2 = mda.Universe(PDB, coordinates, format=MemoryReader)</span>
-
-<span class="sd">.. Note:: By default the :class:`MemoryReader` reads an array in *afc*</span>
-<span class="sd">   (atom, frame, coordinates) order and therefore the first two axes</span>
-<span class="sd">   of ``results`` (in *fac* order) have to be swapped with</span>
-<span class="sd">   ``results.swapaxes(0, 1)``. This might be changed in the</span>
-<span class="sd">   future.</span>
 
 <span class="sd">.. _creating-in-memory-trajectory-label:</span>
 
@@ -231,7 +225,7 @@
 <span class="sd">  protein = u.select_atoms(&quot;protein&quot;)</span>
 
 <span class="sd">  coordinates = AnalysisFromFunction(lambda ag: ag.positions.copy(),</span>
-<span class="sd">                                     protein).run().results.swapaxes(0, 1)</span>
+<span class="sd">                                     protein).run().results</span>
 <span class="sd">  u2 = mda.Merge(protein)            # create the protein-only Universe</span>
 <span class="sd">  u2.load_new(coordinates, format=MemoryReader)</span>
 
@@ -241,7 +235,7 @@
 
 <span class="sd">  u2 = mda.Merge(protein).load_new(</span>
 <span class="sd">           AnalysisFromFunction(lambda ag: ag.positions.copy(),</span>
-<span class="sd">                                protein).run().results.swapaxes(0, 1),</span>
+<span class="sd">                                protein).run().results,</span>
 <span class="sd">           format=MemoryReader)</span>
 
 <span class="sd">The new :class:`~MDAnalysis.core.universe.Universe` ``u2`` can be used</span>
@@ -301,7 +295,7 @@
     <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;MEMORY&#39;</span>
     <span class="n">_Timestep</span> <span class="o">=</span> <span class="n">Timestep</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coordinate_array</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;afc&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coordinate_array</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;fac&#39;</span><span class="p">,</span>
                  <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -309,7 +303,7 @@
 <span class="sd">        ----------</span>
 <span class="sd">        coordinate_array : :class:`~numpy.ndarray` object</span>
 <span class="sd">            The underlying array of coordinates</span>
-<span class="sd">        format : str, optional</span>
+<span class="sd">        order : str, optional</span>
 <span class="sd">            the order/shape of the return data array, corresponding</span>
 <span class="sd">            to (a)tom, (f)rame, (c)oordinates all six combinations</span>
 <span class="sd">            of &#39;a&#39;, &#39;f&#39;, &#39;c&#39; are allowed ie &quot;fac&quot; - return array</span>
@@ -326,12 +320,12 @@
 
         <span class="nb">super</span><span class="p">(</span><span class="n">MemoryReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span> <span class="o">=</span> <span class="n">format</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">coordinate_array</span><span class="p">),</span> <span class="n">format</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">coordinate_array</span><span class="p">),</span> <span class="n">order</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> \
-            <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> \
-            <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)]</span>
 
         <span class="n">provided_n_atoms</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;n_atoms&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">provided_n_atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span>
@@ -347,23 +341,24 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_read_next_timestep</span><span class="p">()</span>
 
-<div class="viewcode-block" id="MemoryReader.set_array"><a class="viewcode-back" href="../../../documentation_pages/coordinates/memory.html#MDAnalysis.coordinates.memory.MemoryReader.set_array">[docs]</a>    <span class="k">def</span> <span class="nf">set_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coordinate_array</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;afc&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="MemoryReader.set_array"><a class="viewcode-back" href="../../../documentation_pages/coordinates/memory.html#MDAnalysis.coordinates.memory.MemoryReader.set_array">[docs]</a>    <span class="k">def</span> <span class="nf">set_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coordinate_array</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;fac&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set underlying array in desired column format.</span>
+<span class="sd">        Set underlying array in desired column order.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        coordinate_array : :class:`~numpy.ndarray` object</span>
 <span class="sd">            The underlying array of coordinates</span>
-<span class="sd">        format</span>
+<span class="sd">        order</span>
 <span class="sd">            The order/shape of the return data array, corresponding</span>
 <span class="sd">            to (a)tom, (f)rame, (c)oordinates all six combinations</span>
 <span class="sd">            of &#39;a&#39;, &#39;f&#39;, &#39;c&#39; are allowed ie &quot;fac&quot; - return array</span>
 <span class="sd">            where the shape is (frame, number of atoms,</span>
 <span class="sd">            coordinates)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_array</span> <span class="o">=</span> <span class="n">coordinate_array</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span> <span class="o">=</span> <span class="n">format</span></div>
+        <span class="c1"># Only make copy if not already in float32 format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_array</span> <span class="o">=</span> <span class="n">coordinate_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span> <span class="o">=</span> <span class="n">order</span></div>
 
 <div class="viewcode-block" id="MemoryReader.get_array"><a class="viewcode-back" href="../../../documentation_pages/coordinates/memory.html#MDAnalysis.coordinates.memory.MemoryReader.get_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -378,8 +373,8 @@
 
 <div class="viewcode-block" id="MemoryReader.timeseries"><a class="viewcode-back" href="../../../documentation_pages/coordinates/memory.html#MDAnalysis.coordinates.memory.MemoryReader.timeseries">[docs]</a>    <span class="k">def</span> <span class="nf">timeseries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;afc&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a subset of coordinate data for an AtomGroup in desired</span>
-<span class="sd">        column format. If no selection is given, it will return a view of</span>
-<span class="sd">        the underlying array, while a copy is returned otherwise.</span>
+<span class="sd">        column order/format. If no selection is given, it will return a view of</span>
+<span class="sd">        the underlying array, while a copy is returned otherwise. </span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ---------</span>
@@ -395,27 +390,31 @@
 <span class="sd">            to (a)tom, (f)rame, (c)oordinates all six combinations</span>
 <span class="sd">            of &#39;a&#39;, &#39;f&#39;, &#39;c&#39; are allowed ie &quot;fac&quot; - return array</span>
 <span class="sd">            where the shape is (frame, number of atoms,</span>
-<span class="sd">            coordinates)</span>
+<span class="sd">            coordinates). </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="c1"># The &quot;format&quot; name is used for compliance with DCD.timeseries</span>
+        <span class="c1"># Renaming it to order here for internal consistency in this class</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">format</span>
+        
         <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_array</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">format</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="p">:</span>
             <span class="k">pass</span>
-        <span class="k">elif</span> <span class="n">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">elif</span> <span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">format</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">elif</span> <span class="n">order</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">format</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="k">elif</span> <span class="n">order</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">elif</span> <span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="k">elif</span> <span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
-        <span class="n">a_index</span> <span class="o">=</span> <span class="n">format</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
-        <span class="n">f_index</span> <span class="o">=</span> <span class="n">format</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
+        <span class="n">a_index</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+        <span class="n">f_index</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
         <span class="n">stop_index</span> <span class="o">=</span> <span class="n">stop</span><span class="o">+</span><span class="mi">1</span>
         <span class="k">if</span> <span class="n">stop_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">stop_index</span> <span class="o">=</span> <span class="bp">None</span>
@@ -441,7 +440,7 @@
         <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
         <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">f_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_format</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
+        <span class="n">f_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stored_order</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
         <span class="n">basic_slice</span> <span class="o">=</span> <span class="p">([</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="n">f_index</span><span class="p">)</span> <span class="o">+</span>
                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">]</span> <span class="o">+</span>
                        <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">f_index</span><span class="p">))</span>
