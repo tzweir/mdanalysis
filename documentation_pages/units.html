@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>12. Constants and unit conversion — MDAnalysis.units &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>13. Constants and unit conversion — MDAnalysis.units &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -29,8 +29,8 @@
           href="../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../index.html" />
-    <link rel="next" title="13. Custom exceptions and warnings — MDAnalysis.exceptions" href="exceptions.html" />
-    <link rel="prev" title="11. Version information for MDAnalysis - MDAnalysis.version" href="version.html" /> 
+    <link rel="next" title="14. Custom exceptions and warnings — MDAnalysis.exceptions" href="exceptions.html" />
+    <link rel="prev" title="12. Version information for MDAnalysis - MDAnalysis.version" href="version.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -43,10 +43,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="exceptions.html" title="13. Custom exceptions and warnings — MDAnalysis.exceptions"
+          <a href="exceptions.html" title="14. Custom exceptions and warnings — MDAnalysis.exceptions"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="version.html" title="11. Version information for MDAnalysis - MDAnalysis.version"
+          <a href="version.html" title="12. Version information for MDAnalysis - MDAnalysis.version"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li> 
       </ul>
@@ -58,24 +58,24 @@
             </a></p>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">12. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a><ul>
-<li><a class="reference internal" href="#implementation-notes">12.1. Implementation notes</a><ul>
-<li><a class="reference internal" href="#conversions">12.1.1. Conversions</a></li>
+<li><a class="reference internal" href="#">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a><ul>
+<li><a class="reference internal" href="#implementation-notes">13.1. Implementation notes</a><ul>
+<li><a class="reference internal" href="#conversions">13.1.1. Conversions</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#functions">12.2. Functions</a></li>
-<li><a class="reference internal" href="#data">12.3. Data</a></li>
-<li><a class="reference internal" href="#references-and-footnotes">12.4. References and footnotes</a></li>
+<li><a class="reference internal" href="#functions">13.2. Functions</a></li>
+<li><a class="reference internal" href="#data">13.3. Data</a></li>
+<li><a class="reference internal" href="#references-and-footnotes">13.4. References and footnotes</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="version.html"
-                        title="previous chapter">11. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></p>
+                        title="previous chapter">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="exceptions.html"
-                        title="next chapter">13. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></p>
+                        title="next chapter">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -105,7 +105,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.units"></span><div class="section" id="constants-and-unit-conversion-mdanalysis-units">
-<h1>12. Constants and unit conversion &#8212; <a class="reference internal" href="#module-MDAnalysis.units" title="MDAnalysis.units"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.units</span></code></a><a class="headerlink" href="#constants-and-unit-conversion-mdanalysis-units" title="Permalink to this headline">¶</a></h1>
+<h1>13. Constants and unit conversion &#8212; <a class="reference internal" href="#module-MDAnalysis.units" title="MDAnalysis.units"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.units</span></code></a><a class="headerlink" href="#constants-and-unit-conversion-mdanalysis-units" title="Permalink to this headline">¶</a></h1>
 <p>The base units of MDAnalysis trajectories are the <strong>Å</strong> (<strong>ångström</strong>) for
 <strong>length</strong> and <strong>ps</strong> (<strong>pico second</strong>) for <strong>time</strong>. By default, all positions
 are in Å and all times are in ps, regardless of how the MD code stored
@@ -155,7 +155,7 @@ table on <a class="reference internal" href="#table-baseunits"><span>Base units 
 </tbody>
 </table>
 <div class="section" id="implementation-notes">
-<h2>12.1. Implementation notes<a class="headerlink" href="#implementation-notes" title="Permalink to this headline">¶</a></h2>
+<h2>13.1. Implementation notes<a class="headerlink" href="#implementation-notes" title="Permalink to this headline">¶</a></h2>
 <p>All conversions with <a class="reference internal" href="#MDAnalysis.units.convert" title="MDAnalysis.units.convert"><code class="xref py py-func docutils literal"><span class="pre">convert()</span></code></a> are carried out in a simple fashion: the
 conversion factor <span class="math">\(f_{b,b'}\)</span> from the base unit <span class="math">\(b\)</span> to another unit
 <span class="math">\(b'\)</span> is precomputed and stored (see <a class="reference internal" href="#data"><span>Data</span></a>). The numerical value of
@@ -176,7 +176,7 @@ so f[u1,u2] = factor[u2]/factor[u1]
 </pre></div>
 </div>
 <div class="section" id="conversions">
-<h3>12.1.1. Conversions<a class="headerlink" href="#conversions" title="Permalink to this headline">¶</a></h3>
+<h3>13.1.1. Conversions<a class="headerlink" href="#conversions" title="Permalink to this headline">¶</a></h3>
 <p>Examples for how to calculate some of the conversion factors that are
 hard-coded in <a class="reference internal" href="#module-MDAnalysis.units" title="MDAnalysis.units"><code class="xref py py-mod docutils literal"><span class="pre">units</span></code></a> (see <a class="reference internal" href="#data"><span>Data</span></a>).</p>
 <dl class="docutils">
@@ -215,7 +215,7 @@ factor = 1/(1e-24 * N_Avogadro / M(H2O))
 </div>
 </div>
 <div class="section" id="functions">
-<h2>12.2. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<h2>13.2. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="MDAnalysis.units.get_conversion_factor">
 <code class="descclassname">MDAnalysis.units.</code><code class="descname">get_conversion_factor</code><span class="sig-paren">(</span><em>unit_type</em>, <em>u1</em>, <em>u2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MDAnalysis/units.html#get_conversion_factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.units.get_conversion_factor" title="Permalink to this definition">¶</a></dt>
@@ -246,7 +246,7 @@ units.</td>
 
 </div>
 <div class="section" id="data">
-<span id="id2"></span><h2>12.3. Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>13.3. Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <dl class="data">
 <dt id="MDAnalysis.units.constants">
 <code class="descclassname">MDAnalysis.units.</code><code class="descname">constants</code><em class="property"> = {u'elementary_charge': 1.602176565e-19, u'N_Avogadro': 6.02214129e+23, u'calorie': 4.184}</em><a class="headerlink" href="#MDAnalysis.units.constants" title="Permalink to this definition">¶</a></dt>
@@ -373,7 +373,7 @@ unit type.</p>
 
 </div>
 <div class="section" id="references-and-footnotes">
-<h2>12.4. References and footnotes<a class="headerlink" href="#references-and-footnotes" title="Permalink to this headline">¶</a></h2>
+<h2>13.4. References and footnotes<a class="headerlink" href="#references-and-footnotes" title="Permalink to this headline">¶</a></h2>
 <table class="docutils citation" frame="void" id="jorgensen1998" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -414,10 +414,10 @@ become</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="exceptions.html" title="13. Custom exceptions and warnings — MDAnalysis.exceptions"
+          <a href="exceptions.html" title="14. Custom exceptions and warnings — MDAnalysis.exceptions"
              >next</a> |</li>
         <li class="right" >
-          <a href="version.html" title="11. Version information for MDAnalysis - MDAnalysis.version"
+          <a href="version.html" title="12. Version information for MDAnalysis - MDAnalysis.version"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li> 
       </ul>
