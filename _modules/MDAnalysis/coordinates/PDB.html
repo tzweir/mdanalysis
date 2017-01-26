@@ -303,7 +303,7 @@
     <span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read coordinates from *filename*.</span>
 
 <span class="sd">        *filename* can be a gzipped or bzip2ed compressed PDB file.</span>
@@ -312,7 +312,7 @@
 <span class="sd">        read as a trajectory where the MODEL numbers correspond to</span>
 <span class="sd">        frame numbers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PDBReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PDBReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;n_atoms&#39;</span><span class="p">]</span>
@@ -561,7 +561,7 @@
                      <span class="n">Pair</span><span class="p">(</span><span class="s1">&#39;VNL&#39;</span><span class="p">,</span> <span class="s1">&#39;CO2&#39;</span><span class="p">),</span> <span class="n">Pair</span><span class="p">(</span><span class="s1">&#39;PF5&#39;</span><span class="p">,</span> <span class="s1">&#39;FE1&#39;</span><span class="p">),</span>
                      <span class="n">Pair</span><span class="p">(</span><span class="s1">&#39;PF5&#39;</span><span class="p">,</span> <span class="s1">&#39;FE2&#39;</span><span class="p">),</span> <span class="n">Pair</span><span class="p">(</span><span class="s1">&#39;UNL&#39;</span><span class="p">,</span> <span class="s1">&#39;UNL&#39;</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="s2">&quot;conect&quot;</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="s2">&quot;conect&quot;</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">remarks</span><span class="o">=</span><span class="s2">&quot;Created by PDBWriter&quot;</span><span class="p">,</span>
                  <span class="n">convert_units</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new PDBWriter</span>
@@ -1075,21 +1075,21 @@
 
 
 <span class="k">class</span> <span class="nc">PrimitivePDBReader</span><span class="p">(</span><span class="n">PDBReader</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;PrimitivePDBReader is identical to the PDBReader,&#39;</span>
                   <span class="s1">&#39; it is deprecated in favor of the shorter name&#39;</span>
                   <span class="s1">&#39; removal targeted for version 0.16.0&#39;</span><span class="p">,</span>
                   <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PrimitivePDBReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimitivePDBReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">PrimitivePDBWriter</span><span class="p">(</span><span class="n">PDBWriter</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;PrimitivePDBWriter is identical to the Writer,&#39;</span>
                       <span class="s1">&#39;it is deprecated in favor of the shorter name&#39;</span>
                       <span class="s1">&#39; removal targeted for version 0.16.0&#39;</span><span class="p">,</span>
                       <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PrimitivePDBWriter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimitivePDBWriter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">ExtendedPDBReader</span><span class="p">(</span><span class="n">PDBReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;PDBReader that reads a PDB-formatted file with five-digit residue numbers.</span>

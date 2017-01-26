@@ -273,8 +273,8 @@
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
     <span class="n">_Timestep</span> <span class="o">=</span> <span class="n">Timestep</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">TRJReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TRJReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;AMBER TRJ reader REQUIRES the n_atoms keyword&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_n_atoms</span> <span class="o">=</span> <span class="n">n_atoms</span>
@@ -501,7 +501,7 @@
              <span class="s1">&#39;force&#39;</span><span class="p">:</span> <span class="s1">&#39;kcal/(mol*Angstrom)&#39;</span><span class="p">}</span>
     <span class="n">_Timestep</span> <span class="o">=</span> <span class="n">Timestep</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">netCDF4</span> <span class="kn">as</span> <span class="nn">netcdf</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -513,7 +513,7 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">NCDFReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NCDFReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span> <span class="o">=</span> <span class="n">netcdf</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
 
@@ -695,7 +695,7 @@
              <span class="s1">&#39;velocity&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom/ps&#39;</span><span class="p">,</span>
              <span class="s1">&#39;force&#39;</span><span class="p">:</span> <span class="s1">&#39;kcal/(mol*Angstrom)&#39;</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">filename</span><span class="p">,</span>
                  <span class="n">n_atoms</span><span class="p">,</span>
                  <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>

@@ -155,7 +155,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;CHAIN&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up the chain reader.</span>
 
 <span class="sd">        Parameters</span>
@@ -194,7 +194,7 @@
 <span class="sd">           The *delta* keyword was deprecated in favor of using *dt*.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ChainReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ChainReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="s1">&#39;delta&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Keyword &#39;delta&#39; is now deprecated &quot;</span>
@@ -347,11 +347,11 @@
 
 <div class="viewcode-block" id="ChainReader._apply"><a class="viewcode-back" href="../../../documentation_pages/coordinates/chain.html#MDAnalysis.coordinates.chain.ChainReader._apply">[docs]</a>    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Execute `method` with `kwargs` for all readers.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">reader</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="n">method</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">reader</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">readers</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">reader</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">method</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">reader</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">readers</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="ChainReader._get"><a class="viewcode-back" href="../../../documentation_pages/coordinates/chain.html#MDAnalysis.coordinates.chain.ChainReader._get">[docs]</a>    <span class="k">def</span> <span class="nf">_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get value of `attr` for all readers.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">reader</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span> <span class="k">for</span> <span class="n">reader</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">readers</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">reader</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span> <span class="k">for</span> <span class="n">reader</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">readers</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="ChainReader._get_same"><a class="viewcode-back" href="../../../documentation_pages/coordinates/chain.html#MDAnalysis.coordinates.chain.ChainReader._get_same">[docs]</a>    <span class="k">def</span> <span class="nf">_get_same</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Verify that `attr` has the same value for all readers and return value.</span>
@@ -449,7 +449,7 @@
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_apply</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ChainReader.__iter__"><a class="viewcode-back" href="../../../documentation_pages/coordinates/chain.html#MDAnalysis.coordinates.chain.ChainReader.__iter__">[docs]</a>    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ChainReader.__iter__"><a class="viewcode-back" href="../../../documentation_pages/coordinates/chain.html#MDAnalysis.coordinates.chain.ChainReader.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generator for all frames, starting at frame 1.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rewind</span><span class="p">()</span>
         <span class="c1"># start from first frame</span>
@@ -462,10 +462,10 @@
         <span class="sd">&quot;&quot;&quot;retrieve the actual filename of the list element&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="n">filename</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;{clsname} {fname} with {nframes} frames of {natoms} atoms&gt;&quot;</span>
                 <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">clsname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                    <span class="n">clsname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                     <span class="n">fname</span><span class="o">=</span><span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_filename</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
                            <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="p">],</span>
                     <span class="n">nframes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span>

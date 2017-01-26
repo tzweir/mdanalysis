@@ -249,7 +249,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># hold on to copy of kwargs; used by external libraries that</span>
         <span class="c1"># reinitialize universes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
@@ -359,7 +359,7 @@
                     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span> <span class="o">+</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">name</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">seg</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">seg</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">universe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -588,7 +588,7 @@
     <span class="k">def</span> <span class="nf">make_anchor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_ANCHOR_UNIVERSES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_gen_anchor_hash</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># return &quot;&lt;Universe with {n_atoms} atoms{bonds}&gt;&quot;.format(</span>
         <span class="c1">#    n_atoms=len(self.atoms),</span>
         <span class="c1">#    bonds=&quot; and {0} bonds&quot;.format(len(self.bonds)) if self.bonds else &quot;&quot;)</span>
@@ -683,9 +683,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_class_bases</span><span class="p">[</span><span class="n">GroupBase</span><span class="p">]</span><span class="o">.</span><span class="n">_add_prop</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">cls</span> <span class="ow">in</span> <span class="n">attr</span><span class="o">.</span><span class="n">target_classes</span><span class="p">:</span>
+        <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">attr</span><span class="o">.</span><span class="n">target_classes</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_class_bases</span><span class="p">[</span><span class="n">cls</span><span class="p">]</span><span class="o">.</span><span class="n">_add_prop</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_class_bases</span><span class="p">[</span><span class="bp">cls</span><span class="p">]</span><span class="o">.</span><span class="n">_add_prop</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
                 <span class="k">pass</span>
 
@@ -696,13 +696,13 @@
             <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Group transplants</span>
-            <span class="k">for</span> <span class="n">cls</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Atom</span><span class="p">,</span> <span class="n">Residue</span><span class="p">,</span> <span class="n">Segment</span><span class="p">,</span> <span class="n">GroupBase</span><span class="p">,</span>
+            <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Atom</span><span class="p">,</span> <span class="n">Residue</span><span class="p">,</span> <span class="n">Segment</span><span class="p">,</span> <span class="n">GroupBase</span><span class="p">,</span>
                         <span class="n">AtomGroup</span><span class="p">,</span> <span class="n">ResidueGroup</span><span class="p">,</span> <span class="n">SegmentGroup</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">meth</span> <span class="ow">in</span> <span class="n">transplants</span><span class="p">[</span><span class="n">cls</span><span class="p">]:</span>
-                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_class_bases</span><span class="p">[</span><span class="n">cls</span><span class="p">],</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">meth</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">meth</span> <span class="ow">in</span> <span class="n">transplants</span><span class="p">[</span><span class="bp">cls</span><span class="p">]:</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_class_bases</span><span class="p">[</span><span class="bp">cls</span><span class="p">],</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">meth</span><span class="p">)</span>
             <span class="c1"># Universe transplants</span>
             <span class="k">for</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">meth</span> <span class="ow">in</span> <span class="n">transplants</span><span class="p">[</span><span class="s1">&#39;Universe&#39;</span><span class="p">]:</span>
-                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">meth</span><span class="p">)</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">meth</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Universe.add_Residue"><a class="viewcode-back" href="../../../documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe.add_Residue">[docs]</a>    <span class="k">def</span> <span class="nf">add_Residue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segment</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a new Residue to this Universe</span>
@@ -801,13 +801,13 @@
         <span class="n">bonds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">bonds</span>
 
         <span class="k">class</span> <span class="nc">_fragset</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-            <span class="n">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ats&#39;</span><span class="p">]</span>
+            <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ats&#39;</span><span class="p">]</span>
             <span class="sd">&quot;&quot;&quot;Normal sets aren&#39;t hashable, this is&quot;&quot;&quot;</span>
 
-            <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ats</span><span class="p">):</span>
+            <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ats</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">ats</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ats</span><span class="p">)</span>
 
-            <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
                 <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ats</span><span class="p">)</span>
 
             <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>

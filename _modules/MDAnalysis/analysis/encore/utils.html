@@ -114,7 +114,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">loadfile</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">loadfile</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Class constructor.</span>
 
 <span class="sd">        Parameters</span>
@@ -153,13 +153,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span>
 
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">args</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">:</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">args</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">:</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
@@ -204,7 +204,7 @@
                 <span class="k">raise</span> <span class="ne">TypeError</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span> <span class="o">=</span> <span class="n">loaded</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="TriangularMatrix.__add__"><a class="viewcode-back" href="../../../../documentation_pages/analysis/encore/utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix.__add__">[docs]</a>    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+<div class="viewcode-block" id="TriangularMatrix.__add__"><a class="viewcode-back" href="../../../../documentation_pages/analysis/encore/utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix.__add__">[docs]</a>    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add scalar to matrix elements.</span>
 
 <span class="sd">        Parameters</span>
@@ -213,11 +213,11 @@
 <span class="sd">        scalar : float</span>
 <span class="sd">            Scalar to be added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">newMatrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">newMatrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
         <span class="n">newMatrix</span><span class="o">.</span><span class="n">_elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span> <span class="o">+</span> <span class="n">scalar</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">newMatrix</span></div>
 
-<div class="viewcode-block" id="TriangularMatrix.__iadd__"><a class="viewcode-back" href="../../../../documentation_pages/analysis/encore/utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix.__iadd__">[docs]</a>    <span class="k">def</span> <span class="nf">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+<div class="viewcode-block" id="TriangularMatrix.__iadd__"><a class="viewcode-back" href="../../../../documentation_pages/analysis/encore/utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix.__iadd__">[docs]</a>    <span class="k">def</span> <span class="fm">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add scalar to matrix elements.</span>
 
 <span class="sd">        Parameters</span>
@@ -230,7 +230,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
-<div class="viewcode-block" id="TriangularMatrix.__mul__"><a class="viewcode-back" href="../../../../documentation_pages/analysis/encore/utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix.__mul__">[docs]</a>    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+<div class="viewcode-block" id="TriangularMatrix.__mul__"><a class="viewcode-back" href="../../../../documentation_pages/analysis/encore/utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix.__mul__">[docs]</a>    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Multiply with scalar.</span>
 
 <span class="sd">        Parameters</span>
@@ -239,11 +239,11 @@
 <span class="sd">        scalar : float</span>
 <span class="sd">            Scalar to multiply with.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">newMatrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">newMatrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
         <span class="n">newMatrix</span><span class="o">.</span><span class="n">_elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span> <span class="o">*</span> <span class="n">scalar</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">newMatrix</span></div>
 
-<div class="viewcode-block" id="TriangularMatrix.__imul__"><a class="viewcode-back" href="../../../../documentation_pages/analysis/encore/utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix.__imul__">[docs]</a>    <span class="k">def</span> <span class="nf">__imul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+<div class="viewcode-block" id="TriangularMatrix.__imul__"><a class="viewcode-back" href="../../../../documentation_pages/analysis/encore/utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix.__imul__">[docs]</a>    <span class="k">def</span> <span class="fm">__imul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Multiply with scalar.</span>
 
 <span class="sd">        Parameters</span>
@@ -255,9 +255,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span> <span class="o">*=</span> <span class="n">scalar</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-    <span class="n">__rmul__</span> <span class="o">=</span> <span class="n">__mul__</span>
+    <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_array</span><span class="p">())</span></div>
 
 
@@ -286,7 +286,7 @@
 <span class="sd">        len(kwargs).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>

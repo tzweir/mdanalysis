@@ -435,7 +435,7 @@
             <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">na_avg</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">na_avg</span><span class="p">[:,</span> <span class="n">k</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">na_std</span><span class="p">[:,</span> <span class="n">k</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;-o&#39;</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">na_avg</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">r&quot;Nucleic Acid Number&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Nucleic Acid Number&quot;</span><span class="p">)</span>
             <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Shear&quot;</span><span class="p">,</span> <span class="s2">&quot;Stretch&quot;</span><span class="p">,</span> <span class="s2">&quot;Stagger&quot;</span><span class="p">,</span> <span class="s2">&quot;Rise&quot;</span><span class="p">,</span> <span class="s2">&quot;Shift&quot;</span><span class="p">,</span> <span class="s2">&quot;Slide&quot;</span><span class="p">]:</span>
                 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;{0!s} ($\AA$)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">param</span><span class="p">)))</span>
@@ -454,7 +454,7 @@
         <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">):</span>
             <span class="k">yield</span> <span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">q</span><span class="p">])</span>
 
-    <span class="n">__iter__</span> <span class="o">=</span> <span class="n">sorted_profiles_iter</span>
+    <span class="fm">__iter__</span> <span class="o">=</span> <span class="n">sorted_profiles_iter</span>
 
 
 <div class="viewcode-block" id="X3DNA"><a class="viewcode-back" href="../../../../documentation_pages/analysis/legacy/x3dna.html#MDAnalysis.analysis.legacy.x3dna.X3DNA">[docs]</a><span class="k">class</span> <span class="nc">X3DNA</span><span class="p">(</span><span class="n">BaseX3DNA</span><span class="p">):</span>
@@ -477,7 +477,7 @@
 <span class="sd">    .. _`X3DNA docs`: http://forum.x3dna.org/</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up parameters to run X3DNA_ on PDB *filename*.</span>
 
 <span class="sd">        :Arguments:</span>
@@ -707,7 +707,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Missing data: Found </span><span class="si">%d</span><span class="s2"> X3DNA profiles from </span><span class="si">%d</span><span class="s2"> frames.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">),</span> <span class="n">length</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tempfiles</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -727,7 +727,7 @@
 <span class="sd">    each frame and runs X3DNA on the frame.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up the class.</span>
 
 <span class="sd">        :Arguments:</span>

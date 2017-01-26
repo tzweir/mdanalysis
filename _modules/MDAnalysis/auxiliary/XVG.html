@@ -197,8 +197,8 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`~MDAnalysis.auxiliary.base.AuxStep`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_selector</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">data_selector</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">XVGStep</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">time_selector</span><span class="o">=</span><span class="n">time_selector</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_selector</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">data_selector</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">XVGStep</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">time_selector</span><span class="o">=</span><span class="n">time_selector</span><span class="p">,</span>
                                       <span class="n">data_selector</span><span class="o">=</span><span class="n">data_selector</span><span class="p">,</span>
                                       <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -251,7 +251,7 @@
     <span class="n">format</span> <span class="o">=</span> <span class="s2">&quot;XVG&quot;</span>
     <span class="n">_Auxstep</span> <span class="o">=</span> <span class="n">XVGStep</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_auxdata</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">xvg_file</span><span class="p">:</span>
             <span class="n">lines</span> <span class="o">=</span> <span class="n">xvg_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
@@ -269,7 +269,7 @@
                                               <span class="n">auxdata_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_auxdata_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">auxdata_values</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_n_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auxdata_values</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">XVGReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">XVGReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_read_next_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Read next auxiliary step and update ``auxstep``.</span>
@@ -352,8 +352,8 @@
     <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;XVG-F&#39;</span>
     <span class="n">_Auxstep</span> <span class="o">=</span> <span class="n">XVGStep</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">XVGFileReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">XVGFileReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_read_next_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Read next recorded step in xvg file and update ``austep``.</span>

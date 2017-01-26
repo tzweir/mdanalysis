@@ -94,7 +94,7 @@
 <span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
 <span class="c1">#</span>
 
-<span class="sd">r&quot;&quot;&quot;Generation and Analysis of HOLE pore profiles --- :mod:`MDAnalysis.analysis.hole`</span>
+<span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generation and Analysis of HOLE pore profiles --- :mod:`MDAnalysis.analysis.hole`</span>
 <span class="sd">=================================================================================</span>
 
 <span class="sd">:Author: Lukas Stelzl, Oliver Beckstein</span>
@@ -472,7 +472,7 @@
         <span class="k">return</span> <span class="n">kw</span><span class="p">,</span> <span class="n">kwargs</span>
 
     <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">r&quot;&quot;&quot;Plot HOLE profiles :math:`R(\zeta)` in a 1D graph.</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Plot HOLE profiles :math:`R(\zeta)` in a 1D graph.</span>
 
 <span class="sd">        Lines are colored according to the color map *cmap*. One graph is</span>
 <span class="sd">        plotted for each trajectory frame (unless `step` is changed).</span>
@@ -539,14 +539,14 @@
             <span class="n">dy</span> <span class="o">=</span> <span class="n">iplot</span> <span class="o">*</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;yshift&#39;</span><span class="p">]</span>
             <span class="n">profile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">profile</span><span class="o">.</span><span class="n">rxncoord</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">radius</span> <span class="o">+</span> <span class="n">dy</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">r&quot;pore coordinate $\zeta$ ($\AA$)&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">r&quot;HOLE radius $R$ ($\AA$)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;pore coordinate $\zeta$ ($\AA$)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;HOLE radius $R$ ($\AA$)&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]:</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ax</span>
 
     <span class="k">def</span> <span class="nf">plot3D</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">r&quot;&quot;&quot;Stacked 3D graph of profiles :math:`R(\zeta)`.</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Stacked 3D graph of profiles :math:`R(\zeta)`.</span>
 
 <span class="sd">        Lines are coloured according to the colour map `cmap`.</span>
 
@@ -622,9 +622,9 @@
                 <span class="n">radius</span><span class="p">[</span><span class="n">radius</span> <span class="o">&gt;</span> <span class="n">rmax</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rxncoord</span><span class="p">,</span> <span class="n">frame</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">rxncoord</span><span class="p">),</span> <span class="n">radius</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">r&quot;pore coordinate $\zeta$ ($\AA$)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;pore coordinate $\zeta$ ($\AA$)&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">r&quot;HOLE radius $R$ ($\AA$)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;HOLE radius $R$ ($\AA$)&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">ax</span>
 
@@ -642,7 +642,7 @@
         <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">):</span>
             <span class="k">yield</span> <span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">q</span><span class="p">])</span>
 
-    <span class="n">__iter__</span> <span class="o">=</span> <span class="n">sorted_profiles_iter</span>
+    <span class="fm">__iter__</span> <span class="o">=</span> <span class="n">sorted_profiles_iter</span>
 
 
 <div class="viewcode-block" id="HOLE"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLE">[docs]</a><span class="k">class</span> <span class="nc">HOLE</span><span class="p">(</span><span class="n">BaseHOLE</span><span class="p">):</span>
@@ -685,7 +685,7 @@
     <span class="c1">#: the *ignore_residues* keyword.</span>
     <span class="n">default_ignore_residues</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SOL&quot;</span><span class="p">,</span> <span class="s2">&quot;WAT&quot;</span><span class="p">,</span> <span class="s2">&quot;TIP&quot;</span><span class="p">,</span> <span class="s2">&quot;HOH&quot;</span><span class="p">,</span> <span class="s2">&quot;K  &quot;</span><span class="p">,</span> <span class="s2">&quot;NA &quot;</span><span class="p">,</span> <span class="s2">&quot;CL &quot;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up parameters to run HOLE_ on PDB *filename*.</span>
 
 <span class="sd">        Parameters</span>
@@ -1234,7 +1234,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Missing data: Found </span><span class="si">%d</span><span class="s2"> HOLE profiles from </span><span class="si">%d</span><span class="s2"> frames.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">),</span> <span class="n">length</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tempfiles</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -1263,7 +1263,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up the HOLE analysis over a trajectory.</span>
 
 <span class="sd">        Parameters</span>

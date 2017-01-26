@@ -292,7 +292,7 @@
 <span class="sd">    .. _GridDataFormats: https://github.com/orbeckst/GridDataFormats</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a :class:`Density` from data.</span>
 
 <span class="sd">        :Arguments:</span>
@@ -343,7 +343,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">units</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">Density</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Density</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span>  <span class="c1"># isDensity: set by make_density()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">units</span>
@@ -462,7 +462,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The name of the unit ({0!r} supplied) must be one of:</span><span class="se">\n</span><span class="s2">{1!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">conversion_factor</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit</span></div>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;isDensity&#39;</span><span class="p">]:</span>
             <span class="n">grid_type</span> <span class="o">=</span> <span class="s1">&#39;density&#39;</span>
         <span class="k">else</span><span class="p">:</span>
@@ -715,7 +715,7 @@
 
 
 <div class="viewcode-block" id="Bfactor2RMSF"><a class="viewcode-back" href="../../../documentation_pages/analysis/density.html#MDAnalysis.analysis.density.Bfactor2RMSF">[docs]</a><span class="k">def</span> <span class="nf">Bfactor2RMSF</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
-    <span class="sd">r&quot;&quot;&quot;Atomic root mean square fluctuation (in Angstrom) from the crystallographic B-factor</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Atomic root mean square fluctuation (in Angstrom) from the crystallographic B-factor</span>
 
 <span class="sd">    RMSF and B-factor are related by [Willis1975]_</span>
 
@@ -805,7 +805,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdb</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s1">&#39;resname HOH and name O&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdb</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s1">&#39;resname HOH and name O&#39;</span><span class="p">,</span>
                  <span class="n">metadata</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Construct the density from psf and pdb and the atomselection.</span>
 

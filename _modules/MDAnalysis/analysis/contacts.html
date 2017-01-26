@@ -309,7 +309,7 @@
 
 
 <div class="viewcode-block" id="soft_cut_q"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.soft_cut_q">[docs]</a><span class="k">def</span> <span class="nf">soft_cut_q</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">lambda_constant</span><span class="o">=</span><span class="mf">1.8</span><span class="p">):</span>
-    <span class="sd">r&quot;&quot;&quot;Calculate fraction of native contacts *Q* for a soft cut off</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate fraction of native contacts *Q* for a soft cut off</span>
 
 <span class="sd">    The native contact function is defined as [Best2013]_</span>
 
@@ -455,7 +455,7 @@
 <span class="sd">        list containing *Q* for all refgroup pairs and analyzed frames</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">refgroup</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;hard_cut&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">refgroup</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;hard_cut&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>
                  <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">basekwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
@@ -486,7 +486,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">u</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Contacts</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="o">**</span><span class="n">basekwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Contacts</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="o">**</span><span class="n">basekwargs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;hard_cut&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fraction_contacts</span> <span class="o">=</span> <span class="n">hard_cut_q</span>
@@ -643,7 +643,7 @@
 <span class="sd">    .. deprecated:: 0.15.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">ref1</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ref2</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">ref1</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ref2</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span>
                  <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">infix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                  <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">centroids</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -905,8 +905,8 @@
                              <span class="s2">&quot;&#39;ContactAnalysis.run(store=True)&#39; first.&quot;</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">xlabel</span><span class="p">(</span><span class="s2">r&quot;$q_1$&quot;</span><span class="p">)</span>
-        <span class="n">ylabel</span><span class="p">(</span><span class="s2">r&quot;$q_2$&quot;</span><span class="p">)</span></div>
+        <span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$q_1$&quot;</span><span class="p">)</span>
+        <span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$q_2$&quot;</span><span class="p">)</span></div>
 
 
 <span class="nd">@deprecate</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="s2">&quot;Contacts&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
@@ -975,7 +975,7 @@
 <span class="sd">    .. deprecated:: 0.15.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate native contacts within a group or between two groups.</span>
 
 <span class="sd">        :Arguments:</span>
@@ -1244,8 +1244,8 @@
                              <span class="s2">&quot;do &#39;ContactAnalysis.run(store=True)&#39; first.&quot;</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">xlabel</span><span class="p">(</span><span class="s2">r&quot;frame number $t$&quot;</span><span class="p">)</span>
-        <span class="n">ylabel</span><span class="p">(</span><span class="s2">r&quot;native contacts $q_1$&quot;</span><span class="p">)</span>
+        <span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;frame number $t$&quot;</span><span class="p">)</span>
+        <span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;native contacts $q_1$&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>

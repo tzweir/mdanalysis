@@ -625,7 +625,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize the :class:`NamedStream` from a *stream* and give it a *name*.</span>
 
 <span class="sd">        The constructor attempts to rewind the stream to the beginning unless</span>
@@ -677,20 +677,20 @@
                               <span class="n">category</span><span class="o">=</span><span class="n">StreamWarning</span><span class="p">)</span></div>
 
     <span class="c1"># access the stream</span>
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># do not call the stream&#39;s __enter__ because the stream is already open</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="c1"># NOTE: By default (close=False) we only reset the stream and NOT close it; this makes</span>
         <span class="c1">#       it easier to use it as a drop-in replacement for a filename that might</span>
         <span class="c1">#       be opened repeatedly (at least in MDAnalysis)</span>
@@ -724,7 +724,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="NamedStream.__del__"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream.__del__">[docs]</a>    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="NamedStream.__del__"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream.__del__">[docs]</a>    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Always closes the stream.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
 
@@ -829,39 +829,39 @@
 
     <span class="c1"># fake the important parts of the string API</span>
     <span class="c1"># (other methods such as rfind() are automatically dealt with via __getattr__)</span>
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">&lt;</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="nf">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
-    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">*</span> <span class="n">x</span>
 
-    <span class="n">__rmul__</span> <span class="o">=</span> <span class="n">__mul__</span>
+    <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
 
     <span class="k">def</span> <span class="nf">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_spec</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format_spec</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&lt;NamedStream({0}, {1})&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
 
 
@@ -991,7 +991,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">convertors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;I&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">strip</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">typespecifier</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">typespecifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :Arguments:</span>
 <span class="sd">         *start*</span>
@@ -1016,11 +1016,11 @@
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;{0!r}: Failed to read&amp;convert {1!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Length of the field in columns (stop - start)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;FixedcolumnEntry({0:d},{1:d},{2!r})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">typespecifier</span><span class="p">)</span>
 
 
@@ -1045,7 +1045,7 @@
 <span class="sd">       http://www.cs.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up the reader with the FORTRAN format string.</span>
 
 <span class="sd">        The string *fmt* should look like &#39;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#39;.</span>
@@ -1128,12 +1128,12 @@
         <span class="n">d</span><span class="p">[</span><span class="s1">&#39;totallength&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;repeat&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
-<div class="viewcode-block" id="FORTRANReader.__len__"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.FORTRANReader.__len__">[docs]</a>    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FORTRANReader.__len__"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.FORTRANReader.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns number of entries.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span> <span class="o">+</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span></div>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span></div>
 
 
 <div class="viewcode-block" id="fixedwidth_bins"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.fixedwidth_bins">[docs]</a><span class="k">def</span> <span class="nf">fixedwidth_bins</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">):</span>
@@ -1413,25 +1413,25 @@
 
 <div class="viewcode-block" id="Namespace"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.Namespace">[docs]</a><span class="k">class</span> <span class="nc">Namespace</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to allow storing attributes in new namespace. &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="c1"># a.this causes a __getattr__ call for key = &#39;this&#39;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">dict</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;&quot;{}&quot; is not known in the namespace.&#39;</span>
                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="nb">dict</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">dict</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="nb">dict</span><span class="o">.</span><span class="n">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="nb">dict</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;&quot;{}&quot; is not known in the namespace.&#39;</span>
                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># this&#39;ll allow us to compare if we&#39;re storing arrays</span>
             <span class="n">assert_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
