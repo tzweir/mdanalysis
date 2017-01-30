@@ -114,6 +114,28 @@
 <span class="sd">:func:`Merge` function.</span>
 
 
+<span class="sd">Working with Universes</span>
+<span class="sd">======================</span>
+
+
+<span class="sd">Quick segid selection</span>
+<span class="sd">---------------------</span>
+
+<span class="sd">If the loaded topology provided segids, then these are made accessible</span>
+<span class="sd">as attributes of the Universe.  If the segid starts with a number such</span>
+<span class="sd">as &#39;4AKE&#39;, the letter &#39;s&#39; will be prepended to the segid.</span>
+<span class="sd">For example::</span>
+
+<span class="sd">   import MDAnalysis as mda</span>
+<span class="sd">   from MDAnalysisTests.datafiles import PSF, DCD</span>
+
+<span class="sd">   u = mda.Universe(PSF, DCD)</span>
+<span class="sd">   u.s4AKE  # selects all segments with segid 4AKE</span>
+
+<span class="sd">If only a single segment has that segid then a Segment object will</span>
+<span class="sd">be returned, otherwise a SegmentGroup will be returned.</span>
+
+
 <span class="sd">Classes</span>
 <span class="sd">=======</span>
 
@@ -353,13 +375,28 @@
                 <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">n_segments</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
 
         <span class="c1"># Update Universe namespace with segids</span>
-        <span class="k">for</span> <span class="n">seg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">seg</span><span class="p">,</span> <span class="s1">&#39;segid&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-                    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span> <span class="o">+</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span>
+        <span class="c1"># Many segments can have same segid, so group together first</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># returns dict of segid:segment</span>
+            <span class="n">segids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;segids&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="c1"># no segids, don&#39;t do this step</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">segid</span><span class="p">,</span> <span class="n">segment</span> <span class="ow">in</span> <span class="n">segids</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">segid</span><span class="p">:</span>  <span class="c1"># ignore blank segids</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># cannot start attribute with number</span>
+                <span class="k">if</span> <span class="n">segid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                    <span class="c1"># prefix &#39;s&#39; if starts with number</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span> <span class="o">+</span> <span class="n">segid</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">name</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span>
-                <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">seg</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">segid</span>
+                <span class="c1"># if len 1 SegmentGroup, convert to Segment</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">segment</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">universe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
