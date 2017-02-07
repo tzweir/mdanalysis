@@ -106,131 +106,21 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">zip</span><span class="p">,</span> <span class="nb">range</span>
-
-<span class="kn">import</span> <span class="nn">Bio.Seq</span>
-<span class="kn">import</span> <span class="nn">Bio.SeqRecord</span>
-<span class="kn">import</span> <span class="nn">Bio.Alphabet</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">flags</span>
-<span class="kn">from</span> <span class="nn">..lib.util</span> <span class="kn">import</span> <span class="n">cached</span><span class="p">,</span> <span class="n">convert_aa_code</span><span class="p">,</span> <span class="n">iterable</span>
+<span class="kn">from</span> <span class="nn">..lib.util</span> <span class="kn">import</span> <span class="n">cached</span><span class="p">,</span> <span class="n">convert_aa_code</span>
 <span class="kn">from</span> <span class="nn">..lib</span> <span class="kn">import</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">mdamath</span>
 <span class="kn">from</span> <span class="nn">..exceptions</span> <span class="kn">import</span> <span class="n">NoDataError</span><span class="p">,</span> <span class="n">SelectionError</span>
 <span class="kn">from</span> <span class="nn">.topologyobjects</span> <span class="kn">import</span> <span class="n">TopologyGroup</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">selection</span>
-<span class="kn">from</span> <span class="nn">.groups</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ComponentBase</span><span class="p">,</span> <span class="n">GroupBase</span><span class="p">,</span>
-                     <span class="n">Atom</span><span class="p">,</span> <span class="n">Residue</span><span class="p">,</span> <span class="n">Segment</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">.groups</span> <span class="kn">import</span> <span class="p">(</span><span class="n">GroupBase</span><span class="p">,</span> <span class="n">Atom</span><span class="p">,</span> <span class="n">Residue</span><span class="p">,</span> <span class="n">Segment</span><span class="p">,</span>
                      <span class="n">AtomGroup</span><span class="p">,</span> <span class="n">ResidueGroup</span><span class="p">,</span> <span class="n">SegmentGroup</span><span class="p">)</span>
 
-
-<span class="k">def</span> <span class="nf">_check_length</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper which checks the length of inputs to set_X</span>
-
-<span class="sd">    Eg:</span>
-
-<span class="sd">    @_check_length</span>
-<span class="sd">    def set_X(self, group, values):</span>
-
-<span class="sd">    Will check the length of *values* compared to *group* before proceeding with</span>
-<span class="sd">    anything in the *set_X* method.</span>
-
-<span class="sd">    Pseudo code for the check:</span>
-
-<span class="sd">    if group in (Atom, Residue, Segment):</span>
-<span class="sd">        values must be single values, ie int, float or string</span>
-<span class="sd">    else:</span>
-<span class="sd">        values must be single value OR same length as group</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_SINGLE_VALUE_ERROR</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Setting {cls} {attrname} with wrong sized input. &quot;</span>
-                           <span class="s2">&quot;Must use single value, length of supplied values: {lenvalues}.&quot;</span><span class="p">)</span>
-    <span class="c1"># Eg &quot;Setting Residue resid with wrong sized input. Must use single value, length of supplied</span>
-    <span class="c1"># values: 2.&quot;</span>
-
-    <span class="n">_GROUP_VALUE_ERROR</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Setting {group} {attrname} with wrong sized array. &quot;</span>
-                          <span class="s2">&quot;Length {group}: {lengroup}, length of supplied values: {lenvalues}.&quot;</span><span class="p">)</span>
-    <span class="c1"># Eg &quot;Setting AtomGroup masses with wrong sized array. Length AtomGroup: 100, length of</span>
-    <span class="c1"># supplied values: 50.&quot;</span>
-
-    <span class="k">def</span> <span class="nf">_attr_len</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
-        <span class="c1"># quasi len measurement</span>
-        <span class="c1"># strings, floats, ints are len 0, ie not iterable</span>
-        <span class="c1"># other iterables are just len&#39;d</span>
-        <span class="k">if</span> <span class="n">iterable</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">0</span>  <span class="c1"># special case</span>
-
-    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="n">val_len</span> <span class="o">=</span> <span class="n">_attr_len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">ComponentBase</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">val_len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">_SINGLE_VALUE_ERROR</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">cls</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attrname</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">singular</span><span class="p">,</span>
-                    <span class="n">lenvalues</span><span class="o">=</span><span class="n">val_len</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">val_len</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">val_len</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">)):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">_GROUP_VALUE_ERROR</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attrname</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">attrname</span><span class="p">,</span>
-                    <span class="n">lengroup</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="n">lenvalues</span><span class="o">=</span><span class="n">val_len</span><span class="p">))</span>
-        <span class="c1"># if everything went OK, continue with the function</span>
-        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">wrapper</span>
-
-
-<span class="k">def</span> <span class="nf">_wronglevel_error</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate an error for setting attr at wrong level</span>
-
-<span class="sd">    attr : TopologyAttr that was accessed</span>
-<span class="sd">    group : Offending Component/Group</span>
-
-<span class="sd">    Eg:</span>
-<span class="sd">    setting mass of residue, gets called with attr=Masses, group=residue</span>
-
-<span class="sd">    raises a NotImplementedError with:</span>
-<span class="sd">    &#39;Cannot set masses from Residue.  Use &#39;Residue.atoms.masses&#39;</span>
-
-<span class="sd">    Mainly used to ensure consistent and helpful error messages</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="p">(</span><span class="n">Atom</span><span class="p">,</span> <span class="n">AtomGroup</span><span class="p">)):</span>
-        <span class="n">group_level</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="p">(</span><span class="n">Residue</span><span class="p">,</span> <span class="n">ResidueGroup</span><span class="p">)):</span>
-        <span class="n">group_level</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="p">(</span><span class="n">Segment</span><span class="p">,</span> <span class="n">SegmentGroup</span><span class="p">)):</span>
-        <span class="n">group_level</span> <span class="o">=</span> <span class="mi">3</span>
-
-    <span class="c1"># What level to go to before trying to set this attr</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">AtomAttr</span><span class="p">):</span>
-        <span class="n">corr_classes</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;atoms&#39;</span><span class="p">,</span> <span class="s1">&#39;atom&#39;</span><span class="p">)</span>
-        <span class="n">attr_level</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">ResidueAttr</span><span class="p">):</span>
-        <span class="n">corr_classes</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;residues&#39;</span><span class="p">,</span> <span class="s1">&#39;residue&#39;</span><span class="p">)</span>
-        <span class="n">attr_level</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">SegmentAttr</span><span class="p">):</span>
-        <span class="n">corr_classes</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;segments&#39;</span><span class="p">,</span> <span class="s1">&#39;segment&#39;</span><span class="p">)</span>
-        <span class="n">attr_level</span> <span class="o">=</span> <span class="mi">3</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">ComponentBase</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">attr_level</span> <span class="o">&gt;</span> <span class="n">group_level</span><span class="p">):</span>
-        <span class="c1"># ie going downards use plurals, going upwards use singulars</span>
-        <span class="c1"># Residue.atom!s!.mass!es! but Atom.segment!!.segid!!</span>
-        <span class="n">correct</span> <span class="o">=</span> <span class="n">corr_classes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">attrname</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">singular</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">correct</span> <span class="o">=</span> <span class="n">corr_classes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">attrname</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrname</span>
-
-    <span class="n">err_msg</span> <span class="o">=</span> <span class="s2">&quot;Cannot set {attr} from {cls}. Use &#39;{cls}.{correct}.{attr} = &#39;&quot;</span>
-    <span class="c1"># eg &quot;Cannot set masses from Residue.  &#39;Use Residue.atoms.masses = &#39;&quot;</span>
-
-    <span class="k">return</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">err_msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">attr</span><span class="o">=</span><span class="n">attrname</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="n">correct</span><span class="p">,</span>
-    <span class="p">))</span>
+<span class="n">_LENGTH_VALUEERROR</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Setting {group} with wrong sized array. &quot;</span>
+                      <span class="s2">&quot;Length {group}: {lengroup}, length values: {lenvalues}&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="TopologyAttr"><a class="viewcode-back" href="../../../documentation_pages/core/topologyattrs.html#MDAnalysis.core.topologyattrs.TopologyAttr">[docs]</a><span class="k">class</span> <span class="nc">TopologyAttr</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -293,6 +183,7 @@
 
 <div class="viewcode-block" id="TopologyAttr.get_atoms"><a class="viewcode-back" href="../../../documentation_pages/core/topologyattrs.html#MDAnalysis.core.topologyattrs.TopologyAttr.get_atoms">[docs]</a>    <span class="k">def</span> <span class="nf">get_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get atom attributes for a given AtomGroup&quot;&quot;&quot;</span>
+        <span class="c1"># aix = ag.indices</span>
         <span class="k">raise</span> <span class="n">NoDataError</span></div>
 
 <div class="viewcode-block" id="TopologyAttr.set_atoms"><a class="viewcode-back" href="../../../documentation_pages/core/topologyattrs.html#MDAnalysis.core.topologyattrs.TopologyAttr.set_atoms">[docs]</a>    <span class="k">def</span> <span class="nf">set_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
@@ -428,7 +319,6 @@
     <span class="k">def</span> <span class="nf">get_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">ag</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span>
 
-    <span class="nd">@_check_length</span>
     <span class="k">def</span> <span class="nf">set_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">ag</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
 
@@ -441,9 +331,6 @@
         <span class="n">aixs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">tt</span><span class="o">.</span><span class="n">residues2atoms_2d</span><span class="p">(</span><span class="n">rg</span><span class="o">.</span><span class="n">_ix</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">aix</span><span class="p">]</span> <span class="k">for</span> <span class="n">aix</span> <span class="ow">in</span> <span class="n">aixs</span><span class="p">]</span></div>
 
-    <span class="k">def</span> <span class="nf">set_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rg</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">_wronglevel_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rg</span><span class="p">)</span>
-
 <div class="viewcode-block" id="AtomAttr.get_segments"><a class="viewcode-back" href="../../../documentation_pages/core/topologyattrs.html#MDAnalysis.core.topologyattrs.AtomAttr.get_segments">[docs]</a>    <span class="k">def</span> <span class="nf">get_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;By default, the values for each atom present in the set of residues</span>
 <span class="sd">        are returned in a single array. This behavior can be overriden in child</span>
@@ -451,10 +338,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">aixs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">tt</span><span class="o">.</span><span class="n">segments2atoms_2d</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">_ix</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">aix</span><span class="p">]</span> <span class="k">for</span> <span class="n">aix</span> <span class="ow">in</span> <span class="n">aixs</span><span class="p">]</span></div>
-
-    <span class="k">def</span> <span class="nf">set_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">_wronglevel_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">aix</span><span class="p">]</span> <span class="k">for</span> <span class="n">aix</span> <span class="ow">in</span> <span class="n">aixs</span><span class="p">]</span></div></div>
 
 
 <span class="c1"># TODO: update docs to property doc</span>
@@ -1081,13 +965,9 @@
         <span class="n">rix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">tt</span><span class="o">.</span><span class="n">atoms2residues</span><span class="p">(</span><span class="n">ag</span><span class="o">.</span><span class="n">_ix</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">rix</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">set_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">_wronglevel_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">get_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rg</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">rg</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span>
 
-    <span class="nd">@_check_length</span>
     <span class="k">def</span> <span class="nf">set_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rg</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">rg</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
 
@@ -1098,10 +978,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rixs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">tt</span><span class="o">.</span><span class="n">segments2residues_2d</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">_ix</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">rix</span><span class="p">]</span> <span class="k">for</span> <span class="n">rix</span> <span class="ow">in</span> <span class="n">rixs</span><span class="p">]</span></div>
-
-    <span class="k">def</span> <span class="nf">set_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">_wronglevel_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">rix</span><span class="p">]</span> <span class="k">for</span> <span class="n">rix</span> <span class="ow">in</span> <span class="n">rixs</span><span class="p">]</span></div></div>
 
 
 <span class="c1"># TODO: update docs to property doc</span>
@@ -1201,36 +1078,37 @@
 
 <span class="sd">           Bio.SeqIO.write([record1, record2, ...], &quot;multi.fasta&quot;, &quot;fasta&quot;)</span>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        format : string, optional</span>
-<span class="sd">           - ``&quot;string&quot;``: return sequence as a string of 1-letter codes</span>
-<span class="sd">           - ``&quot;Seq&quot;``: return a :class:`Bio.Seq.Seq` instance</span>
-<span class="sd">           - ``&quot;SeqRecord&quot;``: return a :class:`Bio.SeqRecord.SeqRecord`</span>
-<span class="sd">             instance</span>
+<span class="sd">        :Keywords:</span>
+<span class="sd">            *format*</span>
 
-<span class="sd">            Default is ``&quot;SeqRecord&quot;``</span>
-<span class="sd">        id : optional</span>
-<span class="sd">           Sequence ID for SeqRecord (should be different for different</span>
-<span class="sd">           sequences)</span>
-<span class="sd">        name : optional</span>
-<span class="sd">           Name of the protein.</span>
-<span class="sd">        description : optional</span>
-<span class="sd">           Short description of the sequence.</span>
-<span class="sd">        kwargs : optional</span>
-<span class="sd">           Any other keyword arguments that are understood by</span>
-<span class="sd">           class:`Bio.SeqRecord.SeqRecord`.</span>
+<span class="sd">                - ``&quot;string&quot;``: return sequence as a string of 1-letter codes</span>
+<span class="sd">                - ``&quot;Seq&quot;``: return a :class:`Bio.Seq.Seq` instance</span>
+<span class="sd">                - ``&quot;SeqRecord&quot;``: return a :class:`Bio.SeqRecord.SeqRecord`</span>
+<span class="sd">                  instance</span>
 
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        :exc:`ValueError` if a residue name cannot be converted to a</span>
-<span class="sd">        1-letter IUPAC protein amino acid code; make sure to only</span>
-<span class="sd">        select protein residues.</span>
+<span class="sd">                Default is ``&quot;SeqRecord&quot;``</span>
 
-<span class="sd">        :exc:`TypeError` if an unknown *format* is selected.</span>
+<span class="sd">             *id*</span>
+<span class="sd">                Sequence ID for SeqRecord (should be different for different</span>
+<span class="sd">                sequences)</span>
+<span class="sd">             *name*</span>
+<span class="sd">                Name of the protein.</span>
+<span class="sd">             *description*</span>
+<span class="sd">                Short description of the sequence.</span>
+<span class="sd">             *kwargs*</span>
+<span class="sd">                Any other keyword arguments that are understood by</span>
+<span class="sd">                :class:`Bio.SeqRecord.SeqRecord`.</span>
+
+<span class="sd">        :Raises: :exc:`ValueError` if a residue name cannot be converted to a</span>
+<span class="sd">                 1-letter IUPAC protein amino acid code; make sure to only</span>
+<span class="sd">                 select protein residues. Raises :exc:`TypeError` if an unknown</span>
+<span class="sd">                 *format* is selected.</span>
 
 <span class="sd">        .. versionadded:: 0.9.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">Bio.Seq</span>
+        <span class="kn">import</span> <span class="nn">Bio.SeqRecord</span>
+        <span class="kn">import</span> <span class="nn">Bio.Alphabet</span>
         <span class="n">formats</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;Seq&#39;</span><span class="p">,</span> <span class="s1">&#39;SeqRecord&#39;</span><span class="p">)</span>
 
         <span class="n">format</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="s2">&quot;SeqRecord&quot;</span><span class="p">)</span>
@@ -1282,20 +1160,13 @@
         <span class="n">six</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">tt</span><span class="o">.</span><span class="n">atoms2segments</span><span class="p">(</span><span class="n">ag</span><span class="o">.</span><span class="n">_ix</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">six</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">set_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">_wronglevel_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">get_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rg</span><span class="p">):</span>
         <span class="n">six</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">tt</span><span class="o">.</span><span class="n">residues2segments</span><span class="p">(</span><span class="n">rg</span><span class="o">.</span><span class="n">_ix</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">six</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">set_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rg</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">_wronglevel_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rg</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">get_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span>
 
-    <span class="nd">@_check_length</span>
     <span class="k">def</span> <span class="nf">set_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span></div>
 
@@ -1386,9 +1257,6 @@
             <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
                 <span class="n">bd</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">o</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">bd</span>
-
-    <span class="k">def</span> <span class="nf">set_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">):</span>
-        <span class="k">return</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Cannot set bond information&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ag</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -1533,7 +1401,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, and Oliver Beckstein.
+        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Balasubramanian, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, and Oliver Beckstein.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
