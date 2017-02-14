@@ -233,7 +233,7 @@ function and then feed the resulting dictionary to <a class="reference internal"
 <h2>4.2.1.3. Functions and Classes<a class="headerlink" href="#functions-and-classes" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="MDAnalysis.analysis.align.alignto">
-<code class="descclassname">MDAnalysis.analysis.align.</code><code class="descname">alignto</code><span class="sig-paren">(</span><em>mobile</em>, <em>reference</em>, <em>select='all'</em>, <em>mass_weighted=False</em>, <em>subselection=None</em>, <em>tol_mass=0.1</em>, <em>strict=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/align.html#alignto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.align.alignto" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.analysis.align.</code><code class="descname">alignto</code><span class="sig-paren">(</span><em>mobile</em>, <em>reference</em>, <em>select='all'</em>, <em>mass_weighted=None</em>, <em>weights=None</em>, <em>subselection=None</em>, <em>tol_mass=0.1</em>, <em>strict=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/align.html#alignto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.align.alignto" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Spatially align <em>mobile</em> to <em>reference</em> by doing a RMSD fit on</dt>
 <dd><em>select</em> atoms.</dd>
@@ -279,15 +279,16 @@ or a whole <a class="reference internal" href="../core/universe.html#MDAnalysis.
 produces identical selections in <em>mobile</em> and <em>reference</em>; or</li>
 <li>dictionary <code class="docutils literal"><span class="pre">{'mobile':sel1,</span> <span class="pre">'reference':sel2}</span></code>.
 (the <a class="reference internal" href="#MDAnalysis.analysis.align.fasta2select" title="MDAnalysis.analysis.align.fasta2select"><code class="xref py py-func docutils literal"><span class="pre">fasta2select()</span></code></a> function returns such a
-dictionary based on a <a href="#id4"><span class="problematic" id="id5">ClustalW_</span></a> or <a href="#id6"><span class="problematic" id="id7">STAMP_</span></a> sequence alignment); or</li>
+dictionary based on a <a href="#id8"><span class="problematic" id="id9">ClustalW_</span></a> or <a href="#id10"><span class="problematic" id="id11">STAMP_</span></a> sequence alignment); or</li>
 <li>tuple <code class="docutils literal"><span class="pre">(sel1,</span> <span class="pre">sel2)</span></code></li>
 </ol>
 <p>When using 2. or 3. with <em>sel1</em> and <em>sel2</em> then these selections can
 also each be a list of selection strings (to generate a AtomGroup with
 defined atom order as described under <a class="reference internal" href="../selections.html#ordered-selections-label"><span>Ordered selections</span></a>).</p>
 </li>
-<li><strong>mass_weighted</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> uses the masses <code class="xref py py-meth docutils literal"><span class="pre">reference.masses()</span></code> as weights for the
+<li><strong>mass_weighted</strong> (<em>boolean, optional (deprecated)</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> uses the masses <code class="xref py py-meth docutils literal"><span class="pre">reference.masses()</span></code> as weights for the
 RMSD fit.</li>
+<li><strong>weights</strong> (<em>str/array_like, optional</em>) &#8211; weights to be used for fit. Can be either &#8216;mass&#8217; or an array_like</li>
 <li><strong>tol_mass</strong> (<em>float, optional</em>) &#8211; Reject match if the atomic masses for matched atoms differ by more than
 <em>tol_mass</em>, default [0.1]</li>
 <li><strong>strict</strong> (<em>boolean, optional</em>) &#8211; <dl class="docutils">
@@ -319,7 +320,7 @@ protein, ligands and the surrounding water)</dd>
 <li><em>old_rmsd</em> &#8211;
 RMSD before spatial alignment</li>
 <li><em>new_rmsd</em> &#8211;
-RMSD after spatial alignment.</li>
+RMSD after spatial alignment</li>
 </ul>
 </p>
 </td>
@@ -342,11 +343,17 @@ the new <em>tol_mass</em> keyword.</p>
 and new <em>strict</em> keyword. The new default is to be lenient whereas
 the old behavior was the equivalent of <em>strict</em> = <code class="docutils literal"><span class="pre">True</span></code>.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.16.0: </span>new general &#8216;weights&#8217; kwarg replace mass_weights, deprecated &#8216;mass_weights&#8217;</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span>Instead of <code class="docutils literal"><span class="pre">mass_weighted=True</span></code> use new <a href="#id4"><span class="problematic" id="id5">``</span></a>weights=&#8217;mass&#8217;`</p>
+</div>
 </dd></dl>
 
 <dl class="class">
 <dt id="MDAnalysis.analysis.align.AlignTraj">
-<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.align.</code><code class="descname">AlignTraj</code><span class="sig-paren">(</span><em>mobile</em>, <em>reference</em>, <em>select='all'</em>, <em>filename=None</em>, <em>prefix='rmsfit_'</em>, <em>mass_weighted=False</em>, <em>tol_mass=0.1</em>, <em>strict=False</em>, <em>force=True</em>, <em>in_memory=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/align.html#AlignTraj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.align.AlignTraj" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.align.</code><code class="descname">AlignTraj</code><span class="sig-paren">(</span><em>mobile</em>, <em>reference</em>, <em>select='all'</em>, <em>filename=None</em>, <em>prefix='rmsfit_'</em>, <em>mass_weighted=None</em>, <em>weights=None</em>, <em>tol_mass=0.1</em>, <em>strict=False</em>, <em>force=True</em>, <em>in_memory=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/align.html#AlignTraj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.align.AlignTraj" title="Permalink to this definition">¶</a></dt>
 <dd><p>RMS-align trajectory to a reference structure using a selection.</p>
 <p>Both reference <em>ref</em> and trajectory <em>mobile</em> must be
 <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> instances. If they contain a
@@ -396,8 +403,10 @@ subdomain to be fitted against</li>
 <li><strong>filename</strong> (<em>string, optional</em>) &#8211; Provide a filename for results to be written to</li>
 <li><strong>prefix</strong> (<em>string, optional</em>) &#8211; Provide a string to prepend to filename for results to be written
 to</li>
-<li><strong>mass_weighted</strong> (<em>boolean, optional</em>) &#8211; Boolean, if true will rmsd will be mass-weighted corresponding to
+<li><strong>mass_weighted</strong> (<em>boolean, optional (deprecated)</em>) &#8211; Boolean, if true will rmsd will be mass-weighted corresponding to
 the atoms selected in the reference trajectory</li>
+<li><strong>weights</strong> (<em>str/array_like (optional)</em>) &#8211; Can either be &#8216;mass&#8217; to use reference masses as weights or an
+arbitrary array</li>
 <li><strong>tol_mass</strong> (<em>float, optional</em>) &#8211; Tolerance given to <cite>get_matching_atoms</cite> to find appropriate atoms</li>
 <li><strong>strict</strong> (<em>boolean, optional</em>) &#8211; Force <cite>get_matching_atoms</cite> to fail if atoms can&#8217;t be found using
 exact methods</li>
@@ -425,6 +434,12 @@ representation (see <a class="reference internal" href="../coordinates/memory.ht
 remainder of the Python session. If <code class="docutils literal"><span class="pre">mobile.trajectory```is</span> <span class="pre">already</span> <span class="pre">a</span>
 <span class="pre">:class:`MemoryReader`</span> <span class="pre">then</span> <span class="pre">it</span> <span class="pre">is</span> <span class="pre">*always*</span> <span class="pre">treated</span> <span class="pre">as</span> <span class="pre">if</span> <span class="pre">`in_memory`</span> <span class="pre">had</span>
 <span class="pre">been</span> <span class="pre">set</span> <span class="pre">to</span> <span class="pre">``True</span></code>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.16.0: </span>new general &#8216;weights&#8217; kwarg replace mass_weights, deprecated &#8216;mass_weights&#8217;</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span>Instead of <code class="docutils literal"><span class="pre">mass_weighted=True</span></code> use new <a href="#id6"><span class="problematic" id="id7">``</span></a>weights=&#8217;mass&#8217;`</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -545,7 +560,7 @@ these two strings are applied to the two different proteins they
 will generate AtomGroups of the aligned residues.</p>
 <p><em>fastafilename</em> contains the two un-aligned sequences in FASTA
 format. The reference is assumed to be the first sequence, the
-target the second. <a href="#id8"><span class="problematic" id="id9">ClustalW_</span></a> produces a pairwise
+target the second. <a href="#id12"><span class="problematic" id="id13">ClustalW_</span></a> produces a pairwise
 alignment (which is written to a file with suffix .aln).  The
 output contains atom selection strings that select the same atoms
 in the two structures.</p>

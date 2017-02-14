@@ -385,7 +385,7 @@
     <span class="k">return</span> <span class="n">mobile_atoms</span><span class="p">,</span> <span class="n">min_rmsd</span></div>
 
 
-<div class="viewcode-block" id="alignto"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto">[docs]</a><span class="k">def</span> <span class="nf">alignto</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<div class="viewcode-block" id="alignto"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto">[docs]</a><span class="k">def</span> <span class="nf">alignto</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
             <span class="n">subselection</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Spatially align *mobile* to *reference* by doing a RMSD fit on</span>
 <span class="sd">        *select* atoms.</span>
@@ -417,57 +417,59 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">      mobile : Universe or AtomGroup</span>
-<span class="sd">         structure to be aligned, a</span>
-<span class="sd">         :class:`~MDAnalysis.core.groups.AtomGroup` or a whole</span>
-<span class="sd">         :class:`~MDAnalysis.core.universe.Universe`</span>
-<span class="sd">      reference : Universe or AtomGroup</span>
-<span class="sd">         reference structure, a :class:`~MDAnalysis.core.groups.AtomGroup`</span>
-<span class="sd">         or a whole :class:`~MDAnalysis.core.universe.Universe`</span>
-<span class="sd">      select: string or dict, optional</span>
-<span class="sd">         1. any valid selection string for</span>
-<span class="sd">            :meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` that</span>
-<span class="sd">            produces identical selections in *mobile* and *reference*; or</span>
-<span class="sd">         2. dictionary ``{&#39;mobile&#39;:sel1, &#39;reference&#39;:sel2}``.</span>
-<span class="sd">            (the :func:`fasta2select` function returns such a</span>
-<span class="sd">            dictionary based on a ClustalW_ or STAMP_ sequence alignment); or</span>
-<span class="sd">         3.  tuple ``(sel1, sel2)``</span>
+<span class="sd">    mobile : Universe or AtomGroup</span>
+<span class="sd">       structure to be aligned, a</span>
+<span class="sd">       :class:`~MDAnalysis.core.groups.AtomGroup` or a whole</span>
+<span class="sd">       :class:`~MDAnalysis.core.universe.Universe`</span>
+<span class="sd">    reference : Universe or AtomGroup</span>
+<span class="sd">       reference structure, a :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">       or a whole :class:`~MDAnalysis.core.universe.Universe`</span>
+<span class="sd">    select: string or dict, optional</span>
+<span class="sd">       1. any valid selection string for</span>
+<span class="sd">          :meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` that</span>
+<span class="sd">          produces identical selections in *mobile* and *reference*; or</span>
+<span class="sd">       2. dictionary ``{&#39;mobile&#39;:sel1, &#39;reference&#39;:sel2}``.</span>
+<span class="sd">          (the :func:`fasta2select` function returns such a</span>
+<span class="sd">          dictionary based on a ClustalW_ or STAMP_ sequence alignment); or</span>
+<span class="sd">       3.  tuple ``(sel1, sel2)``</span>
 
-<span class="sd">         When using 2. or 3. with *sel1* and *sel2* then these selections can</span>
-<span class="sd">         also each be a list of selection strings (to generate a AtomGroup with</span>
-<span class="sd">         defined atom order as described under :ref:`ordered-selections-label`).</span>
-<span class="sd">      mass_weighted : boolean, optional</span>
-<span class="sd">         ``True`` uses the masses :meth:`reference.masses` as weights for the</span>
-<span class="sd">         RMSD fit.</span>
-<span class="sd">      tol_mass: float, optional</span>
-<span class="sd">         Reject match if the atomic masses for matched atoms differ by more than</span>
-<span class="sd">         *tol_mass*, default [0.1]</span>
-<span class="sd">      strict: boolean, optional</span>
-<span class="sd">         ``True``</span>
-<span class="sd">             Will raise :exc:`SelectionError` if a single atom does not</span>
-<span class="sd">             match between the two selections.</span>
-<span class="sd">         ``False`` [default]</span>
-<span class="sd">             Will try to prepare a matching selection by dropping</span>
-<span class="sd">             residues with non-matching atoms. See :func:`get_matching_atoms`</span>
-<span class="sd">             for details.</span>
-<span class="sd">      subselection : string, optional</span>
-<span class="sd">         Apply the transformation only to this selection.</span>
+<span class="sd">       When using 2. or 3. with *sel1* and *sel2* then these selections can</span>
+<span class="sd">       also each be a list of selection strings (to generate a AtomGroup with</span>
+<span class="sd">       defined atom order as described under :ref:`ordered-selections-label`).</span>
+<span class="sd">    mass_weighted : boolean, optional (deprecated)</span>
+<span class="sd">       ``True`` uses the masses :meth:`reference.masses` as weights for the</span>
+<span class="sd">       RMSD fit.</span>
+<span class="sd">    weights : str/array_like, optional</span>
+<span class="sd">       weights to be used for fit. Can be either &#39;mass&#39; or an array_like</span>
+<span class="sd">    tol_mass: float, optional</span>
+<span class="sd">       Reject match if the atomic masses for matched atoms differ by more than</span>
+<span class="sd">       *tol_mass*, default [0.1]</span>
+<span class="sd">    strict: boolean, optional</span>
+<span class="sd">       ``True``</span>
+<span class="sd">           Will raise :exc:`SelectionError` if a single atom does not</span>
+<span class="sd">           match between the two selections.</span>
+<span class="sd">       ``False`` [default]</span>
+<span class="sd">           Will try to prepare a matching selection by dropping</span>
+<span class="sd">           residues with non-matching atoms. See :func:`get_matching_atoms`</span>
+<span class="sd">           for details.</span>
+<span class="sd">    subselection : string, optional</span>
+<span class="sd">       Apply the transformation only to this selection.</span>
 
-<span class="sd">         ``None`` [default]</span>
-<span class="sd">             Apply to `mobile.universe.atoms` (i.e. all atoms in the</span>
-<span class="sd">             context of the selection from *mobile* such as the rest of a</span>
-<span class="sd">             protein, ligands and the surrounding water)</span>
-<span class="sd">         *selection-string*</span>
-<span class="sd">             Apply to `mobile.select_atoms(selection-string)`</span>
-<span class="sd">         :class:`~MDAnalysis.core.groups.AtomGroup`</span>
-<span class="sd">             Apply to the arbitrary group of atoms</span>
+<span class="sd">       ``None`` [default]</span>
+<span class="sd">           Apply to `mobile.universe.atoms` (i.e. all atoms in the</span>
+<span class="sd">           context of the selection from *mobile* such as the rest of a</span>
+<span class="sd">           protein, ligands and the surrounding water)</span>
+<span class="sd">       *selection-string*</span>
+<span class="sd">           Apply to `mobile.select_atoms(selection-string)`</span>
+<span class="sd">       :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">           Apply to the arbitrary group of atoms</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    old_rmsd</span>
 <span class="sd">        RMSD before spatial alignment</span>
 <span class="sd">    new_rmsd</span>
-<span class="sd">        RMSD after spatial alignment.</span>
+<span class="sd">        RMSD after spatial alignment</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -482,6 +484,11 @@
 <span class="sd">       Uses :func:`get_matching_atoms` to work with incomplete selections</span>
 <span class="sd">       and new *strict* keyword. The new default is to be lenient whereas</span>
 <span class="sd">       the old behavior was the equivalent of *strict* = ``True``.</span>
+
+<span class="sd">    .. versionchanged:: 0.16.0</span>
+<span class="sd">       new general &#39;weights&#39; kwarg replace mass_weights, deprecated &#39;mass_weights&#39;</span>
+<span class="sd">    .. deprecated:: 0.16.0</span>
+<span class="sd">       Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">select</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
         <span class="c1"># keep the EXACT order in the input AtomGroups; select_atoms(&#39;all&#39;)</span>
@@ -498,16 +505,18 @@
                                                  <span class="n">tol_mass</span><span class="o">=</span><span class="n">tol_mass</span><span class="p">,</span>
                                                  <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
-        <span class="c1"># division by the mean is done in rmsd, not done in qcp, but is done in</span>
-        <span class="c1"># _fit_to</span>
+    <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
+                      <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
+                      <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span> <span class="ow">and</span> <span class="n">weights</span> <span class="o">==</span> <span class="s1">&#39;mass&#39;</span><span class="p">:</span>
         <span class="n">weights</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">masses</span>
-        <span class="n">ref_com</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
-        <span class="n">mobile_com</span> <span class="o">=</span> <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">weights</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="n">ref_com</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
-        <span class="n">mobile_com</span> <span class="o">=</span> <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
+
+    <span class="n">mobile_com</span> <span class="o">=</span> <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+    <span class="n">ref_com</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 
     <span class="n">ref_coordinates</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref_com</span>
     <span class="n">mobile_coordinates</span> <span class="o">=</span> <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile_com</span>
@@ -559,8 +568,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;rmsfit_&#39;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                 <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                 <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;rmsfit_&#39;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialization</span>
 
 <span class="sd">        Parameters</span>
@@ -577,9 +587,12 @@
 <span class="sd">        prefix : string, optional</span>
 <span class="sd">            Provide a string to prepend to filename for results to be written</span>
 <span class="sd">            to</span>
-<span class="sd">        mass_weighted : boolean, optional</span>
+<span class="sd">        mass_weighted : boolean, optional (deprecated)</span>
 <span class="sd">            Boolean, if true will rmsd will be mass-weighted corresponding to</span>
 <span class="sd">            the atoms selected in the reference trajectory</span>
+<span class="sd">        weights : str/array_like (optional)</span>
+<span class="sd">            Can either be &#39;mass&#39; to use reference masses as weights or an</span>
+<span class="sd">            arbitrary array</span>
 <span class="sd">        tol_mass : float, optional</span>
 <span class="sd">            Tolerance given to `get_matching_atoms` to find appropriate atoms</span>
 <span class="sd">        strict : boolean, optional</span>
@@ -614,6 +627,10 @@
 <span class="sd">        :class:`MemoryReader` then it is *always* treated as if `in_memory` had</span>
 <span class="sd">        been set to ``True``.</span>
 
+<span class="sd">        .. versionchanged:: 0.16.0</span>
+<span class="sd">           new general &#39;weights&#39; kwarg replace mass_weights, deprecated &#39;mass_weights&#39;</span>
+<span class="sd">        .. deprecated:: 0.16.0</span>
+<span class="sd">           Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">select</span> <span class="o">=</span> <span class="n">rms</span><span class="o">.</span><span class="n">process_selection</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="o">*</span><span class="n">select</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">])</span>
@@ -655,24 +672,29 @@
         <span class="c1"># retained</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_writer</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">natoms</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
-            <span class="c1"># if performing a mass-weighted alignment/rmsd calculation</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">masses</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
+                          <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
+                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
+                <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span> <span class="ow">and</span> <span class="n">weights</span> <span class="o">==</span> <span class="s1">&#39;mass&#39;</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">masses</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="n">weights</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;RMS-fitting on {0:d} atoms.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">_prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># reference centre of mass system</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ref_com</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ref_com</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ref_coordinates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ref_com</span>
         <span class="c1"># allocate the array for selection atom coords</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,))</span>
 
     <span class="k">def</span> <span class="nf">_single_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span><span class="o">.</span><span class="n">frame</span>
-        <span class="n">mobile_com</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mobile_atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
+        <span class="n">mobile_com</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mobile_atoms</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">)</span>
         <span class="n">mobile_coordinates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mobile_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile_com</span>
         <span class="n">mobile_atoms</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">_fit_to</span><span class="p">(</span><span class="n">mobile_coordinates</span><span class="p">,</span>
                                                  <span class="bp">self</span><span class="o">.</span><span class="n">_ref_coordinates</span><span class="p">,</span>

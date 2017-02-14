@@ -241,7 +241,7 @@ RMSD between a and b</p>
 <h3>4.2.4.1.2. Analysis classes<a class="headerlink" href="#analysis-classes" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="MDAnalysis.analysis.rms.RMSD">
-<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.rms.</code><code class="descname">RMSD</code><span class="sig-paren">(</span><em>atomgroup</em>, <em>reference=None</em>, <em>select='all'</em>, <em>groupselections=None</em>, <em>filename='rmsd.dat'</em>, <em>mass_weighted=False</em>, <em>tol_mass=0.1</em>, <em>ref_frame=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/rms.html#RMSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.rms.RMSD" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.rms.</code><code class="descname">RMSD</code><span class="sig-paren">(</span><em>atomgroup</em>, <em>reference=None</em>, <em>select='all'</em>, <em>groupselections=None</em>, <em>filename='rmsd.dat'</em>, <em>mass_weighted=None</em>, <em>weights=None</em>, <em>tol_mass=0.1</em>, <em>ref_frame=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/rms.html#RMSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.rms.RMSD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to perform RMSD analysis on a trajectory.</p>
 <p>Run the analysis with <code class="xref py py-meth docutils literal"><span class="pre">RMSD.run()</span></code>, which stores the results
 in the array <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSD.rmsd" title="MDAnalysis.analysis.rms.RMSD.rmsd"><code class="xref py py-attr docutils literal"><span class="pre">RMSD.rmsd</span></code></a>:</p>
@@ -293,8 +293,9 @@ one additional column for each selection. [<code class="docutils literal"><span 
 implemented.</p>
 </div>
 </li>
-<li><strong>filename</strong> (<em>str (optional)</em>) &#8211; write RSMD into file file <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSD.save" title="MDAnalysis.analysis.rms.RMSD.save"><code class="xref py py-meth docutils literal"><span class="pre">RMSD.save()</span></code></a></li>
-<li><strong>mass_weighted</strong> (<em>bool (optional)</em>) &#8211; do a mass-weighted RMSD fit</li>
+<li><strong>filename</strong> (<em>str, optional</em>) &#8211; write RSMD into file file <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSD.save" title="MDAnalysis.analysis.rms.RMSD.save"><code class="xref py py-meth docutils literal"><span class="pre">RMSD.save()</span></code></a></li>
+<li><strong>mass_weighted</strong> (<em>bool (deprecated)</em>) &#8211; do a mass-weighted RMSD fit</li>
+<li><strong>weights</strong> (<em>str/array_like (optional)</em>) &#8211; choose weights. If &#8216;str&#8217; uses masses as weights</li>
 <li><strong>tol_mass</strong> (<em>float (optional)</em>) &#8211; Reject match if the atomic masses for matched atoms differ by more
 than <cite>tol_mass</cite></li>
 <li><strong>ref_frame</strong> (<em>int (optional)</em>) &#8211; frame index to select frame from <cite>reference</cite></li>
@@ -308,6 +309,12 @@ than <cite>tol_mass</cite></li>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.8: </span><cite>groupselections</cite> added</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.16.0: </span>Flexible weighting scheme with new <code class="docutils literal"><span class="pre">weights</span></code> keyword.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span>Instead of <code class="docutils literal"><span class="pre">mass_weighted=True</span></code> use new <a href="#id5"><span class="problematic" id="id6">``</span></a>weights=&#8217;mass&#8217;`  Refactor to fit with AnalysisBase API</p>
 </div>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.rms.RMSD.rmsd">
@@ -331,21 +338,46 @@ used.</dd>
 
 <dl class="class">
 <dt id="MDAnalysis.analysis.rms.RMSF">
-<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.rms.</code><code class="descname">RMSF</code><span class="sig-paren">(</span><em>atomgroup</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/rms.html#RMSF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.rms.RMSF" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to perform RMSF analysis on a set of atoms across a trajectory.</p>
-<p>Run the analysis with <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSF.run" title="MDAnalysis.analysis.rms.RMSF.run"><code class="xref py py-meth docutils literal"><span class="pre">RMSF.run()</span></code></a>, which stores the results
-in the array <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSF.rmsf" title="MDAnalysis.analysis.rms.RMSF.rmsf"><code class="xref py py-attr docutils literal"><span class="pre">RMSF.rmsf</span></code></a>.</p>
-<p>This class performs no coordinate transforms; RMSFs are obtained from atom
-coordinates as-is.</p>
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.rms.</code><code class="descname">RMSF</code><span class="sig-paren">(</span><em>atomgroup</em>, <em>weights=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/rms.html#RMSF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.rms.RMSF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate RMSF of given atoms across a trajectory.</p>
+<blockquote>
+<div><p>This method implements an algorithm for computing sums of squares while
+avoiding overflows and underflows <a class="reference internal" href="#welford1962" id="id7">[Welford1962]</a>.</p>
+<table class="docutils citation" frame="void" id="welford1962" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[Welford1962]</a></td><td>B. P. Welford (1962). &#8220;Note on a Method for
+Calculating Corrected Sums of Squares and Products.&#8221; Technometrics
+4(3):419-420.</td></tr>
+</tbody>
+</table>
+</div></blockquote>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
 </div>
-<p>Calculate RMSF of given atoms across a trajectory.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.16.0: </span>Flexible weighting scheme with new <code class="docutils literal"><span class="pre">weights</span></code> keyword.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span>Instead of <code class="docutils literal"><span class="pre">mass_weighted=True</span></code> use new <a href="#id8"><span class="problematic" id="id9">``</span></a>weights=&#8217;mass&#8217;`
+Refactor to fit with AnalysisBase API
+The keyword argument <em>quiet</em> is deprecated in favor of <em>verbose</em>.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>atomgroup</strong> (<em>mda.AtomGroup</em>) &#8211; AtomGroup to obtain RMSF for</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>atomgroup</strong> (<em>mda.AtomGroup</em>) &#8211; Atoms for which RMSF is calculated</li>
+<li><strong>start</strong> (<em>int (optional)</em>) &#8211; starting frame, default None becomes 0.</li>
+<li><strong>stop</strong> (<em>int (optional)</em>) &#8211; Frame index to stop analysis. Default: None becomes
+n_frames. Iteration stops <em>before</em> this frame number,
+which means that the trajectory would be read until the end.</li>
+<li><strong>step</strong> (<em>int (optional)</em>) &#8211; step between frames, default None becomes 1.</li>
+<li><strong>weights</strong> (<em>str / array_like (optional)</em>) &#8211; used weights. If <code class="docutils literal"><span class="pre">'mass'</span></code> use masses of atomgroup, it <code class="docutils literal"><span class="pre">None</span></code> use uniform weights.</li>
+<li><strong>verbose</strong> (<em>bool (optional)</em>) &#8211; if <code class="docutils literal"><span class="pre">False</span></code>, suppress all output</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -354,51 +386,6 @@ coordinates as-is.</p>
 <code class="descname">rmsf</code><a class="headerlink" href="#MDAnalysis.analysis.rms.RMSF.rmsf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Results are stored in this N-length <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> array,
 giving RMSFs for each of the given atoms.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">rmsf</code></dt>
-<dd><p>RMSF data; only available after using <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSF.run" title="MDAnalysis.analysis.rms.RMSF.run"><code class="xref py py-meth docutils literal"><span class="pre">RMSF.run()</span></code></a></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.analysis.rms.RMSF.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>start=None</em>, <em>stop=None</em>, <em>step=None</em>, <em>progout=10</em>, <em>verbose=None</em>, <em>quiet=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/rms.html#RMSF.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.rms.RMSF.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate RMSF of given atoms across a trajectory.</p>
-<p>This method implements an algorithm for computing sums of squares while
-avoiding overflows and underflows <a class="reference internal" href="#welford1962" id="id5">[Welford1962]</a>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>start</strong> (<em>int (optional)</em>) &#8211; starting frame, default None becomes 0.</li>
-<li><strong>stop</strong> (<em>int (optional)</em>) &#8211; Frame index to stop analysis. Default: None becomes
-n_frames. Iteration stops <em>before</em> this frame number,
-which means that the trajectory would be read until the end.</li>
-<li><strong>step</strong> (<em>int (optional)</em>) &#8211; step between frames, default None becomes 1.</li>
-<li><strong>progout</strong> (<em>int (optional)</em>) &#8211; number of frames to iterate through between updates to progress
-output; <code class="docutils literal"><span class="pre">None</span></code> for no updates [10]</li>
-<li><strong>verbose</strong> (<em>bool (optional)</em>) &#8211; if <code class="docutils literal"><span class="pre">False</span></code>, suppress all output (implies <em>progout</em> = <code class="docutils literal"><span class="pre">None</span></code>)
-[<code class="docutils literal"><span class="pre">True</span></code>]</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="welford1962" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[Welford1962]</a></td><td>B. P. Welford (1962). &#8220;Note on a Method for
-Calculating Corrected Sums of Squares and Products.&#8221; Technometrics
-4(3):419-420.</td></tr>
-</tbody>
-</table>
-<div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 0.16: </span>The keyword argument <em>quiet</em> is deprecated in favor of <em>verbose</em>.</p>
-</div>
 </dd></dl>
 
 </dd></dl>

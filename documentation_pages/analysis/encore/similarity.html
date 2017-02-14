@@ -235,7 +235,7 @@ a symmetrized version of the Kullback-Leibler divergence, which is unbounded.</p
 <h2>4.2.6.1.1.1. Functions for ensemble comparisons<a class="headerlink" href="#functions-for-ensemble-comparisons" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="MDAnalysis.analysis.encore.similarity.hes">
-<code class="descclassname">MDAnalysis.analysis.encore.similarity.</code><code class="descname">hes</code><span class="sig-paren">(</span><em>ensembles</em>, <em>selection='name CA'</em>, <em>cov_estimator='shrinkage'</em>, <em>mass_weighted=True</em>, <em>align=False</em>, <em>details=False</em>, <em>estimate_error=False</em>, <em>bootstrapping_samples=100</em>, <em>calc_diagonal=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/similarity.html#hes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.similarity.hes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.analysis.encore.similarity.</code><code class="descname">hes</code><span class="sig-paren">(</span><em>ensembles</em>, <em>selection='name CA'</em>, <em>cov_estimator='shrinkage'</em>, <em>weights='mass'</em>, <em>align=False</em>, <em>details=False</em>, <em>estimate_error=False</em>, <em>bootstrapping_samples=100</em>, <em>calc_diagonal=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/similarity.html#hes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.similarity.hes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the Harmonic Ensemble Similarity (HES) between ensembles using
 the symmetrized version of Kullback-Leibler divergence as described
 in <a class="reference internal" href="../../references.html#tiberti2015" id="id4">[Tiberti2015]</a>.</p>
@@ -248,8 +248,7 @@ in <a class="reference internal" href="../../references.html#tiberti2015" id="id
 <li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 <li><strong>cov_estimator</strong> (<em>str, optional</em>) &#8211; Covariance matrix estimator method, either shrinkage, <cite>shrinkage</cite>,
 or Maximum Likelyhood, <cite>ml</cite>. Default is shrinkage.</li>
-<li><strong>mass_weighted</strong> (<em>bool, optional</em>) &#8211; Whether to perform mass-weighted covariance matrix estimation
-(default is True).</li>
+<li><strong>weights</strong> (<em>str/array_like, optional</em>) &#8211; specify optional weights. If <code class="docutils literal"><span class="pre">mass</span></code> then chose masses of ensemble atoms</li>
 <li><strong>align</strong> (<em>bool, optional</em>) &#8211; Whether to align the ensembles before calculating their similarity.
 Note: this changes the ensembles in-place, and will thus leave your
 ensembles in an altered state.
@@ -1152,7 +1151,7 @@ harmonic similarity measure</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.analysis.encore.similarity.</code><code class="descname">hes</code><span class="sig-paren">(</span><em>ensembles</em>, <em>selection='name CA'</em>, <em>cov_estimator='shrinkage'</em>, <em>mass_weighted=True</em>, <em>align=False</em>, <em>details=False</em>, <em>estimate_error=False</em>, <em>bootstrapping_samples=100</em>, <em>calc_diagonal=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/similarity.html#hes"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.analysis.encore.similarity.</code><code class="descname">hes</code><span class="sig-paren">(</span><em>ensembles</em>, <em>selection='name CA'</em>, <em>cov_estimator='shrinkage'</em>, <em>weights='mass'</em>, <em>align=False</em>, <em>details=False</em>, <em>estimate_error=False</em>, <em>bootstrapping_samples=100</em>, <em>calc_diagonal=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/similarity.html#hes"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Calculates the Harmonic Ensemble Similarity (HES) between ensembles using
 the symmetrized version of Kullback-Leibler divergence as described
 in <a class="reference internal" href="../../references.html#tiberti2015" id="id10">[Tiberti2015]</a>.</p>
@@ -1165,8 +1164,7 @@ in <a class="reference internal" href="../../references.html#tiberti2015" id="id
 <li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 <li><strong>cov_estimator</strong> (<em>str, optional</em>) &#8211; Covariance matrix estimator method, either shrinkage, <cite>shrinkage</cite>,
 or Maximum Likelyhood, <cite>ml</cite>. Default is shrinkage.</li>
-<li><strong>mass_weighted</strong> (<em>bool, optional</em>) &#8211; Whether to perform mass-weighted covariance matrix estimation
-(default is True).</li>
+<li><strong>weights</strong> (<em>str/array_like, optional</em>) &#8211; specify optional weights. If <code class="docutils literal"><span class="pre">mass</span></code> then chose masses of ensemble atoms</li>
 <li><strong>align</strong> (<em>bool, optional</em>) &#8211; Whether to align the ensembles before calculating their similarity.
 Note: this changes the ensembles in-place, and will thus leave your
 ensembles in an altered state.

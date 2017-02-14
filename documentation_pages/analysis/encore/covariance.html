@@ -110,7 +110,7 @@ an ensemble of structures.</p>
 </div>
 <dl class="function">
 <dt id="MDAnalysis.analysis.encore.covariance.covariance_matrix">
-<code class="descclassname">MDAnalysis.analysis.encore.covariance.</code><code class="descname">covariance_matrix</code><span class="sig-paren">(</span><em>ensemble</em>, <em>selection='name CA'</em>, <em>estimator=&lt;function shrinkage_covariance_estimator&gt;</em>, <em>mass_weighted=True</em>, <em>reference=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/covariance.html#covariance_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.covariance.covariance_matrix" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.analysis.encore.covariance.</code><code class="descname">covariance_matrix</code><span class="sig-paren">(</span><em>ensemble</em>, <em>selection='name CA'</em>, <em>estimator=&lt;function shrinkage_covariance_estimator&gt;</em>, <em>weights='mass'</em>, <em>reference=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/covariance.html#covariance_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.covariance.covariance_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates (optionally mass weighted) covariance matrix</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -118,13 +118,13 @@ an ensemble of structures.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>ensemble</strong> (<em>Universe object</em>) &#8211; The structural ensemble</li>
-<li><strong>selection</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Atom selection string in the MDAnalysis format.</li>
-<li><strong>estimator</strong> (<a class="reference internal" href="utils.html#MDAnalysis.analysis.encore.utils.ParallelCalculation.function" title="MDAnalysis.analysis.encore.utils.ParallelCalculation.function"><em>function</em></a>) &#8211; Function that estimates the covariance matrix. It requires at least
+<li><strong>selection</strong> (<em>str (optional)</em>) &#8211; Atom selection string in the MDAnalysis format.</li>
+<li><strong>estimator</strong> (<em>function (optional)</em>) &#8211; Function that estimates the covariance matrix. It requires at least
 a &#8220;coordinates&#8221; numpy array (of shape (N,M,3), where N is the number
 of frames and M the number of atoms). See ml_covariance_estimator and
 shrinkage_covariance_estimator for reference.</li>
-<li><strong>mass_weighted</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Whether to do a mass-weighted analysis (default is True)</li>
-<li><strong>reference</strong> (<em>MDAnalysis.Universe object</em>) &#8211; Use the distances to a specific reference structure rather than the
+<li><strong>weights</strong> (<em>str/array_like (optional)</em>) &#8211; specify weights. If <code class="docutils literal"><span class="pre">'mass'</span></code> then chose masses of ensemble atoms, if <code class="docutils literal"><span class="pre">None</span></code> chose uniform weights</li>
+<li><strong>reference</strong> (<em>MDAnalysis.Universe object (optional)</em>) &#8211; Use the distances to a specific reference structure rather than the
 distance to the mean.</li>
 </ul>
 </td>

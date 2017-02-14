@@ -112,7 +112,7 @@ class to compute an RMSD matrix in such a way is also available.</p>
 </div>
 <dl class="function">
 <dt id="MDAnalysis.analysis.encore.confdistmatrix.conformational_distance_matrix">
-<code class="descclassname">MDAnalysis.analysis.encore.confdistmatrix.</code><code class="descname">conformational_distance_matrix</code><span class="sig-paren">(</span><em>ensemble</em>, <em>conf_dist_function</em>, <em>selection=''</em>, <em>superimposition_selection=''</em>, <em>n_jobs=1</em>, <em>pairwise_align=True</em>, <em>mass_weighted=True</em>, <em>metadata=True</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/confdistmatrix.html#conformational_distance_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.confdistmatrix.conformational_distance_matrix" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.analysis.encore.confdistmatrix.</code><code class="descname">conformational_distance_matrix</code><span class="sig-paren">(</span><em>ensemble</em>, <em>conf_dist_function</em>, <em>selection=''</em>, <em>superimposition_selection=''</em>, <em>n_jobs=1</em>, <em>pairwise_align=True</em>, <em>weights='mass'</em>, <em>metadata=True</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/confdistmatrix.html#conformational_distance_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.confdistmatrix.conformational_distance_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the conformational distance matrix calculation.
 args and kwargs are passed to conf_dist_function.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -124,14 +124,17 @@ args and kwargs are passed to conf_dist_function.</p>
 be computed.</li>
 <li><strong>conf_dist_function</strong> (<em>function object</em>) &#8211; Function that fills the matrix with conformational distance
 values. See set_rmsd_matrix_elements for an example.</li>
-<li><strong>pairwise_align</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Whether to perform pairwise alignment between conformations.
+<li><strong>selection</strong> (<em>str, optional</em>) &#8211; use this selection for the calculation of conformational distance</li>
+<li><strong>superimposition_selection</strong> (<em>str, optional</em>) &#8211; use atoms from this selection for fitting instead of those of
+&#8220;selection&#8221;</li>
+<li><strong>pairwise_align</strong> (<em>bool, optional</em>) &#8211; Whether to perform pairwise alignment between conformations.
 Default is True (do the superimposition)</li>
-<li><strong>mass_weighted</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Whether to perform mass-weighted superimposition and metric
-calculation. Default is True.</li>
-<li><strong>metadata</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Whether to build a metadata dataset for the calculated matrix.
+<li><strong>weights</strong> (<em>str/array_like, optional</em>) &#8211; weights to be used for fit. Can be either &#8216;mass&#8217; or an array_like</li>
+<li><strong>metadata</strong> (<em>bool, optional</em>) &#8211; Whether to build a metadata dataset for the calculated matrix.
 Default is True.</li>
-<li><strong>n_jobs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of cores to be used for parallel calculation
+<li><strong>n_jobs</strong> (<em>int, optional</em>) &#8211; Number of cores to be used for parallel calculation
 Default is 1. -1 uses all available cores</li>
+<li><strong>verbose</strong> (<em>bool, optional</em>) &#8211; enable verbose output</li>
 </ul>
 </td>
 </tr>
@@ -148,7 +151,7 @@ Conformational distance matrix in triangular representation.</p>
 
 <dl class="function">
 <dt id="MDAnalysis.analysis.encore.confdistmatrix.get_distance_matrix">
-<code class="descclassname">MDAnalysis.analysis.encore.confdistmatrix.</code><code class="descname">get_distance_matrix</code><span class="sig-paren">(</span><em>ensemble</em>, <em>selection='name CA'</em>, <em>load_matrix=None</em>, <em>save_matrix=None</em>, <em>superimpose=True</em>, <em>superimposition_subset='name CA'</em>, <em>mass_weighted=True</em>, <em>n_jobs=1</em>, <em>verbose=False</em>, <em>*conf_dist_args</em>, <em>**conf_dist_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/confdistmatrix.html#get_distance_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.confdistmatrix.get_distance_matrix" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.analysis.encore.confdistmatrix.</code><code class="descname">get_distance_matrix</code><span class="sig-paren">(</span><em>ensemble</em>, <em>selection='name CA'</em>, <em>load_matrix=None</em>, <em>save_matrix=None</em>, <em>superimpose=True</em>, <em>superimposition_subset='name CA'</em>, <em>weights='mass'</em>, <em>n_jobs=1</em>, <em>verbose=False</em>, <em>*conf_dist_args</em>, <em>**conf_dist_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/confdistmatrix.html#get_distance_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.confdistmatrix.get_distance_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieves or calculates the conformational distance (RMSD)
 matrix. The distance matrix is calculated between all the frames of all
 the <a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> objects given as input.
@@ -175,8 +178,7 @@ filename is required.</li>
 (default is True).</li>
 <li><strong>superimposition_subset</strong> (<em>str, optional</em>) &#8211; Group for superimposition using MDAnalysis selection syntax
 (default is CA atoms: &#8220;name CA&#8221;)</li>
-<li><strong>mass_weighted</strong> (<em>bool, optional</em>) &#8211; calculate a mass-weighted RMSD (default is True). If set to False
-the superimposition will also not be mass-weighted.</li>
+<li><strong>weights</strong> (<em>str/array_like, optional</em>) &#8211; weights to be used for fit. Can be either &#8216;mass&#8217; or an array_like</li>
 <li><strong>n_jobs</strong> (<em>int, optional</em>) &#8211; Maximum number of cores to be used (default is 1). If -1 use all cores.</li>
 <li><strong>verbose</strong> (<em>bool, optional</em>) &#8211; print progress</li>
 </ul>
@@ -195,7 +197,7 @@ Conformational distance matrix. .</p>
 
 <dl class="function">
 <dt id="MDAnalysis.analysis.encore.confdistmatrix.set_rmsd_matrix_elements">
-<code class="descclassname">MDAnalysis.analysis.encore.confdistmatrix.</code><code class="descname">set_rmsd_matrix_elements</code><span class="sig-paren">(</span><em>tasks</em>, <em>coords</em>, <em>rmsdmat</em>, <em>masses</em>, <em>fit_coords=None</em>, <em>fit_masses=None</em>, <em>pbar_counter=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/confdistmatrix.html#set_rmsd_matrix_elements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.confdistmatrix.set_rmsd_matrix_elements" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.analysis.encore.confdistmatrix.</code><code class="descname">set_rmsd_matrix_elements</code><span class="sig-paren">(</span><em>tasks</em>, <em>coords</em>, <em>rmsdmat</em>, <em>weights</em>, <em>fit_coords=None</em>, <em>fit_weights=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/confdistmatrix.html#set_rmsd_matrix_elements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.confdistmatrix.set_rmsd_matrix_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>RMSD Matrix calculator</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -208,18 +210,18 @@ is triangular, the trm_indices matrix automatically
 calculates the corrisponding i,j matrix indices.
 The matrix is written as an array in a row-major
 order (see the TriangularMatrix class for details).</p>
-<p>If fit_coords and fit_masses are specified, the structures
-will be superimposed before calculating RMSD, and fit_coords and fit_masses
+<p>If fit_coords and fit_weights are specified, the structures
+will be superimposed before calculating RMSD, and fit_coords and fit_weights
 will be used to place both structures at their center of mass and
-compute the rotation matrix. In this case, both fit_coords and fit_masses
+compute the rotation matrix. In this case, both fit_coords and fit_weights
 must be specified.</p>
 </li>
 <li><strong>coords</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)"><em>numpy.array</em></a>) &#8211; Array of the ensemble coordinates</li>
-<li><strong>masses</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)"><em>numpy.array</em></a>) &#8211; Array of atomic masses, having the same order as the
+<li><strong>weights</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)"><em>numpy.array</em></a>) &#8211; Array of atomic weights, having the same order as the
 coordinates array</li>
 <li><strong>rmsdmat</strong> (<a class="reference internal" href="utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix" title="MDAnalysis.analysis.encore.utils.TriangularMatrix"><em>encore.utils.TriangularMatrix</em></a>) &#8211; Memory-shared triangular matrix object</li>
-<li><strong>fit_coords</strong> (<em>numpy.array or None</em>) &#8211; Array of the coordinates used for fitting</li>
-<li><strong>fit_masses</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)"><em>numpy.array</em></a>) &#8211; Array of atomic masses, having the same order as the
+<li><strong>fit_coords</strong> (<em>numpy.array or None, optional</em>) &#8211; Array of the coordinates used for fitting</li>
+<li><strong>fit_weights</strong> (<em>numpy.array. optional</em>) &#8211; Array of atomic weights, having the same order as the
 fit_coords array</li>
 </ul>
 </td>
