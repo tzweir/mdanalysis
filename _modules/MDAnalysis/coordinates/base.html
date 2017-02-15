@@ -1723,24 +1723,29 @@
 
 
 <span class="k">class</span> <span class="nc">_Writermeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-    <span class="c1"># Auto register upon class creation</span>
+    <span class="c1"># Auto register this format upon class creation</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">classdict</span><span class="p">):</span>
         <span class="nb">type</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">classdict</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># grab the string which describes this format</span>
+            <span class="c1"># could be either &#39;PDB&#39; or [&#39;PDB&#39;, &#39;ENT&#39;] for multiple formats</span>
             <span class="n">fmt</span> <span class="o">=</span> <span class="n">asiterable</span><span class="p">(</span><span class="n">classdict</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="c1"># not required however</span>
             <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fmt</span><span class="p">:</span>
-                <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-                <span class="n">_SINGLEFRAME_WRITERS</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">classdict</span><span class="p">[</span><span class="s1">&#39;multiframe&#39;</span><span class="p">]:</span>
-                    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fmt</span><span class="p">:</span>
-                        <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-                        <span class="n">_MULTIFRAME_WRITERS</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
-            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                <span class="k">pass</span>
+            <span class="c1"># does the Writer support single and multiframe writing?</span>
+            <span class="n">single</span> <span class="o">=</span> <span class="n">classdict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;singleframe&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+            <span class="n">multi</span> <span class="o">=</span> <span class="n">classdict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multiframe&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">single</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fmt</span><span class="p">:</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                    <span class="n">_SINGLEFRAME_WRITERS</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
+            <span class="k">if</span> <span class="n">multi</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fmt</span><span class="p">:</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                    <span class="n">_MULTIFRAME_WRITERS</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
 
 
 <div class="viewcode-block" id="Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Writer">[docs]</a><span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Writermeta</span><span class="p">,</span> <span class="n">IObase</span><span class="p">)):</span>
