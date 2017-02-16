@@ -579,7 +579,8 @@
     <span class="n">smax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">padding</span>
 
     <span class="n">BINS</span> <span class="o">=</span> <span class="n">fixedwidth_bins</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">smin</span><span class="p">,</span> <span class="n">smax</span><span class="p">)</span>
-    <span class="n">arange</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">BINS</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span> <span class="n">BINS</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span>
+    <span class="n">arange</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">BINS</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span> <span class="n">BINS</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span>
+    <span class="n">arange</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">arange</span><span class="p">)</span>
     <span class="n">bins</span> <span class="o">=</span> <span class="n">BINS</span><span class="p">[</span><span class="s1">&#39;Nbins&#39;</span><span class="p">]</span>
 
     <span class="c1"># create empty grid with the right dimensions (and get the edges)</span>
