@@ -1051,8 +1051,8 @@ class TestAttributeSetting(object):
             # I want to create a subclass of AtomGroup
             # that has a new attribute, should be possible..
             def __init__(self, ix, u, thing):
-                self.thing = thing
                 super(AwesomeGroup, self).__init__(ix, u)
+                self.thing = thing
 
             def thing_thingy(self):
                 # this is my cool new method which uses my new attribute
@@ -1062,4 +1062,4 @@ class TestAttributeSetting(object):
 
         ag = AwesomeGroup([4, 6, 8], u, 'wow')
 
-        assert_(ag.thingy_thing() == 'wowwow')
+        assert_(ag.thing_thingy() == 'wowwow')
