@@ -1723,6 +1723,9 @@
 <span class="sd">    specific to ResidueGroups.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;ResidueGroup {}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">)))</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get an :class:`AtomGroup` of atoms represented in this</span>
@@ -1819,6 +1822,9 @@
 <span class="sd">    SegmentGroups.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;SegmentGroup {}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">)))</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get an AtomGroup of atoms represented in this SegmentGroup.</span>
@@ -1891,10 +1897,6 @@
         <span class="c1"># index of component</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ix</span> <span class="o">=</span> <span class="n">ix</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_u</span> <span class="o">=</span> <span class="n">u</span>
-
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;{} {}&gt;&quot;</span>
-                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">level</span><span class="p">:</span>
@@ -2003,6 +2005,22 @@
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;{cls} has no attribute {attr}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="bp">cls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="n">attr</span><span class="p">))</span></div>
 
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">me</span> <span class="o">=</span> <span class="s1">&#39;&lt;Atom {}:&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; of type {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;resname&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; of resname {},&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;resid&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; resid {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;segid&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; and segid {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;altLoc&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; and altloc {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">altloc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">me</span> <span class="o">+</span> <span class="s1">&#39;&gt;&#39;</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">residue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">resindices</span><span class="p">[</span><span class="bp">self</span><span class="p">]]</span>
@@ -2105,6 +2123,15 @@
 <span class="sd">    Residues.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">me</span> <span class="o">=</span> <span class="s1">&#39;&lt;Residue&#39;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;resname&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; {},&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;resid&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">me</span> <span class="o">+</span> <span class="s1">&#39;&gt;&#39;</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
@@ -2130,6 +2157,12 @@
 <span class="sd">    Segments.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">me</span> <span class="o">=</span> <span class="s1">&#39;&lt;Segment&#39;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;segid&#39;</span><span class="p">):</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">me</span> <span class="o">+</span> <span class="s1">&#39;&gt;&#39;</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
