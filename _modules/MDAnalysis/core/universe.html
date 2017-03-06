@@ -325,17 +325,20 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_generate_from_topology</span><span class="p">()</span>
 
             <span class="c1"># Load coordinates</span>
-            <span class="c1"># if passed Topology object as top</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">coordinatefile</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="c1"># Can the topology file also act as coordinate file?</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">_</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
-                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="c1"># If we got the topology as a Topology object, then we</span>
+                    <span class="c1"># cannot read coordinates from it.</span>
                     <span class="n">coordinatefile</span> <span class="o">=</span> <span class="bp">None</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">coordinatefile</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">]</span>
+                    <span class="c1"># Can the topology file also act as coordinate file?</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">_</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                                           <span class="n">format</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">coordinatefile</span> <span class="o">=</span> <span class="bp">None</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">coordinatefile</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">coordinatefile</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load_new</span><span class="p">(</span><span class="n">coordinatefile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
