@@ -201,6 +201,7 @@
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numbers</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">weakref</span>
@@ -1367,13 +1368,20 @@
 <span class="sd">            range(10)[10:-1:-1]  # []</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">varname</span> <span class="ow">in</span> <span class="p">(</span>
-                <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">),</span>
-                <span class="p">(</span><span class="n">stop</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">),</span>
-                <span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="s1">&#39;step&#39;</span><span class="p">)</span>
-        <span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">var</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)):</span>
+
+        <span class="n">slice_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">start</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">:</span> <span class="n">stop</span><span class="p">,</span> <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="n">step</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">varname</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">slice_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
+                <span class="n">slice_dict</span><span class="p">[</span><span class="n">varname</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">var</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;{0} is not an integer&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">varname</span><span class="p">))</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">slice_dict</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">]</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">slice_dict</span><span class="p">[</span><span class="s1">&#39;stop&#39;</span><span class="p">]</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="n">slice_dict</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span>
+
         <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Step size is zero&quot;</span><span class="p">)</span>
 
