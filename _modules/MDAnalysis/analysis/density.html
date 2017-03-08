@@ -203,9 +203,8 @@
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib</span> <span class="kn">import</span> <span class="n">NeighborSearch</span> <span class="k">as</span> <span class="n">NS</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">NoDataError</span><span class="p">,</span> <span class="n">MissingDataWarning</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span> <span class="nn">..lib</span> <span class="kn">import</span> <span class="n">distances</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="kn">import</span> <span class="n">ProgressMeter</span>
-
-<span class="kn">import</span> <span class="nn">MDAnalysis.analysis.distances</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 
@@ -533,32 +532,33 @@
 <span class="sd">    :Returns: :class:`Density`</span>
 
 <span class="sd">    .. versionchanged:: 0.13.0</span>
-<span class="sd">       *update_selection* and *quite* keywords added</span>
+<span class="sd">       *update_selection* and *quiet* keywords added</span>
 
 <span class="sd">    .. deprecated:: 0.16</span>
 <span class="sd">       The keyword argument *quiet* is deprecated in favor of *verbose*.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
-        <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
-    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The universe must be a proper MDAnalysis.Universe instance.&quot;</span><span class="p">)</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">universe</span>
+
     <span class="k">if</span> <span class="n">cutoff</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">soluteselection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># special fast selection for &#39;&lt;atomsel&gt; not within &lt;cutoff&gt; of &lt;solutesel&gt;&#39;</span>
-        <span class="n">notwithin_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">atomselection</span><span class="p">,</span> <span class="n">soluteselection</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span>
-                                                              <span class="n">use_kdtree</span><span class="o">=</span><span class="n">use_kdtree</span><span class="p">)</span>
+        <span class="n">notwithin_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span>
+            <span class="n">u</span><span class="p">,</span> <span class="n">groupselection</span><span class="p">,</span> <span class="n">soluteselection</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span>
+            <span class="n">use_kdtree</span><span class="o">=</span><span class="n">use_kdtree</span><span class="p">,</span> <span class="n">updating_selection</span><span class="o">=</span><span class="n">update_selection</span><span class="p">)</span>
         <span class="k">def</span> <span class="nf">current_coordinates</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">notwithin_coordinates</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">group</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">atomselection</span><span class="p">)</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">atomselection</span><span class="p">,</span> <span class="n">updating</span><span class="o">=</span><span class="n">update_selection</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">current_coordinates</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">positions</span>
 
     <span class="n">coord</span> <span class="o">=</span> <span class="n">current_coordinates</span><span class="p">()</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Selected {0:d} atoms out of {1:d} atoms ({2!s}) from {3:d} total.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">atomselection</span><span class="p">)),</span> <span class="n">atomselection</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">)))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;Selected {0:d} atoms out of {1:d} atoms ({2!s}) from {3:d} total.&quot;</span>
+        <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">atomselection</span><span class="p">)),</span>
+                  <span class="n">atomselection</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">))</span>
+    <span class="p">)</span>
 
     <span class="c1"># mild warning; typically this is run on RMS-fitted trajectories and</span>
     <span class="c1"># so the box information is rather meaningless</span>
@@ -594,11 +594,7 @@
                        <span class="s2">&quot;</span><span class="si">%(step)5d</span><span class="s2">/</span><span class="si">%(numsteps)d</span><span class="s2">  [</span><span class="si">%(percentage)5.1f%%</span><span class="s2">]</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">:</span><span class="n">step</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">update_selection</span><span class="p">:</span>
-           <span class="n">group</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">atomselection</span><span class="p">)</span>
-           <span class="n">coord</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">positions</span>
-        <span class="k">else</span><span class="p">:</span>
-           <span class="n">coord</span> <span class="o">=</span> <span class="n">current_coordinates</span><span class="p">()</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="n">current_coordinates</span><span class="p">()</span>
 
         <span class="n">pm</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -606,7 +602,6 @@
 
         <span class="n">h</span><span class="p">[:],</span> <span class="n">edges</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogramdd</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">arange</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">grid</span> <span class="o">+=</span> <span class="n">h</span>  <span class="c1"># accumulate average histogram</span>
-
 
     <span class="n">n_frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
     <span class="n">grid</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_frames</span><span class="p">)</span>
@@ -645,55 +640,87 @@
     <span class="k">return</span> <span class="n">g</span></div>
 
 
-<span class="k">def</span> <span class="nf">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">sel1</span><span class="p">,</span> <span class="n">sel2</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">not_within</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_kdtree</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">sel1</span><span class="p">,</span> <span class="n">sel2</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span>
+                                  <span class="n">not_within</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_kdtree</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">updating_selection</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate optimized selection for &#39;*sel1* not within *cutoff* of *sel2*&#39;</span>
 
-<span class="sd">    Example usage::</span>
-<span class="sd">      notwithin_coordinates = notwithin_coordinates_factory(universe, &#39;name OH2&#39;,&#39;protein and not name H*&#39;,3.5)</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : MDAnalysis.Universe</span>
+<span class="sd">        Universe object on which to operate</span>
+<span class="sd">    sel1, sel2 : str</span>
+<span class="sd">        Selection strings for the solvent and solute selections</span>
+<span class="sd">    cutoff : float</span>
+<span class="sd">        Distance cutoff</span>
+<span class="sd">    not_within : bool</span>
+<span class="sd">        True: selection behaves as &#39;not within&#39; (As described above)</span>
+<span class="sd">        False: selection is a &lt;sel1&gt; WITHIN &lt;cutoff&gt; OF &lt;sel2&gt;&#39;</span>
+<span class="sd">    use_kdtree : bool</span>
+<span class="sd">        True: use fast kd-tree based selections</span>
+<span class="sd">        False: use distance matrix approach</span>
+<span class="sd">    updating_selection : bool</span>
+<span class="sd">        If True, re-evaluate the selection string each frame.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    * Periodic boundary conditions are *not* taken into account: the naive</span>
+<span class="sd">      minimum image convention employed in the distance check is currently</span>
+<span class="sd">      not being applied to remap the coordinates themselves, and hence it</span>
+<span class="sd">      would lead to counts in the wrong region.</span>
+<span class="sd">    * With ``updating_selection=True``, the selection is evaluated every turn;</span>
+<span class="sd">      do not use distance based selections (such as &quot;AROUND&quot;) in your selection</span>
+<span class="sd">      string because it will likely completely negate any gains from using</span>
+<span class="sd">      this function factory in the first place.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`notwithin_coordinates_factory` creates an optimized function that, when called,</span>
+<span class="sd">    returns the coordinates of the &quot;solvent&quot; selection that are *not within* a given cut-off</span>
+<span class="sd">    distance of the &quot;solute&quot;. Because it is KD-tree based, it is cheap to query the KD-tree with</span>
+<span class="sd">    a different cut-off::</span>
+<span class="sd">    </span>
+<span class="sd">      notwithin_coordinates = notwithin_coordinates_factory(universe, &#39;name OH2&#39;,&#39;protein and not name H*&#39;, 3.5)</span>
 <span class="sd">      ...</span>
-<span class="sd">      coord = notwithin_coordinates()        # changes with time step</span>
+<span class="sd">      coord = notwithin_coordinates()        # get coordinates outside cutoff 3.5 A</span>
 <span class="sd">      coord = notwithin_coordinates(cutoff2) # can use different cut off</span>
 
-<span class="sd">    :Keywords:</span>
-<span class="sd">      *not_within*</span>
-<span class="sd">         True: selection behaves as &#39;not within&#39; (As described above)</span>
-<span class="sd">         False: selection is a &lt;sel1&gt; WITHIN &lt;cutoff&gt; OF &lt;sel2&gt;&#39;</span>
-<span class="sd">      *use_kdtree*</span>
-<span class="sd">         True: use fast kd-tree based selections (requires new MDAnalysis &gt;= 0.6)</span>
-<span class="sd">         False: use distance matrix approach</span>
-
-<span class="sd">    .. Note::</span>
-
-<span class="sd">       * Periodic boundary conditions are *not* taken into account: the naive</span>
-<span class="sd">         minimum image convention employed in the distance check is currently</span>
-<span class="sd">         not being applied to remap the coordinates themselves, and hence it</span>
-<span class="sd">         would lead to counts in the wrong region.</span>
-<span class="sd">       * The selections are static and do not change with time steps.</span>
-
+<span class="sd">    For programmatic convenience, the function can also function as a factory for a simple </span>
+<span class="sd">    *within cutoff* query if the keyword ``not_within=False`` is set::</span>
+<span class="sd">  </span>
+<span class="sd">      within_coordinates = notwithin_coordinates_factory(universe, &#39;name OH2&#39;,&#39;protein and not name H*&#39;, 3.5, </span>
+<span class="sd">                                                         not_within=False)</span>
+<span class="sd">      ...</span>
+<span class="sd">      coord = within_coordinates()        # get coordinates within cutoff 3.5 A</span>
+<span class="sd">      coord = within_coordinates(cutoff2) # can use different cut off</span>
+<span class="sd">    </span>
+<span class="sd">    (Readability is enhanced by properly naming the generated function ``within_coordinates().)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Benchmark of FABP system (solvent 3400 OH2, protein 2100 atoms) on G4 powerbook, 500 frames</span>
     <span class="c1">#                    cpu/s    relative   speedup       use_kdtree</span>
     <span class="c1"># distance matrix    633        1          1           False</span>
     <span class="c1"># AROUND + kdtree    420        0.66       1.5         n/a (&#39;name OH2 around 4 protein&#39;)</span>
     <span class="c1"># manual + kdtree    182        0.29       3.5         True</span>
-    <span class="n">solvent</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel1</span><span class="p">)</span>
-    <span class="n">protein</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel2</span><span class="p">)</span>
+    <span class="n">solvent</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel1</span><span class="p">,</span> <span class="n">updating</span><span class="o">=</span><span class="n">updating_selection</span><span class="p">)</span>
+    <span class="n">protein</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel2</span><span class="p">,</span> <span class="n">updating</span><span class="o">=</span><span class="n">updating_selection</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">use_kdtree</span><span class="p">:</span>
         <span class="c1"># using faster hand-coded &#39;not within&#39; selection with kd-tree</span>
         <span class="k">if</span> <span class="n">not_within</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>  <span class="c1"># default</span>
-            <span class="n">set_solvent</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">solvent</span><span class="p">)</span>  <span class="c1"># need sets to do bulk = allsolvent - selection</span>
             <span class="k">def</span> <span class="nf">notwithin_coordinates</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">):</span>
                 <span class="c1"># must update every time step</span>
                 <span class="n">ns_w</span> <span class="o">=</span> <span class="n">NS</span><span class="o">.</span><span class="n">AtomNeighborSearch</span><span class="p">(</span><span class="n">solvent</span><span class="p">)</span>  <span class="c1"># build kd-tree on solvent (N_w &gt; N_protein)</span>
-                <span class="n">solvation_shell</span> <span class="o">=</span> <span class="n">ns_w</span><span class="o">.</span><span class="n">search_list</span><span class="p">(</span><span class="n">protein</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span>  <span class="c1"># solvent within CUTOFF of protein</span>
-                <span class="n">group</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">AtomGroup</span><span class="p">(</span><span class="n">set_solvent</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">solvation_shell</span><span class="p">))</span>  <span class="c1"># bulk</span>
+                <span class="n">solvation_shell</span> <span class="o">=</span> <span class="n">ns_w</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">protein</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span>  <span class="c1"># solvent within CUTOFF of protein</span>
+                <span class="c1"># Find indices in solvent NOT in solvation shell</span>
+                <span class="n">uniq_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">solvent</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="n">solvation_shell</span><span class="o">.</span><span class="n">ix</span><span class="p">)</span>
+                <span class="c1"># Then reselect these from Universe.atoms (as these indices are global)</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">uniq_idx</span><span class="p">]</span>
                 <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">positions</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">def</span> <span class="nf">notwithin_coordinates</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">):</span>
                 <span class="c1"># acts as &#39;&lt;solvent&gt; WITHIN &lt;cutoff&gt; OF &lt;protein&gt;&#39;</span>
                 <span class="c1"># must update every time step</span>
                 <span class="n">ns_w</span> <span class="o">=</span> <span class="n">NS</span><span class="o">.</span><span class="n">AtomNeighborSearch</span><span class="p">(</span><span class="n">solvent</span><span class="p">)</span>  <span class="c1"># build kd-tree on solvent (N_w &gt; N_protein)</span>
-                <span class="n">group</span> <span class="o">=</span> <span class="n">ns_w</span><span class="o">.</span><span class="n">search_list</span><span class="p">(</span><span class="n">protein</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span>  <span class="c1"># solvent within CUTOFF of protein</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="n">ns_w</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">protein</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span>  <span class="c1"># solvent within CUTOFF of protein</span>
                 <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">positions</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># slower distance matrix based (calculate all with all distances first)</span>
@@ -710,7 +737,7 @@
             <span class="n">s_coor</span> <span class="o">=</span> <span class="n">solvent</span><span class="o">.</span><span class="n">positions</span>
             <span class="n">p_coor</span> <span class="o">=</span> <span class="n">protein</span><span class="o">.</span><span class="n">positions</span>
             <span class="c1"># Does water i satisfy d[i,j] &gt; r for ALL j?</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">distances</span><span class="o">.</span><span class="n">distance_array</span><span class="p">(</span><span class="n">s_coor</span><span class="p">,</span> <span class="n">p_coor</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">box</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">dist</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">distances</span><span class="o">.</span><span class="n">distance_array</span><span class="p">(</span><span class="n">s_coor</span><span class="p">,</span> <span class="n">p_coor</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">box</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">dist</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">s_coor</span><span class="p">[</span><span class="n">aggregatefunc</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">notwithin_coordinates</span>
 
