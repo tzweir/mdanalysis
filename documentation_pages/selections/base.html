@@ -95,18 +95,18 @@
   <span class="target" id="module-MDAnalysis.selections.base"></span><div class="section" id="base-classes-for-the-selection-writers">
 <h1>7.6. Base classes for the selection writers<a class="headerlink" href="#base-classes-for-the-selection-writers" title="Permalink to this headline">¶</a></h1>
 <p>Specialized SelectionWriters are derived from
-<a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriter" title="MDAnalysis.selections.base.SelectionWriter"><code class="xref py py-class docutils literal"><span class="pre">SelectionWriter</span></code></a>. Override the <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriter._write_head" title="MDAnalysis.selections.base.SelectionWriter._write_head"><code class="xref py py-meth docutils literal"><span class="pre">_write_head()</span></code></a>,
-<a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriter._translate" title="MDAnalysis.selections.base.SelectionWriter._translate"><code class="xref py py-meth docutils literal"><span class="pre">_translate()</span></code></a>, and <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriter._write_tail" title="MDAnalysis.selections.base.SelectionWriter._write_tail"><code class="xref py py-meth docutils literal"><span class="pre">_write_tail()</span></code></a>
+<a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriterBase" title="MDAnalysis.selections.base.SelectionWriterBase"><code class="xref py py-class docutils literal"><span class="pre">SelectionWriterBase</span></code></a>. Override the <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriterBase._write_head" title="MDAnalysis.selections.base.SelectionWriterBase._write_head"><code class="xref py py-meth docutils literal"><span class="pre">_write_head()</span></code></a>,
+<a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriterBase._translate" title="MDAnalysis.selections.base.SelectionWriterBase._translate"><code class="xref py py-meth docutils literal"><span class="pre">_translate()</span></code></a>, and <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriterBase._write_tail" title="MDAnalysis.selections.base.SelectionWriterBase._write_tail"><code class="xref py py-meth docutils literal"><span class="pre">_write_tail()</span></code></a>
 methods.</p>
 <dl class="class">
-<dt id="MDAnalysis.selections.base.SelectionWriter">
-<em class="property">class </em><code class="descclassname">MDAnalysis.selections.base.</code><code class="descname">SelectionWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='wa'</em>, <em>numterms=None</em>, <em>preamble=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriter" title="Permalink to this definition">¶</a></dt>
+<dt id="MDAnalysis.selections.base.SelectionWriterBase">
+<em class="property">class </em><code class="descclassname">MDAnalysis.selections.base.</code><code class="descname">SelectionWriterBase</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='wa'</em>, <em>numterms=None</em>, <em>preamble=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriterBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriterBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export a selection in MDAnalysis to a format usable in an external package.</p>
-<p>The <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriter" title="MDAnalysis.selections.base.SelectionWriter"><code class="xref py py-class docutils literal"><span class="pre">SelectionWriter</span></code></a> writes a selection string to a file
+<p>The <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriterBase" title="MDAnalysis.selections.base.SelectionWriterBase"><code class="xref py py-class docutils literal"><span class="pre">SelectionWriterBase</span></code></a> writes a selection string to a file
 that can be used in another package such as <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>, <a class="reference external" href="http://www.pymol.org/">PyMOL</a>,
 <a class="reference external" href="http://www.gromacs.org/">Gromacs</a> or <a class="reference external" href="http://www.charmm.org/">CHARMM</a>. In this way, analysis and visualization
 can be done with the best or most convenient tools at hand.</p>
-<p><a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriter" title="MDAnalysis.selections.base.SelectionWriter"><code class="xref py py-class docutils literal"><span class="pre">SelectionWriter</span></code></a> is a base class and child classes are
+<p><a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriterBase" title="MDAnalysis.selections.base.SelectionWriterBase"><code class="xref py py-class docutils literal"><span class="pre">SelectionWriterBase</span></code></a> is a base class and child classes are
 derived with the appropriate customizations for the package file
 format.</p>
 <div class="versionchanged">
@@ -135,7 +135,7 @@ to 0 or <code class="docutils literal"><span class="pre">False</span></code> the
 <dd><p class="first last">string that is written as a comment at the top of the file []</p>
 </dd>
 <dt><em>kwargs</em></dt>
-<dd><p class="first last">use as defaults for <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriter.write" title="MDAnalysis.selections.base.SelectionWriter.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></p>
+<dd><p class="first last">use as defaults for <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriterBase.write" title="MDAnalysis.selections.base.SelectionWriterBase.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></p>
 </dd>
 </dl>
 </td>
@@ -143,8 +143,8 @@ to 0 or <code class="docutils literal"><span class="pre">False</span></code> the
 </tbody>
 </table>
 <dl class="method">
-<dt id="MDAnalysis.selections.base.SelectionWriter.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='wa'</em>, <em>numterms=None</em>, <em>preamble=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriter.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriter.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="MDAnalysis.selections.base.SelectionWriterBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='wa'</em>, <em>numterms=None</em>, <em>preamble=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriterBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriterBase.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set up for writing to <em>filename</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -167,7 +167,7 @@ to 0 or <code class="docutils literal"><span class="pre">False</span></code> the
 <dd><p class="first last">string that is written as a comment at the top of the file []</p>
 </dd>
 <dt><em>kwargs</em></dt>
-<dd><p class="first last">use as defaults for <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriter.write" title="MDAnalysis.selections.base.SelectionWriter.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></p>
+<dd><p class="first last">use as defaults for <a class="reference internal" href="#MDAnalysis.selections.base.SelectionWriterBase.write" title="MDAnalysis.selections.base.SelectionWriterBase.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></p>
 </dd>
 </dl>
 </td>
@@ -177,8 +177,8 @@ to 0 or <code class="docutils literal"><span class="pre">False</span></code> the
 </dd></dl>
 
 <dl class="method">
-<dt id="MDAnalysis.selections.base.SelectionWriter._translate">
-<code class="descname">_translate</code><span class="sig-paren">(</span><em>atoms</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriter._translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriter._translate" title="Permalink to this definition">¶</a></dt>
+<dt id="MDAnalysis.selections.base.SelectionWriterBase._translate">
+<code class="descname">_translate</code><span class="sig-paren">(</span><em>atoms</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriterBase._translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriterBase._translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Translate atoms into a list of native selection terms.</p>
 <ul>
 <li><p class="first">build list of ALL selection terms as if this was a single line, e.g.
@@ -199,30 +199,30 @@ to 0 or <code class="docutils literal"><span class="pre">False</span></code> the
 </dd></dl>
 
 <dl class="method">
-<dt id="MDAnalysis.selections.base.SelectionWriter._write_head">
-<code class="descname">_write_head</code><span class="sig-paren">(</span><em>out</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriter._write_head"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriter._write_head" title="Permalink to this definition">¶</a></dt>
+<dt id="MDAnalysis.selections.base.SelectionWriterBase._write_head">
+<code class="descname">_write_head</code><span class="sig-paren">(</span><em>out</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriterBase._write_head"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriterBase._write_head" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial output to open file object <em>out</em>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="MDAnalysis.selections.base.SelectionWriter._write_tail">
-<code class="descname">_write_tail</code><span class="sig-paren">(</span><em>out</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriter._write_tail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriter._write_tail" title="Permalink to this definition">¶</a></dt>
+<dt id="MDAnalysis.selections.base.SelectionWriterBase._write_tail">
+<code class="descname">_write_tail</code><span class="sig-paren">(</span><em>out</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriterBase._write_tail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriterBase._write_tail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Last output to open file object <em>out</em>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="MDAnalysis.selections.base.SelectionWriter.comment">
-<code class="descname">comment</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriter.comment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriter.comment" title="Permalink to this definition">¶</a></dt>
+<dt id="MDAnalysis.selections.base.SelectionWriterBase.comment">
+<code class="descname">comment</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriterBase.comment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriterBase.comment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return string <em>s</em> interpolated into the comment format string.</p>
-<p>If no <code class="xref py py-attr docutils literal"><span class="pre">SelectionWriter.commentfmt</span></code> is defined (None) then the
+<p>If no <code class="xref py py-attr docutils literal"><span class="pre">SelectionWriterBase.commentfmt</span></code> is defined (None) then the
 empty string is returned because presumably there is no way to enter
 comments into the file.</p>
 <p>A newline is appended to non-empty strings.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="MDAnalysis.selections.base.SelectionWriter.write">
-<code class="descname">write</code><span class="sig-paren">(</span><em>selection</em>, <em>number=None</em>, <em>name=None</em>, <em>frame=None</em>, <em>mode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriter.write" title="Permalink to this definition">¶</a></dt>
+<dt id="MDAnalysis.selections.base.SelectionWriterBase.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>selection</em>, <em>number=None</em>, <em>name=None</em>, <em>frame=None</em>, <em>mode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/base.html#SelectionWriterBase.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.base.SelectionWriterBase.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write selection to the output file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

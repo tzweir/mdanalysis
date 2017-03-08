@@ -126,11 +126,10 @@
 <h1>8.1. Auxiliary Readers &#8212; <code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.auxiliary</span></code><a class="headerlink" href="#auxiliary-readers-mdanalysis-auxiliary" title="Permalink to this headline">¶</a></h1>
 <p>The auxiliary submodule contains code for reading &#8216;auxiliary&#8217; data from a
 trajectory and allowing alignment with trajectory timesteps. Additional
-methods in <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.Reader</span></code></a> allow auxiliary data to
-be added and read alongside a trajectory.</p>
+methods in <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.ProtoReader</span></code></a> allow auxiliary data
+to be added and read alongside a trajectory.</p>
 <p>Auxiliary data are timeseries accompanying a trajectory not stored in the
-regular trajectory file to be read by the trajectory
-<a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></a>. They may be stored
+regular trajectory file to be read by the trajectory Reader. They may be stored
 internally (e.g. in an array) or read from a file. In general, auxiliary data is
 assumed to be time ordered and contain no duplicates.</p>
 <div class="section" id="supported-formats">
@@ -236,8 +235,7 @@ instance from the trajectory), as:</p>
 <code class="docutils literal"><span class="pre">cutoff</span></code>, if set), the representative value(s) are set to <code class="docutils literal"><span class="pre">np.nan</span></code>.</p>
 <div class="section" id="adding-an-auxiliary-to-a-trajectory">
 <h4>8.1.2.1.1. Adding an auxiliary to a trajectory<a class="headerlink" href="#adding-an-auxiliary-to-a-trajectory" title="Permalink to this headline">¶</a></h4>
-<p>Auxiliary data may be added to a trajectory
-(<a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></a> object) through the
+<p>Auxiliary data may be added to a trajectory Reader through the
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.add_auxiliary" title="MDAnalysis.coordinates.base.ProtoReader.add_auxiliary"><code class="xref py py-meth docutils literal"><span class="pre">add_auxiliary()</span></code></a> method. Auxiliary data
 may be passed in as a AuxReader instance, or directly as e.g. a filename, in
 which case <a class="reference internal" href="core.html#MDAnalysis.auxiliary.core.get_auxreader_for" title="MDAnalysis.auxiliary.core.get_auxreader_for"><code class="xref py py-func docutils literal"><span class="pre">get_auxreader_for()</span></code></a> is used to
@@ -253,7 +251,7 @@ updated, and the representative auxiliary value(s) will be available as e.g.
 </div>
 <div class="section" id="iterating-by-an-auxiliary">
 <h4>8.1.2.1.2. Iterating by an auxiliary<a class="headerlink" href="#iterating-by-an-auxiliary" title="Permalink to this headline">¶</a></h4>
-<p>The trajectory <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></a> methods
+<p>The trajectory <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code></a> methods
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.next_as_aux" title="MDAnalysis.coordinates.base.ProtoReader.next_as_aux"><code class="xref py py-meth docutils literal"><span class="pre">next_as_aux()</span></code></a> and
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.iter_as_aux" title="MDAnalysis.coordinates.base.ProtoReader.iter_as_aux"><code class="xref py py-meth docutils literal"><span class="pre">iter_as_aux()</span></code></a> allow for movement
 through only trajectory timesteps to which one or more steps that fall within
@@ -269,7 +267,7 @@ is less frequent:</p>
 <p>If the auxiliary data are more frequent and the cutoff (if set) is
 sufficiently high, <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.next_as_aux" title="MDAnalysis.coordinates.base.ProtoReader.next_as_aux"><code class="xref py py-meth docutils literal"><span class="pre">next_as_aux()</span></code></a>
 and <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.iter_as_aux" title="MDAnalysis.coordinates.base.ProtoReader.iter_as_aux"><code class="xref py py-meth docutils literal"><span class="pre">iter_as_aux()</span></code></a> behave the same
-as the <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></a>
+as the <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code></a>
 meth:<cite>~MDAnalysis.coordinates.base.ProtoReader.next</cite> and
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.__iter__" title="MDAnalysis.coordinates.base.ProtoReader.__iter__"><code class="xref py py-meth docutils literal"><span class="pre">__iter__()</span></code></a>.</p>
 <p>In order to acess auxiliary values at every individual step, including those

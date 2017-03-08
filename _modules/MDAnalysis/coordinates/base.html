@@ -181,17 +181,17 @@
 <span class="sd">   .. automethod:: copy</span>
 <span class="sd">   .. automethod:: copy_slice</span>
 
-<span class="sd">.. autoclass:: IObase</span>
+<span class="sd">.. autoclass:: IOBase</span>
 <span class="sd">   :members:</span>
 
 <span class="sd">.. autoclass:: ProtoReader</span>
 <span class="sd">   :members:</span>
 
-<span class="sd">.. autoclass:: Reader</span>
+<span class="sd">.. autoclass:: ReaderBase</span>
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
 
-<span class="sd">.. autoclass:: Writer</span>
+<span class="sd">.. autoclass:: WriterBase</span>
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
 
@@ -857,7 +857,7 @@
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="IObase"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase">[docs]</a><span class="k">class</span> <span class="nc">IObase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase">[docs]</a><span class="k">class</span> <span class="nc">IOBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class bundling common functionality for trajectory I/O.</span>
 
 <span class="sd">    .. versionchanged:: 0.8</span>
@@ -868,7 +868,7 @@
     <span class="c1">#: ... for formats that support it)</span>
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
 
-<div class="viewcode-block" id="IObase.convert_pos_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_pos_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.convert_pos_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_pos_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Conversion of coordinate array x from native units to base units.</span>
 
 <span class="sd">        Parameters</span>
@@ -898,7 +898,7 @@
         <span class="n">x</span> <span class="o">*=</span> <span class="n">f</span>
         <span class="k">return</span> <span class="n">x</span></div>
 
-<div class="viewcode-block" id="IObase.convert_velocities_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_velocities_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_velocities_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.convert_velocities_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_velocities_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_velocities_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Conversion of velocities array *v* from native to base units</span>
 
 <span class="sd">        Parameters</span>
@@ -923,7 +923,7 @@
         <span class="n">v</span> <span class="o">*=</span> <span class="n">f</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
-<div class="viewcode-block" id="IObase.convert_forces_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_forces_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_forces_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.convert_forces_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_forces_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_forces_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Conversion of forces array *force* from native to base units</span>
 
 <span class="sd">        Parameters</span>
@@ -948,7 +948,7 @@
         <span class="n">force</span> <span class="o">*=</span> <span class="n">f</span>
         <span class="k">return</span> <span class="n">force</span></div>
 
-<div class="viewcode-block" id="IObase.convert_time_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_time_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_time_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.convert_time_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_time_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_time_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert time *t* from native units to base units.</span>
 
 <span class="sd">        Parameters</span>
@@ -981,7 +981,7 @@
         <span class="n">t</span> <span class="o">*=</span> <span class="n">f</span>
         <span class="k">return</span> <span class="n">t</span></div>
 
-<div class="viewcode-block" id="IObase.convert_pos_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_pos_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_pos_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.convert_pos_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_pos_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_pos_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Conversion of coordinate array x from base units to native units.</span>
 
 <span class="sd">        Parameters</span>
@@ -1011,7 +1011,7 @@
         <span class="n">x</span> <span class="o">*=</span> <span class="n">f</span>
         <span class="k">return</span> <span class="n">x</span></div>
 
-<div class="viewcode-block" id="IObase.convert_velocities_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_velocities_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_velocities_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.convert_velocities_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_velocities_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_velocities_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Conversion of coordinate array *v* from base to native units</span>
 
 <span class="sd">        Parameters</span>
@@ -1036,7 +1036,7 @@
         <span class="n">v</span> <span class="o">*=</span> <span class="n">f</span>
         <span class="k">return</span> <span class="n">v</span></div>
 
-<div class="viewcode-block" id="IObase.convert_forces_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_forces_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_forces_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.convert_forces_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_forces_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_forces_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Conversion of force array *force* from base to native units.</span>
 
 <span class="sd">        Parameters</span>
@@ -1061,7 +1061,7 @@
         <span class="n">force</span> <span class="o">*=</span> <span class="n">f</span>
         <span class="k">return</span> <span class="n">force</span></div>
 
-<div class="viewcode-block" id="IObase.convert_time_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_time_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_time_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.convert_time_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_time_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_time_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert time *t* from base units to native units.</span>
 
 <span class="sd">        Parameters</span>
@@ -1094,7 +1094,7 @@
         <span class="n">t</span> <span class="o">*=</span> <span class="n">f</span>
         <span class="k">return</span> <span class="n">t</span></div>
 
-<div class="viewcode-block" id="IObase.close"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IOBase.close"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Close the trajectory file.&quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
@@ -1121,10 +1121,10 @@
                 <span class="n">_READERS</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
 
 
-<div class="viewcode-block" id="ProtoReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader">[docs]</a><span class="k">class</span> <span class="nc">ProtoReader</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Readermeta</span><span class="p">,</span> <span class="n">IObase</span><span class="p">)):</span>
+<div class="viewcode-block" id="ProtoReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader">[docs]</a><span class="k">class</span> <span class="nc">ProtoReader</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Readermeta</span><span class="p">,</span> <span class="n">IOBase</span><span class="p">)):</span>
     <span class="sd">&quot;&quot;&quot;Base class for Readers, without a :meth:`__del__` method.</span>
 
-<span class="sd">    Extends :class:`IObase` with most attributes and methods of a generic</span>
+<span class="sd">    Extends :class:`IOBase` with most attributes and methods of a generic</span>
 <span class="sd">    Reader, with the exception of a :meth:`__del__` method. It should be used</span>
 <span class="sd">    as base for Readers that do not need :meth:`__del__`, especially since</span>
 <span class="sd">    having even an empty :meth:`__del__` might lead to memory leaks.</span>
@@ -1133,7 +1133,7 @@
 <span class="sd">    :mod:`MDAnalysis.coordinates.__init__` for the required attributes and</span>
 <span class="sd">    methods.</span>
 
-<span class="sd">    .. SeeAlso:: :class:`Reader`</span>
+<span class="sd">    .. SeeAlso:: :class:`ReaderBase`</span>
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Frames now 0-based instead of 1-based</span>
@@ -1671,11 +1671,11 @@
         <span class="k">return</span> <span class="n">descriptions</span></div></div>
 
 
-<div class="viewcode-block" id="Reader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Reader">[docs]</a><span class="k">class</span> <span class="nc">Reader</span><span class="p">(</span><span class="n">ProtoReader</span><span class="p">):</span>
+<div class="viewcode-block" id="ReaderBase"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ReaderBase">[docs]</a><span class="k">class</span> <span class="nc">ReaderBase</span><span class="p">(</span><span class="n">ProtoReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class for trajectory readers that extends :class:`ProtoReader` with a</span>
 <span class="sd">    :meth:`__del__` method.</span>
 
-<span class="sd">    New Readers should subclass :class:`Reader` and properly implement a</span>
+<span class="sd">    New Readers should subclass :class:`ReaderBase` and properly implement a</span>
 <span class="sd">    :meth:`close` method, to ensure proper release of resources (mainly file</span>
 <span class="sd">    handles). Readers that are inherently safe in this regard should subclass</span>
 <span class="sd">    :class:`ProtoReader` instead.</span>
@@ -1688,16 +1688,16 @@
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Most of the base Reader class definitions were offloaded to</span>
-<span class="sd">       :class:`ProtoReader` so as to allow the subclassing of Readers without a</span>
+<span class="sd">       :class:`ProtoReader` so as to allow the subclassing of ReaderBases without a</span>
 <span class="sd">       :meth:`__del__` method.  Created init method to create common</span>
-<span class="sd">       functionality, all Reader subclasses must now :func:`super` through this</span>
+<span class="sd">       functionality, all ReaderBase subclasses must now :func:`super` through this</span>
 <span class="sd">       class.  Added attribute :attr:`_ts_kwargs`, which is created in init.</span>
 <span class="sd">       Provides kwargs to be passed to :class:`Timestep`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">convert_units</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ReaderBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
 
@@ -1748,14 +1748,14 @@
                     <span class="n">_MULTIFRAME_WRITERS</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
 
 
-<div class="viewcode-block" id="Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Writer">[docs]</a><span class="k">class</span> <span class="nc">Writer</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Writermeta</span><span class="p">,</span> <span class="n">IObase</span><span class="p">)):</span>
+<div class="viewcode-block" id="WriterBase"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.WriterBase">[docs]</a><span class="k">class</span> <span class="nc">WriterBase</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Writermeta</span><span class="p">,</span> <span class="n">IOBase</span><span class="p">)):</span>
     <span class="sd">&quot;&quot;&quot;Base class for trajectory writers.</span>
 
 <span class="sd">    See Trajectory API definition in :mod:`MDAnalysis.coordinates.__init__` for</span>
 <span class="sd">    the required attributes and methods.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Writer.convert_dimensions_to_unitcell"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Writer.convert_dimensions_to_unitcell">[docs]</a>    <span class="k">def</span> <span class="nf">convert_dimensions_to_unitcell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="WriterBase.convert_dimensions_to_unitcell"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.WriterBase.convert_dimensions_to_unitcell">[docs]</a>    <span class="k">def</span> <span class="nf">convert_dimensions_to_unitcell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read dimensions from timestep *ts* and return appropriate unitcell.</span>
 
 <span class="sd">        The default is to return ``[A,B,C,alpha,beta,gamma]``; if this</span>
@@ -1769,7 +1769,7 @@
         <span class="n">lengths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">lengths</span><span class="p">,</span> <span class="n">angles</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="Writer.write"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Writer.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+<div class="viewcode-block" id="WriterBase.write"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.WriterBase.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write current timestep, using the supplied *obj*.</span>
 
 <span class="sd">        The argument should be a :class:`~MDAnalysis.core.groups.AtomGroup` or</span>
@@ -1804,7 +1804,7 @@
             <span class="c1"># self.n_atoms</span>
             <span class="k">return</span> <span class="s2">&quot;&lt; {0!s} {1!r} &gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Writer.has_valid_coordinates"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Writer.has_valid_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">has_valid_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">criteria</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="WriterBase.has_valid_coordinates"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.WriterBase.has_valid_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">has_valid_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">criteria</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns ``True`` if all values are within limit values of their formats.</span>
 
 <span class="sd">        Due to rounding, the test is asymmetric (and *min* is supposed to be negative):</span>
@@ -1824,7 +1824,7 @@
         <span class="c1"># def write_next_timestep(self, ts=None)</span>
 
 
-<span class="k">class</span> <span class="nc">SingleFrameReader</span><span class="p">(</span><span class="n">ProtoReader</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">SingleFrameReaderBase</span><span class="p">(</span><span class="n">ProtoReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class for Readers that only have one frame.</span>
 
 <span class="sd">    To use this base class, define the method :meth:`_read_first_frame` to</span>
@@ -1839,7 +1839,7 @@
     <span class="n">_err</span> <span class="o">=</span> <span class="s2">&quot;{0} only contains a single frame&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">convert_units</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">SingleFrameReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SingleFrameReaderBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="k">if</span> <span class="n">convert_units</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -1886,7 +1886,7 @@
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># all single frame readers should use context managers to access</span>
         <span class="c1"># self.filename. Explicitly setting it to the null action in case</span>
-        <span class="c1"># the IObase.close method is ever changed from that.</span>
+        <span class="c1"># the IOBase.close method is ever changed from that.</span>
         <span class="k">pass</span>
 </pre></div>
 

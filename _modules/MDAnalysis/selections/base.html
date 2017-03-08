@@ -100,11 +100,11 @@
 <span class="sd">======================================</span>
 
 <span class="sd">Specialized SelectionWriters are derived from</span>
-<span class="sd">:class:`SelectionWriter`. Override the :meth:`~SelectionWriter._write_head`,</span>
-<span class="sd">:meth:`~SelectionWriter._translate`, and :meth:`~SelectionWriter._write_tail`</span>
+<span class="sd">:class:`SelectionWriterBase`. Override the :meth:`~SelectionWriterBase._write_head`,</span>
+<span class="sd">:meth:`~SelectionWriterBase._translate`, and :meth:`~SelectionWriterBase._write_tail`</span>
 <span class="sd">methods.</span>
 
-<span class="sd">.. autoclass:: SelectionWriter</span>
+<span class="sd">.. autoclass:: SelectionWriterBase</span>
 <span class="sd">   :members: __init__, write, _translate, _write_head, _write_tail, comment</span>
 
 <span class="sd">.. autofunction:: join</span>
@@ -148,15 +148,15 @@
                 <span class="n">_SELECTION_WRITERS</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
 
 
-<div class="viewcode-block" id="SelectionWriter"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriter">[docs]</a><span class="k">class</span> <span class="nc">SelectionWriter</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Selectionmeta</span><span class="p">)):</span>
+<div class="viewcode-block" id="SelectionWriterBase"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase">[docs]</a><span class="k">class</span> <span class="nc">SelectionWriterBase</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Selectionmeta</span><span class="p">)):</span>
     <span class="sd">&quot;&quot;&quot;Export a selection in MDAnalysis to a format usable in an external package.</span>
 
-<span class="sd">    The :class:`SelectionWriter` writes a selection string to a file</span>
+<span class="sd">    The :class:`SelectionWriterBase` writes a selection string to a file</span>
 <span class="sd">    that can be used in another package such as `VMD`_, `PyMOL`_,</span>
 <span class="sd">    `Gromacs`_ or `CHARMM`_. In this way, analysis and visualization</span>
 <span class="sd">    can be done with the best or most convenient tools at hand.</span>
 
-<span class="sd">    :class:`SelectionWriter` is a base class and child classes are</span>
+<span class="sd">    :class:`SelectionWriterBase` is a base class and child classes are</span>
 <span class="sd">    derived with the appropriate customizations for the package file</span>
 <span class="sd">    format.</span>
 
@@ -179,7 +179,7 @@
     <span class="n">commentfmt</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">default_numterms</span> <span class="o">=</span> <span class="mi">8</span>
 
-<div class="viewcode-block" id="SelectionWriter.__init__"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wa&quot;</span><span class="p">,</span> <span class="n">numterms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionWriterBase.__init__"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wa&quot;</span><span class="p">,</span> <span class="n">numterms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up for writing to *filename*.</span>
 
 <span class="sd">        :Arguments:</span>
@@ -214,10 +214,10 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">write_preamble</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SelectionWriter.comment"><a class="viewcode-back" href="../../../documentation_pages/selections/vmd.html#MDAnalysis.selections.base.SelectionWriter.comment">[docs]</a>    <span class="k">def</span> <span class="nf">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionWriterBase.comment"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase.comment">[docs]</a>    <span class="k">def</span> <span class="nf">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return string *s* interpolated into the comment format string.</span>
 
-<span class="sd">        If no :attr:`SelectionWriter.commentfmt` is defined (None) then the</span>
+<span class="sd">        If no :attr:`SelectionWriterBase.commentfmt` is defined (None) then the</span>
 <span class="sd">        empty string is returned because presumably there is no way to enter</span>
 <span class="sd">        comments into the file.</span>
 
@@ -227,15 +227,15 @@
             <span class="k">return</span> <span class="s1">&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">commentfmt</span> <span class="o">%</span> <span class="n">s</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span></div>
 
-<div class="viewcode-block" id="SelectionWriter.write_preamble"><a class="viewcode-back" href="../../../documentation_pages/selections/vmd.html#MDAnalysis.selections.base.SelectionWriter.write_preamble">[docs]</a>    <span class="k">def</span> <span class="nf">write_preamble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">write_preamble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write a header, depending on the file format.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preamble</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
             <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preamble</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span>
 
-<div class="viewcode-block" id="SelectionWriter.write"><a class="viewcode-back" href="../../../documentation_pages/selections/vmd.html#MDAnalysis.selections.base.SelectionWriter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionWriterBase.write"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write selection to the output file.</span>
 
 <span class="sd">        :Arguments:</span>
@@ -287,7 +287,7 @@
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>  <span class="c1"># switch back after eg preamble</span></div>
 
-<div class="viewcode-block" id="SelectionWriter._translate"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriter._translate">[docs]</a>    <span class="k">def</span> <span class="nf">_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionWriterBase._translate"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase._translate">[docs]</a>    <span class="k">def</span> <span class="nf">_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Translate atoms into a list of native selection terms.</span>
 
 <span class="sd">        - build list of ALL selection terms as if this was a single line, e.g.</span>
@@ -301,11 +301,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="SelectionWriter._write_head"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriter._write_head">[docs]</a>    <span class="k">def</span> <span class="nf">_write_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionWriterBase._write_head"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase._write_head">[docs]</a>    <span class="k">def</span> <span class="nf">_write_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initial output to open file object *out*.&quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="SelectionWriter._write_tail"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriter._write_tail">[docs]</a>    <span class="k">def</span> <span class="nf">_write_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionWriterBase._write_tail"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase._write_tail">[docs]</a>    <span class="k">def</span> <span class="nf">_write_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Last output to open file object *out*.&quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 

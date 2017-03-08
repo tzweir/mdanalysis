@@ -223,7 +223,7 @@
 <span class="sd">    topology_format</span>
 <span class="sd">        Provide the file format of the topology file; ``None`` guesses it from</span>
 <span class="sd">        the file extension [``None``] Can also pass a subclass of</span>
-<span class="sd">        :class:`MDAnalysis.topology.base.TopologyReader` to define a custom</span>
+<span class="sd">        :class:`MDAnalysis.topology.base.TopologyReaderBase` to define a custom</span>
 <span class="sd">        reader to be used on the topology file.</span>
 <span class="sd">    format</span>
 <span class="sd">        Provide the file format of the coordinate or trajectory file; ``None``</span>
@@ -231,8 +231,8 @@
 <span class="sd">        effect if a list of file names is supplied because the &quot;chained&quot; reader</span>
 <span class="sd">        has to guess the file format for each individual list member.</span>
 <span class="sd">        [``None``] Can also pass a subclass of</span>
-<span class="sd">        :class:`MDAnalysis.coordinates.base.Reader` to define a custom reader</span>
-<span class="sd">        to be used on the trajectory file.</span>
+<span class="sd">        :class:`MDAnalysis.coordinates.base.ProtoReader` to define a custom</span>
+<span class="sd">        reader to be used on the trajectory file.</span>
 <span class="sd">    guess_bonds : bool, optional</span>
 <span class="sd">        Once Universe has been loaded, attempt to guess the connectivity</span>
 <span class="sd">        between atoms.  This will populate the .bonds .angles and .dihedrals</span>
@@ -430,7 +430,7 @@
 <span class="sd">            keyword has no effect if a list of file names is supplied because</span>
 <span class="sd">            the &quot;chained&quot; reader has to guess the file format for each</span>
 <span class="sd">            individual list member [``None``]. Can also pass a subclass of</span>
-<span class="sd">            :class:`MDAnalysis.coordinates.base.Reader` to define a custom</span>
+<span class="sd">            :class:`MDAnalysis.coordinates.base.ProtoReader` to define a custom</span>
 <span class="sd">            reader to be used on the trajectory file.</span>
 <span class="sd">        in_memory : bool (optional)</span>
 <span class="sd">            Directly load trajectory into memory with the</span>
@@ -1108,7 +1108,7 @@
 
     <span class="c1"># Take one frame of coordinates from combined atomgroups</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">])</span>
-    <span class="n">trajectory</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">trajectory</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">ReaderBase</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Timestep</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
     <span class="nb">setattr</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="s2">&quot;ts&quot;</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
     <span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> <span class="mi">1</span>

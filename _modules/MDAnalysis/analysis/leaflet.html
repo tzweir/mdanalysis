@@ -138,8 +138,10 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">NX</span>
-<span class="kn">import</span> <span class="nn">MDAnalysis</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">core</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">distances</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">selections</span>
 
 
 <div class="viewcode-block" id="LeafletFinder"><a class="viewcode-back" href="../../../documentation_pages/analysis/leaflet.html#MDAnalysis.analysis.leaflet.LeafletFinder">[docs]</a><span class="k">class</span> <span class="nc">LeafletFinder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -188,10 +190,10 @@
 <span class="sd">                 use fast :func:`~MDAnalysis.analysis.distances.distance_array`</span>
 <span class="sd">                 implementation [``None``].</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">universe</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">as_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">)</span>
+        <span class="n">universe</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">as_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selectionstring</span> <span class="o">=</span> <span class="n">selectionstring</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selectionstring</span><span class="p">,</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">AtomGroup</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selectionstring</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">AtomGroup</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionstring</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selectionstring</span><span class="p">)</span>
@@ -289,10 +291,8 @@
 <span class="sd">        See :class:`MDAnalysis.selections.base.SelectionWriter` for all</span>
 <span class="sd">        options.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">MDAnalysis.selections</span>
-
-        <span class="n">SelectionWriter</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">selections</span><span class="o">.</span><span class="n">get_writer</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
-        <span class="n">writer</span> <span class="o">=</span> <span class="n">SelectionWriter</span><span class="p">(</span>
+        <span class="n">sw</span> <span class="o">=</span> <span class="n">selections</span><span class="o">.</span><span class="n">get_writer</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">sw</span><span class="p">(</span>
             <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="s1">&#39;wa&#39;</span><span class="p">),</span>
             <span class="n">preamble</span><span class="o">=</span><span class="s2">&quot;leaflets based on selection={selectionstring!r} cutoff={cutoff:f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)),</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
