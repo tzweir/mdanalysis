@@ -131,7 +131,7 @@ optional argument to <a class="reference internal" href="#MDAnalysis.start_loggi
 &#8220;MDAnalysis.&#8221;.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">The <a class="reference external" href="http://docs.python.org/library/logging.html#module-logging" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">logging</span></code></a> module in the standard library contains
+<p class="last">The <a class="reference external" href="https://docs.python.org/library/logging.html#module-logging" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">logging</span></code></a> module in the standard library contains
 in depth documentation about using logging.</p>
 </div>
 <div class="section" id="convenience-functions">
@@ -175,7 +175,56 @@ and the filter list to empty.</p>
 <dt id="MDAnalysis.lib.log.ProgressMeter">
 <em class="property">class </em><code class="descclassname">MDAnalysis.lib.log.</code><code class="descname">ProgressMeter</code><span class="sig-paren">(</span><em>numsteps</em>, <em>format=None</em>, <em>interval=10</em>, <em>offset=1</em>, <em>verbose=None</em>, <em>dynamic=True</em>, <em>format_handling='auto'</em>, <em>quiet=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#ProgressMeter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.ProgressMeter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple progress meter</p>
-<p>Usage:</p>
+<p>The <a class="reference internal" href="#MDAnalysis.lib.log.ProgressMeter" title="MDAnalysis.lib.log.ProgressMeter"><code class="xref py py-class docutils literal"><span class="pre">ProgressMeter</span></code></a> class can be used to show running progress such
+as frames processed or percentage done to give the user feedback on the
+duration and progress of a task. It is structures as a class that is
+customized on instantation (e.g., using a custom <cite>format</cite> string and the
+expected total number of frames to be processed). Within a processing loop,
+call <a class="reference internal" href="#MDAnalysis.lib.log.echo" title="MDAnalysis.lib.log.echo"><code class="xref py py-meth docutils literal"><span class="pre">echo()</span></code></a> with the current frame number to print the output to
+stderr.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>numsteps</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; total number of steps</li>
+<li><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; only calculate and print progress every <cite>interval</cite> steps [10]</li>
+<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>a format string with Python variable interpolation. Allowed
+values:</p>
+<ul>
+<li><em>step</em>: current step</li>
+<li><em>numsteps</em>: total number of steps as supplied in <em>numsteps</em></li>
+<li><em>percentage</em>: percentage of total</li>
+</ul>
+<p>The last call to <code class="xref py py-meth docutils literal"><span class="pre">ProgressMeter.print()</span></code> will automatically
+issue a newline <code class="docutils literal"><span class="pre">\n</span></code>.</p>
+<p>If <em>format</em> is <code class="docutils literal"><span class="pre">None</span></code> then the default is used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>Step {step:5d}/{numsteps} [{percentage:5.1f}%]
+</pre></div>
+</div>
+</li>
+<li><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number to add to <em>step</em>; e.g. if <em>step</em> is 0-based (as in MDAnalysis)
+then one should set <em>offset</em> = 1; for 1-based steps, choose 0. [1]</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">False</span></code>, disable all output, <code class="docutils literal"><span class="pre">True</span></code> print all messages as
+specified, [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>dynamic</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, each line will be printed on top of the previous one.
+This is done by prepedind the format with <code class="docutils literal"><span class="pre">\r</span></code>. [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>format_handling</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>how to handle the format string. Allowed values are:</p>
+<ul>
+<li><em>new</em>: the format string uses {}-based formating</li>
+<li><em>legacy</em>: the format string uses %-basedd formating</li>
+<li><em>auto</em>: default, try to guess how the format string should be
+handled</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>The typical use case is to show progress as frames of a trajectory are
+processed:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
@@ -195,7 +244,7 @@ Step   200/10000 [  2.0%]
 </pre></div>
 </div>
 <p>By default, each line of the progress meter is displayed on top of the
-previous one. To prevent this behaviour, set the <em>dynamic</em> keyword to
+previous one. To prevent this behaviour, set the <cite>dynamic</cite> keyword to
 <code class="docutils literal"><span class="pre">False</span></code>.</p>
 <p>It is possible to embed (almost) arbitrary additional data in the
 format string, for example a current RMSD value:</p>
@@ -213,49 +262,15 @@ RMSD   1.89 at  200/10000 [  2.0%]
 ...
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>numsteps</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; total number of steps</li>
-<li><strong>interval</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; only calculate progress every <em>interval</em> steps [10]</li>
-<li><strong>format</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>a format string with Python variable interpolation. Allowed
-values:</p>
-<ul>
-<li><em>step</em>: current step</li>
-<li><em>numsteps</em>: total number of steps as supplied in <em>numsteps</em></li>
-<li><em>percentage</em>: percentage of total</li>
-</ul>
-<p>The last call to <code class="xref py py-meth docutils literal"><span class="pre">ProgressMeter.print()</span></code> will automatically
-issue a newline <code class="docutils literal"><span class="pre">\n</span></code>.</p>
-<p>If <em>format</em> is <code class="docutils literal"><span class="pre">None</span></code> then the default is used:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Step {step:5d}/{numsteps} [{percentage:5.1f}%]
-</pre></div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.8: </span>Keyword argument <em>quiet</em> was added.</p>
 </div>
-</li>
-<li><strong>offset</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number to add to <em>step</em>; e.g. if <em>step</em> is 0-based (as in MDAnalysis)
-then one should set <em>offset</em> = 1; for 1-based steps, choose 0. [1]</li>
-<li><strong>verbose</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">False</span></code>, disable all output, <code class="docutils literal"><span class="pre">True</span></code> print all messages as
-specified, [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>dynamic</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, each line will be printed on top of the previous one.
-This is done by prepedind the format with <code class="docutils literal"><span class="pre">\r</span></code>. [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>format_handling</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>how to handle the format string. Allowed values are:</p>
-<ul>
-<li><em>new</em>: the format string uses {}-based formating</li>
-<li><em>legacy</em>: the format string uses %-basedd formating</li>
-<li><em>auto</em>: default, try to guess how the format string should be
-handled</li>
-</ul>
-</li>
-<li><strong>versionchanged</strong> (<em>.</em>) &#8211; Keyword argument <em>quiet</em> was added.</li>
-<li><strong>versionchanged</strong> &#8211; Keyword argument <em>dynamic</em> replaces <code class="docutils literal"><span class="pre">\r</span></code> in the format.</li>
-<li><strong>deprecated</strong> (<em>.</em>) &#8211; Keyword argument <em>quiet</em> is deprecated in favor of <em>verbose</em>.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.16: </span>Keyword argument <em>dynamic</em> replaces <code class="docutils literal"><span class="pre">\r</span></code> in the format.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16: </span>Keyword argument <em>quiet</em> is deprecated in favor of <em>verbose</em>.</p>
+</div>
 <dl class="method">
 <dt id="MDAnalysis.lib.log.ProgressMeter.echo">
 <code class="descname">echo</code><span class="sig-paren">(</span><em>step</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#ProgressMeter.echo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.ProgressMeter.echo" title="Permalink to this definition">¶</a></dt>
@@ -315,23 +330,22 @@ console.</p>
 <dt id="MDAnalysis.lib.log.echo">
 <code class="descclassname">MDAnalysis.lib.log.</code><code class="descname">echo</code><span class="sig-paren">(</span><em>s=''</em>, <em>replace=False</em>, <em>newline=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#echo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.echo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple string output that immediately prints to the console.</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>s: str</dt>
-<dd>The string to output.</dd>
-<dt>replace: bool</dt>
-<dd>If <code class="docutils literal"><span class="pre">True</span></code>, the string will be printed on top of the current line. In
-practice, ``</dd>
-</dl>
-</div></blockquote>
-<dl class="docutils">
-<dt>`` is added at the beginning og the string.</dt>
-<dd><dl class="first last docutils">
-<dt>newline: bool</dt>
-<dd>If <code class="docutils literal"><span class="pre">True</span></code>, a new line id added at the end of the string.</dd>
-</dl>
-</dd>
-</dl>
+<p>The string <cite>s</cite> is modified according to the keyword arguments and then
+printed to <code class="xref py py-const docutils literal"><span class="pre">sys.stderr</span></code>, which is immediately flushed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>s</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The string to output.</li>
+<li><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, the string will be printed on top of the current line. In
+practice, <code class="docutils literal"><span class="pre">\r</span></code> is added at the beginning of the string.</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, a newline is added at the end of the string.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">

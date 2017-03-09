@@ -136,23 +136,23 @@ their documentation for details.</p>
 <dt id="MDAnalysis.coordinates.core.writer">
 <code class="descclassname">MDAnalysis.coordinates.core.</code><code class="descname">writer</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/core.html#writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.core.writer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a trajectory writer instance for <em>filename</em>.</p>
-<dl class="docutils">
-<dt>filename <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd>Output filename of the trajectory; the extension determines the
-format.</dd>
-<dt>n_atoms <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
-<dd>The number of atoms in the output trajectory; can be ommitted
-for single-frame writers.</dd>
-<dt>multiframe <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
-<dd><code class="docutils literal"><span class="pre">True</span></code>: write a trajectory with multiple frames; <code class="docutils literal"><span class="pre">False</span></code>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Output filename of the trajectory; the extension determines the
+format.</li>
+<li><strong>n_atoms</strong> (<em>int, optional</em>) &#8211; The number of atoms in the output trajectory; can be ommitted
+for single-frame writers.</li>
+<li><strong>multiframe</strong> (<em>bool, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: write a trajectory with multiple frames; <code class="docutils literal"><span class="pre">False</span></code>
 only write a single frame snapshot; <code class="docutils literal"><span class="pre">None</span></code> first try to get
-a multiframe writer and then fall back to single frame [<code class="docutils literal"><span class="pre">None</span></code>]</dd>
-<dt>kwargs <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
-<dd><blockquote class="first">
-<div><p>Keyword arguments for the writer; all trajectory Writers accept
-at least</p>
-<blockquote>
-<div><dl class="docutils">
+a multiframe writer and then fall back to single frame [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>kwargs</strong> (<em>optional</em>) &#8211; <dl class="docutils">
+<dt>Keyword arguments for the writer; all trajectory Writers accept</dt>
+<dd><dl class="first last docutils">
+<dt>at least</dt>
+<dd><dl class="first last docutils">
 <dt><em>start</em></dt>
 <dd>starting time [0]</dd>
 <dt><em>step</em></dt>
@@ -160,28 +160,37 @@ at least</p>
 <dt><em>dt</em></dt>
 <dd>length of time between two frames, in ps [1.0]</dd>
 </dl>
-</div></blockquote>
-</div></blockquote>
-<p class="last">Some readers accept additional arguments, which need to be looked
-up in the documentation of the reader.</p>
 </dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>A Writer object</em></li>
-<li><strong>.. SeeAlso</strong> (: <a class="reference internal" href="DCD.html#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a> for DCD) &#8211;
-trajectories or <a class="reference internal" href="XTC.html#MDAnalysis.coordinates.XTC.XTCWriter" title="MDAnalysis.coordinates.XTC.XTCWriter"><code class="xref py py-class docutils literal"><span class="pre">XTCWriter</span></code></a>
-and <a class="reference internal" href="TRR.html#MDAnalysis.coordinates.TRR.TRRWriter" title="MDAnalysis.coordinates.TRR.TRRWriter"><code class="xref py py-class docutils literal"><span class="pre">TRRWriter</span></code></a> for Gromacs.</li>
-<li><strong>.. versionchanged</strong> (<em>: 0.7.6</em>) &#8211;
-Added <em>multiframe</em> keyword. See also <a class="reference internal" href="#MDAnalysis.coordinates.core.get_writer_for" title="MDAnalysis.coordinates.core.get_writer_for"><code class="xref py py-func docutils literal"><span class="pre">get_writer_for()</span></code></a>.</li>
+</dd>
+</dl>
+<p>Some readers accept additional arguments, which need to be looked
+up in the documentation of the reader.</p>
+</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A Writer object</p>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="DCD.html#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.coordinates.DCD.DCDWriter()</span></code></a></dt>
+<dd>DCD trajectories</dd>
+<dt><a class="reference internal" href="XTC.html#MDAnalysis.coordinates.XTC.XTCWriter" title="MDAnalysis.coordinates.XTC.XTCWriter"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.coordinates.XTC.XTCWriter()</span></code></a></dt>
+<dd>Gromacs XTC trajectories</dd>
+<dt><a class="reference internal" href="TRR.html#MDAnalysis.coordinates.TRR.TRRWriter" title="MDAnalysis.coordinates.TRR.TRRWriter"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.coordinates.TRR.TRRWriter()</span></code></a></dt>
+<dd>Gromacs TRR trajectories</dd>
+<dt><code class="xref py py-func docutils literal"><span class="pre">()</span></code></dt>
+<dd>Added <em>multiframe</em> keyword. See also <a class="reference internal" href="#MDAnalysis.coordinates.core.get_writer_for" title="MDAnalysis.coordinates.core.get_writer_for"><code class="xref py py-func docutils literal"><span class="pre">get_writer_for()</span></code></a>.</dd>
+</dl>
+</div>
 </dd></dl>
 
 <p>Helper functions:</p>

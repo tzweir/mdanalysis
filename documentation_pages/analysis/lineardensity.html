@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.8.4. Linear Density — MDAnalysis.analysis.lineardensity &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.8.2. Linear Density — MDAnalysis.analysis.lineardensity &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,8 +30,8 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
     <link rel="up" title="4. Analysis modules" href="../analysis_modules.html" />
-    <link rel="next" title="4.8.5. Water dynamics analysis — MDAnalysis.analysis.waterdynamics" href="waterdynamics.html" />
-    <link rel="prev" title="4.8.1. Generating a density from a MD trajectory" href="density.html" /> 
+    <link rel="next" title="4.8.3. Water dynamics analysis — MDAnalysis.analysis.waterdynamics" href="waterdynamics.html" />
+    <link rel="prev" title="4.8.1. Generating densities from trajectories — MDAnalysis.analysis.density" href="density.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -44,10 +44,10 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="waterdynamics.html" title="4.8.5. Water dynamics analysis — MDAnalysis.analysis.waterdynamics"
+          <a href="waterdynamics.html" title="4.8.3. Water dynamics analysis — MDAnalysis.analysis.waterdynamics"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="density.html" title="4.8.1. Generating a density from a MD trajectory"
+          <a href="density.html" title="4.8.1. Generating densities from trajectories — MDAnalysis.analysis.density"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &raquo;</li> 
@@ -60,10 +60,10 @@
             </a></p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="density.html"
-                        title="previous chapter">4.8.1. Generating a density from a MD trajectory</a></p>
+                        title="previous chapter">4.8.1. Generating densities from trajectories &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.density</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="waterdynamics.html"
-                        title="next chapter">4.8.5. Water dynamics analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.waterdynamics</span></code></a></p>
+                        title="next chapter">4.8.3. Water dynamics analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.waterdynamics</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -93,7 +93,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.lineardensity"></span><div class="section" id="linear-density-mdanalysis-analysis-lineardensity">
-<h1>4.8.4. Linear Density &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.lineardensity" title="MDAnalysis.analysis.lineardensity"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.lineardensity</span></code></a><a class="headerlink" href="#linear-density-mdanalysis-analysis-lineardensity" title="Permalink to this headline">¶</a></h1>
+<h1>4.8.2. Linear Density &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.lineardensity" title="MDAnalysis.analysis.lineardensity"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.lineardensity</span></code></a><a class="headerlink" href="#linear-density-mdanalysis-analysis-lineardensity" title="Permalink to this headline">¶</a></h1>
 <p>A tool to compute mass and charge density profiles along the three
 cartesian axes of the simulation cell. Works only for orthorombic,
 fixed volume cells (thus for simulations in canonical NVT ensemble).</p>
@@ -110,12 +110,12 @@ LinearDensity(selection, grouping=&#8217;atoms&#8217;, binsize=0.25)</p>
 <li><strong>selection</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; Any atomgroup</li>
 <li><strong>grouping</strong> (<em>str {'atoms', 'residues', 'segments', 'fragments'}</em>) &#8211; Density profiles will be computed on the center of geometry
 of a selected group of atoms [&#8216;atoms&#8217;]</li>
-<li><strong>binsize</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Bin width in Angstrom used to build linear density
+<li><strong>binsize</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Bin width in Angstrom used to build linear density
 histograms. Defines the resolution of the resulting density
 profile (smaller &#8211;&gt; higher resolution) [0.25]</li>
-<li><strong>start</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The frame to start at [0]</li>
-<li><strong>stop</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The frame to end at [-1]</li>
-<li><strong>step</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The step size through the trajectory in frames [0]</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The frame to start at [0]</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The frame to end at [-1]</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The step size through the trajectory in frames [0]</li>
 </ul>
 </td>
 </tr>
@@ -150,7 +150,7 @@ with the name of the trajectory file.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>description</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; An arbitrary description added to the output filename. Can be useful</li>
+<li><strong>description</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; An arbitrary description added to the output filename. Can be useful</li>
 <li><strong>form</strong> (<em>str {'txt', 'npz'}</em>) &#8211; Format of the output. &#8216;txt&#8217; will generate an ASCII text file while
 &#8216;npz&#8217; will produce a numpy binary file.</li>
 </ul>
@@ -188,10 +188,10 @@ written to file as follows:</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="waterdynamics.html" title="4.8.5. Water dynamics analysis — MDAnalysis.analysis.waterdynamics"
+          <a href="waterdynamics.html" title="4.8.3. Water dynamics analysis — MDAnalysis.analysis.waterdynamics"
              >next</a> |</li>
         <li class="right" >
-          <a href="density.html" title="4.8.1. Generating a density from a MD trajectory"
+          <a href="density.html" title="4.8.1. Generating densities from trajectories — MDAnalysis.analysis.density"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &raquo;</li> 

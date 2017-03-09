@@ -30,7 +30,7 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
     <link rel="up" title="6. Coordinates modules" href="../coordinates_modules.html" />
-    <link rel="next" title="&lt;no title&gt;" href="pdbextensions.html" />
+    <link rel="next" title="6.25. XDR based trajectory files — MDAnalysis.coordinates.XDR" href="XDR.html" />
     <link rel="prev" title="6.23. Common functions for coordinate reading — MDAnalysis.coordinates.core" href="core.html" /> 
   </head>
   <body role="document">
@@ -44,7 +44,7 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pdbextensions.html" title="&lt;no title&gt;"
+          <a href="XDR.html" title="6.25. XDR based trajectory files — MDAnalysis.coordinates.XDR"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="core.html" title="6.23. Common functions for coordinate reading — MDAnalysis.coordinates.core"
@@ -62,8 +62,8 @@
   <p class="topless"><a href="core.html"
                         title="previous chapter">6.23. Common functions for coordinate reading &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.core</span></code></a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="pdbextensions.html"
-                        title="next chapter">&lt;no title&gt;</a></p>
+  <p class="topless"><a href="XDR.html"
+                        title="next chapter">6.25. XDR based trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XDR</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -106,13 +106,10 @@ interest to developers.</p>
 represent multiple trajectories as one virtual trajectory. Users
 typically do not need to use the <a class="reference internal" href="#MDAnalysis.coordinates.chain.ChainReader" title="MDAnalysis.coordinates.chain.ChainReader"><code class="xref py py-class docutils literal"><span class="pre">ChainReader</span></code></a> explicitly.</p>
 <p class="rubric">Notes</p>
-<ul class="simple">
-<li>Trajectory API attributes exist but most of them only reflect
-the first trajectory in the list; <code class="xref py py-attr docutils literal"><span class="pre">ChainReader.n_frames</span></code>,
-<code class="xref py py-attr docutils literal"><span class="pre">ChainReader.n_atoms</span></code>, and <code class="xref py py-attr docutils literal"><span class="pre">ChainReader.fixed</span></code> are
-properly set, though</li>
-<li>slicing not implemented</li>
-</ul>
+<p>The trajectory API attributes exist but most of them only reflect the first
+trajectory in the list; <code class="xref py py-attr docutils literal"><span class="pre">ChainReader.n_frames</span></code>,
+<code class="xref py py-attr docutils literal"><span class="pre">ChainReader.n_atoms</span></code>, and <code class="xref py py-attr docutils literal"><span class="pre">ChainReader.fixed</span></code> are properly
+set, though</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based</p>
 </div>
@@ -162,7 +159,7 @@ unchanged</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>k</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; <p>Frame <cite>k</cite> in the chained trajectory can be found in the trajectory at
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>k</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; <p>Frame <cite>k</cite> in the chained trajectory can be found in the trajectory at
 index <em>i</em> and frame index <em>f</em>.</p>
 <p>Frames are internally treated as 0-based indices into the trajectory.</p>
 </td>
@@ -170,7 +167,7 @@ index <em>i</em> and frame index <em>f</em>.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>(i, f)</strong> &#8211;
 <strong>local frame</strong> tuple `</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#tuple" title="(in Python v2.7)">tuple</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#tuple" title="(in Python v2.7)">tuple</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">IndexError for <cite>k&lt;0</cite> or <cite>i&lt;0</cite>.</td>
 </tr>
@@ -203,7 +200,7 @@ the chained trajectory.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attr</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; attribute name</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attr</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; attribute name</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>value</strong> &#8211;
 common value of the attribute</td>
@@ -224,10 +221,11 @@ return <a class="reference internal" href="base.html#MDAnalysis.coordinates.base
 <p>The frame is translated to the corresponding reader and local
 frame index and the <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code> instance in
 <code class="xref py py-attr docutils literal"><span class="pre">ChainReader.ts</span></code> is updated.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="rubric">Notes</p>
 <p><cite>frame</cite> is 0-based, i.e. the first frame in the trajectory is
 accessed with <code class="docutils literal"><span class="pre">frame</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.chain.ChainReader._get_local_frame" title="MDAnalysis.coordinates.chain.ChainReader._get_local_frame"><code class="xref py py-meth docutils literal"><span class="pre">_get_local_frame()</span></code></a></p>
 </div>
 </dd></dl>
@@ -312,7 +310,7 @@ accessed with <code class="docutils literal"><span class="pre">frame</span> <spa
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pdbextensions.html" title="&lt;no title&gt;"
+          <a href="XDR.html" title="6.25. XDR based trajectory files — MDAnalysis.coordinates.XDR"
              >next</a> |</li>
         <li class="right" >
           <a href="core.html" title="6.23. Common functions for coordinate reading — MDAnalysis.coordinates.core"

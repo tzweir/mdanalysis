@@ -648,6 +648,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">universe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The Universe that we belong to&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span>
 
 <div class="viewcode-block" id="TopologyGroup.select_bonds"><a class="viewcode-back" href="../../../documentation_pages/core/topologyobjects.html#MDAnalysis.core.topologyobjects.TopologyGroup.select_bonds">[docs]</a>    <span class="k">def</span> <span class="nf">select_bonds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">):</span>
@@ -688,9 +689,12 @@
         <span class="sd">&quot;&quot;&quot;Retrieve all bonds from within this TopologyGroup that are within</span>
 <span class="sd">        the AtomGroup which is passed.</span>
 
-<span class="sd">        Keywords</span>
-<span class="sd">        --------</span>
-<span class="sd">          *strict*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ag : AtomGroup</span>
+<span class="sd">            The `:class:~MDAnalysis.core.groups.AtomGroup` to intersect</span>
+<span class="sd">            with.</span>
+<span class="sd">        strict : bool</span>
 <span class="sd">            Only retrieve bonds which are completely contained within the</span>
 <span class="sd">            AtomGroup. [``False``]</span>
 
@@ -716,21 +720,33 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;all bond indices</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        to_indices : function that just returns `indices`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bix</span>
 
 <div class="viewcode-block" id="TopologyGroup.to_indices"><a class="viewcode-back" href="../../../documentation_pages/core/topologyobjects.html#MDAnalysis.core.topologyobjects.TopologyGroup.to_indices">[docs]</a>    <span class="k">def</span> <span class="nf">to_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a tuple of tuples which define the contents of this</span>
-<span class="sd">        TopologyGroup in terms of the atom numbers,</span>
-<span class="sd">        (0 based index within u.atoms)</span>
+        <span class="sd">&quot;&quot;&quot;Return a data structure with atom indices describing the bonds.</span>
 
 <span class="sd">        This format should be identical to the original contents of the</span>
 <span class="sd">        entries in universe._topology.</span>
 <span class="sd">        Note that because bonds are sorted as they are initialised, the order</span>
 <span class="sd">        that atoms are defined in each entry might be reversed.</span>
 
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        indices : tuple</span>
+<span class="sd">            A tuple of tuples which define the contents of this</span>
+<span class="sd">            TopologyGroup in terms of the atom numbers.  (0 based</span>
+<span class="sd">            index within u.atoms)</span>
+
 <span class="sd">        .. versionadded:: 0.9.0</span>
 <span class="sd">        .. versionchanged:: 0.10.0</span>
 <span class="sd">           Renamed from &quot;dump_contents&quot; to &quot;to_indices&quot;</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span></div>
 

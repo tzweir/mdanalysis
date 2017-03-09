@@ -387,29 +387,31 @@
 
 <div class="viewcode-block" id="alignto"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto">[docs]</a><span class="k">def</span> <span class="nf">alignto</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
             <span class="n">subselection</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Spatially align *mobile* to *reference* by doing a RMSD fit on</span>
-<span class="sd">        *select* atoms.</span>
+    <span class="sd">&quot;&quot;&quot;Perform a spatial superposition by minimizing the RMSD.</span>
+
+<span class="sd">    Spatially align the group of atoms `mobile` to `reference` by</span>
+<span class="sd">    doing a RMSD fit on `select` atoms.</span>
 
 <span class="sd">    The superposition is done in the following way:</span>
 
 <span class="sd">    1. A rotation matrix is computed that minimizes the RMSD between</span>
 <span class="sd">       the coordinates of `mobile.select_atoms(sel1)` and</span>
-<span class="sd">       `reference.select_atoms(sel2)`; before the rotation, *mobile* is</span>
+<span class="sd">       `reference.select_atoms(sel2)`; before the rotation, `mobile` is</span>
 <span class="sd">       translated so that its center of geometry (or center of mass)</span>
-<span class="sd">       coincides with the one of *reference*. (See below for explanation of</span>
+<span class="sd">       coincides with the one of `reference`. (See below for explanation of</span>
 <span class="sd">       how *sel1* and *sel2* are derived from *select*.)</span>
 
 <span class="sd">    2. All atoms in :class:`~MDAnalysis.core.universe.Universe` that</span>
-<span class="sd">       contains *mobile* are shifted and rotated. (See below for how</span>
+<span class="sd">       contains `mobile` are shifted and rotated. (See below for how</span>
 <span class="sd">       to change this behavior through the *subselection* keyword.)</span>
 
-<span class="sd">    The *mobile* and *reference* atom groups can be constructed so that they</span>
-<span class="sd">    already match atom by atom. In this case, *select* should be set to &quot;all&quot;</span>
-<span class="sd">    (or ``None``) so that no further selections are applied to *mobile* and</span>
-<span class="sd">    *reference*, therefore preserving the exact atom ordering (see</span>
+<span class="sd">    The `mobile` and `reference` atom groups can be constructed so that they</span>
+<span class="sd">    already match atom by atom. In this case, `select` should be set to &quot;all&quot;</span>
+<span class="sd">    (or ``None``) so that no further selections are applied to `mobile` and</span>
+<span class="sd">    `reference`, therefore preserving the exact atom ordering (see</span>
 <span class="sd">    :ref:`ordered-selections-label`).</span>
 
-<span class="sd">    .. Warning:: The atom order for *mobile* and *reference* is *only*</span>
+<span class="sd">    .. Warning:: The atom order for `mobile` and `reference` is *only*</span>
 <span class="sd">       preserved when *select* is either &quot;all&quot; or ``None``. In any other case,</span>
 <span class="sd">       a new selection will be made that will sort the resulting AtomGroup by</span>
 <span class="sd">       index and therefore destroy the correspondence between the two groups.</span>
@@ -427,7 +429,7 @@
 <span class="sd">    select: string or dict, optional</span>
 <span class="sd">       1. any valid selection string for</span>
 <span class="sd">          :meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` that</span>
-<span class="sd">          produces identical selections in *mobile* and *reference*; or</span>
+<span class="sd">          produces identical selections in `mobile` and `reference`; or</span>
 <span class="sd">       2. dictionary ``{&#39;mobile&#39;:sel1, &#39;reference&#39;:sel2}``.</span>
 <span class="sd">          (the :func:`fasta2select` function returns such a</span>
 <span class="sd">          dictionary based on a ClustalW_ or STAMP_ sequence alignment); or</span>
@@ -457,7 +459,7 @@
 
 <span class="sd">       ``None`` [default]</span>
 <span class="sd">           Apply to `mobile.universe.atoms` (i.e. all atoms in the</span>
-<span class="sd">           context of the selection from *mobile* such as the rest of a</span>
+<span class="sd">           context of the selection from `mobile` such as the rest of a</span>
 <span class="sd">           protein, ligands and the surrounding water)</span>
 <span class="sd">       *selection-string*</span>
 <span class="sd">           Apply to `mobile.select_atoms(selection-string)`</span>
@@ -466,15 +468,17 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    old_rmsd</span>
+<span class="sd">    old_rmsd : float</span>
 <span class="sd">        RMSD before spatial alignment</span>
-<span class="sd">    new_rmsd</span>
+<span class="sd">    new_rmsd : float</span>
 <span class="sd">        RMSD after spatial alignment</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    AlignTraj: More efficient method for RMSD-fitting trajectories.</span>
 
+<span class="sd">    .. _ClustalW: http://www.clustal.org/</span>
+<span class="sd">    .. _STAMP: http://www.compbio.dundee.ac.uk/manuals/stamp.4.2/</span>
 
 <span class="sd">    .. versionchanged:: 0.8</span>
 <span class="sd">       Added check that the two groups describe the same atoms including</span>
@@ -489,6 +493,7 @@
 <span class="sd">       new general &#39;weights&#39; kwarg replace mass_weights, deprecated &#39;mass_weights&#39;</span>
 <span class="sd">    .. deprecated:: 0.16.0</span>
 <span class="sd">       Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;`</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">select</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
         <span class="c1"># keep the EXACT order in the input AtomGroups; select_atoms(&#39;all&#39;)</span>
@@ -547,7 +552,7 @@
 <div class="viewcode-block" id="AlignTraj"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.AlignTraj">[docs]</a><span class="k">class</span> <span class="nc">AlignTraj</span><span class="p">(</span><span class="n">AnalysisBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;RMS-align trajectory to a reference structure using a selection.</span>
 
-<span class="sd">    Both reference *ref* and trajectory *mobile* must be</span>
+<span class="sd">    Both reference *ref* and trajectory `mobile` must be</span>
 <span class="sd">    :class:`MDAnalysis.Universe` instances. If they contain a</span>
 <span class="sd">    trajectory then it is used. The output file format is determined</span>
 <span class="sd">    by the file extension of *filename*. One can also use the same</span>
@@ -751,7 +756,7 @@
 <span class="sd">      *select*</span>
 <span class="sd">         1. any valid selection string for</span>
 <span class="sd">            :meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` that</span>
-<span class="sd">            produces identical selections in *mobile* and *reference*; or</span>
+<span class="sd">            produces identical selections in `mobile` and `reference`; or</span>
 <span class="sd">         2. a dictionary ``{&#39;mobile&#39;:sel1, &#39;reference&#39;:sel2}`` (the</span>
 <span class="sd">            :func:`fasta2select` function returns such a</span>
 <span class="sd">            dictionary based on a ClustalW_ or STAMP_ sequence alignment); or</span>
@@ -950,7 +955,7 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    aln[0]</span>
+<span class="sd">    alignment : tuple</span>
 <span class="sd">        Tuple of top sequence matching output `(&#39;Sequence A&#39;, &#39;Sequence B&#39;, score,</span>
 <span class="sd">        begin, end)`</span>
 
@@ -986,25 +991,26 @@
 <span class="sd">    these two strings are applied to the two different proteins they</span>
 <span class="sd">    will generate AtomGroups of the aligned residues.</span>
 
-<span class="sd">    *fastafilename* contains the two un-aligned sequences in FASTA</span>
+<span class="sd">    `fastafilename` contains the two un-aligned sequences in FASTA</span>
 <span class="sd">    format. The reference is assumed to be the first sequence, the</span>
 <span class="sd">    target the second. ClustalW_ produces a pairwise</span>
-<span class="sd">    alignment (which is written to a file with suffix .aln).  The</span>
+<span class="sd">    alignment (which is written to a file with suffix ``.aln``).  The</span>
 <span class="sd">    output contains atom selection strings that select the same atoms</span>
 <span class="sd">    in the two structures.</span>
 
-<span class="sd">    Unless *ref_offset* and/or *target_offset* are specified, the resids</span>
+<span class="sd">    Unless `ref_offset` and/or `target_offset` are specified, the resids</span>
 <span class="sd">    in the structure are assumed to correspond to the positions in the</span>
 <span class="sd">    un-aligned sequence, namely the first residue has resid == 1.</span>
 
-<span class="sd">    In more complicated cases (e.g. when the resid numbering in the</span>
-<span class="sd">    structure/psf has gaps due to missing parts), simply provide the</span>
-<span class="sd">    sequence of resids as they appear in the psf in *ref_resids* or</span>
-<span class="sd">    *target_resids*, e.g. ::</span>
+<span class="sd">    In more complicated cases (e.g., when the resid numbering in the</span>
+<span class="sd">    input structure has gaps due to missing parts), simply provide the</span>
+<span class="sd">    sequence of resids as they appear in the topology in `ref_resids` or</span>
+<span class="sd">    `target_resids`, e.g. ::</span>
 
 <span class="sd">       target_resids = [a.resid for a in trj.select_atoms(&#39;name CA&#39;)]</span>
 
-<span class="sd">    (This translation table *is* combined with any value for *xxx_offset*!)</span>
+<span class="sd">    (This translation table *is* combined with any value for</span>
+<span class="sd">    `ref_offset` or `target_offset`!)</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1037,7 +1043,7 @@
 <span class="sd">        with the suffix &#39;.dnd&#39; instead of &#39;.aln&#39;</span>
 <span class="sd">    clustalw : str, optional</span>
 <span class="sd">        path to the ClustalW (or ClustalW2) binary; only</span>
-<span class="sd">        needed for *is_aligned* = ``False``, default: &quot;ClustalW2&quot;</span>
+<span class="sd">        needed for `is_aligned` = ``False``, default: &quot;ClustalW2&quot;</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1051,6 +1057,9 @@
 <span class="sd">    :func:`sequence_alignment`, which does not require external</span>
 <span class="sd">    programs.</span>
 
+<span class="sd">    .. _ClustalW: http://www.clustal.org/</span>
+<span class="sd">    .. _STAMP: http://www.compbio.dundee.ac.uk/manuals/stamp.4.2/</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">Bio.SeqIO</span>
     <span class="kn">import</span> <span class="nn">Bio.AlignIO</span>
@@ -1059,13 +1068,12 @@
 
     <span class="n">protein_gapped</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">Alphabet</span><span class="o">.</span><span class="n">Gapped</span><span class="p">(</span><span class="n">Bio</span><span class="o">.</span><span class="n">Alphabet</span><span class="o">.</span><span class="n">IUPAC</span><span class="o">.</span><span class="n">protein</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">is_aligned</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using provided alignment </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fastafilename</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using provided alignment {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fastafilename</span><span class="p">))</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fastafilename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fasta</span><span class="p">:</span>
             <span class="n">alignment</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">AlignIO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
                 <span class="n">fasta</span><span class="p">,</span> <span class="s2">&quot;fasta&quot;</span><span class="p">,</span> <span class="n">alphabet</span><span class="o">=</span><span class="n">protein_gapped</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">Bio.Align.Applications</span> <span class="kn">import</span> <span class="n">ClustalwCommandline</span>
-        <span class="kn">import</span> <span class="nn">os.path</span>
 
         <span class="k">if</span> <span class="n">alnfilename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">filepath</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fastafilename</span><span class="p">)</span>
@@ -1104,11 +1112,11 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">&quot;Only two sequences in the alignment can be processed.&quot;</span><span class="p">)</span>
 
-    <span class="n">orig_resids</span> <span class="o">=</span> <span class="p">[</span><span class="n">ref_resids</span><span class="p">,</span> <span class="n">target_resids</span><span class="p">]</span>  <span class="c1"># implict assertion that</span>
-    <span class="c1"># we only have two sequences in the alignment</span>
+    <span class="c1"># implict assertion that we only have two sequences in the alignment</span>
+    <span class="n">orig_resids</span> <span class="o">=</span> <span class="p">[</span><span class="n">ref_resids</span><span class="p">,</span> <span class="n">target_resids</span><span class="p">]</span>
     <span class="n">offsets</span> <span class="o">=</span> <span class="p">[</span><span class="n">ref_offset</span><span class="p">,</span> <span class="n">target_offset</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">iseq</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
-            <span class="n">alignment</span><span class="p">):</span>  <span class="c1"># need iseq index to change orig_resids</span>
+    <span class="k">for</span> <span class="n">iseq</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alignment</span><span class="p">):</span>
+        <span class="c1"># need iseq index to change orig_resids</span>
         <span class="k">if</span> <span class="n">orig_resids</span><span class="p">[</span><span class="n">iseq</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1"># build default: assume consecutive numbering of all</span>
             <span class="c1"># residues in the alignment</span>
@@ -1118,12 +1126,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">orig_resids</span><span class="p">[</span><span class="n">iseq</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">orig_resids</span><span class="p">[</span><span class="n">iseq</span><span class="p">])</span>
     <span class="c1"># add offsets to the sequence &lt;--&gt; resid translation table</span>
-    <span class="n">seq2resids</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">resids</span> <span class="o">+</span>
-        <span class="n">offset</span> <span class="k">for</span> <span class="n">resids</span><span class="p">,</span>
-        <span class="n">offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
-            <span class="n">orig_resids</span><span class="p">,</span>
-            <span class="n">offsets</span><span class="p">)]</span>
+    <span class="n">seq2resids</span> <span class="o">=</span> <span class="p">[</span><span class="n">resids</span> <span class="o">+</span> <span class="n">offset</span> <span class="k">for</span> <span class="n">resids</span><span class="p">,</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+        <span class="n">orig_resids</span><span class="p">,</span> <span class="n">offsets</span><span class="p">)]</span>
     <span class="k">del</span> <span class="n">orig_resids</span>
     <span class="k">del</span> <span class="n">offsets</span>
 
@@ -1205,7 +1209,7 @@
     <span class="sd">&quot;&quot;&quot;Return two atom groups with one-to-one matched atoms.</span>
 
 <span class="sd">    The function takes two :class:`~MDAnalysis.core.groups.AtomGroup`</span>
-<span class="sd">    instances *ag1* and *ag2* and returns two atom groups *g1* and *g2* that</span>
+<span class="sd">    instances `ag1` and `ag2` and returns two atom groups `g1` and `g2` that</span>
 <span class="sd">    consist of atoms so that the mass of atom ``g1[0]`` is the same as the mass</span>
 <span class="sd">    of atom ``g2[0]``, ``g1[1]`` and ``g2[1]`` etc.</span>
 
@@ -1214,7 +1218,7 @@
 <span class="sd">    1. The two groups must contain the same number of residues.</span>
 <span class="sd">    2. Any residues in each group that have differing number of atoms are discarded.</span>
 <span class="sd">    3. The masses of corresponding atoms are compared. and if any masses differ</span>
-<span class="sd">       by more than *tol_mass* the test is considered failed and a</span>
+<span class="sd">       by more than `tol_mass` the test is considered failed and a</span>
 <span class="sd">       :exc:`SelectionError` is raised.</span>
 
 <span class="sd">    The log file (see :func:`MDAnalysis.start_logging`) will contain detailed</span>
@@ -1230,7 +1234,7 @@
 <span class="sd">        compared</span>
 <span class="sd">    tol_mass : float, optional</span>
 <span class="sd">         Reject if the atomic masses for matched atoms differ by more than</span>
-<span class="sd">         *tol_mass* [0.1]</span>
+<span class="sd">         `tol_mass` [0.1]</span>
 <span class="sd">    strict : boolean, optional</span>
 <span class="sd">        ``True``</span>
 <span class="sd">            Will raise :exc:`SelectionError` if a single atom does not</span>
@@ -1242,10 +1246,11 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    ``(g1, g2)``</span>
-<span class="sd">        Tuple with :class:`~MDAnalysis.core.groups.AtomGroup` instances</span>
-<span class="sd">        that match, atom by atom. The groups are either the original groups if all matches</span>
-<span class="sd">        or slices of the original groups.</span>
+<span class="sd">    ``(g1, g2)`` : tuple</span>
+<span class="sd">        Tuple with :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">        instances that match, atom by atom. The groups are either the</span>
+<span class="sd">        original groups if all matches or slices of the original</span>
+<span class="sd">        groups.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -1262,8 +1267,9 @@
 <span class="sd">    .. versionadded:: 0.8</span>
 
 <span class="sd">    .. versionchanged:: 0.10.0</span>
-<span class="sd">       Renamed from :func:`check_same_atoms` to :func:`get_matching_atoms` and now returns</span>
-<span class="sd">       matching atomgroups (possibly with residues removed)</span>
+<span class="sd">       Renamed from :func:`check_same_atoms` to</span>
+<span class="sd">       :func:`get_matching_atoms` and now returns matching atomgroups</span>
+<span class="sd">       (possibly with residues removed)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

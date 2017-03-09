@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.8.1. Generating a density from a MD trajectory &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.8.1. Generating densities from trajectories — MDAnalysis.analysis.density &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,7 +30,7 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
     <link rel="up" title="4. Analysis modules" href="../analysis_modules.html" />
-    <link rel="next" title="4.8.4. Linear Density — MDAnalysis.analysis.lineardensity" href="lineardensity.html" />
+    <link rel="next" title="4.8.2. Linear Density — MDAnalysis.analysis.lineardensity" href="lineardensity.html" />
     <link rel="prev" title="4.7.3. Radial Distribution Functions — MDAnalysis.analysis.rdf" href="rdf.html" /> 
   </head>
   <body role="document">
@@ -44,7 +44,7 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="lineardensity.html" title="4.8.4. Linear Density — MDAnalysis.analysis.lineardensity"
+          <a href="lineardensity.html" title="4.8.2. Linear Density — MDAnalysis.analysis.lineardensity"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="rdf.html" title="4.7.3. Radial Distribution Functions — MDAnalysis.analysis.rdf"
@@ -60,9 +60,12 @@
             </a></p>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.8.1. Generating a density from a MD trajectory</a></li>
-<li><a class="reference internal" href="#creating-densities">4.8.2. Creating densities</a></li>
-<li><a class="reference internal" href="#supporting-classes-and-functions">4.8.3. Supporting classes and functions</a></li>
+<li><a class="reference internal" href="#">4.8.1. Generating densities from trajectories &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.density</span></code></a><ul>
+<li><a class="reference internal" href="#generating-a-density-from-a-md-trajectory">4.8.1.1. Generating a density from a MD trajectory</a></li>
+<li><a class="reference internal" href="#creating-densities">4.8.1.2. Creating densities</a></li>
+<li><a class="reference internal" href="#supporting-classes-and-functions">4.8.1.3. Supporting classes and functions</a></li>
+</ul>
+</li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -70,7 +73,7 @@
                         title="previous chapter">4.7.3. Radial Distribution Functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rdf</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="lineardensity.html"
-                        title="next chapter">4.8.4. Linear Density &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.lineardensity</span></code></a></p>
+                        title="next chapter">4.8.2. Linear Density &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.lineardensity</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -99,8 +102,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <span class="target" id="module-MDAnalysis.analysis.density"></span><p>Generating densities from trajectories &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.density" title="MDAnalysis.analysis.density"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.density</span></code></a>
-=============================================================================</p>
+  <span class="target" id="module-MDAnalysis.analysis.density"></span><div class="section" id="generating-densities-from-trajectories-mdanalysis-analysis-density">
+<h1>4.8.1. Generating densities from trajectories &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.density" title="MDAnalysis.analysis.density"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.density</span></code></a><a class="headerlink" href="#generating-densities-from-trajectories-mdanalysis-analysis-density" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -116,7 +119,7 @@
 <p>The module provides classes and functions to generate and represent
 volumetric data, in particular densities.</p>
 <div class="section" id="generating-a-density-from-a-md-trajectory">
-<h1>4.8.1. Generating a density from a MD trajectory<a class="headerlink" href="#generating-a-density-from-a-md-trajectory" title="Permalink to this headline">¶</a></h1>
+<h2>4.8.1.1. Generating a density from a MD trajectory<a class="headerlink" href="#generating-a-density-from-a-md-trajectory" title="Permalink to this headline">¶</a></h2>
 <p>An input trajectory must</p>
 <ol class="arabic simple">
 <li>have been centered on the protein of interest;</li>
@@ -142,11 +145,11 @@ literature value of the TIP4P water model at ambient conditions (see the values
 in <a class="reference internal" href="../units.html#MDAnalysis.units.water" title="MDAnalysis.units.water"><code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.units.water</span></code></a> for details). Finally, the density is
 writte as an <a class="reference external" href="http://www.opendx.org/">OpenDX</a> compatible file that can be read in <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a> or <a class="reference external" href="http://www.pymol.org/">PyMOL</a>.</p>
 <p>See <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> for details. In particular, the density is stored
-as a NumPy array in <code class="xref py py-attr docutils literal"><span class="pre">Density.grid</span></code>, which can be processed in
+as a NumPy array in <a class="reference internal" href="#MDAnalysis.analysis.density.Density.grid" title="MDAnalysis.analysis.density.Density.grid"><code class="xref py py-attr docutils literal"><span class="pre">Density.grid</span></code></a>, which can be processed in
 any manner.</p>
 </div>
 <div class="section" id="creating-densities">
-<h1>4.8.2. Creating densities<a class="headerlink" href="#creating-densities" title="Permalink to this headline">¶</a></h1>
+<h2>4.8.1.2. Creating densities<a class="headerlink" href="#creating-densities" title="Permalink to this headline">¶</a></h2>
 <p>The following functions take trajectory or coordinate data and generate a
 <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> object.</p>
 <dl class="function">
@@ -164,7 +167,9 @@ histogrammed on a grid with spacing <cite>delta</cite>.</p>
 <li><strong>atomselection</strong> (<em>str, optional</em>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
 [&#8220;name OH2&#8221;]</li>
 <li><strong>delta</strong> (<em>float, optional</em>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
-<li><strong>stop, step</strong> (<em>start,</em>) &#8211; Slice the trajectory as <code class="docutils literal"><span class="pre">trajectory[start:stop:step]</span></code>; default
+<li><strong>start</strong> (<em>int, optional</em>) &#8211; </li>
+<li><strong>stop</strong> (<em>int, optional</em>) &#8211; </li>
+<li><strong>step</strong> (<em>int, optional</em>) &#8211; Slice the trajectory as <code class="docutils literal"><span class="pre">trajectory[start:stop:step]</span></code>; default
 is to read the whole trajectory.</li>
 <li><strong>metadata</strong> (<em>dict. optional</em>) &#8211; <cite>dict</cite> of additional data to be saved with the object; the meta data
 are passed through as they are.</li>
@@ -193,7 +198,8 @@ processed, which is interesting with <code class="docutils literal"><span class=
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> instance with the histogrammed data together
+with associated metadata.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a></p>
@@ -257,14 +263,14 @@ calculated as described for <a class="reference internal" href="#MDAnalysis.anal
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pdb</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; PDB filename (should have the temperatureFactor set); ANISO
+<li><strong>pdb</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; PDB filename (should have the temperatureFactor set); ANISO
 records are currently <em>not</em> processed</li>
-<li><strong>atomselection</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
+<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
 [&#8216;resname HOH and name O&#8217;]</li>
-<li><strong>delta</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
-<li><strong>metadata</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary of additional data to be saved with the object [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>padding</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; increase histogram dimensions by padding (on top of initial box size) [1.0]</li>
-<li><strong>sigma</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; width (in Angstrom) of the gaussians that are used to build up the
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
+<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary of additional data to be saved with the object [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; increase histogram dimensions by padding (on top of initial box size) [1.0]</li>
+<li><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; width (in Angstrom) of the gaussians that are used to build up the
 density; if <code class="docutils literal"><span class="pre">None</span></code> then uses B-factors from <em>pdb</em> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
 </ul>
 </td>
@@ -307,17 +313,96 @@ standard conditions</p>
 
 </div>
 <div class="section" id="supporting-classes-and-functions">
-<h1>4.8.3. Supporting classes and functions<a class="headerlink" href="#supporting-classes-and-functions" title="Permalink to this headline">¶</a></h1>
-<p>The main output of the density creation functions is a <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a>
-instance, which is derived from a <code class="xref py py-class docutils literal"><span class="pre">gridData.Grid</span></code>. A <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> is
-essentially, a 3D array with origin and lengths together with associated
-metadata (which can be used in downstream processing).</p>
+<h2>4.8.1.3. Supporting classes and functions<a class="headerlink" href="#supporting-classes-and-functions" title="Permalink to this headline">¶</a></h2>
+<p>The main output of the density creation functions is a
+<a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> instance, which is derived from a
+<a class="reference external" href="https://gridDataFormats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a>. A <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> is essentially, a 3D
+array with origin and lengths together with associated metadata (which
+can be used in downstream processing).</p>
 <dl class="class">
 <dt id="MDAnalysis.analysis.density.Density">
 <em class="property">class </em><code class="descclassname">MDAnalysis.analysis.density.</code><code class="descname">Density</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/density.html#Density"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Density" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://gridDataFormats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a></p>
 <p>Class representing a density on a regular cartesian grid.</p>
-<p>The data (<code class="xref py py-attr docutils literal"><span class="pre">Density.grid</span></code>) can be manipulated as a standard numpy
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>grid</strong> (<em>array_like</em>) &#8211; histogram or density, typically a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></li>
+<li><strong>edges</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; list of arrays, the lower and upper bin edges along the axes</li>
+<li><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; <p>dictionary of class parameters; saved with
+<a class="reference internal" href="#MDAnalysis.analysis.density.Density.save" title="MDAnalysis.analysis.density.Density.save"><code class="xref py py-meth docutils literal"><span class="pre">Density.save()</span></code></a>. The following keys are meaningful to
+the class. Meaning of the values are listed:</p>
+<blockquote>
+<div><em>isDensity</em><blockquote>
+<div><ul>
+<li><code class="docutils literal"><span class="pre">False</span></code>: grid is a histogram with counts [default]</li>
+<li><code class="docutils literal"><span class="pre">True</span></code>: a density</li>
+</ul>
+<p>Applying <code class="xref py py-meth docutils literal"><span class="pre">Density.make_density`()</span></code> sets it to <code class="docutils literal"><span class="pre">True</span></code>.</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; <p>A dict with the keys</p>
+<ul>
+<li><em>length</em>:  physical unit of grid edges (Angstrom or nm) [Angstrom]</li>
+<li><em>density</em>: unit of the density if <code class="docutils literal"><span class="pre">isDensity=True</span></code> or <code class="docutils literal"><span class="pre">None</span></code>
+otherwise; the default is &#8220;Angstrom^{-3}&#8221; for densities
+(meaning <span class="math">\(\text{Å}^{-3}\)</span>).</li>
+</ul>
+<p>(Actually, the default unit is the value of
+<code class="docutils literal"><span class="pre">MDAnalysis.core.flags['length_unit']</span></code>; in most
+cases this is &#8220;Angstrom&#8221;.)</p>
+</li>
+<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; a user defined dictionary of arbitrary values associated with the
+density; the class does not touch <code class="xref py py-attr docutils literal"><span class="pre">Density.metadata</span></code> but
+stores it with <a class="reference internal" href="#MDAnalysis.analysis.density.Density.save" title="MDAnalysis.analysis.density.Density.save"><code class="xref py py-meth docutils literal"><span class="pre">Density.save()</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="MDAnalysis.analysis.density.Density.grid">
+<code class="descname">grid</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>array</em></p>
+<p>counts or density</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.analysis.density.Density.edges">
+<code class="descname">edges</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.edges" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of 1d-arrays</em></p>
+<p>The boundaries of each cell in <cite>grid</cite> along all axes (equivalent
+to what <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogramdd.html#numpy.histogramdd" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.histogramdd()</span></code></a> returns).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.analysis.density.Density.delta">
+<code class="descname">delta</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.delta" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>array</em></p>
+<p>Cell size in each dimension.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.analysis.density.Density.origin">
+<code class="descname">origin</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>array</em></p>
+<p>Coordinates of the <em>center</em> of the cell at index <cite>grid[0, 0, 0, ...,
+0]</cite>, which is considered to be the front lower left corner.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.analysis.density.Density.units">
+<code class="descname">units</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.units" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em></p>
+<p>The units for lengths and density; change units with the method
+<a class="reference internal" href="#MDAnalysis.analysis.density.Density.convert_length" title="MDAnalysis.analysis.density.Density.convert_length"><code class="xref py py-meth docutils literal"><span class="pre">convert_length()</span></code></a> or <a class="reference internal" href="#MDAnalysis.analysis.density.Density.convert_density" title="MDAnalysis.analysis.density.Density.convert_density"><code class="xref py py-meth docutils literal"><span class="pre">convert_density()</span></code></a>.</p>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>The data (<a class="reference internal" href="#MDAnalysis.analysis.density.Density.grid" title="MDAnalysis.analysis.density.Density.grid"><code class="xref py py-attr docutils literal"><span class="pre">Density.grid</span></code></a>) can be manipulated as a standard numpy
 array. Changes can be saved to a file using the <a class="reference internal" href="#MDAnalysis.analysis.density.Density.save" title="MDAnalysis.analysis.density.Density.save"><code class="xref py py-meth docutils literal"><span class="pre">Density.save()</span></code></a> method. The
 grid can be restored using the <a class="reference internal" href="#MDAnalysis.analysis.density.Density.load" title="MDAnalysis.analysis.density.Density.load"><code class="xref py py-meth docutils literal"><span class="pre">Density.load()</span></code></a> method or by supplying the
 filename to the constructor.</p>
@@ -329,13 +414,21 @@ rest should work for an array of any dimension.</p>
 <p>If the input histogram consists of counts per cell then the
 <a class="reference internal" href="#MDAnalysis.analysis.density.Density.make_density" title="MDAnalysis.analysis.density.Density.make_density"><code class="xref py py-meth docutils literal"><span class="pre">Density.make_density()</span></code></a> method converts the grid to a physical density. For
 a probability density, divide it by <code class="xref py py-meth docutils literal"><span class="pre">Density.grid.sum()</span></code> or use <code class="docutils literal"><span class="pre">normed=True</span></code>
-right away in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.histogramdd.html#numpy.histogramdd" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">histogramdd()</span></code></a>.</p>
+right away in <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogramdd.html#numpy.histogramdd" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">histogramdd()</span></code></a>.</p>
 <p>The user <em>should</em> set the <em>parameters</em> keyword (see docs for the
 constructor); in particular, if the data are already a density, one must
-set <em>isDensity</em> == <code class="docutils literal"><span class="pre">True</span></code> because there is no reliable way to detect if
+set <code class="docutils literal"><span class="pre">isDensity=True</span></code> because there is no reliable way to detect if
 data represent counts or a density. As a special convenience, if data are
-read from a file and the user has not set <em>isDensity</em> then it is assumed
+read from a file and the user has not set <code class="docutils literal"><span class="pre">isDensity</span></code> then it is assumed
 that the data are in fact a density.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://gridDataFormats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a></dt>
+<dd>the base class of <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a>.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
 <p>Typical use:</p>
 <ol class="arabic">
 <li><p class="first">From a histogram (i.e. counts on a grid):</p>
@@ -367,7 +460,7 @@ at ambient conditions:</p>
 </pre></div>
 </div>
 <p>After the final step, <code class="docutils literal"><span class="pre">D</span></code> will contain a density on a grid measured in
-Angstrom, with the density values itself measured relative to the
+Ångstrom, with the density values itself measured relative to the
 density of water.</p>
 </li>
 </ol>
@@ -381,53 +474,6 @@ to supply the appropriate length unit, and to use
 <a class="reference internal" href="#MDAnalysis.analysis.density.Density.make_density" title="MDAnalysis.analysis.density.Density.make_density"><code class="xref py py-meth docutils literal"><span class="pre">Density.make_density()</span></code></a> to obtain a density. This ensures
 that the length- and the density unit correspond to each other.</p>
 </div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-class docutils literal"><span class="pre">Grid</span></code> which is the base class of
-<a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a>. (<code class="xref py py-class docutils literal"><span class="pre">Grid</span></code> has been imported from
-<code class="xref py py-class docutils literal"><span class="pre">gridData.Grid</span></code> which is part of <a class="reference external" href="https://github.com/MDAnalysis/GridDataFormats">GridDataFormats</a>).</p>
-</div>
-<p>Create a <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> from data.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>grid</strong> (<em>array_like</em>) &#8211; histogram or density, typically a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></li>
-<li><strong>edges</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; list of arrays, the lower and upper bin edges along the axes</li>
-<li><strong>parameters</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; <dl class="docutils">
-<dt>dictionary of class parameters; saved with</dt>
-<dd><a class="reference internal" href="#MDAnalysis.analysis.density.Density.save" title="MDAnalysis.analysis.density.Density.save"><code class="xref py py-meth docutils literal"><span class="pre">Density.save()</span></code></a>. The following keys are meaningful to
-the class. Meaning of the values are listed:<blockquote class="last">
-<div><em>isDensity</em><blockquote>
-<div><ul>
-<li><code class="docutils literal"><span class="pre">False</span></code>: grid is a histogram with counts [default]</li>
-<li><code class="docutils literal"><span class="pre">True</span></code>: a density</li>
-</ul>
-<p>Applying <code class="xref py py-meth docutils literal"><span class="pre">Density.make_density`()</span></code> sets it to <code class="docutils literal"><span class="pre">True</span></code>.</p>
-</div></blockquote>
-</div></blockquote>
-</dd>
-<dt>units <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd>A dict with the keys<ul>
-<li><em>length</em>:  physical unit of grid edges (Angstrom or nm) [Angstrom]</li>
-<li><em>density</em>: unit of the density if <code class="docutils literal"><span class="pre">isDensity</span> <span class="pre">==</span> <span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">None</span></code>
-otherwise; the default is &#8220;Angstrom^{-3}&#8221; for densities (meaning A^-3).</li>
-</ul>
-<p class="last">(Actually, the default unit is the value of
-<code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.core.flags['length_unit']</span></code>; in most cases this is &#8220;Angstrom&#8221;.)</p>
-</dd>
-<dt>metadata <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd>a user defined dictionary of arbitrary values associated with the
-density; the class does not touch <code class="xref py py-attr docutils literal"><span class="pre">Density.metadata</span></code> but
-stores it with <a class="reference internal" href="#MDAnalysis.analysis.density.Density.save" title="MDAnalysis.analysis.density.Density.save"><code class="xref py py-meth docutils literal"><span class="pre">Density.save()</span></code></a></dd>
-</dl>
-</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.density.Density.__delattr__">
 <code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__delattr__" title="Permalink to this definition">¶</a></dt>
@@ -554,7 +600,7 @@ iterator.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
 <li><code class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></code> &#8211;
-If the density does not have a unit associate with it to begin
+If the density does not have a unit associated with it to begin
 with (i.e., is not a density) then no conversion can take place.</li>
 <li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211;
 for unknown <cite>unit</cite>.</li>
@@ -570,7 +616,6 @@ density; otherwise raises <code class="xref py py-exc docutils literal"><span cl
 <li>Conversions always go back to unity so there can be rounding
 and floating point artifacts for multiple conversions.</li>
 </ol>
-<p>There may be some undesirable cross-interactions with <a class="reference internal" href="#MDAnalysis.analysis.density.Density.convert_length" title="MDAnalysis.analysis.density.Density.convert_length"><code class="xref py py-meth docutils literal"><span class="pre">convert_length()</span></code></a>...</p>
 </dd></dl>
 
 <dl class="method">
@@ -648,11 +693,10 @@ completely resets all values, based on the loaded data.</p>
 <dt id="MDAnalysis.analysis.density.Density.make_density">
 <code class="descname">make_density</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/density.html#Density.make_density"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Density.make_density" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the grid (a histogram, counts in a cell) to a density (counts/volume).</p>
-<ol class="arabic simple">
-<li>This changes the grid irrevocably.</li>
-<li>For a probability density, manually divide by <code class="xref py py-meth docutils literal"><span class="pre">grid.sum()</span></code>.</li>
-</ol>
-<p>If this is already a density, then a warning is issued and nothing is done.</p>
+<p>This method changes the grid irrevocably.</p>
+<p>For a probability density, manually divide by <code class="xref py py-meth docutils literal"><span class="pre">grid.sum()</span></code>.</p>
+<p>If this is already a density, then a warning is issued and nothing is
+done, so calling <cite>make_density</cite> multiple times does not do any harm.</p>
 </dd></dl>
 
 <dl class="method">
@@ -707,12 +751,12 @@ sigma is taken as sqrt(3.*B/8.)/pi (see <code class="xref py py-func docutils li
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>pdb</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; PDB file or <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>;</li>
-<li><strong>atomselection</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed</li>
-<li><strong>delta</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
-<li><strong>metadata</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary of additional data to be saved with the object</li>
-<li><strong>padding</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; increase histogram dimensions by padding (on top of initial box size)</li>
-<li><strong>sigma</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; width (in Angstrom) of the gaussians that are used to build up the
+<li><strong>pdb</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; PDB file or <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>;</li>
+<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed</li>
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
+<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary of additional data to be saved with the object</li>
+<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; increase histogram dimensions by padding (on top of initial box size)</li>
+<li><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; width (in Angstrom) of the gaussians that are used to build up the
 density; if <code class="docutils literal"><span class="pre">None</span></code> (the default) then uses B-factors from pdb</li>
 </ul>
 </td>
@@ -752,13 +796,22 @@ that can be easily matched to a broader density distribution.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>universe</strong> (<em>MDAnalysis.Universe</em>) &#8211; Universe object on which to operate</li>
-<li><strong>sel2</strong> (<em>sel1,</em>) &#8211; Selection strings for the solvent and solute selections</li>
-<li><strong>cutoff</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Distance cutoff</li>
-<li><strong>not_within</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; True: selection behaves as &#8216;not within&#8217; (As described above)
-False: selection is a &lt;sel1&gt; WITHIN &lt;cutoff&gt; OF &lt;sel2&gt;&#8217;</li>
-<li><strong>use_kdtree</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; True: use fast kd-tree based selections
-False: use distance matrix approach</li>
-<li><strong>updating_selection</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If True, re-evaluate the selection string each frame.</li>
+<li><strong>sel1</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Selection string for the <em>solvent</em> selection (should be
+the group with the <em>larger number of atoms</em> to make the
+KD-Tree search more efficient)</li>
+<li><strong>sel2</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Selection string for the <em>solute</em> selection</li>
+<li><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Distance cutoff</li>
+<li><strong>not_within</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <ul>
+<li><code class="docutils literal"><span class="pre">True</span></code>: selection behaves as &#8220;not within&#8221; (As described above)</li>
+<li><code class="docutils literal"><span class="pre">False</span></code>: selection is a &#8220;&lt;sel1&gt; WITHIN &lt;cutoff&gt; OF &lt;sel2&gt;&#8221;</li>
+</ul>
+</li>
+<li><strong>use_kdtree</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <ul>
+<li><code class="docutils literal"><span class="pre">True</span></code>: use fast KD-Tree based selections</li>
+<li><code class="docutils literal"><span class="pre">False</span></code>: use distance matrix approach</li>
+</ul>
+</li>
+<li><strong>updating_selection</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, re-evaluate the selection string each frame.</li>
 </ul>
 </td>
 </tr>
@@ -780,7 +833,7 @@ this function factory in the first place.</li>
 returns the coordinates of the &#8220;solvent&#8221; selection that are <em>not within</em> a given cut-off
 distance of the &#8220;solute&#8221;. Because it is KD-tree based, it is cheap to query the KD-tree with
 a different cut-off:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">notwithin_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="s1">&#39;name OH2&#39;</span><span class="p">,</span><span class="s1">&#39;protein and not name H*&#39;</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">notwithin_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="s1">&#39;name OH2&#39;</span><span class="p">,</span> <span class="s1">&#39;protein and not name H*&#39;</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">notwithin_coordinates</span><span class="p">()</span>        <span class="c1"># get coordinates outside cutoff 3.5 A</span>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">notwithin_coordinates</span><span class="p">(</span><span class="n">cutoff2</span><span class="p">)</span> <span class="c1"># can use different cut off</span>
@@ -795,9 +848,11 @@ a different cut-off:</p>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">within_coordinates</span><span class="p">(</span><span class="n">cutoff2</span><span class="p">)</span> <span class="c1"># can use different cut off</span>
 </pre></div>
 </div>
-<p>(Readability is enhanced by properly naming the generated function <a href="#id2"><span class="problematic" id="id3">``</span></a>within_coordinates().)</p>
+<p>(Readability is enhanced by properly naming the generated function
+<code class="docutils literal"><span class="pre">within_coordinates()</span></code>.)</p>
 </dd></dl>
 
+</div>
 </div>
 
 
@@ -816,7 +871,7 @@ a different cut-off:</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="lineardensity.html" title="4.8.4. Linear Density — MDAnalysis.analysis.lineardensity"
+          <a href="lineardensity.html" title="4.8.2. Linear Density — MDAnalysis.analysis.lineardensity"
              >next</a> |</li>
         <li class="right" >
           <a href="rdf.html" title="4.7.3. Radial Distribution Functions — MDAnalysis.analysis.rdf"

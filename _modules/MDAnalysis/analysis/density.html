@@ -98,7 +98,7 @@
 <span class="c1"># Copyright (c) 2007-2011 Oliver Beckstein &lt;orbeckst@gmail.com&gt;</span>
 <span class="c1"># (based on code from Hop --- a framework to analyze solvation dynamics from MD simulations)</span>
 
-<span class="sa">r</span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Generating densities from trajectories --- :mod:`MDAnalysis.analysis.density`</span>
 <span class="sd">=============================================================================</span>
 
@@ -156,10 +156,11 @@
 <span class="sd">Supporting classes and functions</span>
 <span class="sd">--------------------------------</span>
 
-<span class="sd">The main output of the density creation functions is a :class:`Density`</span>
-<span class="sd">instance, which is derived from a :class:`gridData.Grid`. A :class:`Density` is</span>
-<span class="sd">essentially, a 3D array with origin and lengths together with associated</span>
-<span class="sd">metadata (which can be used in downstream processing).</span>
+<span class="sd">The main output of the density creation functions is a</span>
+<span class="sd">:class:`Density` instance, which is derived from a</span>
+<span class="sd">:class:`gridData.core.Grid`. A :class:`Density` is essentially, a 3D</span>
+<span class="sd">array with origin and lengths together with associated metadata (which</span>
+<span class="sd">can be used in downstream processing).</span>
 
 <span class="sd">.. autoclass:: Density</span>
 <span class="sd">   :members:</span>
@@ -232,8 +233,60 @@
 
 
 <div class="viewcode-block" id="Density"><a class="viewcode-back" href="../../../documentation_pages/analysis/density.html#MDAnalysis.analysis.density.Density">[docs]</a><span class="k">class</span> <span class="nc">Density</span><span class="p">(</span><span class="n">Grid</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class representing a density on a regular cartesian grid.</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Class representing a density on a regular cartesian grid.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    grid : array_like</span>
+<span class="sd">        histogram or density, typically a :class:`numpy.ndarray`</span>
+<span class="sd">    edges : list</span>
+<span class="sd">        list of arrays, the lower and upper bin edges along the axes</span>
+<span class="sd">    parameters : dict</span>
+<span class="sd">        dictionary of class parameters; saved with</span>
+<span class="sd">        :meth:`Density.save`. The following keys are meaningful to</span>
+<span class="sd">        the class. Meaning of the values are listed:</span>
+
+<span class="sd">         *isDensity*</span>
+
+<span class="sd">            - ``False``: grid is a histogram with counts [default]</span>
+<span class="sd">            - ``True``: a density</span>
+
+<span class="sd">            Applying :meth:`Density.make_density`` sets it to ``True``.</span>
+<span class="sd">    units : dict</span>
+<span class="sd">        A dict with the keys</span>
+
+<span class="sd">        - *length*:  physical unit of grid edges (Angstrom or nm) [Angstrom]</span>
+<span class="sd">        - *density*: unit of the density if ``isDensity=True`` or ``None``</span>
+<span class="sd">          otherwise; the default is &quot;Angstrom^{-3}&quot; for densities</span>
+<span class="sd">          (meaning :math:`\text{Å}^{-3}`).</span>
+
+<span class="sd">        (Actually, the default unit is the value of</span>
+<span class="sd">        ``MDAnalysis.core.flags[&#39;length_unit&#39;]``; in most</span>
+<span class="sd">        cases this is &quot;Angstrom&quot;.)</span>
+<span class="sd">    metadata : dict</span>
+<span class="sd">        a user defined dictionary of arbitrary values associated with the</span>
+<span class="sd">        density; the class does not touch :attr:`Density.metadata` but</span>
+<span class="sd">        stores it with :meth:`Density.save`</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    grid : array</span>
+<span class="sd">        counts or density</span>
+<span class="sd">    edges : list of 1d-arrays</span>
+<span class="sd">        The boundaries of each cell in `grid` along all axes (equivalent</span>
+<span class="sd">        to what :func:`numpy.histogramdd` returns).</span>
+<span class="sd">    delta : array</span>
+<span class="sd">        Cell size in each dimension.</span>
+<span class="sd">    origin : array</span>
+<span class="sd">        Coordinates of the *center* of the cell at index `grid[0, 0, 0, ...,</span>
+<span class="sd">        0]`, which is considered to be the front lower left corner.</span>
+<span class="sd">    units : dict</span>
+<span class="sd">        The units for lengths and density; change units with the method</span>
+<span class="sd">        :meth:`~Density.convert_length` or :meth:`~Density.convert_density`.</span>
+
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
 <span class="sd">    The data (:attr:`Density.grid`) can be manipulated as a standard numpy</span>
 <span class="sd">    array. Changes can be saved to a file using the :meth:`Density.save` method. The</span>
 <span class="sd">    grid can be restored using the :meth:`Density.load` method or by supplying the</span>
@@ -253,11 +306,18 @@
 
 <span class="sd">    The user *should* set the *parameters* keyword (see docs for the</span>
 <span class="sd">    constructor); in particular, if the data are already a density, one must</span>
-<span class="sd">    set *isDensity* == ``True`` because there is no reliable way to detect if</span>
+<span class="sd">    set ``isDensity=True`` because there is no reliable way to detect if</span>
 <span class="sd">    data represent counts or a density. As a special convenience, if data are</span>
-<span class="sd">    read from a file and the user has not set *isDensity* then it is assumed</span>
+<span class="sd">    read from a file and the user has not set ``isDensity`` then it is assumed</span>
 <span class="sd">    that the data are in fact a density.</span>
 
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    gridData.core.Grid : the base class of :class:`Density`.</span>
+
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
 <span class="sd">    Typical use:</span>
 
 <span class="sd">    1. From a histogram (i.e. counts on a grid)::</span>
@@ -286,7 +346,7 @@
 <span class="sd">         D.convert_density(&#39;water&#39;)</span>
 
 <span class="sd">       After the final step, ``D`` will contain a density on a grid measured in</span>
-<span class="sd">       Angstrom, with the density values itself measured relative to the</span>
+<span class="sd">       Ångstrom, with the density values itself measured relative to the</span>
 <span class="sd">       density of water.</span>
 
 <span class="sd">    :class:`Density` objects can be algebraically manipulated (added,</span>
@@ -300,50 +360,9 @@
 <span class="sd">       :meth:`Density.make_density` to obtain a density. This ensures</span>
 <span class="sd">       that the length- and the density unit correspond to each other.</span>
 
-<span class="sd">    .. SeeAlso::</span>
-
-<span class="sd">       :class:`Grid` which is the base class of</span>
-<span class="sd">       :class:`Density`. (:class:`Grid` has been imported from</span>
-<span class="sd">       :class:`gridData.Grid` which is part of GridDataFormats_).</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a :class:`Density` from data.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        grid : array_like</span>
-<span class="sd">            histogram or density, typically a :class:`numpy.ndarray`</span>
-<span class="sd">        edges : list</span>
-<span class="sd">            list of arrays, the lower and upper bin edges along the axes</span>
-<span class="sd">        parameters : dict</span>
-<span class="sd">            dictionary of class parameters; saved with</span>
-<span class="sd">            :meth:`Density.save`. The following keys are meaningful to</span>
-<span class="sd">            the class. Meaning of the values are listed:</span>
-
-<span class="sd">             *isDensity*</span>
-
-<span class="sd">                - ``False``: grid is a histogram with counts [default]</span>
-<span class="sd">                - ``True``: a density</span>
-
-<span class="sd">                Applying :meth:`Density.make_density`` sets it to ``True``.</span>
-<span class="sd">         units : dict</span>
-<span class="sd">            A dict with the keys</span>
-
-<span class="sd">            - *length*:  physical unit of grid edges (Angstrom or nm) [Angstrom]</span>
-<span class="sd">            - *density*: unit of the density if ``isDensity == True`` or ``None``</span>
-<span class="sd">              otherwise; the default is &quot;Angstrom^{-3}&quot; for densities (meaning A^-3).</span>
-
-<span class="sd">            (Actually, the default unit is the value of</span>
-<span class="sd">            :attr:`MDAnalysis.core.flags[&#39;length_unit&#39;]`; in most cases this is &quot;Angstrom&quot;.)</span>
-
-<span class="sd">         metadata : dict</span>
-<span class="sd">            a user defined dictionary of arbitrary values associated with the</span>
-<span class="sd">            density; the class does not touch :attr:`Density.metadata` but</span>
-<span class="sd">            stores it with :meth:`Density.save`</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">length_unit</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;length_unit&#39;</span><span class="p">]</span>
 
         <span class="n">parameters</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span><span class="p">,</span> <span class="p">{})</span>
@@ -366,8 +385,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">units</span>
 
     <span class="k">def</span> <span class="nf">_check_set_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check that all bindings ``{unit_type : value, ...}`` in the dict `u` are valid and set the object&#39;s units</span>
-<span class="sd">        attribute.</span>
+        <span class="sd">&quot;&quot;&quot;Check and set units.</span>
+
+<span class="sd">        First check that all units and their values in the dict `u` are valid</span>
+<span class="sd">        and then set the object&#39;s units attribute.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        u : dict</span>
+<span class="sd">            ``{unit_type : value, ...}``</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            if unit types or unit values are not recognized or if required</span>
+<span class="sd">            unit types are not in :attr:`units`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># all this unit crap should be a class...</span>
         <span class="k">try</span><span class="p">:</span>
@@ -393,10 +425,12 @@
 <div class="viewcode-block" id="Density.make_density"><a class="viewcode-back" href="../../../documentation_pages/analysis/density.html#MDAnalysis.analysis.density.Density.make_density">[docs]</a>    <span class="k">def</span> <span class="nf">make_density</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert the grid (a histogram, counts in a cell) to a density (counts/volume).</span>
 
-<span class="sd">        (1) This changes the grid irrevocably.</span>
-<span class="sd">        (2) For a probability density, manually divide by :meth:`grid.sum`.</span>
+<span class="sd">        This method changes the grid irrevocably.</span>
 
-<span class="sd">        If this is already a density, then a warning is issued and nothing is done.</span>
+<span class="sd">        For a probability density, manually divide by :meth:`grid.sum`.</span>
+
+<span class="sd">        If this is already a density, then a warning is issued and nothing is</span>
+<span class="sd">        done, so calling `make_density` multiple times does not do any harm.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Make it a density by dividing by the volume of each grid cell</span>
         <span class="c1"># (from numpy.histogramdd, which is for general n-D grids)</span>
@@ -414,14 +448,14 @@
             <span class="n">shape</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dedges</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">/=</span> <span class="n">dedges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;isDensity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;^{-3}&quot;</span>  <span class="c1"># see units.densityUnit_factor</span></div>
+        <span class="c1"># see units.densityUnit_factor for units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;^{-3}&quot;</span></div>
 
 <div class="viewcode-block" id="Density.convert_length"><a class="viewcode-back" href="../../../documentation_pages/analysis/density.html#MDAnalysis.analysis.density.Density.convert_length">[docs]</a>    <span class="k">def</span> <span class="nf">convert_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;Angstrom&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert Grid object to the new `unit`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-
 <span class="sd">        unit : str, optional</span>
 <span class="sd">              unit that the grid should be converted to: one of</span>
 <span class="sd">              &quot;Angstrom&quot;, &quot;nm&quot;</span>
@@ -443,7 +477,6 @@
 
 <div class="viewcode-block" id="Density.convert_density"><a class="viewcode-back" href="../../../documentation_pages/analysis/density.html#MDAnalysis.analysis.density.Density.convert_density">[docs]</a>    <span class="k">def</span> <span class="nf">convert_density</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;Angstrom&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert the density to the physical units given by `unit`.</span>
-
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -467,7 +500,7 @@
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        RuntimeError</span>
-<span class="sd">             If the density does not have a unit associate with it to begin</span>
+<span class="sd">             If the density does not have a unit associated with it to begin</span>
 <span class="sd">             with (i.e., is not a density) then no conversion can take place.</span>
 <span class="sd">        ValueError</span>
 <span class="sd">             for unknown `unit`.</span>
@@ -480,8 +513,6 @@
 <span class="sd">        (2) Conversions always go back to unity so there can be rounding</span>
 <span class="sd">            and floating point artifacts for multiple conversions.</span>
 
-<span class="sd">        There may be some undesirable cross-interactions with :meth:`convert_length`...</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;isDensity&#39;</span><span class="p">]:</span>
             <span class="n">errmsg</span> <span class="o">=</span> <span class="s1">&#39;The grid is not a density so converty_density() makes no sense.&#39;</span>
@@ -490,7 +521,8 @@
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">]:</span>
             <span class="k">return</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">*=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">*=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s1">&#39;density&#39;</span><span class="p">,</span>
+                                                     <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The name of the unit ({0!r} supplied) must be one of:</span><span class="se">\n</span><span class="s2">{1!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">conversion_factor</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;density&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit</span></div>
@@ -522,7 +554,9 @@
 <span class="sd">            [&quot;name OH2&quot;]</span>
 <span class="sd">    delta : float, optional</span>
 <span class="sd">            bin size for the density grid in Angstroem (same in x,y,z) [1.0]</span>
-<span class="sd">    start, stop, step : int, optional</span>
+<span class="sd">    start : int, optional</span>
+<span class="sd">    stop : int, optional</span>
+<span class="sd">    step : int, optional</span>
 <span class="sd">            Slice the trajectory as ``trajectory[start:stop:step]``; default</span>
 <span class="sd">            is to read the whole trajectory.</span>
 <span class="sd">    metadata : dict. optional</span>
@@ -557,6 +591,8 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    :class:`Density`</span>
+<span class="sd">            A :class:`Density` instance with the histogrammed data together</span>
+<span class="sd">            with associated metadata.</span>
 
 
 <span class="sd">    Notes</span>
@@ -711,18 +747,24 @@
 <span class="sd">    ----------</span>
 <span class="sd">    universe : MDAnalysis.Universe</span>
 <span class="sd">        Universe object on which to operate</span>
-<span class="sd">    sel1, sel2 : str</span>
-<span class="sd">        Selection strings for the solvent and solute selections</span>
+<span class="sd">    sel1 : str</span>
+<span class="sd">        Selection string for the *solvent* selection (should be</span>
+<span class="sd">        the group with the *larger number of atoms* to make the</span>
+<span class="sd">        KD-Tree search more efficient)</span>
+<span class="sd">    sel2 : str</span>
+<span class="sd">        Selection string for the *solute* selection</span>
 <span class="sd">    cutoff : float</span>
 <span class="sd">        Distance cutoff</span>
 <span class="sd">    not_within : bool</span>
-<span class="sd">        True: selection behaves as &#39;not within&#39; (As described above)</span>
-<span class="sd">        False: selection is a &lt;sel1&gt; WITHIN &lt;cutoff&gt; OF &lt;sel2&gt;&#39;</span>
+
+<span class="sd">        - ``True``: selection behaves as &quot;not within&quot; (As described above)</span>
+<span class="sd">        - ``False``: selection is a &quot;&lt;sel1&gt; WITHIN &lt;cutoff&gt; OF &lt;sel2&gt;&quot;</span>
 <span class="sd">    use_kdtree : bool</span>
-<span class="sd">        True: use fast kd-tree based selections</span>
-<span class="sd">        False: use distance matrix approach</span>
+
+<span class="sd">        - ``True``: use fast KD-Tree based selections</span>
+<span class="sd">        - ``False``: use distance matrix approach</span>
 <span class="sd">    updating_selection : bool</span>
-<span class="sd">        If True, re-evaluate the selection string each frame.</span>
+<span class="sd">        If ``True``, re-evaluate the selection string each frame.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -742,7 +784,7 @@
 <span class="sd">    distance of the &quot;solute&quot;. Because it is KD-tree based, it is cheap to query the KD-tree with</span>
 <span class="sd">    a different cut-off::</span>
 
-<span class="sd">      notwithin_coordinates = notwithin_coordinates_factory(universe, &#39;name OH2&#39;,&#39;protein and not name H*&#39;, 3.5)</span>
+<span class="sd">      notwithin_coordinates = notwithin_coordinates_factory(universe, &#39;name OH2&#39;, &#39;protein and not name H*&#39;, 3.5)</span>
 <span class="sd">      ...</span>
 <span class="sd">      coord = notwithin_coordinates()        # get coordinates outside cutoff 3.5 A</span>
 <span class="sd">      coord = notwithin_coordinates(cutoff2) # can use different cut off</span>
@@ -756,7 +798,8 @@
 <span class="sd">      coord = within_coordinates()        # get coordinates within cutoff 3.5 A</span>
 <span class="sd">      coord = within_coordinates(cutoff2) # can use different cut off</span>
 
-<span class="sd">    (Readability is enhanced by properly naming the generated function ``within_coordinates().)</span>
+<span class="sd">    (Readability is enhanced by properly naming the generated function</span>
+<span class="sd">    ``within_coordinates()``.)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Benchmark of FABP system (solvent 3400 OH2, protein 2100 atoms) on G4 powerbook, 500 frames</span>
     <span class="c1">#                    cpu/s    relative   speedup       use_kdtree</span>
