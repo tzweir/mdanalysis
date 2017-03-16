@@ -847,16 +847,21 @@
         <span class="n">atomgroup</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="n">atomgroup</span><span class="o">.</span><span class="n">indices</span><span class="p">]</span> <span class="o">+=</span> <span class="n">vector</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Apply a rotation matrix `R` to the selection&#39;s coordinates.</span>
+<span class="sd">        :math:`\mathsf{R}` is a 3x3 orthogonal matrix that transforms a vector</span>
+<span class="sd">        :math:`\mathbf{x} \rightarrow \mathbf{x}&#39;`:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \mathbf{x}&#39; = \mathsf{R}\mathbf{x}</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        R : array_like</span>
 <span class="sd">            3x3 rotation matrix to use for applying rotation.</span>
 <span class="sd">        point : array_like, optional</span>
-<span class="sd">            Center of rotation. If ``None`` then the center of geometry of this</span>
-<span class="sd">            group is used.</span>
+<span class="sd">            Center of rotation</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -864,17 +869,9 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        By default (``point=None``) the rotation is performed around</span>
-<span class="sd">        the centroid of the group (:meth:`center_of_geometry`). In</span>
-<span class="sd">        order to perform a rotation around, say, the origin, use</span>
-<span class="sd">        ``point=[0, 0, 0]``.</span>
-
-<span class="sd">        :math:`\mathsf{R}` is a 3x3 orthogonal matrix that transforms a vector</span>
-<span class="sd">        :math:`\mathbf{x} \rightarrow \mathbf{x}&#39;`:</span>
-
-<span class="sd">        .. math::</span>
-
-<span class="sd">            \mathbf{x}&#39; = \mathsf{R}\mathbf{x}</span>
+<span class="sd">        By default rotates around center of origin ``point=(0, 0, 0)``. To</span>
+<span class="sd">        rotate around center of geometry of the atomgroup use ``ag.rotate(R,</span>
+<span class="sd">        point=ag.centroid)``.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -883,10 +880,10 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
-        <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="k">if</span> <span class="n">point</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroid</span><span class="p">()</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">point</span><span class="p">)</span>
         <span class="c1"># changes the coordinates (in place)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">point</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">indices</span>
         <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>

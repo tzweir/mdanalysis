@@ -978,16 +978,19 @@ represented in the AtomGroup.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.groups.AtomGroup.rotate">
-<code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>point=None</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.rotate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply a rotation matrix <cite>R</cite> to the selection&#8217;s coordinates.</p>
+<code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>point=(0</em>, <em>0</em>, <em>0)</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rotation matrix <cite>R</cite> to the selection&#8217;s coordinates.
+<span class="math">\(\mathsf{R}\)</span> is a 3x3 orthogonal matrix that transforms a vector
+<span class="math">\(\mathbf{x} \rightarrow \mathbf{x}'\)</span>:</p>
+<div class="math">
+\[\mathbf{x}' = \mathsf{R}\mathbf{x}\]</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>R</strong> (<em>array_like</em>) &#8211; 3x3 rotation matrix to use for applying rotation.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
-group is used.</li>
+<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation</li>
 </ul>
 </td>
 </tr>
@@ -1000,14 +1003,9 @@ group is used.</li>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>By default (<code class="docutils literal"><span class="pre">point=None</span></code>) the rotation is performed around
-the centroid of the group (<a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.center_of_geometry" title="MDAnalysis.core.groups.AtomGroup.center_of_geometry"><code class="xref py py-meth docutils literal"><span class="pre">center_of_geometry()</span></code></a>). In
-order to perform a rotation around, say, the origin, use
-<code class="docutils literal"><span class="pre">point=[0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>.</p>
-<p><span class="math">\(\mathsf{R}\)</span> is a 3x3 orthogonal matrix that transforms a vector
-<span class="math">\(\mathbf{x} \rightarrow \mathbf{x}'\)</span>:</p>
-<div class="math">
-\[\mathbf{x}' = \mathsf{R}\mathbf{x}\]</div>
+<p>By default rotates around center of origin <code class="docutils literal"><span class="pre">point=(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>. To
+rotate around center of geometry of the atomgroup use <code class="docutils literal"><span class="pre">ag.rotate(R,</span>
+<span class="pre">point=ag.centroid)</span></code>.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
@@ -2144,16 +2142,19 @@ argument <cite>box</cite> can be used to provide alternative unit cell informati
 
 <dl class="method">
 <dt id="MDAnalysis.core.groups.ResidueGroup.rotate">
-<code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>point=None</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.rotate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply a rotation matrix <cite>R</cite> to the selection&#8217;s coordinates.</p>
+<code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>point=(0</em>, <em>0</em>, <em>0)</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rotation matrix <cite>R</cite> to the selection&#8217;s coordinates.
+<span class="math">\(\mathsf{R}\)</span> is a 3x3 orthogonal matrix that transforms a vector
+<span class="math">\(\mathbf{x} \rightarrow \mathbf{x}'\)</span>:</p>
+<div class="math">
+\[\mathbf{x}' = \mathsf{R}\mathbf{x}\]</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>R</strong> (<em>array_like</em>) &#8211; 3x3 rotation matrix to use for applying rotation.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
-group is used.</li>
+<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation</li>
 </ul>
 </td>
 </tr>
@@ -2166,14 +2167,9 @@ group is used.</li>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>By default (<code class="docutils literal"><span class="pre">point=None</span></code>) the rotation is performed around
-the centroid of the group (<a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.center_of_geometry" title="MDAnalysis.core.groups.ResidueGroup.center_of_geometry"><code class="xref py py-meth docutils literal"><span class="pre">center_of_geometry()</span></code></a>). In
-order to perform a rotation around, say, the origin, use
-<code class="docutils literal"><span class="pre">point=[0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>.</p>
-<p><span class="math">\(\mathsf{R}\)</span> is a 3x3 orthogonal matrix that transforms a vector
-<span class="math">\(\mathbf{x} \rightarrow \mathbf{x}'\)</span>:</p>
-<div class="math">
-\[\mathbf{x}' = \mathsf{R}\mathbf{x}\]</div>
+<p>By default rotates around center of origin <code class="docutils literal"><span class="pre">point=(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>. To
+rotate around center of geometry of the atomgroup use <code class="docutils literal"><span class="pre">ag.rotate(R,</span>
+<span class="pre">point=ag.centroid)</span></code>.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
@@ -3012,16 +3008,19 @@ No duplicates are removed.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.groups.SegmentGroup.rotate">
-<code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>point=None</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.rotate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply a rotation matrix <cite>R</cite> to the selection&#8217;s coordinates.</p>
+<code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>point=(0</em>, <em>0</em>, <em>0)</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rotation matrix <cite>R</cite> to the selection&#8217;s coordinates.
+<span class="math">\(\mathsf{R}\)</span> is a 3x3 orthogonal matrix that transforms a vector
+<span class="math">\(\mathbf{x} \rightarrow \mathbf{x}'\)</span>:</p>
+<div class="math">
+\[\mathbf{x}' = \mathsf{R}\mathbf{x}\]</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>R</strong> (<em>array_like</em>) &#8211; 3x3 rotation matrix to use for applying rotation.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
-group is used.</li>
+<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation</li>
 </ul>
 </td>
 </tr>
@@ -3034,14 +3033,9 @@ group is used.</li>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>By default (<code class="docutils literal"><span class="pre">point=None</span></code>) the rotation is performed around
-the centroid of the group (<a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.center_of_geometry" title="MDAnalysis.core.groups.SegmentGroup.center_of_geometry"><code class="xref py py-meth docutils literal"><span class="pre">center_of_geometry()</span></code></a>). In
-order to perform a rotation around, say, the origin, use
-<code class="docutils literal"><span class="pre">point=[0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>.</p>
-<p><span class="math">\(\mathsf{R}\)</span> is a 3x3 orthogonal matrix that transforms a vector
-<span class="math">\(\mathbf{x} \rightarrow \mathbf{x}'\)</span>:</p>
-<div class="math">
-\[\mathbf{x}' = \mathsf{R}\mathbf{x}\]</div>
+<p>By default rotates around center of origin <code class="docutils literal"><span class="pre">point=(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>. To
+rotate around center of geometry of the atomgroup use <code class="docutils literal"><span class="pre">ag.rotate(R,</span>
+<span class="pre">point=ag.centroid)</span></code>.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
