@@ -391,9 +391,91 @@
     <span class="fm">__new__</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span>
 
 
+
+<span class="k">def</span> <span class="nf">_only_same_level</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="n">ComponentBase</span><span class="p">,</span> <span class="n">GroupBase</span><span class="p">)):</span>  <span class="c1"># sanity check</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t perform &#39;{}&#39; between objects:&quot;</span>
+                            <span class="s2">&quot; &#39;{}&#39; and &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="n">function</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">level</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t perform &#39;{}&#39; on different level objects&quot;</span>
+                            <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">universe</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Can&#39;t operate on objects from different Universes&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapped</span>
+
+
 <span class="k">class</span> <span class="nc">GroupBase</span><span class="p">(</span><span class="n">_MutableBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class from which a Universe&#39;s Group class is built.</span>
 
+<span class="sd">	Instances of :class:`GroupBase` provide the following operations that</span>
+<span class="sd">    conserve element repetitions and order:</span>
+
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | Operation                     | Equivalent | Result                     |</span>
+<span class="sd">    +===============================+============+============================+</span>
+<span class="sd">    | ``len(s)``                    |            | number of elements (atoms, |</span>
+<span class="sd">    |                               |            | residues or segment) in    |</span>
+<span class="sd">    |                               |            | the group                  |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s == t``                    |            | test if ``s`` and ``t``    |</span>
+<span class="sd">    |                               |            | contain the same elements  |</span>
+<span class="sd">    |                               |            | in the same order          |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``x in s``                    |            | test if component ``x`` is |</span>
+<span class="sd">    |                               |            | part of group ``s``        |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.concatenate(t)``          | ``s + t``  | new Group with elements    |</span>
+<span class="sd">    |                               |            | from ``s`` and from ``t``  |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.subtract(t)``             |            | new Group with elements    |</span>
+<span class="sd">    |                               |            | from ``s`` that are not    |</span>
+<span class="sd">    |                               |            | in ``t``                   |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+
+<span class="sd">    The following operations treat the Group as set. Any result will have any</span>
+<span class="sd">    duplicate entries removed and the Group will be sorted.</span>
+
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | Operation                     | Equivalent | Result                     |</span>
+<span class="sd">    +===============================+============+============================+</span>
+<span class="sd">    | ``s.isdisjoint(t)``           |            | ``True`` if ``s`` and      |</span>
+<span class="sd">    |                               |            | ``t`` do not share         |</span>
+<span class="sd">    |                               |            | elements                   |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.issubset(t)``             |            | test if all elements of    |</span>
+<span class="sd">    |                               |            | ``s`` are part of ``t``    |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.is_strict_subset(t)``     |            | test if all elements of    |</span>
+<span class="sd">    |                               |            | ``s`` are part of ``t``,   |</span>
+<span class="sd">    |                               |            | and ``s != t``             |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.issuperset(t)``           |            | test if all elements of    |</span>
+<span class="sd">    |                               |            | ``t`` are part of ``s``    |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.is_strict_superset(t)``   |            | test if all elements of    |</span>
+<span class="sd">    |                               |            | ``t`` are part of ``s``,   |</span>
+<span class="sd">    |                               |            | and ``s != t``             |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.union(t)``                | ``s | t``  | new Group with elements    |</span>
+<span class="sd">    |                               |            | from both ``s`` and ``t``  |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.intersection(t)``         | ``s &amp; t``  | new Group with elements    |</span>
+<span class="sd">    |                               |            | common to ``s`` and ``t``  |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.difference(t)``           | ``s - t``  | new Group with elements of |</span>
+<span class="sd">    |                               |            | ``s`` that are not in ``t``|</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.symmetric_difference(t)`` | ``s ^ t``  | new Group with elements    |</span>
+<span class="sd">    |                               |            | that are part of ``s`` or  |</span>
+<span class="sd">    |                               |            | ``t`` but not both         |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -425,7 +507,7 @@
         <span class="c1"># it can be sliced by all of these already,</span>
         <span class="c1"># so just return ourselves sliced by the item</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">singular</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">singular</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">item</span><span class="p">:</span>  <span class="c1"># check for empty list</span>
                 <span class="c1"># hack to make lists into numpy arrays</span>
@@ -434,7 +516,7 @@
             <span class="c1"># We specify _derived_class instead of self.__class__ to allow</span>
             <span class="c1"># subclasses, such as UpdatingAtomGroup, to control the class</span>
             <span class="c1"># resulting from slicing.</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">name</span>
@@ -466,23 +548,7 @@
 <span class="sd">            Group with elements of `self` and `other` concatenated</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="n">ComponentBase</span><span class="p">,</span> <span class="n">GroupBase</span><span class="p">)):</span>  <span class="c1"># sanity check</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;unsupported operand type(s) for +:&quot;</span>
-                            <span class="s2">&quot; &#39;{}&#39; and &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                                                    <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">level</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t add different level objects&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">_u</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t add objects from different Universes&quot;</span><span class="p">)</span>
-
-        <span class="c1"># for the case where other is a Component, and so other._ix is an</span>
-        <span class="c1"># integer</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="n">o_ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">other</span><span class="o">.</span><span class="n">_ix</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ix</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Using built-in sum requires supporting 0 + self. If other is</span>
@@ -500,18 +566,40 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">other</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;unsupported operand type(s) for +:&quot;</span>
                             <span class="s2">&quot; &#39;{}&#39; and &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                                                     <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test group equality.</span>
+
+<span class="sd">        Two groups are equal if they contain the same indices in</span>
+<span class="sd">        the same order. Groups that are not at the same level or that belong</span>
+<span class="sd">        to different universe cannot be compared.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">:</span>
             <span class="c1"># maybe raise TypeError instead?</span>
             <span class="c1"># eq method raises Error for wrong comparisons</span>
             <span class="k">return</span> <span class="bp">False</span>
-        <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">ix</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ix</span>
+        <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">ix</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ix</span>
+
+    <span class="k">def</span> <span class="fm">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__and__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__xor__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">universe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -532,8 +620,21 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ix</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ix_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Unique indices of the components in the Group.</span>
+
+<span class="sd">        For a Group, ix_array is the same as ix. This method gives a</span>
+<span class="sd">        consistent API between components and groups.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        ix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ix</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span>
 
     <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">pbc</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate center of group given some weights</span>
@@ -1003,6 +1104,316 @@
         <span class="n">ta</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topattr</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="p">[</span><span class="n">ta</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">ta</span><span class="p">)}</span>
 
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="nf">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Concatenate with another Group or Component of the same level.</span>
+
+<span class="sd">        Duplicate entries and original order is preserved. It is synomymous to</span>
+<span class="sd">        the `+` operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Group</span>
+<span class="sd">            Group with elements of `self` and `other` concatenated</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        The order of the original contents (including duplicates)</span>
+<span class="sd">        are preserved when performing a concatenation.</span>
+
+<span class="sd">        &gt;&gt;&gt; ag1 = u.select_atoms(&#39;name O&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; ag2 = u.select_atoms(&#39;name N&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; ag3 = ag1 + ag2  # or ag1.concatenate(ag2)</span>
+<span class="sd">        &gt;&gt;&gt; ag3[:3].names</span>
+<span class="sd">        array([&#39;O&#39;, &#39;O&#39;, &#39;O&#39;], dtype=object)</span>
+<span class="sd">        &gt;&gt;&gt; ag3[-3:].names</span>
+<span class="sd">        array([&#39;N&#39;, &#39;N&#39;, &#39;N&#39;], dtype=object)</span>
+
+<span class="sd">        .. versionadded:: 0.16.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix_array</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">]),</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
+
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Group of elements either in this Group or another</span>
+
+<span class="sd">        On the contrary to concatenation, this method sort the elements and</span>
+<span class="sd">        removes duplicate ones. It is synomymous to the `|` operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Group</span>
+<span class="sd">            Group with the combined elements of `self` and `other`, without</span>
+<span class="sd">            duplicate elements</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        In contrast to :meth:`concatenate`, any duplicates are dropped</span>
+<span class="sd">        and the result is sorted.</span>
+
+<span class="sd">        &gt;&gt;&gt; ag1 = u.select_atoms(&#39;name O&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; ag2 = u.select_atoms(&#39;name N&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; ag3 = ag1 | ag2  # or ag1.union(ag2)</span>
+<span class="sd">        &gt;&gt;&gt; ag3[:3].names</span>
+<span class="sd">        array([&#39;N&#39;, &#39;O&#39;, &#39;N&#39;], dtype=object)</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        concatenate, intersection</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix_array</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">union1d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
+
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Group of elements which are in both this Group and another</span>
+
+<span class="sd">        This method removes duplicate elements and sorts the result. It is</span>
+<span class="sd">        synomymous to the `&amp;` operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Group</span>
+<span class="sd">            Group with the common elements of `self` and `other`, without</span>
+<span class="sd">            duplicate elements</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Intersections can be used when the select atoms string would</span>
+<span class="sd">        become too complicated.  For example to find the water atoms</span>
+<span class="sd">        which are within 4.0A of two segments:</span>
+
+<span class="sd">        &gt;&gt;&gt; water = u.select_atoms(&#39;resname SOL&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; shell1 = water.select_atoms(&#39;around 4.0 segid 1&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; shell2 = water.select_atoms(&#39;around 4.0 segid 2&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; common = shell1 &amp; shell2  # or shell1.intersection(shell2)</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        union</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix_array</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
+
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Group with elements from this Group that don&#39;t appear in other</span>
+
+<span class="sd">        The original order of this group is kept, as well as any duplicate</span>
+<span class="sd">        elements. If an element of this Group is duplicated and appears in</span>
+<span class="sd">        the other Group or Component, then all the occurences of that element</span>
+<span class="sd">        are removed from the returned Group.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Group</span>
+<span class="sd">            Group with the elements of `self` that are not in  `other`,</span>
+<span class="sd">            conserves order and duplicates.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Unlike :meth:`difference` this method will not sort or remove</span>
+<span class="sd">        duplicates.</span>
+
+<span class="sd">        &gt;&gt;&gt; ag1 = u.atoms[[3, 3, 2, 2, 1, 1]]</span>
+<span class="sd">        &gt;&gt;&gt; ag2 = u.atoms[2]</span>
+<span class="sd">        &gt;&gt;&gt; ag3 = ag1 - ag2  # or ag1.subtract(ag2)</span>
+<span class="sd">        &gt;&gt;&gt; ag1.indices</span>
+<span class="sd">        array([3, 3, 1, 1])</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        concatenate, difference</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix_array</span>
+        <span class="n">in_other</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">)</span>  <span class="c1"># mask of in self.ix AND other</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="o">~</span><span class="n">in_other</span><span class="p">]</span>  <span class="c1"># ie inverse of previous mask</span>
+
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="nf">difference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Elements from this Group that do not appear in another</span>
+
+<span class="sd">        This method removes duplicate elements and sorts the result. As such,</span>
+<span class="sd">        it is different from :meth:`subtract`. :meth:`difference` is synomymous</span>
+<span class="sd">        to the `-` operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Group</span>
+<span class="sd">            Group with the elements of `self` that are not in  `other`, without</span>
+<span class="sd">            duplicate elements</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        subtract, symmetric_difference</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix_array</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
+
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="nf">symmetric_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Group of elements which are only in one of this Group or another</span>
+
+<span class="sd">        This method removes duplicate elements and the result is sorted. It is</span>
+<span class="sd">        synomym to the `^` operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Group</span>
+<span class="sd">            Group with the elements that are in `self` or in `other` but not in</span>
+<span class="sd">            both, without duplicate elements</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &gt;&gt;&gt; ag1 = u.atoms[[0, 1, 5, 3, 3, 2]]</span>
+<span class="sd">        &gt;&gt;&gt; ag2 = u.atoms[[4, 4, 6, 2, 3, 5]]</span>
+<span class="sd">        &gt;&gt;&gt; ag3 = ag1 ^ ag2  # or ag1.symmetric_difference(ag2)</span>
+<span class="sd">        &gt;&gt;&gt; ag3.indices  # 0 and 1 are only in ag1, 4 and 6 are only in ag2</span>
+<span class="sd">        [0, 1, 4, 6]</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        difference</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix_array</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derived_class</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">setxor1d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">isdisjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;If the Group has no elements in common with the other Group</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Bool</span>
+<span class="sd">            True if the two Groups do not have common elements</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="nf">issubset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;If all elements of this Group are part of another Group</span>
+
+<span class="sd">        Note that an empty group is a subset of any group of the same level.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Bool</span>
+<span class="sd">            True if this Group is a subset of the other one</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">ix_array</span><span class="p">)</span>
+        <span class="n">s_ix</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s_ix</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">o_ix</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">is_strict_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;If this Group is a subset of another Group but not identical</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Bool</span>
+<span class="sd">            True if this Group is a strict subset of the other one</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>
+
+    <span class="nd">@_only_same_level</span>
+    <span class="k">def</span> <span class="nf">issuperset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;If all elements of another Group are part of this Group</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Bool</span>
+<span class="sd">            True if this Group is a subset of the other one</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">ix_array</span><span class="p">)</span>
+        <span class="n">s_ix</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s_ix</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">o_ix</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">is_strict_superset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;If this Group is a superset of another Group but not identical</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Group or Component</span>
+<span class="sd">            Group or Component with `other.level` same as `self.level`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Bool</span>
+<span class="sd">            True if this Group is a strict superset of the other one</span>
+
+<span class="sd">        .. versionadded:: 0.16</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>
+
 
 <div class="viewcode-block" id="AtomGroup"><a class="viewcode-back" href="../../../documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup">[docs]</a><span class="k">class</span> <span class="nc">AtomGroup</span><span class="p">(</span><span class="n">GroupBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A group of atoms.</span>
@@ -1057,6 +1468,88 @@
 <span class="sd">        new :class:`AtomGroup` for multiple matches.  This makes it</span>
 <span class="sd">        difficult to use the feature consistently in scripts.</span>
 
+<span class="sd">    AtomGroups can be compared and combined using group operators. For</span>
+<span class="sd">    instance, AtomGroups can be concatenated using `+` or :meth:`concatenate`::</span>
+
+<span class="sd">        ag_concat = ag1 + ag2  # or ag_concat = ag1.concatenate(ag2)</span>
+
+<span class="sd">    When groups are concatenated, the order of the atoms is conserved. If atoms</span>
+<span class="sd">    appear several times in one of the groups, the duplicates are kept in the</span>
+<span class="sd">    resulting group. On the contrary to :meth:`concatenate`, :meth:`union`</span>
+<span class="sd">    treats the AtomGroups as sets, duplicates are removed from the resulting</span>
+<span class="sd">    group, and atoms are ordered. The `|` operator is synomymous to</span>
+<span class="sd">    :meth:`union`::</span>
+
+<span class="sd">        ag_union = ag1 | ag2  # or ag_union = ag1.union(ag2)</span>
+
+<span class="sd">    The opposite operation to :meth:`concatenate` is :meth:`subtract`. This</span>
+<span class="sd">    method creates a new group with all the atoms of the group that are not in</span>
+<span class="sd">    a given other group; the order of the atoms is kept, so as duplicates.</span>
+<span class="sd">    :meth:`difference` is the set version of :meth:`subtract`. The resulting</span>
+<span class="sd">    group is sorted and deduplicated.</span>
+
+<span class="sd">    All set methods are listed in the table below. These methods treat the</span>
+<span class="sd">    groups as sorted and deduplicated sets of atoms.</span>
+
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | Operation                     | Equivalent | Result                     |</span>
+<span class="sd">    +===============================+============+============================+</span>
+<span class="sd">    | ``s.isdisjoint(t)``           |            | ``True`` if ``s`` and      |</span>
+<span class="sd">    |                               |            | ``t`` do not share         |</span>
+<span class="sd">    |                               |            | elements                   |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.issubset(t)``             |            | test if all elements of    |</span>
+<span class="sd">    |                               |            | ``s`` are part of ``t``    |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.is_strict_subset(t)``     |            | test if all elements of    |</span>
+<span class="sd">    |                               |            | ``s`` are part of ``t``,   |</span>
+<span class="sd">    |                               |            | and ``s != t``             |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.issuperset(t)``           |            | test if all elements of    |</span>
+<span class="sd">    |                               |            | ``t`` are part of ``s``    |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.is_strict_superset(t)``   |            | test if all elements of    |</span>
+<span class="sd">    |                               |            | ``t`` are part of ``s``,   |</span>
+<span class="sd">    |                               |            | and ``s != t``             |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.union(t)``                | ``s | t``  | new Group with elements    |</span>
+<span class="sd">    |                               |            | from both ``s`` and ``t``  |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.intersection(t)``         | ``s &amp; t``  | new Group with elements    |</span>
+<span class="sd">    |                               |            | common to ``s`` and ``t``  |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.difference(t)``           | ``s - t``  | new Group with elements of |</span>
+<span class="sd">    |                               |            | ``s`` that are not in ``t``|</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.symmetric_difference(t)`` | ``s ^ t``  | new Group with elements    |</span>
+<span class="sd">    |                               |            | that are part of ``s`` or  |</span>
+<span class="sd">    |                               |            | ``t`` but not both         |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+
+<span class="sd">    The following methods keep the order of the atoms, and keep duplicated</span>
+<span class="sd">    atoms.</span>
+
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | Operation                     | Equivalent | Result                     |</span>
+<span class="sd">    +===============================+============+============================+</span>
+<span class="sd">    | ``len(s)``                    |            | number of elements (atoms, |</span>
+<span class="sd">    |                               |            | residues or segment) in    |</span>
+<span class="sd">    |                               |            | the group                  |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s == t``                    |            | test if ``s`` and ``t``    |</span>
+<span class="sd">    |                               |            | contain the same elements  |</span>
+<span class="sd">    |                               |            | in the same order          |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.concatenate(t)``          | ``s + t``  | new Group with elements    |</span>
+<span class="sd">    |                               |            | from ``s`` and from ``t``  |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+<span class="sd">    | ``s.subtract(t)``             |            | new Group with elements    |</span>
+<span class="sd">    |                               |            | from ``s`` that are not    |</span>
+<span class="sd">    |                               |            | in ``t``                   |</span>
+<span class="sd">    +-------------------------------+------------+----------------------------+</span>
+
+<span class="sd">    The `in` operator allows to test if an :class:`Atom` is in the AtomGroup.</span>
+
 <span class="sd">    AtomGroup instances are always bound to a</span>
 <span class="sd">    :class:`MDAnalysis.core.universe.Universe`. They cannot exist in isolation.</span>
 
@@ -1094,7 +1587,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get another AtomGroup identical to this one.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1107,7 +1600,7 @@
     <span class="k">def</span> <span class="nf">residues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get sorted :class:`ResidueGroup` of the (unique) residues</span>
 <span class="sd">        represented in the AtomGroup.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resindices</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resindices</span><span class="p">)]</span>
 
     <span class="nd">@residues.setter</span>
     <span class="k">def</span> <span class="nf">residues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
@@ -1149,7 +1642,7 @@
     <span class="k">def</span> <span class="nf">segments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get sorted :class:`SegmentGroup` of the (unique) segments</span>
 <span class="sd">        represented in the AtomGroup.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segindices</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segindices</span><span class="p">)]</span>
 
     <span class="nd">@segments.setter</span>
     <span class="k">def</span> <span class="nf">segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
@@ -1168,7 +1661,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unique</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return an AtomGroup containing sorted and unique atoms only.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">positions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1187,12 +1680,12 @@
 <span class="sd">                  method was used.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span>
 
     <span class="nd">@positions.setter</span>
     <span class="k">def</span> <span class="nf">positions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
-        <span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">velocities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1208,17 +1701,17 @@
 <span class="sd">        :attr:`~MDAnalysis.coordinates.base.Timestep.velocities`.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">])</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain velocities&quot;</span><span class="p">)</span>
 
     <span class="nd">@velocities.setter</span>
     <span class="k">def</span> <span class="nf">velocities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain velocities&quot;</span><span class="p">)</span>
 
@@ -1232,17 +1725,17 @@
 <span class="sd">        will give all particles zero velocity).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span>
 
     <span class="nd">@forces.setter</span>
     <span class="k">def</span> <span class="nf">forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span>
 
@@ -1443,7 +1936,7 @@
 <span class="sd">                ``global`` absent, the result would be an empty selection since</span>
 <span class="sd">                the ``protein`` subselection would itself be empty. When issuing</span>
 <span class="sd">                :meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` from a</span>
-<span class="sd">                :class:`~MDAnalysis.core.universe.Universe`, ``global`` is ignored. </span>
+<span class="sd">                :class:`~MDAnalysis.core.universe.Universe`, ``global`` is ignored.</span>
 
 <span class="sd">        **Dynamic selections**</span>
 <span class="sd">            If :meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` is</span>
@@ -1505,7 +1998,7 @@
                      <span class="s1">&#39;residue&#39;</span><span class="p">:</span> <span class="s1">&#39;resindices&#39;</span><span class="p">}</span>
 
         <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="s2">&quot;atom&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="n">a</span><span class="o">.</span><span class="n">ix</span><span class="p">]]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="n">a</span><span class="o">.</span><span class="n">ix</span><span class="p">]]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
 
         <span class="c1"># higher level groupings</span>
         <span class="k">try</span><span class="p">:</span>
@@ -1578,7 +2071,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;bond only makes sense for a group with exactly 2 atoms&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">topologyobjects</span><span class="o">.</span><span class="n">Bond</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">topologyobjects</span><span class="o">.</span><span class="n">Bond</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1598,7 +2091,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;angle only makes sense for a group with exactly 3 atoms&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">topologyobjects</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">topologyobjects</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dihedral</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1618,7 +2111,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;dihedral only makes sense for a group with exactly 4 atoms&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">topologyobjects</span><span class="o">.</span><span class="n">Dihedral</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">topologyobjects</span><span class="o">.</span><span class="n">Dihedral</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">improper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1638,7 +2131,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;improper only makes sense for a group with exactly 4 atoms&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">topologyobjects</span><span class="o">.</span><span class="n">ImproperDihedral</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">topologyobjects</span><span class="o">.</span><span class="n">ImproperDihedral</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.write"><a class="viewcode-back" href="../../../documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s2">&quot;PDB&quot;</span><span class="p">,</span>
               <span class="n">filenamefmt</span><span class="o">=</span><span class="s2">&quot;{trjname}_{frame}&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1731,6 +2224,8 @@
 <span class="sd">    :class:`GroupBase`, so this class only includes ad-hoc methods</span>
 <span class="sd">    specific to ResidueGroups.</span>
 
+<span class="sd">    ResidueGroups can be compared and combined using group operators. See the</span>
+<span class="sd">    list of these operators on :class:`GroupBase`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
@@ -1742,7 +2237,7 @@
 <span class="sd">        :class:`ResidueGroup`.  No duplicates are removed.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1759,7 +2254,7 @@
         <span class="sd">&quot;&quot;&quot;Get another :class:`ResidueGroup` identical to this one.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1774,7 +2269,7 @@
 <span class="sd">        ResidueGroup.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segindices</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segindices</span><span class="p">)]</span>
 
     <span class="nd">@segments.setter</span>
     <span class="k">def</span> <span class="nf">segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
@@ -1817,7 +2312,7 @@
         <span class="sd">&quot;&quot;&quot;Return a ResidueGroup containing sorted and unique residues only.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span></div>
 
 
 <div class="viewcode-block" id="SegmentGroup"><a class="viewcode-back" href="../../../documentation_pages/core/groups.html#MDAnalysis.core.groups.SegmentGroup">[docs]</a><span class="k">class</span> <span class="nc">SegmentGroup</span><span class="p">(</span><span class="n">GroupBase</span><span class="p">):</span>
@@ -1828,6 +2323,8 @@
 <span class="sd">    GroupBase, so this class only includes ad-hoc methods specific to</span>
 <span class="sd">    SegmentGroups.</span>
 
+<span class="sd">    SegmentGroups can be compared and combined using group operators. See the</span>
+<span class="sd">    list of these operators on :class:`GroupBase`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
@@ -1838,7 +2335,7 @@
 <span class="sd">        segment in the SegmentGroup. No duplicates are removed.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1858,7 +2355,7 @@
 <span class="sd">        No duplicates are removed.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resindices</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resindices</span><span class="p">)]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1875,7 +2372,7 @@
         <span class="sd">&quot;&quot;&quot;Get another SegmentGroup identical to this one.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1889,7 +2386,7 @@
         <span class="sd">&quot;&quot;&quot;Return a SegmentGroup containing sorted and unique segments only.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span></div>
 
 
 <span class="nd">@functools.total_ordering</span>
@@ -1919,6 +2416,7 @@
     <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)</span>
 
+    <span class="nd">@_only_same_level</span>
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Concatenate the Component with another Component or Group of the</span>
 <span class="sd">        same level.</span>
@@ -1934,27 +2432,10 @@
 <span class="sd">            Group with elements of `self` and `other` concatenated</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="n">ComponentBase</span><span class="p">,</span> <span class="n">GroupBase</span><span class="p">)):</span>  <span class="c1"># sanity check</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;unsupported operand type(s) for +:&quot;</span>
-                            <span class="s2">&quot; &#39;{}&#39; and &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                                                    <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">level</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Can only add {0}s or {1}s (not {2}s/{3}s)&#39;</span>
-                            <span class="s1">&#39; to {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">singular</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                                             <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">plural</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                                             <span class="n">other</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">singular</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                                             <span class="n">other</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">plural</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">universe</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can only add objects from the same Universe&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="n">o_ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">other</span><span class="o">.</span><span class="n">ix</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix</span>
+        <span class="n">o_ix</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ix_array</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">plural</span><span class="p">(</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]),</span> <span class="n">o_ix</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">ix_array</span><span class="p">,</span> <span class="n">o_ix</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Using built-in sum requires supporting 0 + self. If other is</span>
@@ -1972,7 +2453,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">other</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">plural</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">plural</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix_array</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;unsupported operand type(s) for +:&quot;</span>
                             <span class="s2">&quot; &#39;{}&#39; and &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
@@ -1992,6 +2473,18 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ix</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ix_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Unique index of this component as an array.</span>
+<span class="sd">        </span>
+<span class="sd">        This method gives a consistent API between components and groups.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        ix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="Atom"><a class="viewcode-back" href="../../../documentation_pages/core/groups.html#MDAnalysis.core.groups.Atom">[docs]</a><span class="k">class</span> <span class="nc">Atom</span><span class="p">(</span><span class="n">ComponentBase</span><span class="p">):</span>
@@ -2028,7 +2521,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">residue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">resindices</span><span class="p">[</span><span class="bp">self</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">resindices</span><span class="p">[</span><span class="bp">self</span><span class="p">]]</span>
 
     <span class="nd">@residue.setter</span>
     <span class="k">def</span> <span class="nf">residue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
@@ -2039,7 +2532,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">segindices</span><span class="p">[</span><span class="bp">self</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">segindices</span><span class="p">[</span><span class="bp">self</span><span class="p">]]</span>
 
     <span class="nd">@segment.setter</span>
     <span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
@@ -2056,11 +2549,11 @@
 <span class="sd">                  frame from the trajectory will replace the change with that</span>
 <span class="sd">                  from the file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="nd">@position.setter</span>
     <span class="k">def</span> <span class="nf">position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2076,17 +2569,17 @@
 <span class="sd">        does not contain velocities.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain velocities&quot;</span><span class="p">)</span>
 
     <span class="nd">@velocity.setter</span>
     <span class="k">def</span> <span class="nf">velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain velocities&quot;</span><span class="p">)</span>
 
@@ -2104,17 +2597,17 @@
 <span class="sd">        does not contain forces.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span>
 
     <span class="nd">@force.setter</span>
     <span class="k">def</span> <span class="nf">force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">values</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span></div>
 
@@ -2139,11 +2632,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">segindices</span><span class="p">[</span><span class="bp">self</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">segindices</span><span class="p">[</span><span class="bp">self</span><span class="p">]]</span>
 
     <span class="nd">@segment.setter</span>
     <span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
@@ -2170,11 +2663,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">residues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">resindices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">resindices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
 
     <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
         <span class="c1"># Segment.r1 access</span>
@@ -2192,7 +2685,7 @@
 
 <span class="c1"># Accessing these attrs doesn&#39;t trigger an update. The class and instance</span>
 <span class="c1"># methods of UpdatingAtomGroup that are used during __init__ must all be</span>
-<span class="c1"># here, otherwise we get __getattribute__ infinite loops. </span>
+<span class="c1"># here, otherwise we get __getattribute__ infinite loops.</span>
 <span class="n">_UAG_SHORTCUT_ATTRS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Class information of the UAG</span>
     <span class="s2">&quot;__class__&quot;</span><span class="p">,</span> <span class="s2">&quot;_derived_class&quot;</span><span class="p">,</span>
@@ -2231,8 +2724,8 @@
 <span class="sd">        ----------</span>
 <span class="sd">        base_group : :class:`AtomGroup`</span>
 <span class="sd">            group on which *selections* are to be applied.</span>
-<span class="sd">        selections : a tuple of :class:`~MDAnalysis.core.selection.Selection` instances</span>
-<span class="sd">            selections ready to be applied to *base_group*.</span>
+<span class="sd">        selections : a tuple of :class:`~MDAnalysis.core.selection.Selection`</span>
+<span class="sd">            instances selections ready to be applied to *base_group*.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Because we&#39;re implementing __getattribute__, which needs _u for</span>
@@ -2265,7 +2758,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
         <span class="c1"># Run back through AtomGroup init with this information to remake ourselves</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">UpdatingAtomGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UpdatingAtomGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_uptodate</span> <span class="o">=</span> <span class="bp">True</span></div>
 
     <span class="nd">@property</span>
@@ -2284,16 +2777,16 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frame</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lastupdate</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span> <span class="c1"># self._u has no trajectory</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frame</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lastupdate</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span> <span class="c1"># self.universe has no trajectory</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lastupdate</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
 
     <span class="nd">@is_uptodate.setter</span>
     <span class="k">def</span> <span class="nf">is_uptodate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_lastupdate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frame</span>
-            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span> <span class="c1"># self._u has no trajectory</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_lastupdate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frame</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span> <span class="c1"># self.universe has no trajectory</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_lastupdate</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># This always marks the selection as outdated</span>
@@ -2337,7 +2830,7 @@
         <span class="n">sels</span> <span class="o">=</span> <span class="s2">&quot;&#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;&#39; + &#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection_strings</span><span class="p">))</span>
         <span class="c1"># Cheap comparison. Might fail for corner cases but this is</span>
         <span class="c1"># mostly cosmetic.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_group</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_group</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
             <span class="n">basegrp</span> <span class="o">=</span> <span class="s2">&quot;the entire Universe.&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">basegrp</span> <span class="o">=</span> <span class="s2">&quot;another AtomGroup.&quot;</span>

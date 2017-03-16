@@ -172,6 +172,132 @@ single <a class="reference internal" href="#MDAnalysis.core.groups.Atom" title="
 new <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> for multiple matches.  This makes it
 difficult to use the feature consistently in scripts.</p>
 </div>
+<p>AtomGroups can be compared and combined using group operators. For
+instance, AtomGroups can be concatenated using <cite>+</cite> or <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ag_concat</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag_concat = ag1.concatenate(ag2)</span>
+</pre></div>
+</div>
+<p>When groups are concatenated, the order of the atoms is conserved. If atoms
+appear several times in one of the groups, the duplicates are kept in the
+resulting group. On the contrary to <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.union" title="MDAnalysis.core.groups.AtomGroup.union"><code class="xref py py-meth docutils literal"><span class="pre">union()</span></code></a>
+treats the AtomGroups as sets, duplicates are removed from the resulting
+group, and atoms are ordered. The <cite>|</cite> operator is synomymous to
+<a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.union" title="MDAnalysis.core.groups.AtomGroup.union"><code class="xref py py-meth docutils literal"><span class="pre">union()</span></code></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ag_union</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag_union = ag1.union(ag2)</span>
+</pre></div>
+</div>
+<p>The opposite operation to <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a> is <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.subtract" title="MDAnalysis.core.groups.AtomGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>. This
+method creates a new group with all the atoms of the group that are not in
+a given other group; the order of the atoms is kept, so as duplicates.
+<a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.difference" title="MDAnalysis.core.groups.AtomGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> is the set version of <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.subtract" title="MDAnalysis.core.groups.AtomGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>. The resulting
+group is sorted and deduplicated.</p>
+<p>All set methods are listed in the table below. These methods treat the
+groups as sorted and deduplicated sets of atoms.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="17%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operation</th>
+<th class="head">Equivalent</th>
+<th class="head">Result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">s.isdisjoint(t)</span></code></td>
+<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">True</span></code> if <code class="docutils literal"><span class="pre">s</span></code> and
+<code class="docutils literal"><span class="pre">t</span></code> do not share
+elements</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">s.issubset(t)</span></code></td>
+<td>&nbsp;</td>
+<td>test if all elements of
+<code class="docutils literal"><span class="pre">s</span></code> are part of <code class="docutils literal"><span class="pre">t</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">s.is_strict_subset(t)</span></code></td>
+<td>&nbsp;</td>
+<td>test if all elements of
+<code class="docutils literal"><span class="pre">s</span></code> are part of <code class="docutils literal"><span class="pre">t</span></code>,
+and <code class="docutils literal"><span class="pre">s</span> <span class="pre">!=</span> <span class="pre">t</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">s.issuperset(t)</span></code></td>
+<td>&nbsp;</td>
+<td>test if all elements of
+<code class="docutils literal"><span class="pre">t</span></code> are part of <code class="docutils literal"><span class="pre">s</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">s.is_strict_superset(t)</span></code></td>
+<td>&nbsp;</td>
+<td>test if all elements of
+<code class="docutils literal"><span class="pre">t</span></code> are part of <code class="docutils literal"><span class="pre">s</span></code>,
+and <code class="docutils literal"><span class="pre">s</span> <span class="pre">!=</span> <span class="pre">t</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">s.union(t)</span></code></td>
+<td><code class="docutils literal"><span class="pre">s</span> <span class="pre">|</span> <span class="pre">t</span></code></td>
+<td>new Group with elements
+from both <code class="docutils literal"><span class="pre">s</span></code> and <code class="docutils literal"><span class="pre">t</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">s.intersection(t)</span></code></td>
+<td><code class="docutils literal"><span class="pre">s</span> <span class="pre">&amp;</span> <span class="pre">t</span></code></td>
+<td>new Group with elements
+common to <code class="docutils literal"><span class="pre">s</span></code> and <code class="docutils literal"><span class="pre">t</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">s.difference(t)</span></code></td>
+<td><code class="docutils literal"><span class="pre">s</span> <span class="pre">-</span> <span class="pre">t</span></code></td>
+<td>new Group with elements of
+<code class="docutils literal"><span class="pre">s</span></code> that are not in <code class="docutils literal"><span class="pre">t</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">s.symmetric_difference(t)</span></code></td>
+<td><code class="docutils literal"><span class="pre">s</span> <span class="pre">^</span> <span class="pre">t</span></code></td>
+<td>new Group with elements
+that are part of <code class="docutils literal"><span class="pre">s</span></code> or
+<code class="docutils literal"><span class="pre">t</span></code> but not both</td>
+</tr>
+</tbody>
+</table>
+<p>The following methods keep the order of the atoms, and keep duplicated
+atoms.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="17%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operation</th>
+<th class="head">Equivalent</th>
+<th class="head">Result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">len(s)</span></code></td>
+<td>&nbsp;</td>
+<td>number of elements (atoms,
+residues or segment) in
+the group</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">s</span> <span class="pre">==</span> <span class="pre">t</span></code></td>
+<td>&nbsp;</td>
+<td>test if <code class="docutils literal"><span class="pre">s</span></code> and <code class="docutils literal"><span class="pre">t</span></code>
+contain the same elements
+in the same order</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">s.concatenate(t)</span></code></td>
+<td><code class="docutils literal"><span class="pre">s</span> <span class="pre">+</span> <span class="pre">t</span></code></td>
+<td>new Group with elements
+from <code class="docutils literal"><span class="pre">s</span></code> and from <code class="docutils literal"><span class="pre">t</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">s.subtract(t)</span></code></td>
+<td>&nbsp;</td>
+<td>new Group with elements
+from <code class="docutils literal"><span class="pre">s</span></code> that are not
+in <code class="docutils literal"><span class="pre">t</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>The <cite>in</cite> operator allows to test if an <a class="reference internal" href="#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> is in the AtomGroup.</p>
 <p>AtomGroup instances are always bound to a
 <a class="reference internal" href="universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.universe.Universe</span></code></a>. They cannot exist in isolation.</p>
 <div class="admonition seealso">
@@ -429,6 +555,67 @@ geometric center of group</td>
 </div>
 </dd></dl>
 
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.concatenate">
+<code class="descname">concatenate</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concatenate with another Group or Component of the same level.</p>
+<p>Duplicate entries and original order is preserved. It is synomymous to
+the <cite>+</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with elements of <cite>self</cite> and <cite>other</cite> concatenated</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>The order of the original contents (including duplicates)
+are preserved when performing a concatenation.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag1.concatenate(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;O&#39;, &#39;O&#39;, &#39;O&#39;], dtype=object)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;N&#39;, &#39;N&#39;, &#39;N&#39;], dtype=object)</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.16.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.difference">
+<code class="descname">difference</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Elements from this Group that do not appear in another</p>
+<p>This method removes duplicate elements and sorts the result. As such,
+it is different from <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.subtract" title="MDAnalysis.core.groups.AtomGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>. <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.difference" title="MDAnalysis.core.groups.AtomGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> is synomymous
+to the <cite>-</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.subtract" title="MDAnalysis.core.groups.AtomGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.symmetric_difference" title="MDAnalysis.core.groups.AtomGroup.symmetric_difference"><code class="xref py py-meth docutils literal"><span class="pre">symmetric_difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.AtomGroup.dihedral">
 <code class="descname">dihedral</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.dihedral" title="Permalink to this definition">¶</a></dt>
@@ -531,6 +718,147 @@ will give all particles zero velocity).</p>
 </div>
 </dd></dl>
 
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.intersection">
+<code class="descname">intersection</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements which are in both this Group and another</p>
+<p>This method removes duplicate elements and sorts the result. It is
+synomymous to the <cite>&amp;</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the common elements of <cite>self</cite> and <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>Intersections can be used when the select atoms string would
+become too complicated.  For example to find the water atoms
+which are within 4.0A of two segments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shell1</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shell2</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common</span> <span class="o">=</span> <span class="n">shell1</span> <span class="o">&amp;</span> <span class="n">shell2</span>  <span class="c1"># or shell1.intersection(shell2)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.union" title="MDAnalysis.core.groups.AtomGroup.union"><code class="xref py py-meth docutils literal"><span class="pre">union()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.is_strict_subset">
+<code class="descname">is_strict_subset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.is_strict_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this Group is a subset of another Group but not identical</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a strict subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.is_strict_superset">
+<code class="descname">is_strict_superset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.is_strict_superset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this Group is a superset of another Group but not identical</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a strict superset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.isdisjoint">
+<code class="descname">isdisjoint</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.isdisjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the Group has no elements in common with the other Group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if the two Groups do not have common elements</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.issubset">
+<code class="descname">issubset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.issubset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If all elements of this Group are part of another Group</p>
+<p>Note that an empty group is a subset of any group of the same level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.issuperset">
+<code class="descname">issuperset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.issuperset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If all elements of another Group are part of this Group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.AtomGroup.ix">
 <code class="descname">ix</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.ix" title="Permalink to this definition">¶</a></dt>
@@ -543,6 +871,18 @@ the <a class="reference internal" href="#MDAnalysis.core.groups.Residue" title="
 <li>If it is a <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup" title="MDAnalysis.core.groups.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>, these are the indices of
 the <a class="reference internal" href="#MDAnalysis.core.groups.Segment" title="MDAnalysis.core.groups.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> instances.</li>
 </ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.core.groups.AtomGroup.ix_array">
+<code class="descname">ix_array</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.ix_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique indices of the components in the Group.</p>
+<p>For a Group, ix_array is the same as ix. This method gives a
+consistent API between components and groups.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.ix" title="MDAnalysis.core.groups.AtomGroup.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -960,6 +1300,76 @@ longer update across frames.</dd>
 </dd></dl>
 
 <dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.subtract">
+<code class="descname">subtract</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.subtract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group with elements from this Group that don&#8217;t appear in other</p>
+<p>The original order of this group is kept, as well as any duplicate
+elements. If an element of this Group is duplicated and appears in
+the other Group or Component, then all the occurences of that element
+are removed from the returned Group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>,
+conserves order and duplicates.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>Unlike <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.difference" title="MDAnalysis.core.groups.AtomGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> this method will not sort or remove
+duplicates.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">-</span> <span class="n">ag2</span>  <span class="c1"># or ag1.subtract(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span><span class="o">.</span><span class="n">indices</span>
+<span class="go">array([3, 3, 1, 1])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.difference" title="MDAnalysis.core.groups.AtomGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.symmetric_difference">
+<code class="descname">symmetric_difference</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.symmetric_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements which are only in one of this Group or another</p>
+<p>This method removes duplicate elements and the result is sorted. It is
+synomym to the <cite>^</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements that are in <cite>self</cite> or in <cite>other</cite> but not in
+both, without duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">^</span> <span class="n">ag2</span>  <span class="c1"># or ag1.symmetric_difference(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="o">.</span><span class="n">indices</span>  <span class="c1"># 0 and 1 are only in ag1, 4 and 6 are only in ag2</span>
+<span class="go">[0, 1, 4, 6]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.difference" title="MDAnalysis.core.groups.AtomGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="MDAnalysis.core.groups.AtomGroup.transform">
 <code class="descname">transform</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply homogenous transformation matrix <cite>M</cite> to the coordinates.</p>
@@ -1035,6 +1445,41 @@ changes).</p>
 <p>It is not possible to assign a new
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> to the
 <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.ts" title="MDAnalysis.core.groups.AtomGroup.ts"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.ts</span></code></a> attribute; change attributes of the object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.AtomGroup.union">
+<code class="descname">union</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.union" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements either in this Group or another</p>
+<p>On the contrary to concatenation, this method sort the elements and
+removes duplicate ones. It is synomymous to the <cite>|</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the combined elements of <cite>self</cite> and <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>In contrast to <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, any duplicates are dropped
+and the result is sorted.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag1.union(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;N&#39;, &#39;O&#39;, &#39;N&#39;], dtype=object)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.intersection" title="MDAnalysis.core.groups.AtomGroup.intersection"><code class="xref py py-meth docutils literal"><span class="pre">intersection()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -1149,6 +1594,8 @@ Topology-specific <a class="reference internal" href="#MDAnalysis.core.groups.Re
 <code class="xref py py-class docutils literal"><span class="pre">TopologyAttr</span></code> components are obtained from
 <code class="xref py py-class docutils literal"><span class="pre">GroupBase</span></code>, so this class only includes ad-hoc methods
 specific to ResidueGroups.</p>
+<p>ResidueGroups can be compared and combined using group operators. See the
+list of these operators on <code class="xref py py-class docutils literal"><span class="pre">GroupBase</span></code>.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.ResidueGroup.__delattr__">
 <code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__delattr__" title="Permalink to this definition">¶</a></dt>
@@ -1368,6 +1815,67 @@ geometric center of group</td>
 </dd></dl>
 
 <dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.concatenate">
+<code class="descname">concatenate</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.concatenate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concatenate with another Group or Component of the same level.</p>
+<p>Duplicate entries and original order is preserved. It is synomymous to
+the <cite>+</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with elements of <cite>self</cite> and <cite>other</cite> concatenated</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>The order of the original contents (including duplicates)
+are preserved when performing a concatenation.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag1.concatenate(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;O&#39;, &#39;O&#39;, &#39;O&#39;], dtype=object)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;N&#39;, &#39;N&#39;, &#39;N&#39;], dtype=object)</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.16.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.difference">
+<code class="descname">difference</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Elements from this Group that do not appear in another</p>
+<p>This method removes duplicate elements and sorts the result. As such,
+it is different from <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.subtract" title="MDAnalysis.core.groups.ResidueGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>. <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.difference" title="MDAnalysis.core.groups.ResidueGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> is synomymous
+to the <cite>-</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.subtract" title="MDAnalysis.core.groups.ResidueGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.symmetric_difference" title="MDAnalysis.core.groups.ResidueGroup.symmetric_difference"><code class="xref py py-meth docutils literal"><span class="pre">symmetric_difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="MDAnalysis.core.groups.ResidueGroup.groupby">
 <code class="descname">groupby</code><span class="sig-paren">(</span><em>topattr</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.groupby" title="Permalink to this definition">¶</a></dt>
 <dd><p>Group together items in this group according to values of <em>topattr</em></p>
@@ -1396,6 +1904,147 @@ geometric center of group</td>
 </div>
 </dd></dl>
 
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.intersection">
+<code class="descname">intersection</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements which are in both this Group and another</p>
+<p>This method removes duplicate elements and sorts the result. It is
+synomymous to the <cite>&amp;</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the common elements of <cite>self</cite> and <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>Intersections can be used when the select atoms string would
+become too complicated.  For example to find the water atoms
+which are within 4.0A of two segments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shell1</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shell2</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common</span> <span class="o">=</span> <span class="n">shell1</span> <span class="o">&amp;</span> <span class="n">shell2</span>  <span class="c1"># or shell1.intersection(shell2)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.union" title="MDAnalysis.core.groups.ResidueGroup.union"><code class="xref py py-meth docutils literal"><span class="pre">union()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.is_strict_subset">
+<code class="descname">is_strict_subset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.is_strict_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this Group is a subset of another Group but not identical</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a strict subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.is_strict_superset">
+<code class="descname">is_strict_superset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.is_strict_superset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this Group is a superset of another Group but not identical</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a strict superset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.isdisjoint">
+<code class="descname">isdisjoint</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.isdisjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the Group has no elements in common with the other Group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if the two Groups do not have common elements</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.issubset">
+<code class="descname">issubset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.issubset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If all elements of this Group are part of another Group</p>
+<p>Note that an empty group is a subset of any group of the same level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.issuperset">
+<code class="descname">issuperset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.issuperset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If all elements of another Group are part of this Group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.ResidueGroup.ix">
 <code class="descname">ix</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.ix" title="Permalink to this definition">¶</a></dt>
@@ -1408,6 +2057,18 @@ the <a class="reference internal" href="#MDAnalysis.core.groups.Residue" title="
 <li>If it is a <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup" title="MDAnalysis.core.groups.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>, these are the indices of
 the <a class="reference internal" href="#MDAnalysis.core.groups.Segment" title="MDAnalysis.core.groups.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> instances.</li>
 </ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.core.groups.ResidueGroup.ix_array">
+<code class="descname">ix_array</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.ix_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique indices of the components in the Group.</p>
+<p>For a Group, ix_array is the same as ix. This method gives a
+consistent API between components and groups.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.ix" title="MDAnalysis.core.groups.ResidueGroup.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -1572,6 +2233,76 @@ ResidueGroup.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.subtract">
+<code class="descname">subtract</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.subtract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group with elements from this Group that don&#8217;t appear in other</p>
+<p>The original order of this group is kept, as well as any duplicate
+elements. If an element of this Group is duplicated and appears in
+the other Group or Component, then all the occurences of that element
+are removed from the returned Group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>,
+conserves order and duplicates.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>Unlike <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.difference" title="MDAnalysis.core.groups.ResidueGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> this method will not sort or remove
+duplicates.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">-</span> <span class="n">ag2</span>  <span class="c1"># or ag1.subtract(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span><span class="o">.</span><span class="n">indices</span>
+<span class="go">array([3, 3, 1, 1])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.concatenate" title="MDAnalysis.core.groups.ResidueGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.difference" title="MDAnalysis.core.groups.ResidueGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.symmetric_difference">
+<code class="descname">symmetric_difference</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.symmetric_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements which are only in one of this Group or another</p>
+<p>This method removes duplicate elements and the result is sorted. It is
+synomym to the <cite>^</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements that are in <cite>self</cite> or in <cite>other</cite> but not in
+both, without duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">^</span> <span class="n">ag2</span>  <span class="c1"># or ag1.symmetric_difference(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="o">.</span><span class="n">indices</span>  <span class="c1"># 0 and 1 are only in ag1, 4 and 6 are only in ag2</span>
+<span class="go">[0, 1, 4, 6]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.difference" title="MDAnalysis.core.groups.ResidueGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="MDAnalysis.core.groups.ResidueGroup.transform">
 <code class="descname">transform</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply homogenous transformation matrix <cite>M</cite> to the coordinates.</p>
@@ -1634,6 +2365,41 @@ from current coordinates <span class="math">\(\mathbf{x}\)</span> to new coordin
 \[\mathbf{x}' = \mathbf{x} + \mathbf{t}\]</div>
 </dd></dl>
 
+<dl class="method">
+<dt id="MDAnalysis.core.groups.ResidueGroup.union">
+<code class="descname">union</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.union" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements either in this Group or another</p>
+<p>On the contrary to concatenation, this method sort the elements and
+removes duplicate ones. It is synomymous to the <cite>|</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the combined elements of <cite>self</cite> and <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>In contrast to <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.concatenate" title="MDAnalysis.core.groups.ResidueGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, any duplicates are dropped
+and the result is sorted.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag1.union(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;N&#39;, &#39;O&#39;, &#39;N&#39;], dtype=object)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.concatenate" title="MDAnalysis.core.groups.ResidueGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.intersection" title="MDAnalysis.core.groups.ResidueGroup.intersection"><code class="xref py py-meth docutils literal"><span class="pre">intersection()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.ResidueGroup.unique">
 <code class="descname">unique</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.unique" title="Permalink to this definition">¶</a></dt>
@@ -1694,6 +2460,8 @@ be used.</p>
 SegmentGroup class. All the TopologyAttr components are obtained from
 GroupBase, so this class only includes ad-hoc methods specific to
 SegmentGroups.</p>
+<p>SegmentGroups can be compared and combined using group operators. See the
+list of these operators on <code class="xref py py-class docutils literal"><span class="pre">GroupBase</span></code>.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.SegmentGroup.__delattr__">
 <code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__delattr__" title="Permalink to this definition">¶</a></dt>
@@ -1912,6 +2680,67 @@ geometric center of group</td>
 </dd></dl>
 
 <dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.concatenate">
+<code class="descname">concatenate</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.concatenate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concatenate with another Group or Component of the same level.</p>
+<p>Duplicate entries and original order is preserved. It is synomymous to
+the <cite>+</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with elements of <cite>self</cite> and <cite>other</cite> concatenated</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>The order of the original contents (including duplicates)
+are preserved when performing a concatenation.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag1.concatenate(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;O&#39;, &#39;O&#39;, &#39;O&#39;], dtype=object)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;N&#39;, &#39;N&#39;, &#39;N&#39;], dtype=object)</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.16.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.difference">
+<code class="descname">difference</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Elements from this Group that do not appear in another</p>
+<p>This method removes duplicate elements and sorts the result. As such,
+it is different from <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.subtract" title="MDAnalysis.core.groups.SegmentGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>. <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.difference" title="MDAnalysis.core.groups.SegmentGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> is synomymous
+to the <cite>-</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.subtract" title="MDAnalysis.core.groups.SegmentGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.symmetric_difference" title="MDAnalysis.core.groups.SegmentGroup.symmetric_difference"><code class="xref py py-meth docutils literal"><span class="pre">symmetric_difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="MDAnalysis.core.groups.SegmentGroup.groupby">
 <code class="descname">groupby</code><span class="sig-paren">(</span><em>topattr</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.groupby" title="Permalink to this definition">¶</a></dt>
 <dd><p>Group together items in this group according to values of <em>topattr</em></p>
@@ -1940,6 +2769,147 @@ geometric center of group</td>
 </div>
 </dd></dl>
 
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.intersection">
+<code class="descname">intersection</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements which are in both this Group and another</p>
+<p>This method removes duplicate elements and sorts the result. It is
+synomymous to the <cite>&amp;</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the common elements of <cite>self</cite> and <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>Intersections can be used when the select atoms string would
+become too complicated.  For example to find the water atoms
+which are within 4.0A of two segments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shell1</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shell2</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common</span> <span class="o">=</span> <span class="n">shell1</span> <span class="o">&amp;</span> <span class="n">shell2</span>  <span class="c1"># or shell1.intersection(shell2)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.union" title="MDAnalysis.core.groups.SegmentGroup.union"><code class="xref py py-meth docutils literal"><span class="pre">union()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.is_strict_subset">
+<code class="descname">is_strict_subset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.is_strict_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this Group is a subset of another Group but not identical</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a strict subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.is_strict_superset">
+<code class="descname">is_strict_superset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.is_strict_superset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this Group is a superset of another Group but not identical</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a strict superset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.isdisjoint">
+<code class="descname">isdisjoint</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.isdisjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the Group has no elements in common with the other Group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if the two Groups do not have common elements</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.issubset">
+<code class="descname">issubset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.issubset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If all elements of this Group are part of another Group</p>
+<p>Note that an empty group is a subset of any group of the same level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.issuperset">
+<code class="descname">issuperset</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.issuperset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If all elements of another Group are part of this Group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>Bool</em> &#8211;
+True if this Group is a subset of the other one</li>
+<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.SegmentGroup.ix">
 <code class="descname">ix</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.ix" title="Permalink to this definition">¶</a></dt>
@@ -1952,6 +2922,18 @@ the <a class="reference internal" href="#MDAnalysis.core.groups.Residue" title="
 <li>If it is a <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup" title="MDAnalysis.core.groups.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>, these are the indices of
 the <a class="reference internal" href="#MDAnalysis.core.groups.Segment" title="MDAnalysis.core.groups.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> instances.</li>
 </ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.core.groups.SegmentGroup.ix_array">
+<code class="descname">ix_array</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.ix_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique indices of the components in the Group.</p>
+<p>For a Group, ix_array is the same as ix. This method gives a
+consistent API between components and groups.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.ix" title="MDAnalysis.core.groups.SegmentGroup.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -2118,6 +3100,76 @@ to new coordinates <span class="math">\(\mathbf{x}'\)</span> is</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.subtract">
+<code class="descname">subtract</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.subtract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group with elements from this Group that don&#8217;t appear in other</p>
+<p>The original order of this group is kept, as well as any duplicate
+elements. If an element of this Group is duplicated and appears in
+the other Group or Component, then all the occurences of that element
+are removed from the returned Group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>,
+conserves order and duplicates.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>Unlike <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.difference" title="MDAnalysis.core.groups.SegmentGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> this method will not sort or remove
+duplicates.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">-</span> <span class="n">ag2</span>  <span class="c1"># or ag1.subtract(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span><span class="o">.</span><span class="n">indices</span>
+<span class="go">array([3, 3, 1, 1])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.concatenate" title="MDAnalysis.core.groups.SegmentGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.difference" title="MDAnalysis.core.groups.SegmentGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.symmetric_difference">
+<code class="descname">symmetric_difference</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.symmetric_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements which are only in one of this Group or another</p>
+<p>This method removes duplicate elements and the result is sorted. It is
+synomym to the <cite>^</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements that are in <cite>self</cite> or in <cite>other</cite> but not in
+both, without duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">^</span> <span class="n">ag2</span>  <span class="c1"># or ag1.symmetric_difference(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="o">.</span><span class="n">indices</span>  <span class="c1"># 0 and 1 are only in ag1, 4 and 6 are only in ag2</span>
+<span class="go">[0, 1, 4, 6]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.difference" title="MDAnalysis.core.groups.SegmentGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="MDAnalysis.core.groups.SegmentGroup.transform">
 <code class="descname">transform</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply homogenous transformation matrix <cite>M</cite> to the coordinates.</p>
@@ -2178,6 +3230,41 @@ from current coordinates <span class="math">\(\mathbf{x}\)</span> to new coordin
 <span class="math">\(\mathbf{x}'\)</span>:</p>
 <div class="math">
 \[\mathbf{x}' = \mathbf{x} + \mathbf{t}\]</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.groups.SegmentGroup.union">
+<code class="descname">union</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.union" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of elements either in this Group or another</p>
+<p>On the contrary to concatenation, this method sort the elements and
+removes duplicate ones. It is synomymous to the <cite>|</cite> operator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the combined elements of <cite>self</cite> and <cite>other</cite>, without
+duplicate elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Group</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>In contrast to <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.concatenate" title="MDAnalysis.core.groups.SegmentGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, any duplicates are dropped
+and the result is sorted.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag1.union(ag2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
+<span class="go">array([&#39;N&#39;, &#39;O&#39;, &#39;N&#39;], dtype=object)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.concatenate" title="MDAnalysis.core.groups.SegmentGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.intersection" title="MDAnalysis.core.groups.SegmentGroup.intersection"><code class="xref py py-meth docutils literal"><span class="pre">intersection()</span></code></a>, <code class="xref py py-meth docutils literal"><span class="pre">()</span></code></p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -2250,7 +3337,7 @@ re-applied), and only then is the attribute returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>base_group</strong> (<a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>) &#8211; group on which <em>selections</em> are to be applied.</li>
-<li><strong>selections</strong> (a tuple of <code class="xref py py-class docutils literal"><span class="pre">Selection</span></code> instances) &#8211; selections ready to be applied to <em>base_group</em>.</li>
+<li><strong>selections</strong> (a tuple of <code class="xref py py-class docutils literal"><span class="pre">Selection</span></code>) &#8211; instances selections ready to be applied to <em>base_group</em>.</li>
 </ul>
 </td>
 </tr>
@@ -2373,6 +3460,17 @@ If it is a Segment, this is the index of the segment.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="MDAnalysis.core.groups.Atom.ix_array">
+<code class="descname">ix_array</code><a class="headerlink" href="#MDAnalysis.core.groups.Atom.ix_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique index of this component as an array.</p>
+<p>This method gives a consistent API between components and groups.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Atom.ix" title="MDAnalysis.core.groups.Atom.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="MDAnalysis.core.groups.Atom.position">
 <code class="descname">position</code><a class="headerlink" href="#MDAnalysis.core.groups.Atom.position" title="Permalink to this definition">¶</a></dt>
 <dd><p>Coordinates of the atom.</p>
@@ -2466,6 +3564,17 @@ If it is a Residue, this is the index of the residue.
 If it is a Segment, this is the index of the segment.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="MDAnalysis.core.groups.Residue.ix_array">
+<code class="descname">ix_array</code><a class="headerlink" href="#MDAnalysis.core.groups.Residue.ix_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique index of this component as an array.</p>
+<p>This method gives a consistent API between components and groups.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Residue.ix" title="MDAnalysis.core.groups.Residue.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -2530,6 +3639,17 @@ Segments.</p>
 <p>If this component is an Atom, this is the index of the atom.
 If it is a Residue, this is the index of the residue.
 If it is a Segment, this is the index of the segment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.core.groups.Segment.ix_array">
+<code class="descname">ix_array</code><a class="headerlink" href="#MDAnalysis.core.groups.Segment.ix_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique index of this component as an array.</p>
+<p>This method gives a consistent API between components and groups.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Segment.ix" title="MDAnalysis.core.groups.Segment.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+</div>
 </dd></dl>
 
 </dd></dl>
