@@ -168,6 +168,11 @@
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Can now also write to a :class:`~MDAnalysis.lib.util.NamedStream` instead</span>
 <span class="sd">       of a normal file (using :class:`~MDAnalysis.lib.util.openany`).</span>
+
+<span class="sd">    .. versionchanged:: 0.16.0</span>
+<span class="sd">       Remove the `wa` mode. The file is now open when the instance is created</span>
+<span class="sd">       and closed with the :meth:`close` method or when exiting the `with`</span>
+<span class="sd">       statement.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: Name of the format.</span>
     <span class="n">format</span> <span class="o">=</span> <span class="bp">None</span>
@@ -179,27 +184,27 @@
     <span class="n">commentfmt</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">default_numterms</span> <span class="o">=</span> <span class="mi">8</span>
 
-<div class="viewcode-block" id="SelectionWriterBase.__init__"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wa&quot;</span><span class="p">,</span> <span class="n">numterms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionWriterBase.__init__"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">numterms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up for writing to *filename*.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">           *filename*</span>
-<span class="sd">               output file</span>
-<span class="sd">           *mode*</span>
-<span class="sd">               overwrite (&quot;w&quot;) for every write, append (&quot;a&quot;) to existing</span>
-<span class="sd">               file, or overwrite an existing file and then append (&quot;wa&quot;) [&quot;wa&quot;]</span>
-<span class="sd">           *numterms*</span>
-<span class="sd">               number of individual index numbers per line for output</span>
-<span class="sd">               formats that write multiple entries in one line. If set</span>
-<span class="sd">               to 0 or ``False`` then no special formatting is done  [8]</span>
-<span class="sd">           *preamble*</span>
-<span class="sd">               string that is written as a comment at the top of the file []</span>
-<span class="sd">           *kwargs*</span>
-<span class="sd">               use as defaults for :meth:`write`</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename:</span>
+<span class="sd">            output file</span>
+<span class="sd">        mode:</span>
+<span class="sd">            create a new file (&quot;w&quot;), or append (&quot;a&quot;) to existing file [&quot;w&quot;]</span>
+<span class="sd">        numterms:</span>
+<span class="sd">            number of individual index numbers per line for output</span>
+<span class="sd">            formats that write multiple entries in one line. If set</span>
+<span class="sd">            to 0 or ``False`` then no special formatting is done  [8]</span>
+<span class="sd">        preamble:</span>
+<span class="sd">            string that is written as a comment at the top of the file []</span>
+<span class="sd">        kwargs:</span>
+<span class="sd">            use as defaults for :meth:`write`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">filename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ext</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;wa&#39;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mode must be one of &#39;w&#39;, &#39;a&#39;, &#39;wa&#39;, not {0!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mode must be one of &#39;w&#39;, &#39;a&#39;, not {0!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span> <span class="o">=</span> <span class="n">mode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">numterms</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">numterms</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -211,6 +216,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">preamble</span> <span class="o">=</span> <span class="n">preamble</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">otherargs</span> <span class="o">=</span> <span class="n">kwargs</span>  <span class="c1"># hack</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_outfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">write_preamble</span><span class="p">()</span></div>
 
@@ -231,26 +238,24 @@
         <span class="sd">&quot;&quot;&quot;Write a header, depending on the file format.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preamble</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preamble</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preamble</span><span class="p">))</span>
 
 <div class="viewcode-block" id="SelectionWriterBase.write"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write selection to the output file.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">           *selection*</span>
-<span class="sd">               a :class:`MDAnalysis.core.groups.AtomGroup`</span>
-<span class="sd">           *number*</span>
-<span class="sd">               selection will be named &quot;mdanalysis&lt;number&gt;&quot;</span>
-<span class="sd">               (``None`` auto increments between writes; useful</span>
-<span class="sd">               when appending) [``None``]</span>
-<span class="sd">           *name*</span>
-<span class="sd">               selection will be named *name* (instead of numbered)</span>
-<span class="sd">               [``None``]</span>
-<span class="sd">           *frame*</span>
-<span class="sd">               write selection of this frame (or the current one if</span>
-<span class="sd">               ``None`` [``None``]</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        selection:</span>
+<span class="sd">            a :class:`MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">        number:</span>
+<span class="sd">            selection will be named &quot;mdanalysis&lt;number&gt;&quot;</span>
+<span class="sd">            (``None`` auto increments between writes; useful</span>
+<span class="sd">            when appending) [``None``]</span>
+<span class="sd">        name:</span>
+<span class="sd">            selection will be named *name* (instead of numbered) [``None``]</span>
+<span class="sd">        frame:</span>
+<span class="sd">            write selection of this frame (or the current one if</span>
+<span class="sd">            ``None`` [``None``]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">universe</span>
         <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -271,21 +276,24 @@
         <span class="c1"># selection_list must contain entries to be joined with spaces or linebreaks</span>
         <span class="n">selection_terms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translate</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
         <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numterms</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
-        <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_write_head</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">iatom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">atoms</span><span class="p">),</span> <span class="n">step</span><span class="p">):</span>
-                <span class="n">line</span> <span class="o">=</span> <span class="n">selection_terms</span><span class="p">[</span><span class="n">iatom</span><span class="p">:</span><span class="n">iatom</span> <span class="o">+</span> <span class="n">step</span><span class="p">]</span>
-                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="n">step</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">iatom</span> <span class="o">+</span> <span class="n">step</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">atoms</span><span class="p">):</span>
-                    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">continuation</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>  <span class="c1"># safe so that we don&#39;t have to put a space at the start of tail</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_write_tail</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># always terminate with newline</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;wa&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span>  <span class="c1"># switch after first write</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_current_mode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>  <span class="c1"># switch back after eg preamble</span></div>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_outfile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_head</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">iatom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">atoms</span><span class="p">),</span> <span class="n">step</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">selection_terms</span><span class="p">[</span><span class="n">iatom</span><span class="p">:</span><span class="n">iatom</span> <span class="o">+</span> <span class="n">step</span><span class="p">]</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="n">step</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">iatom</span> <span class="o">+</span> <span class="n">step</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">atoms</span><span class="p">):</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">continuation</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>  <span class="c1"># safe so that we don&#39;t have to put a space at the start of tail</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_tail</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># always terminate with newline</span></div>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Close the file</span>
+
+<span class="sd">        .. versionadded:: 0.16.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <div class="viewcode-block" id="SelectionWriterBase._translate"><a class="viewcode-back" href="../../../documentation_pages/selections/base.html#MDAnalysis.selections.base.SelectionWriterBase._translate">[docs]</a>    <span class="k">def</span> <span class="nf">_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Translate atoms into a list of native selection terms.</span>
@@ -315,7 +323,7 @@
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">exc</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">False</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 </pre></div>
 
           </div>
