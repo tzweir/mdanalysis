@@ -133,14 +133,14 @@ gromacs order is done automatically.</dd>
 </dl>
 <dl class="class">
 <dt id="MDAnalysis.coordinates.GRO.GROReader">
-<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.GRO.</code><code class="descname">GROReader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.GRO.</code><code class="descname">GROReader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=None</em>, <em>n_atoms=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reader for the Gromacs GRO structure format.</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based</p>
 </div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.GRO.GROReader.Writer">
-<code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROReader.Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROReader.Writer" title="Permalink to this definition">¶</a></dt>
+<code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROReader.Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROReader.Writer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a CRDWriter for <em>filename</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -164,7 +164,7 @@ gromacs order is done automatically.</dd>
 
 <dl class="class">
 <dt id="MDAnalysis.coordinates.GRO.GROWriter">
-<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.GRO.</code><code class="descname">GROWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROWriter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.GRO.</code><code class="descname">GROWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=None</em>, <em>n_atoms=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>GRO Writer that conforms to the Trajectory API.</p>
 <dl class="docutils">
 <dt>Will attempt to write the following information from the topology:</dt>
@@ -194,11 +194,10 @@ Now now writes velocities where possible</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>filename</em></dt>
-<dd><p class="first last">output filename</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; output filename</li>
+<li><strong>n_atoms</strong> (<em>int (optional)</em>) &#8211; number of atoms</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -212,35 +211,24 @@ of 3 decimal places is hard-coded here.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.GRO.GROWriter.write">
-<code class="descname">write</code><span class="sig-paren">(</span><em>selection</em>, <em>frame=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROWriter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROWriter.write" title="Permalink to this definition">¶</a></dt>
+<code class="descname">write</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROWriter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROWriter.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write selection at current trajectory frame to file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt>selection</dt>
-<dd><p class="first last">MDAnalysis AtomGroup (selection or Universe.atoms)
-or also Universe</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt>frame</dt>
-<dd><p class="first last">optionally move to frame number <em>frame</em></p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>obj</strong> (<em>AtomGroup / Universe / Timestep</em>) &#8211; </li>
+<li><strong>GRO format only allows 5 digits for resid and atom</strong> (<em>The</em>) &#8211; </li>
+<li><strong>If these number become larger than 99,999 then this</strong> (<em>number.</em>) &#8211; </li>
+<li><strong>will chop off the leading digits.</strong> (<em>routine</em>) &#8211; </li>
+<li><strong>versionchanged</strong> (<em>.</em>) &#8211; resName and atomName are truncated to a maximum of 5 characters</li>
+<li><strong>versionchanged</strong> &#8211; frame kwarg has been removed</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>The GRO format only allows 5 digits for resid and atom
-number. If these number become larger than 99,999 then this
-routine will chop off the leading digits.</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.6: </span>resName and atomName are truncated to a maximum of 5 characters</p>
-</div>
 </dd></dl>
 
 </dd></dl>
