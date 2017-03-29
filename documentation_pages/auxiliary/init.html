@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.1. Auxiliary Readers — MDAnalysis.auxiliary &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>8.1. Auxiliary Readers — MDAnalysis.auxiliary &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="8. Auxiliary modules" href="../auxiliary_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8.2. Auxiliary Readers — MDAnalysis.auxiliary.base" href="base.html" />
     <link rel="prev" title="8. Auxiliary modules" href="../auxiliary_modules.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="../auxiliary_modules.html" title="8. Auxiliary modules"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../auxiliary_modules.html" accesskey="U">8. Auxiliary modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../auxiliary_modules.html" accesskey="U">8. Auxiliary modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -97,21 +98,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/auxiliary/init.txt"
+      <li><a href="../../_sources/documentation_pages/auxiliary/init.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -179,19 +177,19 @@ reader for .xvg files.</td>
 <p>Auxiliary readers inherit from the base
 <a class="reference internal" href="base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a>. In stand-alone use they
 allow iteration over each step in a set of auxiliary data:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">aux</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">xvg</span><span class="o">.</span><span class="n">XVGReader</span><span class="p">(</span><span class="s1">&#39;auxdata.xvg&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">aux</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">xvg</span><span class="o">.</span><span class="n">XVGReader</span><span class="p">(</span><span class="s1">&#39;auxdata.xvg&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">aux</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">auxstep</span>
+    <span class="nb">print</span> <span class="n">auxstep</span>
 </pre></div>
 </div>
 <p>To iterate over only certain sections of the auxiliary:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">aux</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">200</span><span class="p">]:</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">aux</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">200</span><span class="p">]:</span>
     <span class="c1"># only steps 100-200</span>
     <span class="n">do_something</span><span class="p">(</span><span class="n">auxstep</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Or to skip steps:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">aux</span><span class="p">[</span><span class="mi">100</span><span class="p">::</span><span class="mi">10</span><span class="p">]:</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">aux</span><span class="p">[</span><span class="mi">100</span><span class="p">::</span><span class="mi">10</span><span class="p">]:</span>
     <span class="c1"># every 10th step starting at 100</span>
     <span class="n">do_something</span><span class="p">(</span><span class="n">auxstep</span><span class="p">)</span>
 </pre></div>
@@ -204,16 +202,16 @@ reading steps one-at-time as needed.</p>
 return an appropriate <a class="reference internal" href="base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> class for
 a supplied format or set of auxiliary data, guessing the format from the
 datatype/file extension:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">auxreader</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">get_auxreader_for</span><span class="p">(</span><span class="s1">&#39;auxdata.xvg&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">auxreader</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">get_auxreader_for</span><span class="p">(</span><span class="s1">&#39;auxdata.xvg&#39;</span><span class="p">)</span>
 <span class="c1"># will return the default XVGReader class</span>
-<span class="n">auxreader</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">get_auxreader_for</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s1">&#39;XVG-F&#39;</span><span class="p">)</span>
+<span class="n">auxreader</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">get_auxreader_for</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;XVG-F&#39;</span><span class="p">)</span>
 <span class="c1"># will return the XVGFileReader class</span>
 </pre></div>
 </div>
 <p>To directly load an instance of the guessed auxiliary reader class given the
 supplied auxdata and any additional auxiliary reader options, the
 function <a class="reference internal" href="core.html#MDAnalysis.auxiliary.core.auxreader" title="MDAnalysis.auxiliary.core.auxreader"><code class="xref py py-func docutils literal"><span class="pre">auxreader()</span></code></a> can be used:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">aux</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">auxreader</span><span class="p">(</span><span class="s1">&#39;auxdata.xvg&#39;</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">aux</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">auxiliary</span><span class="o">.</span><span class="n">auxreader</span><span class="p">(</span><span class="s1">&#39;auxdata.xvg&#39;</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">aux</span><span class="p">:</span>
    <span class="n">do_something</span><span class="p">(</span><span class="n">auxstep</span><span class="p">)</span>
 </pre></div>
@@ -228,7 +226,7 @@ the auxiliary data for that timestep.</p>
 of the auxiliary step, <code class="docutils literal"><span class="pre">dt</span></code> of the trajectory and time at the first frame of the
 trajectory (obtained through a <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>
 instance from the trajectory), as:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">frame</span> <span class="o">=</span> <span class="n">floor</span><span class="p">((</span><span class="n">time_at_step</span> <span class="o">-</span> <span class="n">time_at_frame_0</span> <span class="o">+</span> <span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">frame</span> <span class="o">=</span> <span class="n">floor</span><span class="p">((</span><span class="n">time_at_step</span> <span class="o">-</span> <span class="n">time_at_frame_0</span> <span class="o">+</span> <span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If there are no auxiliary steps assigned to a given timestep (or none within
@@ -240,7 +238,7 @@ instance from the trajectory), as:</p>
 may be passed in as a AuxReader instance, or directly as e.g. a filename, in
 which case <a class="reference internal" href="core.html#MDAnalysis.auxiliary.core.get_auxreader_for" title="MDAnalysis.auxiliary.core.get_auxreader_for"><code class="xref py py-func docutils literal"><span class="pre">get_auxreader_for()</span></code></a> is used to
 guess an appropriate reader. e.g.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
 <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">add_auxiliary</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;./pull_force.xvg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -258,7 +256,7 @@ through only trajectory timesteps to which one or more steps that fall within
 <code class="docutils literal"><span class="pre">cutoff</span></code> from a given auxiliary have been assigned. This may be used to
 avoid representative values set to <code class="docutils literal"><span class="pre">np.nan</span></code>, particularly when auxiliary data
 is less frequent:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">add_auxiliary</span><span class="p">(</span><span class="s1">&#39;low_f&#39;</span><span class="p">,</span> <span class="s1">&#39;low_freq_aux_data.xvg&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">add_auxiliary</span><span class="p">(</span><span class="s1">&#39;low_f&#39;</span><span class="p">,</span> <span class="s1">&#39;low_freq_aux_data.xvg&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">iter_as_aux</span><span class="p">(</span><span class="s1">&#39;low_f&#39;</span><span class="p">):</span>
     <span class="n">do_something</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">aux</span><span class="o">.</span><span class="n">low_f</span><span class="p">)</span> <span class="c1"># do something with &#39;low_f&#39; auxiliary data without</span>
                                <span class="c1"># worrying about having to deal with np.nan</span>
@@ -269,17 +267,17 @@ sufficiently high, <a class="reference internal" href="../coordinates/base.html#
 and <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.iter_as_aux" title="MDAnalysis.coordinates.base.ProtoReader.iter_as_aux"><code class="xref py py-meth docutils literal"><span class="pre">iter_as_aux()</span></code></a> behave the same
 as the <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code></a>
 meth:<cite>~MDAnalysis.coordinates.base.ProtoReader.next</cite> and
-<a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.__iter__" title="MDAnalysis.coordinates.base.ProtoReader.__iter__"><code class="xref py py-meth docutils literal"><span class="pre">__iter__()</span></code></a>.</p>
+<code class="xref py py-meth docutils literal"><span class="pre">__iter__()</span></code>.</p>
 <p>In order to acess auxiliary values at every individual step, including those
 outside the time range of the trajectory,
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.iter_auxiliary" title="MDAnalysis.coordinates.base.ProtoReader.iter_auxiliary"><code class="xref py py-meth docutils literal"><span class="pre">iter_auxiliary()</span></code></a> allows iteration
 over the auxiliary independent of the trajectory:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">iter_auxiliary</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">iter_auxiliary</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">):</span>
     <span class="n">do_something</span><span class="p">(</span><span class="n">auxstep</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To iterate over only a certain section of the auxiliary:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">iter_auxiliary</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">auxstep</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">iter_auxiliary</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="c1"># every 10th step from 100</span>
     <span class="n">do_something</span><span class="p">(</span><span class="n">auxstep</span><span class="p">)</span>
 </pre></div>
@@ -291,17 +289,17 @@ timestep after iteration is complete.</p>
 <h4>8.1.2.1.3. Accessing auxiliary attributes<a class="headerlink" href="#accessing-auxiliary-attributes" title="Permalink to this headline">¶</a></h4>
 <p>To check the values of attributes of an added auxiliary, use
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.get_aux_attribute" title="MDAnalysis.coordinates.base.ProtoReader.get_aux_attribute"><code class="xref py py-meth docutils literal"><span class="pre">get_aux_attribute()</span></code></a>, e.g.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pullf_dt</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">get_aux_attribute</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;dt&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pullf_dt</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">get_aux_attribute</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;dt&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If attributes are settable, they can be changed using
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.set_aux_attribute" title="MDAnalysis.coordinates.base.ProtoReader.set_aux_attribute"><code class="xref py py-meth docutils literal"><span class="pre">set_aux_attribute()</span></code></a>, e.g.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">trajectory</span><span class="o">.</span><span class="n">set_aux_attribute</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;data_selector&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">trajectory</span><span class="o">.</span><span class="n">set_aux_attribute</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;data_selector&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The auxiliary may be renamed using <code class="docutils literal"><span class="pre">set_aux_attribute</span></code> with &#8216;auxname&#8217;, or more
 directly by using <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.rename_aux" title="MDAnalysis.coordinates.base.ProtoReader.rename_aux"><code class="xref py py-meth docutils literal"><span class="pre">rename_aux()</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">trajectory</span><span class="o">.</span><span class="n">rename_aux</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;pullf&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">trajectory</span><span class="o">.</span><span class="n">rename_aux</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;pullf&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -313,22 +311,22 @@ first be obtained with <a class="reference internal" href="base.html#MDAnalysis.
 The returned dictionary can then be passed to
 <a class="reference internal" href="core.html#MDAnalysis.auxiliary.core.auxreader" title="MDAnalysis.auxiliary.core.auxreader"><code class="xref py py-func docutils literal"><span class="pre">auxreader()</span></code></a> to load a new copy of the
 original auxiliary reader:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">description</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">description</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span>
 <span class="k">del</span><span class="p">(</span><span class="n">aux</span><span class="p">)</span>
 <span class="n">reload_aux</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">auxreader</span><span class="p">(</span><span class="o">**</span><span class="n">description</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The &#8216;description&#8217; of any or all the auxiliaries added to a trajectory can be
 obtained using <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.get_aux_descriptions" title="MDAnalysis.coordinates.base.ProtoReader.get_aux_descriptions"><code class="xref py py-meth docutils literal"><span class="pre">get_aux_descriptions()</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">descriptions</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">get_aux_descriptions</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">descriptions</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">get_aux_descriptions</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Get descriptions for selected auxiliaries only:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">descriptions</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">get_aux_descriptions</span><span class="p">([</span><span class="s1">&#39;pullf&#39;</span><span class="p">,</span> <span class="s1">&#39;pullx&#39;</span><span class="p">])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">descriptions</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">get_aux_descriptions</span><span class="p">([</span><span class="s1">&#39;pullf&#39;</span><span class="p">,</span> <span class="s1">&#39;pullx&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>And to reload:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">descr</span> <span class="ow">in</span> <span class="n">descriptions</span><span class="p">:</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">descr</span> <span class="ow">in</span> <span class="n">descriptions</span><span class="p">:</span>
     <span class="n">new_trajectory</span><span class="o">.</span><span class="n">add_auxiliary</span><span class="p">(</span><span class="o">**</span><span class="n">descr</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -360,7 +358,7 @@ Determined from <code class="docutils literal"><span class="pre">_data</span></c
 </dl>
 </div></blockquote>
 <p>The following are stored in AuxStep but can be accessed through the parent
-auxiliary reader (see <a class="reference internal" href="#auxreader-api"><span>AuxReader class</span></a> below).</p>
+auxiliary reader (see <a class="reference internal" href="#auxreader-api"><span class="std std-ref">AuxReader class</span></a> below).</p>
 <blockquote>
 <div><dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">_dt</span></code></dt>
@@ -467,7 +465,7 @@ timestep.</dd>
 </dl>
 </div></blockquote>
 <p>The following are stored in <code class="docutils literal"><span class="pre">auxstep</span></code> but may be accessed from the auxiliary
-reader; see the <a class="reference internal" href="#auxstep-api"><span>AuxStep class</span></a> above.</p>
+reader; see the <a class="reference internal" href="#auxstep-api"><span class="std std-ref">AuxStep class</span></a> above.</p>
 <blockquote>
 <div><p><code class="docutils literal"><span class="pre">step</span></code></p>
 <p><code class="docutils literal"><span class="pre">time</span></code></p>
@@ -513,7 +511,7 @@ of the auxiliary for recreating.</dd>
 <dt><code class="docutils literal"><span class="pre">__getitem__(step)</span></code></dt>
 <dd>If <em>step</em> is a single index, move to that step and return the <code class="xref py py-class docutils literal"><span class="pre">AuxStep</span></code>;
 if a list or slice, return an iterator over the specified auxiliary steps.
-See examples in <a class="reference internal" href="#auxiliary-api"><span>Auxiliary API</span></a> above.</dd>
+See examples in <a class="reference internal" href="#auxiliary-api"><span class="std std-ref">Auxiliary API</span></a> above.</dd>
 <dt><code class="docutils literal"><span class="pre">rewind()</span></code></dt>
 <dd>Reposition to first step.</dd>
 <dt><code class="docutils literal"><span class="pre">update_ts(ts)</span></code></dt>
@@ -561,7 +559,7 @@ and addionally define:</p>
 <div><dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">__init__(auxdata,</span> <span class="pre">**kwargs)</span></code></dt>
 <dd>Additional processing of <em>kwargs</em> and any necessary initial processing of
-<em>auxdata</em>. Must <a class="reference external" href="https://docs.python.org/library/functions.html#super" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">super()</span></code></a> through
+<em>auxdata</em>. Must <a class="reference external" href="https://docs.python.org/2/library/functions.html#super" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">super()</span></code></a> through
 <a class="reference internal" href="base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a>.</dd>
 <dt><code class="docutils literal"><span class="pre">_read_next_step()</span></code></dt>
 <dd>Read the data from the next auxiliary step and update <code class="docutils literal"><span class="pre">auxstep</span></code> as
@@ -630,13 +628,13 @@ following (these may be overwritten by subclasses as appropriate):</p>
         <li class="right" >
           <a href="../auxiliary_modules.html" title="8. Auxiliary modules"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../auxiliary_modules.html" >8. Auxiliary modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../auxiliary_modules.html" >8. Auxiliary modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

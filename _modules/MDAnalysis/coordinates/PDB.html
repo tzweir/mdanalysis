@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.coordinates.PDB &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.coordinates.PDB &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,8 +42,8 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -53,14 +54,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -216,7 +214,7 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">zip</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">zip</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">errno</span>
@@ -225,14 +223,14 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">flags</span>
-<span class="kn">from</span> <span class="nn">..lib</span> <span class="kn">import</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">base</span>
-<span class="kn">from</span> <span class="nn">..topology.core</span> <span class="kn">import</span> <span class="n">guess_atom_element</span>
-<span class="kn">from</span> <span class="nn">..core.universe</span> <span class="kn">import</span> <span class="n">Universe</span>
-<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="kn">import</span> <span class="n">NoDataError</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">flags</span>
+<span class="kn">from</span> <span class="nn">..lib</span> <span class="k">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">..topology.core</span> <span class="k">import</span> <span class="n">guess_atom_element</span>
+<span class="kn">from</span> <span class="nn">..core.universe</span> <span class="k">import</span> <span class="n">Universe</span>
+<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="k">import</span> <span class="n">NoDataError</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis.coordinates.PBD&quot;</span><span class="p">)</span>
@@ -300,10 +298,10 @@
 <span class="sd">       * New :attr:`title` (list with all TITLE lines).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
-    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
+    <span class="nb">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read coordinates from *filename*.</span>
 
 <span class="sd">        *filename* can be a gzipped or bzip2ed compressed PDB file.</span>
@@ -319,7 +317,7 @@
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="c1"># hackish, but should work and keeps things DRY</span>
             <span class="c1"># regular MDA usage via Universe doesn&#39;t follow this route</span>
-            <span class="kn">from</span> <span class="nn">MDAnalysis.topology</span> <span class="kn">import</span> <span class="n">PDBParser</span>
+            <span class="kn">from</span> <span class="nn">MDAnalysis.topology</span> <span class="k">import</span> <span class="n">PDBParser</span>
 
             <span class="k">with</span> <span class="n">PDBParser</span><span class="o">.</span><span class="n">PDBParser</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
                 <span class="n">top</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
@@ -406,8 +404,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_pdbfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">_read_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_read_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># TODO: cleanup _read_frame() to use a &quot;free&quot; Timestep</span>
@@ -453,7 +451,7 @@
         <span class="c1"># check if atom number changed</span>
         <span class="k">if</span> <span class="n">pos</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Read an incorrect number of atoms</span><span class="se">\n</span><span class="s2">&quot;</span>
-                             <span class="s2">&quot;Expected {expected} got {actual}&quot;</span>
+                             <span class="s2">&quot;Expected </span><span class="si">{expected}</span><span class="s2"> got </span><span class="si">{actual}</span><span class="s2">&quot;</span>
                              <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expected</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">actual</span><span class="o">=</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span><span class="p">:</span>
@@ -508,30 +506,30 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fmt</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;ATOM&#39;</span><span class="p">:</span> <span class="p">(</span>
-            <span class="s2">&quot;ATOM  {serial:5d} {name:&lt;4s}{altLoc:&lt;1s}{resName:&lt;4s}&quot;</span>
-            <span class="s2">&quot;{chainID:1s}{resSeq:4d}{iCode:1s}&quot;</span>
-            <span class="s2">&quot;   {pos[0]:8.3f}{pos[1]:8.3f}{pos[2]:8.3f}{occupancy:6.2f}&quot;</span>
-            <span class="s2">&quot;{tempFactor:6.2f}      {segID:&lt;4s}{element:&gt;2s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
-        <span class="s1">&#39;REMARK&#39;</span><span class="p">:</span> <span class="s2">&quot;REMARK     {0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;COMPND&#39;</span><span class="p">:</span> <span class="s2">&quot;COMPND    {0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;HEADER&#39;</span><span class="p">:</span> <span class="s2">&quot;HEADER    {0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;TITLE&#39;</span><span class="p">:</span> <span class="s2">&quot;TITLE     {0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;MODEL&#39;</span><span class="p">:</span> <span class="s2">&quot;MODEL     {0:5d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;NUMMDL&#39;</span><span class="p">:</span> <span class="s2">&quot;NUMMDL    {0:5d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ATOM  </span><span class="si">{serial:5d}</span><span class="s2"> </span><span class="si">{name:&lt;4s}{altLoc:&lt;1s}{resName:&lt;4s}</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;</span><span class="si">{chainID:1s}{resSeq:4d}{iCode:1s}</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;   </span><span class="si">{pos[0]:8.3f}{pos[1]:8.3f}{pos[2]:8.3f}{occupancy:6.2f}</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;</span><span class="si">{tempFactor:6.2f}</span><span class="s2">      </span><span class="si">{segID:&lt;4s}{element:&gt;2s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
+        <span class="s1">&#39;REMARK&#39;</span><span class="p">:</span> <span class="s2">&quot;REMARK     </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;COMPND&#39;</span><span class="p">:</span> <span class="s2">&quot;COMPND    </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;HEADER&#39;</span><span class="p">:</span> <span class="s2">&quot;HEADER    </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;TITLE&#39;</span><span class="p">:</span> <span class="s2">&quot;TITLE     </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;MODEL&#39;</span><span class="p">:</span> <span class="s2">&quot;MODEL     </span><span class="si">{0:5d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;NUMMDL&#39;</span><span class="p">:</span> <span class="s2">&quot;NUMMDL    </span><span class="si">{0:5d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="s1">&#39;ENDMDL&#39;</span><span class="p">:</span> <span class="s2">&quot;ENDMDL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="s1">&#39;END&#39;</span><span class="p">:</span> <span class="s2">&quot;END</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;CRYST1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;CRYST1{box[0]:9.3f}{box[1]:9.3f}{box[2]:9.3f}&quot;</span>
-                   <span class="s2">&quot;{ang[0]:7.2f}{ang[1]:7.2f}{ang[2]:7.2f} &quot;</span>
-                   <span class="s2">&quot;{spacegroup:&lt;11s}{zvalue:4d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
-        <span class="s1">&#39;CONECT&#39;</span><span class="p">:</span> <span class="s2">&quot;CONECT{0}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="s1">&#39;CRYST1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;CRYST1</span><span class="si">{box[0]:9.3f}{box[1]:9.3f}{box[2]:9.3f}</span><span class="s2">&quot;</span>
+                   <span class="s2">&quot;</span><span class="si">{ang[0]:7.2f}{ang[1]:7.2f}{ang[2]:7.2f}</span><span class="s2"> &quot;</span>
+                   <span class="s2">&quot;</span><span class="si">{spacegroup:&lt;11s}{zvalue:4d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
+        <span class="s1">&#39;CONECT&#39;</span><span class="p">:</span> <span class="s2">&quot;CONECT</span><span class="si">{0}</span><span class="se">\n</span><span class="s2">&quot;</span>
     <span class="p">}</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
-    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
+    <span class="nb">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
     <span class="n">pdb_coor_limits</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">999.9995</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">9999.9995</span><span class="p">}</span>
     <span class="c1">#: wrap comments into REMARK records that are not longer than</span>
     <span class="c1"># :attr:`remark_max_length` characters.</span>
     <span class="n">remark_max_length</span> <span class="o">=</span> <span class="mi">66</span>
-    <span class="n">multiframe</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">multiframe</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="c1"># These attributes are used to deduce how to format the atom name.</span>
     <span class="n">ions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;FE&#39;</span><span class="p">,</span> <span class="s1">&#39;AS&#39;</span><span class="p">,</span> <span class="s1">&#39;ZN&#39;</span><span class="p">,</span> <span class="s1">&#39;MG&#39;</span><span class="p">,</span> <span class="s1">&#39;MN&#39;</span><span class="p">,</span> <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;BR&#39;</span><span class="p">,</span>
@@ -561,9 +559,9 @@
                      <span class="n">Pair</span><span class="p">(</span><span class="s1">&#39;VNL&#39;</span><span class="p">,</span> <span class="s1">&#39;CO2&#39;</span><span class="p">),</span> <span class="n">Pair</span><span class="p">(</span><span class="s1">&#39;PF5&#39;</span><span class="p">,</span> <span class="s1">&#39;FE1&#39;</span><span class="p">),</span>
                      <span class="n">Pair</span><span class="p">(</span><span class="s1">&#39;PF5&#39;</span><span class="p">,</span> <span class="s1">&#39;FE2&#39;</span><span class="p">),</span> <span class="n">Pair</span><span class="p">(</span><span class="s1">&#39;UNL&#39;</span><span class="p">,</span> <span class="s1">&#39;UNL&#39;</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="s2">&quot;conect&quot;</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="s2">&quot;conect&quot;</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">remarks</span><span class="o">=</span><span class="s2">&quot;Created by PDBWriter&quot;</span><span class="p">,</span>
-                 <span class="n">convert_units</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+                 <span class="n">convert_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new PDBWriter</span>
 
 <span class="sd">        :Arguments:</span>
@@ -610,11 +608,11 @@
         <span class="c1">#       - additional title keyword could contain line for TITLE</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
-        <span class="k">if</span> <span class="n">convert_units</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">convert_units</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">convert_units</span> <span class="o">=</span> <span class="n">flags</span><span class="p">[</span><span class="s1">&#39;convert_lengths&#39;</span><span class="p">]</span>
         <span class="c1"># convert length and time to base units</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span> <span class="o">=</span> <span class="n">convert_units</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_multiframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiframe</span> <span class="k">if</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">multiframe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multiframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiframe</span> <span class="k">if</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">multiframe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="n">bonds</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">frames_written</span> <span class="o">=</span> <span class="mi">0</span>
@@ -626,33 +624,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span> <span class="o">=</span> <span class="n">remarks</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span>  <span class="c1"># open file on init</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">first_frame_done</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_frame_done</span> <span class="o">=</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="PDBWriter.close"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBWriter.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Close PDB file and write END record&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;pdbfile&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;pdbfile&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">END</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;END record has already been written&quot;</span>
                             <span class="s2">&quot; before the final closing of the file&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span> <span class="o">=</span> <span class="bp">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span> <span class="o">=</span> <span class="kc">None</span></div>
 
     <span class="k">def</span> <span class="nf">_write_pdb_title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiframe</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s2">&quot;MDANALYSIS FRAMES FROM {0:d}, SKIP {1:d}: {2!s}&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s2">&quot;MDANALYSIS FRAMES FROM </span><span class="si">{0:d}</span><span class="s2">, SKIP </span><span class="si">{1:d}</span><span class="s2">: </span><span class="si">{2!s}</span><span class="s2">&quot;</span>
                        <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s2">&quot;MDANALYSIS FRAME {0:d}: {1!s}&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s2">&quot;MDANALYSIS FRAME </span><span class="si">{0:d}</span><span class="s2">: </span><span class="si">{1!s}</span><span class="s2">&quot;</span>
                        <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_write_pdb_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_frame_done</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_frame_done</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">return</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">first_frame_done</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_frame_done</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span>
 
@@ -687,7 +685,7 @@
         <span class="c1"># check if any coordinates are illegal (coordinates are already in</span>
         <span class="c1"># Angstroem per package default)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_valid_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">,</span> <span class="n">coor</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="c1"># note the precarious close() here: we know that the file is open and</span>
         <span class="c1"># we now prepare to remove what we have already written (header and</span>
         <span class="c1"># such) or add a REMARK (which allows the user to look at the</span>
@@ -705,13 +703,13 @@
                 <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">:</span>
                     <span class="k">pass</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PDB files must have coordinate values between &quot;</span>
-                         <span class="s2">&quot;{0:.3f} and {1:.3f} Angstroem: file writing was &quot;</span>
+                         <span class="s2">&quot;</span><span class="si">{0:.3f}</span><span class="s2"> and </span><span class="si">{1:.3f}</span><span class="s2"> Angstroem: file writing was &quot;</span>
                          <span class="s2">&quot;aborted.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">],</span>
                                            <span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="PDBWriter._write_pdb_bonds"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBWriter._write_pdb_bonds">[docs]</a>    <span class="k">def</span> <span class="nf">_write_pdb_bonds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Writes out all the bond records&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">universe</span><span class="p">,</span> <span class="s1">&#39;bonds&#39;</span><span class="p">):</span>
@@ -839,7 +837,7 @@
 
         <span class="k">for</span> <span class="n">framenumber</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">traj</span><span class="p">),</span> <span class="n">step</span><span class="p">):</span>
             <span class="n">traj</span><span class="p">[</span><span class="n">framenumber</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">write_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_pdb_bonds</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -847,7 +845,7 @@
         <span class="c1"># Set the trajectory to the starting position</span>
         <span class="n">traj</span><span class="p">[</span><span class="n">start</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="PDBWriter.write_next_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBWriter.write_next_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">write_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="PDBWriter.write_next_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBWriter.write_next_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">write_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;write a new timestep to the PDB file</span>
 
 <span class="sd">        :Keywords:</span>
@@ -864,7 +862,7 @@
 <span class="sd">           with the :class:`~MDAnalysis.core.groups.AtomGroup.Universe` as</span>
 <span class="sd">           its argument so that topology information can be gathered.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -888,7 +886,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">atomname</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39; {}  &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">&#39; </span><span class="si">{}</span><span class="s1">  &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span>
         <span class="k">elif</span> <span class="p">((</span><span class="n">resname</span> <span class="o">==</span> <span class="n">atomname</span>
                <span class="ow">or</span> <span class="n">atomname</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ions</span>
                <span class="ow">or</span> <span class="n">atomname</span> <span class="o">==</span> <span class="s1">&#39;UNK&#39;</span>
@@ -896,10 +894,10 @@
                <span class="ow">or</span> <span class="p">(</span><span class="n">resname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">special_cl</span> <span class="ow">and</span> <span class="n">atomname</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;CL&#39;</span><span class="p">)</span>
                <span class="ow">or</span> <span class="n">Pair</span><span class="p">(</span><span class="n">resname</span><span class="p">,</span> <span class="n">atomname</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_pairs</span><span class="p">)</span>
               <span class="ow">and</span> <span class="n">Pair</span><span class="p">(</span><span class="n">resname</span><span class="p">,</span> <span class="n">atomname</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude_pairs</span><span class="p">):</span>
-            <span class="k">return</span> <span class="s1">&#39;{:&lt;4}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39; {:&lt;3}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:&lt;4}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39; </span><span class="si">{:&lt;3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PDBWriter._write_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBWriter._write_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">_write_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PDBWriter._write_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBWriter._write_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">_write_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write a new timestep *ts* to file</span>
 
 <span class="sd">        Does unit conversion if necessary.</span>
@@ -926,7 +924,7 @@
         <span class="n">atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">atoms</span>
         <span class="n">pos</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">positions</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span><span class="p">:</span>
-            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">multiframe</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">MODEL</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frames_written</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -943,8 +941,8 @@
                 <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">attrname</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frames_written</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found no information for attr: &#39;{}&#39;&quot;</span>
-                                  <span class="s2">&quot; Using default value of &#39;{}&#39;&quot;</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found no information for attr: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span>
+                                  <span class="s2">&quot; Using default value of &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span>
                                   <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attrname</span><span class="p">,</span> <span class="n">default</span><span class="p">))</span>
                 <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">default</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">))</span>
         <span class="n">altlocs</span> <span class="o">=</span> <span class="n">get_attr</span><span class="p">(</span><span class="s1">&#39;altLocs&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
@@ -1053,7 +1051,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span><span class="p">:</span>
             <span class="c1"># only write a single END record</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;END&#39;</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span> <span class="o">=</span> <span class="bp">True</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="PDBWriter.ENDMDL"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBWriter.ENDMDL">[docs]</a>    <span class="k">def</span> <span class="nf">ENDMDL</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write the ENDMDL_ record.</span>
@@ -1069,27 +1067,10 @@
 <span class="sd">        .. _CONECT: http://www.wwpdb.org/documentation/format32/sect10.html#CONECT</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">conect</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;{0:5d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">conect</span><span class="p">]</span>
+        <span class="n">conect</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{0:5d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">conect</span><span class="p">]</span>
         <span class="n">conect</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conect</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;CONECT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">conect</span><span class="p">))</span></div></div>
 
-
-<span class="k">class</span> <span class="nc">PrimitivePDBReader</span><span class="p">(</span><span class="n">PDBReader</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;PrimitivePDBReader is identical to the PDBReader,&#39;</span>
-                  <span class="s1">&#39; it is deprecated in favor of the shorter name&#39;</span>
-                  <span class="s1">&#39; removal targeted for version 0.16.0&#39;</span><span class="p">,</span>
-                  <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PrimitivePDBReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">PrimitivePDBWriter</span><span class="p">(</span><span class="n">PDBWriter</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;PrimitivePDBWriter is identical to the Writer,&#39;</span>
-                      <span class="s1">&#39;it is deprecated in favor of the shorter name&#39;</span>
-                      <span class="s1">&#39; removal targeted for version 0.16.0&#39;</span><span class="p">,</span>
-                      <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PrimitivePDBWriter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">ExtendedPDBReader</span><span class="p">(</span><span class="n">PDBReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;PDBReader that reads a PDB-formatted file with five-digit residue numbers.</span>
@@ -1107,7 +1088,7 @@
 
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s2">&quot;XPDB&quot;</span>
+    <span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;XPDB&quot;</span>
 
 
 <div class="viewcode-block" id="MultiPDBWriter"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.MultiPDBWriter">[docs]</a><span class="k">class</span> <span class="nc">MultiPDBWriter</span><span class="p">(</span><span class="n">PDBWriter</span><span class="p">):</span>
@@ -1136,9 +1117,9 @@
 <span class="sd">    .. versionadded:: 0.7.6</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
-    <span class="n">multiframe</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># For Writer registration</span>
-    <span class="n">singleframe</span> <span class="o">=</span> <span class="bp">False</span></div>
+    <span class="nb">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
+    <span class="n">multiframe</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># For Writer registration</span>
+    <span class="n">singleframe</span> <span class="o">=</span> <span class="kc">False</span></div>
 </pre></div>
 
           </div>
@@ -1155,13 +1136,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

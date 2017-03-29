@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.1.2. Core objects: Containers — MDAnalysis.core.groups &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>9.1.2. Core objects: Containers — MDAnalysis.core.groups &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="9. Core modules" href="../core_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="9.1.3. Compute observable timeseries from trajectories — MDAnalysis.core.Timeseries" href="Timeseries.html" />
     <link rel="prev" title="9.1.1. Core object: Universe — MDAnalysis.core.universe" href="universe.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="universe.html" title="9.1.1. Core object: Universe — MDAnalysis.core.universe"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../core_modules.html" accesskey="U">9. Core modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../core_modules.html" accesskey="U">9. Core modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -80,21 +81,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/core/groups.txt"
+      <li><a href="../../_sources/documentation_pages/core/groups.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -130,19 +128,19 @@ these units ((<a class="reference internal" href="#MDAnalysis.core.groups.Residu
 generated from a selection, or by indexing/slcing the AtomGroup of all
 atoms in the Universe at <code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.core.universe.Universe.atoms</span></code>.</p>
 <p>An AtomGroup can be indexed and sliced like a list:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>will return the first and the last <a class="reference internal" href="#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> in the group whereas the
 slice</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>returns an AtomGroup of every second element, corresponding to indices 0,
 2, and 4.</p>
 <p>It also supports &#8220;advanced slicing&#8221; when the argument is a
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> or a <a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">aslice</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> or a <a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">aslice</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="n">ag</span><span class="p">[</span><span class="n">aslice</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -158,7 +156,7 @@ dihedrals).</p>
 </div>
 <p>Atoms can also be accessed in a Pythonic fashion by using the atom name as
 an attribute. For instance,</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="o">.</span><span class="n">CA</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="o">.</span><span class="n">CA</span>
 </pre></div>
 </div>
 <p>will provide a <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> of all CA atoms in the
@@ -174,7 +172,7 @@ difficult to use the feature consistently in scripts.</p>
 </div>
 <p>AtomGroups can be compared and combined using group operators. For
 instance, AtomGroups can be concatenated using <cite>+</cite> or <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ag_concat</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag_concat = ag1.concatenate(ag2)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ag_concat</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag_concat = ag1.concatenate(ag2)</span>
 </pre></div>
 </div>
 <p>When groups are concatenated, the order of the atoms is conserved. If atoms
@@ -183,7 +181,7 @@ resulting group. On the contrary to <a class="reference internal" href="#MDAnaly
 treats the AtomGroups as sets, duplicates are removed from the resulting
 group, and atoms are ordered. The <cite>|</cite> operator is synomymous to
 <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.union" title="MDAnalysis.core.groups.AtomGroup.union"><code class="xref py py-meth docutils literal"><span class="pre">union()</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ag_union</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag_union = ag1.union(ag2)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ag_union</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag_union = ag1.union(ag2)</span>
 </pre></div>
 </div>
 <p>The opposite operation to <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a> is <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.subtract" title="MDAnalysis.core.groups.AtomGroup.subtract"><code class="xref py py-meth docutils literal"><span class="pre">subtract()</span></code></a>. This
@@ -305,47 +303,6 @@ in <code class="docutils literal"><span class="pre">t</span></code></td>
 <p class="last"><a class="reference internal" href="universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.universe.Universe</span></code></a></p>
 </div>
 <dl class="attribute">
-<dt id="MDAnalysis.core.groups.AtomGroup.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.AtomGroup.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.AtomGroup.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.AtomGroup.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.AtomGroup.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.AtomGroup.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.AtomGroup.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="MDAnalysis.core.groups.AtomGroup.angle">
 <code class="descname">angle</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.angle" title="Permalink to this definition">¶</a></dt>
 <dd><p>This AtomGroup represented as an Angle object</p>
@@ -377,7 +334,7 @@ in <code class="docutils literal"><span class="pre">t</span></code></td>
 <code class="descname">bbox</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.bbox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the bounding box of the selection.</p>
 <p>The lengths A,B,C of the orthorhombic enclosing box are</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">AtomGroup</span><span class="o">.</span><span class="n">bbox</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">AtomGroup</span><span class="o">.</span><span class="n">bbox</span><span class="p">()</span>
 <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -385,21 +342,23 @@ in <code class="docutils literal"><span class="pre">t</span></code></td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pbc</strong> (<em>bool, optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
-calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>note</strong> (<em>.</em>) &#8211; The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to
-<code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
+calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>corners</strong> &#8211;
-2x3 array giving corners of bounding box as
-[[xmin, ymin, zmin], [xmax, ymax, zmax]].</p>
-</td>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>:param .. note::: The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to</dt>
+<dd><code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>corners</strong> &#8211; 2x3 array giving corners of bounding box as
+[[xmin, ymin, zmin], [xmax, ymax, zmax]].</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></td>
 </tr>
 </tbody>
 </table>
@@ -441,21 +400,23 @@ calculation. [<code class="docutils literal"><span class="pre">False</span></cod
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pbc</strong> (<em>bool, optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
-calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>note</strong> (<em>.</em>) &#8211; The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to
-<code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
+calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>R</strong> (<em>float</em>) &#8211;
-Radius of bounding sphere.</li>
-<li><strong>center</strong> (<em>array</em>) &#8211;
-Coordinates of sphere center as <code class="docutils literal"><span class="pre">[xcen,ycen,zcen]</span></code>.</li>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>:param .. note::: The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to</dt>
+<dd><code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>R</strong> (<em>float</em>) &#8211; Radius of bounding sphere.</li>
+<li><strong>center</strong> (<em>array</em>) &#8211; Coordinates of sphere center as <code class="docutils literal"><span class="pre">[xcen,ycen,zcen]</span></code>.</li>
 </ul>
-</p>
 </td>
 </tr>
 </tbody>
@@ -478,13 +439,12 @@ Coordinates of sphere center as <code class="docutils literal"><span class="pre"
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>weights</strong> (<em>array_like</em>) &#8211; weights to be used</li>
-<li><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<li><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> &#8211;
-weighted center of group</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> &#8211; weighted center of group</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
@@ -494,7 +454,7 @@ weighted center of group</p>
 </table>
 <p class="rubric">Examples</p>
 <p>To find the charge weighted center of a given Atomgroup:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;prop mass &gt; 4.0&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;prop mass &gt; 4.0&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">sel</span><span class="o">.</span><span class="n">charges</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -511,11 +471,10 @@ weighted center of group</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211;
-geometric center of group</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211; geometric center of group</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
 </tr>
@@ -537,11 +496,10 @@ geometric center of group</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211;
-geometric center of group</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211; geometric center of group</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
 </tr>
@@ -565,7 +523,7 @@ the <cite>+</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with elements of <cite>self</cite> and <cite>other</cite> concatenated</td>
 </tr>
@@ -576,7 +534,7 @@ the <cite>+</cite> operator.</p>
 <p class="rubric">Example</p>
 <p>The order of the original contents (including duplicates)
 are preserved when performing a concatenation.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag1.concatenate(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
@@ -601,7 +559,7 @@ to the <cite>-</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>, without
 duplicate elements</td>
@@ -655,17 +613,17 @@ will give all particles zero velocity).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>topattr</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Topology attribute to group components by.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>topattr</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Topology attribute to group components by.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Unique values of the topology attribute as keys, Groups as values.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Example</p>
 <p>To group atoms with the same mass together:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;masses&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;masses&#39;</span><span class="p">)</span>
 <span class="go">{12.010999999999999: &lt;AtomGroup with 462 atoms&gt;,</span>
 <span class="go">14.007: &lt;AtomGroup with 116 atoms&gt;,</span>
 <span class="go">15.999000000000001: &lt;AtomGroup with 134 atoms&gt;}</span>
@@ -684,7 +642,7 @@ will give all particles zero velocity).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vdwradii</strong> (<em>dict, optional</em>) &#8211; Dict relating atom type: vdw radii</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vdwradii</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>, </em><em>optional</em>) &#8211; Dict relating atom type: vdw radii</td>
 </tr>
 </tbody>
 </table>
@@ -728,7 +686,7 @@ synomymous to the <cite>&amp;</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the common elements of <cite>self</cite> and <cite>other</cite>, without
 duplicate elements</td>
@@ -741,7 +699,7 @@ duplicate elements</td>
 <p>Intersections can be used when the select atoms string would
 become too complicated.  For example to find the water atoms
 which are within 4.0A of two segments:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shell1</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 1&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shell2</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 2&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">common</span> <span class="o">=</span> <span class="n">shell1</span> <span class="o">&amp;</span> <span class="n">shell2</span>  <span class="c1"># or shell1.intersection(shell2)</span>
@@ -761,12 +719,11 @@ which are within 4.0A of two segments:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a strict subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a strict subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -782,12 +739,11 @@ True if this Group is a strict subset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a strict superset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a strict superset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -803,12 +759,11 @@ True if this Group is a strict superset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if the two Groups do not have common elements</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if the two Groups do not have common elements</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -825,12 +780,11 @@ True if the two Groups do not have common elements</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -846,12 +800,11 @@ True if this Group is a subset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -881,7 +834,7 @@ the <a class="reference internal" href="#MDAnalysis.core.groups.Segment" title="
 consistent API between components and groups.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.ix" title="MDAnalysis.core.groups.AtomGroup.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.ix" title="MDAnalysis.core.groups.AtomGroup.ix"><code class="xref py py-obj docutils literal"><span class="pre">ix</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -920,15 +873,14 @@ Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 <code class="docutils literal"><span class="pre">[lx,</span> <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>. If <code class="docutils literal"><span class="pre">None</span></code>, uses these
 timestep dimensions.</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> to change coordinates in place.</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> to change coordinates in place.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>coords</strong> &#8211;
-Shifted atom coordinates.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>coords</strong> &#8211; Shifted atom coordinates.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -990,7 +942,7 @@ represented in the AtomGroup.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>R</strong> (<em>array_like</em>) &#8211; 3x3 rotation matrix to use for applying rotation.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation</li>
+<li><strong>point</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; Center of rotation</li>
 </ul>
 </td>
 </tr>
@@ -1026,9 +978,9 @@ rotate around center of geometry of the atomgroup use <code class="docutils lite
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Rotation angle in degrees.</li>
+<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Rotation angle in degrees.</li>
 <li><strong>axis</strong> (<em>array_like</em>) &#8211; Rotation axis vector.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
+<li><strong>point</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
 group is used.</li>
 </ul>
 </td>
@@ -1078,12 +1030,12 @@ which will then be available to the selection parser.</p>
 <p>Selections can be set to update automatically on frame change, by
 setting the <cite>updating</cite> named argument to <cite>True</cite>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and not ( name H* or name O* )&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and not ( name H* or name O* )&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span>
 <span class="go">&lt;AtomGroup with 3420 atoms&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;around 10 group notHO&quot;</span><span class="p">,</span> <span class="n">notHO</span><span class="o">=</span><span class="n">sel</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;around 10 group notHO&quot;</span><span class="p">,</span> <span class="n">notHO</span><span class="o">=</span><span class="n">sel</span><span class="p">)</span>
 <span class="go">&lt;AtomGroup with 1250 atoms&gt;</span>
 </pre></div>
 </div>
@@ -1097,7 +1049,7 @@ order of <a class="reference internal" href="#MDAnalysis.core.groups.Atom" title
 are not removed.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../selections.html#selection-commands-label"><span>Selection commands</span></a></p>
+<p class="last"><a class="reference internal" href="../selections.html#selection-commands-label"><span class="std std-ref">Selection commands</span></a></p>
 </div>
 <p class="rubric">Selection syntax</p>
 <p>The selection parser understands the following CASE SENSITIVE
@@ -1170,7 +1122,7 @@ protein that are within 3.5 Angstroms from the protein</dd>
 <dt>point <em>x</em> <em>y</em> <em>z</em>  <em>distance</em></dt>
 <dd>selects all atoms within a cutoff of a point in space, make sure
 coordinate is separated by spaces,
-e.g. <code class="docutils literal"><span class="pre">point</span> <span class="pre">5.0</span> <span class="pre">5.0</span> <span class="pre">5.0</span>&nbsp; <span class="pre">3.5</span></code> selects all atoms within 3.5
+e.g. <code class="docutils literal"><span class="pre">point</span> <span class="pre">5.0</span> <span class="pre">5.0</span> <span class="pre">5.0</span>&#160; <span class="pre">3.5</span></code> selects all atoms within 3.5
 Angstroms of the coordinate (5.0, 5.0, 5.0)</dd>
 <dt>prop [abs] <em>property</em>  <em>operator</em>  <em>value</em></dt>
 <dd>selects atoms based on position, using <em>property</em>  <strong>x</strong>, <strong>y</strong>,
@@ -1288,7 +1240,7 @@ longer update across frames.</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level</strong> (<em>{'atom', 'residue', 'segment'}</em>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level</strong> (<em>{'atom'</em><em>, </em><em>'residue'</em><em>, </em><em>'segment'}</em>) &#8211; </td>
 </tr>
 </tbody>
 </table>
@@ -1309,7 +1261,7 @@ are removed from the returned Group.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>,
 conserves order and duplicates.</td>
@@ -1321,7 +1273,7 @@ conserves order and duplicates.</td>
 <p class="rubric">Example</p>
 <p>Unlike <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.difference" title="MDAnalysis.core.groups.AtomGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> this method will not sort or remove
 duplicates.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">-</span> <span class="n">ag2</span>  <span class="c1"># or ag1.subtract(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span><span class="o">.</span><span class="n">indices</span>
@@ -1344,7 +1296,7 @@ synomym to the <cite>^</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements that are in <cite>self</cite> or in <cite>other</cite> but not in
 both, without duplicate elements</td>
@@ -1354,7 +1306,7 @@ both, without duplicate elements</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">^</span> <span class="n">ag2</span>  <span class="c1"># or ag1.symmetric_difference(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="o">.</span><span class="n">indices</span>  <span class="c1"># 0 and 1 are only in ag1, 4 and 6 are only in ag2</span>
@@ -1375,7 +1327,7 @@ both, without duplicate elements</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; 4x4 matrix, with the rotation in <code class="docutils literal"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">M[:3,:3]</span></code> and the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; 4x4 matrix, with the rotation in <code class="docutils literal"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">M[:3,:3]</span></code> and the
 translation in <code class="docutils literal"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">M[:3,3]</span></code>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
@@ -1455,7 +1407,7 @@ removes duplicate ones. It is synomymous to the <cite>|</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the combined elements of <cite>self</cite> and <cite>other</cite>, without
 duplicate elements</td>
@@ -1467,7 +1419,7 @@ duplicate elements</td>
 <p class="rubric">Example</p>
 <p>In contrast to <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, any duplicates are dropped
 and the result is sorted.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag1.union(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
@@ -1510,9 +1462,9 @@ groups of atoms to be kept together through the process.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>compound</strong> (<em>{'atoms', 'group', 'residues', 'segments', 'fragments'}</em>) &#8211; The group which will be kept together through the shifting process.</li>
-<li><strong>center</strong> (<em>{'com', 'cog'}</em>) &#8211; How to define the center of a given group of atoms.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Box dimensions, can be either orthogonal or triclinic information.
+<li><strong>compound</strong> (<em>{'atoms'</em><em>, </em><em>'group'</em><em>, </em><em>'residues'</em><em>, </em><em>'segments'</em><em>, </em><em>'fragments'}</em>) &#8211; The group which will be kept together through the shifting process.</li>
+<li><strong>center</strong> (<em>{'com'</em><em>, </em><em>'cog'}</em>) &#8211; How to define the center of a given group of atoms.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Box dimensions, can be either orthogonal or triclinic information.
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 <code class="docutils literal"><span class="pre">[lx,</span> <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>. If <code class="docutils literal"><span class="pre">None</span></code>, uses these
@@ -1555,13 +1507,13 @@ need to write out a trajectory, see <code class="xref py py-mod docutils literal
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<em>str, optional</em>) &#8211; <code class="docutils literal"><span class="pre">None</span></code>: create TRJNAME_FRAME.FORMAT from filenamefmt [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>file_format</strong> (<em>str, optional</em>) &#8211; PDB, CRD, GRO, VMD (tcl), PyMol (pml), Gromacs (ndx) CHARMM (str)
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">None</span></code>: create TRJNAME_FRAME.FORMAT from filenamefmt [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>file_format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; PDB, CRD, GRO, VMD (tcl), PyMol (pml), Gromacs (ndx) CHARMM (str)
 Jmol (spt); case-insensitive and can also be supplied as the
 filename extension [PDB]</li>
-<li><strong>filenamefmt</strong> (<em>str, optional</em>) &#8211; format string for default filename; use substitution tokens
+<li><strong>filenamefmt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; format string for default filename; use substitution tokens
 &#8216;trjname&#8217; and &#8216;frame&#8217; [&#8220;%(trjname)s_%(frame)d&#8221;]</li>
-<li><strong>bonds</strong> (<em>str, optional</em>) &#8211; <p>how to handle bond information, especially relevant for PDBs;
+<li><strong>bonds</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; <p>how to handle bond information, especially relevant for PDBs;
 default is <code class="docutils literal"><span class="pre">&quot;conect&quot;</span></code>.
 * <code class="docutils literal"><span class="pre">&quot;conect&quot;</span></code>: write only the CONECT records defined in the original</p>
 <blockquote>
@@ -1572,13 +1524,15 @@ guessed by MDAnalysis</li>
 <li><code class="docutils literal"><span class="pre">None</span></code>: do not write out bonds</li>
 </ul>
 </li>
-<li><strong>versionchanged</strong> (<em>.</em>) &#8211; Merged with write_selection.  This method can now write both
-selections out.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<dl class="docutils">
+<dt>:param .. versionchanged:: 0.9.0: Merged with write_selection.  This method can now write both</dt>
+<dd>selections out.</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1595,53 +1549,6 @@ specific to ResidueGroups.</p>
 <p>ResidueGroups can be compared and combined using group operators. See the
 list of these operators on <code class="xref py py-class docutils literal"><span class="pre">GroupBase</span></code>.</p>
 <dl class="attribute">
-<dt id="MDAnalysis.core.groups.ResidueGroup.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.ResidueGroup.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.ResidueGroup.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.ResidueGroup.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.ResidueGroup.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.ResidueGroup.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.ResidueGroup.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.ResidueGroup.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="MDAnalysis.core.groups.ResidueGroup.atoms">
 <code class="descname">atoms</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get an <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> of atoms represented in this
@@ -1655,7 +1562,7 @@ list of these operators on <code class="xref py py-class docutils literal"><span
 <code class="descname">bbox</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.bbox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the bounding box of the selection.</p>
 <p>The lengths A,B,C of the orthorhombic enclosing box are</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">AtomGroup</span><span class="o">.</span><span class="n">bbox</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">AtomGroup</span><span class="o">.</span><span class="n">bbox</span><span class="p">()</span>
 <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -1663,21 +1570,23 @@ list of these operators on <code class="xref py py-class docutils literal"><span
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pbc</strong> (<em>bool, optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
-calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>note</strong> (<em>.</em>) &#8211; The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to
-<code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
+calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>corners</strong> &#8211;
-2x3 array giving corners of bounding box as
-[[xmin, ymin, zmin], [xmax, ymax, zmax]].</p>
-</td>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>:param .. note::: The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to</dt>
+<dd><code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>corners</strong> &#8211; 2x3 array giving corners of bounding box as
+[[xmin, ymin, zmin], [xmax, ymax, zmax]].</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></td>
 </tr>
 </tbody>
 </table>
@@ -1698,21 +1607,23 @@ calculation. [<code class="docutils literal"><span class="pre">False</span></cod
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pbc</strong> (<em>bool, optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
-calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>note</strong> (<em>.</em>) &#8211; The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to
-<code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
+calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>R</strong> (<em>float</em>) &#8211;
-Radius of bounding sphere.</li>
-<li><strong>center</strong> (<em>array</em>) &#8211;
-Coordinates of sphere center as <code class="docutils literal"><span class="pre">[xcen,ycen,zcen]</span></code>.</li>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>:param .. note::: The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to</dt>
+<dd><code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>R</strong> (<em>float</em>) &#8211; Radius of bounding sphere.</li>
+<li><strong>center</strong> (<em>array</em>) &#8211; Coordinates of sphere center as <code class="docutils literal"><span class="pre">[xcen,ycen,zcen]</span></code>.</li>
 </ul>
-</p>
 </td>
 </tr>
 </tbody>
@@ -1735,13 +1646,12 @@ Coordinates of sphere center as <code class="docutils literal"><span class="pre"
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>weights</strong> (<em>array_like</em>) &#8211; weights to be used</li>
-<li><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<li><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> &#8211;
-weighted center of group</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> &#8211; weighted center of group</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
@@ -1751,7 +1661,7 @@ weighted center of group</p>
 </table>
 <p class="rubric">Examples</p>
 <p>To find the charge weighted center of a given Atomgroup:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;prop mass &gt; 4.0&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;prop mass &gt; 4.0&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">sel</span><span class="o">.</span><span class="n">charges</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1768,11 +1678,10 @@ weighted center of group</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211;
-geometric center of group</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211; geometric center of group</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
 </tr>
@@ -1794,11 +1703,10 @@ geometric center of group</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211;
-geometric center of group</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211; geometric center of group</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
 </tr>
@@ -1822,7 +1730,7 @@ the <cite>+</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with elements of <cite>self</cite> and <cite>other</cite> concatenated</td>
 </tr>
@@ -1833,7 +1741,7 @@ the <cite>+</cite> operator.</p>
 <p class="rubric">Example</p>
 <p>The order of the original contents (including duplicates)
 are preserved when performing a concatenation.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag1.concatenate(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
@@ -1858,7 +1766,7 @@ to the <cite>-</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>, without
 duplicate elements</td>
@@ -1881,17 +1789,17 @@ duplicate elements</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>topattr</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Topology attribute to group components by.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>topattr</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Topology attribute to group components by.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Unique values of the topology attribute as keys, Groups as values.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Example</p>
 <p>To group atoms with the same mass together:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;masses&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;masses&#39;</span><span class="p">)</span>
 <span class="go">{12.010999999999999: &lt;AtomGroup with 462 atoms&gt;,</span>
 <span class="go">14.007: &lt;AtomGroup with 116 atoms&gt;,</span>
 <span class="go">15.999000000000001: &lt;AtomGroup with 134 atoms&gt;}</span>
@@ -1912,7 +1820,7 @@ synomymous to the <cite>&amp;</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the common elements of <cite>self</cite> and <cite>other</cite>, without
 duplicate elements</td>
@@ -1925,7 +1833,7 @@ duplicate elements</td>
 <p>Intersections can be used when the select atoms string would
 become too complicated.  For example to find the water atoms
 which are within 4.0A of two segments:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shell1</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 1&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shell2</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 2&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">common</span> <span class="o">=</span> <span class="n">shell1</span> <span class="o">&amp;</span> <span class="n">shell2</span>  <span class="c1"># or shell1.intersection(shell2)</span>
@@ -1945,12 +1853,11 @@ which are within 4.0A of two segments:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a strict subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a strict subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -1966,12 +1873,11 @@ True if this Group is a strict subset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a strict superset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a strict superset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -1987,12 +1893,11 @@ True if this Group is a strict superset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if the two Groups do not have common elements</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if the two Groups do not have common elements</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -2009,12 +1914,11 @@ True if the two Groups do not have common elements</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -2030,12 +1934,11 @@ True if this Group is a subset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -2065,7 +1968,7 @@ the <a class="reference internal" href="#MDAnalysis.core.groups.Segment" title="
 consistent API between components and groups.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.ix" title="MDAnalysis.core.groups.ResidueGroup.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.ix" title="MDAnalysis.core.groups.ResidueGroup.ix"><code class="xref py py-obj docutils literal"><span class="pre">ix</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -2104,15 +2007,14 @@ Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 <code class="docutils literal"><span class="pre">[lx,</span> <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>. If <code class="docutils literal"><span class="pre">None</span></code>, uses these
 timestep dimensions.</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> to change coordinates in place.</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> to change coordinates in place.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>coords</strong> &#8211;
-Shifted atom coordinates.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>coords</strong> &#8211; Shifted atom coordinates.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -2154,7 +2056,7 @@ argument <cite>box</cite> can be used to provide alternative unit cell informati
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>R</strong> (<em>array_like</em>) &#8211; 3x3 rotation matrix to use for applying rotation.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation</li>
+<li><strong>point</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; Center of rotation</li>
 </ul>
 </td>
 </tr>
@@ -2190,9 +2092,9 @@ rotate around center of geometry of the atomgroup use <code class="docutils lite
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Rotation angle in degrees.</li>
+<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Rotation angle in degrees.</li>
 <li><strong>axis</strong> (<em>array_like</em>) &#8211; Rotation axis vector.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
+<li><strong>point</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
 group is used.</li>
 </ul>
 </td>
@@ -2240,7 +2142,7 @@ are removed from the returned Group.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>,
 conserves order and duplicates.</td>
@@ -2252,7 +2154,7 @@ conserves order and duplicates.</td>
 <p class="rubric">Example</p>
 <p>Unlike <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.difference" title="MDAnalysis.core.groups.ResidueGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> this method will not sort or remove
 duplicates.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">-</span> <span class="n">ag2</span>  <span class="c1"># or ag1.subtract(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span><span class="o">.</span><span class="n">indices</span>
@@ -2275,7 +2177,7 @@ synomym to the <cite>^</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements that are in <cite>self</cite> or in <cite>other</cite> but not in
 both, without duplicate elements</td>
@@ -2285,7 +2187,7 @@ both, without duplicate elements</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">^</span> <span class="n">ag2</span>  <span class="c1"># or ag1.symmetric_difference(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="o">.</span><span class="n">indices</span>  <span class="c1"># 0 and 1 are only in ag1, 4 and 6 are only in ag2</span>
@@ -2306,7 +2208,7 @@ both, without duplicate elements</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; 4x4 matrix, with the rotation in <code class="docutils literal"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">M[:3,:3]</span></code> and the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; 4x4 matrix, with the rotation in <code class="docutils literal"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">M[:3,:3]</span></code> and the
 translation in <code class="docutils literal"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">M[:3,3]</span></code>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
@@ -2371,7 +2273,7 @@ removes duplicate ones. It is synomymous to the <cite>|</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the combined elements of <cite>self</cite> and <cite>other</cite>, without
 duplicate elements</td>
@@ -2383,7 +2285,7 @@ duplicate elements</td>
 <p class="rubric">Example</p>
 <p>In contrast to <a class="reference internal" href="#MDAnalysis.core.groups.ResidueGroup.concatenate" title="MDAnalysis.core.groups.ResidueGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, any duplicates are dropped
 and the result is sorted.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag1.union(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
@@ -2413,9 +2315,9 @@ groups of atoms to be kept together through the process.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>compound</strong> (<em>{'atoms', 'group', 'residues', 'segments', 'fragments'}</em>) &#8211; The group which will be kept together through the shifting process.</li>
-<li><strong>center</strong> (<em>{'com', 'cog'}</em>) &#8211; How to define the center of a given group of atoms.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Box dimensions, can be either orthogonal or triclinic information.
+<li><strong>compound</strong> (<em>{'atoms'</em><em>, </em><em>'group'</em><em>, </em><em>'residues'</em><em>, </em><em>'segments'</em><em>, </em><em>'fragments'}</em>) &#8211; The group which will be kept together through the shifting process.</li>
+<li><strong>center</strong> (<em>{'com'</em><em>, </em><em>'cog'}</em>) &#8211; How to define the center of a given group of atoms.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Box dimensions, can be either orthogonal or triclinic information.
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 <code class="docutils literal"><span class="pre">[lx,</span> <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>. If <code class="docutils literal"><span class="pre">None</span></code>, uses these
@@ -2459,53 +2361,6 @@ SegmentGroups.</p>
 <p>SegmentGroups can be compared and combined using group operators. See the
 list of these operators on <code class="xref py py-class docutils literal"><span class="pre">GroupBase</span></code>.</p>
 <dl class="attribute">
-<dt id="MDAnalysis.core.groups.SegmentGroup.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.SegmentGroup.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.SegmentGroup.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.SegmentGroup.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.SegmentGroup.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.SegmentGroup.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.SegmentGroup.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.SegmentGroup.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="MDAnalysis.core.groups.SegmentGroup.atoms">
 <code class="descname">atoms</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get an AtomGroup of atoms represented in this SegmentGroup.</p>
@@ -2518,7 +2373,7 @@ segment in the SegmentGroup. No duplicates are removed.</p>
 <code class="descname">bbox</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.bbox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the bounding box of the selection.</p>
 <p>The lengths A,B,C of the orthorhombic enclosing box are</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">AtomGroup</span><span class="o">.</span><span class="n">bbox</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">AtomGroup</span><span class="o">.</span><span class="n">bbox</span><span class="p">()</span>
 <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -2526,21 +2381,23 @@ segment in the SegmentGroup. No duplicates are removed.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pbc</strong> (<em>bool, optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
-calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>note</strong> (<em>.</em>) &#8211; The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to
-<code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
+calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>corners</strong> &#8211;
-2x3 array giving corners of bounding box as
-[[xmin, ymin, zmin], [xmax, ymax, zmax]].</p>
-</td>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>:param .. note::: The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to</dt>
+<dd><code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>corners</strong> &#8211; 2x3 array giving corners of bounding box as
+[[xmin, ymin, zmin], [xmax, ymax, zmax]].</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></td>
 </tr>
 </tbody>
 </table>
@@ -2561,21 +2418,23 @@ calculation. [<code class="docutils literal"><span class="pre">False</span></cod
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pbc</strong> (<em>bool, optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
-calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>note</strong> (<em>.</em>) &#8211; The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to
-<code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, move all atoms within the primary unit cell before
+calculation. [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>R</strong> (<em>float</em>) &#8211;
-Radius of bounding sphere.</li>
-<li><strong>center</strong> (<em>array</em>) &#8211;
-Coordinates of sphere center as <code class="docutils literal"><span class="pre">[xcen,ycen,zcen]</span></code>.</li>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>:param .. note::: The <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> flag <em>use_pbc</em> when set to</dt>
+<dd><code class="docutils literal"><span class="pre">True</span></code> allows the <em>pbc</em> flag to be used by default.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>R</strong> (<em>float</em>) &#8211; Radius of bounding sphere.</li>
+<li><strong>center</strong> (<em>array</em>) &#8211; Coordinates of sphere center as <code class="docutils literal"><span class="pre">[xcen,ycen,zcen]</span></code>.</li>
 </ul>
-</p>
 </td>
 </tr>
 </tbody>
@@ -2598,13 +2457,12 @@ Coordinates of sphere center as <code class="docutils literal"><span class="pre"
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>weights</strong> (<em>array_like</em>) &#8211; weights to be used</li>
-<li><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<li><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> &#8211;
-weighted center of group</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> &#8211; weighted center of group</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
@@ -2614,7 +2472,7 @@ weighted center of group</p>
 </table>
 <p class="rubric">Examples</p>
 <p>To find the charge weighted center of a given Atomgroup:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;prop mass &gt; 4.0&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;prop mass &gt; 4.0&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">sel</span><span class="o">.</span><span class="n">charges</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2631,11 +2489,10 @@ weighted center of group</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211;
-geometric center of group</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211; geometric center of group</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
 </tr>
@@ -2657,11 +2514,10 @@ geometric center of group</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean, optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pbc</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: Move all atoms within the primary unit cell
 before calculation [<code class="docutils literal"><span class="pre">False</span></code>]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211;
-geometric center of group</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>center</strong> &#8211; geometric center of group</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
 </tr>
@@ -2685,7 +2541,7 @@ the <cite>+</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with elements of <cite>self</cite> and <cite>other</cite> concatenated</td>
 </tr>
@@ -2696,7 +2552,7 @@ the <cite>+</cite> operator.</p>
 <p class="rubric">Example</p>
 <p>The order of the original contents (including duplicates)
 are preserved when performing a concatenation.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">+</span> <span class="n">ag2</span>  <span class="c1"># or ag1.concatenate(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
@@ -2721,7 +2577,7 @@ to the <cite>-</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>, without
 duplicate elements</td>
@@ -2744,17 +2600,17 @@ duplicate elements</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>topattr</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Topology attribute to group components by.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>topattr</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Topology attribute to group components by.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Unique values of the topology attribute as keys, Groups as values.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Example</p>
 <p>To group atoms with the same mass together:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;masses&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;masses&#39;</span><span class="p">)</span>
 <span class="go">{12.010999999999999: &lt;AtomGroup with 462 atoms&gt;,</span>
 <span class="go">14.007: &lt;AtomGroup with 116 atoms&gt;,</span>
 <span class="go">15.999000000000001: &lt;AtomGroup with 134 atoms&gt;}</span>
@@ -2775,7 +2631,7 @@ synomymous to the <cite>&amp;</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the common elements of <cite>self</cite> and <cite>other</cite>, without
 duplicate elements</td>
@@ -2788,7 +2644,7 @@ duplicate elements</td>
 <p>Intersections can be used when the select atoms string would
 become too complicated.  For example to find the water atoms
 which are within 4.0A of two segments:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;resname SOL&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shell1</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 1&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shell2</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;around 4.0 segid 2&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">common</span> <span class="o">=</span> <span class="n">shell1</span> <span class="o">&amp;</span> <span class="n">shell2</span>  <span class="c1"># or shell1.intersection(shell2)</span>
@@ -2808,12 +2664,11 @@ which are within 4.0A of two segments:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a strict subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a strict subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -2829,12 +2684,11 @@ True if this Group is a strict subset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a strict superset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a strict superset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -2850,12 +2704,11 @@ True if this Group is a strict superset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if the two Groups do not have common elements</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if the two Groups do not have common elements</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -2872,12 +2725,11 @@ True if the two Groups do not have common elements</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -2893,12 +2745,11 @@ True if this Group is a subset of the other one</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>Bool</em> &#8211;
-True if this Group is a subset of the other one</li>
-<li><strong>.. versionadded</strong> (<em>: 0.16</em>)</li>
+<li><em>Bool</em> &#8211; True if this Group is a subset of the other one</li>
+<li><em>.. versionadded:: 0.16</em></li>
 </ul>
 </td>
 </tr>
@@ -2928,7 +2779,7 @@ the <a class="reference internal" href="#MDAnalysis.core.groups.Segment" title="
 consistent API between components and groups.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.ix" title="MDAnalysis.core.groups.SegmentGroup.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.ix" title="MDAnalysis.core.groups.SegmentGroup.ix"><code class="xref py py-obj docutils literal"><span class="pre">ix</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -2968,15 +2819,14 @@ Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 <code class="docutils literal"><span class="pre">[lx,</span> <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>. If <code class="docutils literal"><span class="pre">None</span></code>, uses these
 timestep dimensions.</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> to change coordinates in place.</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <code class="docutils literal"><span class="pre">True</span></code> to change coordinates in place.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>coords</strong> &#8211;
-Shifted atom coordinates.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>coords</strong> &#8211; Shifted atom coordinates.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -3020,7 +2870,7 @@ No duplicates are removed.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>R</strong> (<em>array_like</em>) &#8211; 3x3 rotation matrix to use for applying rotation.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation</li>
+<li><strong>point</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; Center of rotation</li>
 </ul>
 </td>
 </tr>
@@ -3056,9 +2906,9 @@ rotate around center of geometry of the atomgroup use <code class="docutils lite
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Rotation angle in degrees.</li>
+<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Rotation angle in degrees.</li>
 <li><strong>axis</strong> (<em>array_like</em>) &#8211; Rotation axis vector.</li>
-<li><strong>point</strong> (<em>array_like, optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
+<li><strong>point</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; Center of rotation. If <code class="docutils literal"><span class="pre">None</span></code> then the center of geometry of this
 group is used.</li>
 </ul>
 </td>
@@ -3105,7 +2955,7 @@ are removed from the returned Group.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements of <cite>self</cite> that are not in  <cite>other</cite>,
 conserves order and duplicates.</td>
@@ -3117,7 +2967,7 @@ conserves order and duplicates.</td>
 <p class="rubric">Example</p>
 <p>Unlike <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.difference" title="MDAnalysis.core.groups.SegmentGroup.difference"><code class="xref py py-meth docutils literal"><span class="pre">difference()</span></code></a> this method will not sort or remove
 duplicates.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">-</span> <span class="n">ag2</span>  <span class="c1"># or ag1.subtract(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span><span class="o">.</span><span class="n">indices</span>
@@ -3140,7 +2990,7 @@ synomym to the <cite>^</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the elements that are in <cite>self</cite> or in <cite>other</cite> but not in
 both, without duplicate elements</td>
@@ -3150,7 +3000,7 @@ both, without duplicate elements</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">^</span> <span class="n">ag2</span>  <span class="c1"># or ag1.symmetric_difference(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="o">.</span><span class="n">indices</span>  <span class="c1"># 0 and 1 are only in ag1, 4 and 6 are only in ag2</span>
@@ -3171,7 +3021,7 @@ both, without duplicate elements</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; 4x4 matrix, with the rotation in <code class="docutils literal"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">M[:3,:3]</span></code> and the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; 4x4 matrix, with the rotation in <code class="docutils literal"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">M[:3,:3]</span></code> and the
 translation in <code class="docutils literal"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">M[:3,3]</span></code>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
@@ -3236,7 +3086,7 @@ removes duplicate ones. It is synomymous to the <cite>|</cite> operator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group or Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<em>Group</em><em> or </em><em>Component</em>) &#8211; Group or Component with <cite>other.level</cite> same as <cite>self.level</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Group with the combined elements of <cite>self</cite> and <cite>other</cite>, without
 duplicate elements</td>
@@ -3248,7 +3098,7 @@ duplicate elements</td>
 <p class="rubric">Example</p>
 <p>In contrast to <a class="reference internal" href="#MDAnalysis.core.groups.SegmentGroup.concatenate" title="MDAnalysis.core.groups.SegmentGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>, any duplicates are dropped
 and the result is sorted.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span> <span class="o">=</span> <span class="n">ag1</span> <span class="o">|</span> <span class="n">ag2</span>  <span class="c1"># or ag1.union(ag2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag3</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">names</span>
@@ -3278,9 +3128,9 @@ groups of atoms to be kept together through the process.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>compound</strong> (<em>{'atoms', 'group', 'residues', 'segments', 'fragments'}</em>) &#8211; The group which will be kept together through the shifting process.</li>
-<li><strong>center</strong> (<em>{'com', 'cog'}</em>) &#8211; How to define the center of a given group of atoms.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Box dimensions, can be either orthogonal or triclinic information.
+<li><strong>compound</strong> (<em>{'atoms'</em><em>, </em><em>'group'</em><em>, </em><em>'residues'</em><em>, </em><em>'segments'</em><em>, </em><em>'fragments'}</em>) &#8211; The group which will be kept together through the shifting process.</li>
+<li><strong>center</strong> (<em>{'com'</em><em>, </em><em>'cog'}</em>) &#8211; How to define the center of a given group of atoms.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Box dimensions, can be either orthogonal or triclinic information.
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 <code class="docutils literal"><span class="pre">[lx,</span> <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>. If <code class="docutils literal"><span class="pre">None</span></code>, uses these
@@ -3350,7 +3200,7 @@ erroneous value.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><cite>True</cite> if the group&#8217;s selection is up-to-date, <cite>False</cite> otherwise.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
 </tr>
 </tbody>
 </table>
@@ -3376,59 +3226,6 @@ the last update occurred under a different trajectory frame.</p>
 <p>This class is used by a Universe for generating its Topology-specific Atom
 class. All the TopologyAttr components are obtained from ComponentBase, so
 this class only includes ad-hoc methods specific to Atoms.</p>
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Atom.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.Atom.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Atom.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Atom.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Atom.__getattr__">
-<code class="descname">__getattr__</code><span class="sig-paren">(</span><em>attr</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/groups.html#Atom.__getattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.groups.Atom.__getattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Try and catch known attributes and give better error message</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Atom.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#MDAnalysis.core.groups.Atom.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Atom.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Atom.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Atom.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Atom.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Atom.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.Atom.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Atom.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#MDAnalysis.core.groups.Atom.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Atom.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#MDAnalysis.core.groups.Atom.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.Atom.force">
 <code class="descname">force</code><a class="headerlink" href="#MDAnalysis.core.groups.Atom.force" title="Permalink to this definition">¶</a></dt>
@@ -3460,7 +3257,7 @@ If it is a Segment, this is the index of the segment.</p>
 <p>This method gives a consistent API between components and groups.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Atom.ix" title="MDAnalysis.core.groups.Atom.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Atom.ix" title="MDAnalysis.core.groups.Atom.ix"><code class="xref py py-obj docutils literal"><span class="pre">ix</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -3503,53 +3300,6 @@ Residue class. All the TopologyAttr components are obtained from
 ComponentBase, so this class only includes ad-hoc methods specific to
 Residues.</p>
 <dl class="attribute">
-<dt id="MDAnalysis.core.groups.Residue.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.Residue.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Residue.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Residue.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Residue.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#MDAnalysis.core.groups.Residue.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Residue.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Residue.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Residue.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Residue.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Residue.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.Residue.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Residue.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#MDAnalysis.core.groups.Residue.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Residue.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#MDAnalysis.core.groups.Residue.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
 <dt id="MDAnalysis.core.groups.Residue.ix">
 <code class="descname">ix</code><a class="headerlink" href="#MDAnalysis.core.groups.Residue.ix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unique index of this component.</p>
@@ -3565,7 +3315,7 @@ If it is a Segment, this is the index of the segment.</p>
 <p>This method gives a consistent API between components and groups.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Residue.ix" title="MDAnalysis.core.groups.Residue.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Residue.ix" title="MDAnalysis.core.groups.Residue.ix"><code class="xref py py-obj docutils literal"><span class="pre">ix</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -3579,53 +3329,6 @@ If it is a Segment, this is the index of the segment.</p>
 Segment class. All the TopologyAttr components are obtained from
 ComponentBase, so this class only includes ad-hoc methods specific to
 Segments.</p>
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Segment.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.Segment.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Segment.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Segment.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Segment.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#MDAnalysis.core.groups.Segment.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Segment.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Segment.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Segment.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.groups.Segment.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Segment.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#MDAnalysis.core.groups.Segment.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.groups.Segment.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#MDAnalysis.core.groups.Segment.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.groups.Segment.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#MDAnalysis.core.groups.Segment.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.Segment.ix">
 <code class="descname">ix</code><a class="headerlink" href="#MDAnalysis.core.groups.Segment.ix" title="Permalink to this definition">¶</a></dt>
@@ -3642,7 +3345,7 @@ If it is a Segment, this is the index of the segment.</p>
 <p>This method gives a consistent API between components and groups.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Segment.ix" title="MDAnalysis.core.groups.Segment.ix"><code class="xref py py-attr docutils literal"><span class="pre">ix</span></code></a></p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.core.groups.Segment.ix" title="MDAnalysis.core.groups.Segment.ix"><code class="xref py py-obj docutils literal"><span class="pre">ix</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -3654,7 +3357,7 @@ If it is a Segment, this is the index of the segment.</p>
 <p>Each of the above classes has a level attribute.  This can be used to
 verify that two objects are of the same level, or to access a particular
 class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">()</span>
 
 <span class="n">ag</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
 <span class="n">at</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
@@ -3690,13 +3393,13 @@ class:</p>
         <li class="right" >
           <a href="universe.html" title="9.1.1. Core object: Universe — MDAnalysis.core.universe"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../core_modules.html" >9. Core modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../core_modules.html" >9. Core modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

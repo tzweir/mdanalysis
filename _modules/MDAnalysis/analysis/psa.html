@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.analysis.psa &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.analysis.psa &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,8 +42,8 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -53,14 +54,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -283,14 +281,14 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span><span class="p">,</span> <span class="n">cPickle</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span><span class="p">,</span> <span class="n">cPickle</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">warnings</span><span class="o">,</span><span class="nn">numbers</span>
 
 <span class="kn">import</span> <span class="nn">MDAnalysis</span>
 <span class="kn">import</span> <span class="nn">MDAnalysis.analysis.align</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">NoDataError</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="k">import</span> <span class="n">NoDataError</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -318,11 +316,11 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">path_metrics</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">key</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Path metric {0} not found. Valid selections: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">path_metrics</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="se">\&quot;</span><span class="s2">{0}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Path metric </span><span class="si">{0}</span><span class="s2"> not found. Valid selections: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">path_metrics</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="se">\&quot;</span><span class="si">{0}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="sqnorm"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.sqnorm">[docs]</a><span class="k">def</span> <span class="nf">sqnorm</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="sqnorm"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.sqnorm">[docs]</a><span class="k">def</span> <span class="nf">sqnorm</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute the sum of squares of elements along specified axes.</span>
 
 <span class="sd">    :Arguments:</span>
@@ -341,7 +339,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_msd_matrix"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.get_msd_matrix">[docs]</a><span class="k">def</span> <span class="nf">get_msd_matrix</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="get_msd_matrix"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.get_msd_matrix">[docs]</a><span class="k">def</span> <span class="nf">get_msd_matrix</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate the matrix of pairwise mean-squared deviations (MSDs) between</span>
 <span class="sd">    all pairs of points in *P* and *Q*, each pair having a point from *P* and a</span>
 <span class="sd">    point from *Q*.</span>
@@ -659,19 +657,19 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">N</span><span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">N</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
         <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;Matrix indices are out of range; i and j must be less than&quot;</span>  \
-                <span class="o">+</span> <span class="s2">&quot; N = {0:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot; N = </span><span class="si">{0:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
     <span class="k">elif</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">:</span>
-        <span class="n">warn_str</span> <span class="o">=</span> <span class="s2">&quot;Column index entered (j = {:d} is smaller than row index&quot;</span>   \
-                 <span class="o">+</span> <span class="s2">&quot; (i = {:d}). Using symmetric element in upper triangle of&quot;</span>  \
+        <span class="n">warn_str</span> <span class="o">=</span> <span class="s2">&quot;Column index entered (j = </span><span class="si">{:d}</span><span class="s2"> is smaller than row index&quot;</span>   \
+                 <span class="o">+</span> <span class="s2">&quot; (i = </span><span class="si">{:d}</span><span class="s2">). Using symmetric element in upper triangle of&quot;</span>  \
                  <span class="o">+</span> <span class="s2">&quot; distance matrix instead: i --&gt; j, j --&gt; i&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warn_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;Error in processing matrix indices; i and j must be integers&quot;</span>\
-                <span class="o">+</span> <span class="s2">&quot; less than integer N = {0:d} such that j &gt;= i+1.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot; less than integer N = </span><span class="si">{0:d}</span><span class="s2"> such that j &gt;= i+1.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span></div>
 
 
@@ -688,7 +686,7 @@
 <span class="sd">    .. versionadded:: 0.9.1</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">ref_select</span><span class="o">=</span><span class="s1">&#39;name CA&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">ref_select</span><span class="o">=</span><span class="s1">&#39;name CA&#39;</span><span class="p">,</span>
                  <span class="n">path_select</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">ref_frame</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Setting up trajectory alignment and fitted path generation.</span>
 
@@ -731,15 +729,15 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">top_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_original</span><span class="o">.</span><span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trj_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_original</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">filename</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">newtrj_name</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">u_fitted</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">newtrj_name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_fitted</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="Path.fit_to_reference"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.fit_to_reference">[docs]</a>    <span class="k">def</span> <span class="nf">fit_to_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s1">&#39;_fit&#39;</span><span class="p">,</span>
-                         <span class="n">rmsdfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span>
-                         <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<div class="viewcode-block" id="Path.fit_to_reference"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.fit_to_reference">[docs]</a>    <span class="k">def</span> <span class="nf">fit_to_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s1">&#39;_fit&#39;</span><span class="p">,</span>
+                         <span class="n">rmsdfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span>
+                         <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Align each trajectory frame to the reference structure with</span>
 <span class="sd">        :func:`MDAnalysis.analysis.align.AlignTraj`.</span>
 
@@ -773,12 +771,12 @@
                                                        <span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span>
                                                        <span class="n">mass_weighted</span><span class="o">=</span><span class="n">mass_weighted</span><span class="p">,</span>
                                                        <span class="n">tol_mass</span><span class="o">=</span><span class="n">tol_mass</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">rmsdfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rmsdfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">aligntrj</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">rmsdfile</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">newtrj_name</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Path.to_path"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.to_path">[docs]</a>    <span class="k">def</span> <span class="nf">to_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fitted</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Path.to_path"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.to_path">[docs]</a>    <span class="k">def</span> <span class="nf">to_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fitted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates a coordinate time series from the fitted universe</span>
 <span class="sd">        trajectory.</span>
 
@@ -807,7 +805,7 @@
 <span class="sd">          of an :class:`MDAnalysis.core.groups.AtomGroup` selection from</span>
 <span class="sd">          :attr:`Path.u_fitted.trajectory`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">select</span> <span class="o">=</span> <span class="n">select</span> <span class="k">if</span> <span class="n">select</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_select</span>
+        <span class="n">select</span> <span class="o">=</span> <span class="n">select</span> <span class="k">if</span> <span class="n">select</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_select</span>
         <span class="k">if</span> <span class="n">fitted</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u_fitted</span><span class="p">,</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Fitted universe not found. Generate a fitted &quot;</span> <span class="o">+</span>
@@ -827,9 +825,9 @@
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="Path.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s1">&#39;_fit&#39;</span><span class="p">,</span> <span class="n">rmsdfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-            <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">flat</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Path.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s1">&#39;_fit&#39;</span><span class="p">,</span> <span class="n">rmsdfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate a path from a trajectory and reference structure, aligning</span>
 <span class="sd">        to a reference structure if specified.</span>
 
@@ -876,7 +874,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">u_fitted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_to_reference</span><span class="p">(</span>                              \
                                 <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="n">postfix</span><span class="p">,</span>             \
                                 <span class="n">rmsdfile</span><span class="o">=</span><span class="n">rmsdfile</span><span class="p">,</span> <span class="n">targetdir</span><span class="o">=</span><span class="n">targetdir</span><span class="p">,</span>         \
-                                <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+                                <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_path</span><span class="p">(</span><span class="n">fitted</span><span class="o">=</span><span class="n">align</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="n">flat</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">newtrj_name</span></div>
 
@@ -890,7 +888,7 @@
 <span class="sd">          ``int``, the number of atoms in the :class:`Path`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No path data; do &#39;Path.to_path()&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span></div></div>
@@ -922,7 +920,7 @@
 <span class="sd">    .. versionadded:: 0.11</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npaths</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npaths</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up a :class:`PSAPair` for a pair of paths that are part of a</span>
 <span class="sd">        :class:`PSA` comparison of *npaths* total paths.</span>
 
@@ -957,10 +955,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pair_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dvec_idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
 
         <span class="c1"># Set by calling hausdorff_nn</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nearest_neighbors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;frames&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;distances&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nearest_neighbors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;frames&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;distances&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
 
         <span class="c1"># Set by self.getHausdorffPair</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hausdorff_pair</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;frames&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span> <span class="s1">&#39;distance&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hausdorff_pair</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;frames&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="s1">&#39;distance&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
 
 
     <span class="k">def</span> <span class="nf">_dvec_idx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
@@ -984,7 +982,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">npaths</span><span class="o">*</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
 
 
-    <span class="k">def</span> <span class="nf">compute_nearest_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">compute_nearest_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generates Hausdorff nearest neighbor lists of *frames* (by index) and</span>
 <span class="sd">        *distances* for *this* pair of paths corresponding to distance matrix</span>
 <span class="sd">        indices (*i*,*j*).</span>
@@ -1020,7 +1018,7 @@
 <span class="sd">        neighbor pair (of snapshots/frames), one in the first path and one in</span>
 <span class="sd">        the second, with the largest separation distance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nearest_neighbors</span><span class="p">[</span><span class="s1">&#39;distances&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nearest_neighbors</span><span class="p">[</span><span class="s1">&#39;distances&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;Nearest neighbors have not been calculated yet;&quot;</span>         \
                     <span class="o">+</span> <span class="s2">&quot; run compute_nearest_neighbors() first.&quot;</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
@@ -1039,7 +1037,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">hausdorff_pair</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_nn_dist_Q</span>
 
 
-    <span class="k">def</span> <span class="nf">get_nearest_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">distances</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_nearest_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">distances</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the nearest neighbor frame indices, distances, or both, for</span>
 <span class="sd">        each path in *this* :class:`PSAPair`.</span>
 
@@ -1064,7 +1062,7 @@
 <span class="sd">          :class:`numpy.ndarray` of the nearest neighbor distances (for the pair</span>
 <span class="sd">          of paths).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nearest_neighbors</span><span class="p">[</span><span class="s1">&#39;distances&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nearest_neighbors</span><span class="p">[</span><span class="s1">&#39;distances&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;Nearest neighbors have not been calculated yet;&quot;</span>         \
                     <span class="o">+</span> <span class="s2">&quot; run compute_nearest_neighbors() first.&quot;</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
@@ -1083,7 +1081,7 @@
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
 
 
-    <span class="k">def</span> <span class="nf">get_hausdorff_pair</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_hausdorff_pair</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the Hausdorff pair of frames indices, the Hausdorff distance,</span>
 <span class="sd">        or both, for the paths in *this* :class:`PSAPair`.</span>
 
@@ -1106,7 +1104,7 @@
 <span class="sd">          frames (one index per path) of the Hausdorff pair; if only *distance*</span>
 <span class="sd">          is ``True``, return the Hausdorff distance for this path pair.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hausdorff_pair</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hausdorff_pair</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;Hausdorff pair has not been calculated yet;&quot;</span>             \
                     <span class="o">+</span> <span class="s2">&quot; run find_hausdorff_pair() first.&quot;</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
@@ -1135,8 +1133,8 @@
 
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universes</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ref_select</span><span class="o">=</span><span class="s1">&#39;name CA&#39;</span><span class="p">,</span>
-                 <span class="n">ref_frame</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">path_select</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universes</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ref_select</span><span class="o">=</span><span class="s1">&#39;name CA&#39;</span><span class="p">,</span>
+                 <span class="n">ref_frame</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">path_select</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Setting up Path Similarity Analysis.</span>
 
@@ -1185,11 +1183,11 @@
 <span class="sd">             names [``None``]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universes</span> <span class="o">=</span> <span class="n">universes</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">u_reference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">reference</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_reference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">reference</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ref_select</span> <span class="o">=</span> <span class="n">ref_select</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ref_frame</span> <span class="o">=</span> <span class="n">ref_frame</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path_select</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_select</span> <span class="k">if</span> <span class="n">path_select</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">path_select</span>
-        <span class="k">if</span> <span class="n">targetdir</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_select</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_select</span> <span class="k">if</span> <span class="n">path_select</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">path_select</span>
+        <span class="k">if</span> <span class="n">targetdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">targetdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s1">&#39;psadata&#39;</span><span class="p">)</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">targetdir</span><span class="p">)</span>
@@ -1219,9 +1217,9 @@
             <span class="n">filename</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
             <span class="n">trj_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trj_names</span> <span class="o">=</span> <span class="n">trj_names</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fit_trj_names</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path_names</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">top_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">universes</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_trj_names</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_names</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">universes</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">trj_names</span>
 
         <span class="c1"># Names of persistence (pickle) files where topology and trajectory</span>
@@ -1239,13 +1237,13 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_labels_pkl</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
             <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">npaths</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="bp">None</span>   <span class="c1"># pairwise distances</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_HP</span> <span class="o">=</span> <span class="bp">None</span> <span class="c1"># (distance vector order) list of all Hausdorff pairs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_NN</span> <span class="o">=</span> <span class="bp">None</span> <span class="c1"># (distance vector order) list of all nearest neighbors</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_psa_pairs</span> <span class="o">=</span> <span class="bp">None</span> <span class="c1"># (distance vector order) list of all PSAPairs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">npaths</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="kc">None</span>   <span class="c1"># pairwise distances</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_HP</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># (distance vector order) list of all Hausdorff pairs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_NN</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># (distance vector order) list of all nearest neighbors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_psa_pairs</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># (distance vector order) list of all PSAPairs</span>
 
 
 <div class="viewcode-block" id="PSAnalysis.generate_paths"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.generate_paths">[docs]</a>    <span class="k">def</span> <span class="nf">generate_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1289,15 +1287,15 @@
 <span class="sd">        persistence and can be accessed as the attribute</span>
 <span class="sd">        :attr:`PSAnalysis.paths`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">align</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;align&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">align</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;align&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;fitted&#39;</span><span class="p">)</span>
         <span class="n">infix</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;infix&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="n">mass_weighted</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;mass_weighted&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="n">tol_mass</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;tol_mass&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">mass_weighted</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;mass_weighted&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">tol_mass</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;tol_mass&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="n">ref_frame</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ref_frame&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_frame</span><span class="p">)</span>
-        <span class="n">flat</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="n">save</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-        <span class="n">store</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">flat</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">save</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">store</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
         <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">fit_trj_names</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1305,7 +1303,7 @@
             <span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_reference</span><span class="p">,</span> <span class="n">ref_select</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_select</span><span class="p">,</span>           \
                      <span class="n">path_select</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_select</span><span class="p">,</span> <span class="n">ref_frame</span><span class="o">=</span><span class="n">ref_frame</span><span class="p">)</span>
             <span class="n">trj_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targetdir</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">datadirs</span><span class="p">[</span><span class="s1">&#39;fitted_trajs&#39;</span><span class="p">]</span>
-            <span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;{0}{1}{2:03n}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">infix</span><span class="p">,</span> <span class="s1">&#39;_psa&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}{1}{2:03n}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">infix</span><span class="p">,</span> <span class="s1">&#39;_psa&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">top_name</span><span class="p">,</span> <span class="n">fit_trj_name</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="n">align</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>      \
                                            <span class="n">postfix</span><span class="o">=</span><span class="n">postfix</span><span class="p">,</span>                     \
                                            <span class="n">targetdir</span><span class="o">=</span><span class="n">trj_dir</span><span class="p">,</span>                   \
@@ -1321,7 +1319,7 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_trjs_pkl</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
                 <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_trj_names</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">store</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">save_paths</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span></div>
 
 
@@ -1346,10 +1344,10 @@
 <span class="sd">             string, filename to save :attr:`PSAnalysis.D`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">metric</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;metric&#39;</span><span class="p">,</span> <span class="s1">&#39;hausdorff&#39;</span><span class="p">)</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="n">stop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="n">step</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="n">store</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">store</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
             <span class="n">metric_func</span> <span class="o">=</span> <span class="n">get_path_metric_func</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
@@ -1395,11 +1393,11 @@
 <span class="sd">             boolean; if ``True``, then stores dictionary of Hausdorff pair</span>
 <span class="sd">             frames/distances in :attr:`PSAnalysis.HP` [``False``]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="n">stop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="n">step</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;neighbors&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="n">hausdorff_pairs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;hausdorff_pairs&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;neighbors&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">hausdorff_pairs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;hausdorff_pairs&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
         <span class="n">numpaths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">npaths</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_NN</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list of nearest neighbors pairs</span>
@@ -1420,7 +1418,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_HP</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pp</span><span class="o">.</span><span class="n">get_hausdorff_pair</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="PSAnalysis.save_result"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.save_result">[docs]</a>    <span class="k">def</span> <span class="nf">save_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PSAnalysis.save_result"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.save_result">[docs]</a>    <span class="k">def</span> <span class="nf">save_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save distance matrix :attr:`PSAnalysis.D` to a numpy compressed npz</span>
 <span class="sd">        file and text file.</span>
 
@@ -1435,7 +1433,7 @@
         <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="s1">&#39;psa_distances&#39;</span>
         <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targetdir</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">datadirs</span><span class="p">[</span><span class="s1">&#39;distance_matrices&#39;</span><span class="p">]</span>
         <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Distance matrix has not been calculated yet&quot;</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">outfile</span> <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">outfile</span> <span class="o">+</span> <span class="s1">&#39;.dat&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
@@ -1444,7 +1442,7 @@
         <span class="k">return</span> <span class="n">filename</span></div>
 
 
-<div class="viewcode-block" id="PSAnalysis.save_paths"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.save_paths">[docs]</a>    <span class="k">def</span> <span class="nf">save_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PSAnalysis.save_paths"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.save_paths">[docs]</a>    <span class="k">def</span> <span class="nf">save_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save fitted :attr:`PSAnalysis.paths` to numpy compressed npz files.</span>
 
 <span class="sd">        :Arguments:</span>
@@ -1457,11 +1455,11 @@
         <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="s1">&#39;path_psa&#39;</span>
         <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targetdir</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">datadirs</span><span class="p">[</span><span class="s1">&#39;paths&#39;</span><span class="p">]</span>
         <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Paths have not been calculated yet&quot;</span><span class="p">)</span>
         <span class="n">path_names</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">):</span>
-            <span class="n">current_outfile</span> <span class="o">=</span> <span class="s2">&quot;{0}{1:03n}.npy&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">current_outfile</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}{1:03n}</span><span class="s2">.npy&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">current_outfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="n">path_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_outfile</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Wrote path to file </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">current_outfile</span><span class="p">)</span>
@@ -1477,16 +1475,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_paths_pkl</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Fitted trajectories cannot be loaded; save file&quot;</span> <span class="o">+</span>
-                              <span class="s2">&quot;{0} does not exist.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_paths_pkl</span><span class="p">))</span>
+                              <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> does not exist.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_paths_pkl</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_paths_pkl</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pname</span><span class="p">)</span> <span class="k">for</span> <span class="n">pname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_names</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_labels_pkl</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_labels_pkl</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Loaded paths from &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paths_pkl</span><span class="p">)</span></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded paths from &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paths_pkl</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="PSAnalysis.plot"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span> <span class="n">count_sort</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-             <span class="n">distance_sort</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+<div class="viewcode-block" id="PSAnalysis.plot"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span> <span class="n">count_sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">distance_sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot a clustered distance matrix using method *linkage* along with</span>
 <span class="sd">        the corresponding dendrogram. Rows (and columns) are identified using</span>
 <span class="sd">        the list of strings specified by :attr:`PSAnalysis.labels`.</span>
@@ -1510,9 +1508,9 @@
 <span class="sd">        suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>
 <span class="sd">        keyword arguments are passed on to :func:`pylab.imshow`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">cm</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">clf</span>
+        <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">cm</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">clf</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No distance data; do &#39;PSAnalysis.run(store=True)&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
         <span class="n">npaths</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
@@ -1539,8 +1537,8 @@
                     <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">YlGn</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">minDist</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">maxDist</span><span class="p">)</span>
         <span class="n">ax_hmap</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span> <span class="c1"># Place origin at upper left (from lower left)</span>
         <span class="n">ax_hmap</span><span class="o">.</span><span class="n">locator_params</span><span class="p">(</span><span class="n">nbins</span><span class="o">=</span><span class="n">npaths</span><span class="p">)</span>
-        <span class="n">ax_hmap</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npaths</span><span class="p">),</span> <span class="n">minor</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">ax_hmap</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npaths</span><span class="p">),</span> <span class="n">minor</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">ax_hmap</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npaths</span><span class="p">),</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax_hmap</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npaths</span><span class="p">),</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">ax_hmap</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">labelleft</span><span class="o">=</span><span class="s1">&#39;off&#39;</span><span class="p">,</span>            \
                         <span class="n">labelright</span><span class="o">=</span><span class="s1">&#39;off&#39;</span><span class="p">,</span> <span class="n">labeltop</span><span class="o">=</span><span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">ax_hmap</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">labelleft</span><span class="o">=</span><span class="s1">&#39;on&#39;</span><span class="p">,</span>             \
@@ -1548,33 +1546,33 @@
         <span class="n">rowlabels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">rowidx</span><span class="p">]</span>
         <span class="n">collabels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">colidx</span><span class="p">]</span>
         <span class="n">ax_hmap</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">collabels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span>                 \
-                <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">labelsize</span><span class="o">-</span><span class="mi">4</span><span class="p">),</span> <span class="n">multialignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">labelsize</span><span class="o">-</span><span class="mi">4</span><span class="p">),</span> <span class="n">multialignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">ax_hmap</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">rowlabels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span>               \
                 <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">labelsize</span><span class="o">-</span><span class="mi">4</span><span class="p">),</span> <span class="n">multialignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span>          \
-                <span class="n">minor</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">ax_color</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">cbar_loc</span><span class="p">)</span>
         <span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">ax_color</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">minDist</span><span class="p">,</span> <span class="n">maxDist</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>  \
-                <span class="n">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%0.1f</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%0.1f</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">ax_color</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">labelsize</span><span class="p">)</span>
 
         <span class="c1"># Remove major ticks from both heat map axes</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_hmap</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_major_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">label1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">label2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">label1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">label2On</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_hmap</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">get_major_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">label1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">label2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">label1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">label2On</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># Remove minor ticks from both heat map axes</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_hmap</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_minor_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_hmap</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">get_minor_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># Remove tickmarks from colorbar</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_color</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">get_major_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targetdir</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">datadirs</span><span class="p">[</span><span class="s1">&#39;plots&#39;</span><span class="p">]</span>
             <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
             <span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
@@ -1582,8 +1580,8 @@
         <span class="k">return</span> <span class="n">Z</span><span class="p">,</span> <span class="n">dgram</span><span class="p">,</span> <span class="n">dist_matrix_clus</span></div>
 
 
-<div class="viewcode-block" id="PSAnalysis.plot_annotated_heatmap"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.plot_annotated_heatmap">[docs]</a>    <span class="k">def</span> <span class="nf">plot_annotated_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span>             \
-                               <span class="n">count_sort</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">distance_sort</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>           \
+<div class="viewcode-block" id="PSAnalysis.plot_annotated_heatmap"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.plot_annotated_heatmap">[docs]</a>    <span class="k">def</span> <span class="nf">plot_annotated_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span>             \
+                               <span class="n">count_sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">distance_sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>           \
                                <span class="n">figsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">annot_size</span><span class="o">=</span><span class="mf">6.5</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot a clustered distance matrix using method *linkage* with</span>
 <span class="sd">        annotated distances in the matrix. Rows (and columns) are identified</span>
@@ -1607,10 +1605,10 @@
 <span class="sd">        suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>
 <span class="sd">        keyword arguments are passed on to :func:`pylab.imshow`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">matplotlib.pylab</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">cm</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">clf</span>
+        <span class="kn">from</span> <span class="nn">matplotlib.pylab</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">cm</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">clf</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">import</span> <span class="nn">seaborn.apionly</span> <span class="kn">as</span> <span class="nn">sns</span>
+            <span class="kn">import</span> <span class="nn">seaborn.apionly</span> <span class="k">as</span> <span class="nn">sns</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
                 <span class="sd">&quot;&quot;&quot;ERROR --- The seaborn package cannot be found!</span>
@@ -1629,7 +1627,7 @@
 <span class="sd">                &quot;&quot;&quot;</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No distance data; do &#39;PSAnalysis.run(store=True)&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
         <span class="n">dist_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span>
@@ -1638,7 +1636,7 @@
                                 <span class="n">method</span><span class="o">=</span><span class="n">linkage</span><span class="p">,</span>                                 \
                                 <span class="n">count_sort</span><span class="o">=</span><span class="n">count_sort</span><span class="p">,</span>                          \
                                 <span class="n">distance_sort</span><span class="o">=</span><span class="n">distance_sort</span><span class="p">,</span>                    \
-                                <span class="n">no_plot</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                <span class="n">no_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">rowidx</span> <span class="o">=</span> <span class="n">colidx</span> <span class="o">=</span> <span class="n">dgram</span><span class="p">[</span><span class="s1">&#39;leaves&#39;</span><span class="p">]</span> <span class="c1"># get row-wise ordering from clustering</span>
         <span class="n">dist_matrix_clus</span> <span class="o">=</span> <span class="n">dist_matrix</span><span class="p">[</span><span class="n">rowidx</span><span class="p">,:]</span>
         <span class="n">dist_matrix_clus</span> <span class="o">=</span> <span class="n">dist_matrix_clus</span><span class="p">[:,</span><span class="n">colidx</span><span class="p">]</span>
@@ -1648,24 +1646,24 @@
         <span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">figsize</span><span class="o">*</span><span class="n">aspect_ratio</span><span class="p">,</span> <span class="n">figsize</span><span class="p">))</span>
         <span class="n">ax_hmap</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
         <span class="n">ax_hmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">dist_matrix_clus</span><span class="p">,</span>                                 \
-                         <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">YlGn</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;3.1f&#39;</span><span class="p">,</span> \
-                         <span class="n">square</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="n">rowidx</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">colidx</span><span class="p">,</span>   \
+                         <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">YlGn</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;3.1f&#39;</span><span class="p">,</span> \
+                         <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="n">rowidx</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">colidx</span><span class="p">,</span>   \
                          <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax_hmap</span><span class="p">)</span>
 
         <span class="c1"># Remove major ticks from both heat map axes</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_hmap</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_major_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">label1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">label2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">label1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">label2On</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_hmap</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">get_major_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">label1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">label2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">label1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">label2On</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># Remove minor ticks from both heat map axes</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_hmap</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_minor_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">tic</span> <span class="ow">in</span> <span class="n">ax_hmap</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">get_minor_ticks</span><span class="p">():</span>
-            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">tic</span><span class="o">.</span><span class="n">tick1On</span> <span class="o">=</span> <span class="n">tic</span><span class="o">.</span><span class="n">tick2On</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targetdir</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">datadirs</span><span class="p">[</span><span class="s1">&#39;plots&#39;</span><span class="p">]</span>
             <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
             <span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
@@ -1673,9 +1671,9 @@
         <span class="k">return</span> <span class="n">Z</span><span class="p">,</span> <span class="n">dgram</span><span class="p">,</span> <span class="n">dist_matrix_clus</span></div>
 
 
-<div class="viewcode-block" id="PSAnalysis.plot_nearest_neighbors"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.plot_nearest_neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">plot_nearest_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>                      \
+<div class="viewcode-block" id="PSAnalysis.plot_nearest_neighbors"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.plot_nearest_neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">plot_nearest_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>                      \
                                <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Path 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Path 2&#39;</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>        \
-                               <span class="n">multiplot</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">aspect_ratio</span><span class="o">=</span><span class="mf">1.75</span><span class="p">,</span>              \
+                               <span class="n">multiplot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">aspect_ratio</span><span class="o">=</span><span class="mf">1.75</span><span class="p">,</span>              \
                                <span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot nearest neighbor distances as a function of normalized frame</span>
 <span class="sd">        number (mapped to the interval *[0,1]*).</span>
@@ -1703,9 +1701,9 @@
 <span class="sd">        suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>
 <span class="sd">        keyword arguments are passed on to :func:`pylab.imshow`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">tight_layout</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">show</span>
+        <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">tight_layout</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">show</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">import</span> <span class="nn">seaborn.apionly</span> <span class="kn">as</span> <span class="nn">sns</span>
+            <span class="kn">import</span> <span class="nn">seaborn.apionly</span> <span class="k">as</span> <span class="nn">sns</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
                 <span class="sd">&quot;&quot;&quot;ERROR --- The seaborn package cannot be found!</span>
@@ -1726,7 +1724,7 @@
 
         <span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">xkcd_palette</span><span class="p">([</span><span class="s2">&quot;cherry&quot;</span><span class="p">,</span> <span class="s2">&quot;windows blue&quot;</span><span class="p">])</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NN</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NN</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;No nearest neighbor data; run &quot;</span>
                        <span class="s2">&quot;&#39;PSAnalysis.run_nearest_neighbors()&#39; first.&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
@@ -1752,18 +1750,18 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;nearest neighbor rmsd ($\AA$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-        <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
         <span class="n">tight_layout</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targetdir</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">datadirs</span><span class="p">[</span><span class="s1">&#39;plots&#39;</span><span class="p">]</span>
             <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
             <span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
         <span class="n">show</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="PSAnalysis.cluster"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.cluster">[docs]</a>    <span class="k">def</span> <span class="nf">cluster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distArray</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span> <span class="n">count_sort</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>               \
-                <span class="n">distance_sort</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">no_plot</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">no_labels</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>             \
+<div class="viewcode-block" id="PSAnalysis.cluster"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.cluster">[docs]</a>    <span class="k">def</span> <span class="nf">cluster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distArray</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span> <span class="n">count_sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>               \
+                <span class="n">distance_sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>             \
                 <span class="n">color_threshold</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Cluster trajectories and optionally plot the dendrogram.</span>
 
@@ -1788,7 +1786,7 @@
 <span class="sd">          after clustering</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib</span>
-        <span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="kn">import</span> <span class="n">linkage</span><span class="p">,</span> <span class="n">dendrogram</span>
+        <span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="k">import</span> <span class="n">linkage</span><span class="p">,</span> <span class="n">dendrogram</span>
 
         <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
 
@@ -1836,7 +1834,7 @@
 <span class="sd">        :Returns:</span>
 <span class="sd">          int, the number of atoms in :class:`PSA`&#39;s :class:`Path`s&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No path data; do &#39;PSAnalysis.generate_paths()&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span></div>
@@ -1852,7 +1850,7 @@
 <span class="sd">        :Returns:</span>
 <span class="sd">          int, the number of paths in :class:`PSA`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">npaths</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">npaths</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No path data; do &#39;PSAnalysis.generate_paths()&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">npaths</span></div>
@@ -1869,13 +1867,13 @@
 <span class="sd">          list of :class:`numpy.ndarray` representations of paths in</span>
 <span class="sd">          :class:`PSA`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No path data; do &#39;PSAnalysis.generate_paths()&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span></div>
 
 
-<div class="viewcode-block" id="PSAnalysis.get_pairwise_distances"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.get_pairwise_distances">[docs]</a>    <span class="k">def</span> <span class="nf">get_pairwise_distances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vectorform</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PSAnalysis.get_pairwise_distances"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.get_pairwise_distances">[docs]</a>    <span class="k">def</span> <span class="nf">get_pairwise_distances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vectorform</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the distance matrix (or vector) of pairwise path distances.</span>
 
 <span class="sd">        .. note::</span>
@@ -1891,11 +1889,11 @@
 <span class="sd">          vector)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No distance data; do &#39;PSAnalysis.run(store=True)&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">vectorform</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">squareform</span>
+            <span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="k">import</span> <span class="n">squareform</span>
             <span class="k">return</span> <span class="n">squareform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span></div>
@@ -1926,7 +1924,7 @@
 <span class="sd">          list of all :class:`PSAPair` objects (in distance vector order)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_psa_pairs</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_psa_pairs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No nearest neighbors data; do&quot;</span>                           \
                     <span class="o">+</span> <span class="s2">&quot; &#39;PSAnalysis.run_pairs_analysis()&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
@@ -1951,7 +1949,7 @@
 <span class="sd">          list of all Hausdorff pairs (in distance vector order)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_HP</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_HP</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No Hausdorff pairs data; do &quot;</span>                            \
                     <span class="o">+</span> <span class="s2">&quot;&#39;PSAnalysis.run_pairs_analysis(hausdorff_pairs=True)&#39; &quot;</span>  \
                     <span class="o">+</span> <span class="s2">&quot;first.&quot;</span>
@@ -1976,7 +1974,7 @@
 <span class="sd">          list of all nearest neighbors (in distance vector order)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NN</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NN</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No nearest neighbors data; do&quot;</span>                           \
                     <span class="o">+</span> <span class="s2">&quot; &#39;PSAnalysis.run_pairs_analysis(neighbors=True)&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
@@ -1997,13 +1995,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

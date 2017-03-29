@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.1. Trajectory Readers and Writers — MDAnalysis.coordinates &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>6.1. Trajectory Readers and Writers — MDAnalysis.coordinates &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="6. Coordinates modules" href="../coordinates_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6.2. CRD structure files in MDAnalysis — MDAnalysis.coordinates.CRD" href="CRD.html" />
     <link rel="prev" title="6. Coordinates modules" href="../coordinates_modules.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="../coordinates_modules.html" title="6. Coordinates modules"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -103,21 +104,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/coordinates/init.txt"
+      <li><a href="../../_sources/documentation_pages/coordinates/init.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -133,7 +131,7 @@
 <p>The coordinates submodule contains code to read, write and store coordinate
 information, either single frames (e.g., the <a class="reference internal" href="GRO.html#module-MDAnalysis.coordinates.GRO" title="MDAnalysis.coordinates.GRO"><code class="xref py py-mod docutils literal"><span class="pre">GRO</span></code></a>
 format) or trajectories (such as the <code class="xref py py-mod docutils literal"><span class="pre">DCD</span></code> format);
-see the <a class="reference internal" href="#id1"><span>Table of supported coordinate formats</span></a> for all formats.</p>
+see the <a class="reference internal" href="#id1"><span class="std std-ref">Table of supported coordinate formats</span></a> for all formats.</p>
 <p>MDAnalysis calls the classes that read a coordinate trajectory and make the
 data available <em>&#8220;Readers&#8221;</em>. Similarly, classes that write out coordinates are
 called <em>&#8220;Writers&#8221;</em>. Readers and Writers provide a common interface to the
@@ -174,7 +172,7 @@ extension but this choice can be overriden with the <code class="docutils litera
 <p>If additional simulation data is available, it may be added to and read
 alongside a trajectory using
 <a class="reference internal" href="base.html#MDAnalysis.coordinates.base.ProtoReader.add_auxiliary" title="MDAnalysis.coordinates.base.ProtoReader.add_auxiliary"><code class="xref py py-meth docutils literal"><span class="pre">add_auxiliary()</span></code></a> as described in
-the <a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><span>Auxiliary API</span></a>.</p>
+the <a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><span class="std std-ref">Auxiliary API</span></a>.</p>
 </div>
 <div class="section" id="writers">
 <h2>6.1.2. Writers<a class="headerlink" href="#writers" title="Permalink to this headline">¶</a></h2>
@@ -193,7 +191,7 @@ is often not needed because the <a class="reference internal" href="../core/univ
 class can choose an appropriate reader automatically.</p>
 <p>A typical approach is to generate a new trajectory from an old one, e.g., to
 only keep the protein:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
 <span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;protein.xtc&quot;</span><span class="p">,</span> <span class="n">protein</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span> <span class="k">as</span> <span class="n">W</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
@@ -215,7 +213,7 @@ manipulate Timesteps directly.</p>
 through the <code class="xref py py-attr docutils literal"><span class="pre">ts</span></code> attribute of
 the trajectory attached to the active
 <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
 <span class="n">ts</span><span class="o">.</span><span class="n">positions</span>  <span class="c1"># returns a numpy array of positions</span>
 </pre></div>
 </div>
@@ -540,7 +538,7 @@ current Timestep.</dd>
 (typically implemented as a property because it needs to translate whatever is in the
 underlying <code class="xref py py-class docutils literal"><span class="pre">_unitcell</span></code> attribute. Also
 comes with a setter that takes a MDAnalysis box so that one can do</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Timestep</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Timestep</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">]</span>
 </pre></div>
 </div>
 <p class="last">which then converts automatically to the underlying representation and stores it
@@ -612,8 +610,8 @@ required.</dd>
 </dd>
 <dt><code class="docutils literal"><span class="pre">__iter__()</span></code></dt>
 <dd><p class="first">allow iteration from beginning to end:</p>
-<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -651,17 +649,17 @@ deal with missing methods gracefully.</p>
 slice, then return an iterator over that part of the trajectory.</p>
 <p>The first functionality allows one to randomly access frames in the
 trajectory:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">314</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">314</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>would load frame 314 into the current <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code>.</p>
 <p>Using slices allows iteration over parts of a trajectory</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">1000</span><span class="p">:</span><span class="mi">2000</span><span class="p">]:</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">1000</span><span class="p">:</span><span class="mi">2000</span><span class="p">]:</span>
     <span class="n">process_frame</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>   <span class="c1"># do some analysis on ts</span>
 </pre></div>
 </div>
 <p>or skipping frames</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">1000</span><span class="p">::</span><span class="mi">100</span><span class="p">]:</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">1000</span><span class="p">::</span><span class="mi">100</span><span class="p">]:</span>
     <span class="n">process_frame</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>   <span class="c1"># do some analysis on ts</span>
 </pre></div>
 </div>
@@ -674,9 +672,9 @@ restricted to sequential iteration.</p>
 <p class="last">If the Reader is not able to provide random access to frames then it
 should raise <code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> on indexing. It is possible to partially
 implement <code class="docutils literal"><span class="pre">__getitem__</span></code> (as done on
-<a class="reference internal" href="base.html#MDAnalysis.coordinates.base.ProtoReader.__getitem__" title="MDAnalysis.coordinates.base.ProtoReader.__getitem__"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.ProtoReader.__getitem__</span></code></a> where slicing the
+<code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.ProtoReader.__getitem__</span></code> where slicing the
 full trajectory is equivalent to
-<a class="reference internal" href="base.html#MDAnalysis.coordinates.base.ProtoReader.__iter__" title="MDAnalysis.coordinates.base.ProtoReader.__iter__"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.ProtoReader.__iter__</span></code></a> (which is always
+<code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.ProtoReader.__iter__</span></code> (which is always
 implemented) and other slices raise <code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code>.</p>
 </dd>
 <dt><code class="docutils literal"><span class="pre">Writer(filename,</span> <span class="pre">**kwargs)</span></code></dt>
@@ -763,12 +761,12 @@ multiple frames to a trajectory file. Every time the
 another frame is appended to the trajectory.</p>
 <p>Typically, many methods and attributes are overriden.</p>
 <p>Signature:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">TrajectoryWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">n_atoms</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">TrajectoryWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">n_atoms</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write_next_timestep</span><span class="p">(</span><span class="n">Timestep</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">)</span>   <span class="c1"># write a selection</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">)</span>   <span class="c1"># write a selection</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Universe</span><span class="p">)</span>    <span class="c1"># write a whole universe</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Timestep</span><span class="p">)</span>    <span class="c1"># same as write_next_timestep()</span>
 </pre></div>
@@ -829,7 +827,7 @@ frame</em> formats contain much more information (e.g. atom and residue names an
 numbers) and hence it is possible to write selections of atoms in a meaningful
 way.</p>
 <p>Signature:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">FrameWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">FrameWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">)</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Universe</span><span class="p">)</span>
 </pre></div>
@@ -883,13 +881,13 @@ raw <a class="reference internal" href="base.html#MDAnalysis.coordinates.base.Ti
         <li class="right" >
           <a href="../coordinates_modules.html" title="6. Coordinates modules"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

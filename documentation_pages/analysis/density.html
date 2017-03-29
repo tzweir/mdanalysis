@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.8.1. Generating densities from trajectories — MDAnalysis.analysis.density &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.8.1. Generating densities from trajectories — MDAnalysis.analysis.density &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="4. Analysis modules" href="../analysis_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4.8.2. Linear Density — MDAnalysis.analysis.lineardensity" href="lineardensity.html" />
     <link rel="prev" title="4.7.3. Radial Distribution Functions — MDAnalysis.analysis.rdf" href="rdf.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="rdf.html" title="4.7.3. Radial Distribution Functions — MDAnalysis.analysis.rdf"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -77,21 +78,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/analysis/density.txt"
+      <li><a href="../../_sources/documentation_pages/analysis/density.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -130,7 +128,7 @@ solute (this is important when using funky unit cells such as
 a dodecahedron or a truncated octahedron).</li>
 </ol>
 <p>To generate the density of water molecules around a protein:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.density</span> <span class="kn">import</span> <span class="n">density_from_Universe</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.density</span> <span class="k">import</span> <span class="n">density_from_Universe</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">TPR</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
 <span class="n">D</span> <span class="o">=</span> <span class="n">density_from_Universe</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s2">&quot;name OW&quot;</span><span class="p">)</span>
 <span class="n">D</span><span class="o">.</span><span class="n">convert_density</span><span class="p">(</span><span class="s1">&#39;TIP4P&#39;</span><span class="p">)</span>
@@ -164,37 +162,37 @@ histogrammed on a grid with spacing <cite>delta</cite>.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>universe</strong> (<em>MDAnalysis.Universe</em>) &#8211; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object with a trajectory</li>
-<li><strong>atomselection</strong> (<em>str, optional</em>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
+<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
 [&#8220;name OH2&#8221;]</li>
-<li><strong>delta</strong> (<em>float, optional</em>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
-<li><strong>start</strong> (<em>int, optional</em>) &#8211; </li>
-<li><strong>stop</strong> (<em>int, optional</em>) &#8211; </li>
-<li><strong>step</strong> (<em>int, optional</em>) &#8211; Slice the trajectory as <code class="docutils literal"><span class="pre">trajectory[start:stop:step]</span></code>; default
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; </li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; </li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Slice the trajectory as <code class="docutils literal"><span class="pre">trajectory[start:stop:step]</span></code>; default
 is to read the whole trajectory.</li>
 <li><strong>metadata</strong> (<em>dict. optional</em>) &#8211; <cite>dict</cite> of additional data to be saved with the object; the meta data
 are passed through as they are.</li>
-<li><strong>padding</strong> (<em>float, optional</em>) &#8211; increase histogram dimensions by padding (on top of initial box size)
+<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; increase histogram dimensions by padding (on top of initial box size)
 in Angstroem [2.0]</li>
-<li><strong>soluteselection</strong> (<em>str, optional</em>) &#8211; MDAnalysis selection for the solute, e.g. &#8220;protein&#8221; [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>cutoff</strong> (<em>float, optional</em>) &#8211; With <cite>cutoff</cite>, select &#8220;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#8221;
+<li><strong>soluteselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; MDAnalysis selection for the solute, e.g. &#8220;protein&#8221; [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; With <cite>cutoff</cite>, select &#8220;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#8221;
 (Special routines that are faster than the standard <code class="docutils literal"><span class="pre">AROUND</span></code> selection);
 any value that evaluates to <code class="docutils literal"><span class="pre">False</span></code> (such as the default 0) disables this
 special selection.</li>
-<li><strong>update_selection</strong> (<em>bool, optional</em>) &#8211; <p>Should the selection of atoms be updated for every step? [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+<li><strong>update_selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; <p>Should the selection of atoms be updated for every step? [<code class="docutils literal"><span class="pre">False</span></code>]</p>
 <ul>
 <li><code class="docutils literal"><span class="pre">True</span></code>: atom selection is updated for each frame, can be slow</li>
 <li><code class="docutils literal"><span class="pre">False</span></code>: atoms are only selected at the beginning</li>
 </ul>
 </li>
-<li><strong>verbose</strong> (<em>bool, optional</em>) &#8211; <p>Print status update to the screen for every <em>interval</em> frame? [<code class="docutils literal"><span class="pre">True</span></code>]</p>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; <p>Print status update to the screen for every <em>interval</em> frame? [<code class="docutils literal"><span class="pre">True</span></code>]</p>
 <ul>
 <li><code class="docutils literal"><span class="pre">False</span></code>: no status updates when a new frame is processed</li>
 <li><code class="docutils literal"><span class="pre">True</span></code>: status update every frame (including number of atoms
 processed, which is interesting with <code class="docutils literal"><span class="pre">update_selection=True</span></code>)</li>
 </ul>
 </li>
-<li><strong>interval</strong> (<em>int, optional</em>) &#8211; Show status update every <cite>interval</cite> frame [1]</li>
-<li><strong>parameters</strong> (<em>dict, optional</em>) &#8211; <cite>dict</cite> with some special parameters for <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> (see docs)</li>
+<li><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Show status update every <cite>interval</cite> frame [1]</li>
+<li><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>, </em><em>optional</em>) &#8211; <cite>dict</cite> with some special parameters for <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> (see docs)</li>
 </ul>
 </td>
 </tr>
@@ -217,22 +215,22 @@ the &#8220;bulk&#8221; solvent away from a solute use the optimized selections w
 keywords <em>cutoff</em> and <em>soluteselection</em> (see Examples below).</p>
 <p class="rubric">Examples</p>
 <p>Basic use for creating a water density (just using the water oxygen atoms &#8220;OW&#8221;):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">density</span> <span class="o">=</span> <span class="n">density_from_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s1">&#39;name OW&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">density</span> <span class="o">=</span> <span class="n">density_from_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s1">&#39;name OW&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If you are only interested in water within a certain region, e.g., within a
 vicinity around a binding site, you can use a selection that updates every
 step by setting the <cite>update_selection</cite> keyword argument:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">site_density</span> <span class="o">=</span> <span class="n">density_from_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">site_density</span> <span class="o">=</span> <span class="n">density_from_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
                                      <span class="n">atomselection</span><span class="o">=</span><span class="s1">&#39;name OW and around 5 (resid 156 157 305)&#39;</span><span class="p">,</span>
-                                     <span class="n">update_selection</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                     <span class="n">update_selection</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>A special case for an updating selection is to create the &#8220;bulk density&#8221;,
 i.e., the water outside the immediate solvation shell of a protein: Select
 all water oxygen atoms that are <em>farther away</em> than a given cut-off (say, 4
 Å) from the solute (here, heavy atoms of the protein):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bulk</span> <span class="o">=</span> <span class="n">density_from_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s1">&#39;name OW&#39;</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bulk</span> <span class="o">=</span> <span class="n">density_from_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s1">&#39;name OW&#39;</span><span class="p">,</span>
                              <span class="n">solute</span><span class="o">=</span><span class="s2">&quot;protein and not name H*&quot;</span><span class="p">,</span>
                              <span class="n">cutoff</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -263,14 +261,14 @@ calculated as described for <a class="reference internal" href="#MDAnalysis.anal
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pdb</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; PDB filename (should have the temperatureFactor set); ANISO
+<li><strong>pdb</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; PDB filename (should have the temperatureFactor set); ANISO
 records are currently <em>not</em> processed</li>
-<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
+<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
 [&#8216;resname HOH and name O&#8217;]</li>
-<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
-<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary of additional data to be saved with the object [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; increase histogram dimensions by padding (on top of initial box size) [1.0]</li>
-<li><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; width (in Angstrom) of the gaussians that are used to build up the
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
+<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary of additional data to be saved with the object [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; increase histogram dimensions by padding (on top of initial box size) [1.0]</li>
+<li><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; width (in Angstrom) of the gaussians that are used to build up the
 density; if <code class="docutils literal"><span class="pre">None</span></code> then uses B-factors from <em>pdb</em> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
 </ul>
 </td>
@@ -316,13 +314,13 @@ standard conditions</p>
 <h2>4.8.1.3. Supporting classes and functions<a class="headerlink" href="#supporting-classes-and-functions" title="Permalink to this headline">¶</a></h2>
 <p>The main output of the density creation functions is a
 <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> instance, which is derived from a
-<a class="reference external" href="https://gridDataFormats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a>. A <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> is essentially, a 3D
+<a class="reference external" href="https://griddataformats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a>. A <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> is essentially, a 3D
 array with origin and lengths together with associated metadata (which
 can be used in downstream processing).</p>
 <dl class="class">
 <dt id="MDAnalysis.analysis.density.Density">
 <em class="property">class </em><code class="descclassname">MDAnalysis.analysis.density.</code><code class="descname">Density</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/density.html#Density"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Density" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://gridDataFormats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://griddataformats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a></p>
 <p>Class representing a density on a regular cartesian grid.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -330,8 +328,8 @@ can be used in downstream processing).</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>grid</strong> (<em>array_like</em>) &#8211; histogram or density, typically a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></li>
-<li><strong>edges</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; list of arrays, the lower and upper bin edges along the axes</li>
-<li><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; <p>dictionary of class parameters; saved with
+<li><strong>edges</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; list of arrays, the lower and upper bin edges along the axes</li>
+<li><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; <p>dictionary of class parameters; saved with
 <a class="reference internal" href="#MDAnalysis.analysis.density.Density.save" title="MDAnalysis.analysis.density.Density.save"><code class="xref py py-meth docutils literal"><span class="pre">Density.save()</span></code></a>. The following keys are meaningful to
 the class. Meaning of the values are listed:</p>
 <blockquote>
@@ -344,7 +342,7 @@ the class. Meaning of the values are listed:</p>
 </div></blockquote>
 </div></blockquote>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; <p>A dict with the keys</p>
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; <p>A dict with the keys</p>
 <ul>
 <li><em>length</em>:  physical unit of grid edges (Angstrom or nm) [Angstrom]</li>
 <li><em>density</em>: unit of the density if <code class="docutils literal"><span class="pre">isDensity=True</span></code> or <code class="docutils literal"><span class="pre">None</span></code>
@@ -355,7 +353,7 @@ otherwise; the default is &#8220;Angstrom^{-3}&#8221; for densities
 <code class="docutils literal"><span class="pre">MDAnalysis.core.flags['length_unit']</span></code>; in most
 cases this is &#8220;Angstrom&#8221;.)</p>
 </li>
-<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; a user defined dictionary of arbitrary values associated with the
+<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; a user defined dictionary of arbitrary values associated with the
 density; the class does not touch <code class="xref py py-attr docutils literal"><span class="pre">Density.metadata</span></code> but
 stores it with <a class="reference internal" href="#MDAnalysis.analysis.density.Density.save" title="MDAnalysis.analysis.density.Density.save"><code class="xref py py-meth docutils literal"><span class="pre">Density.save()</span></code></a></li>
 </ul>
@@ -366,38 +364,33 @@ stores it with <a class="reference internal" href="#MDAnalysis.analysis.density.
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.density.Density.grid">
 <code class="descname">grid</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array</em></p>
-<p>counts or density</p>
+<dd><p><em>array</em> &#8211; counts or density</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.density.Density.edges">
 <code class="descname">edges</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.edges" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list of 1d-arrays</em></p>
-<p>The boundaries of each cell in <cite>grid</cite> along all axes (equivalent
+<dd><p><em>list of 1d-arrays</em> &#8211; The boundaries of each cell in <cite>grid</cite> along all axes (equivalent
 to what <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogramdd.html#numpy.histogramdd" title="(in NumPy v1.12)"><code class="xref py py-func docutils literal"><span class="pre">numpy.histogramdd()</span></code></a> returns).</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.density.Density.delta">
 <code class="descname">delta</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.delta" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array</em></p>
-<p>Cell size in each dimension.</p>
+<dd><p><em>array</em> &#8211; Cell size in each dimension.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.density.Density.origin">
 <code class="descname">origin</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.origin" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array</em></p>
-<p>Coordinates of the <em>center</em> of the cell at index <cite>grid[0, 0, 0, ...,
+<dd><p><em>array</em> &#8211; Coordinates of the <em>center</em> of the cell at index <cite>grid[0, 0, 0, ...,
 0]</cite>, which is considered to be the front lower left corner.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.density.Density.units">
 <code class="descname">units</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.units" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dict</em></p>
-<p>The units for lengths and density; change units with the method
+<dd><p><em>dict</em> &#8211; The units for lengths and density; change units with the method
 <a class="reference internal" href="#MDAnalysis.analysis.density.Density.convert_length" title="MDAnalysis.analysis.density.Density.convert_length"><code class="xref py py-meth docutils literal"><span class="pre">convert_length()</span></code></a> or <a class="reference internal" href="#MDAnalysis.analysis.density.Density.convert_density" title="MDAnalysis.analysis.density.Density.convert_density"><code class="xref py py-meth docutils literal"><span class="pre">convert_density()</span></code></a>.</p>
 </dd></dl>
 
@@ -424,7 +417,7 @@ that the data are in fact a density.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
-<dt><a class="reference external" href="https://gridDataFormats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a></dt>
+<dt><a class="reference external" href="https://griddataformats.readthedocs.io/en/stable/gridData/core.html#gridData.core.Grid" title="(in gridDataFormats v0.3)"><code class="xref py py-class docutils literal"><span class="pre">gridData.core.Grid</span></code></a></dt>
 <dd>the base class of <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a>.</dd>
 </dl>
 </div>
@@ -432,28 +425,28 @@ that the data are in fact a density.</p>
 <p>Typical use:</p>
 <ol class="arabic">
 <li><p class="first">From a histogram (i.e. counts on a grid):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">h</span><span class="p">,</span><span class="n">edges</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">histogramdd</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;isDensity&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">},</span> <span class="n">units</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">})</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">h</span><span class="p">,</span><span class="n">edges</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">histogramdd</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;isDensity&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">units</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">})</span>
 <span class="n">D</span><span class="o">.</span><span class="n">make_density</span><span class="p">()</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">From a saved density file (e.g. in OpenDX format), where the lengths are
 in Angstrom and the density in 1/A**3:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="s2">&quot;density.dx&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="s2">&quot;density.dx&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">From a saved density file (e.g. in OpenDX format), where the lengths are
 in Angstrom and the density is measured relative to the density of water
 at ambient conditions:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="s2">&quot;density.dx&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="s1">&#39;water&#39;</span><span class="p">})</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="s2">&quot;density.dx&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;density&#39;</span><span class="p">:</span> <span class="s1">&#39;water&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">From a saved <em>histogram</em> (less common, but in order to demonstrate the
 <em>parameters</em> keyword) where the lengths are in nm:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="s2">&quot;counts.dx&quot;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;isDensity&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">},</span> <span class="n">units</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;nm&#39;</span><span class="p">})</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="s2">&quot;counts.dx&quot;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;isDensity&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">units</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;nm&#39;</span><span class="p">})</span>
 <span class="n">D</span><span class="o">.</span><span class="n">make_density</span><span class="p">()</span>
 <span class="n">D</span><span class="o">.</span><span class="n">convert_length</span><span class="p">(</span><span class="s1">&#39;Angstrom^{-3}&#39;</span><span class="p">)</span>
 <span class="n">D</span><span class="o">.</span><span class="n">convert_density</span><span class="p">(</span><span class="s1">&#39;water&#39;</span><span class="p">)</span>
@@ -474,58 +467,6 @@ to supply the appropriate length unit, and to use
 <a class="reference internal" href="#MDAnalysis.analysis.density.Density.make_density" title="MDAnalysis.analysis.density.Density.make_density"><code class="xref py py-meth docutils literal"><span class="pre">Density.make_density()</span></code></a> to obtain a density. This ensures
 that the length- and the density unit correspond to each other.</p>
 </div>
-<dl class="attribute">
-<dt id="MDAnalysis.analysis.density.Density.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.analysis.density.Density.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.analysis.density.Density.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.analysis.density.Density.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.analysis.density.Density.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.analysis.density.Density.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.analysis.density.Density.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.analysis.density.Density.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#MDAnalysis.analysis.density.Density.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.analysis.density.Density.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#MDAnalysis.analysis.density.Density.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="method">
 <dt id="MDAnalysis.analysis.density.Density.centers">
 <code class="descname">centers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Density.centers" title="Permalink to this definition">¶</a></dt>
@@ -559,7 +500,7 @@ iterator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>unit</strong> (<em>str, optional</em>) &#8211; <p>The target unit that the density should be converted to.</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; <p>The target unit that the density should be converted to.</p>
 <p><cite>unit</cite> can be one of the following:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -599,11 +540,9 @@ iterator.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></code> &#8211;
-If the density does not have a unit associated with it to begin
+<li><code class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></code> &#8211; If the density does not have a unit associated with it to begin
 with (i.e., is not a density) then no conversion can take place.</li>
-<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211;
-for unknown <cite>unit</cite>.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; for unknown <cite>unit</cite>.</li>
 </ul>
 </td>
 </tr>
@@ -626,7 +565,7 @@ and floating point artifacts for multiple conversions.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>unit</strong> (<em>str, optional</em>) &#8211; unit that the grid should be converted to: one of
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; unit that the grid should be converted to: one of
 &#8220;Angstrom&#8221;, &#8220;nm&#8221;</td>
 </tr>
 </tbody>
@@ -670,7 +609,7 @@ modified, <code class="xref py py-meth docutils literal"><span class="pre">Grid.
 (TODO: also recompute when interpolation_cval value is changed.)</p>
 <dl class="docutils">
 <dt>Example usage for resampling::</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XX</span><span class="p">,</span><span class="n">YY</span><span class="p">,</span><span class="n">ZZ</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">75</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">96</span><span class="p">:</span><span class="mi">150</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">20</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mf">0.5</span><span class="p">]</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XX</span><span class="p">,</span><span class="n">YY</span><span class="p">,</span><span class="n">ZZ</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">75</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">96</span><span class="p">:</span><span class="mi">150</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">20</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mf">0.5</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">FF</span> <span class="o">=</span> <span class="n">interpolated</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span><span class="n">YY</span><span class="p">,</span><span class="n">ZZ</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -751,12 +690,12 @@ sigma is taken as sqrt(3.*B/8.)/pi (see <code class="xref py py-func docutils li
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>pdb</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; PDB file or <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>;</li>
-<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed</li>
-<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
-<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary of additional data to be saved with the object</li>
-<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; increase histogram dimensions by padding (on top of initial box size)</li>
-<li><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; width (in Angstrom) of the gaussians that are used to build up the
+<li><strong>pdb</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; PDB file or <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>;</li>
+<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed</li>
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
+<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary of additional data to be saved with the object</li>
+<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; increase histogram dimensions by padding (on top of initial box size)</li>
+<li><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; width (in Angstrom) of the gaussians that are used to build up the
 density; if <code class="docutils literal"><span class="pre">None</span></code> (the default) then uses B-factors from pdb</li>
 </ul>
 </td>
@@ -769,8 +708,8 @@ of about 0.5 A to obtain a well-defined and resolved x-ray water density
 that can be easily matched to a broader density distribution.</p>
 <p class="rubric">Examples</p>
 <p>The following creates the density with the B-factors from the pdb file:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">DC</span> <span class="o">=</span> <span class="n">BfactorDensityCreator</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s2">&quot;name HOH&quot;</span><span class="p">,</span>
-                           <span class="n">padding</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DC</span> <span class="o">=</span> <span class="n">BfactorDensityCreator</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s2">&quot;name HOH&quot;</span><span class="p">,</span>
+                           <span class="n">padding</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="n">density</span> <span class="o">=</span> <span class="n">DC</span><span class="o">.</span><span class="n">Density</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -796,22 +735,22 @@ that can be easily matched to a broader density distribution.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>universe</strong> (<em>MDAnalysis.Universe</em>) &#8211; Universe object on which to operate</li>
-<li><strong>sel1</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Selection string for the <em>solvent</em> selection (should be
+<li><strong>sel1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Selection string for the <em>solvent</em> selection (should be
 the group with the <em>larger number of atoms</em> to make the
 KD-Tree search more efficient)</li>
-<li><strong>sel2</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Selection string for the <em>solute</em> selection</li>
-<li><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Distance cutoff</li>
-<li><strong>not_within</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <ul>
+<li><strong>sel2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Selection string for the <em>solute</em> selection</li>
+<li><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Distance cutoff</li>
+<li><strong>not_within</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <ul>
 <li><code class="docutils literal"><span class="pre">True</span></code>: selection behaves as &#8220;not within&#8221; (As described above)</li>
 <li><code class="docutils literal"><span class="pre">False</span></code>: selection is a &#8220;&lt;sel1&gt; WITHIN &lt;cutoff&gt; OF &lt;sel2&gt;&#8221;</li>
 </ul>
 </li>
-<li><strong>use_kdtree</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <ul>
+<li><strong>use_kdtree</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <ul>
 <li><code class="docutils literal"><span class="pre">True</span></code>: use fast KD-Tree based selections</li>
 <li><code class="docutils literal"><span class="pre">False</span></code>: use distance matrix approach</li>
 </ul>
 </li>
-<li><strong>updating_selection</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, re-evaluate the selection string each frame.</li>
+<li><strong>updating_selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, re-evaluate the selection string each frame.</li>
 </ul>
 </td>
 </tr>
@@ -833,7 +772,7 @@ this function factory in the first place.</li>
 returns the coordinates of the &#8220;solvent&#8221; selection that are <em>not within</em> a given cut-off
 distance of the &#8220;solute&#8221;. Because it is KD-tree based, it is cheap to query the KD-tree with
 a different cut-off:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">notwithin_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="s1">&#39;name OH2&#39;</span><span class="p">,</span> <span class="s1">&#39;protein and not name H*&#39;</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">notwithin_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="s1">&#39;name OH2&#39;</span><span class="p">,</span> <span class="s1">&#39;protein and not name H*&#39;</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">notwithin_coordinates</span><span class="p">()</span>        <span class="c1"># get coordinates outside cutoff 3.5 A</span>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">notwithin_coordinates</span><span class="p">(</span><span class="n">cutoff2</span><span class="p">)</span> <span class="c1"># can use different cut off</span>
@@ -841,8 +780,8 @@ a different cut-off:</p>
 </div>
 <p>For programmatic convenience, the function can also function as a factory for a simple
 <em>within cutoff</em> query if the keyword <code class="docutils literal"><span class="pre">not_within=False</span></code> is set:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">within_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="s1">&#39;name OH2&#39;</span><span class="p">,</span><span class="s1">&#39;protein and not name H*&#39;</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span>
-                                                   <span class="n">not_within</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">within_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="s1">&#39;name OH2&#39;</span><span class="p">,</span><span class="s1">&#39;protein and not name H*&#39;</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span>
+                                                   <span class="n">not_within</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">within_coordinates</span><span class="p">()</span>        <span class="c1"># get coordinates within cutoff 3.5 A</span>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">within_coordinates</span><span class="p">(</span><span class="n">cutoff2</span><span class="p">)</span> <span class="c1"># can use different cut off</span>
@@ -876,13 +815,13 @@ a different cut-off:</p>
         <li class="right" >
           <a href="rdf.html" title="4.7.3. Radial Distribution Functions — MDAnalysis.analysis.rdf"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

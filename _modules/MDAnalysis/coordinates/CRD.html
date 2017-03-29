@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.coordinates.CRD &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.coordinates.CRD &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,8 +42,8 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -53,14 +54,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -103,15 +101,15 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">zip</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
 
 <span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="kn">import</span> <span class="n">NoDataError</span>
-<span class="kn">from</span> <span class="nn">..lib</span> <span class="kn">import</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="k">import</span> <span class="n">NoDataError</span>
+<span class="kn">from</span> <span class="nn">..lib</span> <span class="k">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">base</span>
 
 
 <div class="viewcode-block" id="CRDReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/CRD.html#MDAnalysis.coordinates.CRD.CRDReader">[docs]</a><span class="k">class</span> <span class="nc">CRDReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">SingleFrameReaderBase</span><span class="p">):</span>
@@ -121,8 +119,8 @@
 <span class="sd">       Now returns a ValueError instead of FormatError</span>
 <span class="sd">       Frames now 0-based instead of 1-based</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;CRD&#39;</span>
-    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
+    <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;CRD&#39;</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">_read_first_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># EXT:</span>
@@ -135,7 +133,7 @@
         <span class="c1">#      iatom,ires,resn,typr,x,y,z,segid,orig_resid,wmain</span>
         <span class="n">coords_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">crdfile</span><span class="p">:</span>
-            <span class="n">extended</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">extended</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">natoms</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">for</span> <span class="n">linenum</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">crdfile</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
@@ -153,7 +151,7 @@
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">coords_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
                 <span class="k">except</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Check CRD format at line {0}: {1}&quot;</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Check CRD format at line </span><span class="si">{0}</span><span class="s2">: </span><span class="si">{1}</span><span class="s2">&quot;</span>
                                      <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">linenum</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords_list</span><span class="p">)</span>
@@ -198,30 +196,30 @@
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Frames now 0-based instead of 1-based</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;CRD&#39;</span>
-    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
+    <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;CRD&#39;</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
 
     <span class="n">fmt</span> <span class="o">=</span> <span class="p">{</span>
         <span class="c1">#crdtype = &#39;extended&#39;</span>
         <span class="c1">#fortran_format = &#39;(2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10)&#39;</span>
-        <span class="s2">&quot;ATOM_EXT&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;{serial:10d}{totRes:10d}  {resname:&lt;8.8s}  {name:&lt;8.8s}&quot;</span>
-                     <span class="s2">&quot;{pos[0]:20.10f}{pos[1]:20.10f}{pos[2]:20.10f}  &quot;</span>
-                     <span class="s2">&quot;{chainID:&lt;8.8s}  {resSeq:&lt;8d}{tempfactor:20.10f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;NUMATOMS_EXT&quot;</span><span class="p">:</span> <span class="s2">&quot;{0:10d} EXT</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ATOM_EXT&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{serial:10d}{totRes:10d}</span><span class="s2">  </span><span class="si">{resname:&lt;8.8s}</span><span class="s2">  </span><span class="si">{name:&lt;8.8s}</span><span class="s2">&quot;</span>
+                     <span class="s2">&quot;</span><span class="si">{pos[0]:20.10f}{pos[1]:20.10f}{pos[2]:20.10f}</span><span class="s2">  &quot;</span>
+                     <span class="s2">&quot;</span><span class="si">{chainID:&lt;8.8s}</span><span class="s2">  </span><span class="si">{resSeq:&lt;8d}{tempfactor:20.10f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;NUMATOMS_EXT&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{0:10d}</span><span class="s2"> EXT</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="c1">#crdtype = &#39;standard&#39;</span>
         <span class="c1">#fortran_format = &#39;(2I5,1X,A4,1X,A4,3F10.5,1X,A4,1X,A4,F10.5)&#39;</span>
-        <span class="s2">&quot;ATOM&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;{serial:5d}{totRes:5d} {resname:&lt;4.4s} {name:&lt;4.4s}&quot;</span>
-                 <span class="s2">&quot;{pos[0]:10.5f}{pos[1]:10.5f}{pos[2]:10.5f} &quot;</span>
-                 <span class="s2">&quot;{chainID:&lt;4.4s} {resSeq:&lt;4d}{tempfactor:10.5f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;TITLE&quot;</span><span class="p">:</span> <span class="s2">&quot;* FRAME {frame} FROM {where}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;NUMATOMS&quot;</span><span class="p">:</span> <span class="s2">&quot;{0:5d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ATOM&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{serial:5d}{totRes:5d}</span><span class="s2"> </span><span class="si">{resname:&lt;4.4s}</span><span class="s2"> </span><span class="si">{name:&lt;4.4s}</span><span class="s2">&quot;</span>
+                 <span class="s2">&quot;</span><span class="si">{pos[0]:10.5f}{pos[1]:10.5f}{pos[2]:10.5f}</span><span class="s2"> &quot;</span>
+                 <span class="s2">&quot;</span><span class="si">{chainID:&lt;4.4s}</span><span class="s2"> </span><span class="si">{resSeq:&lt;4d}{tempfactor:10.5f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;TITLE&quot;</span><span class="p">:</span> <span class="s2">&quot;* FRAME </span><span class="si">{frame}</span><span class="s2"> FROM </span><span class="si">{where}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NUMATOMS&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{0:5d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">filename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;crd&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">crd</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">crd</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="CRDWriter.write"><a class="viewcode-back" href="../../../documentation_pages/coordinates/CRD.html#MDAnalysis.coordinates.CRD.CRDWriter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CRDWriter.write"><a class="viewcode-back" href="../../../documentation_pages/coordinates/CRD.html#MDAnalysis.coordinates.CRD.CRDWriter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write selection at current trajectory frame to file.</span>
 
 <span class="sd">        write(selection,frame=FRAME)</span>
@@ -230,7 +228,7 @@
 <span class="sd">        frame             optionally move to frame FRAME</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">universe</span>
-        <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>  <span class="c1"># advance to frame</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -284,7 +282,7 @@
         <span class="k">if</span> <span class="n">missing_topology</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="s2">&quot;Supplied AtomGroup was missing the following attributes: &quot;</span>
-                <span class="s2">&quot;{miss}. These will be written with default values. &quot;</span>
+                <span class="s2">&quot;</span><span class="si">{miss}</span><span class="s2">. These will be written with default values. &quot;</span>
                 <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">miss</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_topology</span><span class="p">)))</span>
 
         <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">crd</span><span class="p">:</span>
@@ -334,13 +332,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

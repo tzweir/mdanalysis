@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.analysis.hbonds.hbond_autocorrel &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.analysis.hbonds.hbond_autocorrel &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" /> 
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,8 +42,8 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -53,14 +54,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -226,12 +224,12 @@
 
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">zip</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="kn">import</span> <span class="n">ProgressMeter</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.lib.distances</span> <span class="kn">import</span> <span class="n">distance_array</span><span class="p">,</span> <span class="n">calc_angles</span><span class="p">,</span> <span class="n">calc_bonds</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="k">import</span> <span class="n">ProgressMeter</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.distances</span> <span class="k">import</span> <span class="n">distance_array</span><span class="p">,</span> <span class="n">calc_angles</span><span class="p">,</span> <span class="n">calc_bonds</span>
 
 
 <div class="viewcode-block" id="HydrogenBondAutoCorrel"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel">[docs]</a><span class="k">class</span> <span class="nc">HydrogenBondAutoCorrel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -275,16 +273,16 @@
 <span class="sd">        Whether to consider periodic boundaries in calculations [``True``]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span>
-                 <span class="n">hydrogens</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">acceptors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">donors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">bond_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">exclusions</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span>
+                 <span class="n">hydrogens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">acceptors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">donors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">bond_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">exclusions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">angle_crit</span><span class="o">=</span><span class="mf">130.0</span><span class="p">,</span> <span class="n">dist_crit</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>  <span class="c1"># geometric criteria</span>
                  <span class="n">sample_time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>  <span class="c1"># expected length of the decay in ps</span>
-                 <span class="n">time_cut</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># cutoff time for intermittent hbonds</span>
+                 <span class="n">time_cut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># cutoff time for intermittent hbonds</span>
                  <span class="n">nruns</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># number of times to iterate through the trajectory</span>
                  <span class="n">nsamples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>  <span class="c1"># number of different points to sample in a run</span>
-                 <span class="n">pbc</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+                 <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="c1"># check that slicing is possible</span>
         <span class="k">try</span><span class="p">:</span>
@@ -319,11 +317,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">time_cut</span> <span class="o">=</span> <span class="n">time_cut</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">solution</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>  <span class="c1"># Raw results</span>
-            <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>  <span class="c1"># Time axis of raw results</span>
-            <span class="s1">&#39;fit&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>  <span class="c1"># coefficients for fit</span>
-            <span class="s1">&#39;tau&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>  <span class="c1"># integral of exponential fit</span>
-            <span class="s1">&#39;estimate&#39;</span><span class="p">:</span> <span class="bp">None</span>  <span class="c1"># y values of fit against time</span>
+            <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Raw results</span>
+            <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Time axis of raw results</span>
+            <span class="s1">&#39;fit&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># coefficients for fit</span>
+            <span class="s1">&#39;tau&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># integral of exponential fit</span>
+            <span class="s1">&#39;estimate&#39;</span><span class="p">:</span> <span class="kc">None</span>  <span class="c1"># y values of fit against time</span>
         <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">_slice_traj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_time</span><span class="p">):</span>
@@ -335,15 +333,15 @@
 
         <span class="n">n_frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">req_frames</span> <span class="o">&gt;</span> <span class="n">n_frames</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Number of required frames ({}) greater than the&quot;</span>
-                          <span class="s2">&quot; number of frames in trajectory ({})&quot;</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Number of required frames (</span><span class="si">{}</span><span class="s2">) greater than the&quot;</span>
+                          <span class="s2">&quot; number of frames in trajectory (</span><span class="si">{}</span><span class="s2">)&quot;</span>
                           <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req_frames</span><span class="p">,</span> <span class="n">n_frames</span><span class="p">),</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
 
         <span class="n">numruns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nruns</span>
         <span class="k">if</span> <span class="n">numruns</span> <span class="o">&gt;</span> <span class="n">n_frames</span><span class="p">:</span>
             <span class="n">numruns</span> <span class="o">=</span> <span class="n">n_frames</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Number of runs ({}) greater than the number of&quot;</span>
-                          <span class="s2">&quot; frames in trajectory ({})&quot;</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Number of runs (</span><span class="si">{}</span><span class="s2">) greater than the number of&quot;</span>
+                          <span class="s2">&quot; frames in trajectory (</span><span class="si">{}</span><span class="s2">)&quot;</span>
                           <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nruns</span><span class="p">,</span> <span class="n">n_frames</span><span class="p">),</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_starts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_frames</span><span class="p">,</span> <span class="n">n_frames</span> <span class="o">/</span> <span class="n">numruns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
@@ -352,11 +350,11 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_skip</span> <span class="o">=</span> <span class="n">req_frames</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">nsamples</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_skip</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># If nsamples &gt; req_frames</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Desired number of sample points too high, using {0}&quot;</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Desired number of sample points too high, using </span><span class="si">{0}</span><span class="s2">&quot;</span>
                           <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req_frames</span><span class="p">),</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_skip</span> <span class="o">=</span> <span class="mi">1</span>
 
-<div class="viewcode-block" id="HydrogenBondAutoCorrel.run"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="HydrogenBondAutoCorrel.run"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run all the required passes</span>
 
 <span class="sd">        Parameters</span>
@@ -365,7 +363,7 @@
 <span class="sd">            Will overwrite previous results if they exist</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># if results exist, don&#39;t waste any time</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="n">master_results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_starts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -376,7 +374,7 @@
         <span class="n">counter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">master_results</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
         <span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nruns</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                           <span class="n">format</span><span class="o">=</span><span class="s2">&quot;Performing run </span><span class="si">%(step)5d</span><span class="s2">/</span><span class="si">%(numsteps)d</span><span class="s2">&quot;</span>
+                           <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;Performing run </span><span class="si">%(step)5d</span><span class="s2">/</span><span class="si">%(numsteps)d</span><span class="s2">&quot;</span>
                                   <span class="s2">&quot;[</span><span class="si">%(percentage)5.1f%%</span><span class="s2">]</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_starts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stops</span><span class="p">)):</span>
@@ -405,7 +403,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
 
         <span class="c1"># Calculate partners at t=0</span>
-        <span class="n">box</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">dimensions</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">dimensions</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span> <span class="k">else</span> <span class="kc">None</span>
 
         <span class="c1"># 2d array of all distances</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">distance_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">box</span><span class="p">)</span>
@@ -432,7 +430,7 @@
             <span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nbonds</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_skip</span><span class="p">]):</span>
-            <span class="n">box</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">dimensions</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span> <span class="k">else</span> <span class="bp">None</span>
+            <span class="n">box</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">dimensions</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span> <span class="k">else</span> <span class="kc">None</span>
 
             <span class="n">d</span> <span class="o">=</span> <span class="n">calc_bonds</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="n">hidx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="n">aidx</span><span class="p">],</span>
                            <span class="n">box</span><span class="o">=</span><span class="n">box</span><span class="p">)</span>
@@ -477,14 +475,14 @@
 <span class="sd">        filename : str, optional</span>
 <span class="sd">            The desired filename [hbond_autocorrel]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span>
                         <span class="n">results</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Results have not been generated, use the run method first&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="HydrogenBondAutoCorrel.solve"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_guess</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="HydrogenBondAutoCorrel.solve"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_guess</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Fit results to an multi exponential decay and integrate to find</span>
 <span class="sd">        characteristic time</span>
 
@@ -514,9 +512,9 @@
 <span class="sd">         - *mesg*</span>
 <span class="sd">         - *ier*</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">leastsq</span>
+        <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">leastsq</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Results have not been generated use, the run method first&quot;</span><span class="p">)</span>
 
@@ -568,12 +566,12 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bond_type</span> <span class="ow">is</span> <span class="s1">&#39;continuous&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_my_solve</span> <span class="o">=</span> <span class="n">double</span>
 
-            <span class="k">if</span> <span class="n">p_guess</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p_guess</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">p_guess</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">)</span>
 
             <span class="n">p</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">p_guess</span><span class="p">,</span>
                                                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">),</span>
-                                                  <span class="n">full_output</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                                  <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;fit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">A1</span><span class="p">,</span> <span class="n">tau1</span><span class="p">,</span> <span class="n">tau2</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">A2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">A1</span>
@@ -581,13 +579,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_my_solve</span> <span class="o">=</span> <span class="n">triple</span>
 
-            <span class="k">if</span> <span class="n">p_guess</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p_guess</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">p_guess</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span>
                            <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">)</span>
 
             <span class="n">p</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">p_guess</span><span class="p">,</span>
                                                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">),</span>
-                                                  <span class="n">full_output</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                                  <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;fit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">,</span> <span class="n">tau1</span><span class="p">,</span> <span class="n">tau2</span><span class="p">,</span> <span class="n">tau3</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">A3</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">A1</span> <span class="o">-</span> <span class="n">A2</span>
@@ -603,9 +601,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Solution to results not found&quot;</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;MDAnalysis HydrogenBondAutoCorrel analysis measuring the &quot;</span>
-                <span class="s2">&quot;{btype} lifetime of {n} different hydrogens&gt;&quot;</span>
+                <span class="s2">&quot;</span><span class="si">{btype}</span><span class="s2"> lifetime of </span><span class="si">{n}</span><span class="s2"> different hydrogens&gt;&quot;</span>
                 <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">btype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bond_type</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)))</span></div>
 </pre></div>
 
@@ -623,13 +621,13 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

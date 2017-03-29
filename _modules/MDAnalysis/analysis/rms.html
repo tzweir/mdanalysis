@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.analysis.rms &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.analysis.rms &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,8 +42,8 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -53,14 +54,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -206,23 +204,23 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">zip</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 
-<span class="kn">import</span> <span class="nn">MDAnalysis.lib.qcprot</span> <span class="kn">as</span> <span class="nn">qcp</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.analysis.base</span> <span class="kn">import</span> <span class="n">AnalysisBase</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.exceptions</span> <span class="kn">import</span> <span class="n">SelectionError</span><span class="p">,</span> <span class="n">NoDataError</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="kn">import</span> <span class="n">ProgressMeter</span><span class="p">,</span> <span class="n">_set_verbose</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="kn">import</span> <span class="n">asiterable</span>
+<span class="kn">import</span> <span class="nn">MDAnalysis.lib.qcprot</span> <span class="k">as</span> <span class="nn">qcp</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.analysis.base</span> <span class="k">import</span> <span class="n">AnalysisBase</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.exceptions</span> <span class="k">import</span> <span class="n">SelectionError</span><span class="p">,</span> <span class="n">NoDataError</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="k">import</span> <span class="n">ProgressMeter</span><span class="p">,</span> <span class="n">_set_verbose</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="k">import</span> <span class="n">asiterable</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MDAnalysis.analysis.rmsd&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="rmsd"><a class="viewcode-back" href="../../../documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.rmsd">[docs]</a><span class="k">def</span> <span class="nf">rmsd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">superposition</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="rmsd"><a class="viewcode-back" href="../../../documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.rmsd">[docs]</a><span class="k">def</span> <span class="nf">rmsd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">superposition</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns RMSD between two coordinate sets `a` and `b`.</span>
 
 <span class="sd">    `a` and `b` are arrays of the coordinates of N atoms of shape N*3</span>
@@ -285,16 +283,16 @@
         <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;weights must have same length as a/b&#39;</span><span class="p">)</span>
         <span class="c1"># weights are constructed as relative to the mean</span>
         <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">superposition</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">qcp</span><span class="o">.</span><span class="n">CalcRMSDRotationalMatrix</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">qcp</span><span class="o">.</span><span class="n">CalcRMSDRotationalMatrix</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
                                   <span class="o">*</span> <span class="p">((</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">N</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -451,19 +449,19 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span>
-                 <span class="n">groupselections</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;rmsd.dat&quot;</span><span class="p">,</span>
-                 <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">ref_frame</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span>
+                 <span class="n">groupselections</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;rmsd.dat&quot;</span><span class="p">,</span>
+                 <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">ref_frame</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">RMSD</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">atomgroup</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span>
                                    <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">atomgroup</span><span class="o">.</span><span class="n">universe</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="n">reference</span> <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="n">reference</span> <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span>
 
         <span class="n">select</span> <span class="o">=</span> <span class="n">process_selection</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">groupselections</span> <span class="o">=</span> <span class="p">([</span><span class="n">process_selection</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">groupselections</span><span class="p">]</span>
-                                <span class="k">if</span> <span class="n">groupselections</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="p">[])</span>
-        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">groupselections</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
                           <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
                           <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
@@ -480,12 +478,12 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mobile_atoms</span><span class="p">):</span>
             <span class="n">err</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Reference and trajectory atom selections do &quot;</span>
                    <span class="s2">&quot;not contain the same number of atoms: &quot;</span>
-                   <span class="s2">&quot;N_ref={0:d}, N_traj={1:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span>
+                   <span class="s2">&quot;N_ref=</span><span class="si">{0:d}</span><span class="s2">, N_traj=</span><span class="si">{1:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span>
                                                       <span class="bp">self</span><span class="o">.</span><span class="n">mobile_atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">))</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
             <span class="k">raise</span> <span class="n">SelectionError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;RMS calculation &quot;</span>
-                    <span class="s2">&quot;for {0:d} atoms.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="p">)))</span>
+                    <span class="s2">&quot;for </span><span class="si">{0:d}</span><span class="s2"> atoms.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="p">)))</span>
         <span class="n">mass_mismatches</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">masses</span> <span class="o">-</span>
                                         <span class="bp">self</span><span class="o">.</span><span class="n">mobile_atoms</span><span class="o">.</span><span class="n">masses</span><span class="p">))</span> <span class="o">&gt;</span>
                            <span class="bp">self</span><span class="o">.</span><span class="n">tol_mass</span><span class="p">)</span>
@@ -495,15 +493,15 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Atoms: reference | mobile&quot;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">ar</span><span class="p">,</span> <span class="n">at</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mobile_atoms</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">ar</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">at</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;{0!s:&gt;4} {1:3d} {2!s:&gt;3} {3!s:&gt;3} {4:6.3f}&quot;</span>
-                                 <span class="s2">&quot;|  {5!s:&gt;4} {6:3d} {7!s:&gt;3} {8!s:&gt;3}&quot;</span>
-                                 <span class="s2">&quot;{9:6.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ar</span><span class="o">.</span><span class="n">segid</span><span class="p">,</span> <span class="n">ar</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0!s:&gt;4}</span><span class="s2"> </span><span class="si">{1:3d}</span><span class="s2"> </span><span class="si">{2!s:&gt;3}</span><span class="s2"> </span><span class="si">{3!s:&gt;3}</span><span class="s2"> </span><span class="si">{4:6.3f}</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;|  </span><span class="si">{5!s:&gt;4}</span><span class="s2"> </span><span class="si">{6:3d}</span><span class="s2"> </span><span class="si">{7!s:&gt;3}</span><span class="s2"> </span><span class="si">{8!s:&gt;3}</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;</span><span class="si">{9:6.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ar</span><span class="o">.</span><span class="n">segid</span><span class="p">,</span> <span class="n">ar</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
                                                    <span class="n">ar</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="n">ar</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                                                    <span class="n">ar</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="n">at</span><span class="o">.</span><span class="n">segid</span><span class="p">,</span> <span class="n">at</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
                                                    <span class="n">at</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="n">at</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                                                    <span class="n">at</span><span class="o">.</span><span class="n">mass</span><span class="p">))</span>
             <span class="n">errmsg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Inconsistent selections, masses differ by more than&quot;</span>
-                      <span class="s2">&quot;{0:f}; mis-matching atoms&quot;</span>
+                      <span class="s2">&quot;</span><span class="si">{0:f}</span><span class="s2">; mis-matching atoms&quot;</span>
                       <span class="s2">&quot;are shown above.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tol_mass</span><span class="p">))</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
             <span class="k">raise</span> <span class="n">SelectionError</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
@@ -525,13 +523,13 @@
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">[</span><span class="s1">&#39;mobile&#39;</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">]):</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;SelectionError: Group Selection&#39;</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="n">SelectionError</span><span class="p">(</span>
-                    <span class="s2">&quot;Group selection {0}: {1} | {2}: Reference and trajectory &quot;</span>
+                    <span class="s2">&quot;Group selection </span><span class="si">{0}</span><span class="s2">: </span><span class="si">{1}</span><span class="s2"> | </span><span class="si">{2}</span><span class="s2">: Reference and trajectory &quot;</span>
                     <span class="s2">&quot;atom selections do not contain the same number of atoms: &quot;</span>
-                    <span class="s2">&quot;N_ref={3}, N_traj={4}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="s2">&quot;N_ref=</span><span class="si">{3}</span><span class="s2">, N_traj=</span><span class="si">{4}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                         <span class="n">igroup</span><span class="p">,</span> <span class="n">sel</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">],</span> <span class="n">sel</span><span class="p">[</span><span class="s1">&#39;mobile&#39;</span><span class="p">],</span>
                         <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">[</span><span class="s1">&#39;mobile&#39;</span><span class="p">])))</span>
         <span class="c1"># initialized to note for testing the save function</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span> <span class="o">=</span> <span class="kc">None</span>
 
 
     <span class="k">def</span> <span class="nf">_prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -539,7 +537,7 @@
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">==</span> <span class="s1">&#39;mass&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">masses</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
         <span class="n">current_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
@@ -572,13 +570,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_rot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>  <span class="c1"># allocate space</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rot</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_rot</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rot</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span>
                               <span class="mi">3</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_groupselections_atoms</span><span class="p">)))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pm</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;RMSD {rmsd:5.2f} A at frame &quot;</span>
-                           <span class="s2">&quot;{step:5d}/{numsteps}  [{percentage:5.1f}%]</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pm</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;RMSD </span><span class="si">{rmsd:5.2f}</span><span class="s2"> A at frame &quot;</span>
+                           <span class="s2">&quot;</span><span class="si">{step:5d}</span><span class="s2">/</span><span class="si">{numsteps}</span><span class="s2">  [</span><span class="si">{percentage:5.1f}</span><span class="s2">%]</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_mobile_coordinates64</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mobile_atoms</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_single_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -616,17 +614,17 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">_groupselections_atoms</span><span class="p">),</span> <span class="mi">3</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">igroup</span><span class="p">]</span> <span class="o">=</span> <span class="n">qcp</span><span class="o">.</span><span class="n">CalcRMSDRotationalMatrix</span><span class="p">(</span>
                     <span class="n">refpos</span><span class="p">,</span> <span class="n">atoms</span><span class="p">[</span><span class="s1">&#39;mobile&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
-                    <span class="n">atoms</span><span class="p">[</span><span class="s1">&#39;mobile&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+                    <span class="n">atoms</span><span class="p">[</span><span class="s1">&#39;mobile&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># only calculate RMSD by setting the Rmatrix to None (no need</span>
             <span class="c1"># to carry out the rotation as we already get the optimum RMSD)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">qcp</span><span class="o">.</span><span class="n">CalcRMSDRotationalMatrix</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_ref_coordinates_64</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mobile_coordinates64</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_n_atoms</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_n_atoms</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_pm</span><span class="o">.</span><span class="n">rmsd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 
-<div class="viewcode-block" id="RMSD.save"><a class="viewcode-back" href="../../../documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.RMSD.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RMSD.save"><a class="viewcode-back" href="../../../documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.RMSD.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save RMSD from :attr:`RMSD.rmsd` to text file *filename*.</span>
 
 <span class="sd">        Parameters</span>
@@ -636,8 +634,8 @@
 <span class="sd">            used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span>
-        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;rmsd has not been calculated yet&quot;</span><span class="p">)</span>
             <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rmsd</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Wrote RMSD timeseries  to file </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
@@ -699,20 +697,20 @@
 <span class="sd">       the keyword argument `quiet` is deprecated in favor of `verbose`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atomgroup</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atomgroup</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">RMSF</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">atomgroup</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atomgroup</span> <span class="o">=</span> <span class="n">atomgroup</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span> <span class="ow">and</span> <span class="n">weights</span> <span class="o">==</span> <span class="s1">&#39;mass&#39;</span><span class="p">:</span>
             <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomgroup</span><span class="o">.</span><span class="n">masses</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span>
 
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">progout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-            <span class="n">verbose</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">el</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">progout</span><span class="p">,</span> <span class="n">quiet</span><span class="p">)]):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">el</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">progout</span><span class="p">,</span> <span class="n">quiet</span><span class="p">)]):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;run arguments are deprecated. Please pass them at &quot;</span>
                           <span class="s2">&quot;class construction. These options will be removed in 0.17.0&quot;</span><span class="p">,</span>
                           <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="n">verbose</span> <span class="o">=</span> <span class="n">_set_verbose</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="n">quiet</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">verbose</span> <span class="o">=</span> <span class="n">_set_verbose</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="n">quiet</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="c1"># regenerate class with correct args</span>
             <span class="nb">super</span><span class="p">(</span><span class="n">RMSF</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atomgroup</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span>
                                        <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
@@ -751,13 +749,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

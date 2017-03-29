@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.9.1. Diffusion map — MDAnalysis.analysis.diffusionmap &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.9.1. Diffusion map — MDAnalysis.analysis.diffusionmap &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="4. Analysis modules" href="../analysis_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4.9.2. Principal Component Analysis (PCA) — MDAnalysis.analysis.pca" href="pca.html" />
     <link rel="prev" title="4.8.3. Water dynamics analysis — MDAnalysis.analysis.waterdynamics" href="waterdynamics.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="waterdynamics.html" title="4.8.3. Water dynamics analysis — MDAnalysis.analysis.waterdynamics"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -78,21 +79,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/analysis/diffusionmap.txt"
+      <li><a href="../../_sources/documentation_pages/analysis/diffusionmap.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -126,7 +124,7 @@ fundamentally difficult problem. The time complexity of the diffusion map is
 storage complexity is <span class="math">\(O(N^2)\)</span>. Instead of a single trajectory a sample of
 protein structures can be used. The sample should be equiblibrated, at least
 locally. The order of the sampled structures in the trajectory is irrelevant.</p>
-<p>The <a class="reference internal" href="#diffusion-map-tutorial"><span>Diffusion Map tutorial</span></a> shows how to use diffusion map for dimension
+<p>The <a class="reference internal" href="#diffusion-map-tutorial"><span class="std std-ref">Diffusion Map tutorial</span></a> shows how to use diffusion map for dimension
 reduction.</p>
 <p>More details about diffusion maps are in <a class="reference internal" href="#delaporte1" id="id1">[deLaPorte1]</a>, <a class="reference internal" href="#lafon1" id="id2">[Lafon1]</a> ,
 <a class="reference internal" href="#ferguson1" id="id3">[Ferguson1]</a>, and <a class="reference internal" href="#clementi1" id="id4">[Clementi1]</a>.</p>
@@ -137,15 +135,15 @@ reduction.</p>
 <code class="xref py py-data docutils literal"><span class="pre">DCD</span></code>). This tutorial shows how to use the
 Diffusion Map class.</p>
 <p>First load all modules and test data</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="kn">as</span> <span class="nn">mda</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.diffusionmap</span> <span class="kn">as</span> <span class="nn">diffusionmap</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.diffusionmap</span> <span class="k">as</span> <span class="nn">diffusionmap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="k">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
 </pre></div>
 </div>
 <p>Given a universe or atom group, we can create and eigenvalue decompose
 the Diffusion Matrix from that trajectory using <a class="reference internal" href="#MDAnalysis.analysis.diffusionmap.DiffusionMap" title="MDAnalysis.analysis.diffusionmap.DiffusionMap"><code class="xref py py-class docutils literal"><span class="pre">DiffusionMap</span></code></a>:: and get
 the corresponding eigenvalues and eigenvectors.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We leave determination of the appropriate scale parameter epsilon to the user,
@@ -153,7 +151,7 @@ the corresponding eigenvalues and eigenvectors.</p>
 trajectory frame, whereas others simple use a trial-and-error approach with
 a constant epsilon. Currently, the constant epsilon method is implemented
 by MDAnalysis.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmap</span> <span class="o">=</span> <span class="n">diffusionmap</span><span class="o">.</span><span class="n">DiffusionMap</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;backbone&#39;</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmap</span> <span class="o">=</span> <span class="n">diffusionmap</span><span class="o">.</span><span class="n">DiffusionMap</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;backbone&#39;</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dmap</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -167,8 +165,8 @@ exist some number of dominant eigenvectors, whose corresponding eigenvalues
 diminish at a constant rate until falling off, this is referred to as a
 spectral gap and should be somewhat apparent for a system at equilibrium with a
 high number of frames.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="c1"># first cell of  a jupyter notebook should contain: %matplotlib inline</span>
-<span class="gp">&gt;&gt;&gt; </span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="c1"># first cell of  a jupyter notebook should contain: %matplotlib inline</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span> <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span> <span class="n">upper_limit</span> <span class="o">=</span> <span class="c1"># some reasonably high number less than the n_eigenvectors</span>
 <span class="gp">&gt;&gt;&gt; </span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dmap</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">[:</span><span class="n">upper_limit</span><span class="p">])</span>
@@ -177,7 +175,7 @@ high number of frames.</p>
 </pre></div>
 </div>
 <p>From here we can transform into the diffusion space</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">num_eigenvectors</span> <span class="o">=</span> <span class="c1"># some number less than the number of frames after</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">num_eigenvectors</span> <span class="o">=</span> <span class="c1"># some number less than the number of frames after</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting for the spectral gap</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">dmap</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">num_eigenvectors</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -194,14 +192,14 @@ epsilon determination or other manipulations on the diffusion
 map method. The <a class="reference internal" href="#MDAnalysis.analysis.diffusionmap.DistanceMatrix" title="MDAnalysis.analysis.diffusionmap.DistanceMatrix"><code class="xref py py-class docutils literal"><span class="pre">DistanceMatrix</span></code></a> exists in
 <a class="reference internal" href="#module-MDAnalysis.analysis.diffusionmap" title="MDAnalysis.analysis.diffusionmap"><code class="xref py py-mod docutils literal"><span class="pre">diffusionmap</span></code></a> and can be passed
 as an initialization argument for <a class="reference internal" href="#MDAnalysis.analysis.diffusionmap.DiffusionMap" title="MDAnalysis.analysis.diffusionmap.DiffusionMap"><code class="xref py py-class docutils literal"><span class="pre">DiffusionMap</span></code></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="kn">as</span> <span class="nn">mda</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.diffusionmap</span> <span class="kn">as</span> <span class="nn">diffusionmap</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.diffusionmap</span> <span class="k">as</span> <span class="nn">diffusionmap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="k">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
 </pre></div>
 </div>
 <p>Now create the distance matrix and pass it as an argument to
 <a class="reference internal" href="#MDAnalysis.analysis.diffusionmap.DiffusionMap" title="MDAnalysis.analysis.diffusionmap.DiffusionMap"><code class="xref py py-class docutils literal"><span class="pre">DiffusionMap</span></code></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dist_matrix</span> <span class="o">=</span> <span class="n">diffusionmap</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dist_matrix</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dmap</span> <span class="o">=</span> <span class="n">diffusionmap</span><span class="o">.</span><span class="n">DiffusionMap</span><span class="p">(</span><span class="n">dist_matrix</span><span class="p">)</span>
@@ -220,8 +218,7 @@ trajectory.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.diffusionmap.DiffusionMap.eigenvalues">
 <code class="descname">eigenvalues</code><a class="headerlink" href="#MDAnalysis.analysis.diffusionmap.DiffusionMap.eigenvalues" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array (n_frames,)</em></p>
-<p>Eigenvalues of the diffusion map</p>
+<dd><p><em>array (n_frames,)</em> &#8211; Eigenvalues of the diffusion map</p>
 </dd></dl>
 
 <dl class="method">
@@ -243,16 +240,15 @@ the collective coordinates.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>u</strong> (<em>MDAnalysis Universe or DistanceMatrix object</em>) &#8211; Can be a Universe, in which case one must supply kwargs for the
+<li><strong>u</strong> (<em>MDAnalysis Universe</em><em> or </em><em>DistanceMatrix object</em>) &#8211; Can be a Universe, in which case one must supply kwargs for the
 initialization of a DistanceMatrix. Otherwise, this can be a
 DistanceMatrix already initialized. Either way, this will be made
 into a diffusion kernel.</li>
 <li><strong>epsilon</strong> (<em>Float</em>) &#8211; Specifies the method used for the choice of scale parameter in the
 diffusion map. More information in <a class="reference internal" href="#lafon1" id="id8">[Lafon1]</a>, <a class="reference internal" href="#ferguson1" id="id9">[Ferguson1]</a> and
 <a class="reference internal" href="#clementi1" id="id10">[Clementi1]</a>, Default: 1.</li>
-<li><strong>**kwargs</strong> &#8211; <p>Parameters to be passed for the initialization of a
-<a class="reference internal" href="#MDAnalysis.analysis.diffusionmap.DistanceMatrix" title="MDAnalysis.analysis.diffusionmap.DistanceMatrix"><code class="xref py py-class docutils literal"><span class="pre">DistanceMatrix</span></code></a>.</p>
-</li>
+<li><strong>**kwargs</strong> &#8211; Parameters to be passed for the initialization of a
+<a class="reference internal" href="#MDAnalysis.analysis.diffusionmap.DistanceMatrix" title="MDAnalysis.analysis.diffusionmap.DistanceMatrix"><code class="xref py py-class docutils literal"><span class="pre">DistanceMatrix</span></code></a>.</li>
 </ul>
 </td>
 </tr>
@@ -267,19 +263,17 @@ diffusion map. More information in <a class="reference internal" href="#lafon1" 
 using a given metric</p>
 <p>A distance matrix can be initialized on its own and used as an
 initialization argument in <a class="reference internal" href="#MDAnalysis.analysis.diffusionmap.DiffusionMap" title="MDAnalysis.analysis.diffusionmap.DiffusionMap"><code class="xref py py-class docutils literal"><span class="pre">DiffusionMap</span></code></a>. Refer to the
-<a class="reference internal" href="#distance-matrix-tutorial"><span>Distance Matrix tutorial</span></a> for a demonstration.</p>
+<a class="reference internal" href="#distance-matrix-tutorial"><span class="std std-ref">Distance Matrix tutorial</span></a> for a demonstration.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.diffusionmap.DistanceMatrix.atoms">
 <code class="descname">atoms</code><a class="headerlink" href="#MDAnalysis.analysis.diffusionmap.DistanceMatrix.atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>AtomGroup</em></p>
-<p>Selected atoms in trajectory subject to dimension reduction</p>
+<dd><p><em>AtomGroup</em> &#8211; Selected atoms in trajectory subject to dimension reduction</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.diffusionmap.DistanceMatrix.dist_matrix">
 <code class="descname">dist_matrix</code><a class="headerlink" href="#MDAnalysis.analysis.diffusionmap.DistanceMatrix.dist_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array, (n_frames, n_frames)</em></p>
-<p>Array of all possible ij metric distances between frames in trajectory.
+<dd><p><em>array, (n_frames, n_frames)</em> &#8211; Array of all possible ij metric distances between frames in trajectory.
 This matrix is symmetric with zeros on the diagonal.</p>
 </dd></dl>
 
@@ -299,24 +293,24 @@ computational cost of eigenvalue decomposition
 scales at O(N^3) where N is the number of frames.
 Cost can be reduced by increasing step interval or specifying a
 start and stop.</li>
-<li><strong>select</strong> (<em>str, optional</em>) &#8211; Any valid selection string for
+<li><strong>select</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Any valid selection string for
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.select_atoms" title="MDAnalysis.core.groups.AtomGroup.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a>
 This selection of atoms is used to calculate the RMSD between
 different frames. Water should be excluded.</li>
-<li><strong>metric</strong> (<em>function, optional</em>) &#8211; Maps two numpy arrays to a float, is positive definite and
+<li><strong>metric</strong> (<a class="reference internal" href="encore/utils.html#MDAnalysis.analysis.encore.utils.ParallelCalculation.function" title="MDAnalysis.analysis.encore.utils.ParallelCalculation.function"><em>function</em></a><em>, </em><em>optional</em>) &#8211; Maps two numpy arrays to a float, is positive definite and
 symmetric. The API for a metric requires that the arrays must have
 equal length, and that the function should have weights as an
 optional argument. Weights give each index value its own weight for
 the metric calculation over the entire arrays. Default: metric is
 set to rms.rmsd().</li>
-<li><strong>cutoff</strong> (<em>float, optional</em>) &#8211; Specify a given cutoff for metric values to be considered equal,
+<li><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; Specify a given cutoff for metric values to be considered equal,
 Default: 1EO-5</li>
-<li><strong>weights</strong> (<em>array, optional</em>) &#8211; Weights to be given to coordinates for metric calculation</li>
-<li><strong>start</strong> (<em>int, optional</em>) &#8211; First frame of trajectory to analyse, Default: None becomes 0.</li>
-<li><strong>stop</strong> (<em>int, optional</em>) &#8211; Frame index to stop analysis. Default: None becomes
+<li><strong>weights</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Weights to be given to coordinates for metric calculation</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; First frame of trajectory to analyse, Default: None becomes 0.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Frame index to stop analysis. Default: None becomes
 n_frames. Iteration stops <em>before</em> this frame number,
 which means that the trajectory would be read until the end.</li>
-<li><strong>step</strong> (<em>int, optional</em>) &#8211; Step between frames to analyse, Default: None becomes 1.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Step between frames to analyse, Default: None becomes 1.</li>
 </ul>
 </td>
 </tr>
@@ -364,10 +358,10 @@ diffusion map. J. Chem. Phys. 134, 124116 (2011).</p>
 <p>Ferguson, A. L.; Panagiotopoulos, A. Z.; Kevrekidis, I. G.
 Debenedetti,  P. G. Nonlinear dimensionality reduction in molecular simulation:
 The diffusion map approach  Chem. Phys. Lett. 509, 1−11 (2011)</p>
-<p><a class="reference internal" href="../references.html#theobald2005" id="id13">[Theobald2005]</a> to calculate the root mean square distance (RMSD) between
+<p><a class="reference internal" href="../references.html#theobald2005" id="id11">[Theobald2005]</a> to calculate the root mean square distance (RMSD) between
 two coordinate sets (as implemented
 in <a class="reference internal" href="../lib/qcprot.html#MDAnalysis.lib.qcprot.CalcRMSDRotationalMatrix" title="MDAnalysis.lib.qcprot.CalcRMSDRotationalMatrix"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.lib.qcprot.CalcRMSDRotationalMatrix()</span></code></a>).
-When using this module in published work please cite <a class="reference internal" href="../references.html#theobald2005" id="id14">[Theobald2005]</a>.</p>
+When using this module in published work please cite <a class="reference internal" href="../references.html#theobald2005" id="id12">[Theobald2005]</a>.</p>
 </div>
 </div>
 
@@ -392,13 +386,13 @@ When using this module in published work please cite <a class="reference interna
         <li class="right" >
           <a href="waterdynamics.html" title="4.8.3. Water dynamics analysis — MDAnalysis.analysis.waterdynamics"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

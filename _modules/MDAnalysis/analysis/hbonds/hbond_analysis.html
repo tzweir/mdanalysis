@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.analysis.hbonds.hbond_analysis &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.analysis.hbonds.hbond_analysis &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" /> 
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,8 +42,8 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -53,14 +54,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -418,18 +416,18 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">zip</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">cPickle</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">zip</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">cPickle</span>
 
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">MissingDataWarning</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">,</span> <span class="n">SelectionError</span><span class="p">,</span> <span class="n">SelectionWarning</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="kn">import</span> <span class="n">parse_residue</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.lib.mdamath</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">angle</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="kn">import</span> <span class="n">ProgressMeter</span><span class="p">,</span> <span class="n">_set_verbose</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.lib.NeighborSearch</span> <span class="kn">import</span> <span class="n">AtomNeighborSearch</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="k">import</span> <span class="n">MissingDataWarning</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">,</span> <span class="n">SelectionError</span><span class="p">,</span> <span class="n">SelectionWarning</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="k">import</span> <span class="n">parse_residue</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.mdamath</span> <span class="k">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">angle</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="k">import</span> <span class="n">ProgressMeter</span><span class="p">,</span> <span class="n">_set_verbose</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.NeighborSearch</span> <span class="k">import</span> <span class="n">AtomNeighborSearch</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MDAnalysis.analysis.hbonds&#39;</span><span class="p">)</span>
@@ -497,12 +495,12 @@
     <span class="n">r_cov</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span>  <span class="c1"># default value</span>
                         <span class="n">N</span><span class="o">=</span><span class="mf">1.31</span><span class="p">,</span> <span class="n">O</span><span class="o">=</span><span class="mf">1.31</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">1.58</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mf">1.55</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection1</span><span class="o">=</span><span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="n">selection2</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">selection1_type</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span>
-                 <span class="n">update_selection1</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">update_selection2</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">filter_first</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">distance_type</span><span class="o">=</span><span class="s1">&#39;hydrogen&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection1</span><span class="o">=</span><span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="n">selection2</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">selection1_type</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span>
+                 <span class="n">update_selection1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">update_selection2</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filter_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">distance_type</span><span class="o">=</span><span class="s1">&#39;hydrogen&#39;</span><span class="p">,</span>
                  <span class="n">distance</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">120.0</span><span class="p">,</span>
-                 <span class="n">forcefield</span><span class="o">=</span><span class="s1">&#39;CHARMM27&#39;</span><span class="p">,</span> <span class="n">donors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">acceptors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">debug</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">detect_hydrogens</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+                 <span class="n">forcefield</span><span class="o">=</span><span class="s1">&#39;CHARMM27&#39;</span><span class="p">,</span> <span class="n">donors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">acceptors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">debug</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">detect_hydrogens</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up calculation of hydrogen bonds between two selections in a universe.</span>
 
 <span class="sd">        The timeseries is accessible as the attribute :attr:`HydrogenBondAnalysis.timeseries`.</span>
@@ -654,7 +652,7 @@
             <span class="s2">&quot;heuristic&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bonded_hydrogens_list</span><span class="p">,</span>  <span class="c1"># pre 0.7.6</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">detect_hydrogens</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bonded_hydrogens_algorithms</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;detect_hydrogens must be one of {0!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;detect_hydrogens must be one of </span><span class="si">{0!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">_get_bonded_hydrogens_algorithms</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">detect_hydrogens</span> <span class="o">=</span> <span class="n">detect_hydrogens</span>
 
@@ -671,9 +669,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">traj_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
 
         <span class="c1"># set up the donors/acceptors lists</span>
-        <span class="k">if</span> <span class="n">donors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">donors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">donors</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="n">acceptors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">acceptors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">acceptors</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">forcefield</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">donors</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_DONORS</span><span class="p">[</span><span class="n">forcefield</span><span class="p">])</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">donors</span><span class="p">))</span>
@@ -682,14 +680,14 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection2</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;HydrogenBondAnalysis: invalid selections&#39;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection1_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="s1">&#39;donor&#39;</span><span class="p">,</span> <span class="s1">&#39;acceptor&#39;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;HydrogenBondAnalysis: Invalid selection type {0!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1_type</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;HydrogenBondAnalysis: Invalid selection type </span><span class="si">{0!s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1_type</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># final result</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># time for each frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># final result</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># time for each frame</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># placeholder for output table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># placeholder for output table</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># always enable debug output for initial selection update</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># always enable debug output for initial selection update</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_selection_1</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_selection_2</span><span class="p">()</span>
         <span class="c1"># per-frame debugging output?</span>
@@ -700,7 +698,7 @@
         <span class="c1"># for *debug* must be set to False.</span>
         <span class="c1"># See the docstring for lib.log._set_verbose, the pull request #1150,</span>
         <span class="c1"># and the issue #903.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">_set_verbose</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">_set_verbose</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                   <span class="n">was</span><span class="o">=</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="n">now</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_parameters</span><span class="p">()</span>
@@ -737,11 +735,11 @@
         <span class="k">assert</span> <span class="n">selection</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">htype</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;donors&quot;</span><span class="p">,</span> <span class="s2">&quot;acceptors&quot;</span><span class="p">)</span>
         <span class="c1"># horrible data organization:  _s1_donors, _s2_acceptors, etc, update_selection1, ...</span>
-        <span class="n">atoms</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_s{0}_{1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">htype</span><span class="p">))</span>
-        <span class="n">update</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;update_selection{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selection</span><span class="p">))</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_s</span><span class="si">{0}</span><span class="s2">_</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">htype</span><span class="p">))</span>
+        <span class="n">update</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;update_selection</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selection</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">atoms</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="s2">&quot;No {1} found in selection {0}. &quot;</span> \
-                <span class="s2">&quot;You might have to specify a custom &#39;{1}&#39; keyword.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">errmsg</span> <span class="o">=</span> <span class="s2">&quot;No </span><span class="si">{1}</span><span class="s2"> found in selection </span><span class="si">{0}</span><span class="s2">. &quot;</span> \
+                <span class="s2">&quot;You might have to specify a custom &#39;</span><span class="si">{1}</span><span class="s2">&#39; keyword.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">selection</span><span class="p">,</span> <span class="n">htype</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">update</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
@@ -804,7 +802,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">atom</span><span class="o">.</span><span class="n">residue</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
-                <span class="s2">&quot;(name H* 1H* 2H* 3H* or type H) and around {0:f} name {1!s}&quot;</span>
+                <span class="s2">&quot;(name H* 1H* 2H* 3H* or type H) and around </span><span class="si">{0:f}</span><span class="s2"> name </span><span class="si">{1!s}</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_cov</span><span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
         <span class="k">except</span> <span class="n">NoDataError</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span></div>
@@ -850,55 +848,55 @@
 
     <span class="k">def</span> <span class="nf">_update_selection_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Size of selection 1: {0} atoms&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Size of selection 1: </span><span class="si">{0}</span><span class="s2"> atoms&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="p">)))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Selection 1 &#39;{0}&#39; did not select any atoms.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1</span><span class="p">)[:</span><span class="mi">80</span><span class="p">]))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Selection 1 &#39;</span><span class="si">{0}</span><span class="s2">&#39; did not select any atoms.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1</span><span class="p">)[:</span><span class="mi">80</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors_h</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s1_acceptors</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection1_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;donor&#39;</span><span class="p">,</span> <span class="s1">&#39;both&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
-                <span class="s1">&#39;name {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">donors</span><span class="p">)))</span>
+                <span class="s1">&#39;name </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">donors</span><span class="p">)))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors_h</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors</span><span class="p">):</span>
                 <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bonded_hydrogens</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">tmp</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors_h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 1 donors: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors</span><span class="p">)))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 1 donor hydrogens: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors_h</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 1 donors: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 1 donor hydrogens: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors_h</span><span class="p">)))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection1_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;acceptor&#39;</span><span class="p">,</span> <span class="s1">&#39;both&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_s1_acceptors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
-                <span class="s1">&#39;name {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">acceptors</span><span class="p">)))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 1 acceptors: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1_acceptors</span><span class="p">)))</span>
+                <span class="s1">&#39;name </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">acceptors</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 1 acceptors: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1_acceptors</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">_update_selection_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection2</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_first</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s1">&#39;Size of selection 2 before filtering:&#39;</span>
-                              <span class="s1">&#39; {} atoms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">)))</span>
+                              <span class="s1">&#39; </span><span class="si">{}</span><span class="s1"> atoms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">)))</span>
             <span class="n">ns_selection_2</span> <span class="o">=</span> <span class="n">AtomNeighborSearch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_s2</span> <span class="o">=</span> <span class="n">ns_selection_2</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="p">,</span> <span class="mf">3.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s1">&#39;Size of selection 2: {0} atoms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s1">&#39;Size of selection 2: </span><span class="si">{0}</span><span class="s1"> atoms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">)))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Selection 2 &quot;{0}&quot; did not select any atoms.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Selection 2 &quot;</span><span class="si">{0}</span><span class="s1">&quot; did not select any atoms.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection2</span><span class="p">)[:</span><span class="mi">80</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors_h</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s2_acceptors</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection1_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;donor&#39;</span><span class="p">,</span> <span class="s1">&#39;both&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_s2_acceptors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
-                <span class="s1">&#39;name {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">acceptors</span><span class="p">)))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 2 acceptors: {0:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2_acceptors</span><span class="p">)))</span>
+                <span class="s1">&#39;name </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">acceptors</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 2 acceptors: </span><span class="si">{0:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2_acceptors</span><span class="p">)))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection1_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;acceptor&#39;</span><span class="p">,</span> <span class="s1">&#39;both&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
-                <span class="s1">&#39;name {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">donors</span><span class="p">)))</span>
+                <span class="s1">&#39;name </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">donors</span><span class="p">)))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors_h</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors</span><span class="p">):</span>
                 <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bonded_hydrogens</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">tmp</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors_h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 2 donors: {0:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors</span><span class="p">)))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 2 donor hydrogens: {0:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors_h</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 2 donors: </span><span class="si">{0:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 2 donor hydrogens: </span><span class="si">{0:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors_h</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">logger_debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
@@ -945,12 +943,12 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;HBond analysis: donors    </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">donors</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;HBond analysis: acceptors </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptors</span><span class="p">)</span>
 
-        <span class="n">remove_duplicates</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;remove_duplicates&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>  <span class="c1"># False: old behaviour</span>
+        <span class="n">remove_duplicates</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;remove_duplicates&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># False: old behaviour</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">remove_duplicates</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Hidden feature remove_duplicates=False activated: you will probably get duplicate H-bonds.&quot;</span><span class="p">)</span>
 
-        <span class="n">debug</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">debug</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">debug</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">debug</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">debug</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">debug</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Toggling debug to </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
@@ -966,11 +964,11 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Problem reading trajectory or trajectory slice incompatible.&quot;</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">()</span>
             <span class="k">raise</span>
-        <span class="n">verbose</span> <span class="o">=</span> <span class="n">_set_verbose</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
-                               <span class="n">quiet</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
-                               <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">verbose</span> <span class="o">=</span> <span class="n">_set_verbose</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                               <span class="n">quiet</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                               <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span>
-                           <span class="n">format</span><span class="o">=</span><span class="s2">&quot;HBonds frame {current_step:5d}: {step:5d}/{numsteps} [{percentage:5.1f}%]</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">,</span>
+                           <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;HBonds frame </span><span class="si">{current_step:5d}</span><span class="s2">: </span><span class="si">{step:5d}</span><span class="s2">/</span><span class="si">{numsteps}</span><span class="s2"> [</span><span class="si">{percentage:5.1f}</span><span class="s2">%]</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">,</span>
                            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -1022,15 +1020,15 @@
                             <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_eucl_distance</span><span class="p">(</span><span class="n">donor_atom</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">angle</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="ow">and</span> <span class="n">dist</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">:</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span>
-                                    <span class="s2">&quot;S1-D: {0!s} &lt;-&gt; S2-A: {1!s} {2:f} A, {3:f} DEG&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">angle</span><span class="p">))</span>
+                                    <span class="s2">&quot;S1-D: </span><span class="si">{0!s}</span><span class="s2"> &lt;-&gt; S2-A: </span><span class="si">{1!s}</span><span class="s2"> </span><span class="si">{2:f}</span><span class="s2"> A, </span><span class="si">{3:f}</span><span class="s2"> DEG&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">angle</span><span class="p">))</span>
                                 <span class="c1">#self.logger_debug(&quot;S1-D: %r &lt;-&gt; S2-A: %r %f A, %f DEG&quot; % (h, a, dist, angle))</span>
                                 <span class="n">frame_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                                     <span class="p">[</span><span class="n">h</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
-                                    <span class="s1">&#39;{0!s}{1!s}:{2!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">h</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
-                                    <span class="s1">&#39;{0!s}{1!s}:{2!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                                    <span class="s1">&#39;</span><span class="si">{0!s}{1!s}</span><span class="s1">:</span><span class="si">{2!s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">h</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                                    <span class="s1">&#39;</span><span class="si">{0!s}{1!s}</span><span class="s1">:</span><span class="si">{2!s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
                                     <span class="n">dist</span><span class="p">,</span> <span class="n">angle</span><span class="p">])</span>
 
-                                <span class="n">already_found</span><span class="p">[(</span><span class="n">h</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">True</span>
+                                <span class="n">already_found</span><span class="p">[(</span><span class="n">h</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection1_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;acceptor&#39;</span><span class="p">,</span> <span class="s1">&#39;both&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s1_acceptors</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Selection 1 Acceptors &lt;-&gt; Donors&quot;</span><span class="p">)</span>
                 <span class="n">ns_acceptors</span> <span class="o">=</span> <span class="n">AtomNeighborSearch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1_acceptors</span><span class="p">)</span>
@@ -1048,12 +1046,12 @@
                             <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_eucl_distance</span><span class="p">(</span><span class="n">donor_atom</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">angle</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="ow">and</span> <span class="n">dist</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">:</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span>
-                                    <span class="s2">&quot;S1-A: {0!s} &lt;-&gt; S2-D: {1!s} {2:f} A, {3:f} DEG&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">angle</span><span class="p">))</span>
+                                    <span class="s2">&quot;S1-A: </span><span class="si">{0!s}</span><span class="s2"> &lt;-&gt; S2-D: </span><span class="si">{1!s}</span><span class="s2"> </span><span class="si">{2:f}</span><span class="s2"> A, </span><span class="si">{3:f}</span><span class="s2"> DEG&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">angle</span><span class="p">))</span>
                                 <span class="c1">#self.logger_debug(&quot;S1-A: %r &lt;-&gt; S2-D: %r %f A, %f DEG&quot; % (a, h, dist, angle))</span>
                                 <span class="n">frame_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                                     <span class="p">[</span><span class="n">h</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
-                                    <span class="s1">&#39;{0!s}{1!s}:{2!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">h</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
-                                    <span class="s1">&#39;{0!s}{1!s}:{2!s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                                    <span class="s1">&#39;</span><span class="si">{0!s}{1!s}</span><span class="s1">:</span><span class="si">{2!s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">h</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                                    <span class="s1">&#39;</span><span class="si">{0!s}{1!s}</span><span class="s1">:</span><span class="si">{2!s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
                                     <span class="n">dist</span><span class="p">,</span> <span class="n">angle</span><span class="p">])</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_results</span><span class="p">)</span>
@@ -1099,7 +1097,7 @@
 
 <span class="sd">        .. _recsql: http://pypi.python.org/pypi/RecSQL</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No timeseries computed, do run() first.&quot;</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">MissingDataWarning</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -1137,7 +1135,7 @@
 
 <span class="sd">        .. SeeAlso:: :mod:`cPickle` module and :class:`numpy.recarray`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">generate_table</span><span class="p">()</span>
         <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">),</span> <span class="n">protocol</span><span class="o">=</span><span class="n">cPickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span></div>
 
@@ -1147,7 +1145,7 @@
 <span class="sd">        :Returns: a class:`numpy.recarray`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No timeseries computed, do run() first.&quot;</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">MissingDataWarning</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -1170,7 +1168,7 @@
 
 <span class="sd">        :Returns: a class:`numpy.recarray`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No timeseries computed, do run() first.&quot;</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">MissingDataWarning</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -1231,7 +1229,7 @@
 <span class="sd">        :Returns: a class:`numpy.recarray`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No timeseries computed, do run() first.&quot;</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">MissingDataWarning</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -1382,13 +1380,13 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

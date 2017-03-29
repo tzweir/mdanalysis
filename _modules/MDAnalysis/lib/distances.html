@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.lib.distances &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.lib.distances &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,8 +42,8 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -53,14 +54,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -137,12 +135,12 @@
 <span class="sd">.. autofunction:: transform_StoR(coordinates, box [,backend])</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="kn">import</span> <span class="n">deprecate</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="k">import</span> <span class="n">deprecate</span>
 
-<span class="kn">from</span> <span class="nn">.mdamath</span> <span class="kn">import</span> <span class="n">triclinic_vectors</span><span class="p">,</span> <span class="n">triclinic_box</span>
+<span class="kn">from</span> <span class="nn">.mdamath</span> <span class="k">import</span> <span class="n">triclinic_vectors</span><span class="p">,</span> <span class="n">triclinic_box</span>
 
 
 <span class="c1"># hack to select backend with backend=&lt;backend&gt; kwarg. Note that</span>
@@ -159,21 +157,21 @@
     <span class="k">pass</span>
 <span class="k">del</span> <span class="n">importlib</span>
 
-<span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="n">funcname</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="n">funcname</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Helper function to select a backend function *funcname*.&quot;&quot;&quot;</span>
-    <span class="n">args</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">tuple</span><span class="p">()</span>
-    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">tuple</span><span class="p">()</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">_distances</span><span class="p">[</span><span class="n">backend</span><span class="p">],</span> <span class="n">funcname</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Function {0} not available with backend {1}; try one of: {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Function </span><span class="si">{0}</span><span class="s2"> not available with backend </span><span class="si">{1}</span><span class="s2">; try one of: </span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">funcname</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_distances</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="c1"># serial versions are always available (and are typically used within</span>
 <span class="c1"># the core and topology modules)</span>
-<span class="kn">from</span> <span class="nn">.c_distances</span> <span class="kn">import</span> <span class="p">(</span><span class="n">calc_distance_array</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">.c_distances</span> <span class="k">import</span> <span class="p">(</span><span class="n">calc_distance_array</span><span class="p">,</span>
                           <span class="n">calc_distance_array_ortho</span><span class="p">,</span>
                           <span class="n">calc_distance_array_triclinic</span><span class="p">,</span>
                           <span class="n">calc_self_distance_array</span><span class="p">,</span>
@@ -192,7 +190,7 @@
                           <span class="n">ortho_pbc</span><span class="p">,</span>
                           <span class="n">triclinic_pbc</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">.c_distances_openmp</span> <span class="kn">import</span> <span class="n">OPENMP_ENABLED</span> <span class="k">as</span> <span class="n">USED_OPENMP</span>
+<span class="kn">from</span> <span class="nn">.c_distances_openmp</span> <span class="k">import</span> <span class="n">OPENMP_ENABLED</span> <span class="k">as</span> <span class="n">USED_OPENMP</span>
 
 
 <span class="k">def</span> <span class="nf">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">):</span>
@@ -253,10 +251,10 @@
 <span class="sd">       float32 data</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">coords</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;{0} must be a sequence of 3 dimensional coordinates&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> must be a sequence of 3 dimensional coordinates&quot;</span>
                          <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">desc</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">coords</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;{0} must be of type float32&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">desc</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> must be of type float32&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">desc</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">_check_results_array</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
@@ -268,7 +266,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">size</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Result array has incorrect size,&quot;</span>
-                         <span class="s2">&quot;should be {0}, got {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+                         <span class="s2">&quot;should be </span><span class="si">{0}</span><span class="s2">, got </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Results array must be of type float64&quot;</span><span class="p">)</span>
 
@@ -279,9 +277,9 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input arrays must all be same shape&quot;</span>
-                         <span class="s2">&quot;Got {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">]))</span>
+                         <span class="s2">&quot;Got </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">]))</span>
 
-<div class="viewcode-block" id="distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.distance_array">[docs]</a><span class="k">def</span> <span class="nf">distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.distance_array">[docs]</a><span class="k">def</span> <span class="nf">distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate all distances between a reference set and another configuration.</span>
 
 <span class="sd">    If there are *i* positions in reference, and *j* positions in configuration,</span>
@@ -335,7 +333,7 @@
     <span class="n">_check_array</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="s1">&#39;conf&#39;</span><span class="p">)</span>
     <span class="n">_check_array</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">boxtype</span> <span class="o">=</span> <span class="n">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
         <span class="c1"># Convert [A,B,C,alpha,beta,gamma] to [[A],[B],[C]]</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_box&#39;</span><span class="p">):</span>
@@ -346,13 +344,13 @@
     <span class="n">confnum</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">refnum</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_check_results_array</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">refnum</span><span class="p">,</span> <span class="n">confnum</span><span class="p">))</span>
         <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">refnum</span><span class="p">,</span> <span class="n">confnum</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;ortho&#39;</span><span class="p">:</span>
             <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;calc_distance_array_ortho&quot;</span><span class="p">,</span>
                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
@@ -369,7 +367,7 @@
     <span class="k">return</span> <span class="n">distances</span></div>
 
 
-<div class="viewcode-block" id="self_distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.self_distance_array">[docs]</a><span class="k">def</span> <span class="nf">self_distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="self_distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.self_distance_array">[docs]</a><span class="k">def</span> <span class="nf">self_distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate all distances within a configuration *reference*.</span>
 
 <span class="sd">    If a *box* is supplied then a minimum image convention is used before</span>
@@ -423,8 +421,8 @@
 
     <span class="n">_check_array</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span>
 
-    <span class="n">with_PBC</span> <span class="o">=</span> <span class="p">(</span><span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">with_PBC</span> <span class="o">=</span> <span class="p">(</span><span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">boxtype</span> <span class="o">=</span> <span class="n">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
         <span class="c1"># Convert [A,B,C,alpha,beta,gamma] to [[A],[B],[C]]</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_box&#39;</span><span class="p">):</span>
@@ -435,13 +433,13 @@
     <span class="n">refnum</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">distnum</span> <span class="o">=</span> <span class="n">refnum</span> <span class="o">*</span> <span class="p">(</span><span class="n">refnum</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 
-    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_check_results_array</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">distnum</span><span class="p">,))</span>
         <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">distnum</span><span class="p">,),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;ortho&#39;</span><span class="p">:</span>
             <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;calc_self_distance_array_ortho&quot;</span><span class="p">,</span>
                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
@@ -559,7 +557,7 @@
     <span class="k">return</span> <span class="n">coords</span></div>
 
 
-<div class="viewcode-block" id="calc_bonds"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_bonds">[docs]</a><span class="k">def</span> <span class="nf">calc_bonds</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_bonds"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_bonds">[docs]</a><span class="k">def</span> <span class="nf">calc_bonds</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate all distances between a pair of atoms.  *atom1* and *atom2* are both</span>
 <span class="sd">    arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</span>
@@ -615,7 +613,7 @@
     <span class="n">_check_array</span><span class="p">(</span><span class="n">atom2</span><span class="p">,</span> <span class="s1">&#39;atom2&#39;</span><span class="p">)</span>
     <span class="n">_check_lengths_match</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">boxtype</span> <span class="o">=</span> <span class="n">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
         <span class="c1"># Convert [A,B,C,alpha,beta,gamma] to [[A],[B],[C]]</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_box&#39;</span><span class="p">):</span>
@@ -625,13 +623,13 @@
 
     <span class="n">numatom</span> <span class="o">=</span> <span class="n">atom1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_check_results_array</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">numatom</span><span class="p">,))</span>
         <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">numatom</span><span class="p">,),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;ortho&#39;</span><span class="p">:</span>
             <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;calc_bond_distance_ortho&quot;</span><span class="p">,</span>
                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
@@ -648,7 +646,7 @@
     <span class="k">return</span> <span class="n">distances</span></div>
 
 
-<div class="viewcode-block" id="calc_angles"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_angles">[docs]</a><span class="k">def</span> <span class="nf">calc_angles</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_angles"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_angles">[docs]</a><span class="k">def</span> <span class="nf">calc_angles</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the angle formed between three atoms, over a list of coordinates.</span>
 <span class="sd">    All *atom* inputs are lists of coordinates of equal length, with *atom2*</span>
@@ -707,7 +705,7 @@
     <span class="n">_check_array</span><span class="p">(</span><span class="n">atom3</span><span class="p">,</span> <span class="s1">&#39;coords3&#39;</span><span class="p">)</span>
     <span class="n">_check_lengths_match</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">boxtype</span> <span class="o">=</span> <span class="n">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
         <span class="c1"># Convert [A,B,C,alpha,beta,gamma] to [[A],[B],[C]]</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_box&#39;</span><span class="p">):</span>
@@ -715,13 +713,13 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_vecs_bad&#39;</span><span class="p">):</span>
             <span class="n">box</span> <span class="o">=</span> <span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">triclinic_box</span><span class="p">(</span><span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
 
-    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_check_results_array</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">numatom</span><span class="p">,))</span>
         <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">numatom</span><span class="p">,),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;ortho&#39;</span><span class="p">:</span>
             <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;calc_angle_ortho&quot;</span><span class="p">,</span>
                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">),</span>
@@ -738,7 +736,7 @@
     <span class="k">return</span> <span class="n">angles</span></div>
 
 
-<div class="viewcode-block" id="calc_dihedrals"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_dihedrals">[docs]</a><span class="k">def</span> <span class="nf">calc_dihedrals</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">coords4</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="calc_dihedrals"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_dihedrals">[docs]</a><span class="k">def</span> <span class="nf">calc_dihedrals</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">coords4</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the dihedral angle formed by four atoms, over a list of coordinates.</span>
@@ -813,7 +811,7 @@
 
     <span class="n">numatom</span> <span class="o">=</span> <span class="n">atom1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">boxtype</span> <span class="o">=</span> <span class="n">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
         <span class="c1"># Convert [A,B,C,alpha,beta,gamma] to [[A],[B],[C]]</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_box&#39;</span><span class="p">):</span>
@@ -821,13 +819,13 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_vecs_bad&#39;</span><span class="p">):</span>
             <span class="n">box</span> <span class="o">=</span> <span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">triclinic_box</span><span class="p">(</span><span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
 
-    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_check_results_array</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">numatom</span><span class="p">,))</span>
         <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">numatom</span><span class="p">,),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;ortho&#39;</span><span class="p">:</span>
             <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;calc_dihedral_ortho&quot;</span><span class="p">,</span>
                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">atom4</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">),</span>
@@ -842,12 +840,6 @@
                <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">angles</span></div>
-
-
-<span class="n">calc_torsions</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">calc_dihedrals</span><span class="p">,</span>
-                          <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;calc_torsions&#39;</span><span class="p">,</span>
-                          <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;calc_dihedrals&#39;</span><span class="p">,</span>
-                          <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This will be removed in v0.15.0&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="apply_PBC"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.apply_PBC">[docs]</a><span class="k">def</span> <span class="nf">apply_PBC</span><span class="p">(</span><span class="n">incoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
@@ -911,12 +903,6 @@
                <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">coords</span></div>
-
-
-<span class="n">applyPBC</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">apply_PBC</span><span class="p">,</span>
-                     <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;applyPBC&#39;</span><span class="p">,</span>
-                     <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;apply_PBC&#39;</span><span class="p">,</span>
-                     <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This will be removed in v0.15.0&quot;</span><span class="p">)</span>
 </pre></div>
 
           </div>
@@ -933,13 +919,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

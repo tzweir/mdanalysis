@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.12. PDB structure files in MDAnalysis — MDAnalysis.coordinates.PDB &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>6.12. PDB structure files in MDAnalysis — MDAnalysis.coordinates.PDB &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="6. Coordinates modules" href="../coordinates_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6.13. PDBQT structure files in MDAnalysis — MDAnalysis.coordinates.PDBQT" href="PDBQT.html" />
     <link rel="prev" title="6.11. MOL2 file format — MDAnalysis.coordinates.MOL2" href="MOL2.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="MOL2.html" title="6.11. MOL2 file format — MDAnalysis.coordinates.MOL2"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -79,21 +80,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/coordinates/PDB.txt"
+      <li><a href="../../_sources/documentation_pages/coordinates/PDB.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -118,7 +116,7 @@ recognized; the only difference is thath the single-frame PDB is represented as
 a trajectory with only one frame.</p>
 <p>In order to write a selection to a PDB file one typically uses the
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.write" title="MDAnalysis.core.groups.AtomGroup.write"><code class="xref py py-meth docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup.write()</span></code></a> method of the selection:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">calphas</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;name CA&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">calphas</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;name CA&quot;</span><span class="p">)</span>
 <span class="n">calphas</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;calpha_only.pdb&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -126,8 +124,8 @@ a trajectory with only one frame.</p>
 <p>In order to write a PDB trajectory one needs to first obtain a multi-frame
 writer (keyword <em>multiframe</em> = <code class="docutils literal"><span class="pre">True</span></code>) and then iterate through the
 trajectory, while writing each frame:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">calphas</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;name CA&quot;</span><span class="p">)</span>
-<span class="n">W</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;calpha_traj.pdb&quot;</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">calphas</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;name CA&quot;</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;calpha_traj.pdb&quot;</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
     <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">calphas</span><span class="p">)</span>
 <span class="n">W</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -159,14 +157,14 @@ to write a PDB trajectory by default (equivalent to using <em>multiframe</em> =
 <p class="rubric">Examples</p>
 <p>In order to write a <strong>multi-frame PDB trajectory</strong> from a universe <em>u</em> one can
 do the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;all.pdb&quot;</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;all.pdb&quot;</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
     <span class="n">pdb</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="n">pdb</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Similarly, writing only a protein:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;protein.pdb&quot;</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;protein.pdb&quot;</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
     <span class="n">pdb</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">protein</span><span class="p">)</span>
@@ -176,13 +174,13 @@ do the following:</p>
 <p>A single frame can be written with the
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.write" title="MDAnalysis.core.groups.AtomGroup.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a> method of any
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
 <span class="n">protein</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;protein.pdb&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, get the single frame writer and supply the
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;protein.pdb&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;protein.pdb&quot;</span><span class="p">)</span>
 <span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
 <span class="n">pdb</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">protein</span><span class="p">)</span>
 <span class="n">pdb</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -611,13 +609,13 @@ or a <a class="reference internal" href="../core/universe.html#MDAnalysis.core.u
 <p>The method writes the frames from the one specified as <em>start</em> until
 the end, using a step of <em>skip</em> (<em>start</em> and <em>skip</em> are set in the
 constructor). Thus, if <em>u</em> is a Universe then</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">pdb</span> <span class="o">=</span> <span class="n">PDBWriter</span><span class="p">(</span><span class="s2">&quot;out.pdb&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span>
 <span class="n">pdb</span><span class="o">.</span><span class="n">write_all_timesteps</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>will write a PDB trajectory containing the last 2 frames and</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">PDBWriter</span><span class="p">(</span><span class="s2">&quot;out.pdb&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">PDBWriter</span><span class="p">(</span><span class="s2">&quot;out.pdb&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">pdb</span><span class="o">.</span><span class="n">write_all_timesteps</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -756,13 +754,13 @@ it will be completely removed in 0.16.0.</dd>
         <li class="right" >
           <a href="MOL2.html" title="6.11. MOL2 file format — MDAnalysis.coordinates.MOL2"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

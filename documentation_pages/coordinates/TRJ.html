@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.15. AMBER trajectories — MDAnalysis.coordinates.TRJ &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>6.15. AMBER trajectories — MDAnalysis.coordinates.TRJ &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="6. Coordinates modules" href="../coordinates_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6.16. TRR trajectory files — MDAnalysis.coordinates.TRR" href="TRR.html" />
     <link rel="prev" title="6.14. PQR file format — MDAnalysis.coordinates.PQR" href="PQR.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="PQR.html" title="6.14. PQR file format — MDAnalysis.coordinates.PQR"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -76,21 +77,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/coordinates/TRJ.txt"
+      <li><a href="../../_sources/documentation_pages/coordinates/TRJ.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -103,8 +101,8 @@
             
   <span class="target" id="module-MDAnalysis.coordinates.TRJ"></span><div class="section" id="amber-trajectories-mdanalysis-coordinates-trj">
 <h1>6.15. AMBER trajectories &#8212; <a class="reference internal" href="#module-MDAnalysis.coordinates.TRJ" title="MDAnalysis.coordinates.TRJ"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.TRJ</span></code></a><a class="headerlink" href="#amber-trajectories-mdanalysis-coordinates-trj" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="http://ambermd.org">AMBER</a> can write <a class="reference internal" href="#ascii-trajectories"><span>ASCII trajectories</span></a> (&#8220;traj&#8221;) and
-<a class="reference internal" href="#netcdf-trajectories"><span>binary trajectories</span></a> (&#8220;netcdf&#8221;). MDAnalysis supports
+<p><a class="reference external" href="http://ambermd.org">AMBER</a> can write <a class="reference internal" href="#ascii-trajectories"><span class="std std-ref">ASCII trajectories</span></a> (&#8220;traj&#8221;) and
+<a class="reference internal" href="#netcdf-trajectories"><span class="std std-ref">binary trajectories</span></a> (&#8220;netcdf&#8221;). MDAnalysis supports
 reading of both formats and writing for the binary trajectories.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -135,15 +133,15 @@ allocate space for both coordinates and velocities;</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
-<li><strong>positions</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>velocities</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>forces</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>reader</strong> (<em>Reader, optional</em>) &#8211; A weak reference to the owning Reader.  Used for
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
+<li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader</em><em>, </em><em>optional</em>) &#8211; A weak reference to the owning Reader.  Used for
 when attributes require trajectory manipulation (e.g. dt)</li>
-<li><strong>dt</strong> (<em>float, optional</em>) &#8211; The time difference between frames (ps).  If <code class="xref py py-attr docutils literal"><span class="pre">time</span></code>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The time difference between frames (ps).  If <code class="xref py py-attr docutils literal"><span class="pre">time</span></code>
 is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>time_offset</strong> (<em>float, optional</em>) &#8211; <p>The starting time from which to calculate time (ps)</p>
+<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; <p>The starting time from which to calculate time (ps)</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
 Can add and remove position/velocity/force information by using
@@ -376,7 +374,7 @@ velocities).</p>
 <dt><em>convert_units</em></dt>
 <dd><p class="first last"><code class="docutils literal"><span class="pre">True</span></code>: units are converted to the AMBER base format; <code class="docutils literal"><span class="pre">None</span></code>
 selects the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code>
-[&#8216;convert_lengths&#8217;] (see <a class="reference internal" href="../core/init.html#flags-label"><span>Flags</span></a>).</p>
+[&#8216;convert_lengths&#8217;] (see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>).</p>
 </dd>
 <dt><em>zlib</em></dt>
 <dd><p class="first last">compress data [<code class="docutils literal"><span class="pre">False</span></code>]</p>
@@ -436,13 +434,13 @@ be written to trajectory file</p>
         <li class="right" >
           <a href="PQR.html" title="6.14. PQR file format — MDAnalysis.coordinates.PQR"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

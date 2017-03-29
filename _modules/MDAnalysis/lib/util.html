@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.lib.util &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.lib.util &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,8 +42,8 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -53,14 +54,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -229,7 +227,7 @@
 <span class="sd">   Moved mathematical functions into lib.mdamath</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">map</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">map</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext en&quot;</span>
@@ -238,24 +236,24 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">errno</span>
-<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">contextmanager</span>
 <span class="kn">import</span> <span class="nn">bz2</span>
 <span class="kn">import</span> <span class="nn">gzip</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
 <span class="kn">import</span> <span class="nn">mmtf</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">functools</span>
-<span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="kn">import</span> <span class="n">assert_equal</span>
+<span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="k">import</span> <span class="n">assert_equal</span>
 
-<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="kn">import</span> <span class="n">StreamWarning</span>
+<span class="kn">from</span> <span class="nn">..exceptions</span> <span class="k">import</span> <span class="n">StreamWarning</span>
 
 
 <span class="c1"># Python 3.0, 3.1 do not have the builtin callable()</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="nb">callable</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">callable</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
     <span class="c1"># http://bugs.python.org/issue10518</span>
     <span class="kn">import</span> <span class="nn">collections</span>
@@ -264,7 +262,7 @@
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Callable</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="filename"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.filename">[docs]</a><span class="k">def</span> <span class="nf">filename</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="filename"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.filename">[docs]</a><span class="k">def</span> <span class="nf">filename</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a new name that has suffix attached; replaces other extensions.</span>
 
 <span class="sd">    :Arguments:</span>
@@ -281,7 +279,7 @@
 <span class="sd">    .. versionchanged:: 0.9.0</span>
 <span class="sd">       Also permits :class:`NamedStream` to pass through.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ext</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extsep</span><span class="p">):</span>
             <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extsep</span> <span class="o">+</span> <span class="n">ext</span>
         <span class="n">root</span><span class="p">,</span> <span class="n">origext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -295,7 +293,7 @@
 
 
 <span class="nd">@contextmanager</span>
-<div class="viewcode-block" id="openany"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.openany">[docs]</a><span class="k">def</span> <span class="nf">openany</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="openany"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.openany">[docs]</a><span class="k">def</span> <span class="nf">openany</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Context manager for :func:`anyopen`.</span>
 
 <span class="sd">    Open the *datasource* and close it when the context of the :keyword:`with`</span>
@@ -360,7 +358,7 @@
     <span class="n">bz2_open</span> <span class="o">=</span> <span class="n">bz2</span><span class="o">.</span><span class="n">open</span>
 
 
-<div class="viewcode-block" id="anyopen"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.anyopen">[docs]</a><span class="k">def</span> <span class="nf">anyopen</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="anyopen"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.anyopen">[docs]</a><span class="k">def</span> <span class="nf">anyopen</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Open datasource (gzipped, bzipped, uncompressed) and return a stream.</span>
 
 <span class="sd">    *datasource* can be a filename or a stream (see :func:`isstream`). By</span>
@@ -404,19 +402,19 @@
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                     <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
-                        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Stream {0}: not guaranteed to be at the beginning.&quot;</span>
+                        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Stream </span><span class="si">{0}</span><span class="s2">: not guaranteed to be at the beginning.&quot;</span>
                                       <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span>
                                       <span class="n">category</span><span class="o">=</span><span class="n">StreamWarning</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">stream</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="n">datasource</span>
             <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;bz2&#39;</span><span class="p">,</span> <span class="s1">&#39;gz&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>  <span class="c1"># file == &#39;&#39; should be last</span>
                 <span class="n">openfunc</span> <span class="o">=</span> <span class="n">handlers</span><span class="p">[</span><span class="n">ext</span><span class="p">]</span>
                 <span class="n">stream</span> <span class="o">=</span> <span class="n">_get_stream</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">openfunc</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">break</span>
-            <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EIO</span><span class="p">,</span> <span class="s2">&quot;Cannot open file or stream in mode={mode!r}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EIO</span><span class="p">,</span> <span class="s2">&quot;Cannot open file or stream in mode=</span><span class="si">{mode!r}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
     <span class="k">elif</span> <span class="n">mode</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">mode</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">):</span>  <span class="c1"># append &#39;a&#39; not tested...</span>
         <span class="k">if</span> <span class="n">isstream</span><span class="p">(</span><span class="n">datasource</span><span class="p">):</span>
             <span class="n">stream</span> <span class="o">=</span> <span class="n">datasource</span>
@@ -425,7 +423,7 @@
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&lt;stream&gt;&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">stream</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="n">datasource</span>
             <span class="n">name</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ext</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
@@ -434,10 +432,10 @@
                 <span class="n">ext</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>  <span class="c1"># anything else but bz2 or gz is just a normal file</span>
             <span class="n">openfunc</span> <span class="o">=</span> <span class="n">handlers</span><span class="p">[</span><span class="n">ext</span><span class="p">]</span>
             <span class="n">stream</span> <span class="o">=</span> <span class="n">openfunc</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EIO</span><span class="p">,</span> <span class="s2">&quot;Cannot open file or stream in mode={mode!r}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EIO</span><span class="p">,</span> <span class="s2">&quot;Cannot open file or stream in mode=</span><span class="si">{mode!r}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Sorry, mode={mode!r} is not implemented for {datasource!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()))</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Sorry, mode=</span><span class="si">{mode!r}</span><span class="s2"> is not implemented for </span><span class="si">{datasource!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()))</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">stream</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">filename</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
@@ -455,14 +453,14 @@
         <span class="c1"># either the file isn&#39;t there or the permissions don&#39;t allow access.</span>
         <span class="k">if</span> <span class="n">errno</span><span class="o">.</span><span class="n">errorcode</span><span class="p">[</span><span class="n">err</span><span class="o">.</span><span class="n">errno</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ENOENT&#39;</span><span class="p">,</span> <span class="s1">&#39;EACCES&#39;</span><span class="p">]:</span>
             <span class="n">six</span><span class="o">.</span><span class="n">reraise</span><span class="p">(</span><span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">())</span>
-        <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">):</span>
         <span class="c1"># additional check for reading (eg can we uncompress) --- is this needed?</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
             <span class="n">stream</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="n">stream</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">stream</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="k">raise</span>
@@ -495,7 +493,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span><span class="p">,</span> <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="n">extension</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
         <span class="n">extension</span> <span class="o">=</span> <span class="n">ext</span> <span class="o">+</span> <span class="n">extension</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ext</span><span class="p">:</span>
@@ -505,7 +503,7 @@
 
 <div class="viewcode-block" id="hasmethod"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.hasmethod">[docs]</a><span class="k">def</span> <span class="nf">hasmethod</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return ``True`` if object *obj* contains the method *m*.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="isstream"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.isstream">[docs]</a><span class="k">def</span> <span class="nf">isstream</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
@@ -538,7 +536,7 @@
     <span class="c1"># Must have ALL the signature methods</span>
     <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">signature_methods</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">hasmethod</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
     <span class="c1"># Must have at least one complete set of alternative_methods</span>
     <span class="n">alternative_results</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="n">hasmethod</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">alternatives</span><span class="p">])</span>
@@ -565,10 +563,10 @@
             <span class="n">exe_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">program</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">is_exe</span><span class="p">(</span><span class="n">exe_file</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">exe_file</span>
-    <span class="k">return</span> <span class="bp">None</span></div>
+    <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<span class="nd">@functools.total_ordering</span>
+<span class="nd">@functools</span><span class="o">.</span><span class="n">total_ordering</span>
 <div class="viewcode-block" id="NamedStream"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream">[docs]</a><span class="k">class</span> <span class="nc">NamedStream</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stream that also provides a (fake) name.</span>
 
@@ -625,7 +623,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize the :class:`NamedStream` from a *stream* and give it a *name*.</span>
 
 <span class="sd">        The constructor attempts to rewind the stream to the beginning unless</span>
@@ -672,25 +670,25 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># typical file objects</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;NamedStream {0}: not guaranteed to be at the beginning.&quot;</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;NamedStream </span><span class="si">{0}</span><span class="s2">: not guaranteed to be at the beginning.&quot;</span>
                               <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
                               <span class="n">category</span><span class="o">=</span><span class="n">StreamWarning</span><span class="p">)</span></div>
 
     <span class="c1"># access the stream</span>
-    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># do not call the stream&#39;s __enter__ because the stream is already open</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="c1"># NOTE: By default (close=False) we only reset the stream and NOT close it; this makes</span>
         <span class="c1">#       it easier to use it as a drop-in replacement for a filename that might</span>
         <span class="c1">#       be opened repeatedly (at least in MDAnalysis)</span>
@@ -702,7 +700,7 @@
 
     <span class="c1"># override more IOBase methods, as these are provided by IOBase and are not</span>
     <span class="c1"># caught with __getattr__ (ugly...)</span>
-<div class="viewcode-block" id="NamedStream.close"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="NamedStream.close"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reset or close the stream.</span>
 
 <span class="sd">        If :attr:`NamedStream.close_stream` is set to ``False`` (the default)</span>
@@ -724,9 +722,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="NamedStream.__del__"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream.__del__">[docs]</a>    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Always closes the stream.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">closed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -829,28 +827,28 @@
 
     <span class="c1"># fake the important parts of the string API</span>
     <span class="c1"># (other methods such as rfind() are automatically dealt with via __getattr__)</span>
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">&lt;</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">x</span>
 
-    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">*</span> <span class="n">x</span>
 
     <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
@@ -858,11 +856,11 @@
     <span class="k">def</span> <span class="nf">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_spec</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format_spec</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;NamedStream({0}, {1})&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;NamedStream(</span><span class="si">{0}</span><span class="s2">, </span><span class="si">{1}</span><span class="s2">)&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="realpath"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.realpath">[docs]</a><span class="k">def</span> <span class="nf">realpath</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -872,8 +870,8 @@
 
 <span class="sd">    Returns ``None`` if any of the args is ``None``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">None</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))))</span></div>
 
 
@@ -896,7 +894,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">get_ext</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Cannot determine coordinate format for &#39;{0}.{1}&#39;&quot;</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Cannot determine coordinate format for &#39;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&#39;&quot;</span>
                             <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">ext</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
@@ -908,11 +906,11 @@
         <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">get_ext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-            <span class="s2">&quot;Cannot determine file format for file &#39;{0}&#39;.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;Cannot determine file format for file &#39;</span><span class="si">{0}</span><span class="s2">&#39;.</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="s2">&quot;           You can set the format explicitly with &quot;</span>
             <span class="s2">&quot;&#39;Universe(..., format=FORMAT)&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="n">check_compressed_format</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">format</span>
+    <span class="nb">format</span> <span class="o">=</span> <span class="n">check_compressed_format</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">format</span>
 
 
 <div class="viewcode-block" id="guess_format"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.guess_format">[docs]</a><span class="k">def</span> <span class="nf">guess_format</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
@@ -933,35 +931,35 @@
     <span class="k">if</span> <span class="n">isstream</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
         <span class="c1"># perhaps StringIO or open stream</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">format</span> <span class="o">=</span> <span class="n">format_from_filename_extension</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="nb">format</span> <span class="o">=</span> <span class="n">format_from_filename_extension</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="c1"># format is None so we need to complain:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;guess_format requires an explicit format specifier &quot;</span>
-                             <span class="s2">&quot;for stream {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+                             <span class="s2">&quot;for stream </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># iterator, list, filename: simple extension checking... something more</span>
         <span class="c1"># complicated is left for the ambitious.</span>
         <span class="c1"># Note: at the moment the upper-case extension *is* the format specifier</span>
         <span class="c1"># and list of filenames is handled by ChainReader</span>
-        <span class="n">format</span> <span class="o">=</span> <span class="p">(</span><span class="n">format_from_filename_extension</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="p">(</span><span class="n">format_from_filename_extension</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
                   <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;CHAIN&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">format</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="nb">format</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="iterable"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.iterable">[docs]</a><span class="k">def</span> <span class="nf">iterable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns ``True`` if *obj* can be iterated over and is *not* a  string</span>
 <span class="sd">    nor a :class:`NamedStream`&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">,</span> <span class="n">NamedStream</span><span class="p">)):</span>
-        <span class="k">return</span> <span class="bp">False</span>  <span class="c1"># avoid iterating over characters of a string</span>
+        <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># avoid iterating over characters of a string</span>
 
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;next&#39;</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">True</span>  <span class="c1"># any iterator will do</span>
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># any iterator will do</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>  <span class="c1"># anything else that might work</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">False</span>
-    <span class="k">return</span> <span class="bp">True</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
 
 
 <div class="viewcode-block" id="asiterable"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.asiterable">[docs]</a><span class="k">def</span> <span class="nf">asiterable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
@@ -991,7 +989,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">convertors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;I&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">strip</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">typespecifier</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">typespecifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :Arguments:</span>
 <span class="sd">         *start*</span>
@@ -1014,14 +1012,14 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertor</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;{0!r}: Failed to read&amp;convert {1!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">]))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0!r}</span><span class="s2">: Failed to read&amp;convert </span><span class="si">{1!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Length of the field in columns (stop - start)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;FixedcolumnEntry({0:d},{1:d},{2!r})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">typespecifier</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;FixedcolumnEntry(</span><span class="si">{0:d}</span><span class="s2">,</span><span class="si">{1:d}</span><span class="s2">,</span><span class="si">{2!r}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">typespecifier</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="FORTRANReader"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.FORTRANReader">[docs]</a><span class="k">class</span> <span class="nc">FORTRANReader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -1045,7 +1043,7 @@
 <span class="sd">       http://www.cs.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up the reader with the FORTRAN format string.</span>
 
 <span class="sd">        The string *fmt* should look like &#39;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#39;.</span>
@@ -1106,13 +1104,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">m</span> <span class="o">=</span> <span class="n">_FORTRAN_format_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">edit_descriptor</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">m</span> <span class="o">=</span> <span class="n">_FORTRAN_format_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;1&quot;</span> <span class="o">+</span> <span class="n">edit_descriptor</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
-                <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span>  <span class="c1"># really no idea what the descriptor is supposed to mean</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unrecognized FORTRAN format {0!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">edit_descriptor</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unrecognized FORTRAN format </span><span class="si">{0!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">edit_descriptor</span><span class="p">))</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;repeat&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
             <span class="n">d</span><span class="p">[</span><span class="s1">&#39;repeat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1128,11 +1126,11 @@
         <span class="n">d</span><span class="p">[</span><span class="s1">&#39;totallength&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;repeat&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
-<div class="viewcode-block" id="FORTRANReader.__len__"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.FORTRANReader.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns number of entries.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span></div>
 
 
@@ -1200,7 +1198,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No conversion for {0} found (1 letter -&gt; 3 letter or 3/4 letter -&gt; 1 letter)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No conversion for </span><span class="si">{0}</span><span class="s2"> found (1 letter -&gt; 3 letter or 3/4 letter -&gt; 1 letter)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
 
 
 <span class="c1">#: Regular expression to match and parse a residue-atom selection; will match</span>
@@ -1244,7 +1242,7 @@
     <span class="c1"># XXX: use _translate_residue() ....</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">RESIDUE</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">residue</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Selection {residue!r} is not valid (only 1/3/4 letter resnames, resid required).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Selection </span><span class="si">{residue!r}</span><span class="s2"> is not valid (only 1/3/4 letter resnames, resid required).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()))</span>
     <span class="n">resid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;resid&#39;</span><span class="p">))</span>
     <span class="n">residue</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;aa&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">residue</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1304,7 +1302,7 @@
     <span class="k">return</span> <span class="n">cached_lookup</span></div>
 
 
-<span class="k">def</span> <span class="nf">unique_rows</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">unique_rows</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the unique rows from an array</span>
 
 <span class="sd">    Arguments</span>
@@ -1339,7 +1337,7 @@
     <span class="k">if</span> <span class="n">return_index</span><span class="p">:</span>
         <span class="n">u</span><span class="p">,</span> <span class="n">r_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
                                                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)])),</span>
-                             <span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                             <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">u</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="n">r_idx</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">view</span><span class="p">(</span>
@@ -1402,7 +1400,7 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">nblocks</span> <span class="o">==</span> <span class="n">nblocks2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Must divide into same number of blocks in both&quot;</span>
-                         <span class="s2">&quot; directions.  Got {} by {}&quot;</span>
+                         <span class="s2">&quot; directions.  Got </span><span class="si">{}</span><span class="s2"> by </span><span class="si">{}</span><span class="s2">&quot;</span>
                          <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nblocks</span><span class="p">,</span> <span class="n">nblocks2</span><span class="p">))</span>
 
     <span class="n">new_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">nblocks</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
@@ -1413,31 +1411,31 @@
 
 <div class="viewcode-block" id="Namespace"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.Namespace">[docs]</a><span class="k">class</span> <span class="nc">Namespace</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to allow storing attributes in new namespace. &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="c1"># a.this causes a __getattr__ call for key = &#39;this&#39;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;&quot;{}&quot; is not known in the namespace.&#39;</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot; is not known in the namespace.&#39;</span>
                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">dict</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="nb">dict</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;&quot;{}&quot; is not known in the namespace.&#39;</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot; is not known in the namespace.&#39;</span>
                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># this&#39;ll allow us to compare if we&#39;re storing arrays</span>
             <span class="n">assert_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
-        <span class="k">return</span> <span class="bp">True</span></div>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
 </pre></div>
 
           </div>
@@ -1454,13 +1452,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

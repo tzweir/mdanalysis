@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>11.2.4. Setting up logging — MDAnalysis.lib.log &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>11.2.4. Setting up logging — MDAnalysis.lib.log &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="11. Library functions — MDAnalysis.lib" href="../lib_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="11.2.5. Mathematical helper functions — MDAnalysis.lib.mdamath" href="mdamath.html" />
     <link rel="prev" title="11.2.3. Neighbor Search wrapper for MDAnalysis — MDAnalysis.lib.NeighborSearch" href="NeighborSearch.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="NeighborSearch.html" title="11.2.3. Neighbor Search wrapper for MDAnalysis — MDAnalysis.lib.NeighborSearch"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../lib_modules.html" accesskey="U">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../lib_modules.html" accesskey="U">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -76,21 +77,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/lib/log.txt"
+      <li><a href="../../_sources/documentation_pages/lib/log.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -112,7 +110,7 @@ convention; a simple logger that writes to the console and logfile can
 be created with the <a class="reference internal" href="#MDAnalysis.lib.log.create" title="MDAnalysis.lib.log.create"><code class="xref py py-func docutils literal"><span class="pre">create()</span></code></a> function. This only has to be done
 <em>once</em>. For convenience, the default MDAnalysis logger can be created
 with <a class="reference internal" href="#MDAnalysis.start_logging" title="MDAnalysis.start_logging"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.start_logging()</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span>
 <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">start_logging</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -120,7 +118,7 @@ with <a class="reference internal" href="#MDAnalysis.start_logging" title="MDAna
 (named <cite>MDAnalysis.log</cite> by default but this can be changed with the
 optional argument to <a class="reference internal" href="#MDAnalysis.start_logging" title="MDAnalysis.start_logging"><code class="xref py py-func docutils literal"><span class="pre">start_logging()</span></code></a>).</p>
 <p>Any code can log to the MDAnalysis logger by using</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MDAnalysis.MODULENAME&#39;</span><span class="p">)</span>
 
 <span class="c1"># use the logger, for example at info level:</span>
@@ -131,7 +129,7 @@ optional argument to <a class="reference internal" href="#MDAnalysis.start_loggi
 &#8220;MDAnalysis.&#8221;.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">The <a class="reference external" href="https://docs.python.org/library/logging.html#module-logging" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">logging</span></code></a> module in the standard library contains
+<p class="last">The <a class="reference external" href="https://docs.python.org/2/library/logging.html#module-logging" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">logging</span></code></a> module in the standard library contains
 in depth documentation about using logging.</p>
 </div>
 <div class="section" id="convenience-functions">
@@ -160,7 +158,7 @@ logged with the tag <em>MDAnalysis</em>.</p>
 <em class="property">class </em><code class="descclassname">MDAnalysis.lib.log.</code><code class="descname">NullHandler</code><span class="sig-paren">(</span><em>level=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#NullHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.NullHandler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Silent Handler.</p>
 <p>Useful as a default:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">NullHandler</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">NullHandler</span><span class="p">()</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
 <span class="k">del</span> <span class="n">h</span>
 </pre></div>
@@ -187,9 +185,9 @@ stderr.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>numsteps</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; total number of steps</li>
-<li><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; only calculate and print progress every <cite>interval</cite> steps [10]</li>
-<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>a format string with Python variable interpolation. Allowed
+<li><strong>numsteps</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; total number of steps</li>
+<li><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; only calculate and print progress every <cite>interval</cite> steps [10]</li>
+<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>a format string with Python variable interpolation. Allowed
 values:</p>
 <ul>
 <li><em>step</em>: current step</li>
@@ -199,17 +197,17 @@ values:</p>
 <p>The last call to <code class="xref py py-meth docutils literal"><span class="pre">ProgressMeter.print()</span></code> will automatically
 issue a newline <code class="docutils literal"><span class="pre">\n</span></code>.</p>
 <p>If <em>format</em> is <code class="docutils literal"><span class="pre">None</span></code> then the default is used:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Step {step:5d}/{numsteps} [{percentage:5.1f}%]
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Step</span> <span class="p">{</span><span class="n">step</span><span class="p">:</span><span class="mi">5</span><span class="n">d</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">numsteps</span><span class="p">}</span> <span class="p">[{</span><span class="n">percentage</span><span class="p">:</span><span class="mf">5.1</span><span class="n">f</span><span class="p">}</span><span class="o">%</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>
-<li><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number to add to <em>step</em>; e.g. if <em>step</em> is 0-based (as in MDAnalysis)
+<li><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number to add to <em>step</em>; e.g. if <em>step</em> is 0-based (as in MDAnalysis)
 then one should set <em>offset</em> = 1; for 1-based steps, choose 0. [1]</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">False</span></code>, disable all output, <code class="docutils literal"><span class="pre">True</span></code> print all messages as
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">False</span></code>, disable all output, <code class="docutils literal"><span class="pre">True</span></code> print all messages as
 specified, [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>dynamic</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, each line will be printed on top of the previous one.
+<li><strong>dynamic</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, each line will be printed on top of the previous one.
 This is done by prepedind the format with <code class="docutils literal"><span class="pre">\r</span></code>. [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>format_handling</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>how to handle the format string. Allowed values are:</p>
+<li><strong>format_handling</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>how to handle the format string. Allowed values are:</p>
 <ul>
 <li><em>new</em>: the format string uses {}-based formating</li>
 <li><em>legacy</em>: the format string uses %-basedd formating</li>
@@ -225,7 +223,7 @@ handled</li>
 <p class="rubric">Examples</p>
 <p>The typical use case is to show progress as frames of a trajectory are
 processed:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
     <span class="n">pm</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
@@ -234,13 +232,13 @@ processed:</p>
 </div>
 <p>For a trajectory with 10000 frames this will produce output such
 as</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Step   100/10000 [  1.0%]
-Step   200/10000 [  2.0%]
-...
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Step</span>   <span class="mi">100</span><span class="o">/</span><span class="mi">10000</span> <span class="p">[</span>  <span class="mf">1.0</span><span class="o">%</span><span class="p">]</span>
+<span class="n">Step</span>   <span class="mi">200</span><span class="o">/</span><span class="mi">10000</span> <span class="p">[</span>  <span class="mf">2.0</span><span class="o">%</span><span class="p">]</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <p>The default <em>format</em> string is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Step {step:5d}/{numsteps} [{percentage:5.1f}%]
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Step</span> <span class="p">{</span><span class="n">step</span><span class="p">:</span><span class="mi">5</span><span class="n">d</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">numsteps</span><span class="p">}</span> <span class="p">[{</span><span class="n">percentage</span><span class="p">:</span><span class="mf">5.1</span><span class="n">f</span><span class="p">}</span><span class="o">%</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>By default, each line of the progress meter is displayed on top of the
@@ -248,18 +246,18 @@ previous one. To prevent this behaviour, set the <cite>dynamic</cite> keyword to
 <code class="docutils literal"><span class="pre">False</span></code>.</p>
 <p>It is possible to embed (almost) arbitrary additional data in the
 format string, for example a current RMSD value:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">format_line</span> <span class="o">=</span> <span class="s2">&quot;RMSD {rmsd:5.2f} at {step:5d}/{numsteps} [{percentage:5.1f}%]&quot;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">format_line</span> <span class="o">=</span> <span class="s2">&quot;RMSD </span><span class="si">{rmsd:5.2f}</span><span class="s2"> at </span><span class="si">{step:5d}</span><span class="s2">/</span><span class="si">{numsteps}</span><span class="s2"> [</span><span class="si">{percentage:5.1f}</span><span class="s2">%]&quot;</span>
 <span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span>
-                   <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">format_line</span><span class="p">)</span>
+                   <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">format_line</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
    <span class="n">pm</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">rmsd</span><span class="o">=</span><span class="n">current_rmsd</span><span class="p">)</span>
    <span class="o">...</span>
 </pre></div>
 </div>
 <p>This will print something like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>RMSD   1.02 at  100/10000 [  1.0%]
-RMSD   1.89 at  200/10000 [  2.0%]
-...
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">RMSD</span>   <span class="mf">1.02</span> <span class="n">at</span>  <span class="mi">100</span><span class="o">/</span><span class="mi">10000</span> <span class="p">[</span>  <span class="mf">1.0</span><span class="o">%</span><span class="p">]</span>
+<span class="n">RMSD</span>   <span class="mf">1.89</span> <span class="n">at</span>  <span class="mi">200</span><span class="o">/</span><span class="mi">10000</span> <span class="p">[</span>  <span class="mf">2.0</span><span class="o">%</span><span class="p">]</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <div class="versionchanged">
@@ -337,10 +335,10 @@ printed to <code class="xref py py-const docutils literal"><span class="pre">sys
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>s</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The string to output.</li>
-<li><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, the string will be printed on top of the current line. In
+<li><strong>s</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The string to output.</li>
+<li><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, the string will be printed on top of the current line. In
 practice, <code class="docutils literal"><span class="pre">\r</span></code> is added at the beginning of the string.</li>
-<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, a newline is added at the end of the string.</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, a newline is added at the end of the string.</li>
 </ul>
 </td>
 </tr>
@@ -386,13 +384,13 @@ logged with the tag <em>MDAnalysis</em>.</p>
         <li class="right" >
           <a href="NeighborSearch.html" title="11.2.3. Neighbor Search wrapper for MDAnalysis — MDAnalysis.lib.NeighborSearch"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../lib_modules.html" >11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../lib_modules.html" >11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

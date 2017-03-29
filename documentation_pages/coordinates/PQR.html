@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.14. PQR file format — MDAnalysis.coordinates.PQR &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>6.14. PQR file format — MDAnalysis.coordinates.PQR &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="6. Coordinates modules" href="../coordinates_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6.15. AMBER trajectories — MDAnalysis.coordinates.TRJ" href="TRJ.html" />
     <link rel="prev" title="6.13. PDBQT structure files in MDAnalysis — MDAnalysis.coordinates.PDBQT" href="PDBQT.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="PDBQT.html" title="6.13. PDBQT structure files in MDAnalysis — MDAnalysis.coordinates.PDBQT"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -67,21 +68,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/coordinates/PQR.txt"
+      <li><a href="../../_sources/documentation_pages/coordinates/PQR.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -101,12 +99,12 @@ following is adopted from the description of the <a class="reference external" h
 by the <a class="reference external" href="http://www.rcsb.org/pdb/info.html#File_Formats_and_Standards">PDB</a> format. This more liberal formatting allows coordinates
 which are larger/smaller than ±999 Å.</p>
 <p>MDAnalysis reads data on a per-line basis from PQR files using the following format:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>recordName serial atomName residueName chainID residueNumber X Y Z charge radius
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">recordName</span> <span class="n">serial</span> <span class="n">atomName</span> <span class="n">residueName</span> <span class="n">chainID</span> <span class="n">residueNumber</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="n">charge</span> <span class="n">radius</span>
 </pre></div>
 </div>
 <p>If this fails it is assumed that the <em>chainID</em> was omitted and the shorter
 format is read:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>recordName serial atomName residueName residueNumber X Y Z charge radius
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">recordName</span> <span class="n">serial</span> <span class="n">atomName</span> <span class="n">residueName</span> <span class="n">residueNumber</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="n">charge</span> <span class="n">radius</span>
 </pre></div>
 </div>
 <p>Anything else will raise a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code>.</p>
@@ -153,7 +151,7 @@ converting PDB files into PQR files using simple scripts.</p>
 </div>
 <p>For example, PQR files created with <a class="reference external" href="http://www.poissonboltzmann.org/pdb2pqr">PDB2PQR</a> and the <cite>&#8211;whitespace</cite>
 option are guaranteed to conform to the above format:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>pdb2pqr --ff=charmm --whitespace 4ake.pdb 4ake.pqr
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pdb2pqr</span> <span class="o">--</span><span class="n">ff</span><span class="o">=</span><span class="n">charmm</span> <span class="o">--</span><span class="n">whitespace</span> <span class="mi">4</span><span class="n">ake</span><span class="o">.</span><span class="n">pdb</span> <span class="mi">4</span><span class="n">ake</span><span class="o">.</span><span class="n">pqr</span>
 </pre></div>
 </div>
 <dl class="class">
@@ -211,8 +209,8 @@ for the atoms.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; output filename</li>
-<li><strong>remarks</strong> (<em>str, optionak</em>) &#8211; remark lines (list of strings) or single string to be added to the
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; output filename</li>
+<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optionak</em>) &#8211; remark lines (list of strings) or single string to be added to the
 top of the PQR file</li>
 </ul>
 </td>
@@ -229,13 +227,13 @@ top of the PQR file</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>selection</strong> &#8211; MDAnalysis AtomGroup or Universe</li>
-<li><strong>frame</strong> (<em>int, optional</em>) &#8211; optionally move to frame number <em>frame</em></li>
-<li><strong>versionchanged</strong> (<em>.</em>) &#8211; Frames now 0-based instead of 1-based</li>
+<li><strong>frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; optionally move to frame number <em>frame</em></li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<p>:param .. versionchanged:: 0.11.0: Frames now 0-based instead of 1-based</p>
 </dd></dl>
 
 </dd></dl>
@@ -263,13 +261,13 @@ top of the PQR file</li>
         <li class="right" >
           <a href="PDBQT.html" title="6.13. PDBQT structure files in MDAnalysis — MDAnalysis.coordinates.PDBQT"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3. Selection commands &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>3. Selection commands &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -28,7 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Analysis modules" href="analysis_modules.html" />
     <link rel="prev" title="2. The topology system" href="topology.html" /> 
   </head>
@@ -48,7 +50,7 @@
         <li class="right" >
           <a href="topology.html" title="2. The topology system"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -90,21 +92,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/documentation_pages/selections.txt"
+      <li><a href="../_sources/documentation_pages/selections.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -120,7 +119,7 @@
 <p>Once you have the <a class="reference internal" href="core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-meth docutils literal"><span class="pre">Universe()</span></code></a> object, you can
 select atoms (using a syntax very similar to <a class="reference external" href="http://www.charmm.org/documentation/c37b1/select.html">CHARMM&#8217;s atom selection
 syntax</a>):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">kalp</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid KALP&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">kalp</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid KALP&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.AtomGroup.select_atoms" title="MDAnalysis.core.groups.AtomGroup.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a> method of a
@@ -132,13 +131,13 @@ defined for AtomGroups on them. Selections always return an
 index in the topology (this is to ensure that there are not any duplicates,
 which can happen with complicated selections).</p>
 <p>One can group subselections using parentheses:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and not (name H* or name O*)&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and not (name H* or name O*)&quot;</span><span class="p">)</span>
 <span class="go">&lt;AtomGroup with 3420 atoms&gt;</span>
 </pre></div>
 </div>
 <p>Almost all the basic CHARMM selections work.</p>
 <p>It is also possible to export selections for external software
-packages with the help of <a class="reference internal" href="selections_modules.html#selection-exporters"><span>Selection exporters</span></a>.</p>
+packages with the help of <a class="reference internal" href="selections_modules.html#selection-exporters"><span class="std std-ref">Selection exporters</span></a>.</p>
 <div class="section" id="selection-keywords">
 <h2>3.1. Selection Keywords<a class="headerlink" href="#selection-keywords" title="Permalink to this headline">¶</a></h2>
 <p>The following describes all selection keywords currently understood by the
@@ -146,7 +145,7 @@ selection parser. The following applies to all selections:</p>
 <ul class="simple">
 <li>Keywords are case sensitive.</li>
 <li>Atoms are automatically sequentially ordered in a resulting selection (see
-notes below on <a class="reference internal" href="#ordered-selections-label"><span>Ordered selections</span></a> for how to circumvent this if
+notes below on <a class="reference internal" href="#ordered-selections-label"><span class="std std-ref">Ordered selections</span></a> for how to circumvent this if
 necessary).</li>
 <li>Selections are parsed left to right and parentheses can be used for
 grouping.</li>
@@ -261,8 +260,8 @@ only taken into account with the
 image convention (and this only works for rectangular simulation cells). If
 periodic boundary conditions should be taken into account then change the
 default behaviour of MDAnalysis by setting these two flags:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;use_periodic_selections&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;use_KDTree_routines&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;use_periodic_selections&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;use_KDTree_routines&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
 </div>
@@ -336,23 +335,23 @@ object, with the difference that the selection expressions are re-evaluated
 every time the trajectory frame changes (this happens lazily, only when the
 <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.UpdatingAtomGroup" title="MDAnalysis.core.groups.UpdatingAtomGroup"><code class="xref py py-class docutils literal"><span class="pre">UpdatingAtomGroup</span></code></a> object is accessed so that
 there is no redundant updating going on):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span># A dynamic selection of corner atoms:
-&gt;&gt;&gt; ag_updating = universe.select_atoms(&quot;prop x &lt; 5 and prop y &lt; 5 and prop z &lt; 5&quot;, updating=True)
-&gt;&gt;&gt; ag_updating
-&lt;UpdatingAtomGroup with 9 atoms&gt;
-&gt;&gt;&gt; universe.trajectory.next()
-&gt;&gt;&gt; ag_updating
-&lt;UpdatingAtomGroup with 14 atoms&gt;
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># A dynamic selection of corner atoms:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ag_updating</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;prop x &lt; 5 and prop y &lt; 5 and prop z &lt; 5&quot;</span><span class="p">,</span> <span class="n">updating</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ag_updating</span>
+<span class="o">&lt;</span><span class="n">UpdatingAtomGroup</span> <span class="k">with</span> <span class="mi">9</span> <span class="n">atoms</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ag_updating</span>
+<span class="o">&lt;</span><span class="n">UpdatingAtomGroup</span> <span class="k">with</span> <span class="mi">14</span> <span class="n">atoms</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Using the <code class="docutils literal"><span class="pre">group</span></code> selection keyword for
-<a class="reference internal" href="#pre-selections-label"><span>preexisting-selections</span></a>, one can
+<a class="reference internal" href="#pre-selections-label"><span class="std std-ref">preexisting-selections</span></a>, one can
 make updating selections depend on
 <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>, or even other
 <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.UpdatingAtomGroup" title="MDAnalysis.core.groups.UpdatingAtomGroup"><code class="xref py py-class docutils literal"><span class="pre">UpdatingAtomGroup</span></code></a>, instances.
 Likewise, making an updating selection from an already updating group will
 cause later updates to also reflect the updating of the base group:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chained_ag_updating</span> <span class="o">=</span> <span class="n">ag_updating</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 1:1000&quot;</span><span class="p">,</span> <span class="n">updating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chained_ag_updating</span> <span class="o">=</span> <span class="n">ag_updating</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 1:1000&quot;</span><span class="p">,</span> <span class="n">updating</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chained_ag_updating</span>
 <span class="go">&lt;UpdatingAtomGroup with 3 atoms&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
@@ -364,7 +363,7 @@ cause later updates to also reflect the updating of the base group:</p>
 <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.UpdatingAtomGroup" title="MDAnalysis.core.groups.UpdatingAtomGroup"><code class="xref py py-class docutils literal"><span class="pre">UpdatingAtomGroup</span></code></a> will return a static
 <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>, which will no longer update
 across frames:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">static_ag</span> <span class="o">=</span> <span class="n">ag_updating</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 1:1000&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">static_ag</span> <span class="o">=</span> <span class="n">ag_updating</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 1:1000&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">static_ag</span>
 <span class="go">&lt;UpdatingAtomGroup with 3 atoms&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
@@ -396,7 +395,7 @@ number)</p>
 </li>
 <li><dl class="first docutils">
 <dt>example</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span>
 <span class="go">&lt;Segment &#39;4AKE&#39;&gt;</span>
 </pre></div>
 </div>
@@ -416,7 +415,7 @@ number)</p>
 </li>
 <li><dl class="first docutils">
 <dt>example</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">r100</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">r100</span>
 <span class="go">&lt;Residue &#39;GLY&#39;, 100&gt;</span>
 </pre></div>
 </div>
@@ -436,7 +435,7 @@ number)</p>
 </li>
 <li><dl class="first docutils">
 <dt>examples</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">MET</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">MET</span>
 <span class="go">&lt;ResidueGroup [&lt;Residue &#39;MET&#39;, 1&gt;, &lt;Residue &#39;MET&#39;, 21&gt;, &lt;Residue &#39;MET&#39;, 34&gt;, &lt;Residue &#39;MET&#39;, 53&gt;, &lt;Residue &#39;MET&#39;, 96&gt;, &lt;Residue &#39;MET&#39;, 174&gt;]&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">CYS</span>
 <span class="go">&lt;ResidueGroup [&lt;Residue &#39;CYS&#39;, 77&gt;]&gt;</span>
@@ -474,7 +473,7 @@ found, or</li>
 </li>
 <li><dl class="first docutils">
 <dt>examples</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CG</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CG</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">AtomGroup</span> <span class="k">with</span> <span class="mi">125</span> <span class="n">atoms</span><span class="o">&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">CG</span>
 <span class="go">&lt;AtomGroup with 125 atoms&gt;</span>
@@ -501,8 +500,8 @@ then one has to concatenate multiple AtomGroups, which does not sort
 them.</p>
 <p>The most straightforward way to concatentate two AtomGroups is by using the
 <code class="docutils literal"><span class="pre">+</span></code> operator:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ordered</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 3 and name P&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 2 and name P&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ordered</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 3 and name P&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 2 and name P&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">)</span>
 <span class="go">[&lt; Atom 570: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 3 and &#39;DMPC&#39;&gt;,</span>
 <span class="go">&lt; Atom 452: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 2 and &#39;DMPC&#39;&gt;]</span>
 </pre></div>
@@ -510,17 +509,17 @@ them.</p>
 <p>A shortcut is to provide <em>two or more</em> selections to
 <a class="reference internal" href="core/universe.html#MDAnalysis.core.universe.Universe.select_atoms" title="MDAnalysis.core.universe.Universe.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a>, which then
 does the concatenation automatically:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 3 and name P&quot;</span><span class="p">,</span> <span class="s2">&quot;segid DMPC and resid 2 and name P&quot;</span><span class="p">))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 3 and name P&quot;</span><span class="p">,</span> <span class="s2">&quot;segid DMPC and resid 2 and name P&quot;</span><span class="p">))</span>
 <span class="go">[&lt; Atom 570: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 3 and &#39;DMPC&#39;&gt;,</span>
 <span class="go">&lt; Atom 452: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 2 and &#39;DMPC&#39;&gt;]</span>
 </pre></div>
 </div>
 <p>Just for comparison to show that a single selection string does not
 work as one might expect:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span># WRONG!
-&gt;&gt;&gt; print list(universe.select_atoms(&quot;segid DMPC and ( resid 3 or resid 2 ) and name P&quot;))
-[&lt; Atom 452: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 2 and &#39;DMPC&#39;&gt;,
-&lt; Atom 570: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 3 and &#39;DMPC&#39;&gt;]
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># WRONG!</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and ( resid 3 or resid 2 ) and name P&quot;</span><span class="p">))</span>
+<span class="p">[</span><span class="o">&lt;</span> <span class="n">Atom</span> <span class="mi">452</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;P&#39;</span> <span class="n">of</span> <span class="nb">type</span> <span class="s1">&#39;180&#39;</span> <span class="n">of</span> <span class="n">resid</span> <span class="s1">&#39;DMPC&#39;</span><span class="p">,</span> <span class="mi">2</span> <span class="ow">and</span> <span class="s1">&#39;DMPC&#39;</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="o">&lt;</span> <span class="n">Atom</span> <span class="mi">570</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;P&#39;</span> <span class="n">of</span> <span class="nb">type</span> <span class="s1">&#39;180&#39;</span> <span class="n">of</span> <span class="n">resid</span> <span class="s1">&#39;DMPC&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="ow">and</span> <span class="s1">&#39;DMPC&#39;</span><span class="o">&gt;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -547,12 +546,12 @@ work as one might expect:</p>
         <li class="right" >
           <a href="topology.html" title="2. The topology system"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

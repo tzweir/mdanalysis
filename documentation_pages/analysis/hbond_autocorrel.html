@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.3.2. Hydrogen bond autocorrelation — MDAnalysis.analysis.hbonds.hbond_autocorrel &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.3.2. Hydrogen bond autocorrelation — MDAnalysis.analysis.hbonds.hbond_autocorrel &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="4. Analysis modules" href="../analysis_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4.4.1. Generation and Analysis of HOLE pore profiles — MDAnalysis.analysis.hole" href="hole.html" />
     <link rel="prev" title="4.3.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis" href="hbond_analysis.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="hbond_analysis.html" title="4.3.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -77,21 +78,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/analysis/hbond_autocorrel.txt"
+      <li><a href="../../_sources/documentation_pages/analysis/hbond_autocorrel.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -199,8 +197,8 @@ This is a dictionary with the following keys</p>
 <em>fit</em>, <em>tau</em> and <em>estimate</em> are filled after the <code class="xref py py-meth docutils literal"><span class="pre">solve()</span></code> method has been
 used.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="kn">import</span> <span class="n">hbonds</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="k">import</span> <span class="n">hbonds</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">H</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name Hn&#39;</span><span class="p">)</span>
 <span class="n">O</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
 <span class="n">N</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
@@ -235,20 +233,20 @@ must be identical in length to the hydrogen group and matched,
 ie hydrogens[0] is bonded to donors[0].
 For many cases, this will mean a donor appears twice in this
 group.</li>
-<li><strong>bond_type</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Which definition of hydrogen bond lifetime to consider, either
+<li><strong>bond_type</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Which definition of hydrogen bond lifetime to consider, either
 &#8216;continuous&#8217; or &#8216;intermittent&#8217;.</li>
-<li><strong>exclusions</strong> (<em>ndarray, optional</em>) &#8211; Indices of Hydrogen-Acceptor pairs to be excluded.
+<li><strong>exclusions</strong> (<em>ndarray</em><em>, </em><em>optional</em>) &#8211; Indices of Hydrogen-Acceptor pairs to be excluded.
 With nH and nA Hydrogens and Acceptors, a (nH x nA) array of distances
 is calculated, <em>exclusions</em> is used as a mask on this array to exclude
 some pairs.</li>
-<li><strong>angle_crit</strong> (<em>float, optional</em>) &#8211; The angle (in degrees) which all bonds must be greater than [130.0]</li>
-<li><strong>dist_crit</strong> (<em>float, optional</em>) &#8211; The maximum distance (in Angstroms) for a hydrogen bond [3.0]</li>
-<li><strong>sample_time</strong> (<em>float, optional</em>) &#8211; The amount of time, in ps, that you wish to observe hydrogen
+<li><strong>angle_crit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The angle (in degrees) which all bonds must be greater than [130.0]</li>
+<li><strong>dist_crit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The maximum distance (in Angstroms) for a hydrogen bond [3.0]</li>
+<li><strong>sample_time</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The amount of time, in ps, that you wish to observe hydrogen
 bonds for [100]</li>
-<li><strong>nruns</strong> (<em>int, optional</em>) &#8211; The number of different start points within the trajectory
+<li><strong>nruns</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; The number of different start points within the trajectory
 to use [1]</li>
-<li><strong>nsamples</strong> (<em>int, optional</em>) &#8211; Within each run, the number of frames to analyse [50]</li>
-<li><strong>pbc</strong> (<em>bool, optional</em>) &#8211; Whether to consider periodic boundaries in calculations [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Within each run, the number of frames to analyse [50]</li>
+<li><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to consider periodic boundaries in calculations [<code class="docutils literal"><span class="pre">True</span></code>]</li>
 </ul>
 </td>
 </tr>
@@ -262,7 +260,7 @@ to use [1]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>force</strong> (<em>bool, optional</em>) &#8211; Will overwrite previous results if they exist</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>force</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Will overwrite previous results if they exist</td>
 </tr>
 </tbody>
 </table>
@@ -278,12 +276,12 @@ characteristic time</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>p_guess</strong> (<em>tuple of floats, optional</em>) &#8211; Initial guess for the leastsq fit, must match the shape of the
+<li><strong>p_guess</strong> (<em>tuple of floats</em><em>, </em><em>optional</em>) &#8211; Initial guess for the leastsq fit, must match the shape of the
 expected coefficients</li>
-<li><strong>defition results are fitted to a double exponential,</strong> (<em>Continuous</em>) &#8211; </li>
+<li><strong>defition results are fitted to a double exponential</strong><strong>,</strong><strong></strong> (<em>Continuous</em>) &#8211; </li>
 <li><strong>definition are fit to a triple exponential.</strong> (<em>intermittent</em>) &#8211; </li>
-<li><strong>results of this fitting procedure are saved into the fit,</strong> (<em>The</em>) &#8211; </li>
-<li><strong>and estimate keywords in the solution dict.</strong> (<em>tau</em>) &#8211; <ul>
+<li><strong>results of this fitting procedure are saved into the fit</strong><strong>,</strong><strong></strong> (<em>The</em>) &#8211; </li>
+<li><strong>and estimate keywords in the solution dict.</strong> (<em>*tau*</em>) &#8211; <ul>
 <li><em>fit</em> contains the coefficients, (A1, tau1, tau2) or
 (A1, A2, tau1, tau2, tau3)</li>
 <li><em>tau</em> contains the calculated lifetime in ps for the hydrogen
@@ -292,7 +290,7 @@ bonding</li>
 autocorrelation function</li>
 </ul>
 </li>
-<li><strong>addition, the output of the leastsq function is saved into the</strong> (<em>In</em>) &#8211; </li>
+<li><strong>addition</strong><strong>, </strong><strong>the output of the leastsq function is saved into the</strong> (<em>In</em>) &#8211; </li>
 <li><strong>dict</strong> (<em>solution</em>) &#8211; <ul>
 <li><em>infodict</em></li>
 <li><em>mesg</em></li>
@@ -315,7 +313,7 @@ autocorrelation function</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str, optional</em>) &#8211; The desired filename [hbond_autocorrel]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; The desired filename [hbond_autocorrel]</td>
 </tr>
 </tbody>
 </table>
@@ -347,13 +345,13 @@ autocorrelation function</li>
         <li class="right" >
           <a href="hbond_analysis.html" title="4.3.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

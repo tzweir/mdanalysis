@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.2.6.1.1. Ensemble Similarity Calculations — MDAnalysis.analysis.encore.similarity &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.2.6.1.1. Ensemble Similarity Calculations — MDAnalysis.analysis.encore.similarity &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../../index.html" />
-    <link rel="up" title="4.2.6. ENCORE Ensemble Similarity Calculations — MDAnalysis.analysis.encore" href="../encore.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="4.2.6.1.2. Clustering" href="clustering.html" />
     <link rel="prev" title="4.2.6. ENCORE Ensemble Similarity Calculations — MDAnalysis.analysis.encore" href="../encore.html" /> 
   </head>
@@ -49,9 +50,9 @@
         <li class="right" >
           <a href="../encore.html" title="4.2.6. ENCORE Ensemble Similarity Calculations — MDAnalysis.analysis.encore"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../analysis_modules.html" >4. Analysis modules</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../encore.html" accesskey="U">4.2.6. ENCORE Ensemble Similarity Calculations &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../analysis_modules.html" >4. Analysis modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../encore.html" accesskey="U">4.2.6. ENCORE Ensemble Similarity Calculations &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -77,21 +78,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../../_sources/documentation_pages/analysis/encore/similarity.txt"
+      <li><a href="../../../_sources/documentation_pages/analysis/encore/similarity.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -155,16 +153,16 @@ between ensembles implemented in individual functions:</p>
 of two simple ensembles. The ensembles are obtained from the MDAnalysis
 test suite for two different simulations of the protein AdK. To run the
 examples first execute:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">Universe</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.encore</span> <span class="kn">as</span> <span class="nn">encore</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">,</span> <span class="n">DCD2</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="k">import</span> <span class="n">Universe</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.encore</span> <span class="k">as</span> <span class="nn">encore</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="k">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">,</span> <span class="n">DCD2</span>
 </pre></div>
 </div>
 <p>To calculate the Harmonic Ensemble Similarity (<a class="reference internal" href="#MDAnalysis.analysis.encore.similarity.hes" title="MDAnalysis.analysis.encore.similarity.hes"><code class="xref py py-func docutils literal"><span class="pre">hes()</span></code></a>)
 two ensemble objects are first created and then used for calculation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ens2</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])</span>
 <span class="go">(array([[        0.        ,  38279683.95892926],</span>
 <span class="go">        [ 38279683.95892926,         0.        ]]), None)</span>
 </pre></div>
@@ -178,10 +176,10 @@ turn require a similarity matrix between the frames the ensembles are made
 of. The similarity matrix is derived from a distance matrix (By default a RMSD
 matrix; a full RMSD matrix between each pairs of elements needs to be computed).
 The RMSD matrix is automatically calculated.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ens2</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">ces</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">CES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">CES</span>
 <span class="go">[[ 0.          0.68070702]</span>
 <span class="go">[ 0.68070702  0.        ]]</span>
 </pre></div>
@@ -189,14 +187,14 @@ The RMSD matrix is automatically calculated.</p>
 <p>However, we may want to reuse the RMSD matrix in other calculations e.g.
 running CES with different parameters or running DRES. In this
 case we first compute the RMSD matrix alone:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rmsd_matrix</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">get_distance_matrix</span><span class="p">(</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rmsd_matrix</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">get_distance_matrix</span><span class="p">(</span>
 <span class="go">                                encore.utils.merge_universes([ens1, ens2]),</span>
 <span class="go">                                save_matrix=&quot;rmsd.npz&quot;)</span>
 </pre></div>
 </div>
 <p>In the above example the RMSD matrix was also saved in rmsd.npz on disk, and
 so can be loaded and re-used at later times, instead of being recomputed:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rmsd_matrix</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">get_distance_matrix</span><span class="p">(</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rmsd_matrix</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">get_distance_matrix</span><span class="p">(</span>
 <span class="go">                                encore.utils.merge_universes([ens1, ens2]),</span>
 <span class="go">                                load_matrix=&quot;rmsd.npz&quot;)</span>
 </pre></div>
@@ -211,9 +209,9 @@ As the algorithms require the distance matrix calculated on the original space,
 we can reuse the previously-calculated RMSD matrix.
 In the following example the dimensions are reduced to 3 using the
 saved RMSD matrix and the default SPE dimensional reduction method.   :</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DRES</span><span class="p">,</span><span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">],</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DRES</span><span class="p">,</span><span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">],</span>
 <span class="go">                               distance_matrix = rmsd_matrix)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">DRES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">DRES</span>
 <span class="go">[[ 0.        ,   0.67453198]</span>
 <span class="go"> [  0.67453198,  0.        ]]</span>
 </pre></div>
@@ -244,21 +242,21 @@ in <a class="reference internal" href="../../references.html#tiberti2015" id="id
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of Universe objects for similarity measurements.</li>
-<li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
-<li><strong>cov_estimator</strong> (<em>str, optional</em>) &#8211; Covariance matrix estimator method, either shrinkage, <cite>shrinkage</cite>,
+<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of Universe objects for similarity measurements.</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>cov_estimator</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Covariance matrix estimator method, either shrinkage, <cite>shrinkage</cite>,
 or Maximum Likelyhood, <cite>ml</cite>. Default is shrinkage.</li>
-<li><strong>weights</strong> (<em>str/array_like, optional</em>) &#8211; specify optional weights. If <code class="docutils literal"><span class="pre">mass</span></code> then chose masses of ensemble atoms</li>
-<li><strong>align</strong> (<em>bool, optional</em>) &#8211; Whether to align the ensembles before calculating their similarity.
+<li><strong>weights</strong> (<em>str/array_like</em><em>, </em><em>optional</em>) &#8211; specify optional weights. If <code class="docutils literal"><span class="pre">mass</span></code> then chose masses of ensemble atoms</li>
+<li><strong>align</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to align the ensembles before calculating their similarity.
 Note: this changes the ensembles in-place, and will thus leave your
 ensembles in an altered state.
 (default is False)</li>
-<li><strong>details</strong> (<em>bool, optional</em>) &#8211; Save the mean and covariance matrix for each
+<li><strong>details</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Save the mean and covariance matrix for each
 ensemble in a numpy array (default is False).</li>
-<li><strong>estimate_error</strong> (<em>bool, optional</em>) &#8211; Whether to perform error estimation (default is False).</li>
-<li><strong>bootstrapping_samples</strong> (<em>int, optional</em>) &#8211; Number of times the similarity matrix will be bootstrapped (default
+<li><strong>estimate_error</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to perform error estimation (default is False).</li>
+<li><strong>bootstrapping_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Number of times the similarity matrix will be bootstrapped (default
 is 100), only if estimate_error is True.</li>
-<li><strong>calc_diagonal</strong> (<em>bool, optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
+<li><strong>calc_diagonal</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
 (i.e. the similarities of every ensemble against itself).
 If this is False (default), 0.0 will be used instead.</li>
 </ul>
@@ -267,7 +265,7 @@ If this is False (default), 0.0 will be used instead.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Harmonic similarity measurements between each pair of ensembles.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array (bidimensional)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a> (bidimensional)</p>
 </td>
 </tr>
 </tbody>
@@ -297,10 +295,10 @@ as Universe objects from a topology file and two trajectories. The
 topology- and trajectory files used are obtained from the MDAnalysis
 test suite for two different simulations of the protein AdK. To run the
 examples see the module <a class="reference internal" href="#examples">Examples</a> for how to import the files:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ens2</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">HES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">HES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">HES</span>
 <span class="go">[[        0.          38279683.95892926]</span>
 <span class="go"> [ 38279683.95892926         0.        ]]</span>
 </pre></div>
@@ -308,17 +306,17 @@ examples see the module <a class="reference internal" href="#examples">Examples<
 <p>You can use the align=True option to align the ensembles first. This will
 align everything to the current timestep in the first ensemble. Note that
 this changes the ens1 and ens2 objects:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">[[    0.          6880.34140106]</span>
 <span class="go">[ 6880.34140106     0.        ]]</span>
 </pre></div>
 </div>
 <p>Alternatively, for greater flexibility in how the alignment should be done
 you can call use an AlignTraj object manually:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="kn">import</span> <span class="n">align</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">AlignTraj</span><span class="p">(</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens1</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">AlignTraj</span><span class="p">(</span><span class="n">ens2</span><span class="p">,</span> <span class="n">ens1</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="k">import</span> <span class="n">align</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">AlignTraj</span><span class="p">(</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens1</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">AlignTraj</span><span class="p">(</span><span class="n">ens2</span><span class="p">,</span> <span class="n">ens1</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">[[    0.          7032.19607004]</span>
 <span class="go"> [ 7032.19607004     0.        ]]</span>
 </pre></div>
@@ -336,8 +334,8 @@ using the Jensen-Shannon divergence as described in
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of ensemble objects for similarity measurements</li>
-<li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of ensemble objects for similarity measurements</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 <li><strong>clustering_method</strong> &#8211; A single or a list of instances of the
 <a class="reference internal" href="clustering.html#module-MDAnalysis.analysis.encore.clustering.ClusteringMethod" title="MDAnalysis.analysis.encore.clustering.ClusteringMethod"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.analysis.encore.clustering.ClusteringMethod</span></code></a> classes
 from the clustering module. Different parameters for the same clustering
@@ -347,20 +345,19 @@ Affinity Propagation (default), the DBSCAN and the KMeans. The latter
 two methods need the sklearn python module installed.</li>
 <li><strong>distance_matrix</strong> (<a class="reference internal" href="utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix" title="MDAnalysis.analysis.encore.utils.TriangularMatrix"><em>encore.utils.TriangularMatrix</em></a>) &#8211; Distance matrix clustering methods. If this parameter
 is not supplied the matrix will be calculated on the fly.</li>
-<li><strong>estimate_error</strong> (<em>bool, optional</em>) &#8211; Whether to perform error estimation (default is False).
+<li><strong>estimate_error</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to perform error estimation (default is False).
 Only bootstrapping mode is supported.</li>
-<li><strong>bootstrapping_samples</strong> (<em>int, optional</em>) &#8211; number of samples to be used for estimating error.</li>
-<li><strong>ncores</strong> (<em>int, optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
-<li><strong>calc_diagonal</strong> (<em>bool, optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
+<li><strong>bootstrapping_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; number of samples to be used for estimating error.</li>
+<li><strong>ncores</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
+<li><strong>calc_diagonal</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
 (i.e. the similarities of every ensemble against itself).
 If this is False (default), 0.0 will be used instead.</li>
-<li><strong>allow_collapsed_result</strong> (<em>bool, optional</em>) &#8211; Whether a return value of a list of one value should be collapsed
+<li><strong>allow_collapsed_result</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether a return value of a list of one value should be collapsed
 into just the value.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>ces, details</strong> &#8211;</p>
-<p>ces contains the similarity values, arranged in a numpy.array.
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>ces, details</strong> &#8211; ces contains the similarity values, arranged in a numpy.array.
 If only one clustering_method is provided the output will be a
 2-dimensional square symmetrical numpy.array. The order of the matrix
 elements depends on the order of the input ensembles: for instance, if</p>
@@ -378,7 +375,7 @@ each cluster, the centroids and the frames associated with each cluster.</p>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array, numpy.array</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a></p>
 </td>
 </tr>
 </tbody>
@@ -399,10 +396,10 @@ topology- and trajectory files used are obtained from the MDAnalysis
 test suite for two different simulations of the protein AdK. To run the
 examples see the module <a class="reference internal" href="#examples">Examples</a> for how to import the files.
 Here the simplest case of just two instances of <code class="xref py py-class docutils literal"><span class="pre">Universe</span></code> is illustrated:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ens2</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CES</span><span class="p">,</span><span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">ces</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">CES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">CES</span>
 <span class="go">[[ 0.          0.68070702]</span>
 <span class="go"> [ 0.68070702  0.        ]]</span>
 </pre></div>
@@ -411,13 +408,13 @@ Here the simplest case of just two instances of <code class="xref py py-class do
 (Note that the sklearn module must be installed). Likewise,  different parameters
 for the same clustering method can be explored by adding different
 instances of the same clustering class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">ces</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">],</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">ces</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">],</span>
 <span class="go">                              clustering_method = [encore.DBSCAN(eps=0.45),</span>
 <span class="go">                                                   encore.DBSCAN(eps=0.50)])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s2">&quot;eps=0.45: &quot;</span><span class="p">,</span> <span class="n">CES</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;eps=0.45: &quot;</span><span class="p">,</span> <span class="n">CES</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">eps=0.45:  [[ 0.          0.20447236]</span>
 <span class="go">[ 0.20447236  0.        ]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s2">&quot;eps=0.5: &quot;</span><span class="p">,</span> <span class="n">CES</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;eps=0.5: &quot;</span><span class="p">,</span> <span class="n">CES</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">eps=0.5:  [[ 0.          0.25331629]</span>
 <span class="go">[ 0.25331629  0.        ]]&quot;</span>
 </pre></div>
@@ -435,8 +432,8 @@ ensembles using the Jensen-Shannon divergence as described in
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of ensemble objects for similarity measurements</li>
-<li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of ensemble objects for similarity measurements</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 <li><strong>dimensionality_reduction_method</strong> &#8211; A single or a list of instances of the DimensionalityReductionMethod
 classes from the dimensionality_reduction module. Different parameters
 for the same method can be explored by adding different instances of
@@ -445,22 +442,21 @@ Stochastic Proximity Embedding (default) and the Principal Component
 Analysis.</li>
 <li><strong>distance_matrix</strong> (<a class="reference internal" href="utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix" title="MDAnalysis.analysis.encore.utils.TriangularMatrix"><em>encore.utils.TriangularMatrix</em></a>) &#8211; conformational distance matrix, It will be calculated on the fly
 from the ensemble data if it is not provided.</li>
-<li><strong>nsamples</strong> (<em>int, optional</em>) &#8211; Number of samples to be drawn from the ensembles (default is 1000).
+<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Number of samples to be drawn from the ensembles (default is 1000).
 This is used to resample the density estimates and calculate the
 Jensen-Shannon divergence between ensembles.</li>
-<li><strong>estimate_error</strong> (<em>bool, optional</em>) &#8211; Whether to perform error estimation (default is False)</li>
-<li><strong>bootstrapping_samples</strong> (<em>int, optional</em>) &#8211; number of samples to be used for estimating error.</li>
-<li><strong>ncores</strong> (<em>int, optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
-<li><strong>calc_diagonal</strong> (<em>bool, optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
+<li><strong>estimate_error</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to perform error estimation (default is False)</li>
+<li><strong>bootstrapping_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; number of samples to be used for estimating error.</li>
+<li><strong>ncores</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
+<li><strong>calc_diagonal</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
 (i.e. the simlarities of every ensemble against itself).
 If this is False (default), 0.0 will be used instead.</li>
-<li><strong>allow_collapsed_result</strong> (<em>bool, optional</em>) &#8211; Whether a return value of a list of one value should be collapsed
+<li><strong>allow_collapsed_result</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether a return value of a list of one value should be collapsed
 into just the value.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>dres, details</strong> &#8211;
-dres contains the similarity values, arranged in numpy.array.
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>dres, details</strong> &#8211; dres contains the similarity values, arranged in numpy.array.
 If one number of dimensions is provided as an integer,
 the output will be a 2-dimensional square symmetrical numpy.array.
 The order of the matrix elements depends on the order of the
@@ -478,7 +474,7 @@ symmetrical similarity matrix.</p>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array, numpy.array</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a></p>
 </td>
 </tr>
 </tbody>
@@ -505,10 +501,10 @@ test suite for two different simulations of the protein AdK. To run the
 examples see the module <a class="reference internal" href="#examples">Examples</a> for how to import the files.
 Here the simplest case of comparing just two instances of <code class="xref py py-class docutils literal"><span class="pre">Universe</span></code> is
 illustrated:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ens2</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">DRES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">DRES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">DRES</span>
 <span class="go">[[ 0.          0.67996043]</span>
 <span class="go"> [ 0.67996043  0.        ]]</span>
 </pre></div>
@@ -520,9 +516,9 @@ reduction can easily be visualized, see the <code class="docutils literal"><span
 parameter dimensionality_reduction_method. Likewise, different parameters
 for the same clustering method can be explored by adding different
 instances of the same method  class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DRES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">],</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DRES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">],</span>
 <span class="go">                                dimensionality_reduction_method = encore.PrincipalComponentAnalysis(dimension=2))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">DRES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">DRES</span>
 <span class="go">[[ 0.          0.69314718]</span>
 <span class="go"> [ 0.69314718  0.        ]]</span>
 </pre></div>
@@ -543,8 +539,8 @@ using the Jensen-Shannon divergence as described in
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of ensemble objects for similarity measurements</li>
-<li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of ensemble objects for similarity measurements</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 <li><strong>clustering_method</strong> &#8211; A single or a list of instances of the
 <a class="reference internal" href="clustering.html#module-MDAnalysis.analysis.encore.clustering.ClusteringMethod" title="MDAnalysis.analysis.encore.clustering.ClusteringMethod"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.analysis.encore.clustering.ClusteringMethod</span></code></a> classes
 from the clustering module. Different parameters for the same clustering
@@ -554,20 +550,19 @@ Affinity Propagation (default), the DBSCAN and the KMeans. The latter
 two methods need the sklearn python module installed.</li>
 <li><strong>distance_matrix</strong> (<a class="reference internal" href="utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix" title="MDAnalysis.analysis.encore.utils.TriangularMatrix"><em>encore.utils.TriangularMatrix</em></a>) &#8211; Distance matrix clustering methods. If this parameter
 is not supplied the matrix will be calculated on the fly.</li>
-<li><strong>estimate_error</strong> (<em>bool, optional</em>) &#8211; Whether to perform error estimation (default is False).
+<li><strong>estimate_error</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to perform error estimation (default is False).
 Only bootstrapping mode is supported.</li>
-<li><strong>bootstrapping_samples</strong> (<em>int, optional</em>) &#8211; number of samples to be used for estimating error.</li>
-<li><strong>ncores</strong> (<em>int, optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
-<li><strong>calc_diagonal</strong> (<em>bool, optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
+<li><strong>bootstrapping_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; number of samples to be used for estimating error.</li>
+<li><strong>ncores</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
+<li><strong>calc_diagonal</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
 (i.e. the similarities of every ensemble against itself).
 If this is False (default), 0.0 will be used instead.</li>
-<li><strong>allow_collapsed_result</strong> (<em>bool, optional</em>) &#8211; Whether a return value of a list of one value should be collapsed
+<li><strong>allow_collapsed_result</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether a return value of a list of one value should be collapsed
 into just the value.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>ces, details</strong> &#8211;</p>
-<p>ces contains the similarity values, arranged in a numpy.array.
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>ces, details</strong> &#8211; ces contains the similarity values, arranged in a numpy.array.
 If only one clustering_method is provided the output will be a
 2-dimensional square symmetrical numpy.array. The order of the matrix
 elements depends on the order of the input ensembles: for instance, if</p>
@@ -585,7 +580,7 @@ each cluster, the centroids and the frames associated with each cluster.</p>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array, numpy.array</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a></p>
 </td>
 </tr>
 </tbody>
@@ -606,10 +601,10 @@ topology- and trajectory files used are obtained from the MDAnalysis
 test suite for two different simulations of the protein AdK. To run the
 examples see the module <a class="reference internal" href="#examples">Examples</a> for how to import the files.
 Here the simplest case of just two instances of <code class="xref py py-class docutils literal"><span class="pre">Universe</span></code> is illustrated:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ens2</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CES</span><span class="p">,</span><span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">ces</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">CES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">CES</span>
 <span class="go">[[ 0.          0.68070702]</span>
 <span class="go"> [ 0.68070702  0.        ]]</span>
 </pre></div>
@@ -618,13 +613,13 @@ Here the simplest case of just two instances of <code class="xref py py-class do
 (Note that the sklearn module must be installed). Likewise,  different parameters
 for the same clustering method can be explored by adding different
 instances of the same clustering class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">ces</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">],</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">ces</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">],</span>
 <span class="go">                              clustering_method = [encore.DBSCAN(eps=0.45),</span>
 <span class="go">                                                   encore.DBSCAN(eps=0.50)])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s2">&quot;eps=0.45: &quot;</span><span class="p">,</span> <span class="n">CES</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;eps=0.45: &quot;</span><span class="p">,</span> <span class="n">CES</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">eps=0.45:  [[ 0.          0.20447236]</span>
 <span class="go">[ 0.20447236  0.        ]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s2">&quot;eps=0.5: &quot;</span><span class="p">,</span> <span class="n">CES</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;eps=0.5: &quot;</span><span class="p">,</span> <span class="n">CES</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">eps=0.5:  [[ 0.          0.25331629]</span>
 <span class="go">[ 0.25331629  0.        ]]&quot;</span>
 </pre></div>
@@ -647,18 +642,17 @@ therefore of convergence.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>original_ensemble</strong> (<a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> object) &#8211; ensemble containing the trajectory whose convergence has to estimated</li>
-<li><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Size of window to be used, in number of frames</li>
-<li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Size of window to be used, in number of frames</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 <li><strong>clustering_method</strong> (<a class="reference internal" href="clustering.html#module-MDAnalysis.analysis.encore.clustering.ClusteringMethod" title="MDAnalysis.analysis.encore.clustering.ClusteringMethod"><em>MDAnalysis.analysis.encore.clustering.ClusteringMethod</em></a>) &#8211; A single or a list of instances of the ClusteringMethod classes from
 the clustering module. Different parameters for the same clustering
 method can be explored by adding different instances of the same
 clustering class.</li>
-<li><strong>ncores</strong> (<em>int, optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
+<li><strong>ncores</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out</strong> &#8211;
-array of shape (number_of_frames / window_size, preference_values).</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out</strong> &#8211; array of shape (number_of_frames / window_size, preference_values).</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
@@ -674,9 +668,9 @@ MDAnalysis test suite for two different simulations of the protein AdK.
 To run the examples see the module <a class="reference internal" href="#examples">Examples</a> for how to import the files.
 Here the simplest case of evaluating the convergence is illustrated by
 splitting the trajectory into a window_size of 10 frames :</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ces_conv</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">ces_convergence</span><span class="p">(</span><span class="n">ens1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">ces_conv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">ces_conv</span>
 <span class="go">[[ 0.48194205]</span>
 <span class="go">[ 0.40284672]</span>
 <span class="go">[ 0.31699026]</span>
@@ -705,19 +699,18 @@ splitting the trajectory into a window_size of 10 frames :</p>
 <li><strong>cc</strong> (<em>encore.clustering.ClustersCollection</em>) &#8211; Collection from cluster calculated by a clustering algorithm
 (e.g. Affinity propagation)</li>
 <li><strong>ens1</strong> (<a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>) &#8211; First ensemble to be used in comparison</li>
-<li><strong>ens1_id</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; First ensemble id as detailed in the ClustersCollection metadata</li>
+<li><strong>ens1_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; First ensemble id as detailed in the ClustersCollection metadata</li>
 <li><strong>ens2</strong> (<a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>) &#8211; Second ensemble to be used in comparison</li>
-<li><strong>ens2_id</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Second ensemble id as detailed in the ClustersCollection metadata</li>
-<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;.</li>
+<li><strong>ens2_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Second ensemble id as detailed in the ClustersCollection metadata</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>djs</strong> &#8211;
-Jensen-Shannon divergence between the two ensembles, as calculated by
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>djs</strong> &#8211; Jensen-Shannon divergence between the two ensembles, as calculated by
 the clustering ensemble similarity method</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -741,19 +734,18 @@ comprise all the ensembles with id [ens2_id_min, ens2_id].</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>cc</strong> (<em>encore.ClustersCollection</em>) &#8211; Collection from cluster calculated by a clustering algorithm
 (e.g. Affinity propagation)</li>
-<li><strong>ens1_id</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; First ensemble id as detailed in the ClustersCollection
+<li><strong>ens1_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; First ensemble id as detailed in the ClustersCollection
 metadata</li>
-<li><strong>ens2_id</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Second ensemble id as detailed in the ClustersCollection
+<li><strong>ens2_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Second ensemble id as detailed in the ClustersCollection
 metadata</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>djs</strong> &#8211;
-Jensen-Shannon divergence between the two ensembles, as
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>djs</strong> &#8211; Jensen-Shannon divergence between the two ensembles, as
 calculated by the clustering ensemble similarity method</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -779,24 +771,21 @@ conformations belong to each ensemble. For instance if
 ensemble_assignment is [1,1,1,1,2,2], it means that the first
 four conformations belong to ensemble 1 and the last two
 to ensemble 2</li>
-<li><strong>nensembles</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of ensembles</li>
-<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Samples to be drawn from the ensembles. Will be required in a later
+<li><strong>nensembles</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of ensembles</li>
+<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Samples to be drawn from the ensembles. Will be required in a later
 stage in order to calculate dJS.</li>
-<li><strong>ens_id_min</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Minimum ID of the ensemble to be considered; see description</li>
-<li><strong>ens_id_max</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Maximum ID of the ensemble to be considered; see description. If None,
+<li><strong>ens_id_min</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Minimum ID of the ensemble to be considered; see description</li>
+<li><strong>ens_id_max</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Maximum ID of the ensemble to be considered; see description. If None,
 it will be set to the maximum possible value given the number of
 ensembles.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>kdes</strong> (<em>scipy.stats.gaussian_kde</em>) &#8211;
-KDEs calculated from ensembles</li>
-<li><strong>resamples</strong> (<em>list of numpy.array</em>) &#8211;
-For each KDE, draw samples according to the probability
+<li><strong>kdes</strong> (<em>scipy.stats.gaussian_kde</em>) &#8211; KDEs calculated from ensembles</li>
+<li><strong>resamples</strong> (<em>list of numpy.array</em>) &#8211; For each KDE, draw samples according to the probability
 distribution of the kde mixture model</li>
-<li><strong>embedded_ensembles</strong> (<em>list of numpy.array</em>) &#8211;
-List of numpy.array containing, each one, the elements of the
+<li><strong>embedded_ensembles</strong> (<em>list of numpy.array</em>) &#8211; List of numpy.array containing, each one, the elements of the
 embedded space belonging to a certain ensemble</li>
 </ul>
 </p>
@@ -822,7 +811,7 @@ values of the components to get an estimate of dKL.
 Since the Jensen-Shannon distance is actually  more complex, we need to
 estimate four expectation values:</p>
 <div class="math">
-\[\langle{}log(P(x))\rangle{}_P\]\[\langle{}log(Q(x))\rangle{}_Q\]\[\langle{}log(0.5*(P(x)+Q(x)))\rangle{}_P\]\[\langle{}log(0.5*(P(x)+Q(x)))\rangle{}_Q\]</div>
+\[ \begin{align}\begin{aligned}\langle{}log(P(x))\rangle{}_P\\\langle{}log(Q(x))\rangle{}_Q\\\langle{}log(0.5*(P(x)+Q(x)))\rangle{}_P\\\langle{}log(0.5*(P(x)+Q(x)))\rangle{}_Q\end{aligned}\end{align} \]</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -834,25 +823,24 @@ calculate the expected values according to &#8216;P&#8217; as detailed before.</
 <li><strong>kde2</strong> (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian_kde.html#scipy.stats.gaussian_kde" title="(in SciPy v0.19.0)"><em>scipy.stats.gaussian_kde</em></a>) &#8211; Kernel density estimation for ensemble 2</li>
 <li><strong>resamples2</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)"><em>numpy.array</em></a>) &#8211; Samples drawn according do kde2. Will be used as sample to
 calculate the expected values according to &#8216;Q&#8217; as detailed before.</li>
-<li><strong>ln_P1_exp_P1</strong> (<em>float or None</em>) &#8211; Use this value for <span class="math">\(\langle{}log(P(x))\rangle{}_P\)</span>; if None,
+<li><strong>ln_P1_exp_P1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Use this value for <span class="math">\(\langle{}log(P(x))\rangle{}_P\)</span>; if None,
 calculate it instead</li>
-<li><strong>ln_P2_exp_P2</strong> (<em>float or None</em>) &#8211; Use this value for <span class="math">\(\langle{}log(Q(x))\rangle{}_Q\)</span>; if
+<li><strong>ln_P2_exp_P2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Use this value for <span class="math">\(\langle{}log(Q(x))\rangle{}_Q\)</span>; if
 None, calculate it instead</li>
-<li><strong>ln_P1P2_exp_P1</strong> (<em>float or None</em>) &#8211; Use this value for
+<li><strong>ln_P1P2_exp_P1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Use this value for
 <span class="math">\(\langle{}log(0.5*(P(x)+Q(x)))\rangle{}_P\)</span>;
 if None, calculate it instead</li>
-<li><strong>ln_P1P2_exp_P2</strong> (<em>float or None</em>) &#8211; Use this value for
+<li><strong>ln_P1P2_exp_P2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Use this value for
 <span class="math">\(\langle{}log(0.5*(P(x)+Q(x)))\rangle{}_Q\)</span>;
 if None, calculate it instead</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>djs</strong> &#8211;
-Jensen-Shannon divergence calculated according to the dimensionality
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>djs</strong> &#8211; Jensen-Shannon divergence calculated according to the dimensionality
 reduction method</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -873,11 +861,10 @@ reduction method</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>djs</strong> &#8211;
-Discrete Jensen-Shannon divergence</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>djs</strong> &#8211; Discrete Jensen-Shannon divergence</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -900,11 +887,10 @@ Notice that since this measure is not symmetric ::
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dkl</strong> &#8211;
-Discrete Kullback-Liebler divergence</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dkl</strong> &#8211; Discrete Kullback-Liebler divergence</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -922,8 +908,8 @@ ensembles using the Jensen-Shannon divergence as described in
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of ensemble objects for similarity measurements</li>
-<li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of ensemble objects for similarity measurements</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 <li><strong>dimensionality_reduction_method</strong> &#8211; A single or a list of instances of the DimensionalityReductionMethod
 classes from the dimensionality_reduction module. Different parameters
 for the same method can be explored by adding different instances of
@@ -932,22 +918,21 @@ Stochastic Proximity Embedding (default) and the Principal Component
 Analysis.</li>
 <li><strong>distance_matrix</strong> (<a class="reference internal" href="utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix" title="MDAnalysis.analysis.encore.utils.TriangularMatrix"><em>encore.utils.TriangularMatrix</em></a>) &#8211; conformational distance matrix, It will be calculated on the fly
 from the ensemble data if it is not provided.</li>
-<li><strong>nsamples</strong> (<em>int, optional</em>) &#8211; Number of samples to be drawn from the ensembles (default is 1000).
+<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Number of samples to be drawn from the ensembles (default is 1000).
 This is used to resample the density estimates and calculate the
 Jensen-Shannon divergence between ensembles.</li>
-<li><strong>estimate_error</strong> (<em>bool, optional</em>) &#8211; Whether to perform error estimation (default is False)</li>
-<li><strong>bootstrapping_samples</strong> (<em>int, optional</em>) &#8211; number of samples to be used for estimating error.</li>
-<li><strong>ncores</strong> (<em>int, optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
-<li><strong>calc_diagonal</strong> (<em>bool, optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
+<li><strong>estimate_error</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to perform error estimation (default is False)</li>
+<li><strong>bootstrapping_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; number of samples to be used for estimating error.</li>
+<li><strong>ncores</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
+<li><strong>calc_diagonal</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
 (i.e. the simlarities of every ensemble against itself).
 If this is False (default), 0.0 will be used instead.</li>
-<li><strong>allow_collapsed_result</strong> (<em>bool, optional</em>) &#8211; Whether a return value of a list of one value should be collapsed
+<li><strong>allow_collapsed_result</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether a return value of a list of one value should be collapsed
 into just the value.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>dres, details</strong> &#8211;
-dres contains the similarity values, arranged in numpy.array.
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>dres, details</strong> &#8211; dres contains the similarity values, arranged in numpy.array.
 If one number of dimensions is provided as an integer,
 the output will be a 2-dimensional square symmetrical numpy.array.
 The order of the matrix elements depends on the order of the
@@ -965,7 +950,7 @@ symmetrical similarity matrix.</p>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array, numpy.array</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a></p>
 </td>
 </tr>
 </tbody>
@@ -992,10 +977,10 @@ test suite for two different simulations of the protein AdK. To run the
 examples see the module <a class="reference internal" href="#examples">Examples</a> for how to import the files.
 Here the simplest case of comparing just two instances of <code class="xref py py-class docutils literal"><span class="pre">Universe</span></code> is
 illustrated:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ens2</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">DRES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">DRES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">DRES</span>
 <span class="go">[[ 0.          0.67996043]</span>
 <span class="go"> [ 0.67996043  0.        ]]</span>
 </pre></div>
@@ -1007,9 +992,9 @@ reduction can easily be visualized, see the <code class="docutils literal"><span
 parameter dimensionality_reduction_method. Likewise, different parameters
 for the same clustering method can be explored by adding different
 instances of the same method  class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DRES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">],</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DRES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span><span class="n">ens2</span><span class="p">],</span>
 <span class="go">                                dimensionality_reduction_method = encore.PrincipalComponentAnalysis(dimension=2))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">DRES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">DRES</span>
 <span class="go">[[ 0.          0.69314718]</span>
 <span class="go"> [ 0.69314718  0.        ]]</span>
 </pre></div>
@@ -1032,20 +1017,19 @@ therefore of convergence.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>original_ensemble</strong> (<a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> object) &#8211; ensemble containing the trajectory whose convergence has to estimated</li>
-<li><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Size of window to be used, in number of frames</li>
-<li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Size of window to be used, in number of frames</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 <li><strong>dimensionality_reduction_method</strong> &#8211; A single or a list of instances of the DimensionalityReductionMethod
 classes from the dimensionality_reduction module. Different parameters
 for the same method can be explored by adding different instances of
 the same dimensionality reduction class.</li>
-<li><strong>nsamples</strong> (<em>int, optional</em>) &#8211; Number of samples to be drawn from the ensembles (default is 1000).
+<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Number of samples to be drawn from the ensembles (default is 1000).
 This is akin to the nsamples parameter of dres().</li>
-<li><strong>ncores</strong> (<em>int, optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
+<li><strong>ncores</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Maximum number of cores to be used (default is 1).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out</strong> &#8211;
-array of shape (number_of_frames / window_size, preference_values).</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out</strong> &#8211; array of shape (number_of_frames / window_size, preference_values).</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
@@ -1061,9 +1045,9 @@ MDAnalysis test suite for two different simulations of the protein AdK.
 To run the examples see the module <a class="reference internal" href="#examples">Examples</a> for how to import the files.
 Here the simplest case of evaluating the convergence is illustrated by
 splitting the trajectory into a window_size of 10 frames :</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dres_conv</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">dres_convergence</span><span class="p">(</span><span class="n">ens1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">dres_conv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">dres_conv</span>
 <span class="go">[[ 0.5295528 ]</span>
 <span class="go"> [ 0.40716539]</span>
 <span class="go"> [ 0.31158669]</span>
@@ -1096,20 +1080,17 @@ distinguish, in the complete embedded space, which conformations
 belong to each ensemble. For instance if ensemble_assignment
 is [1,1,1,1,2,2], it means that the first four conformations belong
 to ensemble 1 and the last two to ensemble 2</li>
-<li><strong>nensembles</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of ensembles</li>
-<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; samples to be drawn from the ensembles. Will be required in
+<li><strong>nensembles</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of ensembles</li>
+<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; samples to be drawn from the ensembles. Will be required in
 a later stage in order to calculate dJS.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>kdes</strong> (<em>scipy.stats.gaussian_kde</em>) &#8211;
-KDEs calculated from ensembles</li>
-<li><strong>resamples</strong> (<em>list of numpy.array</em>) &#8211;
-For each KDE, draw samples according to the probability distribution
+<li><strong>kdes</strong> (<em>scipy.stats.gaussian_kde</em>) &#8211; KDEs calculated from ensembles</li>
+<li><strong>resamples</strong> (<em>list of numpy.array</em>) &#8211; For each KDE, draw samples according to the probability distribution
 of the KDE mixture model</li>
-<li><strong>embedded_ensembles</strong> (<em>list of numpy.array</em>) &#8211;
-List of numpy.array containing, each one, the elements of the
+<li><strong>embedded_ensembles</strong> (<em>list of numpy.array</em>) &#8211; List of numpy.array containing, each one, the elements of the
 embedded space belonging to a certain ensemble</li>
 </ul>
 </p>
@@ -1138,11 +1119,10 @@ ensemble.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dhes</strong> &#8211;
-harmonic similarity measure</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dhes</strong> &#8211; harmonic similarity measure</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -1160,21 +1140,21 @@ in <a class="reference internal" href="../../references.html#tiberti2015" id="id
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of Universe objects for similarity measurements.</li>
-<li><strong>selection</strong> (<em>str, optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
-<li><strong>cov_estimator</strong> (<em>str, optional</em>) &#8211; Covariance matrix estimator method, either shrinkage, <cite>shrinkage</cite>,
+<li><strong>ensembles</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of Universe objects for similarity measurements.</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>cov_estimator</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Covariance matrix estimator method, either shrinkage, <cite>shrinkage</cite>,
 or Maximum Likelyhood, <cite>ml</cite>. Default is shrinkage.</li>
-<li><strong>weights</strong> (<em>str/array_like, optional</em>) &#8211; specify optional weights. If <code class="docutils literal"><span class="pre">mass</span></code> then chose masses of ensemble atoms</li>
-<li><strong>align</strong> (<em>bool, optional</em>) &#8211; Whether to align the ensembles before calculating their similarity.
+<li><strong>weights</strong> (<em>str/array_like</em><em>, </em><em>optional</em>) &#8211; specify optional weights. If <code class="docutils literal"><span class="pre">mass</span></code> then chose masses of ensemble atoms</li>
+<li><strong>align</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to align the ensembles before calculating their similarity.
 Note: this changes the ensembles in-place, and will thus leave your
 ensembles in an altered state.
 (default is False)</li>
-<li><strong>details</strong> (<em>bool, optional</em>) &#8211; Save the mean and covariance matrix for each
+<li><strong>details</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Save the mean and covariance matrix for each
 ensemble in a numpy array (default is False).</li>
-<li><strong>estimate_error</strong> (<em>bool, optional</em>) &#8211; Whether to perform error estimation (default is False).</li>
-<li><strong>bootstrapping_samples</strong> (<em>int, optional</em>) &#8211; Number of times the similarity matrix will be bootstrapped (default
+<li><strong>estimate_error</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to perform error estimation (default is False).</li>
+<li><strong>bootstrapping_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Number of times the similarity matrix will be bootstrapped (default
 is 100), only if estimate_error is True.</li>
-<li><strong>calc_diagonal</strong> (<em>bool, optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
+<li><strong>calc_diagonal</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to calculate the diagonal of the similarity scores
 (i.e. the similarities of every ensemble against itself).
 If this is False (default), 0.0 will be used instead.</li>
 </ul>
@@ -1183,7 +1163,7 @@ If this is False (default), 0.0 will be used instead.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Harmonic similarity measurements between each pair of ensembles.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array (bidimensional)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a> (bidimensional)</p>
 </td>
 </tr>
 </tbody>
@@ -1213,10 +1193,10 @@ as Universe objects from a topology file and two trajectories. The
 topology- and trajectory files used are obtained from the MDAnalysis
 test suite for two different simulations of the protein AdK. To run the
 examples see the module <a class="reference internal" href="#examples">Examples</a> for how to import the files:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ens1</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ens2</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">HES</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">HES</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">HES</span>
 <span class="go">[[        0.          38279683.95892926]</span>
 <span class="go"> [ 38279683.95892926         0.        ]]</span>
 </pre></div>
@@ -1224,17 +1204,17 @@ examples see the module <a class="reference internal" href="#examples">Examples<
 <p>You can use the align=True option to align the ensembles first. This will
 align everything to the current timestep in the first ensemble. Note that
 this changes the ens1 and ens2 objects:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">[[    0.          6880.34140106]</span>
 <span class="go">[ 6880.34140106     0.        ]]</span>
 </pre></div>
 </div>
 <p>Alternatively, for greater flexibility in how the alignment should be done
 you can call use an AlignTraj object manually:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="kn">import</span> <span class="n">align</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">AlignTraj</span><span class="p">(</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens1</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">AlignTraj</span><span class="p">(</span><span class="n">ens2</span><span class="p">,</span> <span class="n">ens1</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="k">import</span> <span class="n">align</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">AlignTraj</span><span class="p">(</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens1</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">AlignTraj</span><span class="p">(</span><span class="n">ens2</span><span class="p">,</span> <span class="n">ens1</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">encore</span><span class="o">.</span><span class="n">hes</span><span class="p">([</span><span class="n">ens1</span><span class="p">,</span> <span class="n">ens2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">[[    0.          7032.19607004]</span>
 <span class="go"> [ 7032.19607004     0.        ]]</span>
 </pre></div>
@@ -1253,8 +1233,8 @@ needs are generated here.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>ensemble</strong> (<a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> object) &#8211; Input ensemble</li>
-<li><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; size of the window (in number of frames) to be used</li>
-<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
+<li><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; size of the window (in number of frames) to be used</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Atom selection string in the MDAnalysis format. Default is &#8220;name CA&#8221;</li>
 </ul>
 </td>
 </tr>
@@ -1281,12 +1261,12 @@ is not exactly divisible by window_size.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>matrix</strong> (<a class="reference internal" href="utils.html#MDAnalysis.analysis.encore.utils.TriangularMatrix" title="MDAnalysis.analysis.encore.utils.TriangularMatrix"><em>encore.utils.TriangularMatrix</em></a>) &#8211; Matrix containing the values to be printed</li>
-<li><strong>base_fname</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Basic filename for output. If None, no files will be written, and
+<li><strong>base_fname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Basic filename for output. If None, no files will be written, and
 the matrix will be just printed on standard output</li>
-<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Text to be written just before the matrix</li>
-<li><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; String to be concatenated to basename, in order to get the final
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Text to be written just before the matrix</li>
+<li><strong>suffix</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; String to be concatenated to basename, in order to get the final
 file name</li>
-<li><strong>extension</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Extension for the output file</li>
+<li><strong>extension</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Extension for the output file</li>
 </ul>
 </td>
 </tr>
@@ -1318,14 +1298,14 @@ file name</li>
         <li class="right" >
           <a href="../encore.html" title="4.2.6. ENCORE Ensemble Similarity Calculations — MDAnalysis.analysis.encore"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../analysis_modules.html" >4. Analysis modules</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../encore.html" >4.2.6. ENCORE Ensemble Similarity Calculations &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../analysis_modules.html" >4. Analysis modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../encore.html" >4.2.6. ENCORE Ensemble Similarity Calculations &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

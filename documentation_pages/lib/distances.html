@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>11.2.1. Fast distance array computation — MDAnalysis.lib.distances &mdash; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>11.2.1. Fast distance array computation — MDAnalysis.lib.distances &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -17,7 +17,8 @@
         VERSION:     '0.16.0-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -28,8 +29,8 @@
           title="Search within MDAnalysis 0.16.0-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis 0.16.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="11. Library functions — MDAnalysis.lib" href="../lib_modules.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="&lt;no title&gt;" href="c_distances.html" />
     <link rel="prev" title="11. Library functions — MDAnalysis.lib" href="../lib_modules.html" /> 
   </head>
@@ -49,8 +50,8 @@
         <li class="right" >
           <a href="../lib_modules.html" title="11. Library functions — MDAnalysis.lib"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../lib_modules.html" accesskey="U">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../lib_modules.html" accesskey="U">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -77,21 +78,18 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/documentation_pages/lib/distances.txt"
+      <li><a href="../../_sources/documentation_pages/lib/distances.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -163,11 +161,11 @@ filled. This can speed up calculations.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>reference</strong> (<em>numpy.array of numpy.float32</em>) &#8211; Reference coordinate array.</li>
 <li><strong>configuration</strong> (<em>numpy.array of numpy.float32</em>) &#8211; Configuration coordinate array.</li>
-<li><strong>box</strong> (<em>numpy.array or None</em>) &#8211; Dimensions of the cell; if provided, the minimum image convention is
+<li><strong>box</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)"><em>numpy.array</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Dimensions of the cell; if provided, the minimum image convention is
 applied. The dimensions must be provided in the same format as returned
 by by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>numpy.array of numpy.float64, optional</em>) &#8211; Preallocated result array which must have the
+<li><strong>result</strong> (<em>numpy.array of numpy.float64</em><em>, </em><em>optional</em>) &#8211; Preallocated result array which must have the
 shape <code class="docutils literal"><span class="pre">(len(ref),</span> <span class="pre">len(conf))</span></code> and <code class="docutils literal"><span class="pre">dtype=numpy.float64</span></code>.
 Avoids creating the array which saves time when the function
 is called repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
@@ -176,8 +174,7 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>d</strong> &#8211;
-<code class="docutils literal"><span class="pre">(len(reference),len(configuration))</span></code> numpy array with the distances
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>d</strong> &#8211; <code class="docutils literal"><span class="pre">(len(reference),len(configuration))</span></code> numpy array with the distances
 <code class="docutils literal"><span class="pre">d[i,j]</span></code> between reference coordinates <cite>i</cite> and configuration
 coordinates <cite>j</cite>.</p>
 </td>
@@ -211,12 +208,12 @@ is filled. This can speed up calculations.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Reference coordinate array with <code class="docutils literal"><span class="pre">N=len(ref)</span></code> coordinates.</li>
-<li><strong>box</strong> (<em>array or None</em>) &#8211; Dimensions of the cell; if provided, the minimum image convention is
+<li><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Reference coordinate array with <code class="docutils literal"><span class="pre">N=len(ref)</span></code> coordinates.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Dimensions of the cell; if provided, the minimum image convention is
 applied. The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>array, optional</em>) &#8211; Preallocated result array which must have the shape
+<li><strong>result</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Preallocated result array which must have the shape
 <code class="docutils literal"><span class="pre">(N*(N-1)/2,)</span></code> and dtype <code class="docutils literal"><span class="pre">numpy.float64</span></code>. Avoids creating
 the array which saves time when the function is called
 repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
@@ -225,8 +222,7 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>d</strong> &#8211;
-<code class="docutils literal"><span class="pre">N*(N-1)/2</span></code> numpy 1D array with the distances dist[i,j] between ref
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>d</strong> &#8211; <code class="docutils literal"><span class="pre">N*(N-1)/2</span></code> numpy 1D array with the distances dist[i,j] between ref
 coordinates i and j at position d[k]. Loop through d:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
@@ -237,7 +233,7 @@ coordinates i and j at position d[k]. Loop through d:</p>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -260,7 +256,7 @@ arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</p>
 <p>In comparison to distance_array and self_distance_array which calculate distances
 between all combinations of coordinates, calc_bonds can be used to calculate distance
 between pairs of objects, similar to:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>numpy.linalg.norm(a - b) for a, b in zip(coords1, coords2)
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The optional argument <em>box</em> applies minimum image convention if supplied.
@@ -274,13 +270,13 @@ up calculations.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; An array of coordinates for one half of the bond.</li>
-<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; An array of coordinates for the other half of bond</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; An array of coordinates for one half of the bond.</li>
+<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; An array of coordinates for the other half of bond</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>array, optional</em>) &#8211; Preallocated result array which must be same length as coord
+<li><strong>result</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Preallocated result array which must be same length as coord
 arrays and <code class="docutils literal"><span class="pre">dtype=numpy.float64</span></code>. Avoids creating the
 array which saves time when the function is called repeatedly. [None]</li>
 <li><strong>backend</strong> &#8211; Select the type of acceleration; &#8220;serial&#8221; is always available. Other
@@ -288,11 +284,10 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bondlengths</strong> &#8211;
-The length between each pair in coords1 and coords2</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bondlengths</strong> &#8211; The length between each pair in coords1 and coords2</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -323,14 +318,14 @@ goes between coordinates in the same image.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of one side of angles.</li>
-<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of apex of angles.</li>
-<li><strong>coords3</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of other side of angles.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of one side of angles.</li>
+<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of apex of angles.</li>
+<li><strong>coords3</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of other side of angles.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>array, optional</em>) &#8211; Preallocated result array which must be same length as coord
+<li><strong>result</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Preallocated result array which must be same length as coord
 arrays and <code class="docutils literal"><span class="pre">dtype=numpy.float64</span></code>. Avoids creating the
 array which saves time when the function is called repeatedly. [None]</li>
 <li><strong>backend</strong> &#8211; Select the type of acceleration; &#8220;serial&#8221; is always available. Other
@@ -338,11 +333,10 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>angles</strong> &#8211;
-A numpy.array of angles in radians.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>angles</strong> &#8211; A numpy.array of angles in radians.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -364,11 +358,11 @@ A numpy.array of angles in radians.</p>
 <dd><p>Calculate the dihedral angle formed by four atoms, over a list of coordinates.</p>
 <p>Dihedral angle around axis connecting atoms 1 and 2 (i.e. the angle
 between the planes spanned by atoms (0,1,2) and (1,2,3)):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>        3
-        |
-  1-----2
- /
-0
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="mi">3</span>
+        <span class="o">|</span>
+  <span class="mi">1</span><span class="o">-----</span><span class="mi">2</span>
+ <span class="o">/</span>
+<span class="mi">0</span>
 </pre></div>
 </div>
 <p>If a 1D numpy array of dtype <code class="docutils literal"><span class="pre">numpy.float64</span></code> with <code class="docutils literal"><span class="pre">len(atom1)</span></code> elements
@@ -378,7 +372,7 @@ speed up calculations.</p>
 into account when constructing the connecting vectors between atoms, ie
 that the vector between atoms 1 &amp; 2 goes between coordinates in the same
 image:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">angles</span> <span class="o">=</span> <span class="n">calc_dihedrals</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">coords4</span> <span class="p">[,</span><span class="n">box</span><span class="o">=</span><span class="n">box</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">angles</span><span class="p">])</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -386,15 +380,15 @@ image:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 1st atom in dihedrals.</li>
-<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 2nd atom in dihedrals.</li>
-<li><strong>coords3</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 3rd atom in dihedrals.</li>
-<li><strong>coords4</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 4th atom in dihedrals.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 1st atom in dihedrals.</li>
+<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 2nd atom in dihedrals.</li>
+<li><strong>coords3</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 3rd atom in dihedrals.</li>
+<li><strong>coords4</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 4th atom in dihedrals.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>array, optional</em>) &#8211; Preallocated result array which must be same length as coord
+<li><strong>result</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Preallocated result array which must be same length as coord
 arrays and <code class="docutils literal"><span class="pre">dtype=numpy.float64</span></code>. Avoids creating the
 array which saves time when the function is called repeatedly. [None]</li>
 <li><strong>backend</strong> &#8211; Select the type of acceleration; &#8220;serial&#8221; is always available. Other
@@ -402,11 +396,10 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>angles</strong> &#8211;
-A numpy.array of angles in radians.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>angles</strong> &#8211; A numpy.array of angles in radians.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -435,8 +428,8 @@ A numpy.array of angles in radians.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coords</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array (of type numpy.float32).</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system; can be either orthogonal or
+<li><strong>coords</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array (of type numpy.float32).</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system; can be either orthogonal or
 triclinic information. The dimensions must be provided in the same
 format as returned by
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span> <span class="pre">ly,</span> <span class="pre">lz,</span>
@@ -446,12 +439,11 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newcoords</strong> &#8211;
-Coordinates that are now all within the primary unit cell, as defined
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newcoords</strong> &#8211; Coordinates that are now all within the primary unit cell, as defined
 by box.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -475,8 +467,8 @@ by box.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputcoords</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; A n x 3 array of coordinate data, of type <code class="docutils literal"><span class="pre">np.float32</span></code>.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>inputcoords</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; A n x 3 array of coordinate data, of type <code class="docutils literal"><span class="pre">np.float32</span></code>.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
@@ -486,10 +478,8 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>outcoords</strong> (<em>array</em>) &#8211;
-A n x 3 array of fractional coordiantes.</li>
-<li><strong>.. versionchanged</strong> (<em>: 0.13.0</em>) &#8211;
-Added <em>backend</em> keyword.</li>
+<li><strong>outcoords</strong> (<em>array</em>) &#8211; A n x 3 array of fractional coordiantes.</li>
+<li><em>.. versionchanged:: 0.13.0</em> &#8211; Added <em>backend</em> keyword.</li>
 </ul>
 </p>
 </td>
@@ -509,8 +499,8 @@ Added <em>backend</em> keyword.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputcoords</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; A n x 3 array of coordinate data, of type np.float32</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>inputcoords</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; A n x 3 array of coordinate data, of type np.float32</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
@@ -519,11 +509,10 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>outcoords</strong> &#8211;
-A n x 3 array of fracional coordiantes.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>outcoords</strong> &#8211; A n x 3 array of fracional coordiantes.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -543,8 +532,8 @@ A n x 3 array of fracional coordiantes.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coords</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array (of type numpy.float32).</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system; can be either orthogonal or
+<li><strong>coords</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array (of type numpy.float32).</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system; can be either orthogonal or
 triclinic information. The dimensions must be provided in the same
 format as returned by
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span> <span class="pre">ly,</span> <span class="pre">lz,</span>
@@ -554,12 +543,11 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newcoords</strong> &#8211;
-Coordinates that are now all within the primary unit cell, as defined
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newcoords</strong> &#8211; Coordinates that are now all within the primary unit cell, as defined
 by box.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -590,14 +578,14 @@ goes between coordinates in the same image.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of one side of angles.</li>
-<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of apex of angles.</li>
-<li><strong>coords3</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of other side of angles.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of one side of angles.</li>
+<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of apex of angles.</li>
+<li><strong>coords3</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of other side of angles.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>array, optional</em>) &#8211; Preallocated result array which must be same length as coord
+<li><strong>result</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Preallocated result array which must be same length as coord
 arrays and <code class="docutils literal"><span class="pre">dtype=numpy.float64</span></code>. Avoids creating the
 array which saves time when the function is called repeatedly. [None]</li>
 <li><strong>backend</strong> &#8211; Select the type of acceleration; &#8220;serial&#8221; is always available. Other
@@ -605,11 +593,10 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>angles</strong> &#8211;
-A numpy.array of angles in radians.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>angles</strong> &#8211; A numpy.array of angles in radians.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -633,7 +620,7 @@ arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</p>
 <p>In comparison to distance_array and self_distance_array which calculate distances
 between all combinations of coordinates, calc_bonds can be used to calculate distance
 between pairs of objects, similar to:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>numpy.linalg.norm(a - b) for a, b in zip(coords1, coords2)
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The optional argument <em>box</em> applies minimum image convention if supplied.
@@ -647,13 +634,13 @@ up calculations.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; An array of coordinates for one half of the bond.</li>
-<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; An array of coordinates for the other half of bond</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; An array of coordinates for one half of the bond.</li>
+<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; An array of coordinates for the other half of bond</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>array, optional</em>) &#8211; Preallocated result array which must be same length as coord
+<li><strong>result</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Preallocated result array which must be same length as coord
 arrays and <code class="docutils literal"><span class="pre">dtype=numpy.float64</span></code>. Avoids creating the
 array which saves time when the function is called repeatedly. [None]</li>
 <li><strong>backend</strong> &#8211; Select the type of acceleration; &#8220;serial&#8221; is always available. Other
@@ -661,11 +648,10 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bondlengths</strong> &#8211;
-The length between each pair in coords1 and coords2</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bondlengths</strong> &#8211; The length between each pair in coords1 and coords2</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -684,11 +670,11 @@ The length between each pair in coords1 and coords2</p>
 <dd><p>Calculate the dihedral angle formed by four atoms, over a list of coordinates.</p>
 <p>Dihedral angle around axis connecting atoms 1 and 2 (i.e. the angle
 between the planes spanned by atoms (0,1,2) and (1,2,3)):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>        3
-        |
-  1-----2
- /
-0
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="mi">3</span>
+        <span class="o">|</span>
+  <span class="mi">1</span><span class="o">-----</span><span class="mi">2</span>
+ <span class="o">/</span>
+<span class="mi">0</span>
 </pre></div>
 </div>
 <p>If a 1D numpy array of dtype <code class="docutils literal"><span class="pre">numpy.float64</span></code> with <code class="docutils literal"><span class="pre">len(atom1)</span></code> elements
@@ -698,7 +684,7 @@ speed up calculations.</p>
 into account when constructing the connecting vectors between atoms, ie
 that the vector between atoms 1 &amp; 2 goes between coordinates in the same
 image:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">angles</span> <span class="o">=</span> <span class="n">calc_dihedrals</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">coords4</span> <span class="p">[,</span><span class="n">box</span><span class="o">=</span><span class="n">box</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">angles</span><span class="p">])</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -706,15 +692,15 @@ image:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 1st atom in dihedrals.</li>
-<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 2nd atom in dihedrals.</li>
-<li><strong>coords3</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 3rd atom in dihedrals.</li>
-<li><strong>coords4</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 4th atom in dihedrals.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>coords1</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 1st atom in dihedrals.</li>
+<li><strong>coords2</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 2nd atom in dihedrals.</li>
+<li><strong>coords3</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 3rd atom in dihedrals.</li>
+<li><strong>coords4</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Coordinate array of 4th atom in dihedrals.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>array, optional</em>) &#8211; Preallocated result array which must be same length as coord
+<li><strong>result</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Preallocated result array which must be same length as coord
 arrays and <code class="docutils literal"><span class="pre">dtype=numpy.float64</span></code>. Avoids creating the
 array which saves time when the function is called repeatedly. [None]</li>
 <li><strong>backend</strong> &#8211; Select the type of acceleration; &#8220;serial&#8221; is always available. Other
@@ -722,11 +708,10 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>angles</strong> &#8211;
-A numpy.array of angles in radians.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>angles</strong> &#8211; A numpy.array of angles in radians.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -763,11 +748,11 @@ filled. This can speed up calculations.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>reference</strong> (<em>numpy.array of numpy.float32</em>) &#8211; Reference coordinate array.</li>
 <li><strong>configuration</strong> (<em>numpy.array of numpy.float32</em>) &#8211; Configuration coordinate array.</li>
-<li><strong>box</strong> (<em>numpy.array or None</em>) &#8211; Dimensions of the cell; if provided, the minimum image convention is
+<li><strong>box</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)"><em>numpy.array</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Dimensions of the cell; if provided, the minimum image convention is
 applied. The dimensions must be provided in the same format as returned
 by by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>numpy.array of numpy.float64, optional</em>) &#8211; Preallocated result array which must have the
+<li><strong>result</strong> (<em>numpy.array of numpy.float64</em><em>, </em><em>optional</em>) &#8211; Preallocated result array which must have the
 shape <code class="docutils literal"><span class="pre">(len(ref),</span> <span class="pre">len(conf))</span></code> and <code class="docutils literal"><span class="pre">dtype=numpy.float64</span></code>.
 Avoids creating the array which saves time when the function
 is called repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
@@ -776,8 +761,7 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>d</strong> &#8211;
-<code class="docutils literal"><span class="pre">(len(reference),len(configuration))</span></code> numpy array with the distances
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>d</strong> &#8211; <code class="docutils literal"><span class="pre">(len(reference),len(configuration))</span></code> numpy array with the distances
 <code class="docutils literal"><span class="pre">d[i,j]</span></code> between reference coordinates <cite>i</cite> and configuration
 coordinates <cite>j</cite>.</p>
 </td>
@@ -811,12 +795,12 @@ is filled. This can speed up calculations.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Reference coordinate array with <code class="docutils literal"><span class="pre">N=len(ref)</span></code> coordinates.</li>
-<li><strong>box</strong> (<em>array or None</em>) &#8211; Dimensions of the cell; if provided, the minimum image convention is
+<li><strong>reference</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Reference coordinate array with <code class="docutils literal"><span class="pre">N=len(ref)</span></code> coordinates.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Dimensions of the cell; if provided, the minimum image convention is
 applied. The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
-<li><strong>result</strong> (<em>array, optional</em>) &#8211; Preallocated result array which must have the shape
+<li><strong>result</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>optional</em>) &#8211; Preallocated result array which must have the shape
 <code class="docutils literal"><span class="pre">(N*(N-1)/2,)</span></code> and dtype <code class="docutils literal"><span class="pre">numpy.float64</span></code>. Avoids creating
 the array which saves time when the function is called
 repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
@@ -825,8 +809,7 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>d</strong> &#8211;
-<code class="docutils literal"><span class="pre">N*(N-1)/2</span></code> numpy 1D array with the distances dist[i,j] between ref
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>d</strong> &#8211; <code class="docutils literal"><span class="pre">N*(N-1)/2</span></code> numpy 1D array with the distances dist[i,j] between ref
 coordinates i and j at position d[k]. Loop through d:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
@@ -837,7 +820,7 @@ coordinates i and j at position d[k]. Loop through d:</p>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -863,8 +846,8 @@ copies of the coordinate arrays.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputcoords</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; A n x 3 array of coordinate data, of type <code class="docutils literal"><span class="pre">np.float32</span></code>.</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>inputcoords</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; A n x 3 array of coordinate data, of type <code class="docutils literal"><span class="pre">np.float32</span></code>.</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
@@ -874,10 +857,8 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>outcoords</strong> (<em>array</em>) &#8211;
-A n x 3 array of fractional coordiantes.</li>
-<li><strong>.. versionchanged</strong> (<em>: 0.13.0</em>) &#8211;
-Added <em>backend</em> keyword.</li>
+<li><strong>outcoords</strong> (<em>array</em>) &#8211; A n x 3 array of fractional coordiantes.</li>
+<li><em>.. versionchanged:: 0.13.0</em> &#8211; Added <em>backend</em> keyword.</li>
 </ul>
 </p>
 </td>
@@ -897,8 +878,8 @@ Added <em>backend</em> keyword.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputcoords</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; A n x 3 array of coordinate data, of type np.float32</li>
-<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
+<li><strong>inputcoords</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; A n x 3 array of coordinate data, of type np.float32</li>
+<li><strong>box</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; The unitcell dimesions for this system.
 The dimensions must be provided in the same format as returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>: <code class="docutils literal"><span class="pre">[lx,</span>
 <span class="pre">ly,</span> <span class="pre">lz,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma]</span></code>.</li>
@@ -907,11 +888,10 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>outcoords</strong> &#8211;
-A n x 3 array of fracional coordiantes.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>outcoords</strong> &#8211; A n x 3 array of fracional coordiantes.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)">array</a></p>
 </td>
 </tr>
 </tbody>
@@ -931,8 +911,6 @@ little to no error checking done on inputs so should be used with
 caution. Similarly, <code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib._distances_openmp</span></code> contains
 the OpenMP-enable functions.</p>
 <div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
 </div>
 </div>
 
@@ -957,13 +935,13 @@ the OpenMP-enable functions.</p>
         <li class="right" >
           <a href="../lib_modules.html" title="11. Library functions — MDAnalysis.lib"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../lib_modules.html" >11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../lib_modules.html" >11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>
