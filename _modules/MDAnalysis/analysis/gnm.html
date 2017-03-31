@@ -71,7 +71,7 @@
             
   <h1>Source code for MDAnalysis.analysis.gnm</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.mdanalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2016 The MDAnalysis Development Team and contributors</span>
@@ -115,16 +115,15 @@
 <span class="sd">The basic approach is to pass a trajectory to :class:`GNMAnalysis` and then run</span>
 <span class="sd">the analysis::</span>
 
-<span class="sd">   u = MDAnalysis.Universe(PSF,DCD)</span>
-<span class="sd">   C = MDAnalysis.analysis.gnm.GNMAnalysis(u,ReportVector=&quot;output.txt&quot;)</span>
+<span class="sd">   u = MDAnalysis.Universe(PSF, DCD)</span>
+<span class="sd">   C = MDAnalysis.analysis.gnm.GNMAnalysis(u, ReportVector=&quot;output.txt&quot;)</span>
 
 <span class="sd">   C.run()</span>
 <span class="sd">   output = zip(*C.results)</span>
 
-<span class="sd">   outputfile = open(&quot;eigenvalues.dat&quot;,&quot;w&quot;)</span>
-<span class="sd">   for item in output[1]:</span>
-<span class="sd">      print &gt;&gt; outputfile, item</span>
-<span class="sd">   outputfile.close()</span>
+<span class="sd">   with open(&quot;eigenvalues.dat&quot;, &quot;w&quot;) as outputfile:</span>
+<span class="sd">      for item in output[1]:</span>
+<span class="sd">           outputfile.write(item + &quot;\n&quot;)</span>
 
 <span class="sd">The results are found in :attr:`GNMAnalysis.results`, which can be</span>
 <span class="sd">used for further processing (see [Hall2007]_).</span>
@@ -150,23 +149,20 @@
 <span class="sd">The following functions are used internally and are typically not</span>
 <span class="sd">directly needed to perform the analysis.</span>
 
-<span class="sd">.. autofunction:: backup_file</span>
 <span class="sd">.. autofunction:: generate_grid</span>
 <span class="sd">.. autofunction:: order_list</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. versionchanged:: 0.16.0</span>
+<span class="sd">   removed un-unsed function :func:`backup_file`</span>
 
-<span class="c1"># import copy #unused</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">linalg</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="c1">#import warnings #unused</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MDAnalysis.analysis.GNM&#39;</span><span class="p">)</span>
@@ -175,43 +171,34 @@
 <span class="k">def</span> <span class="nf">_dsq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">((</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
-<div class="viewcode-block" id="backup_file"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.backup_file">[docs]</a><span class="k">def</span> <span class="nf">backup_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This function helps prevent overwriting default named files</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-        <span class="n">target_name</span> <span class="o">=</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="n">filename</span>
-        <span class="n">failure</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">target_name</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">target_name</span><span class="p">)</span>
-            <span class="n">failure</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-                <span class="n">alt_target_name</span> <span class="o">=</span> <span class="n">target_name</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">alt_target_name</span><span class="p">):</span>
-                    <span class="k">continue</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">alt_target_name</span><span class="p">)</span>
-                    <span class="n">failure</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="k">break</span>
-        <span class="k">if</span> <span class="n">failure</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Too many backups. Clean up and try again&quot;</span><span class="p">)</span>
-            <span class="n">exit</span><span class="p">()</span></div>
-
-
 <div class="viewcode-block" id="generate_grid"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.generate_grid">[docs]</a><span class="k">def</span> <span class="nf">generate_grid</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    An alternative to searching the entire list of each atom; divide the structure into cutoff sized boxes</span>
-<span class="sd">    This way, for each particle you only need to search the neighbouring boxes to find the particles within the cutoff</span>
-<span class="sd">    Observed a 6x speed up for a smallish protein with ~300 residues; this should get better with bigger systems.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">positions</span><span class="p">)</span>
-    <span class="n">high_x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">high_y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">high_z</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-    <span class="n">low_x</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">low_y</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">low_z</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Simple grid search.</span>
+
+<span class="sd">    An alternative to searching the entire list of each atom; divide the</span>
+<span class="sd">    structure into `cutoff` sized boxes This way, for each particle you only need</span>
+<span class="sd">    to search the neighbouring boxes to find the particles within the `cutoff`.</span>
+
+<span class="sd">    Observed a 6x speed up for a smallish protein with ~300 residues; this</span>
+<span class="sd">    should get better with bigger systems.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    positions : array</span>
+<span class="sd">        coordinates of the atoms</span>
+<span class="sd">    cutoff : float</span>
+<span class="sd">        find particles with distance less than `cutoff` from each other; the</span>
+<span class="sd">        grid will consist of boxes with sides of at least length `cutoff`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">high_x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">high_y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">high_z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">low_x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">low_y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">low_z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
     <span class="n">natoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
     <span class="c1">#Ok now generate a list with 3 dimensions representing boxes in x, y and z</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="p">[[[</span>
@@ -228,9 +215,7 @@
 
 
 <div class="viewcode-block" id="order_list"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.order_list">[docs]</a><span class="k">def</span> <span class="nf">order_list</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Returns a dictionary showing the order of eigenvalues (which are reported scrambled normally)</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Returns a dictionary showing the order of eigenvalues (which are reported scrambled normally)&quot;&quot;&quot;</span>
     <span class="n">ordered</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
     <span class="n">unordered</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
     <span class="n">ordered</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -241,56 +226,84 @@
 
 
 <div class="viewcode-block" id="GNMAnalysis"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.GNMAnalysis">[docs]</a><span class="k">class</span> <span class="nc">GNMAnalysis</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Basic tool for GNM analysis.</span>
+    <span class="sd">&quot;&quot;&quot;Basic tool for GNM analysis.</span>
 
 <span class="sd">    Each frame is treated as a novel structure and the GNM</span>
 <span class="sd">    calculated.  By default, this stores the dominant eigenvector</span>
 <span class="sd">    and its associated eigenvalue; either can be used to monitor</span>
 <span class="sd">    conformational change in a simulation.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s1">&#39;protein and name CA&#39;</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span> <span class="n">ReportVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Bonus_groups</span><span class="o">=</span><span class="p">()):</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">          Analyze the full trajectory in the universe.</span>
+<span class="sd">    selection : str (optional)</span>
+<span class="sd">          MDAnalysis selection string, default &quot;protein and name CA&quot;</span>
+<span class="sd">    cutoff : float (optional)</span>
+<span class="sd">          Consider selected atoms within the cutoff as neighbors for the</span>
+<span class="sd">          Gaussian network model.</span>
+<span class="sd">    ReportVector : str (optional)</span>
+<span class="sd">          filename to write eigenvectors to, by default no output is written</span>
+<span class="sd">          (``None``)</span>
+<span class="sd">    Bonus_groups : tuple</span>
+<span class="sd">          This is a tuple of selection strings that identify additional groups</span>
+<span class="sd">          (such as ligands). The center of mass of each group will be added as</span>
+<span class="sd">          a single point in the ENM (it is a popular way of treating small</span>
+<span class="sd">          ligands such as drugs). You need to ensure that none of the atoms in</span>
+<span class="sd">          `Bonus_groups` is contained in `selection` as this could lead to</span>
+<span class="sd">          double counting. No checks are applied. Default is ``None``.</span>
+
+<span class="sd">    .. SeeAlso:: :class:`closeContactGNMAnalysis`</span>
+
+<span class="sd">    .. versionchanged:: 0.16.0</span>
+<span class="sd">       Made :meth:`generate_output` a private method :meth:`_generate_output`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s1">&#39;protein and name CA&#39;</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span>
+                 <span class="n">ReportVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Bonus_groups</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">=</span> <span class="n">cutoff</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># final result</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_timesteps</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># time for each frame</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ReportVector</span> <span class="o">=</span> <span class="n">ReportVector</span>
-        <span class="c1"># this is a tuple of selection groups, the com of each which will be added as a single point in the ENM</span>
-        <span class="c1"># (its a popular way of treating small ligands eg drugs)</span>
-        <span class="c1"># be careful that it doesn&#39;t have any atoms which can be caught by the global selection as this could lead to</span>
-        <span class="c1">#  double counting</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Bonus_groups</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">Bonus_groups</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Bonus_groups</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">Bonus_groups</span><span class="p">]</span> \
+                            <span class="k">if</span> <span class="n">Bonus_groups</span> <span class="k">else</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ca</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="p">)</span>
 
-<div class="viewcode-block" id="GNMAnalysis.generate_output"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.GNMAnalysis.generate_output">[docs]</a>    <span class="k">def</span> <span class="nf">generate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">outputobject</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">nmodes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ReportVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">counter</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Appends eigenvalues and eigenvectors to results.</span>
+    <span class="k">def</span> <span class="nf">_generate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">outputobject</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">nmodes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                         <span class="n">ReportVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">counter</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Appends eigenvalues and eigenvectors to results.</span>
 
 <span class="sd">        This generates the output by adding eigenvalue and</span>
 <span class="sd">        eigenvector data to an appendable object and optionally</span>
 <span class="sd">        printing some of the results to file. This is the function</span>
 <span class="sd">        to replace if you want to generate a more complex set of</span>
 <span class="sd">        outputs</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">list_map</span> <span class="o">=</span> <span class="n">order_list</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
-        <span class="c1">#print round(time), w[list_map[1]]</span>
         <span class="k">if</span> <span class="n">ReportVector</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ReportVector</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">oup</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]]):</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
                           <span class="n">w</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">oup</span><span class="p">)</span>
-        <span class="n">outputobject</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">time</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">v</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span></div>
+        <span class="n">outputobject</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">time</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">v</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span>
         <span class="c1">#outputobject.append((time, [ w[list_map[i]] for i in range(nmodes) ], [ v[list_map[i]] for i in range(</span>
         <span class="c1"># nmodes) ] ))</span>
 
 <div class="viewcode-block" id="GNMAnalysis.generate_kirchoff"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.GNMAnalysis.generate_kirchoff">[docs]</a>    <span class="k">def</span> <span class="nf">generate_kirchoff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Generate the Kirchhoff matrix of contacts.</span>
+        <span class="sd">&quot;&quot;&quot;Generate the Kirchhoff matrix of contacts.</span>
 
 <span class="sd">        This generates the neighbour matrix by generating a grid of</span>
 <span class="sd">        near-neighbours and then calculating which are are within</span>
-<span class="sd">        the cutoff. Returns the resulting matrix</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="c1">#ca = self.u.select_atoms(self.selection)</span>
+<span class="sd">        the cutoff.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array</span>
+<span class="sd">             the resulting Kirchhoff matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">positions</span>
 
         <span class="n">natoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
@@ -331,38 +344,43 @@
                     <span class="n">matrix</span><span class="p">[</span><span class="n">jcounter</span><span class="p">][</span><span class="n">jcounter</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">jcounter</span><span class="p">][</span><span class="n">jcounter</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">matrix</span></div>
 
-<div class="viewcode-block" id="GNMAnalysis.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.GNMAnalysis.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Analyze trajectory and produce timeseries.</span>
+<div class="viewcode-block" id="GNMAnalysis.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.GNMAnalysis.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Analyze trajectory and produce timeseries.</span>
 
-<span class="sd">        Returns GNM results per frame::</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start : int (optional)</span>
+<span class="sd">        stop : int (optional)</span>
+<span class="sd">        step : int (optional)</span>
 
-<span class="sd">          results = [(time,eigenvalues[1],eigenvectors[1]),(time,eigenvalues[1],eigenvectors[1])... ]</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        results : list</span>
+<span class="sd">            GNM results per frame::</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">                results = [(time,eigenvalues[1],eigenvectors[1]),(time,eigenvalues[1],eigenvectors[1])... ]</span>
+
+<span class="sd">        .. versionchanged:: 0.16.0</span>
+<span class="sd">           use start, stop, step instead of skip</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;GNM analysis: starting&quot;</span><span class="p">)</span>
-        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_timesteps</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">counter</span> <span class="o">%</span> <span class="n">skip</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">continue</span>
-            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">frame</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
-            <span class="n">timestep</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">time</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_timesteps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timestep</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">:</span><span class="n">step</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_timesteps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
 
             <span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_kirchoff</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-            <span class="k">except</span> <span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Frame skip at&quot;</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span>
+                <span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Frame skip at&quot;</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
                       <span class="s2">&quot;(SVD failed to converge). Cutoff&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span>
                 <span class="k">continue</span>
             <span class="c1">#Save the results somewhere useful in some useful format. Usefully.</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">generate_output</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">ReportVector</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ReportVector</span><span class="p">,</span> <span class="n">counter</span><span class="o">=</span><span class="n">counter</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_generate_output</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">ReportVector</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ReportVector</span><span class="p">,</span>
+                                  <span class="n">counter</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="closeContactGNMAnalysis"><a class="viewcode-back" href="../../../documentation_pages/analysis/gnm.html#MDAnalysis.analysis.gnm.closeContactGNMAnalysis">[docs]</a><span class="k">class</span> <span class="nc">closeContactGNMAnalysis</span><span class="p">(</span><span class="n">GNMAnalysis</span><span class="p">):</span>
@@ -370,29 +388,73 @@
 
 <span class="sd">    This is a version of the GNM where the Kirchoff matrix is</span>
 <span class="sd">    constructed from the close contacts between individual atoms</span>
-<span class="sd">    in different residues</span>
+<span class="sd">    in different residues.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">          Analyze the full trajectory in the universe.</span>
+<span class="sd">    selection : str (optional)</span>
+<span class="sd">          MDAnalysis selection string, default &quot;protein&quot;</span>
+<span class="sd">    cutoff : float (optional)</span>
+<span class="sd">          Consider selected atoms within the cutoff as neighbors for the</span>
+<span class="sd">          Gaussian network model [4.5 Å].</span>
+<span class="sd">    ReportVector : str (optional)</span>
+<span class="sd">          filename to write eigenvectors to, by default no output is written</span>
+<span class="sd">          (``None``)</span>
+<span class="sd">    weights : {&quot;size&quot;, None} (optional)</span>
+<span class="sd">          If set to &quot;size&quot; (the default) then weight the contact by</span>
+<span class="sd">          :math:`1/\sqrt{N_i N_j}` where :math:`N_i` and :math:`N_j` are the</span>
+<span class="sd">          number of atoms in the residues :math:`i` and :math:`j` that contain</span>
+<span class="sd">          the atoms that form a contact.</span>
+<span class="sd">    MassWeight : bool (deprecated, optional)</span>
+<span class="sd">          if set to ``True`` equivalent to `weights` set to &quot;size&quot;.</span>
+<span class="sd">          .. Note:: This option does not perform a true mass weighting but</span>
+<span class="sd">                    weighting by the number of atoms in each residue; the name</span>
+<span class="sd">                    of the parameter exists for historical reasons and will</span>
+<span class="sd">                    be removed in 0.17.0. Until then, setting `MassWeight` to</span>
+<span class="sd">                    anything but ``None`` will override `weights`.</span>
+
+<span class="sd">    .. SeeAlso:: :class:`GNMAnalysis`</span>
+
+<span class="sd">    .. versionchanged:: 0.16.0</span>
+<span class="sd">       Made :meth:`generate_output` a private method :meth:`_generate_output`.</span>
+
+<span class="sd">    .. deprecated:: 0.16.0</span>
+<span class="sd">       Instead of ``MassWeight=True`` use ``weights=&quot;size&quot;``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">ReportVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">MassWeight</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">ReportVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">weights</span><span class="o">=</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="n">MassWeight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">=</span> <span class="n">cutoff</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># final result</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_timesteps</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># time for each frame</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ReportVector</span> <span class="o">=</span> <span class="n">ReportVector</span>
-        <span class="c1"># no bonus groups in this version of the GNM analysis tool; this is because this version doesn&#39;t use CA atoms</span>
-        <span class="c1">#  or centroids, and so doesn&#39;t need them</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ca</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">MassWeight</span> <span class="o">=</span> <span class="n">MassWeight</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span>
+        <span class="c1"># remove MassWeight in 0.17.0</span>
+        <span class="k">if</span> <span class="n">MassWeight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;MassWeight=True|False is deprecated in favor of weights=&#39;size&#39;|None &quot;</span>
+                          <span class="s2">&quot;and will be removed in 0.17.0&quot;</span><span class="p">,</span>
+                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="s2">&quot;size&quot;</span> <span class="k">if</span> <span class="n">MassWeight</span> <span class="k">else</span> <span class="kc">None</span>
+
 
     <span class="k">def</span> <span class="nf">generate_kirchoff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">natoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
-        <span class="n">nresidues</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+        <span class="n">natoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">n_atoms</span>
+        <span class="n">nresidues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">n_residues</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">positions</span>
         <span class="n">res_positions</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">low_x</span><span class="p">,</span> <span class="n">low_y</span><span class="p">,</span> <span class="n">low_z</span> <span class="o">=</span> <span class="n">generate_grid</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span>
         <span class="n">residue_index_map</span> <span class="o">=</span> <span class="p">[</span><span class="n">resnum</span> <span class="k">for</span> <span class="p">[</span><span class="n">resnum</span><span class="p">,</span> <span class="n">residue</span><span class="p">]</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">residue</span><span class="o">.</span><span class="n">atoms</span><span class="p">]</span>
-        <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nresidues</span><span class="p">,</span> <span class="n">nresidues</span><span class="p">),</span> <span class="s2">&quot;float&quot;</span><span class="p">)</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nresidues</span><span class="p">,</span> <span class="n">nresidues</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float_</span><span class="p">)</span>
         <span class="n">cutoffsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">**</span> <span class="mi">2</span>
+
+        <span class="c1"># cache sqrt of residue sizes (slow) so that sr[i]*sr[j] == sqrt(r[i]*r[j])</span>
+        <span class="n">sqrt_res_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span>  <span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">residues</span><span class="p">])</span> \
+                         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">==</span> <span class="s2">&quot;size&quot;</span> <span class="k">else</span> <span class="kc">None</span>
 
         <span class="k">for</span> <span class="n">icounter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">natoms</span><span class="p">):</span>
             <span class="n">neighbour_atoms</span> <span class="o">=</span> <span class="p">[]</span>
@@ -409,14 +471,12 @@
             <span class="k">for</span> <span class="n">jcounter</span> <span class="ow">in</span> <span class="n">neighbour_atoms</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">jcounter</span> <span class="o">&gt;</span> <span class="n">icounter</span> <span class="ow">and</span> <span class="n">_dsq</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">icounter</span><span class="p">],</span> <span class="n">positions</span><span class="p">[</span><span class="n">jcounter</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">cutoffsq</span><span class="p">:</span>
                     <span class="n">iresidue</span><span class="p">,</span> <span class="n">jresidue</span> <span class="o">=</span> <span class="n">residue_index_map</span><span class="p">[</span><span class="n">icounter</span><span class="p">],</span> <span class="n">residue_index_map</span><span class="p">[</span><span class="n">jcounter</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">MassWeight</span><span class="p">:</span>
-                        <span class="n">contact</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">iresidue</span><span class="p">]</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">jresidue</span><span class="p">]</span><span class="o">.</span><span class="n">atoms</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">contact</span> <span class="o">=</span> <span class="mf">1.0</span>
-                    <span class="n">matrix</span><span class="p">[</span><span class="n">iresidue</span><span class="p">][</span><span class="n">jresidue</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">iresidue</span><span class="p">][</span><span class="n">jresidue</span><span class="p">]</span> <span class="o">-</span> <span class="n">contact</span>
-                    <span class="n">matrix</span><span class="p">[</span><span class="n">jresidue</span><span class="p">][</span><span class="n">iresidue</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">jresidue</span><span class="p">][</span><span class="n">iresidue</span><span class="p">]</span> <span class="o">-</span> <span class="n">contact</span>
-                    <span class="n">matrix</span><span class="p">[</span><span class="n">iresidue</span><span class="p">][</span><span class="n">iresidue</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">iresidue</span><span class="p">][</span><span class="n">iresidue</span><span class="p">]</span> <span class="o">+</span> <span class="n">contact</span>
-                    <span class="n">matrix</span><span class="p">[</span><span class="n">jresidue</span><span class="p">][</span><span class="n">jresidue</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">jresidue</span><span class="p">][</span><span class="n">jresidue</span><span class="p">]</span> <span class="o">+</span> <span class="n">contact</span>
+                    <span class="n">contact</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">sqrt_res_sizes</span><span class="p">[</span><span class="n">iresidue</span><span class="p">]</span> <span class="o">*</span> <span class="n">sqrt_res_sizes</span><span class="p">[</span><span class="n">jresidue</span><span class="p">])</span> \
+                              <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">==</span> <span class="s2">&quot;size&quot;</span> <span class="k">else</span> <span class="mf">1.0</span>
+                    <span class="n">matrix</span><span class="p">[</span><span class="n">iresidue</span><span class="p">][</span><span class="n">jresidue</span><span class="p">]</span> <span class="o">-=</span> <span class="n">contact</span>
+                    <span class="n">matrix</span><span class="p">[</span><span class="n">jresidue</span><span class="p">][</span><span class="n">iresidue</span><span class="p">]</span> <span class="o">-=</span> <span class="n">contact</span>
+                    <span class="n">matrix</span><span class="p">[</span><span class="n">iresidue</span><span class="p">][</span><span class="n">iresidue</span><span class="p">]</span> <span class="o">+=</span> <span class="n">contact</span>
+                    <span class="n">matrix</span><span class="p">[</span><span class="n">jresidue</span><span class="p">][</span><span class="n">jresidue</span><span class="p">]</span> <span class="o">+=</span> <span class="n">contact</span>
         <span class="k">return</span> <span class="n">matrix</span></div>
 </pre></div>
 
