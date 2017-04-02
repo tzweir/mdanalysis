@@ -286,8 +286,8 @@
 <span class="sd">.. _`10.1002/prot.340090204`: http://dx.doi.org/10.1002/prot.340090204</span>
 
 
-<span class="sd">Example</span>
-<span class="sd">-------</span>
+<span class="sd">How to perform HydrogenBondAnalysis</span>
+<span class="sd">-----------------------------------</span>
 
 <span class="sd">All protein-water hydrogen bonds can be analysed with ::</span>
 
@@ -536,61 +536,62 @@
 <span class="sd">           you can improve performance by setting the *update_selection*</span>
 <span class="sd">           keywords to ``False``.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *universe*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        universe : universe</span>
 <span class="sd">            Universe object</span>
-<span class="sd">          *selection1*</span>
+<span class="sd">        selection1 : str (optional)</span>
 <span class="sd">            Selection string for first selection [&#39;protein&#39;]</span>
-<span class="sd">          *selection2*</span>
+<span class="sd">        selection2 : str (optional)</span>
 <span class="sd">            Selection string for second selection [&#39;all&#39;]</span>
-<span class="sd">          *selection1_type*</span>
+<span class="sd">        selection1_type : str (optional)</span>
 <span class="sd">            Selection 1 can be &#39;donor&#39;, &#39;acceptor&#39; or &#39;both&#39;. Note that the</span>
 <span class="sd">            value for *selection1_type* automatically determines how</span>
 <span class="sd">            *selection2* handles donors and acceptors: If *selection1* contains</span>
 <span class="sd">            &#39;both&#39; then *selection2* will also contain *both*. If *selection1*</span>
 <span class="sd">            is set to &#39;donor&#39; then *selection2* is &#39;acceptor&#39; (and vice versa).</span>
 <span class="sd">            [&#39;both&#39;].</span>
-<span class="sd">          *update_selection1*</span>
+<span class="sd">        update_selection1 : bool (optional)</span>
 <span class="sd">            Update selection 1 at each frame? [``False``]</span>
-<span class="sd">          *update_selection2*</span>
+<span class="sd">        update_selection2 : bool (optional)</span>
 <span class="sd">            Update selection 2 at each frame? [``False``]</span>
-<span class="sd">          *filter_first*</span>
+<span class="sd">        filter_first : bool (optional)</span>
 <span class="sd">            Filter selection 2 first to only atoms 3*distance away [``True``]</span>
-<span class="sd">          *distance*</span>
+<span class="sd">        distance : float (optional)</span>
 <span class="sd">            Distance cutoff for hydrogen bonds; only interactions with a H-A distance</span>
 <span class="sd">            &lt;= *distance* (and the appropriate D-H-A angle, see *angle*) are</span>
 <span class="sd">            recorded. (Note: *distance_type* can change this to the D-A distance.) [3.0]</span>
-<span class="sd">          *angle*</span>
+<span class="sd">        angle : float (optional)</span>
 <span class="sd">            Angle cutoff for hydrogen bonds; an ideal H-bond has an angle of</span>
 <span class="sd">            180º.  A hydrogen bond is only recorded if the D-H-A angle is</span>
 <span class="sd">            &gt;=  *angle*. The default of 120º also finds fairly non-specific</span>
 <span class="sd">            hydrogen interactions and a possibly better value is 150º. [120.0]</span>
-<span class="sd">          *forcefield*</span>
+<span class="sd">        forcefield : {&quot;CHARMM27&quot;, &quot;GLYCAM06&quot;, &quot;other&quot;} (optional)</span>
 <span class="sd">            Name of the forcefield used. Switches between different</span>
 <span class="sd">            :attr:`~HydrogenBondAnalysis.DEFAULT_DONORS` and</span>
 <span class="sd">            :attr:`~HydrogenBondAnalysis.DEFAULT_ACCEPTORS` values.</span>
 <span class="sd">            Available values: &quot;CHARMM27&quot;, &quot;GLYCAM06&quot;, &quot;other&quot; [&quot;CHARMM27&quot;]</span>
-<span class="sd">          *donors*</span>
+<span class="sd">        donors : sequence (optional)</span>
 <span class="sd">            Extra H donor atom types (in addition to those in</span>
 <span class="sd">            :attr:`~HydrogenBondAnalysis.DEFAULT_DONORS`), must be a sequence.</span>
-<span class="sd">          *acceptors*</span>
+<span class="sd">        acceptors : sequence (optional)</span>
 <span class="sd">            Extra H acceptor atom types (in addition to those in</span>
 <span class="sd">            :attr:`~HydrogenBondAnalysis.DEFAULT_ACCEPTORS`), must be a sequence.</span>
-<span class="sd">          *start*</span>
+<span class="sd">        start : int (optional)</span>
 <span class="sd">            starting frame-index for analysis, ``None`` is the first one, 0.</span>
 <span class="sd">            *start* and *stop* are 0-based frame indices and are used to slice</span>
 <span class="sd">            the trajectory (if supported) [``None``]</span>
-<span class="sd">          *stop*</span>
+<span class="sd">        stop : int (optional)</span>
 <span class="sd">            last trajectory frame for analysis, ``None`` is the last one [``None``]</span>
-<span class="sd">          *step*</span>
+<span class="sd">        step : int (optional)</span>
 <span class="sd">            read every *step* between *start* and *stop*, ``None`` selects 1.</span>
 <span class="sd">            Note that not all trajectory reader from 1 [``None``]</span>
-<span class="sd">          *debug*</span>
+<span class="sd">        debug : bool (optional)</span>
 <span class="sd">            If set to ``True`` enables per-frame debug logging. This is disabled</span>
 <span class="sd">            by default because it generates a very large amount of output in</span>
 <span class="sd">            the log file. (Note that a logger must have been started to see</span>
 <span class="sd">            the output, e.g. using :func:`MDAnalysis.start_logging`.)</span>
-<span class="sd">          *detect_hydrogens*</span>
+<span class="sd">        detect_hydrogens : {&quot;distance&quot;, &quot;heuristic&quot;} (optional)</span>
 <span class="sd">            Determine the algorithm to find hydrogens connected to donor</span>
 <span class="sd">            atoms. Can be &quot;distance&quot; (default; finds all hydrogens in the</span>
 <span class="sd">            donor&#39;s residue within a cutoff of the donor) or &quot;heuristic&quot;</span>
@@ -598,14 +599,17 @@
 <span class="sd">            always give the correct answer but &quot;heuristic&quot; is faster,</span>
 <span class="sd">            especially when the donor list is updated each</span>
 <span class="sd">            for each frame. [&quot;distance&quot;]</span>
-<span class="sd">          *distance_type*</span>
+<span class="sd">        distance_type : {&quot;hydrogen&quot;, &quot;heavy&quot;} (optional)</span>
 <span class="sd">            Measure hydrogen bond lengths between donor and acceptor heavy</span>
 <span class="sd">            attoms (&quot;heavy&quot;) or between donor hydrogen and acceptor heavy</span>
 <span class="sd">            atom (&quot;hydrogen&quot;). If using &quot;heavy&quot; then one should set the *distance*</span>
 <span class="sd">            cutoff to a higher value such as 3.5 Å. [&quot;hydrogen&quot;]</span>
 
-<span class="sd">        :Raises: :exc:`SelectionError` is raised for each static selection without</span>
-<span class="sd">                 the required donors and/or acceptors.</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        :exc:`SelectionError`</span>
+<span class="sd">            is raised for each static selection without the required</span>
+<span class="sd">            donors and/or acceptors.</span>
 
 <span class="sd">        .. versionchanged:: 0.7.6</span>
 <span class="sd">           New *verbose* keyword (and per-frame debug logging disabled by</span>

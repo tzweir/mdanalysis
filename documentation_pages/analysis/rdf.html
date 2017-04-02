@@ -92,15 +92,8 @@
             
   <span class="target" id="module-MDAnalysis.analysis.rdf"></span><div class="section" id="radial-distribution-functions-mdanalysis-analysis-rdf">
 <h1>4.7.3. Radial Distribution Functions &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.rdf" title="MDAnalysis.analysis.rdf"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.rdf</span></code></a><a class="headerlink" href="#radial-distribution-functions-mdanalysis-analysis-rdf" title="Permalink to this headline">¶</a></h1>
-<p>Tools for calculating pair distribution functions</p>
-<dl class="docutils">
-<dt># TODO</dt>
-<dd><ul class="first last simple">
-<li>Structure factor?</li>
-<li>Coordination number</li>
-</ul>
-</dd>
-</dl>
+<p>Tools for calculating pair distribution functions (&#8220;radial
+distribution functions&#8221; or &#8220;RDF&#8221;).</p>
 <dl class="class">
 <dt id="MDAnalysis.analysis.rdf.InterRDF">
 <em class="property">class </em><code class="descclassname">MDAnalysis.analysis.rdf.</code><code class="descname">InterRDF</code><span class="sig-paren">(</span><em>g1</em>, <em>g2</em>, <em>nbins=75</em>, <em>range=(0.0</em>, <em>15.0)</em>, <em>exclusion_block=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/rdf.html#InterRDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.rdf.InterRDF" title="Permalink to this definition">¶</a></dt>
@@ -111,34 +104,36 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>g1</strong> &#8211; First AtomGroup</li>
-<li><strong>g2</strong> &#8211; Second AtomGroup</li>
-<li><strong>Keywords</strong> &#8211; </li>
-<li><strong>--------</strong> &#8211; </li>
-<li><strong>nbins</strong> &#8211; Number of bins in the histogram [75]</li>
-<li><strong>range</strong> &#8211; The size of the RDF [0.0, 15.0]</li>
-<li><strong>exclusion_block</strong> &#8211; A tuple representing the tile to exclude from the distance
+<li><strong>g1</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; First AtomGroup</li>
+<li><strong>g2</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; Second AtomGroup</li>
+<li><strong>nbins</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Number of bins in the histogram [75]</li>
+<li><strong>range</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The size of the RDF [0.0, 15.0]</li>
+<li><strong>exclusion_block</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; A tuple representing the tile to exclude from the distance
 array. [None]</li>
-<li><strong>start</strong> &#8211; The frame to start at [0]</li>
-<li><strong>stop</strong> &#8211; The frame to end at [-1]</li>
-<li><strong>step</strong> &#8211; The step size through the trajectory in frames [0]</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The frame to start at (default is first)</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The frame to end at (default is last)</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The step size through the trajectory in frames (default is
+every frame)</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<p>First create the InterRDF object, by supplying two AtomGroups
-then use the <cite>run</cite> method</p>
-<blockquote>
-<div>rdf = InterRDF(ag1, ag2)
-rdf.run()</div></blockquote>
-<p>Results are available through the .bins and .rdf attributes</p>
-<blockquote>
-<div>plt.plot(rdf.bins, rdf.rdf)</div></blockquote>
+<p>First create the <a class="reference internal" href="#MDAnalysis.analysis.rdf.InterRDF" title="MDAnalysis.analysis.rdf.InterRDF"><code class="xref py py-class docutils literal"><span class="pre">InterRDF</span></code></a> object, by supplying two
+AtomGroups then use the <code class="xref py py-meth docutils literal"><span class="pre">run()</span></code> method</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rdf</span> <span class="o">=</span> <span class="n">InterRDF</span><span class="p">(</span><span class="n">ag1</span><span class="p">,</span> <span class="n">ag2</span><span class="p">)</span>
+<span class="n">rdf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Results are available through the <code class="xref py py-attr docutils literal"><span class="pre">bins</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">rdf</span></code>
+attributes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rdf</span><span class="o">.</span><span class="n">bins</span><span class="p">,</span> <span class="n">rdf</span><span class="o">.</span><span class="n">rdf</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>The <cite>exclusion_block</cite> keyword allows the masking of pairs from
 within the same molecule.  For example, if there are 7 of each
-atom in each molecule, the exclusion mask (7, 7) can be used.</p>
+atom in each molecule, the exclusion mask <cite>(7, 7)</cite> can be used.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.13.0.</span></p>
 </div>

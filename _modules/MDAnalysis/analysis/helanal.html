@@ -230,7 +230,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">mean_a</span><span class="p">))</span>
 
 <div class="viewcode-block" id="helanal_trajectory"><a class="viewcode-back" href="../../../documentation_pages/analysis/helanal.html#MDAnalysis.analysis.helanal.helanal_trajectory">[docs]</a><span class="k">def</span> <span class="nf">helanal_trajectory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span>
-                       <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">begin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">begin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">matrix_filename</span><span class="o">=</span><span class="s2">&quot;bending_matrix.dat&quot;</span><span class="p">,</span>
                        <span class="n">origin_pdbfile</span><span class="o">=</span><span class="s2">&quot;origin.pdb&quot;</span><span class="p">,</span>
                        <span class="n">summary_filename</span><span class="o">=</span><span class="s2">&quot;summary.txt&quot;</span><span class="p">,</span>
@@ -241,70 +241,72 @@
                        <span class="n">twist_filename</span><span class="o">=</span><span class="s2">&quot;unit_twist.xvg&quot;</span><span class="p">,</span>
                        <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;helanal_&quot;</span><span class="p">,</span> <span class="n">ref_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Perform HELANAL_ helix analysis on all frames in *universe*.</span>
+    <span class="sd">&quot;&quot;&quot;Perform HELANAL helix analysis on all frames in `universe`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">    selection : str (optional)</span>
+<span class="sd">        selection string that selects Calpha atoms [``&quot;name CA&quot;``]</span>
+<span class="sd">    begin : float (optional)</span>
+<span class="sd">        start analysing for time (ps) &gt;= *begin*; ``None`` starts from the</span>
+<span class="sd">        beginning [``None``]</span>
+<span class="sd">    finish : float (optional)</span>
+<span class="sd">        stop analysis for time (ps) =&lt; *finish*; ``None`` goes to the</span>
+<span class="sd">        end of the trajectory [``None``]</span>
+<span class="sd">    matrix_filename : str (optional)</span>
+<span class="sd">        Output file- bending matrix [``&quot;bending_matrix.dat&quot;``]</span>
+<span class="sd">    origin_pdbfile : str (optional)</span>
+<span class="sd">        Output file- origin pdb file [``&quot;origin.pdb&quot;``]</span>
+<span class="sd">    summary_filename : str (optional)</span>
+<span class="sd">        Output file- all of the basic data [``&quot;summary.txt&quot;``]</span>
+<span class="sd">    screw_filename : str (optional)</span>
+<span class="sd">        Output file- local tilts of individual residues from 2 to n-1</span>
+<span class="sd">        [``&quot;screw.xvg&quot;``]</span>
+<span class="sd">    tilt_filename : str (optional)</span>
+<span class="sd">        Output file- tilt of line of best fit applied to origin axes</span>
+<span class="sd">        [``&quot;local_tilt.xvg&quot;``]</span>
+<span class="sd">    bend_filename : str (optional)</span>
+<span class="sd">        Output file- local bend angles between successive local helix axes</span>
+<span class="sd">        [``&quot;local_bend.xvg&quot;``]</span>
+<span class="sd">    twist_filename : str (optional)</span>
+<span class="sd">        Output file- local unit twist between successive helix turns</span>
+<span class="sd">        [``&quot;unit_twist.xvg&quot;``]</span>
+<span class="sd">    prefix : str (optional)</span>
+<span class="sd">        Prefix to add to all output file names; set to ``None`` to disable</span>
+<span class="sd">        [``&quot;helanal__&quot;``]</span>
+<span class="sd">    ref_axis : array_like (optional)</span>
+<span class="sd">        Calculate tilt angle relative to the axis; if ``None`` then ``[0,0,1]``</span>
+<span class="sd">        is chosen [``None``]</span>
+<span class="sd">    verbose : bool (optional)</span>
+<span class="sd">        Toggle diagnostic outputs. [``True``]</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    FinishTimeException</span>
+<span class="sd">          If the specified finish time precedes the specified start time or</span>
+<span class="sd">          current time stamp of trajectory object.</span>
 
 <span class="sd">    .. Note::</span>
 
 <span class="sd">       Only a single helix is analyzed. Use the selection to specify the</span>
 <span class="sd">       helix, e.g. with &quot;name CA and resid 1:20&quot; or use start=1, stop=20.</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">       *universe*</span>
-<span class="sd">          :class:`~MDAnalysis.core.universe.Universe`</span>
-
-<span class="sd">    :Keywords:</span>
-<span class="sd">       *selection*</span>
-<span class="sd">          selection string that selects Calpha atoms [``&quot;name CA&quot;``]</span>
-<span class="sd">       *start*</span>
-<span class="sd">          start residue resid</span>
-<span class="sd">       *end*</span>
-<span class="sd">          end residue resid</span>
-<span class="sd">       *begin*</span>
-<span class="sd">          start analysing for time (ps) &gt;= *begin*; ``None`` starts from the</span>
-<span class="sd">          beginning [``None``]</span>
-<span class="sd">       *finish*</span>
-<span class="sd">          stop analysis for time (ps) =&lt; *finish*; ``None`` goes to the</span>
-<span class="sd">          end of the trajectory [``None``]</span>
-<span class="sd">       *matrix_filename*</span>
-<span class="sd">          Output file- bending matrix [``&quot;bending_matrix.dat&quot;``]</span>
-<span class="sd">       *origin_pdbfile*</span>
-<span class="sd">          Output file- origin pdb file [``&quot;origin.pdb&quot;``]</span>
-<span class="sd">       *summary_filename*</span>
-<span class="sd">          Output file- all of the basic data [``&quot;summary.txt&quot;``]</span>
-<span class="sd">       *screw_filename*</span>
-<span class="sd">          Output file- local tilts of individual residues from 2 to n-1</span>
-<span class="sd">          [``&quot;screw.xvg&quot;``]</span>
-<span class="sd">       *tilt_filename*</span>
-<span class="sd">          Output file- tilt of line of best fit applied to origin axes</span>
-<span class="sd">          [``&quot;local_tilt.xvg&quot;``]</span>
-<span class="sd">       *bend_filename*</span>
-<span class="sd">          Output file- local bend angles between successive local helix axes</span>
-<span class="sd">          [``&quot;local_bend.xvg&quot;``]</span>
-<span class="sd">       *twist_filename*</span>
-<span class="sd">          Output file- local unit twist between successive helix turns</span>
-<span class="sd">          [``&quot;unit_twist.xvg&quot;``]</span>
-<span class="sd">       *prefix*</span>
-<span class="sd">          Prefix to add to all output file names; set to ``None`` to disable</span>
-<span class="sd">          [``&quot;helanal__&quot;``]</span>
-<span class="sd">       *ref_axis*</span>
-<span class="sd">          Calculate tilt angle relative to the axis; if ``None`` then ``[0,0,1]``</span>
-<span class="sd">          is chosen [``None``]</span>
-<span class="sd">       *verbose*</span>
-<span class="sd">          Toggle diagnostic outputs. [``True``]</span>
-
-<span class="sd">    :Raises:</span>
-<span class="sd">       FinishTimeException</span>
-<span class="sd">          If the specified finish time precedes the specified start time or</span>
-<span class="sd">          current time stamp of trajectory object.</span>
 
 <span class="sd">    .. versionchanged:: 0.13.0</span>
-<span class="sd">       New *quiet* keyword to silence frame progress output and most of the</span>
+<span class="sd">       New `quiet` keyword to silence frame progress output and most of the</span>
 <span class="sd">       output that used to be printed to stdout is now logged to the logger</span>
 <span class="sd">       *MDAnalysis.analysis.helanal* (at logelevel *INFO*).</span>
 
-<span class="sd">    .. deprecated:: 0.16</span>
-<span class="sd">       The *quiet* keyword argument is deprecated in favor of the New</span>
-<span class="sd">       *verbose* one.</span>
+<span class="sd">    .. versionchanged:: 0.16.0</span>
+<span class="sd">       Removed the `start` and `end` keywords for selecting residues because this can</span>
+<span class="sd">       be accomplished more transparently with `selection`. The first and last resid</span>
+<span class="sd">       are directly obtained from the selection.</span>
+
+<span class="sd">    .. deprecated:: 0.16.0</span>
+<span class="sd">       The `quiet` keyword argument is deprecated in favor of the new</span>
+<span class="sd">       `verbose` one.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">verbose</span> <span class="o">=</span> <span class="n">_set_verbose</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="n">quiet</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ref_axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -314,13 +316,8 @@
         <span class="c1"># two atoms</span>
         <span class="n">ref_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ref_axis</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span>
-        <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span>
-        <span class="n">selection</span> <span class="o">+=</span> <span class="s2">&quot; and resid </span><span class="si">{start:d}</span><span class="s2">:</span><span class="si">{end:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">())</span>
     <span class="n">ca</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">ca</span><span class="o">.</span><span class="n">resids</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
     <span class="n">trajectory</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span>
 
     <span class="k">if</span> <span class="n">finish</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -555,8 +552,8 @@
     <span class="k">return</span> <span class="p">[</span><span class="n">list_mean</span><span class="p">,</span> <span class="n">list_sd</span><span class="p">,</span> <span class="n">list_abdev</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="helanal_main"><a class="viewcode-back" href="../../../documentation_pages/analysis/helanal.html#MDAnalysis.analysis.helanal.helanal_main">[docs]</a><span class="k">def</span> <span class="nf">helanal_main</span><span class="p">(</span><span class="n">pdbfile</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ref_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Simple HELANAL run on a single frame PDB/GRO.</span>
+<div class="viewcode-block" id="helanal_main"><a class="viewcode-back" href="../../../documentation_pages/analysis/helanal.html#MDAnalysis.analysis.helanal.helanal_main">[docs]</a><span class="k">def</span> <span class="nf">helanal_main</span><span class="p">(</span><span class="n">pdbfile</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">ref_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simple HELANAL_ run on a single frame PDB/GRO.</span>
 
 <span class="sd">    Computed data are returned as a dict and also logged at level INFO to the</span>
 <span class="sd">    logger *MDAnalysis.analysis.helanal*. A simple way to enable a logger is to</span>
@@ -565,21 +562,30 @@
 <span class="sd">    .. Note:: Only a single helix is analyzed. Use the selection to specify</span>
 <span class="sd">              the helix, e.g. with &quot;name CA and resid 1:20&quot;.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pdbfile : str</span>
+<span class="sd">        filename of the single-frame input file</span>
+<span class="sd">    selection : str (optional)</span>
+<span class="sd">        selection string, default is &quot;name CA&quot; to select all C-alpha atoms.</span>
+<span class="sd">    ref_axis : array_like (optional)</span>
+<span class="sd">        Calculate tilt angle relative to the axis; if ``None`` then ``[0,0,1]``</span>
+<span class="sd">        is chosen [``None``]</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
-<span class="sd">    Dict with keys for</span>
-<span class="sd">    * Height: mean, stdev, abs dev</span>
-<span class="sd">    * Twist: mean, stdev, abs dev</span>
-<span class="sd">    * Residues/turn: mean, stdev, abs dev</span>
-<span class="sd">    * Local bending angles: array for computed angles (per residue)</span>
-<span class="sd">    * Unit twist angles: array for computed angles (per residue)</span>
-<span class="sd">    * Best fit tilt</span>
-<span class="sd">    * Rotation angles: local screw angles (per residue)</span>
+<span class="sd">    result : dict</span>
+<span class="sd">       The `result` contains keys</span>
+<span class="sd">        * Height: mean, stdev, abs dev</span>
+<span class="sd">        * Twist: mean, stdev, abs dev</span>
+<span class="sd">        * Residues/turn: mean, stdev, abs dev</span>
+<span class="sd">        * Local bending angles: array for computed angles (per residue)</span>
+<span class="sd">        * Unit twist angles: array for computed angles (per residue)</span>
+<span class="sd">        * Best fit tilt</span>
+<span class="sd">        * Rotation angles: local screw angles (per residue)</span>
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
-
 <span class="sd">    Analyze helix 8 in AdK (PDB 4AKE); the standard logger is started and</span>
 <span class="sd">    writes output to the file ``MDAnalysis.log``::</span>
 
@@ -590,15 +596,13 @@
 <span class="sd">    .. versionchanged:: 0.13.0</span>
 <span class="sd">       All output is returned as a dict and logged to the logger</span>
 <span class="sd">       *MDAnalysis.analysis.helanal* instead of being printed to stdout.</span>
+
+<span class="sd">    .. versionchanged:: 0.16.0</span>
+<span class="sd">       Removed the `start` and `end` keywords for selecting residues because this can</span>
+<span class="sd">       be accomplished more transparently with `selection`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">universe</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">pdbfile</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span>
-        <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span>
-        <span class="n">selection</span> <span class="o">+=</span> <span class="s2">&quot; and resid </span><span class="si">{start:d}</span><span class="s2">:</span><span class="si">{end:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">())</span>
     <span class="n">ca</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Analysing </span><span class="si">%d</span><span class="s2">/</span><span class="si">%d</span><span class="s2"> residues&quot;</span><span class="p">,</span> <span class="n">ca</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)</span>

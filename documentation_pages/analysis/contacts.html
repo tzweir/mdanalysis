@@ -108,21 +108,22 @@
             
   <span class="target" id="module-MDAnalysis.analysis.contacts"></span><div class="section" id="native-contacts-analysis-mdanalysis-analysis-contacts">
 <h1>4.2.2. Native contacts analysis &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.contacts" title="MDAnalysis.analysis.contacts"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><a class="headerlink" href="#native-contacts-analysis-mdanalysis-analysis-contacts" title="Permalink to this headline">¶</a></h1>
-<p>Analysis of native contacts <em>Q</em> over a trajectory. Native contacts of a
-conformation are contacts that exist in a reference structure and in the
-conformation. Contacts in the reference structure are always defined as being
-closer then a distance <cite>radius</cite>. The fraction of native contacts for a
-conformation can be calculated in different ways. This module supports 3
-different metrics liseted below, as wel as custom metrics.</p>
+<p>This module contains classes to analyze native contacts <em>Q</em> over a
+trajectory. Native contacts of a conformation are contacts that exist
+in a reference structure and in the conformation. Contacts in the
+reference structure are always defined as being closer then a distance
+<cite>radius</cite>. The fraction of native contacts for a conformation can be
+calculated in different ways. This module supports 3 different metrics
+listed below, as well as custom metrics.</p>
 <ol class="arabic simple">
 <li><em>Hard Cut</em>: To count as a contact the atoms <em>i</em> and <em>j</em> have to be at least
 as close as in the reference structure.</li>
 <li><em>Soft Cut</em>: The atom pair <em>i</em> and <em>j</em> is assigned based on a soft potential
-that is 1 for if the distance is 0, 1/2 if the distance is the same as in
+that is 1 if the distance is 0, 1/2 if the distance is the same as in
 the reference and 0 for large distances. For the exact definition of the
 potential and parameters have a look at function <a class="reference internal" href="#MDAnalysis.analysis.contacts.soft_cut_q" title="MDAnalysis.analysis.contacts.soft_cut_q"><code class="xref py py-func docutils literal"><span class="pre">soft_cut_q()</span></code></a>.</li>
 <li><em>Radius Cut</em>: To count as a contact the atoms <em>i</em> and <em>j</em> cannot be further
-apart then some distance <cite>radius</cite>.</li>
+apart than some distance <cite>radius</cite>.</li>
 </ol>
 <p>The &#8220;fraction of native contacts&#8221; <em>Q(t)</em> is a number between 0 and 1 and
 calculated as the total number of native contacts for a given time frame
@@ -202,9 +203,9 @@ conformation and plot the trajectory projected on q1-q2 <a class="reference inte
 <div class="section" id="writing-your-own-contact-analysis">
 <h3>4.2.2.1.3. Writing your own contact analysis<a class="headerlink" href="#writing-your-own-contact-analysis" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#MDAnalysis.analysis.contacts.Contacts" title="MDAnalysis.analysis.contacts.Contacts"><code class="xref py py-class docutils literal"><span class="pre">Contacts</span></code></a> class has been designed to be extensible for your own
-analysis. As an example we will analysis when the acidic and basic groups of
-are in contact which each other, this means that at least one of the contacts
-formed in the reference is closer then 2.5 Å.</p>
+analysis. As an example we will analyze when the acidic and basic groups of AdK
+are in contact which each other; this means that at least one of the contacts
+formed in the reference is closer than 2.5 Å.</p>
 <p>For this we define a new function to determine if any contact is closer than
 2.5 Å; this function must implement the API prescribed by <a class="reference internal" href="#MDAnalysis.analysis.contacts.Contacts" title="MDAnalysis.analysis.contacts.Contacts"><code class="xref py py-class docutils literal"><span class="pre">Contacts</span></code></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_any_closer</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="mf">2.5</span><span class="p">):</span>

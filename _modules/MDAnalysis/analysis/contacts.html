@@ -93,28 +93,27 @@
 <span class="c1">#</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">================================================================</span>
 <span class="sd">Native contacts analysis --- :mod:`MDAnalysis.analysis.contacts`</span>
 <span class="sd">================================================================</span>
 
-
-<span class="sd">Analysis of native contacts *Q* over a trajectory. Native contacts of a</span>
-<span class="sd">conformation are contacts that exist in a reference structure and in the</span>
-<span class="sd">conformation. Contacts in the reference structure are always defined as being</span>
-<span class="sd">closer then a distance `radius`. The fraction of native contacts for a</span>
-<span class="sd">conformation can be calculated in different ways. This module supports 3</span>
-<span class="sd">different metrics liseted below, as wel as custom metrics.</span>
+<span class="sd">This module contains classes to analyze native contacts *Q* over a</span>
+<span class="sd">trajectory. Native contacts of a conformation are contacts that exist</span>
+<span class="sd">in a reference structure and in the conformation. Contacts in the</span>
+<span class="sd">reference structure are always defined as being closer then a distance</span>
+<span class="sd">`radius`. The fraction of native contacts for a conformation can be</span>
+<span class="sd">calculated in different ways. This module supports 3 different metrics</span>
+<span class="sd">listed below, as well as custom metrics.</span>
 
 <span class="sd">1. *Hard Cut*: To count as a contact the atoms *i* and *j* have to be at least</span>
 <span class="sd">   as close as in the reference structure.</span>
 
 <span class="sd">2. *Soft Cut*: The atom pair *i* and *j* is assigned based on a soft potential</span>
-<span class="sd">   that is 1 for if the distance is 0, 1/2 if the distance is the same as in</span>
+<span class="sd">   that is 1 if the distance is 0, 1/2 if the distance is the same as in</span>
 <span class="sd">   the reference and 0 for large distances. For the exact definition of the</span>
 <span class="sd">   potential and parameters have a look at function :func:`soft_cut_q`.</span>
 
 <span class="sd">3. *Radius Cut*: To count as a contact the atoms *i* and *j* cannot be further</span>
-<span class="sd">   apart then some distance `radius`.</span>
+<span class="sd">   apart than some distance `radius`.</span>
 
 <span class="sd">The &quot;fraction of native contacts&quot; *Q(t)* is a number between 0 and 1 and</span>
 <span class="sd">calculated as the total number of native contacts for a given time frame</span>
@@ -211,9 +210,9 @@
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">The :class:`Contacts` class has been designed to be extensible for your own</span>
-<span class="sd">analysis. As an example we will analysis when the acidic and basic groups of</span>
-<span class="sd">are in contact which each other, this means that at least one of the contacts</span>
-<span class="sd">formed in the reference is closer then 2.5 Å.</span>
+<span class="sd">analysis. As an example we will analyze when the acidic and basic groups of AdK</span>
+<span class="sd">are in contact which each other; this means that at least one of the contacts</span>
+<span class="sd">formed in the reference is closer than 2.5 Å.</span>
 
 <span class="sd">For this we define a new function to determine if any contact is closer than</span>
 <span class="sd">2.5 Å; this function must implement the API prescribed by :class:`Contacts`::</span>

@@ -198,6 +198,57 @@ with keyword arguments. For further details on <a class="reference external" hre
 </div></blockquote>
 <p>The class also provides some simple plotting functions of the collected
 data such as <a class="reference internal" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.plot" title="MDAnalysis.analysis.legacy.x3dna.X3DNA.plot"><code class="xref py py-meth docutils literal"><span class="pre">X3DNA.plot()</span></code></a> or <code class="xref py py-meth docutils literal"><span class="pre">X3DNA.plot3D()</span></code>.</p>
+<p>When methods return helicoidal basepair parameter as lists, then the order
+is always</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">index</th>
+<th class="head">parameter</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>shear</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>stretch</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>stagger</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>buckle</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>propeller</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>opening</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>shift</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>slide</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>rise</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>tilt</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>roll</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>twist</td>
+</tr>
+</tbody>
+</table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.8.</span></p>
 </div>
@@ -206,36 +257,30 @@ data such as <a class="reference internal" href="#MDAnalysis.analysis.legacy.x3d
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><p class="first"><em>filename</em></p>
-<blockquote>
-<div><p>The <em>filename</em> is used as input for X3DNA in the &#8220;xdna_ensemble&#8221;
-command.  It specifies the name of a PDB coordinate file
-to be used. This must be in Brookhaven protein databank format
-or something closely approximating this. Both ATOM and HETATM
-records are read. Note that if water molecules or ions are
-present in the channel these can be ignored on read by the use
-of the <em>ignore_residues</em> keyword.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><p class="first"><em>executable</em></p>
-<blockquote>
-<div><p>Path to the <strong class="program">xdna_ensemble</strong> executable directories
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The <cite>filename</cite> is used as input for X3DNA in the
+<strong class="program">xdna_ensemble</strong> command.  It specifies the name of a
+PDB coordinate file to be used. This must be in Brookhaven
+protein databank format or something closely approximating
+this.</li>
+<li><strong>executable</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Path to the <strong class="program">xdna_ensemble</strong> executable directories
 (e.g. <code class="docutils literal"><span class="pre">/opt/x3dna/2.1</span> <span class="pre">and</span> <span class="pre">/opt/x3dna/2.1/bin</span></code>) must be set
 and then added to export in bashrc file. See X3DNA
-documentation for set-up instructions.</p>
-</div></blockquote>
-<p><em>x3dna_param</em></p>
-<blockquote class="last">
-<div><p>Determines whether base step or base pair parameters will be
-calculated. If True then stacked base step parameters will be
-analyzed [Default is True].  If False then stacked base pair
-parameters will be analyzed.</p>
-</div></blockquote>
+documentation for set-up instructions.</li>
+<li><strong>x3dna_param</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Determines whether base step or base pair parameters will be
+calculated. If <code class="docutils literal"><span class="pre">True</span></code> (default) then stacked <em>base step</em>
+parameters will be analyzed.  If <code class="docutils literal"><span class="pre">False</span></code> then stacked <em>base
+pair</em> parameters will be analyzed.</li>
+<li><strong>logfile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Write output from X3DNA to <cite>logfile</cite> (default: &#8220;bp_step.par&#8221;)</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj" title="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj"><code class="xref py py-class docutils literal"><span class="pre">X3DNAtraj</span></code></a></p>
+</div>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNA.profiles">
 <code class="descname">profiles</code><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.profiles" title="Permalink to this definition">¶</a></dt>
@@ -250,25 +295,21 @@ that the order is random; one needs to sort the keys first.</p>
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNA.collect">
 <code class="descname">collect</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/legacy/x3dna.html#X3DNA.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse the output from a X3DNA run into numpy recarrays.</p>
-<p>Can deal with outputs containing multiple frames. Output format:</p>
+<p>Can deal with outputs containing multiple frames.</p>
 <p>The method saves the result as <a class="reference internal" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.profiles" title="MDAnalysis.analysis.legacy.x3dna.X3DNA.profiles"><code class="xref py py-attr docutils literal"><span class="pre">X3DNA.profiles</span></code></a>, a dictionary
 indexed by the frame number. Each entry is a
 <code class="xref py py-class docutils literal"><span class="pre">np.recarray</span></code>.</p>
-<p>If the keyword <em>outdir</em> is supplied (e.g. &#8221;.&#8221;) then each profile is
+<p>If the keyword <cite>outdir</cite> is supplied (e.g. &#8221;.&#8221;) then each profile is
 saved to a gzipped data file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>run</em></dt>
-<dd><p class="first last">identifier, free form [1]</p>
-</dd>
-<dt><em>outdir</em></dt>
-<dd><p class="first last">save output data under <em>outdir</em>/<em>run</em> if set to any other
-value but <code class="docutils literal"><span class="pre">None</span></code> [<code class="docutils literal"><span class="pre">None</span></code>]</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>run</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em>) &#8211; identifier, free form [1]</li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; save output data under <cite>outdir</cite>/<cite>run</cite> if set to any other
+value but <code class="docutils literal"><span class="pre">None</span></code> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -278,29 +319,52 @@ value but <code class="docutils literal"><span class="pre">None</span></code> [<
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNA.mean">
 <code class="descname">mean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.mean" title="Permalink to this definition">¶</a></dt>
-<dd><p>H.mean() returns the mean value for the base parameters (order of base parameters:Shear,Stretch,Stagger,
-Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for each nucleic acid pair.</p>
+<dd><p>Returns the mean value for the base parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The list contains the means for the helicoidal parameters. The
+order is <code class="docutils literal"><span class="pre">[shear,</span> <span class="pre">stretch,</span> <span class="pre">stagger,</span> <span class="pre">buckle,</span> <span class="pre">propeller,</span> <span class="pre">opening,</span>
+<span class="pre">shift,</span> <span class="pre">slide,</span> <span class="pre">rise,</span> <span class="pre">tilt,</span> <span class="pre">roll,</span> <span class="pre">twist]</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNA.mean_std">
 <code class="descname">mean_std</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.mean_std" title="Permalink to this definition">¶</a></dt>
-<dd><p>H.mean_std() returns the mean and standard deviation of base parameters (order of base parameters:Shear,
-Stretch,Stagger,Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for each nucleic acid pair.</p>
+<dd><p>Returns the mean and standard deviation of base parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The tuple contains two lists with the means and the standard deviations
+for the helicoidal parameters. The order for both lists is <code class="docutils literal"><span class="pre">[shear,</span>
+<span class="pre">stretch,</span> <span class="pre">stagger,</span> <span class="pre">buckle,</span> <span class="pre">propeller,</span> <span class="pre">opening,</span> <span class="pre">shift,</span> <span class="pre">slide,</span> <span class="pre">rise,</span> <span class="pre">tilt,</span>
+<span class="pre">roll,</span> <span class="pre">twist]</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNA.plot">
 <code class="descname">plot</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.plot" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Plot base parameter profiles  in a 1D graph</dt>
-<dd>(plotting of the mean and standard deviation parameter value for each individual base pair).</dd>
-</dl>
+<dd><p>Plot time-averaged base parameters for each basse pair in a 1D graph.</p>
+<p>One plot is produced for each parameter. It shows the the mean and
+standard deviation for each individual base pair. Each plot is saved to
+PNG file with name &#8220;&lt;parameter_name&gt;.png&#8221;.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body"><em>Not available at this time</em></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ax</strong> (<em>matplotlib.pyplot.Axes</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Provide <cite>ax</cite> to have all plots plotted in the same axes.</td>
 </tr>
 </tbody>
 </table>
@@ -326,15 +390,27 @@ Stretch,Stagger,Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for e
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNA.sorted_profiles_iter">
 <code class="descname">sorted_profiles_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.sorted_profiles_iter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an iterator over profiles sorted by frame/order parameter <em>q</em>.</p>
-<p>The iterator produces tuples <code class="docutils literal"><span class="pre">(q,</span> <span class="pre">profile)</span></code>.</p>
+<dd><p>Return an iterator over profiles sorted by frame/order parameter.</p>
+<p>The iterator produces tuples <code class="docutils literal"><span class="pre">(q,</span> <span class="pre">profile)</span></code>. Typically, <cite>q</cite> is the
+frame number.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNA.std">
 <code class="descname">std</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA.std" title="Permalink to this definition">¶</a></dt>
-<dd><p>H.std() returns the standard deviation of base parameters (order of base parameters:Shear,Stretch,Stagger,
-Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for each nucleic acid pair.</p>
+<dd><p>Returns the standard deviation for the base parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The list contains the standard deviations for the helicoidal
+parameters. The order is <code class="docutils literal"><span class="pre">[shear,</span> <span class="pre">stretch,</span> <span class="pre">stagger,</span> <span class="pre">buckle,</span>
+<span class="pre">propeller,</span> <span class="pre">opening,</span> <span class="pre">shift,</span> <span class="pre">slide,</span> <span class="pre">rise,</span> <span class="pre">tilt,</span> <span class="pre">roll,</span> <span class="pre">twist]</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -353,31 +429,33 @@ each frame and runs X3DNA on the frame.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>universe</em></dt>
-<dd><p class="first last">The input trajectory as part of a
-<a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>. trajectory is
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>universe</strong> (<a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; The input trajectory as part of a
+<a class="reference internal" href="../../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>; the trajectory is
 converted to a sequence of PDB files and X3DNA is run on each
-individual file. (Use the <em>start</em>, <em>stop</em>, and <em>step</em> keywords
-to slice the trajectory.)</p>
-</dd>
-<dt><em>start</em>, <em>stop</em>, <em>step</em></dt>
-<dd><p class="first last">frame indices to slice the trajectory as
-<code class="docutils literal"><span class="pre">universe.trajectory[start,</span> <span class="pre">stop,</span> <span class="pre">step]</span></code></p>
-</dd>
-<dt><em>x3dna_param</em></dt>
-<dd><p class="first last">indicates whether stacked bases or stacked base-pairs will be
-analyzed. True is bases or False is stacked base-pairs [Default
-is True].</p>
-</dd>
-<dt><em>kwargs</em></dt>
-<dd><p class="first last">All other keywords are passed on to <a class="reference internal" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA" title="MDAnalysis.analysis.legacy.x3dna.X3DNA"><code class="xref py py-class docutils literal"><span class="pre">X3DNA</span></code></a> (see there for description).</p>
-</dd>
-</dl>
+individual file. (Use the <cite>start</cite>, <cite>stop</cite>, and <cite>step</cite> keywords
+to slice the trajectory.)</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; MDAnalysis selection string (default: &#8220;nucleic&#8221;) to select the
+atoms that should be analyzed.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; </li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; </li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; frame indices to slice the trajectory as
+<code class="docutils literal"><span class="pre">universe.trajectory[start,</span> <span class="pre">stop,</span> <span class="pre">step]</span></code>; by default, the whole
+trajectory is analyzed.</li>
+<li><strong>x3dna_param</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; indicates whether stacked bases or stacked base-pairs will be
+analyzed. <code class="docutils literal"><span class="pre">True</span></code> is bases and <code class="docutils literal"><span class="pre">False</span></code> is stacked base-pairs
+[Default is <code class="docutils literal"><span class="pre">True</span></code>].</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; All other keywords are passed on to <a class="reference internal" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA" title="MDAnalysis.analysis.legacy.x3dna.X3DNA"><code class="xref py py-class docutils literal"><span class="pre">X3DNA</span></code></a> (see there
+for description).</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.analysis.legacy.x3dna.X3DNA" title="MDAnalysis.analysis.legacy.x3dna.X3DNA"><code class="xref py py-class docutils literal"><span class="pre">X3DNA</span></code></a></p>
+</div>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.profiles">
 <code class="descname">profiles</code><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.profiles" title="Permalink to this definition">¶</a></dt>
@@ -388,29 +466,52 @@ X3DNA profiles, indexed by the frame number.</p>
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.mean">
 <code class="descname">mean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.mean" title="Permalink to this definition">¶</a></dt>
-<dd><p>H.mean() returns the mean value for the base parameters (order of base parameters:Shear,Stretch,Stagger,
-Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for each nucleic acid pair.</p>
+<dd><p>Returns the mean value for the base parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The list contains the means for the helicoidal parameters. The
+order is <code class="docutils literal"><span class="pre">[shear,</span> <span class="pre">stretch,</span> <span class="pre">stagger,</span> <span class="pre">buckle,</span> <span class="pre">propeller,</span> <span class="pre">opening,</span>
+<span class="pre">shift,</span> <span class="pre">slide,</span> <span class="pre">rise,</span> <span class="pre">tilt,</span> <span class="pre">roll,</span> <span class="pre">twist]</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.mean_std">
 <code class="descname">mean_std</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.mean_std" title="Permalink to this definition">¶</a></dt>
-<dd><p>H.mean_std() returns the mean and standard deviation of base parameters (order of base parameters:Shear,
-Stretch,Stagger,Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for each nucleic acid pair.</p>
+<dd><p>Returns the mean and standard deviation of base parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The tuple contains two lists with the means and the standard deviations
+for the helicoidal parameters. The order for both lists is <code class="docutils literal"><span class="pre">[shear,</span>
+<span class="pre">stretch,</span> <span class="pre">stagger,</span> <span class="pre">buckle,</span> <span class="pre">propeller,</span> <span class="pre">opening,</span> <span class="pre">shift,</span> <span class="pre">slide,</span> <span class="pre">rise,</span> <span class="pre">tilt,</span>
+<span class="pre">roll,</span> <span class="pre">twist]</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.plot">
 <code class="descname">plot</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.plot" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Plot base parameter profiles  in a 1D graph</dt>
-<dd>(plotting of the mean and standard deviation parameter value for each individual base pair).</dd>
-</dl>
+<dd><p>Plot time-averaged base parameters for each basse pair in a 1D graph.</p>
+<p>One plot is produced for each parameter. It shows the the mean and
+standard deviation for each individual base pair. Each plot is saved to
+PNG file with name &#8220;&lt;parameter_name&gt;.png&#8221;.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body"><em>Not available at this time</em></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ax</strong> (<em>matplotlib.pyplot.Axes</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Provide <cite>ax</cite> to have all plots plotted in the same axes.</td>
 </tr>
 </tbody>
 </table>
@@ -420,14 +521,15 @@ Stretch,Stagger,Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for e
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.run">
 <code class="descname">run</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/legacy/x3dna.html#X3DNAtraj.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run X3DNA on the whole trajectory and collect profiles.</p>
-<p>Keyword arguments <em>start</em>, <em>stop</em>, and <em>step</em> can be used to only
-analyse part of the trajectory.</p>
+<p>Keyword arguments <cite>start</cite>, <cite>stop</cite>, and <cite>step</cite> can be used to only
+analyse part of the trajectory. The defaults are the values provided to
+the class constructor.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.run_x3dna">
 <code class="descname">run_x3dna</code><span class="sig-paren">(</span><em>pdbfile</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/legacy/x3dna.html#X3DNAtraj.run_x3dna"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.run_x3dna" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run X3DNA on a single PDB file <em>pdbfile</em>.</p>
+<dd><p>Run X3DNA on a single PDB file <cite>pdbfile</cite>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -444,15 +546,27 @@ analyse part of the trajectory.</p>
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.sorted_profiles_iter">
 <code class="descname">sorted_profiles_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.sorted_profiles_iter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an iterator over profiles sorted by frame/order parameter <em>q</em>.</p>
-<p>The iterator produces tuples <code class="docutils literal"><span class="pre">(q,</span> <span class="pre">profile)</span></code>.</p>
+<dd><p>Return an iterator over profiles sorted by frame/order parameter.</p>
+<p>The iterator produces tuples <code class="docutils literal"><span class="pre">(q,</span> <span class="pre">profile)</span></code>. Typically, <cite>q</cite> is the
+frame number.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.std">
 <code class="descname">std</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.X3DNAtraj.std" title="Permalink to this definition">¶</a></dt>
-<dd><p>H.std() returns the standard deviation of base parameters (order of base parameters:Shear,Stretch,Stagger,
-Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for each nucleic acid pair.</p>
+<dd><p>Returns the standard deviation for the base parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The list contains the standard deviations for the helicoidal
+parameters. The order is <code class="docutils literal"><span class="pre">[shear,</span> <span class="pre">stretch,</span> <span class="pre">stagger,</span> <span class="pre">buckle,</span>
+<span class="pre">propeller,</span> <span class="pre">opening,</span> <span class="pre">shift,</span> <span class="pre">slide,</span> <span class="pre">rise,</span> <span class="pre">tilt,</span> <span class="pre">roll,</span> <span class="pre">twist]</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -460,9 +574,9 @@ Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for each nucleic acid
 </div>
 <div class="section" id="utilities">
 <h2>4.5.2.3. Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="exception">
 <dt id="MDAnalysis.analysis.legacy.x3dna.ApplicationError">
-<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.legacy.x3dna.</code><code class="descname">ApplicationError</code><a class="reference internal" href="../../../_modules/MDAnalysis/exceptions.html#ApplicationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.ApplicationError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">MDAnalysis.analysis.legacy.x3dna.</code><code class="descname">ApplicationError</code><a class="reference internal" href="../../../_modules/MDAnalysis/exceptions.html#ApplicationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.legacy.x3dna.ApplicationError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when an external application failed.</p>
 <p>The error code is specific for the application.</p>
 <div class="versionadded">

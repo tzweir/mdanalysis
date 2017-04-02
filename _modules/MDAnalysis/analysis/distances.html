@@ -167,6 +167,10 @@
 <span class="sd">    :mod:`scipy.sparse` is require for using *sparse* matrices; if it cannot</span>
 <span class="sd">    be imported then an `ImportError` is raised.</span>
 
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :mod:`MDAnalysis.analysis.contacts` for native contact analysis</span>
+
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Keyword *suppress_progmet* and *progress_meter_freq* were removed.</span>
@@ -251,10 +255,11 @@
 <span class="sd">    ----------</span>
 <span class="sd">    group : AtomGroup</span>
 <span class="sd">        Find members of `group` that are between `A` and `B`</span>
-<span class="sd">    A, B : AtomGroups</span>
-<span class="sd">        `A` and `B` are :class:`~MDAnalysis.core.groups.AtomGroup`</span>
-<span class="sd">        instances.  Works best if `group` is bigger than either `A` or</span>
-<span class="sd">        `B`.</span>
+<span class="sd">    A : AtomGroup</span>
+<span class="sd">    B : AtomGroup</span>
+<span class="sd">        `A` and `B` are the groups of atoms between which atoms in</span>
+<span class="sd">        `group` are searched for.  The function works is more</span>
+<span class="sd">        efficient if `group` is bigger than either `A` or `B`.</span>
 <span class="sd">    distance : float</span>
 <span class="sd">        maximum distance for an atom to be counted as in the vicinity of</span>
 <span class="sd">        `A` or `B`</span>
@@ -267,6 +272,7 @@
 
 
 <span class="sd">    .. versionadded: 0.7.5</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ns_group</span> <span class="o">=</span> <span class="n">AtomNeighborSearch</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
     <span class="n">resA</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ns_group</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">distance</span><span class="p">))</span>

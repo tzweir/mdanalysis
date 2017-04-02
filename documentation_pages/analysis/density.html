@@ -162,37 +162,37 @@ histogrammed on a grid with spacing <cite>delta</cite>.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>universe</strong> (<em>MDAnalysis.Universe</em>) &#8211; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object with a trajectory</li>
-<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
+<li><strong>atomselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; selection string (MDAnalysis syntax) for the species to be analyzed
 [&#8220;name OH2&#8221;]</li>
-<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; </li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; </li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Slice the trajectory as <code class="docutils literal"><span class="pre">trajectory[start:stop:step]</span></code>; default
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; bin size for the density grid in Angstroem (same in x,y,z) [1.0]</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; </li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; </li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Slice the trajectory as <code class="docutils literal"><span class="pre">trajectory[start:stop:step]</span></code>; default
 is to read the whole trajectory.</li>
 <li><strong>metadata</strong> (<em>dict. optional</em>) &#8211; <cite>dict</cite> of additional data to be saved with the object; the meta data
 are passed through as they are.</li>
-<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; increase histogram dimensions by padding (on top of initial box size)
+<li><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; increase histogram dimensions by padding (on top of initial box size)
 in Angstroem [2.0]</li>
-<li><strong>soluteselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; MDAnalysis selection for the solute, e.g. &#8220;protein&#8221; [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; With <cite>cutoff</cite>, select &#8220;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#8221;
+<li><strong>soluteselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; MDAnalysis selection for the solute, e.g. &#8220;protein&#8221; [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; With <cite>cutoff</cite>, select &#8220;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#8221;
 (Special routines that are faster than the standard <code class="docutils literal"><span class="pre">AROUND</span></code> selection);
 any value that evaluates to <code class="docutils literal"><span class="pre">False</span></code> (such as the default 0) disables this
 special selection.</li>
-<li><strong>update_selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; <p>Should the selection of atoms be updated for every step? [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+<li><strong>update_selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <p>Should the selection of atoms be updated for every step? [<code class="docutils literal"><span class="pre">False</span></code>]</p>
 <ul>
 <li><code class="docutils literal"><span class="pre">True</span></code>: atom selection is updated for each frame, can be slow</li>
 <li><code class="docutils literal"><span class="pre">False</span></code>: atoms are only selected at the beginning</li>
 </ul>
 </li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; <p>Print status update to the screen for every <em>interval</em> frame? [<code class="docutils literal"><span class="pre">True</span></code>]</p>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <p>Print status update to the screen for every <em>interval</em> frame? [<code class="docutils literal"><span class="pre">True</span></code>]</p>
 <ul>
 <li><code class="docutils literal"><span class="pre">False</span></code>: no status updates when a new frame is processed</li>
 <li><code class="docutils literal"><span class="pre">True</span></code>: status update every frame (including number of atoms
 processed, which is interesting with <code class="docutils literal"><span class="pre">update_selection=True</span></code>)</li>
 </ul>
 </li>
-<li><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Show status update every <cite>interval</cite> frame [1]</li>
-<li><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>, </em><em>optional</em>) &#8211; <cite>dict</cite> with some special parameters for <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> (see docs)</li>
+<li><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Show status update every <cite>interval</cite> frame [1]</li>
+<li><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <cite>dict</cite> with some special parameters for <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> (see docs)</li>
 </ul>
 </td>
 </tr>
@@ -500,7 +500,7 @@ iterator.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; <p>The target unit that the density should be converted to.</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <p>The target unit that the density should be converted to.</p>
 <p><cite>unit</cite> can be one of the following:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -565,7 +565,7 @@ and floating point artifacts for multiple conversions.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; unit that the grid should be converted to: one of
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; unit that the grid should be converted to: one of
 &#8220;Angstrom&#8221;, &#8220;nm&#8221;</td>
 </tr>
 </tbody>

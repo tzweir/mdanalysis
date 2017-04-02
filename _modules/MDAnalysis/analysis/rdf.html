@@ -96,12 +96,15 @@
 <span class="sd">Radial Distribution Functions --- :mod:`MDAnalysis.analysis.rdf`</span>
 <span class="sd">================================================================</span>
 
-<span class="sd">Tools for calculating pair distribution functions</span>
+<span class="sd">Tools for calculating pair distribution functions (&quot;radial</span>
+<span class="sd">distribution functions&quot; or &quot;RDF&quot;).</span>
 
-<span class="sd"># TODO</span>
-<span class="sd"> - Structure factor?</span>
-<span class="sd"> - Coordination number</span>
+<span class="sd">.. Not Implemented yet:</span>
+<span class="sd">.. - Structure factor?</span>
+<span class="sd">.. - Coordination number</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">..lib.util</span> <span class="k">import</span> <span class="n">blocks_of</span>
@@ -116,44 +119,44 @@
 
 <span class="sd">    Arguments</span>
 <span class="sd">    ---------</span>
-<span class="sd">    g1</span>
+<span class="sd">    g1 : AtomGroup</span>
 <span class="sd">      First AtomGroup</span>
-<span class="sd">    g2</span>
+<span class="sd">    g2 : AtomGroup</span>
 <span class="sd">      Second AtomGroup</span>
-
-<span class="sd">    Keywords</span>
-<span class="sd">    --------</span>
-<span class="sd">    nbins</span>
+<span class="sd">    nbins : int (optional)</span>
 <span class="sd">          Number of bins in the histogram [75]</span>
-<span class="sd">    range</span>
+<span class="sd">    range : tuple or list (optional)</span>
 <span class="sd">          The size of the RDF [0.0, 15.0]</span>
-<span class="sd">    exclusion_block</span>
+<span class="sd">    exclusion_block : tuple (optional)</span>
 <span class="sd">          A tuple representing the tile to exclude from the distance</span>
 <span class="sd">          array. [None]</span>
-<span class="sd">    start</span>
-<span class="sd">          The frame to start at [0]</span>
-<span class="sd">    stop</span>
-<span class="sd">          The frame to end at [-1]</span>
-<span class="sd">    step</span>
-<span class="sd">          The step size through the trajectory in frames [0]</span>
+<span class="sd">    start : int (optional)</span>
+<span class="sd">          The frame to start at (default is first)</span>
+<span class="sd">    stop : int (optional)</span>
+<span class="sd">          The frame to end at (default is last)</span>
+<span class="sd">    step : int (optional)</span>
+<span class="sd">          The step size through the trajectory in frames (default is</span>
+<span class="sd">          every frame)</span>
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
-<span class="sd">    First create the InterRDF object, by supplying two AtomGroups</span>
-<span class="sd">    then use the `run` method</span>
+<span class="sd">    First create the :class:`InterRDF` object, by supplying two</span>
+<span class="sd">    AtomGroups then use the :meth:`run` method ::</span>
 
 <span class="sd">      rdf = InterRDF(ag1, ag2)</span>
 <span class="sd">      rdf.run()</span>
 
-<span class="sd">    Results are available through the .bins and .rdf attributes</span>
+<span class="sd">    Results are available through the :attr:`bins` and :attr:`rdf`</span>
+<span class="sd">    attributes::</span>
 
 <span class="sd">      plt.plot(rdf.bins, rdf.rdf)</span>
 
 <span class="sd">    The `exclusion_block` keyword allows the masking of pairs from</span>
 <span class="sd">    within the same molecule.  For example, if there are 7 of each</span>
-<span class="sd">    atom in each molecule, the exclusion mask (7, 7) can be used.</span>
+<span class="sd">    atom in each molecule, the exclusion mask `(7, 7)` can be used.</span>
 
 <span class="sd">    .. versionadded:: 0.13.0</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span>
                  <span class="n">nbins</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">),</span> <span class="n">exclusion_block</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>

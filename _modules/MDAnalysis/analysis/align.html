@@ -246,6 +246,7 @@
 
 <span class="sd">.. autofunction:: _fit_to</span>
 <span class="sd">.. autofunction:: fasta2select</span>
+<span class="sd">.. autofunction:: sequence_alignment</span>
 <span class="sd">.. autofunction:: get_matching_atoms</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -353,9 +354,9 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    mobile_coordinates : array</span>
+<span class="sd">    mobile_coordinates : ndarray</span>
 <span class="sd">        Coordinates of atoms to be aligned</span>
-<span class="sd">    ref_coordinates : array</span>
+<span class="sd">    ref_coordinates : ndarray</span>
 <span class="sd">        Coordinates of atoms to be fit against</span>
 <span class="sd">    mobile_atoms : AtomGroup</span>
 <span class="sd">        Atoms to be translated</span>
@@ -363,7 +364,7 @@
 <span class="sd">        array of xyz coordinate of mobile center of mass</span>
 <span class="sd">    ref_com: ndarray</span>
 <span class="sd">        array of xyz coordinate of reference center of mass</span>
-<span class="sd">    weights : numpy array, optional</span>
+<span class="sd">    weights : numpy array (optional)</span>
 <span class="sd">        Array to be used for weighted rmsd</span>
 
 <span class="sd">    Returns</span>
@@ -424,7 +425,7 @@
 <span class="sd">    reference : Universe or AtomGroup</span>
 <span class="sd">       reference structure, a :class:`~MDAnalysis.core.groups.AtomGroup`</span>
 <span class="sd">       or a whole :class:`~MDAnalysis.core.universe.Universe`</span>
-<span class="sd">    select: string or dict, optional</span>
+<span class="sd">    select: string or dict (optional)</span>
 <span class="sd">       1. any valid selection string for</span>
 <span class="sd">          :meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` that</span>
 <span class="sd">          produces identical selections in `mobile` and `reference`; or</span>
@@ -436,15 +437,15 @@
 <span class="sd">       When using 2. or 3. with *sel1* and *sel2* then these selections can</span>
 <span class="sd">       also each be a list of selection strings (to generate a AtomGroup with</span>
 <span class="sd">       defined atom order as described under :ref:`ordered-selections-label`).</span>
-<span class="sd">    mass_weighted : boolean, optional (deprecated)</span>
+<span class="sd">    mass_weighted : boolean (optional) (deprecated)</span>
 <span class="sd">       ``True`` uses the masses :meth:`reference.masses` as weights for the</span>
 <span class="sd">       RMSD fit.</span>
-<span class="sd">    weights : str/array_like, optional</span>
+<span class="sd">    weights : str/array_like (optional)</span>
 <span class="sd">       weights to be used for fit. Can be either &#39;mass&#39; or an array_like</span>
-<span class="sd">    tol_mass: float, optional</span>
+<span class="sd">    tol_mass: float (optional)</span>
 <span class="sd">       Reject match if the atomic masses for matched atoms differ by more than</span>
 <span class="sd">       *tol_mass*, default [0.1]</span>
-<span class="sd">    strict: boolean, optional</span>
+<span class="sd">    strict: boolean (optional)</span>
 <span class="sd">       ``True``</span>
 <span class="sd">           Will raise :exc:`SelectionError` if a single atom does not</span>
 <span class="sd">           match between the two selections.</span>
@@ -452,7 +453,7 @@
 <span class="sd">           Will try to prepare a matching selection by dropping</span>
 <span class="sd">           residues with non-matching atoms. See :func:`get_matching_atoms`</span>
 <span class="sd">           for details.</span>
-<span class="sd">    subselection : string, optional</span>
+<span class="sd">    subselection : string (optional)</span>
 <span class="sd">       Apply the transformation only to this selection.</span>
 
 <span class="sd">       ``None`` [default]</span>
@@ -471,12 +472,13 @@
 <span class="sd">    new_rmsd : float</span>
 <span class="sd">        RMSD after spatial alignment</span>
 
-<span class="sd">    See Also</span>
-<span class="sd">    --------</span>
-<span class="sd">    AlignTraj: More efficient method for RMSD-fitting trajectories.</span>
+<span class="sd">    .. SeeAlso::</span>
+<span class="sd">       AlignTraj: More efficient method for RMSD-fitting trajectories.</span>
+
 
 <span class="sd">    .. _ClustalW: http://www.clustal.org/</span>
 <span class="sd">    .. _STAMP: http://www.compbio.dundee.ac.uk/manuals/stamp.4.2/</span>
+
 
 <span class="sd">    .. versionchanged:: 0.8</span>
 <span class="sd">       Added check that the two groups describe the same atoms including</span>
@@ -484,13 +486,13 @@
 
 <span class="sd">    .. versionchanged:: 0.10.0</span>
 <span class="sd">       Uses :func:`get_matching_atoms` to work with incomplete selections</span>
-<span class="sd">       and new *strict* keyword. The new default is to be lenient whereas</span>
-<span class="sd">       the old behavior was the equivalent of *strict* = ``True``.</span>
+<span class="sd">       and new `strict` keyword. The new default is to be lenient whereas</span>
+<span class="sd">       the old behavior was the equivalent of ``strict = True``.</span>
 
 <span class="sd">    .. versionchanged:: 0.16.0</span>
 <span class="sd">       new general &#39;weights&#39; kwarg replace mass_weights, deprecated &#39;mass_weights&#39;</span>
 <span class="sd">    .. deprecated:: 0.16.0</span>
-<span class="sd">       Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;`</span>
+<span class="sd">       Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;``</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">select</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
@@ -582,36 +584,37 @@
 <span class="sd">            Universe containing trajectory to be fitted to reference</span>
 <span class="sd">        reference : Universe</span>
 <span class="sd">            Universe containing trajectory frame to be used as reference</span>
-<span class="sd">        select : string, optional</span>
+<span class="sd">        select : string (optional)</span>
 <span class="sd">            Set as default to all, is used for Universe.select_atoms to choose</span>
 <span class="sd">            subdomain to be fitted against</span>
-<span class="sd">        filename : string, optional</span>
+<span class="sd">        filename : string (optional)</span>
 <span class="sd">            Provide a filename for results to be written to</span>
-<span class="sd">        prefix : string, optional</span>
+<span class="sd">        prefix : string (optional)</span>
 <span class="sd">            Provide a string to prepend to filename for results to be written</span>
 <span class="sd">            to</span>
-<span class="sd">        mass_weighted : boolean, optional (deprecated)</span>
-<span class="sd">            Boolean, if true will rmsd will be mass-weighted corresponding to</span>
-<span class="sd">            the atoms selected in the reference trajectory</span>
+<span class="sd">        mass_weighted : boolean (optional, deprecated)</span>
+<span class="sd">            Boolean, if ``True`` will rmsd will be mass-weighted corresponding</span>
+<span class="sd">            to the atoms selected in the reference trajectory. However, this is</span>
+<span class="sd">            deprecated: rather use ``weights=&quot;mass&quot;``.</span>
 <span class="sd">        weights : str/array_like (optional)</span>
 <span class="sd">            Can either be &#39;mass&#39; to use reference masses as weights or an</span>
 <span class="sd">            arbitrary array</span>
-<span class="sd">        tol_mass : float, optional</span>
+<span class="sd">        tol_mass : float (optional)</span>
 <span class="sd">            Tolerance given to `get_matching_atoms` to find appropriate atoms</span>
-<span class="sd">        strict : boolean, optional</span>
+<span class="sd">        strict : boolean (optional)</span>
 <span class="sd">            Force `get_matching_atoms` to fail if atoms can&#39;t be found using</span>
 <span class="sd">            exact methods</span>
-<span class="sd">        force : boolean, optional</span>
+<span class="sd">        force : boolean (optional)</span>
 <span class="sd">            Force overwrite of filename for rmsd-fitting</span>
-<span class="sd">        verbose : boolean, optional</span>
+<span class="sd">        verbose : boolean (optional)</span>
 <span class="sd">            Set logger to show more information</span>
-<span class="sd">        start : int, optional</span>
+<span class="sd">        start : int (optional)</span>
 <span class="sd">            First frame of trajectory to analyse, Default: 0</span>
-<span class="sd">        stop : int, optional</span>
+<span class="sd">        stop : int (optional)</span>
 <span class="sd">            Last frame of trajectory to analyse, Default: -1</span>
-<span class="sd">        step : int, optional</span>
+<span class="sd">        step : int (optional)</span>
 <span class="sd">            Step between frames to analyse, Default: 1</span>
-<span class="sd">        in_memory : boolean, optional</span>
+<span class="sd">        in_memory : boolean (optional)</span>
 <span class="sd">            *Permanently* switch `mobile` to an in-memory trajectory</span>
 <span class="sd">            so that alignment can be done in-place, which can improve</span>
 <span class="sd">            performance substantially in some cases. In this case, no file</span>
@@ -634,6 +637,7 @@
 <span class="sd">           new general &#39;weights&#39; kwarg replace mass_weights, deprecated &#39;mass_weights&#39;</span>
 <span class="sd">        .. deprecated:: 0.16.0</span>
 <span class="sd">           Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;`</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">select</span> <span class="o">=</span> <span class="n">rms</span><span class="o">.</span><span class="n">process_selection</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ref_atoms</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="o">*</span><span class="n">select</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">])</span>
@@ -922,7 +926,7 @@
     <span class="k">return</span> <span class="n">filename</span>
 
 
-<span class="k">def</span> <span class="nf">sequence_alignment</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mismatch_penalty</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+<div class="viewcode-block" id="sequence_alignment"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.sequence_alignment">[docs]</a><span class="k">def</span> <span class="nf">sequence_alignment</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mismatch_penalty</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
                        <span class="n">gap_penalty</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">gapextension_penalty</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate a global sequence alignment between two residue groups.</span>
 
@@ -940,15 +944,15 @@
 <span class="sd">        Atom group to be aligned</span>
 <span class="sd">    reference : AtomGroup</span>
 <span class="sd">        Atom group to be aligned against</span>
-<span class="sd">    match_score : float, optional, default 2</span>
+<span class="sd">    match_score : float (optional), default 2</span>
 <span class="sd">         score for matching residues, default 2</span>
-<span class="sd">    mismatch_penalty : float, optional, default -1</span>
+<span class="sd">    mismatch_penalty : float (optional), default -1</span>
 <span class="sd">         penalty for residues that do not match , default : -1</span>
-<span class="sd">    gap_penalty : float, optional, default -2</span>
+<span class="sd">    gap_penalty : float (optional), default -2</span>
 <span class="sd">         penalty for opening a gap; the high default value creates compact</span>
 <span class="sd">         alignments for highly identical sequences but might not be suitable</span>
 <span class="sd">         for sequences with low identity, default : -2</span>
-<span class="sd">    gapextension_penalty : float, optional, default -0.1</span>
+<span class="sd">    gapextension_penalty : float (optional), default -0.1</span>
 <span class="sd">         penalty for extending a gap, default: -0.1</span>
 
 <span class="sd">    Returns</span>
@@ -975,7 +979,7 @@
         <span class="n">mobile</span><span class="o">.</span><span class="n">residues</span><span class="o">.</span><span class="n">sequence</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">),</span>
         <span class="n">match_score</span><span class="p">,</span> <span class="n">mismatch_penalty</span><span class="p">,</span> <span class="n">gap_penalty</span><span class="p">,</span> <span class="n">gapextension_penalty</span><span class="p">)</span>
     <span class="c1"># choose top alignment</span>
-    <span class="k">return</span> <span class="n">aln</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">aln</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="fasta2select"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.fasta2select">[docs]</a><span class="k">def</span> <span class="nf">fasta2select</span><span class="p">(</span><span class="n">fastafilename</span><span class="p">,</span> <span class="n">is_aligned</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1015,31 +1019,31 @@
 <span class="sd">    fastafilename : str, path to filename</span>
 <span class="sd">        FASTA file with first sequence as reference and</span>
 <span class="sd">        second the one to be aligned (ORDER IS IMPORTANT!)</span>
-<span class="sd">    is_aligned : boolean, optional</span>
-<span class="sd">        ``False`` : [default]</span>
+<span class="sd">    is_aligned : boolean (optional)</span>
+<span class="sd">        ``False`` (default)</span>
 <span class="sd">            run clustalw for sequence alignment;</span>
 <span class="sd">        ``True``</span>
 <span class="sd">            use the alignment in the file (e.g. from STAMP) [``False``]</span>
-<span class="sd">    ref_offset : int, optional</span>
+<span class="sd">    ref_offset : int (optional)</span>
 <span class="sd">        add this number to the column number in the FASTA file</span>
 <span class="sd">        to get the original residue number, default: 0</span>
-<span class="sd">    target_offset : int, optional</span>
+<span class="sd">    target_offset : int (optional)</span>
 <span class="sd">        add this number to the column number in the FASTA file</span>
 <span class="sd">        to get the original residue number, default: 0</span>
-<span class="sd">    ref_resids : str, optional</span>
+<span class="sd">    ref_resids : str (optional)</span>
 <span class="sd">        sequence of resids as they appear in the reference structure</span>
-<span class="sd">    target_resids : str, optional</span>
+<span class="sd">    target_resids : str (optional)</span>
 <span class="sd">        sequence of resids as they appear in the target</span>
-<span class="sd">    alnfilename : str, optional</span>
+<span class="sd">    alnfilename : str (optional)</span>
 <span class="sd">        filename of ClustalW alignment (clustal format) that is</span>
 <span class="sd">        produced by *clustalw* when *is_aligned* = ``False``.</span>
 <span class="sd">        default ``None`` uses the name and path of *fastafilename* and</span>
 <span class="sd">        subsititutes the suffix with &#39;.aln&#39;.</span>
-<span class="sd">    treefilename: str, optional</span>
+<span class="sd">    treefilename: str (optional)</span>
 <span class="sd">        filename of ClustalW guide tree (Newick format);</span>
 <span class="sd">        if default ``None``  the the filename is generated from *alnfilename*</span>
 <span class="sd">        with the suffix &#39;.dnd&#39; instead of &#39;.aln&#39;</span>
-<span class="sd">    clustalw : str, optional</span>
+<span class="sd">    clustalw : str (optional)</span>
 <span class="sd">        path to the ClustalW (or ClustalW2) binary; only</span>
 <span class="sd">        needed for `is_aligned` = ``False``, default: &quot;ClustalW2&quot;</span>
 
@@ -1047,13 +1051,14 @@
 <span class="sd">    -------</span>
 <span class="sd">    select_dict : dict</span>
 <span class="sd">        dictionary with &#39;reference&#39; and &#39;mobile&#39; selection string</span>
-<span class="sd">        that can be used immediately in :func:`rms_fit_trj` as</span>
+<span class="sd">        that can be used immediately in :class:`AlignTraj` as</span>
 <span class="sd">        ``select=select_dict``.</span>
 
-<span class="sd">    See Also</span>
-<span class="sd">    --------</span>
-<span class="sd">    :func:`sequence_alignment`, which does not require external</span>
-<span class="sd">    programs.</span>
+
+<span class="sd">    .. SeeAlso::</span>
+<span class="sd">      :func:`sequence_alignment`, which does not require external</span>
+<span class="sd">      programs.</span>
+
 
 <span class="sd">    .. _ClustalW: http://www.clustal.org/</span>
 <span class="sd">    .. _STAMP: http://www.compbio.dundee.ac.uk/manuals/stamp.4.2/</span>
@@ -1230,10 +1235,10 @@
 <span class="sd">    ag2 : AtomGroup</span>
 <span class="sd">        Second :class:`~MDAnalysis.core.groups.AtomGroup` instance that is</span>
 <span class="sd">        compared</span>
-<span class="sd">    tol_mass : float, optional</span>
+<span class="sd">    tol_mass : float (optional)</span>
 <span class="sd">         Reject if the atomic masses for matched atoms differ by more than</span>
 <span class="sd">         `tol_mass` [0.1]</span>
-<span class="sd">    strict : boolean, optional</span>
+<span class="sd">    strict : boolean (optional)</span>
 <span class="sd">        ``True``</span>
 <span class="sd">            Will raise :exc:`SelectionError` if a single atom does not</span>
 <span class="sd">            match between the two selections.</span>

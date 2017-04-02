@@ -71,7 +71,7 @@
             
   <h1>Source code for MDAnalysis.analysis.waterdynamics</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.mdanalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2016 The MDAnalysis Development Team and contributors</span>
@@ -92,8 +92,7 @@
 <span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
 <span class="c1">#</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Water dynamics analysis --- :mod:`MDAnalysis.analysis.waterdynamics`</span>
+<span class="sd">&quot;&quot;&quot;Water dynamics analysis --- :mod:`MDAnalysis.analysis.waterdynamics`</span>
 <span class="sd">=======================================================================</span>
 
 <span class="sd">:Author: Alejandro Bernardin</span>
@@ -102,51 +101,66 @@
 
 <span class="sd">.. versionadded:: 0.11.0</span>
 
-<span class="sd">This module provides functions to analize water dynamics trajectories and water interactions with other molecules.</span>
-<span class="sd">The functions in this module are: water orientational relaxation (WOR) [Yeh1999]_, hydrogen bond lifetimes (HBL) [Rapaport1983]_,</span>
-<span class="sd">angular distribution (AD) [Grigera1995]_, mean square displacement (MSD) [Brodka1994]_ and survival probability (SP) [Liu2004]_.</span>
+<span class="sd">This module provides functions to analize water dynamics trajectories and water</span>
+<span class="sd">interactions with other molecules.  The functions in this module are: water</span>
+<span class="sd">orientational relaxation (WOR) [Yeh1999]_, hydrogen bond lifetimes (HBL)</span>
+<span class="sd">[Rapaport1983]_, angular distribution (AD) [Grigera1995]_, mean square</span>
+<span class="sd">displacement (MSD) [Brodka1994]_ and survival probability (SP) [Liu2004]_.</span>
 
-<span class="sd">For more information about this type of analysis please refer to [Araya-Secchi2014]_ (water in a protein cavity) and [Milischuk2011]_ (water in a nanopore).</span>
+<span class="sd">For more information about this type of analysis please refer to</span>
+<span class="sd">[Araya-Secchi2014]_ (water in a protein cavity) and [Milischuk2011]_ (water in</span>
+<span class="sd">a nanopore).</span>
 
 <span class="sd">.. rubric:: References</span>
 
-<span class="sd">.. [Rapaport1983] D.C. Rapaport (1983): Hydrogen bonds in water, Molecular Physics: An International</span>
-<span class="sd">            Journal at the Interface Between Chemistry and Physics, 50:5, 1151-1162.</span>
+<span class="sd">.. [Rapaport1983] D.C. Rapaport (1983): Hydrogen bonds in water, Molecular</span>
+<span class="sd">            Physics: An International Journal at the Interface Between</span>
+<span class="sd">            Chemistry and Physics, 50:5, 1151-1162.</span>
 
-<span class="sd">.. [Yeh1999] Yu-ling Yeh and Chung-Yuan Mou (1999).</span>
-<span class="sd">             Orientational Relaxation Dynamics of Liquid Water Studied by Molecular Dynamics</span>
-<span class="sd">             Simulation, J. Phys. Chem. B 1999, 103, 3699-3705.</span>
+<span class="sd">.. [Yeh1999] Yu-ling Yeh and Chung-Yuan Mou (1999).  Orientational Relaxation</span>
+<span class="sd">             Dynamics of Liquid Water Studied by Molecular Dynamics Simulation,</span>
+<span class="sd">             J. Phys. Chem. B 1999, 103, 3699-3705.</span>
 
-<span class="sd">.. [Grigera1995] Raul Grigera, Susana G. Kalko and Jorge Fischbarg (1995). Wall-Water Interface.</span>
-<span class="sd">                  A Molecular Dynamics Study, Langmuir 1996,12,154-158</span>
+<span class="sd">.. [Grigera1995] Raul Grigera, Susana G. Kalko and Jorge Fischbarg</span>
+<span class="sd">                 (1995). Wall-Water Interface.  A Molecular Dynamics Study,</span>
+<span class="sd">                 Langmuir 1996,12,154-158</span>
 
-<span class="sd">.. [Liu2004] Pu Liu, Edward Harder, and B. J. Berne (2004).On the Calculation of Diffusion Coefficients</span>
-<span class="sd">             in Confined Fluids and Interfaces with an Application to the Liquid-Vapor Interface of</span>
-<span class="sd">             Water, J. Phys. Chem. B 2004, 108, 6595-6602.</span>
+<span class="sd">.. [Liu2004] Pu Liu, Edward Harder, and B. J. Berne (2004).On the Calculation</span>
+<span class="sd">             of Diffusion Coefficients in Confined Fluids and Interfaces with</span>
+<span class="sd">             an Application to the Liquid-Vapor Interface of Water,</span>
+<span class="sd">             J. Phys. Chem. B 2004, 108, 6595-6602.</span>
 
-<span class="sd">.. [Brodka1994] Aleksander Brodka (1994). Diffusion in restricted volume, Molecular Physics, 1994, Vol.</span>
-<span class="sd">                82, No. 5, 1075-1078.</span>
+<span class="sd">.. [Brodka1994] Aleksander Brodka (1994). Diffusion in restricted volume,</span>
+<span class="sd">                Molecular Physics, 1994, Vol.  82, No. 5, 1075-1078.</span>
 
-<span class="sd">.. [Araya-Secchi2014] Araya-Secchi, R., Tomas Perez-Acle, Seung-gu Kang, Tien Huynh, Alejandro Bernardin, Yerko Escalona, Jose-Antonio Garate, Agustin D. Martinez,</span>
-<span class="sd">                     Isaac E. Garcia, Juan C. Saez, Ruhong Zhou (2014). Characterization of a novel water pocket inside the human Cx26 hemichannel structure. Biophysical journal, 107(3), 599-612.</span>
+<span class="sd">.. [Araya-Secchi2014] Araya-Secchi, R., Tomas Perez-Acle, Seung-gu Kang, Tien</span>
+<span class="sd">                      Huynh, Alejandro Bernardin, Yerko Escalona, Jose-Antonio</span>
+<span class="sd">                      Garate, Agustin D. Martinez, Isaac E. Garcia, Juan</span>
+<span class="sd">                      C. Saez, Ruhong Zhou (2014). Characterization of a novel</span>
+<span class="sd">                      water pocket inside the human Cx26 hemichannel</span>
+<span class="sd">                      structure. Biophysical journal, 107(3), 599-612.</span>
 
-<span class="sd">.. [Milischuk2011] Anatoli A. Milischuk and Branka M. Ladanyi. Structure and dynamics of water confined</span>
-<span class="sd">                    in silica nanopores. J. Chem. Phys. 135, 174709 (2011); doi: 10.1063/1.3657408</span>
+<span class="sd">.. [Milischuk2011] Anatoli A. Milischuk and Branka M. Ladanyi. Structure and</span>
+<span class="sd">                   dynamics of water confined in silica</span>
+<span class="sd">                   nanopores. J. Chem. Phys. 135, 174709 (2011); doi:</span>
+<span class="sd">                   10.1063/1.3657408</span>
 
 
 
-<span class="sd">.. examples</span>
+<span class="sd">.. _examples:</span>
 
-<span class="sd">Examples</span>
-<span class="sd">--------</span>
+<span class="sd">Example use of the analysis classes</span>
+<span class="sd">-----------------------------------</span>
 
 <span class="sd">HydrogenBondLifetimes</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~</span>
 
-<span class="sd">Analyzing hydrogen bond lifetimes (HBL) :class:`HydrogenBondLifetimes`, both continuos and intermittent. In this case we are analyzing</span>
-<span class="sd">how residue 38 interact with a water sphere of radius 6.0 centered on the geometric center of protein and</span>
-<span class="sd">residue 42. If the hydrogen bond lifetimes are very stable, we can assume that residue 38 is hydrophilic, on the other</span>
-<span class="sd">hand, if the  are very unstable, we can assume that residue 38 is hydrophobic::</span>
+<span class="sd">Analyzing hydrogen bond lifetimes (HBL) :class:`HydrogenBondLifetimes`, both</span>
+<span class="sd">continuos and intermittent. In this case we are analyzing how residue 38</span>
+<span class="sd">interact with a water sphere of radius 6.0 centered on the geometric center of</span>
+<span class="sd">protein and residue 42. If the hydrogen bond lifetimes are very stable, we can</span>
+<span class="sd">assume that residue 38 is hydrophilic, on the other hand, if the are very</span>
+<span class="sd">unstable, we can assume that residue 38 is hydrophobic::</span>
 
 <span class="sd">  import MDAnalysis</span>
 <span class="sd">  from MDAnalysis.analysis.waterdynamics import HydrogenBondLifetimes as HBL</span>
@@ -162,7 +176,7 @@
 <span class="sd">  for HBLc, HBLi in HBL_analysis.timeseries:</span>
 <span class="sd">        print(&quot;{time} {HBLc} {time} {HBLi}&quot;.format(time=time, HBLc=HBLc, HBLi=HBLi))</span>
 <span class="sd">        time += 1</span>
-<span class="sd">  </span>
+
 <span class="sd">  #we can also plot our data</span>
 <span class="sd">  plt.figure(1,figsize=(18, 6))</span>
 
@@ -182,15 +196,22 @@
 
 <span class="sd">  plt.show()</span>
 
-<span class="sd">where HBLc is the value for the continuos hydrogen bond lifetimes and HBLi is the value for the intermittent</span>
-<span class="sd">hydrogen bond lifetime, t0 = 0, tf = 2000 and dtmax = 30. In this way we create 30 windows timestep</span>
-<span class="sd">(30 values in x axis). The continuos hydrogen bond lifetimes should decay faster than intermittent.</span>
+<span class="sd">where HBLc is the value for the continuos hydrogen bond lifetimes and HBLi is</span>
+<span class="sd">the value for the intermittent hydrogen bond lifetime, t0 = 0, tf = 2000 and</span>
+<span class="sd">dtmax = 30. In this way we create 30 windows timestep (30 values in x</span>
+<span class="sd">axis). The continuos hydrogen bond lifetimes should decay faster than</span>
+<span class="sd">intermittent.</span>
 
 
 <span class="sd">WaterOrientationalRelaxation</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 
-<span class="sd">Analyzing water orientational relaxation (WOR) :class:`WaterOrientationalRelaxation`. In this case we are analyzing &quot;how fast&quot; water molecules are rotating/changing direction. If WOR is very stable we can assume that water molecules are rotating/changing direction very slow, on the other hand, if WOR decay very fast, we can assume that water molecules are rotating/changing direction very fast::</span>
+<span class="sd">Analyzing water orientational relaxation (WOR)</span>
+<span class="sd">:class:`WaterOrientationalRelaxation`. In this case we are analyzing &quot;how fast&quot;</span>
+<span class="sd">water molecules are rotating/changing direction. If WOR is very stable we can</span>
+<span class="sd">assume that water molecules are rotating/changing direction very slow, on the</span>
+<span class="sd">other hand, if WOR decay very fast, we can assume that water molecules are</span>
+<span class="sd">rotating/changing direction very fast::</span>
 
 <span class="sd">  import MDAnalysis</span>
 <span class="sd">  from MDAnalysis.analysis.waterdynamics import WaterOrientationalRelaxation as WOR</span>
@@ -230,20 +251,24 @@
 <span class="sd">  plt.title(&#39;WOR dip&#39;)</span>
 <span class="sd">  plt.plot(range(0,time),[column[2] for column in WOR_analysis.timeseries])</span>
 
-<span class="sd">  plt.show()  </span>
+<span class="sd">  plt.show()</span>
 
-<span class="sd">where t0 = 0, tf = 1000 and dtmax = 20. In this way we create 20 windows timesteps (20 values in the x axis),</span>
-<span class="sd">the first window is created with 1000 timestep average (1000/1), the second window is created with 500</span>
-<span class="sd">timestep average(1000/2), the third window is created with 333 timestep average (1000/3) and so on.</span>
+<span class="sd">where t0 = 0, tf = 1000 and dtmax = 20. In this way we create 20 windows</span>
+<span class="sd">timesteps (20 values in the x axis), the first window is created with 1000</span>
+<span class="sd">timestep average (1000/1), the second window is created with 500 timestep</span>
+<span class="sd">average(1000/2), the third window is created with 333 timestep average (1000/3)</span>
+<span class="sd">and so on.</span>
 
 <span class="sd">AngularDistribution</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~</span>
 
-<span class="sd">Analyzing angular distribution (AD) :class:`AngularDistribution` for OH vector, HH vector and dipole vector. It returns</span>
-<span class="sd">a line histogram with vector orientation preference. A straight line in the output graphic means no preferential</span>
-<span class="sd">orientation in water molecules. In this case we are analyzing if water molecules have some orientational</span>
-<span class="sd">preference, in this way we can see if water molecules are under an electric field or if they are interacting</span>
-<span class="sd">with something (residue, protein, etc)::</span>
+<span class="sd">Analyzing angular distribution (AD) :class:`AngularDistribution` for OH vector,</span>
+<span class="sd">HH vector and dipole vector. It returns a line histogram with vector</span>
+<span class="sd">orientation preference. A straight line in the output graphic means no</span>
+<span class="sd">preferential orientation in water molecules. In this case we are analyzing if</span>
+<span class="sd">water molecules have some orientational preference, in this way we can see if</span>
+<span class="sd">water molecules are under an electric field or if they are interacting with</span>
+<span class="sd">something (residue, protein, etc)::</span>
 
 <span class="sd">  import MDAnalysis</span>
 <span class="sd">  from MDAnalysis.analysis.waterdynamics import AngularDistribution as AD</span>
@@ -286,13 +311,17 @@
 <span class="sd">  plt.show()</span>
 
 
-<span class="sd">where P(cos(theta)) is the angular distribution or angular probabilities.</span>
+<span class="sd">where `P(cos(theta))` is the angular distribution or angular probabilities.</span>
+
 
 <span class="sd">MeanSquareDisplacement</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~~</span>
-<span class="sd">Analyzing mean square displacement (MSD) :class:`MeanSquareDisplacement` for water molecules. In this case we are analyzing the average distance</span>
-<span class="sd">that water molecules travels inside protein in XYZ direction (cylindric zone of radius 11[nm], Zmax 4.0[nm] and Zmin -8.0[nm]). A strong</span>
-<span class="sd">rise mean a fast movement of water molecules, a weak rise mean slow movement of particles::</span>
+
+<span class="sd">Analyzing mean square displacement (MSD) :class:`MeanSquareDisplacement` for</span>
+<span class="sd">water molecules. In this case we are analyzing the average distance that water</span>
+<span class="sd">molecules travels inside protein in XYZ direction (cylindric zone of radius</span>
+<span class="sd">11[nm], Zmax 4.0[nm] and Zmin -8.0[nm]). A strong rise mean a fast movement of</span>
+<span class="sd">water molecules, a weak rise mean slow movement of particles::</span>
 
 <span class="sd">  import MDAnalysis</span>
 <span class="sd">  from MDAnalysis.analysis.waterdynamics import MeanSquareDisplacement as MSD</span>
@@ -307,7 +336,7 @@
 <span class="sd">  for msd in MSD_analysis.timeseries:</span>
 <span class="sd">        print(&quot;{time} {msd}&quot;.format(time=time, msd=msd))</span>
 <span class="sd">        time += 1</span>
-<span class="sd">  </span>
+
 <span class="sd">  #Plot</span>
 <span class="sd">  plt.xlabel(&#39;time&#39;)</span>
 <span class="sd">  plt.ylabel(&#39;MSD&#39;)</span>
@@ -315,12 +344,17 @@
 <span class="sd">  plt.plot(range(0,time),MSD_analysis.timeseries)</span>
 <span class="sd">  plt.show()</span>
 
+
+<span class="sd">.. _SP-examples:</span>
+
 <span class="sd">SurvivalProbability</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~</span>
-<span class="sd">Analyzing survival probability (SP) :class:`SurvivalProbability` for water molecules. In this case we are analyzing how long water</span>
-<span class="sd">molecules remain in a sphere of radius 12.3 centered in the geometrical center of resid 42, 26, 34 and 80.</span>
-<span class="sd">A slow decay of SP means a long permanence time of water molecules in the zone, on the</span>
-<span class="sd">other hand, a fast decay means a short permanence time::</span>
+
+<span class="sd">Analyzing survival probability (SP) :class:`SurvivalProbability` for water</span>
+<span class="sd">molecules. In this case we are analyzing how long water molecules remain in a</span>
+<span class="sd">sphere of radius 12.3 centered in the geometrical center of resid 42, 26, 34</span>
+<span class="sd">and 80.  A slow decay of SP means a long permanence time of water molecules in</span>
+<span class="sd">the zone, on the other hand, a fast decay means a short permanence time::</span>
 
 <span class="sd">  import MDAnalysis</span>
 <span class="sd">  from MDAnalysis.analysis.waterdynamics import SurvivalProbability as SP</span>
@@ -342,17 +376,19 @@
 <span class="sd">  plt.title(&#39;Survival Probability&#39;)</span>
 <span class="sd">  plt.plot(range(0,time),MSD_analysis.timeseries)</span>
 <span class="sd">  plt.show()</span>
-<span class="sd">  </span>
 
-<span class="sd">.. Output</span>
+
+<span class="sd">.. _Output:</span>
 
 <span class="sd">Output</span>
 <span class="sd">------</span>
 
 <span class="sd">HydrogenBondLifetimes</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~</span>
-<span class="sd">Hydrogen bond lifetimes (HBL) data is returned per window timestep, which is stored in</span>
-<span class="sd">:attr:`HydrogenBondLifetimes.timeseries` (in all the following descriptions, # indicates comments that are not part of the output)::</span>
+
+<span class="sd">Hydrogen bond lifetimes (HBL) data is returned per window timestep, which is</span>
+<span class="sd">stored in :attr:`HydrogenBondLifetimes.timeseries` (in all the following</span>
+<span class="sd">descriptions, # indicates comments that are not part of the output)::</span>
 
 <span class="sd">    results = [</span>
 <span class="sd">        [ # time t0</span>
@@ -366,8 +402,9 @@
 
 <span class="sd">WaterOrientationalRelaxation</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<span class="sd">Water orientational relaxation (WOR) data is returned per window timestep, which is stored in</span>
-<span class="sd">:attr:`WaterOrientationalRelaxation.timeseries`::</span>
+
+<span class="sd">Water orientational relaxation (WOR) data is returned per window timestep,</span>
+<span class="sd">which is stored in :attr:`WaterOrientationalRelaxation.timeseries`::</span>
 
 <span class="sd">    results = [</span>
 <span class="sd">        [ # time t0</span>
@@ -381,8 +418,10 @@
 
 <span class="sd">AngularDistribution</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~</span>
+
 <span class="sd">Angular distribution (AD) data is returned per vector, which is stored in</span>
-<span class="sd">:attr:`AngularDistribution.graph`. In fact, AngularDistribution returns a histogram::</span>
+<span class="sd">:attr:`AngularDistribution.graph`. In fact, AngularDistribution returns a</span>
+<span class="sd">histogram::</span>
 
 <span class="sd">    results = [</span>
 <span class="sd">        [ # OH vector values</span>
@@ -399,8 +438,10 @@
 
 <span class="sd">MeanSquareDisplacement</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~~</span>
-<span class="sd">Mean Square Displacement (MSD) data is returned in a list, which each element represents a MSD value in its respective</span>
-<span class="sd">window timestep. Data is stored in :attr:`MeanSquareDisplacement.timeseries`::</span>
+
+<span class="sd">Mean Square Displacement (MSD) data is returned in a list, which each element</span>
+<span class="sd">represents a MSD value in its respective window timestep. Data is stored in</span>
+<span class="sd">:attr:`MeanSquareDisplacement.timeseries`::</span>
 
 <span class="sd">    results = [</span>
 <span class="sd">         #MSD values orders by window timestep</span>
@@ -409,8 +450,10 @@
 
 <span class="sd">SurvivalProbability</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~</span>
-<span class="sd">Survival Probability (SP) data is returned in a list, which each element represents a SP value in its respective</span>
-<span class="sd">window timestep. Data is stored in :attr:`SurvivalProbability.timeseries`::</span>
+
+<span class="sd">Survival Probability (SP) data is returned in a list, which each element</span>
+<span class="sd">represents a SP value in its respective window timestep. Data is stored in</span>
+<span class="sd">:attr:`SurvivalProbability.timeseries`::</span>
 
 <span class="sd">    results = [</span>
 <span class="sd">         # SP values order by window timestep</span>
@@ -442,7 +485,6 @@
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
 
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span><span class="p">,</span> <span class="n">zip_longest</span>
@@ -455,47 +497,53 @@
 
 
 <div class="viewcode-block" id="HydrogenBondLifetimes"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.HydrogenBondLifetimes">[docs]</a><span class="k">class</span> <span class="nc">HydrogenBondLifetimes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This is a autocorrelation function that gives the &quot;Hydrogen Bond Lifetimes&quot; (HBL) proposed by D.C. Rapaport [Rapaport1983]_. From this</span>
-<span class="sd">    function we can obtain the continuos and intermittent behavior of hydrogen bonds in time. A</span>
-<span class="sd">    fast decay in these parameters indicate a fast change in HBs connectivity. A slow decay</span>
-<span class="sd">    indicate very stables hydrogen bonds, like in ice. The HBL is also know as &quot;Hydrogen Bond Population</span>
-<span class="sd">    Relaxation&quot; (HBPR). In the continuos case we have:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Hydrogen bond lifetime analysis</span>
+
+<span class="sd">    This is a autocorrelation function that gives the &quot;Hydrogen Bond Lifetimes&quot;</span>
+<span class="sd">    (HBL) proposed by D.C. Rapaport [Rapaport1983]_. From this function we can</span>
+<span class="sd">    obtain the continuous and intermittent behavior of hydrogen bonds in</span>
+<span class="sd">    time. A fast decay in these parameters indicate a fast change in HBs</span>
+<span class="sd">    connectivity. A slow decay indicate very stables hydrogen bonds, like in</span>
+<span class="sd">    ice. The HBL is also know as &quot;Hydrogen Bond Population Relaxation&quot;</span>
+<span class="sd">    (HBPR). In the continuos case we have:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">       C_{HB}^c(\tau) = \frac{\sum_{ij}h_{ij}(t_0)h&#39;_{ij}(t_0+\tau)}{\sum_{ij}h_{ij}(t_0)}</span>
 
-<span class="sd">    where :math:`h&#39;_{ij}(t_0+\tau)=1` if there is a H-bond between a pair :math:`ij` during time interval</span>
-<span class="sd">    :math:`t_0+\tau` (continuos) and :math:`h&#39;_{ij}(t_0+\tau)=0` otherwise. In the intermittent case</span>
-<span class="sd">    we have:</span>
+<span class="sd">    where :math:`h&#39;_{ij}(t_0+\tau)=1` if there is a H-bond between a pair</span>
+<span class="sd">    :math:`ij` during time interval :math:`t_0+\tau` (continuos) and</span>
+<span class="sd">    :math:`h&#39;_{ij}(t_0+\tau)=0` otherwise. In the intermittent case we have:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">       C_{HB}^i(\tau) = \frac{\sum_{ij}h_{ij}(t_0)h_{ij}(t_0+\tau)}{\sum_{ij}h_{ij}(t_0)}</span>
 
-<span class="sd">    where :math:`h_{ij}(t_0+\tau)=1` if there is a H-bond between a pair :math:`ij` at time</span>
-<span class="sd">    :math:`t_0+\tau` (intermittent) and :math:`h_{ij}(t_0+\tau)=0` otherwise.</span>
+<span class="sd">    where :math:`h_{ij}(t_0+\tau)=1` if there is a H-bond between a pair</span>
+<span class="sd">    :math:`ij` at time :math:`t_0+\tau` (intermittent) and</span>
+<span class="sd">    :math:`h_{ij}(t_0+\tau)=0` otherwise.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">      Universe object</span>
+<span class="sd">    selection1 : str</span>
+<span class="sd">      Selection string for first selection [‘byres name OH2’].</span>
+<span class="sd">      It could be any selection available in MDAnalysis, not just water.</span>
+<span class="sd">    selection2 : str</span>
+<span class="sd">      Selection string to analize its HBL against selection1</span>
+<span class="sd">    t0 : int</span>
+<span class="sd">      frame  where analysis begins</span>
+<span class="sd">    tf : int</span>
+<span class="sd">      frame where analysis ends</span>
+<span class="sd">    dtmax : int</span>
+<span class="sd">      Maximum dt size, `dtmax` &lt; `tf` or it will crash.</span>
+<span class="sd">    nproc : int</span>
+<span class="sd">      Number of processors to use, by default is 1.</span>
+
 
 <span class="sd">    .. versionadded:: 0.11.0</span>
-
-<span class="sd">    :Arguments:</span>
-<span class="sd">     *universe*</span>
-<span class="sd">       Universe object</span>
-<span class="sd">     *selection1*</span>
-<span class="sd">       Selection string for first selection [‘byres name OH2’]</span>
-<span class="sd">       It could be any selection available in MDAnalysis, not just water.</span>
-<span class="sd">     *selection2*</span>
-<span class="sd">       Selection string to analize its HBL against selection1</span>
-<span class="sd">     *t0*</span>
-<span class="sd">       Time where analysis begin</span>
-<span class="sd">     *tf*</span>
-<span class="sd">       Time where analysis end</span>
-<span class="sd">     *dtmax*</span>
-<span class="sd">       Maximum dt size, dtmax &lt; tf or it will crash.</span>
-<span class="sd">     *nproc*</span>
-<span class="sd">       Number of processors to use, by default is 1.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">universe</span> <span class="p">,</span><span class="n">selection1</span> <span class="p">,</span><span class="n">selection2</span><span class="p">,</span> <span class="n">t0</span> <span class="p">,</span> <span class="n">tf</span> <span class="p">,</span> <span class="n">dtmax</span><span class="p">,</span> <span class="n">nproc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection1</span><span class="p">,</span> <span class="n">selection2</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dtmax</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection1</span> <span class="o">=</span> <span class="n">selection1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection2</span> <span class="o">=</span> <span class="n">selection2</span>
@@ -690,10 +738,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getGraphics</span><span class="p">(</span><span class="n">h_list</span><span class="o">.</span><span class="n">timeseries</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtmax</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="WaterOrientationalRelaxation"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.WaterOrientationalRelaxation">[docs]</a><span class="k">class</span> <span class="nc">WaterOrientationalRelaxation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to evaluate the Water Orientational Relaxation proposed by Yu-ling Yeh</span>
-<span class="sd">    and Chung-Yuan Mou [Yeh1999_]. WaterOrientationalRelaxation indicates &quot;how fast&quot; water molecules are rotating</span>
-<span class="sd">    or changing direction. This is a time correlation function given by:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Water orientation relaxation analysis</span>
+
+<span class="sd">    Function to evaluate the Water Orientational Relaxation proposed by Yu-ling</span>
+<span class="sd">    Yeh and Chung-Yuan Mou [Yeh1999_]. WaterOrientationalRelaxation indicates</span>
+<span class="sd">    &quot;how fast&quot; water molecules are rotating or changing direction. This is a</span>
+<span class="sd">    time correlation function given by:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        C_{\hat u}(\tau)=\langle \mathit{P}_2[\mathbf{\hat{u}}(t_0)\cdot\mathbf{\hat{u}}(t_0+\tau)]\rangle</span>
@@ -701,23 +751,26 @@
 <span class="sd">    where :math:`P_2=(3x^2-1)/2` is the second-order Legendre polynomial and :math:`\hat{u}` is</span>
 <span class="sd">    a unit vector along HH, OH or dipole vector.</span>
 
-<span class="sd">    .. versionadded:: 0.11.0</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *universe*</span>
-<span class="sd">         Universe object</span>
-<span class="sd">      *selection*</span>
-<span class="sd">       Selection string, only models with 3 atoms molecules are allowed (TIP3, TIP3P, etc)</span>
-<span class="sd">      *t0*</span>
-<span class="sd">       Time where analysis begin</span>
-<span class="sd">      *tf*</span>
-<span class="sd">       Time where analysis end</span>
-<span class="sd">      *dtmax*</span>
-<span class="sd">       Maximum dt size window, dtmax &lt; tf or it will crash.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">      Universe object</span>
+<span class="sd">    selection : str</span>
+<span class="sd">      Selection string for water [‘byres name OH2’].</span>
+<span class="sd">    t0 : int</span>
+<span class="sd">      frame  where analysis begins</span>
+<span class="sd">    tf : int</span>
+<span class="sd">      frame where analysis ends</span>
+<span class="sd">    dtmax : int</span>
+<span class="sd">      Maximum dt size, `dtmax` &lt; `tf` or it will crash.</span>
+
+
+<span class="sd">    .. versionadded:: 0.11.0</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">universe</span><span class="p">,</span><span class="n">selection</span><span class="p">,</span><span class="n">t0</span><span class="p">,</span><span class="n">tf</span><span class="p">,</span><span class="n">dtmax</span><span class="p">,</span><span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dtmax</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t0</span> <span class="o">=</span> <span class="n">t0</span>
@@ -838,7 +891,7 @@
         <span class="n">sort</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">sort</span>
 
-    <span class="k">def</span> <span class="nf">_selection_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">universe</span><span class="p">,</span><span class="n">selection_str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_selection_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection_str</span><span class="p">):</span>
         <span class="n">selection</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
             <span class="n">selection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection_str</span><span class="p">))</span>
@@ -848,7 +901,7 @@
     <span class="c1"># Second Legendre polynomial</span>
     <span class="n">lg2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span><span class="n">x</span> <span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
 
-<div class="viewcode-block" id="WaterOrientationalRelaxation.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.WaterOrientationalRelaxation.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="WaterOrientationalRelaxation.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.WaterOrientationalRelaxation.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Analyze trajectory and produce timeseries</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -868,31 +921,33 @@
 
 
 <div class="viewcode-block" id="AngularDistribution"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.AngularDistribution">[docs]</a><span class="k">class</span> <span class="nc">AngularDistribution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Angular distribution function analysis</span>
+
 <span class="sd">    The angular distribution function (AD) is defined as the distribution</span>
-<span class="sd">    probability of the cosine of the :math:`\theta` angle formed by the OH vector, HH vector</span>
-<span class="sd">    or dipolar vector of water molecules and a vector :math:`\hat n` parallel to chosen axis</span>
-<span class="sd">    (z is the default value). The cosine is define as :math:`\cos \theta = \hat u \cdot \hat n`, where :math:`\hat u` is OH, HH or dipole vector.</span>
-<span class="sd">    It creates a histogram and returns a list of lists, see Output_. The AD is also know as Angular Probability (AP).</span>
+<span class="sd">    probability of the cosine of the :math:`\theta` angle formed by the OH</span>
+<span class="sd">    vector, HH vector or dipolar vector of water molecules and a vector</span>
+<span class="sd">    :math:`\hat n` parallel to chosen axis (z is the default value). The cosine</span>
+<span class="sd">    is define as :math:`\cos \theta = \hat u \cdot \hat n`, where :math:`\hat</span>
+<span class="sd">    u` is OH, HH or dipole vector.  It creates a histogram and returns a list</span>
+<span class="sd">    of lists, see Output_. The AD is also know as Angular Probability (AP).</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">        Universe object</span>
+<span class="sd">    selection : str</span>
+<span class="sd">        Selection string to evaluate its angular distribution [‘byres name OH2’]</span>
+<span class="sd">    bins : int (optional)</span>
+<span class="sd">        Number of bins to create the histogram by means of :func:`numpy.histogram [40]</span>
+<span class="sd">    axis : {&#39;x&#39;, &#39;y&#39;, &#39;z&#39;} (optional)</span>
+<span class="sd">        Axis to create angle with the vector (HH, OH or dipole) and calculate</span>
+<span class="sd">        cosine theta [&#39;z&#39;].</span>
+
 
 <span class="sd">    .. versionadded:: 0.11.0</span>
-
-<span class="sd">    :Arguments:</span>
-<span class="sd">         *universe*</span>
-<span class="sd">             Universe object</span>
-<span class="sd">         *selection*</span>
-<span class="sd">             Selection string to evaluate its angular distribution [‘byres name OH2’]</span>
-<span class="sd">         *bins*</span>
-<span class="sd">             Number of bins to create the histogram by means of numpy.histogram_ [40]</span>
-<span class="sd">         *axis*</span>
-<span class="sd">             Axis to create angle with the vector (HH, OH or dipole) and calculate cosine theta [&#39;z&#39;]. Options: &#39;x&#39;,</span>
-<span class="sd">             &#39;y&#39;, &#39;z&#39;</span>
-
-<span class="sd">    .. _numpy.histogram: http://docs.scipy.org/doc/np/reference/generated/np.histogram.html</span>
-
-
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">universe</span><span class="p">,</span><span class="n">selection_str</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection_str</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection_str</span> <span class="o">=</span> <span class="n">selection_str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span>
@@ -1004,9 +1059,10 @@
 
 
 <div class="viewcode-block" id="MeanSquareDisplacement"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.MeanSquareDisplacement">[docs]</a><span class="k">class</span>  <span class="nc">MeanSquareDisplacement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to evaluate the Mean Square Displacement (MSD_). The MSD gives the average distance that</span>
-<span class="sd">    particles travels. The MSD is given by:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mean square displacement analysis</span>
+
+<span class="sd">    Function to evaluate the Mean Square Displacement (MSD_). The MSD gives the</span>
+<span class="sd">    average distance that particles travels. The MSD is given by:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \langle\Delta r(t)^2\rangle = 2nDt</span>
@@ -1017,23 +1073,25 @@
 
 <span class="sd">    .. _MSD: http://en.wikipedia.org/wiki/Mean_squared_displacement</span>
 
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">      Universe object</span>
+<span class="sd">    selection : str</span>
+<span class="sd">      Selection string for water [‘byres name OH2’].</span>
+<span class="sd">    t0 : int</span>
+<span class="sd">      frame  where analysis begins</span>
+<span class="sd">    tf : int</span>
+<span class="sd">      frame where analysis ends</span>
+<span class="sd">    dtmax : int</span>
+<span class="sd">      Maximum dt size, `dtmax` &lt; `tf` or it will crash.</span>
+
+
 <span class="sd">    .. versionadded:: 0.11.0</span>
-
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *universe*</span>
-<span class="sd">         Universe object</span>
-<span class="sd">      *selection*</span>
-<span class="sd">         Selection string</span>
-<span class="sd">      *t0*</span>
-<span class="sd">         Time where analysis begin</span>
-<span class="sd">      *tf*</span>
-<span class="sd">         Time where analysis end</span>
-<span class="sd">      *dtmax*</span>
-<span class="sd">         Maximum dt size window, dtmax &lt; tf or it will crash.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">universe</span><span class="p">,</span><span class="n">selection</span><span class="p">,</span><span class="n">t0</span><span class="p">,</span><span class="n">tf</span><span class="p">,</span><span class="n">dtmax</span><span class="p">,</span><span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dtmax</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t0</span> <span class="o">=</span> <span class="n">t0</span>
@@ -1141,30 +1199,36 @@
 
 
 <div class="viewcode-block" id="SurvivalProbability"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.SurvivalProbability">[docs]</a><span class="k">class</span> <span class="nc">SurvivalProbability</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to evaluate the Survival Probability (SP). The SP gives the probability</span>
-<span class="sd">    for a group of particles to remain in certain region. The SP is given by:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Survival probability analysis</span>
+
+<span class="sd">    Function to evaluate the Survival Probability (SP). The SP gives the</span>
+<span class="sd">    probability for a group of particles to remain in certain region. The SP is</span>
+<span class="sd">    given by:</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        P(\tau) = \frac1T \sum_{t=1}^T \frac{N(t,t+\tau)}{N(t)}</span>
 
-<span class="sd">    where :math:`T` is the maximum time of simulation, :math:`\tau` is the timestep and</span>
-<span class="sd">    :math:`N` the number of particles in certain time.</span>
+<span class="sd">    where :math:`T` is the maximum time of simulation, :math:`\tau` is the</span>
+<span class="sd">    timestep and :math:`N` the number of particles in certain time.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">      Universe object</span>
+<span class="sd">    selection : str</span>
+<span class="sd">      Selection string; any selection is allowed. With this selection you</span>
+<span class="sd">      define the region/zone where to analyze, e.g.: &quot;selection_a&quot; and &quot;zone&quot;</span>
+<span class="sd">      (see `SP-examples`_ )</span>
+<span class="sd">    t0 : int</span>
+<span class="sd">      frame  where analysis begins</span>
+<span class="sd">    tf : int</span>
+<span class="sd">      frame where analysis ends</span>
+<span class="sd">    dtmax : int</span>
+<span class="sd">      Maximum dt size, `dtmax` &lt; `tf` or it will crash.</span>
+
 
 <span class="sd">    .. versionadded:: 0.11.0</span>
-
-<span class="sd">    :Arguments:</span>
-<span class="sd">     *universe*</span>
-<span class="sd">        Universe object</span>
-<span class="sd">     *selection*</span>
-<span class="sd">      Selection string, any selection is allowed, with this selection you define the region/zone where</span>
-<span class="sd">      to analize, i.e.: &quot;selection_a&quot; and &quot;zone&quot; (see SP examples_ )</span>
-<span class="sd">     *t0*</span>
-<span class="sd">      Time where analysis begin</span>
-<span class="sd">     *tf*</span>
-<span class="sd">      Time where analysis end</span>
-<span class="sd">     *dtmax*</span>
-<span class="sd">      Maximum dt size window, dtmax &lt; tf or it will crash</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

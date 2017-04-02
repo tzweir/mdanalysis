@@ -59,6 +59,15 @@
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/mdanalysis-logo-200x150.png" alt="Logo"/>
             </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4.4.2. Leaflet identification &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.leaflet</span></code></a><ul>
+<li><a class="reference internal" href="#algorithm">4.4.2.1. Algorithm</a></li>
+<li><a class="reference internal" href="#classes-and-functions">4.4.2.2. Classes and Functions</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="hole.html"
                         title="previous chapter">4.4.1. Generation and Analysis of HOLE pore profiles &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hole</span></code></a></p>
@@ -92,27 +101,10 @@
             
   <span class="target" id="module-MDAnalysis.analysis.leaflet"></span><div class="section" id="leaflet-identification-mdanalysis-analysis-leaflet">
 <h1>4.4.2. Leaflet identification &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.leaflet" title="MDAnalysis.analysis.leaflet"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.leaflet</span></code></a><a class="headerlink" href="#leaflet-identification-mdanalysis-analysis-leaflet" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Oliver Beckstein</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Year:</th><td class="field-body">2010</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Copyright:</th><td class="field-body">GNU Public License v3</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Algorithm:</dt>
-<dd><ol class="first last arabic simple">
-<li>build a graph of all phosphate distances &lt; cutoff</li>
-<li>identify the largest connected subgraphs</li>
-<li>analyse first and second largest graph, which correspond to the leaflets</li>
-</ol>
-</dd>
-</dl>
+<p>This module implements the <em>LeafletFinder</em> algorithm, described in
+<a class="reference internal" href="../references.html#michaud-agrawal2011" id="id1">[Michaud-Agrawal2011]</a>. It can identify the lipids in a bilayer of
+arbitrary shape and topology, including planar and undulating bilayers
+under periodic boundary conditions or vesicles.</p>
 <p>One can use this information to identify</p>
 <ul class="simple">
 <li>the upper and lower leaflet of a <em>planar membrane</em> by comparing the
@@ -122,14 +114,50 @@ the leaflet groups, or</li>
 of distances from the centre of geometry (or possibly simply the
 <code class="xref py py-meth docutils literal"><span class="pre">radius_of_gyration()</span></code>).</li>
 </ul>
-<p>See example scripts in the <a href="#id1"><span class="problematic" id="id2">MDAnalysisCookbook_</span></a> on how to use
+<p>See example scripts in the <a href="#id4"><span class="problematic" id="id5">MDAnalysisCookbook_</span></a> on how to use
 <a class="reference internal" href="#MDAnalysis.analysis.leaflet.LeafletFinder" title="MDAnalysis.analysis.leaflet.LeafletFinder"><code class="xref py py-class docutils literal"><span class="pre">LeafletFinder</span></code></a>. The function <a class="reference internal" href="#MDAnalysis.analysis.leaflet.optimize_cutoff" title="MDAnalysis.analysis.leaflet.optimize_cutoff"><code class="xref py py-func docutils literal"><span class="pre">optimize_cutoff()</span></code></a> implements a
 (slow) heuristic method to find the best cut off for the LeafletFinder
 algorithm.</p>
+<div class="section" id="algorithm">
+<h2>4.4.2.1. Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>build a graph of all phosphate distances &lt; cutoff</li>
+<li>identify the largest connected subgraphs</li>
+<li>analyse first and second largest graph, which correspond to the leaflets</li>
+</ol>
+<p>For further details see <a class="reference internal" href="../references.html#michaud-agrawal2011" id="id2">[Michaud-Agrawal2011]</a>.</p>
+</div>
+<div class="section" id="classes-and-functions">
+<h2>4.4.2.2. Classes and Functions<a class="headerlink" href="#classes-and-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MDAnalysis.analysis.leaflet.LeafletFinder">
 <em class="property">class </em><code class="descclassname">MDAnalysis.analysis.leaflet.</code><code class="descname">LeafletFinder</code><span class="sig-paren">(</span><em>universe</em>, <em>selectionstring</em>, <em>cutoff=15.0</em>, <em>pbc=False</em>, <em>sparse=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/leaflet.html#LeafletFinder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.leaflet.LeafletFinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identify atoms in the same leaflet of a lipid bilayer.</p>
+<p>This class implements the <em>LeafletFinder</em> algorithm <a class="reference internal" href="../references.html#michaud-agrawal2011" id="id3">[Michaud-Agrawal2011]</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> or a file name (e.g., in PDB or
+GRO format)</li>
+<li><strong>selection</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; A AtomGroup instance or a
+<code class="xref py py-meth docutils literal"><span class="pre">Universe.select_atoms()</span></code> selection string
+for atoms that define the lipid head groups, e.g.
+universe.atoms.PO4 or &#8220;name PO4&#8221; or &#8220;name P*&#8221;</li>
+<li><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; head group-defining atoms within a distance of <cite>cutoff</cite>
+Angstroms are deemed to be in the same leaflet [15.0]</li>
+<li><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; take periodic boundary conditions into account [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>sparse</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <code class="docutils literal"><span class="pre">None</span></code>: use fastest possible routine; <code class="docutils literal"><span class="pre">True</span></code>: use slow
+sparse matrix implementation (for large systems); <code class="docutils literal"><span class="pre">False</span></code>:
+use fast <a class="reference internal" href="../lib/distances.html#MDAnalysis.lib.distances.distance_array" title="MDAnalysis.lib.distances.distance_array"><code class="xref py py-func docutils literal"><span class="pre">distance_array()</span></code></a>
+implementation [<code class="docutils literal"><span class="pre">None</span></code>].</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
 <p>The components of the graph are stored in the list
 <code class="xref py py-attr docutils literal"><span class="pre">LeafletFinder.components</span></code>; the atoms in each component are numbered
 consecutively, starting at 0. To obtain the atoms in the input structure
@@ -148,44 +176,6 @@ instance. Similarly, all atoms in the first leaflet are then</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">leaflet0</span><span class="o">.</span><span class="n">residues</span><span class="o">.</span><span class="n">atoms</span>
 </pre></div>
 </div>
-<p>Initialize from a <em>universe</em> or pdb file.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>universe</em></dt>
-<dd><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> or a PDB file name.</p>
-</dd>
-<dt><em>selection</em></dt>
-<dd><p class="first last"><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup</span></code></a> or a
-<code class="xref py py-meth docutils literal"><span class="pre">MDAnalysis.Universe.select_atoms()</span></code> selection string
-for atoms that define the lipid head groups, e.g.
-universe.atoms.PO4 or &#8220;name PO4&#8221; or &#8220;name P*&#8221;</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>cutoff</em></dt>
-<dd><p class="first last">head group-defining atoms within a distance of <em>cutoff</em>
-Angstroms are deemed to be in the same leaflet [15.0]</p>
-</dd>
-<dt><em>pbc</em></dt>
-<dd><p class="first last">take periodic boundary conditions into account (only works
-for orthorhombic boxes) [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-<dt><em>sparse</em></dt>
-<dd><p class="first last"><code class="docutils literal"><span class="pre">None</span></code>: use fastest possible routine; <code class="docutils literal"><span class="pre">True</span></code>: use slow
-sparse matrix implementation (for large systems); <code class="docutils literal"><span class="pre">False</span></code>:
-use fast <a class="reference internal" href="distances.html#MDAnalysis.analysis.distances.distance_array" title="MDAnalysis.analysis.distances.distance_array"><code class="xref py py-func docutils literal"><span class="pre">distance_array()</span></code></a>
-implementation [<code class="docutils literal"><span class="pre">None</span></code>].</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
 <dl class="method">
 <dt id="MDAnalysis.analysis.leaflet.LeafletFinder.group">
 <code class="descname">group</code><span class="sig-paren">(</span><em>component_index</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/leaflet.html#LeafletFinder.group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.leaflet.LeafletFinder.group" title="Permalink to this definition">¶</a></dt>
@@ -242,47 +232,45 @@ options.</p>
 <li><p class="first">at least two groups (assumes that there are at least 2 leaflets)</p>
 </li>
 <li><p class="first">reject any solutions for which:</p>
-<blockquote>
-<div><p><cite>|N0 - N1|/|N0 + N1| &gt; *max_imbalance*</cite></p>
-</div></blockquote>
-<p>Ni = number of lipids in group i. This heuristic picks groups with
-balanced numbers of lipids.</p>
+<div class="math">
+\[\frac{|N_0 - N_1|}{|N_0 + N_1|} &gt; \mathrm{max_imbalance}\]</div>
+<p>with <span class="math">\(N_i\)</span> being the number of lipids in group
+<span class="math">\(i\)</span>. This heuristic picks groups with balanced numbers of
+lipids.</p>
 </li>
 </ol>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>universe</em></dt>
-<dd><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> instance</p>
-</dd>
-<dt><em>selection</em></dt>
-<dd><p class="first last">selection string as used for <a class="reference internal" href="#MDAnalysis.analysis.leaflet.LeafletFinder" title="MDAnalysis.analysis.leaflet.LeafletFinder"><code class="xref py py-class docutils literal"><span class="pre">LeafletFinder</span></code></a></p>
-</dd>
-<dt><em>dmin</em>, <em>dmax</em>, <em>step</em></dt>
-<dd><p class="first last">scan cutoffs from <em>dmin</em> to <em>dmax</em> at stepsize*step (in Angstroms)</p>
-</dd>
-<dt><em>max_imbalance</em></dt>
-<dd><p class="first last">tuning parameter for the balancing heuristic (2) [0.2]</p>
-</dd>
-<dt><em>kwargs</em></dt>
-<dd><p class="first last">other arguments for  <a class="reference internal" href="#MDAnalysis.analysis.leaflet.LeafletFinder" title="MDAnalysis.analysis.leaflet.LeafletFinder"><code class="xref py py-class docutils literal"><span class="pre">LeafletFinder</span></code></a></p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> instance</li>
+<li><strong>selection</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; AtomGroup or selection string as used for <a class="reference internal" href="#MDAnalysis.analysis.leaflet.LeafletFinder" title="MDAnalysis.analysis.leaflet.LeafletFinder"><code class="xref py py-class docutils literal"><span class="pre">LeafletFinder</span></code></a></li>
+<li><strong>dmin</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; </li>
+<li><strong>dmax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; </li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; scan cutoffs from <cite>dmin</cite> to <cite>dmax</cite> at stepsize <cite>step</cite> (in Angstroms)</li>
+<li><strong>max_imbalance</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; tuning parameter for the balancing heuristic [0.2]</li>
+<li><strong>kwargs</strong> (<em>other keyword arguments</em>) &#8211; other arguments for  <a class="reference internal" href="#MDAnalysis.analysis.leaflet.LeafletFinder" title="MDAnalysis.analysis.leaflet.LeafletFinder"><code class="xref py py-class docutils literal"><span class="pre">LeafletFinder</span></code></a></li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">(cutoff,N)</span></code> optimum cutoff and number of groups found</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">optimum cutoff and number of groups found</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">can die in various ways if really no appropriate number of groups
-can be found; needs to be made more robust</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(cutoff, N)</p>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function can die in various ways if really no
+appropriate number of groups can be found; it ought  to be
+made more robust.</p>
+</div>
 </dd></dl>
 
+</div>
 </div>
 
 
