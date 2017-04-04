@@ -1436,6 +1436,22 @@ and the result is sorted.</p>
 <dt id="MDAnalysis.core.groups.AtomGroup.unique">
 <code class="descname">unique</code><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup.unique" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an AtomGroup containing sorted and unique atoms only.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span>
+<span class="go">&lt;AtomGroup with 6 atoms&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">ix</span>
+<span class="go">array([2, 1, 2, 2, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span> <span class="o">=</span> <span class="n">ag</span><span class="o">.</span><span class="n">unique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span>
+<span class="go">&lt;AtomGroup with 3 atoms&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag2</span><span class="o">.</span><span class="n">ix</span>
+<span class="go">array([0, 1, 2])</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.16.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -2302,6 +2318,22 @@ and the result is sorted.</p>
 <dt id="MDAnalysis.core.groups.ResidueGroup.unique">
 <code class="descname">unique</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.unique" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a ResidueGroup containing sorted and unique residues only.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">residues</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span>
+<span class="go">&lt;ResidueGroup with 6 residues&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span><span class="o">.</span><span class="n">ix</span>
+<span class="go">array([2, 1, 2, 2, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rg2</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">unique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rg2</span>
+<span class="go">&lt;ResidueGroup with 3 residues&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rg2</span><span class="o">.</span><span class="n">ix</span>
+<span class="go">array([0, 1, 2])</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.16.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -3115,6 +3147,22 @@ and the result is sorted.</p>
 <dt id="MDAnalysis.core.groups.SegmentGroup.unique">
 <code class="descname">unique</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.unique" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a SegmentGroup containing sorted and unique segments only.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">segments</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span>
+<span class="go">&lt;SegmentGroup with 6 segments&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">ix</span>
+<span class="go">array([2, 1, 2, 2, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sg2</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">unique</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sg2</span>
+<span class="go">&lt;SegmentGroup with 3 segments&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sg2</span><span class="o">.</span><span class="n">ix</span>
+<span class="go">array([0, 1, 2])</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.16.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="method">

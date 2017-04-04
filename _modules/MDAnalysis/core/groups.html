@@ -1659,7 +1659,24 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unique</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return an AtomGroup containing sorted and unique atoms only.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return an AtomGroup containing sorted and unique atoms only.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">           &gt;&gt;&gt; ag = u.atoms[[2, 1, 2, 2, 1, 0]]</span>
+<span class="sd">           &gt;&gt;&gt; ag</span>
+<span class="sd">           &lt;AtomGroup with 6 atoms&gt;</span>
+<span class="sd">           &gt;&gt;&gt; ag.ix</span>
+<span class="sd">           array([2, 1, 2, 2, 1, 0])</span>
+<span class="sd">           &gt;&gt;&gt; ag2 = ag.unique</span>
+<span class="sd">           &gt;&gt;&gt; ag2</span>
+<span class="sd">           &lt;AtomGroup with 3 atoms&gt;</span>
+<span class="sd">           &gt;&gt;&gt; ag2.ix</span>
+<span class="sd">           array([0, 1, 2])</span>
+
+<span class="sd">        .. versionadded:: 0.16.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span>
 
     <span class="nd">@property</span>
@@ -2310,6 +2327,21 @@
     <span class="k">def</span> <span class="nf">unique</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a ResidueGroup containing sorted and unique residues only.</span>
 
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">           &gt;&gt;&gt; rg = u.residues[[2, 1, 2, 2, 1, 0]]</span>
+<span class="sd">           &gt;&gt;&gt; rg</span>
+<span class="sd">           &lt;ResidueGroup with 6 residues&gt;</span>
+<span class="sd">           &gt;&gt;&gt; rg.ix</span>
+<span class="sd">           array([2, 1, 2, 2, 1, 0])</span>
+<span class="sd">           &gt;&gt;&gt; rg2 = rg.unique</span>
+<span class="sd">           &gt;&gt;&gt; rg2</span>
+<span class="sd">           &lt;ResidueGroup with 3 residues&gt;</span>
+<span class="sd">           &gt;&gt;&gt; rg2.ix</span>
+<span class="sd">           array([0, 1, 2])</span>
+
+<span class="sd">        .. versionadded:: 0.16.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span></div>
 
@@ -2383,6 +2415,22 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unique</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a SegmentGroup containing sorted and unique segments only.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">           &gt;&gt;&gt; sg = u.segments[[2, 1, 2, 2, 1, 0]]</span>
+<span class="sd">           &gt;&gt;&gt; sg</span>
+<span class="sd">           &lt;SegmentGroup with 6 segments&gt;</span>
+<span class="sd">           &gt;&gt;&gt; sg.ix</span>
+<span class="sd">           array([2, 1, 2, 2, 1, 0])</span>
+<span class="sd">           &gt;&gt;&gt; sg2 = sg.unique</span>
+<span class="sd">           &gt;&gt;&gt; sg2</span>
+<span class="sd">           &lt;SegmentGroup with 3 segments&gt;</span>
+<span class="sd">           &gt;&gt;&gt; sg2.ix</span>
+<span class="sd">           array([0, 1, 2])</span>
+
+<span class="sd">        .. versionadded:: 0.16.0</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">)]</span></div>
