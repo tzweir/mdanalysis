@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.14. PQR file format — MDAnalysis.coordinates.PQR &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>6.14. PQR file format — MDAnalysis.coordinates.PQR &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="PDBQT.html" title="6.13. PDBQT structure files in MDAnalysis — MDAnalysis.coordinates.PDBQT"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
@@ -139,9 +139,11 @@ particularly significant when large coordinate values are used.</p>
 <p>Output should look like this (although the only real requirement is
 <em>whitespace</em> separation between <em>all</em> entries). The chainID is optional
 and can be omitted:</p>
-<p>ATOM      1  N    MET     1     -11.921   26.307   10.410 -0.3000 1.8500
-ATOM     36  NH1  ARG     2      -6.545   25.499    3.854 -0.8000 1.8500
-ATOM     37 HH11  ARG     2      -6.042   25.480    4.723  0.4600 0.2245</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ATOM</span>      <span class="mi">1</span>  <span class="n">N</span>    <span class="n">MET</span>     <span class="mi">1</span>     <span class="o">-</span><span class="mf">11.921</span>   <span class="mf">26.307</span>   <span class="mf">10.410</span> <span class="o">-</span><span class="mf">0.3000</span> <span class="mf">1.8500</span>
+<span class="n">ATOM</span>     <span class="mi">36</span>  <span class="n">NH1</span>  <span class="n">ARG</span>     <span class="mi">2</span>      <span class="o">-</span><span class="mf">6.545</span>   <span class="mf">25.499</span>    <span class="mf">3.854</span> <span class="o">-</span><span class="mf">0.8000</span> <span class="mf">1.8500</span>
+<span class="n">ATOM</span>     <span class="mi">37</span> <span class="n">HH11</span>  <span class="n">ARG</span>     <span class="mi">2</span>      <span class="o">-</span><span class="mf">6.042</span>   <span class="mf">25.480</span>    <span class="mf">4.723</span>  <span class="mf">0.4600</span> <span class="mf">0.2245</span>
+</pre></div>
+</div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Fields <em>must be white-space separated</em> or data are read
@@ -226,14 +228,16 @@ top of the PQR file</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>selection</strong> &#8211; MDAnalysis AtomGroup or Universe</li>
+<li><strong>selection</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; MDAnalysis AtomGroup or Universe</li>
 <li><strong>frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; optionally move to frame number <em>frame</em></li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>:param .. versionchanged:: 0.11.0: Frames now 0-based instead of 1-based</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -261,13 +265,13 @@ top of the PQR file</li>
         <li class="right" >
           <a href="PDBQT.html" title="6.13. PDBQT structure files in MDAnalysis — MDAnalysis.coordinates.PDBQT"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >6. Coordinates modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

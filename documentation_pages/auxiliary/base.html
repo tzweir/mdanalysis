@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.2. Auxiliary Readers — MDAnalysis.auxiliary.base &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>8.2. Auxiliary Readers — MDAnalysis.auxiliary.base &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="init.html" title="8.1. Auxiliary Readers — MDAnalysis.auxiliary"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../auxiliary_modules.html" accesskey="U">8. Auxiliary modules</a> &#187;</li> 
       </ul>
     </div>
@@ -110,14 +110,11 @@ Ignored if <code class="docutils literal"><span class="pre">constant_dt</span></
 <li><strong>initial_time</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; Time of first auxiliary step (in ps). If not specified, will attempt to
 determine from auxiliary data; otherwise defaults to 0 ps. Ignored if
 <code class="docutils literal"><span class="pre">constant_dt</span></code> is False.</li>
-<li><strong>time_selector</strong> (<em>optional</em>) &#8211; <p>Key to select &#8216;time&#8217; value from the full set of data read for each step,
-if time selection is enabled; type will vary depending on the auxiliary
-data format (see individual AuxReader documentation).
-If <code class="docutils literal"><span class="pre">None</span></code> (default value), time is instead calculated as:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">step</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">initial_time</span>
-</pre></div>
-</div>
-</li>
+<li><strong>time_selector</strong> (<em>optional</em>) &#8211; Key to select &#8216;time&#8217; value from the full set of data read for each
+step, if time selection is enabled; type will vary depending on the
+auxiliary data format (see individual AuxReader documentation). If
+<code class="docutils literal"><span class="pre">None</span></code> (default value), time is instead calculated as: <code class="docutils literal"><span class="pre">time</span> <span class="pre">=</span> <span class="pre">step</span>
+<span class="pre">*</span> <span class="pre">dt</span> <span class="pre">+</span> <span class="pre">initial_time</span></code></li>
 <li><strong>data_selector</strong> (<em>optional</em>) &#8211; Key(s) to select auxiliary data values of interest from the full set of
 data read for each step, if data selection is enabled by the reader;
 type will vary depending on the auxiliary data format (see individual
@@ -590,13 +587,13 @@ large to read in at once.</p>
         <li class="right" >
           <a href="init.html" title="8.1. Auxiliary Readers — MDAnalysis.auxiliary"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../auxiliary_modules.html" >8. Auxiliary modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

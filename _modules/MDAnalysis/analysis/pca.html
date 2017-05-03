@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.analysis.pca &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.analysis.pca &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -139,6 +139,7 @@
 <span class="sd">PCA class.</span>
 
 <span class="sd">First load all modules and test data</span>
+
 <span class="sd">    &gt;&gt;&gt; import MDAnalysis as mda</span>
 <span class="sd">    &gt;&gt;&gt; import MDAnalysis.analysis.pca as pca</span>
 <span class="sd">    &gt;&gt;&gt; from MDAnalysis.tests.datafiles import PSF, DCD</span>
@@ -146,6 +147,7 @@
 <span class="sd">Given a universe containing trajectory data we can perform Principal Component</span>
 <span class="sd">Analyis by using the class :class:`PCA` and retrieving the principal</span>
 <span class="sd">components.</span>
+
 <span class="sd">    &gt;&gt;&gt; u = mda.Universe(PSF, DCD)</span>
 <span class="sd">    &gt;&gt;&gt; PSF_pca = pca.PCA(u, select=&#39;backbone&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; PSF_pca.run()</span>
@@ -170,6 +172,7 @@
 <span class="sd">.. autofunction:: cosine_content</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
@@ -188,8 +191,10 @@
 <span class="sd">    After initializing and calling method with a universe or an atom group,</span>
 <span class="sd">    principal components ordering the atom coordinate data by decreasing</span>
 <span class="sd">    variance will be available for analysis. As an example:</span>
+
 <span class="sd">        &gt;&gt;&gt; pca = PCA(universe, select=&#39;backbone&#39;).run()</span>
 <span class="sd">        &gt;&gt;&gt; pca_space =  pca.transform(universe.select_atoms(&#39;backbone&#39;), 3)</span>
+
 <span class="sd">    generates the principal components of the backbone of the atomgroup and</span>
 <span class="sd">    then transforms those atomgroup coordinates by the direction of those</span>
 <span class="sd">    variances. Please refer to the :ref:`PCA-tutorial` for more detailed</span>
@@ -221,7 +226,6 @@
 <span class="sd">        Take an atomgroup or universe with the same number of atoms as was</span>
 <span class="sd">        used for the calculation in :meth:`PCA.run` and project it onto the</span>
 <span class="sd">        principal components.</span>
-
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -446,13 +450,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.core.groups &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.core.groups &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -161,6 +161,7 @@
 
 
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
 <span class="kn">from</span> <span class="nn">six</span> <span class="k">import</span> <span class="n">string_types</span>
 
@@ -719,15 +720,16 @@
 <span class="sd">            If ``True``, move all atoms within the primary unit cell before</span>
 <span class="sd">            calculation. [``False``]</span>
 
-<span class="sd">        .. note::</span>
-<span class="sd">            The :class:`MDAnalysis.core.flags` flag *use_pbc* when set to</span>
-<span class="sd">            ``True`` allows the *pbc* flag to be used by default.</span>
-
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">         corners : array</span>
 <span class="sd">            2x3 array giving corners of bounding box as</span>
 <span class="sd">            [[xmin, ymin, zmin], [xmax, ymax, zmax]].</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        The :class:`MDAnalysis.core.flags` flag *use_pbc* when set to</span>
+<span class="sd">        ``True`` allows the *pbc* flag to be used by default.</span>
 
 
 <span class="sd">        .. versionadded:: 0.7.2</span>
@@ -754,16 +756,17 @@
 <span class="sd">            If ``True``, move all atoms within the primary unit cell before</span>
 <span class="sd">            calculation. [``False``]</span>
 
-<span class="sd">        .. note::</span>
-<span class="sd">            The :class:`MDAnalysis.core.flags` flag *use_pbc* when set to</span>
-<span class="sd">            ``True`` allows the *pbc* flag to be used by default.</span>
-
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        R : float</span>
 <span class="sd">            Radius of bounding sphere.</span>
 <span class="sd">        center : array</span>
 <span class="sd">            Coordinates of sphere center as ``[xcen,ycen,zcen]``.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        The :class:`MDAnalysis.core.flags` flag *use_pbc* when set to</span>
+<span class="sd">        ``True`` allows the *pbc* flag to be used by default.</span>
 
 
 <span class="sd">        .. versionadded:: 0.7.3</span>
@@ -1552,7 +1555,9 @@
 <span class="sd">    AtomGroup instances are always bound to a</span>
 <span class="sd">    :class:`MDAnalysis.core.universe.Universe`. They cannot exist in isolation.</span>
 
-<span class="sd">    .. SeeAlso:: :class:`MDAnalysis.core.universe.Universe`</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`MDAnalysis.core.universe.Universe`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
@@ -2160,7 +2165,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        filename : str, optional</span>
-<span class="sd">           ``None``: create TRJNAME_FRAME.FORMAT from filenamefmt [``None``]</span>
+<span class="sd">            ``None``: create TRJNAME_FRAME.FORMAT from filenamefmt [``None``]</span>
 <span class="sd">        file_format : str, optional</span>
 <span class="sd">            PDB, CRD, GRO, VMD (tcl), PyMol (pml), Gromacs (ndx) CHARMM (str)</span>
 <span class="sd">            Jmol (spt); case-insensitive and can also be supplied as the</span>
@@ -2169,13 +2174,12 @@
 <span class="sd">            format string for default filename; use substitution tokens</span>
 <span class="sd">            &#39;trjname&#39; and &#39;frame&#39; [&quot;%(trjname)s_%(frame)d&quot;]</span>
 <span class="sd">        bonds : str, optional</span>
-<span class="sd">           how to handle bond information, especially relevant for PDBs;</span>
-<span class="sd">           default is ``&quot;conect&quot;``.</span>
-<span class="sd">           * ``&quot;conect&quot;``: write only the CONECT records defined in the original</span>
-<span class="sd">             file</span>
-<span class="sd">           * ``&quot;all&quot;``: write out all bonds, both the original defined and those</span>
-<span class="sd">             guessed by MDAnalysis</span>
-<span class="sd">           * ``None``: do not write out bonds</span>
+<span class="sd">            how to handle bond information, especially relevant for PDBs.</span>
+<span class="sd">            ``&quot;conect&quot;``: write only the CONECT records defined in the original</span>
+<span class="sd">            file. ``&quot;all&quot;``: write out all bonds, both the original defined and</span>
+<span class="sd">            those guessed by MDAnalysis. ``None``: do not write out bonds.</span>
+<span class="sd">            Default os ``&quot;conect&quot;``.</span>
+
 
 <span class="sd">        .. versionchanged:: 0.9.0</span>
 <span class="sd">           Merged with write_selection.  This method can now write both</span>
@@ -2563,7 +2567,7 @@
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;segid&#39;</span><span class="p">):</span>
             <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; and segid </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segid</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;altLoc&#39;</span><span class="p">):</span>
-            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; and altloc </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">altloc</span><span class="p">)</span>
+            <span class="n">me</span> <span class="o">+=</span> <span class="s1">&#39; and altLoc </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">altLoc</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">me</span> <span class="o">+</span> <span class="s1">&#39;&gt;&#39;</span>
 
     <span class="nd">@property</span>
@@ -2946,13 +2950,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.analysis.gnm &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.analysis.gnm &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -96,7 +96,7 @@
 <span class="c1">#Ben Hall (benjamin.a.hall@ucl.ac.uk) is to blame</span>
 <span class="c1">#Copyright 2011; Consider under GPL v2 or later</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Elastic network analysis of MD trajectories --- :mod:`MDAnalysis.analysis.gnm`</span>
 <span class="sd">==============================================================================</span>
 
@@ -109,21 +109,22 @@
 
 <span class="sd">An example is provided in the MDAnalysis Cookbook_, listed as GNMExample_.</span>
 
-<span class="sd">.. GNMExample_: https://github.com/MDAnalysis/MDAnalysisCookbook/blob/master/examples/GNMExample.py</span>
-<span class="sd">.. Cookbook_: https://github.com/MDAnalysis/MDAnalysisCookbook</span>
+<span class="sd">.. _GNMExample: https://github.com/MDAnalysis/MDAnalysisCookbook/blob/master/examples/GNMExample.py</span>
+<span class="sd">.. _Cookbook: https://github.com/MDAnalysis/MDAnalysisCookbook</span>
 
 <span class="sd">The basic approach is to pass a trajectory to :class:`GNMAnalysis` and then run</span>
 <span class="sd">the analysis::</span>
 
-<span class="sd">   u = MDAnalysis.Universe(PSF, DCD)</span>
-<span class="sd">   C = MDAnalysis.analysis.gnm.GNMAnalysis(u, ReportVector=&quot;output.txt&quot;)</span>
+<span class="sd">    u = MDAnalysis.Universe(PSF, DCD)</span>
+<span class="sd">    C = MDAnalysis.analysis.gnm.GNMAnalysis(u, ReportVector=&quot;output.txt&quot;)</span>
 
-<span class="sd">   C.run()</span>
-<span class="sd">   output = zip(*C.results)</span>
+<span class="sd">    C.run()</span>
+<span class="sd">    output = zip(*C.results)</span>
 
-<span class="sd">   with open(&quot;eigenvalues.dat&quot;, &quot;w&quot;) as outputfile:</span>
-<span class="sd">      for item in output[1]:</span>
-<span class="sd">           outputfile.write(item + &quot;\n&quot;)</span>
+<span class="sd">    with open(&quot;eigenvalues.dat&quot;, &quot;w&quot;) as outputfile:</span>
+<span class="sd">        for item in output[1]:</span>
+<span class="sd">            outputfile.write(item + &quot;\n&quot;)</span>
+
 
 <span class="sd">The results are found in :attr:`GNMAnalysis.results`, which can be</span>
 <span class="sd">used for further processing (see [Hall2007]_).</span>
@@ -157,7 +158,7 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -253,7 +254,10 @@
 <span class="sd">          `Bonus_groups` is contained in `selection` as this could lead to</span>
 <span class="sd">          double counting. No checks are applied. Default is ``None``.</span>
 
-<span class="sd">    .. SeeAlso:: :class:`closeContactGNMAnalysis`</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`closeContactGNMAnalysis`</span>
+
 
 <span class="sd">    .. versionchanged:: 0.16.0</span>
 <span class="sd">       Made :meth:`generate_output` a private method :meth:`_generate_output`.</span>
@@ -409,13 +413,18 @@
 <span class="sd">          the atoms that form a contact.</span>
 <span class="sd">    MassWeight : bool (deprecated, optional)</span>
 <span class="sd">          if set to ``True`` equivalent to `weights` set to &quot;size&quot;.</span>
-<span class="sd">          .. Note:: This option does not perform a true mass weighting but</span>
-<span class="sd">                    weighting by the number of atoms in each residue; the name</span>
-<span class="sd">                    of the parameter exists for historical reasons and will</span>
-<span class="sd">                    be removed in 0.17.0. Until then, setting `MassWeight` to</span>
-<span class="sd">                    anything but ``None`` will override `weights`.</span>
 
-<span class="sd">    .. SeeAlso:: :class:`GNMAnalysis`</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The `MassWeight` option does not perform a true mass weighting but</span>
+<span class="sd">    weighting by the number of atoms in each residue; the name of the parameter</span>
+<span class="sd">    exists for historical reasons and will be removed in 0.17.0. Until then,</span>
+<span class="sd">    setting `MassWeight` to anything but ``None`` will override `weights`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`GNMAnalysis`</span>
+
 
 <span class="sd">    .. versionchanged:: 0.16.0</span>
 <span class="sd">       Made :meth:`generate_output` a private method :meth:`_generate_output`.</span>
@@ -494,13 +503,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

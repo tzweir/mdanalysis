@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.2.1. Coordinate fitting and alignment — MDAnalysis.analysis.align &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.2.1. Coordinate fitting and alignment — MDAnalysis.analysis.align &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="base.html" title="4.1.1. Analysis building blocks — MDAnalysis.analysis.base"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
@@ -117,8 +117,8 @@
 </table>
 <p>The module contains functions to fit a target structure to a reference
 structure. They use the fast QCP algorithm to calculate the root mean
-square distance (RMSD) between two coordinate sets <a class="reference internal" href="../references.html#theobald2005" id="id1">[Theobald2005]</a> and
-the rotation matrix <em>R</em> that minimizes the RMSD <a class="reference internal" href="../references.html#liu2010" id="id2">[Liu2010]</a>. (Please
+square distance (RMSD) between two coordinate sets <a class="reference internal" href="../lib/qcprot.html#theobald2005" id="id1">[Theobald2005]</a> and
+the rotation matrix <em>R</em> that minimizes the RMSD <a class="reference internal" href="../lib/qcprot.html#liu2010" id="id2">[Liu2010]</a>. (Please
 cite these references when using this module.).</p>
 <p>Typically, one selects a group of atoms (such as the C-alphas),
 calculates the RMSD and transformation matrix, and applys the
@@ -132,8 +132,7 @@ manually and explains the intermediate steps.</p>
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
 <dt><a class="reference internal" href="rms.html#module-MDAnalysis.analysis.rms" title="MDAnalysis.analysis.rms"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></dt>
-<dd>contains functions to compute RMSD (when structural alignment is not
-required)</dd>
+<dd>contains functions to compute RMSD (when structural alignment is not required)</dd>
 <dt><a class="reference internal" href="../lib/qcprot.html#module-MDAnalysis.lib.qcprot" title="MDAnalysis.lib.qcprot"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></dt>
 <dd>implements the fast RMSD algorithm.</dd>
 </dl>
@@ -316,13 +315,19 @@ protein, ligands and the surrounding water)</dd>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
 <li><strong>old_rmsd</strong> (<em>float</em>) &#8211; RMSD before spatial alignment</li>
 <li><strong>new_rmsd</strong> (<em>float</em>) &#8211; RMSD after spatial alignment</li>
-<li><em>.. SeeAlso::</em> &#8211; AlignTraj: More efficient method for RMSD-fitting trajectories.</li>
 </ul>
 </p>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#MDAnalysis.analysis.align.AlignTraj" title="MDAnalysis.analysis.align.AlignTraj"><code class="xref py py-func docutils literal"><span class="pre">AlignTraj()</span></code></a></dt>
+<dd>More efficient method for RMSD-fitting trajectories.</dd>
+</dl>
+</div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.8: </span>Added check that the two groups describe the same atoms including
 the new <em>tol_mass</em> keyword.</p>
@@ -412,19 +417,21 @@ the coordinates of <cite>mobile</cite> are changed in memory.</li>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>If set to <cite>verbose=False</cite>, it is recommended to wrap the statement in a
+<ul class="simple">
+<li>If set to <code class="docutils literal"><span class="pre">verbose=False</span></code>, it is recommended to wrap the statement in a
 <code class="docutils literal"><span class="pre">try</span> <span class="pre">...</span>&#160; <span class="pre">finally</span></code> to guarantee restoring of the log level in the
-case of an exception.</p>
-<p>The <cite>in_memory</cite> option changes the <cite>mobile</cite> universe to an in-memory
-representation (see <a class="reference internal" href="../coordinates/memory.html#module-MDAnalysis.coordinates.memory" title="MDAnalysis.coordinates.memory"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.memory</span></code></a>) for the
-remainder of the Python session. If <code class="docutils literal"><span class="pre">mobile.trajectory```is</span> <span class="pre">already</span> <span class="pre">a</span>
-<span class="pre">:class:`MemoryReader`</span> <span class="pre">then</span> <span class="pre">it</span> <span class="pre">is</span> <span class="pre">*always*</span> <span class="pre">treated</span> <span class="pre">as</span> <span class="pre">if</span> <span class="pre">`in_memory`</span> <span class="pre">had</span>
-<span class="pre">been</span> <span class="pre">set</span> <span class="pre">to</span> <span class="pre">``True</span></code>.</p>
+case of an exception.</li>
+<li>The <code class="docutils literal"><span class="pre">in_memory</span></code> option changes the <cite>mobile</cite> universe to an
+in-memory representation (see <a class="reference internal" href="../coordinates/memory.html#module-MDAnalysis.coordinates.memory" title="MDAnalysis.coordinates.memory"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.memory</span></code></a>)
+for the remainder of the Python session. If <code class="docutils literal"><span class="pre">mobile.trajectory</span></code> is
+already a <code class="xref py py-class docutils literal"><span class="pre">MemoryReader</span></code> then it is <em>always</em> treated as if
+<code class="docutils literal"><span class="pre">in_memory</span></code> had been set to <code class="docutils literal"><span class="pre">True</span></code>.</li>
+</ul>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.16.0: </span>new general &#8216;weights&#8217; kwarg replace mass_weights, deprecated &#8216;mass_weights&#8217;</p>
+<p><span class="versionmodified">Changed in version 0.16.0: </span>new general <code class="docutils literal"><span class="pre">weights</span></code> kwarg replace <code class="docutils literal"><span class="pre">mass_weights</span></code></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 0.16.0: </span>Instead of <code class="docutils literal"><span class="pre">mass_weighted=True</span></code> use new <a href="#id4"><span class="problematic" id="id5">``</span></a>weights=&#8217;mass&#8217;`</p>
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span>Instead of <code class="docutils literal"><span class="pre">mass_weighted=True</span></code> use new <code class="docutils literal"><span class="pre">weights='mass'</span></code></p>
 </div>
 </dd></dl>
 
@@ -602,8 +609,7 @@ that can be used immediately in <a class="reference internal" href="#MDAnalysis.
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.analysis.align.sequence_alignment" title="MDAnalysis.analysis.align.sequence_alignment"><code class="xref py py-func docutils literal"><span class="pre">sequence_alignment()</span></code></a>, which does not require external
-programs.</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.analysis.align.sequence_alignment" title="MDAnalysis.analysis.align.sequence_alignment"><code class="xref py py-func docutils literal"><span class="pre">sequence_alignment()</span></code></a>, <code class="xref py py-func docutils literal"><span class="pre">which()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">programs.()</span></code></p>
 </div>
 </dd></dl>
 
@@ -749,13 +755,13 @@ global alignment is too expensive).</p>
         <li class="right" >
           <a href="base.html" title="4.1.1. Analysis building blocks — MDAnalysis.analysis.base"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

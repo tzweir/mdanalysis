@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.analysis.contacts &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.analysis.contacts &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -282,7 +282,7 @@
 <span class="sd">   :members:</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -608,8 +608,7 @@
 <span class="c1"># until then it remains because we don&#39;t have the functionality</span>
 <span class="c1"># elsewhere.</span>
 
-<span class="nd">@deprecate</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="s2">&quot;Contacts&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">ContactAnalysis</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ContactAnalysis"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis">[docs]</a><span class="k">class</span> <span class="nc">ContactAnalysis</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform a native contact analysis (&quot;q1-q2&quot;).</span>
 
 <span class="sd">    The analysis of the trajectory is performed with the</span>
@@ -636,48 +635,47 @@
 <span class="sd">    accessible as the attribute</span>
 <span class="sd">    :attr:`ContactAnalysis.timeseries`.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    topology : filename as str</span>
+<span class="sd">        topology file</span>
+<span class="sd">    trajectory : filename as str</span>
+<span class="sd">        trajectory</span>
+<span class="sd">    ref1 : filename or ``None``, optional</span>
+<span class="sd">        structure of the reference conformation 1 (pdb); if ``None`` the</span>
+<span class="sd">        *first* frame of the trajectory is chosen</span>
+<span class="sd">    ref2 : filename or ``None``, optional</span>
+<span class="sd">        structure of the reference conformation 2 (pdb); if ``None`` the</span>
+<span class="sd">        *last* frame of the trajectory is chosen</span>
+<span class="sd">    radius : float, optional, default 8 A</span>
+<span class="sd">        contacts are deemed any Ca within radius</span>
+<span class="sd">    targetdir : path, optional, default ``.``</span>
+<span class="sd">        output files are saved in this directory</span>
+<span class="sd">    infix : string, optional</span>
+<span class="sd">        additional tag string that is inserted into the output filename of</span>
+<span class="sd">        the data file</span>
+<span class="sd">     selection : string, optional, default ``&quot;name CA&quot;``</span>
+<span class="sd">        MDAnalysis selection string that selects the particles of</span>
+<span class="sd">        interest; the default is to only select the C-alpha atoms</span>
+<span class="sd">        in `ref1` and `ref2`</span>
+
+<span class="sd">        .. Note:: If `selection` produces more than one atom per</span>
+<span class="sd">                  residue then you will get multiple contacts per</span>
+<span class="sd">                  residue unless you also set `centroids` = ``True``</span>
+<span class="sd">     centroids : bool</span>
+<span class="sd">        If set to ``True``, use the centroids for the selected atoms on a</span>
+<span class="sd">        per-residue basis to compute contacts. This allows, for instance</span>
+<span class="sd">        defining the sidechains as `selection` and then computing distances</span>
+<span class="sd">        between sidechain centroids.</span>
+
 
 <span class="sd">    .. deprecated:: 0.15.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="s2">&quot;Contacts&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">ref1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ref2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span>
                  <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">infix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">centroids</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        topology : filename as str</span>
-<span class="sd">            topology file</span>
-<span class="sd">        trajectory : filename as str</span>
-<span class="sd">            trajectory</span>
-<span class="sd">        ref1 : filename or ``None``, optional</span>
-<span class="sd">            structure of the reference conformation 1 (pdb); if ``None`` the</span>
-<span class="sd">            *first* frame of the trajectory is chosen</span>
-<span class="sd">        ref2 : filename or ``None``, optional</span>
-<span class="sd">            structure of the reference conformation 2 (pdb); if ``None`` the</span>
-<span class="sd">            *last* frame of the trajectory is chosen</span>
-<span class="sd">        radius : float, optional, default 8 A</span>
-<span class="sd">            contacts are deemed any Ca within radius</span>
-<span class="sd">        targetdir : path, optional, default ``.``</span>
-<span class="sd">            output files are saved in this directory</span>
-<span class="sd">        infix : string, optional</span>
-<span class="sd">            additional tag string that is inserted into the output filename of</span>
-<span class="sd">            the data file</span>
-<span class="sd">         selection : string, optional, default ``&quot;name CA&quot;``</span>
-<span class="sd">            MDAnalysis selection string that selects the particles of</span>
-<span class="sd">            interest; the default is to only select the C-alpha atoms</span>
-<span class="sd">            in `ref1` and `ref2`</span>
-
-<span class="sd">            .. Note:: If `selection` produces more than one atom per</span>
-<span class="sd">                      residue then you will get multiple contacts per</span>
-<span class="sd">                      residue unless you also set `centroids` = ``True``</span>
-<span class="sd">         centroids : bool</span>
-<span class="sd">            If set to ``True``, use the centroids for the selected atoms on a</span>
-<span class="sd">            per-residue basis to compute contacts. This allows, for instance</span>
-<span class="sd">            defining the sidechains as `selection` and then computing distances</span>
-<span class="sd">            between sidechain centroids.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">topology</span> <span class="o">=</span> <span class="n">topology</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span> <span class="o">=</span> <span class="n">trajectory</span>
@@ -889,7 +887,7 @@
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
                     <span class="k">continue</span>
-                <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+                <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">records</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></div>
 
 <div class="viewcode-block" id="ContactAnalysis.plot"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -903,11 +901,10 @@
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$q_1$&quot;</span><span class="p">)</span>
-        <span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$q_2$&quot;</span><span class="p">)</span></div>
+        <span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$q_2$&quot;</span><span class="p">)</span></div></div>
 
 
-<span class="nd">@deprecate</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="s2">&quot;Contacts&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">ContactAnalysis1</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ContactAnalysis1"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis1">[docs]</a><span class="k">class</span> <span class="nc">ContactAnalysis1</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform a very flexible native contact analysis with respect to a single</span>
 <span class="sd">    reference.</span>
 
@@ -972,6 +969,7 @@
 <span class="sd">    .. deprecated:: 0.15.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="s2">&quot;Contacts&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate native contacts within a group or between two groups.</span>
 
@@ -1217,7 +1215,7 @@
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
                     <span class="k">continue</span>
-                <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+                <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">records</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">qavg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outarray</span><span class="p">)</span>
@@ -1302,7 +1300,7 @@
         <span class="n">colorbar</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+            <span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>
@@ -1319,13 +1317,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

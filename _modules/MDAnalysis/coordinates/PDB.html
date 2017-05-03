@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis.coordinates.PDB &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>MDAnalysis.coordinates.PDB &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -127,7 +127,7 @@
 <span class="sd">  W.close()</span>
 
 <span class="sd">It is important to *always close the trajectory* when done because only at this</span>
-<span class="sd">step is the final END_ record written, which is required by the `PDB</span>
+<span class="sd">step is the final END_ record written, which is required by the `PDB 3.2</span>
 <span class="sd">standard`_.</span>
 
 
@@ -144,7 +144,7 @@
 <span class="sd">-----------------------------------------</span>
 <span class="sd">A pure-Python implementation for PDB files commonly encountered in MD</span>
 <span class="sd">simulations comes under the names :class:`PDBReader` and</span>
-<span class="sd">:class:`PDBWriter`. It only implements a subset of the `PDB standard`_</span>
+<span class="sd">:class:`PDBWriter`. It only implements a subset of the `PDB 3.2 standard`_</span>
 <span class="sd">(for instance, it does not deal with insertion codes) and also allows some</span>
 <span class="sd">typical enhancements such as 4-letter resids (introduced by CHARMM/NAMD).</span>
 
@@ -207,12 +207,19 @@
 <span class="sd">.. autoclass:: MultiPDBWriter</span>
 <span class="sd">   :members:</span>
 
+<span class="sd">.. autoclass:: ExtendedPDBReader</span>
+<span class="sd">   :members:</span>
+<span class="sd">   :inherited-members:</span>
 
 <span class="sd">..deprecated:: 0.15.0</span>
 <span class="sd">    The &quot;permissive&quot; flag is not used anymore (and effectively defaults to True);</span>
 <span class="sd">    it will be completely removed in 0.16.0.</span>
 
+
+<span class="sd">.. _`PDB 3.2 standard`:</span>
+<span class="sd">    http://www.wwpdb.org/documentation/format32/v3.2.html</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">zip</span>
 
@@ -289,9 +296,13 @@
 <span class="sd">    =============  ============  ===========  =============================================</span>
 
 
-<span class="sd">    .. SeeAlso:: :class:`PDBWriter`; :class:`PDBReader`</span>
-<span class="sd">                 implements a larger subset of the header records,</span>
-<span class="sd">                 which are accessible as :attr:`PDBReader.metadata`.</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`PDBWriter`</span>
+<span class="sd">    :class:`PDBReader`</span>
+<span class="sd">       implements a larger subset of the header records,</span>
+<span class="sd">       which are accessible as :attr:`PDBReader.metadata`.</span>
+
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       * Frames now 0-based instead of 1-based</span>
@@ -484,10 +495,12 @@
 <span class="sd">    .. _ENDMDL: http://www.wwpdb.org/documentation/format32/sect9.html#ENDMDL</span>
 <span class="sd">    .. _CONECT: http://www.wwpdb.org/documentation/format32/sect10.html#CONECT</span>
 
-<span class="sd">    .. SeeAlso::</span>
-<span class="sd">       This class is identical to :class:`MultiPDBWriter` with the one</span>
-<span class="sd">       exception that it defaults to writing single-frame PDB files as if</span>
-<span class="sd">       *multiframe* = ``False`` was selected.</span>
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    This class is identical to :class:`MultiPDBWriter` with the one</span>
+<span class="sd">    exception that it defaults to writing single-frame PDB files as if</span>
+<span class="sd">    *multiframe* = ``False`` was selected.</span>
+
 
 <span class="sd">    .. versionchanged:: 0.7.5</span>
 <span class="sd">       Initial support for multi-frame PDB files.</span>
@@ -564,37 +577,42 @@
                  <span class="n">convert_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new PDBWriter</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *filename*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename: str</span>
 <span class="sd">           name of output file</span>
-<span class="sd">         *start*</span>
+<span class="sd">        start: int (optional)</span>
 <span class="sd">           starting timestep</span>
-<span class="sd">         *step*</span>
+<span class="sd">        step: int (optional)</span>
 <span class="sd">           skip between subsequent timesteps</span>
-<span class="sd">         *remarks*</span>
-<span class="sd">           comments to annotate pdb file (added to the TITLE record); note that</span>
+<span class="sd">        remarks: str (optional)</span>
+<span class="sd">           comments to annotate pdb file (added to the *TITLE* record); note that</span>
 <span class="sd">           any remarks from the trajectory that serves as input are</span>
 <span class="sd">           written to REMARK records with lines longer than :attr:`remark_max_length` (66</span>
 <span class="sd">           characters) being wrapped.</span>
-<span class="sd">         *convert_units*</span>
+<span class="sd">        convert_units: str (optional)</span>
 <span class="sd">           units are converted to the MDAnalysis base format; ``None`` selects</span>
 <span class="sd">           the value of :data:`MDAnalysis.core.flags` [&#39;convert_lengths&#39;]</span>
-<span class="sd">         *bonds*</span>
-<span class="sd">           write bonds to the PDB file as CONECT_ records [``False``]</span>
-
-<span class="sd">           .. Note::</span>
-
-<span class="sd">              Currently only works when writing a whole :class:`Universe` and</span>
-<span class="sd">              if bond information is available in the topology. (For selections</span>
-<span class="sd">              smaller than the whole :class:`Universe`, the atom numbering in</span>
-<span class="sd">              the CONECT_ records would not match the numbering of the atoms in</span>
-<span class="sd">              the new PDB file and therefore a :exc:`NotImplementedError` is</span>
-<span class="sd">              raised.)</span>
-
-<span class="sd">         *multiframe*</span>
+<span class="sd">        bonds : {&quot;conect&quot;, &quot;all&quot;, None} (optional)</span>
+<span class="sd">           If set to &quot;conect&quot;, then only write those bonds that were already</span>
+<span class="sd">           defined in an input PDB file as PDB CONECT_ record. If set to &quot;all&quot;,</span>
+<span class="sd">           write all bonds (including guessed ones) to the file. ``None`` does</span>
+<span class="sd">           not write any bonds. The default is &quot;conect&quot;.</span>
+<span class="sd">        multiframe: bool (optional)</span>
 <span class="sd">           ``False``: write a single frame to the file; ``True``: create a</span>
 <span class="sd">           multi frame PDB file in which frames are written as MODEL_ ... ENDMDL_</span>
 <span class="sd">           records. If ``None``, then the class default is chosen.    [``None``]</span>
+
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Writing bonds currently only works when writing a whole</span>
+<span class="sd">        :class:`Universe` and if bond information is available in the topology.</span>
+<span class="sd">        (For selections smaller than the whole :class:`Universe`, the atom</span>
+<span class="sd">        numbering in the CONECT_ records would not match the numbering of the</span>
+<span class="sd">        atoms in the new PDB file and therefore a :exc:`NotImplementedError` is</span>
+<span class="sd">        raised.)</span>
+
 
 <span class="sd">        .. _CONECT: http://www.wwpdb.org/documentation/format32/sect10.html#CONECT</span>
 <span class="sd">        .. _MODEL: http://www.wwpdb.org/documentation/format32/sect9.html#MODEL</span>
@@ -738,7 +756,7 @@
 
         <span class="n">conect</span> <span class="o">=</span> <span class="p">([</span><span class="n">a</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">con</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
                   <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">atoms</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">con</span><span class="p">)</span>
-        <span class="n">conect</span> <span class="o">=</span> <span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mapping</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">conect</span><span class="p">)</span>
+        <span class="n">connect</span> <span class="o">=</span> <span class="p">([</span><span class="n">mapping</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">conect</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">conect</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">CONECT</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></div>
@@ -1072,23 +1090,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;CONECT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">conect</span><span class="p">))</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">ExtendedPDBReader</span><span class="p">(</span><span class="n">PDBReader</span><span class="p">):</span>
+<div class="viewcode-block" id="ExtendedPDBReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.ExtendedPDBReader">[docs]</a><span class="k">class</span> <span class="nc">ExtendedPDBReader</span><span class="p">(</span><span class="n">PDBReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;PDBReader that reads a PDB-formatted file with five-digit residue numbers.</span>
 
-<span class="sd">    This reader does not conform to the `PDB standard`_ because it allows</span>
+<span class="sd">    This reader does not conform to the `PDB 3.2 standard`_ because it allows</span>
 <span class="sd">    five-digit residue numbers that may take up columns 23 to 27 (inclusive)</span>
 <span class="sd">    instead of being confined to 23-26 (with column 27 being reserved for the</span>
 <span class="sd">    insertion code in the PDB standard). PDB files in this format are written</span>
 <span class="sd">    by popular programs such as VMD_.</span>
 
-<span class="sd">    .. SeeAlso:: :class:`PDBReader`</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`PDBReader`</span>
 
-<span class="sd">    .. _PDB standard: http://www.wwpdb.org/documentation/format32/sect9.html</span>
+
 <span class="sd">    .. _VMD: http://www.ks.uiuc.edu/Research/vmd/</span>
 
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;XPDB&quot;</span>
+    <span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;XPDB&quot;</span></div>
 
 
 <div class="viewcode-block" id="MultiPDBWriter"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.MultiPDBWriter">[docs]</a><span class="k">class</span> <span class="nc">MultiPDBWriter</span><span class="p">(</span><span class="n">PDBWriter</span><span class="p">):</span>
@@ -1101,18 +1121,18 @@
 <span class="sd">    *multiframe* = ``True``), consisting of multiple models (using the MODEL_</span>
 <span class="sd">    and ENDMDL_ records).</span>
 
-<span class="sd">    .. _`PDB 3.2 standard`:</span>
-<span class="sd">       http://www.wwpdb.org/documentation/format32/v3.2.html</span>
 
 <span class="sd">    .. _MODEL: http://www.wwpdb.org/documentation/format32/sect9.html#MODEL</span>
 <span class="sd">    .. _ENDMDL: http://www.wwpdb.org/documentation/format32/sect9.html#ENDMDL</span>
 <span class="sd">    .. _CONECT: http://www.wwpdb.org/documentation/format32/sect10.html#CONECT</span>
 
 
-<span class="sd">    .. SeeAlso::</span>
-<span class="sd">       This class is identical to :class:`PDBWriter` with the one</span>
-<span class="sd">       exception that it defaults to writing multi-frame PDB files instead of</span>
-<span class="sd">       single frames.</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    This class is identical to :class:`PDBWriter` with the one</span>
+<span class="sd">    exception that it defaults to writing multi-frame PDB files instead of</span>
+<span class="sd">    single frames.</span>
+
 
 <span class="sd">    .. versionadded:: 0.7.6</span>
 
@@ -1136,13 +1156,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

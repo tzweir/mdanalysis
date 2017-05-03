@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.7.1. Elastic network analysis of MD trajectories — MDAnalysis.analysis.gnm &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.7.1. Elastic network analysis of MD trajectories — MDAnalysis.analysis.gnm &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="polymer.html" title="4.6.1. Polymer analysis — MDAnalysis.analysis.polymer"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
@@ -113,8 +113,8 @@
 </tr>
 </tbody>
 </table>
-<p>Analyse a trajectory using elastic network models, following the approach of <a class="reference internal" href="../references.html#hall2007" id="id1">[Hall2007]</a>.</p>
-<p>An example is provided in the MDAnalysis <a href="#id3"><span class="problematic" id="id4">Cookbook_</span></a>, listed as <a href="#id5"><span class="problematic" id="id6">GNMExample_</span></a>.</p>
+<p>Analyse a trajectory using elastic network models, following the approach of <a class="reference internal" href="#hall2007" id="id1">[Hall2007]</a>.</p>
+<p>An example is provided in the MDAnalysis <a class="reference external" href="https://github.com/MDAnalysis/MDAnalysisCookbook">Cookbook</a>, listed as <a class="reference external" href="https://github.com/MDAnalysis/MDAnalysisCookbook/blob/master/examples/GNMExample.py">GNMExample</a>.</p>
 <p>The basic approach is to pass a trajectory to <a class="reference internal" href="#MDAnalysis.analysis.gnm.GNMAnalysis" title="MDAnalysis.analysis.gnm.GNMAnalysis"><code class="xref py py-class docutils literal"><span class="pre">GNMAnalysis</span></code></a> and then run
 the analysis:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
@@ -124,13 +124,12 @@ the analysis:</p>
 <span class="n">output</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;eigenvalues.dat&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outputfile</span><span class="p">:</span>
-   <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">output</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">outputfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">item</span> <span class="o">+</span> <span class="s2">&quot;</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">output</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">outputfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">item</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>&#8221;)</p>
 <p>The results are found in <code class="xref py py-attr docutils literal"><span class="pre">GNMAnalysis.results</span></code>, which can be
-used for further processing (see <a class="reference internal" href="../references.html#hall2007" id="id2">[Hall2007]</a>).</p>
+used for further processing (see <a class="reference internal" href="#hall2007" id="id2">[Hall2007]</a>).</p>
 <p class="rubric">References</p>
 <table class="docutils citation" frame="void" id="hall2007" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -172,8 +171,13 @@ double counting. No checks are applied. Default is <code class="docutils literal
 </tr>
 </tbody>
 </table>
-<p>:param .. SeeAlso:: <a class="reference internal" href="#MDAnalysis.analysis.gnm.closeContactGNMAnalysis" title="MDAnalysis.analysis.gnm.closeContactGNMAnalysis"><code class="xref py py-class docutils literal"><span class="pre">closeContactGNMAnalysis</span></code></a>:
-:param .. versionchanged:: 0.16.0: Made <code class="xref py py-meth docutils literal"><span class="pre">generate_output()</span></code> a private method <code class="xref py py-meth docutils literal"><span class="pre">_generate_output()</span></code>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.analysis.gnm.closeContactGNMAnalysis" title="MDAnalysis.analysis.gnm.closeContactGNMAnalysis"><code class="xref py py-class docutils literal"><span class="pre">closeContactGNMAnalysis</span></code></a></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.16.0: </span>Made <code class="xref py py-meth docutils literal"><span class="pre">generate_output()</span></code> a private method <code class="xref py py-meth docutils literal"><span class="pre">_generate_output()</span></code>.</p>
+</div>
 <dl class="method">
 <dt id="MDAnalysis.analysis.gnm.GNMAnalysis.generate_kirchoff">
 <code class="descname">generate_kirchoff</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/gnm.html#GNMAnalysis.generate_kirchoff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.gnm.GNMAnalysis.generate_kirchoff" title="Permalink to this definition">¶</a></dt>
@@ -249,22 +253,27 @@ Gaussian network model [4.5 Å].</li>
 <span class="math">\(1/\sqrt{N_i N_j}\)</span> where <span class="math">\(N_i\)</span> and <span class="math">\(N_j\)</span> are the
 number of atoms in the residues <span class="math">\(i\)</span> and <span class="math">\(j\)</span> that contain
 the atoms that form a contact.</li>
-<li><strong>MassWeight</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>deprecated</em><em>, </em><em>optional</em><em>)</em><em></em>) &#8211; <p>if set to <code class="docutils literal"><span class="pre">True</span></code> equivalent to <cite>weights</cite> set to &#8220;size&#8221;.
-.. Note:: This option does not perform a true mass weighting but</p>
-<blockquote>
-<div>weighting by the number of atoms in each residue; the name
-of the parameter exists for historical reasons and will
-be removed in 0.17.0. Until then, setting <cite>MassWeight</cite> to
-anything but <code class="docutils literal"><span class="pre">None</span></code> will override <cite>weights</cite>.</div></blockquote>
-</li>
+<li><strong>MassWeight</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>deprecated</em><em>, </em><em>optional</em><em>)</em><em></em>) &#8211; if set to <code class="docutils literal"><span class="pre">True</span></code> equivalent to <cite>weights</cite> set to &#8220;size&#8221;.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>:param .. SeeAlso:: <a class="reference internal" href="#MDAnalysis.analysis.gnm.GNMAnalysis" title="MDAnalysis.analysis.gnm.GNMAnalysis"><code class="xref py py-class docutils literal"><span class="pre">GNMAnalysis</span></code></a>:
-:param .. versionchanged:: 0.16.0: Made <code class="xref py py-meth docutils literal"><span class="pre">generate_output()</span></code> a private method <code class="xref py py-meth docutils literal"><span class="pre">_generate_output()</span></code>.
-:param .. deprecated:: 0.16.0: Instead of <code class="docutils literal"><span class="pre">MassWeight=True</span></code> use <code class="docutils literal"><span class="pre">weights=&quot;size&quot;</span></code>.</p>
+<p class="rubric">Notes</p>
+<p>The <cite>MassWeight</cite> option does not perform a true mass weighting but
+weighting by the number of atoms in each residue; the name of the parameter
+exists for historical reasons and will be removed in 0.17.0. Until then,
+setting <cite>MassWeight</cite> to anything but <code class="docutils literal"><span class="pre">None</span></code> will override <cite>weights</cite>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.analysis.gnm.GNMAnalysis" title="MDAnalysis.analysis.gnm.GNMAnalysis"><code class="xref py py-class docutils literal"><span class="pre">GNMAnalysis</span></code></a></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.16.0: </span>Made <code class="xref py py-meth docutils literal"><span class="pre">generate_output()</span></code> a private method <code class="xref py py-meth docutils literal"><span class="pre">_generate_output()</span></code>.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span>Instead of <code class="docutils literal"><span class="pre">MassWeight=True</span></code> use <code class="docutils literal"><span class="pre">weights=&quot;size&quot;</span></code>.</p>
+</div>
 </dd></dl>
 
 </div>
@@ -329,13 +338,13 @@ grid will consist of boxes with sides of at least length <cite>cutoff</cite></li
         <li class="right" >
           <a href="polymer.html" title="4.6.1. Polymer analysis — MDAnalysis.analysis.polymer"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

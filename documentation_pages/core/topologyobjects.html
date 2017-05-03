@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.2.2. Core Topology Objects — MDAnalysis.core.topologyobjects &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>9.2.2. Core Topology Objects — MDAnalysis.core.topologyobjects &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="topology.html" title="9.2.1. Core Topology object — MDAnalysis.core.topology"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../core_modules.html" accesskey="U">9. Core modules</a> &#187;</li> 
       </ul>
     </div>
@@ -370,51 +370,53 @@ dihedrals present in a group of atoms.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">topologydict</span> <span class="o">=</span> <span class="n">TopologyDict</span><span class="p">(</span><span class="n">members</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>TopologyDicts are also built lazily from a <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyGroup.topDict" title="MDAnalysis.core.topologyobjects.TopologyGroup.topDict"><code class="xref py py-class docutils literal"><span class="pre">TopologyGroup.topDict</span></code></a>
+attribute.</p>
+<p>The <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyDict" title="MDAnalysis.core.topologyobjects.TopologyDict"><code class="xref py py-class docutils literal"><span class="pre">TopologyDict</span></code></a> collects all the selected topology type from the
+atoms and categorises them according to the types of the atoms within. A
+<a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyGroup" title="MDAnalysis.core.topologyobjects.TopologyGroup"><code class="xref py py-class docutils literal"><span class="pre">TopologyGroup</span></code></a> containing all of a given bond type can be made by
+querying with the appropriate key. The keys to the <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyDict" title="MDAnalysis.core.topologyobjects.TopologyDict"><code class="xref py py-class docutils literal"><span class="pre">TopologyDict</span></code></a>
+are a tuple of the atom types that the bond represents and can be viewed
+using the <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyDict.keys" title="MDAnalysis.core.topologyobjects.TopologyDict.keys"><code class="xref py py-meth docutils literal"><span class="pre">keys()</span></code></a> method.</p>
+<p>For example, from a system containing pure ethanol</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">td</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">bonds</span><span class="o">.</span><span class="n">topDict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">[(&#39;C&#39;, &#39;C&#39;),</span>
+<span class="go"> (&#39;C&#39;, &#39;H&#39;),</span>
+<span class="go"> (&#39;O&#39;, &#39;H&#39;),</span>
+<span class="go"> (&#39;C&#39;, &#39;O&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">]</span>
+<span class="go">&lt; TopologyGroup containing 912 bonds &gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The key for a bond is taken from the type attribute of the atoms.</p>
+<p class="last">Getting and setting types of bonds is done smartly, so a C-C-H
+angle is considered identical to a H-C-C angle.</p>
+</div>
+<p>Duplicate entries are automatically removed upon creation and
+combination of different Dicts.  This means a bond between atoms
+1 and 2 will only ever appear once in a dict despite both atoms 1
+and 2 having the bond in their <code class="xref py py-attr docutils literal"><span class="pre">bond</span></code> attribute.</p>
+<p>Two <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyDict" title="MDAnalysis.core.topologyobjects.TopologyDict"><code class="xref py py-class docutils literal"><span class="pre">TopologyDict</span></code></a> instances can be combined using
+addition and it will not create any duplicate bonds in the process.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*members*</strong> &#8211; A list of <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyObject" title="MDAnalysis.core.topologyobjects.TopologyObject"><code class="xref py py-class docutils literal"><span class="pre">TopologyObject</span></code></a> instances</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul>
-<li><em>*topologydict*</em> &#8211; A specialised dictionary of the topology instances passed to it</li>
-<li>TopologyDicts are also built lazily from a <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyGroup.topDict" title="MDAnalysis.core.topologyobjects.TopologyGroup.topDict"><code class="xref py py-class docutils literal"><span class="pre">TopologyGroup.topDict</span></code></a></li>
-<li><em>attribute.</em></li>
-<li>The <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyDict" title="MDAnalysis.core.topologyobjects.TopologyDict"><code class="xref py py-class docutils literal"><span class="pre">TopologyDict</span></code></a> collects all the selected topology type from the</li>
-<li><em>atoms and categorises them according to the types of the atoms within. A</em></li>
-<li><a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyGroup" title="MDAnalysis.core.topologyobjects.TopologyGroup"><code class="xref py py-class docutils literal"><span class="pre">TopologyGroup</span></code></a> containing all of a given bond type can be made by</li>
-<li>querying with the appropriate key. The keys to the <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyDict" title="MDAnalysis.core.topologyobjects.TopologyDict"><code class="xref py py-class docutils literal"><span class="pre">TopologyDict</span></code></a></li>
-<li><em>are a tuple of the atom types that the bond represents and can be viewed</em></li>
-<li>using the <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyDict.keys" title="MDAnalysis.core.topologyobjects.TopologyDict.keys"><code class="xref py py-meth docutils literal"><span class="pre">keys()</span></code></a> method.</li>
-<li><em>For example, from a system containing pure ethanol ::</em> &#8211; &gt;&gt;&gt; td = u.bonds.topDict
-&gt;&gt;&gt; td.keys()
-[(&#8216;C&#8217;, &#8216;C&#8217;),<blockquote>
-<div>(&#8216;C&#8217;, &#8216;H&#8217;),
-(&#8216;O&#8217;, &#8216;H&#8217;),
-(&#8216;C&#8217;, &#8216;O&#8217;)]</div></blockquote>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">td</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">]</span>
-<span class="go">&lt; TopologyGroup containing 912 bonds &gt;</span>
-</pre></div>
-</div>
-</li>
-<li><em>.. Note::</em> &#8211; The key for a bond is taken from the type attribute of the atoms.<p>Getting and setting types of bonds is done smartly, so a C-C-H
-angle is considered identical to a H-C-C angle.</p>
-</li>
-<li><em>Duplicate entries are automatically removed upon creation and</em></li>
-<li><em>combination of different Dicts.  This means a bond between atoms</em></li>
-<li><em>1 and 2 will only ever appear once in a dict despite both atoms 1</em></li>
-<li>and 2 having the bond in their <code class="xref py py-attr docutils literal"><span class="pre">bond</span></code> attribute.</li>
-<li>Two <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyDict" title="MDAnalysis.core.topologyobjects.TopologyDict"><code class="xref py py-class docutils literal"><span class="pre">TopologyDict</span></code></a> instances can be combined using</li>
-<li><em>addition and it will not create any duplicate bonds in the process.</em></li>
-<li><em>.. versionadded:: 0.8</em></li>
-<li><em>.. versionchanged:: 0.9.0</em> &#8211; Changed initialisation to use a list of <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyObject" title="MDAnalysis.core.topologyobjects.TopologyObject"><code class="xref py py-class docutils literal"><span class="pre">TopologyObject</span></code></a>
-instances instead of list of atoms; now used from within
-<a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyGroup" title="MDAnalysis.core.topologyobjects.TopologyGroup"><code class="xref py py-class docutils literal"><span class="pre">TopologyGroup</span></code></a> instead of accessed from <code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code>.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>members</strong> &#8211; A list of <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyObject" title="MDAnalysis.core.topologyobjects.TopologyObject"><code class="xref py py-class docutils literal"><span class="pre">TopologyObject</span></code></a> instances</td>
 </tr>
 </tbody>
 </table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.8.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.9.0: </span>Changed initialisation to use a list of <a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyObject" title="MDAnalysis.core.topologyobjects.TopologyObject"><code class="xref py py-class docutils literal"><span class="pre">TopologyObject</span></code></a>
+instances instead of list of atoms; now used from within
+<a class="reference internal" href="#MDAnalysis.core.topologyobjects.TopologyGroup" title="MDAnalysis.core.topologyobjects.TopologyGroup"><code class="xref py py-class docutils literal"><span class="pre">TopologyGroup</span></code></a> instead of accessed from <code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code>.</p>
+</div>
 <dl class="method">
 <dt id="MDAnalysis.core.topologyobjects.TopologyDict.keys">
 <code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/topologyobjects.html#TopologyDict.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.topologyobjects.TopologyDict.keys" title="Permalink to this definition">¶</a></dt>
@@ -545,7 +547,9 @@ AtomGroup. [<code class="docutils literal"><span class="pre">False</span></code>
 </tr>
 </tbody>
 </table>
-<p>:param .. versionadded:: 0.9.0:</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.9.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -815,13 +819,13 @@ of the type too, i.e.:</p>
         <li class="right" >
           <a href="topology.html" title="9.2.1. Core Topology object — MDAnalysis.core.topology"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../core_modules.html" >9. Core modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>

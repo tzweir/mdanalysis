@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.2.5. Calculating path similarity — MDAnalysis.analysis.psa &#8212; MDAnalysis 0.16.0-dev0 documentation</title>
+    <title>4.2.5. Calculating path similarity — MDAnalysis.analysis.psa &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.16.0-dev0',
+        VERSION:     '0.16.1-dev0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.0-dev0 documentation"
+          title="Search within MDAnalysis 0.16.1-dev0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="rms.html" title="4.2.4. Calculating root mean square quantities — MDAnalysis.analysis.rms"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
@@ -118,7 +118,7 @@
 </div>
 <p>The module contains code to calculate the geometric similarity of trajectories
 using path metrics such as the Hausdorff or Fréchet distances
-<a class="reference internal" href="../references.html#seyler2015" id="id1">[Seyler2015]</a>. The path metrics are functions of two paths and return a
+<a class="reference internal" href="#seyler2015" id="id1">[Seyler2015]</a>. The path metrics are functions of two paths and return a
 nonnegative number, i.e., a distance. Two paths are identical if their distance
 is zero, and large distances indicate dissimilarity. Each path metric is a
 function of the individual points (e.g., coordinate snapshots) that comprise
@@ -136,8 +136,8 @@ are then computed directly with no further alignment. This pre-processing step
 is necessary to preserve the metric properties of the Hausdorff and Fréchet
 metrics; using the best-fit rmsd on a pairwise basis does not generally
 preserve the triangle inequality.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p class="last">The <a class="reference external" href="https://github.com/Becksteinlab/PSAnalysisTutorial">PSAnalysisTutorial</a> outlines a typical application of PSA to
 a set of trajectories, including doing proper alignment,
 performing distance comparisons, and generating heat
@@ -282,6 +282,7 @@ each atom.</li>
 steps, <span class="math">\(N\)</span> atoms, and <span class="math">\(3N\)</span> coordinates (e.g.,
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.positions" title="MDAnalysis.core.groups.AtomGroup.positions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup.positions</span></code></a>). <em>P</em> (<em>Q</em>) has
 either shape <span class="math">\(N_p \times N \times 3\)</span> (<span class="math">\(N_q \times N \times 3\)</span>), or <span class="math">\(N_p \times (3N)\)</span> (<span class="math">\(N_q \times (3N)\)</span>) in flattened form.</p>
+<p>Note that reversing the path does not change the Hausdorff distance.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -318,18 +319,16 @@ either shape <span class="math">\(N_p \times N \times 3\)</span> (<span class="m
 <span class="go">4.7786639840135905</span>
 </pre></div>
 </div>
-<p>Note that reversing the path does not change the Hausdorff distance.</p>
 <p class="rubric">Notes</p>
-<p>The Hausdorff distance is calculated in a brute force manner from the
+<ul class="simple">
+<li>The Hausdorff distance is calculated in a brute force manner from the
 distance matrix without further optimizations, essentially following
-<a class="reference internal" href="#huttenlocher1993" id="id2">[Huttenlocher1993]</a>.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.directed_hausdorff.html#scipy.spatial.distance.directed_hausdorff" title="(in SciPy v0.19.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.spatial.distance.directed_hausdorff()</span></code></a> is an optimized
+<a class="reference internal" href="#huttenlocher1993" id="id2">[Huttenlocher1993]</a>.</li>
+<li><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.directed_hausdorff.html#scipy.spatial.distance.directed_hausdorff" title="(in SciPy v0.19.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.spatial.distance.directed_hausdorff()</span></code></a> is an optimized
 implementation of the early break algorithm of <a class="reference internal" href="#taha2015" id="id3">[Taha2015]</a>; note that
 one still has to calculate the <em>symmetric</em> Hausdorff distance as
-<cite>max(directed_hausdorff(P, Q)[0], directed_hausdorff(Q, P)[0])</cite>.</p>
-</div>
+<cite>max(directed_hausdorff(P, Q)[0], directed_hausdorff(Q, P)[0])</cite>.</li>
+</ul>
 <p class="rubric">References</p>
 <table class="docutils citation" frame="void" id="huttenlocher1993" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -400,7 +399,7 @@ measure that gives equal weight to <em>P</em> and <em>Q</em>.</p>
 </div>
 <p class="rubric">Notes</p>
 <p>The weighted average Hausdorff distance is not a true metric (it does not
-obey the triangle inequality); see <a class="reference internal" href="../references.html#seyler2015" id="id4">[Seyler2015]</a> for further details.</p>
+obey the triangle inequality); see <a class="reference internal" href="#seyler2015" id="id4">[Seyler2015]</a> for further details.</p>
 </dd></dl>
 
 <dl class="function">
@@ -452,7 +451,7 @@ average Hausdorff gives equal weight to both paths.</p>
 </div>
 <p class="rubric">Notes</p>
 <p>The average Hausdorff distance is not a true metric (it does not obey the
-triangle inequality); see <a class="reference internal" href="../references.html#seyler2015" id="id5">[Seyler2015]</a> for further details.</p>
+triangle inequality); see <a class="reference internal" href="#seyler2015" id="id5">[Seyler2015]</a> for further details.</p>
 </dd></dl>
 
 <dl class="function">
@@ -486,14 +485,13 @@ distances for <cite>P</cite> and <cite>Q</cite>, respectively</p>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>Hausdorff neighbors are those points on the two paths that are separated by
+<ul class="simple">
+<li>Hausdorff neighbors are those points on the two paths that are separated by
 the Hausdorff distance. They are the farthest nearest neighbors and are
-maximally different in the sense of the Hausdorff distance <a class="reference internal" href="../references.html#seyler2015" id="id6">[Seyler2015]</a>.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.directed_hausdorff.html#scipy.spatial.distance.directed_hausdorff" title="(in SciPy v0.19.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.spatial.distance.directed_hausdorff()</span></code></a> can also provide the
-Hausdorff neighbors.</p>
-</div>
+maximally different in the sense of the Hausdorff distance <a class="reference internal" href="#seyler2015" id="id6">[Seyler2015]</a>.</li>
+<li><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.directed_hausdorff.html#scipy.spatial.distance.directed_hausdorff" title="(in SciPy v0.19.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.spatial.distance.directed_hausdorff()</span></code></a> can also provide the
+hausdorff neighbors.</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -1129,21 +1127,21 @@ persistence and can be accessed as the attribute
 <code class="descname">get_num_atoms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/psa.html#PSAnalysis.get_num_atoms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.psa.PSAnalysis.get_num_atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of atoms used to construct the <a class="reference internal" href="#MDAnalysis.analysis.psa.Path" title="MDAnalysis.analysis.psa.Path"><code class="xref py py-class docutils literal"><span class="pre">Path</span></code></a> instances in
 <code class="xref py py-class docutils literal"><span class="pre">PSA</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">the number of atoms</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Must run <a class="reference internal" href="#MDAnalysis.analysis.psa.PSAnalysis.generate_paths" title="MDAnalysis.analysis.psa.PSAnalysis.generate_paths"><code class="xref py py-meth docutils literal"><span class="pre">PSAnalysis.generate_paths()</span></code></a> prior to calling this
 method.</p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the number of atoms in <code class="xref py py-class docutils literal"><span class="pre">PSA</span></code>&#8216;s :class:<a href="#id11"><span class="problematic" id="id12">`</span></a>Path`s&#8217;</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -1261,7 +1259,7 @@ more information about accessing nearest neighbor data.</p>
 <code class="xref py py-attr docutils literal"><span class="pre">PSAnalysis.labels</span></code>.</p>
 <p>If <cite>filename</cite> is supplied then the figure is also written to file (the
 suffix determines the file type, e.g. pdf, png, eps, ...). All other
-keyword arguments are passed on to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v2.0.0)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.imshow()</span></code></a>.</p>
+keyword arguments are passed on to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v2.0.1)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.imshow()</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1290,7 +1288,7 @@ dendrogram default to 3 points smaller [<code class="docutils literal"><span cla
 <code class="xref py py-attr docutils literal"><span class="pre">PSAnalysis.labels</span></code>.</p>
 <p>If <cite>filename</cite> is supplied then the figure is also written to file (the
 suffix determines the file type, e.g. pdf, png, eps, ...). All other
-keyword arguments are passed on to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v2.0.0)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.imshow()</span></code></a>.</p>
+keyword arguments are passed on to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v2.0.1)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.imshow()</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1317,7 +1315,7 @@ number.</p>
 <p>The frame number is mapped to the interval <em>[0, 1]</em>.</p>
 <p>If <cite>filename</cite> is supplied then the figure is also written to file (the
 suffix determines the file type, e.g. pdf, png, eps, ...). All other
-keyword arguments are passed on to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v2.0.0)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.imshow()</span></code></a>.</p>
+keyword arguments are passed on to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v2.0.1)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.imshow()</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1496,13 +1494,13 @@ file and text file.</p>
         <li class="right" >
           <a href="rms.html" title="4.2.4. Calculating root mean square quantities — MDAnalysis.analysis.rms"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.0-dev0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.16.1-dev0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >4. Analysis modules</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
   </body>
 </html>
