@@ -111,7 +111,7 @@
 <span class="sd">    filename</span>
 <span class="sd">        filename of the input trajectory or coordinate file.  Also can</span>
 <span class="sd">        handle a few special cases, see notes below.</span>
-<span class="sd">    format</span>
+<span class="sd">    format : str or :class:`Reader` (optional)</span>
 <span class="sd">        Define the desired format.  Can be a string to request a given</span>
 <span class="sd">        Reader.</span>
 <span class="sd">        If a class is passed, it will be assumed that this is</span>
@@ -119,7 +119,8 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    A Reader object</span>
+<span class="sd">    :class:`Reader`</span>
+<span class="sd">        A Reader object</span>
 
 
 <span class="sd">    Raises</span>
@@ -131,13 +132,19 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    There are a number of special cases that can be handled:</span>
-<span class="sd">      If `filename` is a numpy array, MemoryReader is returned.</span>
-<span class="sd">      If `filename` is an MMTF object, MMTFReader is returned.</span>
-<span class="sd">      If `filename` is an iterable of filenames, ChainReader is returned.</span>
 
-<span class="sd">    Automatic detection is disabled when an explicit `format` is</span>
-<span class="sd">    provided, unless a list of filenames is given, in which case</span>
-<span class="sd">    ChainReader is returned and `format` passed to the ChainReader.</span>
+<span class="sd">    - If `filename` is a numpy array,</span>
+<span class="sd">      :class:`~MDAnalysis.coordinates.memory.MemoryReader` is returned.</span>
+<span class="sd">    - If `filename` is an MMTF object,</span>
+<span class="sd">      :class:`~MDAnalysis.coordinates.MMTF.MMTFReader` is returned.</span>
+<span class="sd">    - If `filename` is an iterable of filenames,</span>
+<span class="sd">      :class:`~MDAnalysis.coordinates.chain.ChainReader` is returned.</span>
+
+<span class="sd">    Automatic detection is disabled when an explicit `format` is provided,</span>
+<span class="sd">    unless a list of filenames is given, in which case</span>
+<span class="sd">    :class:`~MDAnalysis.coordinates.chain.ChainReader` is returned and `format`</span>
+<span class="sd">    passed to the :class:`~MDAnalysis.coordinates.chain.ChainReader`.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># check if format is actually a Reader</span>
     <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="nb">format</span><span class="p">):</span>
@@ -177,7 +184,7 @@
     <span class="sd">&quot;&quot;&quot;Return an appropriate trajectory or frame writer class for `filename`.</span>
 
 <span class="sd">    The format is determined by the `format` argument or the extension of</span>
-<span class="sd">    `filename`. If `format` is provided, it takes precedence over The</span>
+<span class="sd">    `filename`. If `format` is provided, it takes precedence over the</span>
 <span class="sd">    extension of `filename`.</span>
 
 <span class="sd">    Parameters</span>
@@ -185,18 +192,20 @@
 <span class="sd">    filename : str or ``None``</span>
 <span class="sd">        If no *format* is supplied, then the filename for the trajectory is</span>
 <span class="sd">        examined for its extension and the Writer is chosen accordingly.</span>
-<span class="sd">        If ``None`` is provided, the</span>
-<span class="sd">        :class:`~MDAnalysis.coordinates.null.NullWriter` is selected.</span>
-<span class="sd">    format : str, optional</span>
+<span class="sd">        If ``None`` is provided, then</span>
+<span class="sd">        :class:`~MDAnalysis.coordinates.null.NullWriter` is selected (and</span>
+<span class="sd">        all output is discarded silently).</span>
+<span class="sd">    format : str (optional)</span>
 <span class="sd">        Explicitly set a format.</span>
-<span class="sd">    multiframe : bool, optional</span>
+<span class="sd">    multiframe : bool (optional)</span>
 <span class="sd">        ``True``: write multiple frames to the trajectory; ``False``: only</span>
 <span class="sd">        write a single coordinate frame; ``None``: first try trajectory (multi</span>
 <span class="sd">        frame writers), then the single frame ones. Default is ``None``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    A Writer object</span>
+<span class="sd">    :class:`Writer`</span>
+<span class="sd">        A Writer object</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -241,7 +250,7 @@
         <span class="n">errmsg</span> <span class="o">=</span> <span class="s2">&quot;No trajectory or frame writer for format &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span>
     <span class="k">elif</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">_MULTIFRAME_WRITERS</span>
-        <span class="n">errmsg</span> <span class="o">=</span> <span class="s2">&quot;No trajectory writer for format &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span> 
+        <span class="n">errmsg</span> <span class="o">=</span> <span class="s2">&quot;No trajectory writer for format &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span>
     <span class="k">elif</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">_SINGLEFRAME_WRITERS</span>
         <span class="n">errmsg</span> <span class="o">=</span> <span class="s2">&quot;No single frame writer for format &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span>
@@ -262,10 +271,19 @@
 <span class="sd">    Automatic detection is disabled when an explicit `format` is</span>
 <span class="sd">    provided.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str or mmtf.MMTFDecoder</span>
+<span class="sd">        name of the topology file; if this is an instance of</span>
+<span class="sd">        :class:`mmtf.MMTFDecoder` then directly use the MMTF format.</span>
+<span class="sd">    format : str</span>
+<span class="sd">        description of the file format</span>
+
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    ValueError</span>
 <span class="sd">        If no appropriate parser could be found.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="nb">format</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">format</span>

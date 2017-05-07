@@ -106,23 +106,24 @@
 reading of both formats and writing for the binary trajectories.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Support for AMBER is <em>experimental</em> and feedback and contributions
-are highly appreciated. Use the <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues">Issue Tracker</a> or get in touch on
-the <a class="reference external" href="http://groups.google.com/group/mdnalysis-discussion">MDAnalysis mailinglist</a>.</p>
+<p class="last">Support for AMBER is still somewhat <em>experimental</em> and feedback and
+contributions are highly appreciated. Use the <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues">Issue Tracker</a> or get in touch
+on the <a class="reference external" href="http://groups.google.com/group/mdnalysis-discussion">MDAnalysis mailinglist</a>.</p>
 </div>
 <p class="rubric">Units</p>
+<p>AMBER trajectories are assumed to be in the following units:</p>
 <ul class="simple">
 <li>lengths in Angstrom (Å)</li>
 <li>time in ps (but see below)</li>
 </ul>
-<p>AMBER trajectory coordinate frames are based on a <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>
+<p>AMBER trajectory coordinate frames are based on a custom <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>
 object.</p>
 <dl class="class">
 <dt id="MDAnalysis.coordinates.TRJ.Timestep">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRJ.</code><code class="descname">Timestep</code><span class="sig-paren">(</span><em>n_atoms</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRJ.html#Timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRJ.Timestep" title="Permalink to this definition">¶</a></dt>
 <dd><p>AMBER trajectory Timestep.</p>
-<p>The Timestep can be initialized with <em>arg</em> being an integer
-(the number of atoms) and an optional keyword argument <em>velocities</em> to
+<p>The Timestep can be initialized with <cite>arg</cite> being an integer
+(the number of atoms) and an optional keyword argument <cite>velocities</cite> to
 allocate space for both coordinates and velocities;</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.10.0: </span>Added ability to contain Forces</p>
@@ -135,24 +136,23 @@ allocate space for both coordinates and velocities;</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
 <li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>reader</strong> (<em>Reader</em><em>, </em><em>optional</em>) &#8211; A weak reference to the owning Reader.  Used for
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; A weak reference to the owning Reader.  Used for
 when attributes require trajectory manipulation (e.g. dt)</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The time difference between frames (ps).  If <code class="xref py py-attr docutils literal"><span class="pre">time</span></code>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The time difference between frames (ps).  If <code class="xref py py-attr docutils literal"><span class="pre">time</span></code>
 is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; <p>The starting time from which to calculate time (ps)</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
-Can add and remove position/velocity/force information by using
-the <code class="docutils literal"><span class="pre">has_*</span></code> attribute.</p>
-</div>
-</li>
+<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The starting time from which to calculate time (in ps)</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
+Can add and remove position/velocity/force information by using
+the <code class="docutils literal"><span class="pre">has_*</span></code> attribute.</p>
+</div>
 <dl class="attribute">
 <dt id="MDAnalysis.coordinates.TRJ.Timestep._pos">
 <code class="descname">_pos</code><a class="headerlink" href="#MDAnalysis.coordinates.TRJ.Timestep._pos" title="Permalink to this definition">¶</a></dt>
@@ -213,8 +213,8 @@ is assumed to be in ps. The default value is 1 ps.</p>
 <p>Functionality is currently limited to simple iteration over the
 trajectory.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based
-kwarg &#8216;delta&#8217; renamed to &#8216;dt&#8217;, for uniformity with other Readers</p>
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based.
+kwarg <cite>delta</cite> renamed to <cite>dt</cite>, for uniformity with other Readers</p>
 </div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.TRJ.TRJReader.close">
@@ -253,7 +253,7 @@ those and will raise a <code class="xref py py-exc docutils literal"><span class
 <dd><p>Reader for <a class="reference external" href="http://ambermd.org/netcdf/nctraj.html">AMBER NETCDF format</a> (version 1.0).</p>
 <p>AMBER binary trajectories are automatically recognised by the
 file extension &#8221;.ncdf&#8221;.</p>
-<p>The number of atoms (<em>n_atoms</em>) does not have to be provided as it can
+<p>The number of atoms (<cite>n_atoms</cite>) does not have to be provided as it can
 be read from the trajectory. The trajectory reader can randomly access
 frames and therefore supports direct indexing (with 0-based frame
 indices) and full-feature trajectory iteration, including slicing.</p>
@@ -272,44 +272,36 @@ the trajectory, then <code class="xref py py-attr docutils literal"><span class=
 </ul>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p><a class="reference internal" href="#MDAnalysis.coordinates.TRJ.NCDFWriter" title="MDAnalysis.coordinates.TRJ.NCDFWriter"><code class="xref py py-class docutils literal"><span class="pre">NCDFWriter</span></code></a>, <code class="xref py py-class docutils literal"></code></p>
-<dl class="last docutils">
-<dt><code class="xref py py-class docutils literal"></code></dt>
-<dd>Added ability to read Forces</dd>
-<dt><code class="xref py py-class docutils literal"></code></dt>
-<dd>Frame labels now 0-based instead of 1-based kwarg &#8216;delta&#8217; renamed to &#8216;dt&#8217;, for uniformity with other Readers</dd>
-</dl>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.TRJ.NCDFWriter" title="MDAnalysis.coordinates.TRJ.NCDFWriter"><code class="xref py py-class docutils literal"><span class="pre">NCDFWriter</span></code></a></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.10.0: </span>Added ability to read Forces</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frame labels now 0-based instead of 1-based.
+kwarg <cite>delta</cite> renamed to <cite>dt</cite>, for uniformity with other Readers.</p>
 </div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.TRJ.NCDFReader.Writer">
 <code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRJ.html#NCDFReader.Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRJ.NCDFReader.Writer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a NCDFWriter for <em>filename</em> with the same parameters as this NCDF.</p>
+<dd><p>Returns a NCDFWriter for <cite>filename</cite> with the same parameters as this NCDF.</p>
 <p>All values can be changed through keyword arguments.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>filename</em></dt>
-<dd><p class="first last">filename of the output NCDF trajectory</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the output NCDF trajectory</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of atoms</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; length of one timestep in picoseconds</li>
+<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; string that is stored in the title field</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
-<dt><em>n_atoms</em></dt>
-<dd><p class="first last">number of atoms</p>
-</dd>
-<dt><em>dt</em></dt>
-<dd><p class="first last">length of one timestep in picoseconds</p>
-</dd>
-<dt><em>remarks</em></dt>
-<dd><p class="first last">string that is stored in the title field</p>
-</dd>
-</dl>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.TRJ.NCDFWriter" title="MDAnalysis.coordinates.TRJ.NCDFWriter"><code class="xref py py-class docutils literal"><span class="pre">NCDFWriter</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.TRJ.NCDFWriter" title="MDAnalysis.coordinates.TRJ.NCDFWriter"><code class="xref py py-class docutils literal"><span class="pre">NCDFWriter</span></code></a></p>
 </td>
 </tr>
 </tbody>
@@ -337,57 +329,33 @@ velocities).</p>
 <p>Unit cell information is written if available.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p><a class="reference internal" href="#MDAnalysis.coordinates.TRJ.NCDFReader" title="MDAnalysis.coordinates.TRJ.NCDFReader"><code class="xref py py-class docutils literal"><span class="pre">NCDFReader</span></code></a>, <code class="xref py py-class docutils literal"></code></p>
-<dl class="last docutils">
-<dt><code class="xref py py-class docutils literal"></code></dt>
-<dd>Added ability to write velocities and forces</dd>
-<dt><code class="xref py py-class docutils literal"></code></dt>
-<dd>kwarg &#8216;delta&#8217; renamed to &#8216;dt&#8217;, for uniformity with other Readers</dd>
-</dl>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.TRJ.NCDFReader" title="MDAnalysis.coordinates.TRJ.NCDFReader"><code class="xref py py-class docutils literal"><span class="pre">NCDFReader</span></code></a></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.10.0: </span>Added ability to write velocities and forces</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>kwarg <cite>delta</cite> renamed to <cite>dt</cite>, for uniformity with other Readers</p>
 </div>
 <p>Create a new NCDFWriter</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>filename</em></dt>
-<dd><p class="first last">name of output file</p>
-</dd>
-<dt><em>n_atoms</em></dt>
-<dd><p class="first last">number of atoms in trajectory file</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>start</em></dt>
-<dd><p class="first last">starting timestep</p>
-</dd>
-<dt><em>step</em></dt>
-<dd><p class="first last">skip between subsequent timesteps</p>
-</dd>
-<dt><em>dt</em></dt>
-<dd><p class="first last">timestep</p>
-</dd>
-<dt><em>convert_units</em></dt>
-<dd><p class="first last"><code class="docutils literal"><span class="pre">True</span></code>: units are converted to the AMBER base format; <code class="docutils literal"><span class="pre">None</span></code>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of output file</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of atoms in trajectory file</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; starting timestep</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; skip between subsequent timesteps</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; timestep</li>
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: units are converted to the AMBER base format; <code class="docutils literal"><span class="pre">None</span></code>
 selects the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code>
-[&#8216;convert_lengths&#8217;] (see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>).</p>
-</dd>
-<dt><em>zlib</em></dt>
-<dd><p class="first last">compress data [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-<dt><em>cmplevel</em></dt>
-<dd><p class="first last">compression level (1-9) [1]</p>
-</dd>
-<dt><em>velocities</em></dt>
-<dd><p class="first last">Write velocities into the trajectory [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-<dt><em>forces</em></dt>
-<dd><p class="first last">Write forces into the trajectory [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-</dl>
+[&#8216;convert_lengths&#8217;] (see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>).</li>
+<li><strong>zlib</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; compress data [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>cmplevel</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; compression level (1-9) [1]</li>
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Write velocities into the trajectory [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Write forces into the trajectory [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -395,16 +363,37 @@ selects the value of <code class="xref py py-data docutils literal"><span class=
 <dl class="method">
 <dt id="MDAnalysis.coordinates.TRJ.NCDFWriter.is_periodic">
 <code class="descname">is_periodic</code><span class="sig-paren">(</span><em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRJ.html#NCDFWriter.is_periodic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRJ.NCDFWriter.is_periodic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> <em>ts</em> contains a valid
-simulation box</p>
+<dd><p>Test if <cite>Timestep</cite> contains a periodic trajectory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ts</strong> (<a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>) &#8211; <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> instance containing coordinates to
+be written to trajectory file; default is the current
+timestep</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Return <code class="docutils literal"><span class="pre">True</span></code> if <cite>ts</cite> contains a valid simulation box</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.TRJ.NCDFWriter.write_next_timestep">
 <code class="descname">write_next_timestep</code><span class="sig-paren">(</span><em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRJ.html#NCDFWriter.write_next_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRJ.NCDFWriter.write_next_timestep" title="Permalink to this definition">¶</a></dt>
 <dd><p>write a new timestep to the trj file</p>
-<p><em>ts</em> is a <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> instance containing coordinates to
-be written to trajectory file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ts</strong> (<a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>) &#8211; <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> instance containing coordinates to
+be written to trajectory file; default is the current
+timestep</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

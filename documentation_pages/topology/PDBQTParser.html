@@ -159,7 +159,7 @@ deduced. Masses are guessed and set to 0 if unknown.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -167,7 +167,9 @@ deduced. Masses are guessed and set to 0 if unknown.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 <div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
@@ -184,7 +186,7 @@ deduced. Masses are guessed and set to 0 if unknown.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -192,10 +194,12 @@ deduced. Masses are guessed and set to 0 if unknown.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.7.</span></p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
 </dd></dl>
 
@@ -209,7 +213,7 @@ deduced. Masses are guessed and set to 0 if unknown.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -217,27 +221,29 @@ deduced. Masses are guessed and set to 0 if unknown.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.topology.PDBQTParser.PDBQTParser.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.PDBQTParser.PDBQTParser.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array x from base units to native units.</p>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -245,13 +251,15 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -265,7 +273,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -273,16 +281,17 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>t</em> is modified in place and also
-returned (although note that scalar values <em>t</em> are passed by
-value in Python and hence an in-place modification has no
-effect on the caller.)</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -327,7 +336,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -335,24 +344,26 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.topology.PDBQTParser.PDBQTParser.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.PDBQTParser.PDBQTParser.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -360,10 +371,12 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 

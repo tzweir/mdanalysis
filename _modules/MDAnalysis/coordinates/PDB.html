@@ -121,31 +121,22 @@
 <span class="sd">trajectory, while writing each frame::</span>
 
 <span class="sd">  calphas = universe.select_atoms(&quot;name CA&quot;)</span>
-<span class="sd">  W = MDAnalysis.Writer(&quot;calpha_traj.pdb&quot;, multiframe=True)</span>
-<span class="sd">  for ts in u.trajectory:</span>
-<span class="sd">      W.write(calphas)</span>
-<span class="sd">  W.close()</span>
+<span class="sd">  with MDAnalysis.Writer(&quot;calpha_traj.pdb&quot;, multiframe=True) as W:</span>
+<span class="sd">      for ts in u.trajectory:</span>
+<span class="sd">          W.write(calphas)</span>
 
 <span class="sd">It is important to *always close the trajectory* when done because only at this</span>
 <span class="sd">step is the final END_ record written, which is required by the `PDB 3.2</span>
-<span class="sd">standard`_.</span>
+<span class="sd">standard`_. Using the writer as a context manager ensures that this always</span>
+<span class="sd">happens.</span>
 
 
-<span class="sd">Implementations</span>
-<span class="sd">---------------</span>
+<span class="sd">Capabilities</span>
+<span class="sd">------------</span>
 
-<span class="sd">PDB I/O is available in the form of the Simple PDB Reader/Writers.</span>
-
-<span class="sd">..deprecated:: 0.15.0</span>
-<span class="sd">Readers and writers solely available in the form of</span>
-<span class="sd">Simple Readers and Writers, see below.</span>
-
-<span class="sd">Simple PDB Reader and Writer</span>
-<span class="sd">-----------------------------------------</span>
 <span class="sd">A pure-Python implementation for PDB files commonly encountered in MD</span>
-<span class="sd">simulations comes under the names :class:`PDBReader` and</span>
-<span class="sd">:class:`PDBWriter`. It only implements a subset of the `PDB 3.2 standard`_</span>
-<span class="sd">(for instance, it does not deal with insertion codes) and also allows some</span>
+<span class="sd">simulations comes under the names :class:`PDBReader` and :class:`PDBWriter`. It</span>
+<span class="sd">only implements a subset of the `PDB 3.2 standard`_ and also allows some</span>
 <span class="sd">typical enhancements such as 4-letter resids (introduced by CHARMM/NAMD).</span>
 
 <span class="sd">The :class:`PDBReader` can read multi-frame PDB files and represents</span>
@@ -155,26 +146,11 @@
 <span class="sd">to write a PDB trajectory by default (equivalent to using *multiframe* =</span>
 <span class="sd">``True``).</span>
 
-<span class="sd">Examples</span>
-<span class="sd">~~~~~~~~</span>
 
-<span class="sd">In order to write a **multi-frame PDB trajectory** from a universe *u* one can</span>
-<span class="sd">do the following::</span>
+<span class="sd">Examples for working with PDB files</span>
+<span class="sd">-----------------------------------</span>
 
-<span class="sd">  pdb = MDAnalysis.Writer(&quot;all.pdb&quot;, multiframe=True)</span>
-<span class="sd">  for ts in u.trajectory:</span>
-<span class="sd">      pdb.write(u)</span>
-<span class="sd">  pdb.close()</span>
-
-<span class="sd">Similarly, writing only a protein::</span>
-
-<span class="sd">  pdb = MDAnalysis.Writer(&quot;protein.pdb&quot;, multiframe=True)</span>
-<span class="sd">  protein = u.select_atoms(&quot;protein&quot;)</span>
-<span class="sd">  for ts in u.trajectory:</span>
-<span class="sd">      pdb.write(protein)</span>
-<span class="sd">  pdb.close()</span>
-
-<span class="sd">A single frame can be written with the</span>
+<span class="sd">A **single frame PDB** can be written with the</span>
 <span class="sd">:meth:`~MDAnalysis.core.groups.AtomGroup.write` method of any</span>
 <span class="sd">:class:`~MDAnalysis.core.groups.AtomGroup`::</span>
 
@@ -184,14 +160,33 @@
 <span class="sd">Alternatively, get the single frame writer and supply the</span>
 <span class="sd">:class:`~MDAnalysis.core.groups.AtomGroup`::</span>
 
-<span class="sd">  pdb = MDAnalysis.Writer(&quot;protein.pdb&quot;)</span>
 <span class="sd">  protein = u.select_atoms(&quot;protein&quot;)</span>
-<span class="sd">  pdb.write(protein)</span>
-<span class="sd">  pdb.close()</span>
+<span class="sd">  with MDAnalysis.Writer(&quot;protein.pdb&quot;) as pdb:</span>
+<span class="sd">      pdb.write(protein)</span>
+
+<span class="sd">In order to write a **multi-frame PDB trajectory** from a universe *u* one can</span>
+<span class="sd">do the following::</span>
+
+<span class="sd">  with MDAnalysis.Writer(&quot;all.pdb&quot;, multiframe=True) as pdb:</span>
+<span class="sd">      for ts in u.trajectory:</span>
+<span class="sd">          pdb.write(u)</span>
+
+<span class="sd">Similarly, writing only a protein::</span>
+
+<span class="sd">  protein = u.select_atoms(&quot;protein&quot;)</span>
+<span class="sd">  with MDAnalysis.Writer(&quot;protein.pdb&quot;, multiframe=True) as pdb:</span>
+<span class="sd">      for ts in u.trajectory:</span>
+<span class="sd">          pdb.write(protein)</span>
+
 
 
 <span class="sd">Classes</span>
-<span class="sd">~~~~~~~</span>
+<span class="sd">-------</span>
+
+<span class="sd">.. versionchanged:: 0.16.0</span>
+<span class="sd">   PDB readers and writers based on :class:`Bio.PDB.PDBParser` were retired and</span>
+<span class="sd">   removed.</span>
+
 
 <span class="sd">.. autoclass:: PDBReader</span>
 <span class="sd">   :members:</span>
@@ -211,13 +206,10 @@
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
 
-<span class="sd">..deprecated:: 0.15.0</span>
-<span class="sd">    The &quot;permissive&quot; flag is not used anymore (and effectively defaults to True);</span>
-<span class="sd">    it will be completely removed in 0.16.0.</span>
-
 
 <span class="sd">.. _`PDB 3.2 standard`:</span>
 <span class="sd">    http://www.wwpdb.org/documentation/format32/v3.2.html</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 
@@ -398,11 +390,14 @@
 <div class="viewcode-block" id="PDBReader.Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBReader.Writer">[docs]</a>    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a PDBWriter for *filename*.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *filename*</span>
-<span class="sd">              filename of the output PDB file</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            filename of the output PDB file</span>
 
-<span class="sd">        :Returns: :class:`PDBWriter`</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`PDBWriter`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;multiframe&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
@@ -495,11 +490,12 @@
 <span class="sd">    .. _ENDMDL: http://www.wwpdb.org/documentation/format32/sect9.html#ENDMDL</span>
 <span class="sd">    .. _CONECT: http://www.wwpdb.org/documentation/format32/sect10.html#CONECT</span>
 
+
 <span class="sd">    Note</span>
 <span class="sd">    ----</span>
 <span class="sd">    This class is identical to :class:`MultiPDBWriter` with the one</span>
 <span class="sd">    exception that it defaults to writing single-frame PDB files as if</span>
-<span class="sd">    *multiframe* = ``False`` was selected.</span>
+<span class="sd">    `multiframe` = ``False`` was selected.</span>
 
 
 <span class="sd">    .. versionchanged:: 0.7.5</span>
@@ -602,7 +598,6 @@
 <span class="sd">           ``False``: write a single frame to the file; ``True``: create a</span>
 <span class="sd">           multi frame PDB file in which frames are written as MODEL_ ... ENDMDL_</span>
 <span class="sd">           records. If ``None``, then the class default is chosen.    [``None``]</span>
-
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
@@ -801,10 +796,11 @@
 <span class="sd">        used as the PDB chainID (but see :meth:`~PDBWriter.ATOM` for</span>
 <span class="sd">        details).</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *obj*</span>
-<span class="sd">            :class:`~MDAnalysis.core.groups.AtomGroup` or</span>
-<span class="sd">            :class:`~MDAnalysis.core.universe.Universe`</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        obj</span>
+<span class="sd">            The :class:`~MDAnalysis.core.groups.AtomGroup` or</span>
+<span class="sd">            :class:`~MDAnalysis.core.universe.Universe` to write.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_frame</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>

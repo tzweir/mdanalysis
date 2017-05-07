@@ -101,6 +101,13 @@
 <span class="sd">this module. The derived classes must follow the :ref:`Trajectory API`</span>
 <span class="sd">in :mod:`MDAnalysis.coordinates.__init__`.</span>
 
+<span class="sd">Timestep</span>
+<span class="sd">--------</span>
+
+<span class="sd">A :class:`Timestep` holds information for the current time frame in</span>
+<span class="sd">the trajectory. It is one of the central data structures in</span>
+<span class="sd">MDAnalysis.</span>
+
 <span class="sd">.. class:: Timestep</span>
 
 <span class="sd">   .. automethod:: __init__</span>
@@ -179,19 +186,62 @@
 <span class="sd">   .. automethod:: copy</span>
 <span class="sd">   .. automethod:: copy_slice</span>
 
-<span class="sd">.. autoclass:: IOBase</span>
-<span class="sd">   :members:</span>
 
-<span class="sd">.. autoclass:: ProtoReader</span>
-<span class="sd">   :members:</span>
+<span class="sd">Readers</span>
+<span class="sd">-------</span>
+
+<span class="sd">Readers know how to take trajectory data in a given format and present it in a</span>
+<span class="sd">common API to the user in MDAnalysis. There are two types of readers:</span>
+
+<span class="sd">1. Readers for *multi frame trajectories*, i.e., file formats that typically</span>
+<span class="sd">   contain many frames. These readers are typically derived from</span>
+<span class="sd">   :class:`ReaderBase`.</span>
+
+<span class="sd">2. Readers for *single frame formats*: These file formats only contain a single</span>
+<span class="sd">   coordinate set. These readers are derived from</span>
+<span class="sd">   :class`:SingleFrameReaderBase`.</span>
+
+<span class="sd">The underlying low-level readers handle closing of files in different</span>
+<span class="sd">ways. Typically, the MDAnalysis readers try to ensure that files are always</span>
+<span class="sd">closed when a reader instance is garbage collected, which relies on</span>
+<span class="sd">implementing a :meth:`~ReaderBase.__del__` method. However, in some cases, this</span>
+<span class="sd">is not necessary (for instance, for the single frame formats) and then such a</span>
+<span class="sd">method can lead to undesirable side effects (such as memory leaks). In this</span>
+<span class="sd">case, :class:`ProtoReader` should be used.</span>
+
 
 <span class="sd">.. autoclass:: ReaderBase</span>
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
 
+<span class="sd">.. autoclass:: SingleFrameReaderBase</span>
+<span class="sd">   :members:</span>
+<span class="sd">   :inherited-members:</span>
+
+<span class="sd">.. autoclass:: ProtoReader</span>
+<span class="sd">   :members:</span>
+
+
+
+<span class="sd">Writers</span>
+<span class="sd">-------</span>
+
+<span class="sd">Writers know how to write information in a :class:`Timestep` to a trajectory</span>
+<span class="sd">file.</span>
+
 <span class="sd">.. autoclass:: WriterBase</span>
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
+
+
+<span class="sd">Helper classes</span>
+<span class="sd">--------------</span>
+
+<span class="sd">The following classes contain basic functionality that all readers and</span>
+<span class="sd">writers share.</span>
+
+<span class="sd">.. autoclass:: IOBase</span>
+<span class="sd">   :members:</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
@@ -230,10 +280,10 @@
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Added :meth:`from_timestep` and :meth:`from_coordinates` constructor</span>
 <span class="sd">       methods.</span>
-<span class="sd">       :class:`Timestep` init now only accepts integer creation</span>
-<span class="sd">       :attr:`n_atoms` now a read only property</span>
-<span class="sd">       :attr:`frame` now 0-based instead of 1-based</span>
-<span class="sd">       Attributes status and step removed</span>
+<span class="sd">       :class:`Timestep` init now only accepts integer creation.</span>
+<span class="sd">       :attr:`n_atoms` now a read only property.</span>
+<span class="sd">       :attr:`frame` now 0-based instead of 1-based.</span>
+<span class="sd">       Attributes `status` and `step` removed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="s1">&#39;F&#39;</span>
 
@@ -246,23 +296,24 @@
 <span class="sd">          The total number of atoms this Timestep describes</span>
 <span class="sd">        positions : bool, optional</span>
 <span class="sd">          Whether this Timestep has position information [``True``]</span>
-<span class="sd">        velocities : bool, optional</span>
+<span class="sd">        velocities : bool (optional)</span>
 <span class="sd">          Whether this Timestep has velocity information [``False``]</span>
-<span class="sd">        forces : bool, optional</span>
+<span class="sd">        forces : bool (optional)</span>
 <span class="sd">          Whether this Timestep has force information [``False``]</span>
-<span class="sd">        reader : Reader, optional</span>
+<span class="sd">        reader : Reader (optional)</span>
 <span class="sd">          A weak reference to the owning Reader.  Used for</span>
 <span class="sd">          when attributes require trajectory manipulation (e.g. dt)</span>
-<span class="sd">        dt : float, optional</span>
+<span class="sd">        dt : float (optional)</span>
 <span class="sd">          The time difference between frames (ps).  If :attr:`time`</span>
 <span class="sd">          is set, then `dt` will be ignored.</span>
-<span class="sd">        time_offset : float, optional</span>
-<span class="sd">          The starting time from which to calculate time (ps)</span>
+<span class="sd">        time_offset : float (optional)</span>
+<span class="sd">          The starting time from which to calculate time (in ps)</span>
 
-<span class="sd">          .. versionchanged:: 0.11.0</span>
-<span class="sd">             Added keywords for `positions`, `velocities` and `forces`.</span>
-<span class="sd">             Can add and remove position/velocity/force information by using</span>
-<span class="sd">             the ``has_*`` attribute.</span>
+
+<span class="sd">        .. versionchanged:: 0.11.0</span>
+<span class="sd">           Added keywords for `positions`, `velocities` and `forces`.</span>
+<span class="sd">           Can add and remove position/velocity/force information by using</span>
+<span class="sd">           the ``has_*`` attribute.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># readers call Reader._read_next_timestep() on init, incrementing</span>
         <span class="c1"># self.frame to 0</span>
@@ -435,7 +486,7 @@
 <span class="sd">           correspond to atom indices,</span>
 <span class="sd">           :attr:`MDAnalysis.core.groups.Atom.index` (0-based)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">[</span><span class="n">atoms</span><span class="p">]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="p">(</span><span class="nb">slice</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">[</span><span class="n">atoms</span><span class="p">]</span>
@@ -471,25 +522,41 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Timestep.copy_slice"><a class="viewcode-back" href="../../../documentation_pages/coordinates/memory.html#MDAnalysis.coordinates.DCD.Timestep.copy_slice">[docs]</a>    <span class="k">def</span> <span class="nf">copy_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sel</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Make a new Timestep containing a subset of the original Timestep.</span>
+        <span class="sd">&quot;&quot;&quot;Make a new `Timestep` containing a subset of the original `Timestep`.</span>
 
-<span class="sd">        ``ts.copy_slice(slice(start, stop, skip))``</span>
-<span class="sd">        ``ts.copy_slice([list of indices])``</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sel : array_like or slice</span>
+<span class="sd">            The underlying position, velocity, and force arrays are sliced</span>
+<span class="sd">            using a :class:`list`, :class:`slice`, or any array-like.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        A Timestep object of the same type containing all header</span>
-<span class="sd">        information and all atom information relevant to the selection.</span>
+<span class="sd">        :class:`Timestep`</span>
+<span class="sd">            A `Timestep` object of the same type containing all header</span>
+<span class="sd">            information and all atom information relevant to the selection.</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
-<span class="sd">        The selection must be a 0 based slice or array of the atom indices</span>
-<span class="sd">        in this Timestep</span>
+<span class="sd">        The selection must be a 0 based :class:`slice` or array of the atom indices</span>
+<span class="sd">        in this :class:`Timestep`</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Using a Python :class:`slice` object::</span>
+
+<span class="sd">           new_ts = ts.copy_slice(slice(start, stop, step))</span>
+
+<span class="sd">        Using a list of indices::</span>
+
+<span class="sd">           new_ts = ts.copy_slice([0, 2, 10, 20, 23])</span>
+
 
 <span class="sd">        .. versionadded:: 0.8</span>
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Reworked to follow new Timestep API.  Now will strictly only</span>
 <span class="sd">           copy official attributes of the Timestep.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Detect the size of the Timestep by doing a dummy slice</span>
         <span class="k">try</span><span class="p">:</span>
@@ -583,16 +650,17 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">          A numpy.ndarray of shape (n_atoms, 3) of position data for each</span>
-<span class="sd">          atom</span>
+<span class="sd">        positions : numpy.ndarray with dtype numpy.float32</span>
+<span class="sd">               position data of shape ``(n_atoms, 3)`` for all atoms</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
-<span class="sd">          :class:`MDAnalysis.exceptions.NoDataError`</span>
-<span class="sd">          If the Timestep has no position data</span>
+<span class="sd">        :exc:`MDAnalysis.exceptions.NoDataError`</span>
+<span class="sd">               if the Timestep has no position data</span>
+
 
 <span class="sd">        .. versionchanged:: 0.11.0</span>
-<span class="sd">           Now can raise NoDataError when no position data present</span>
+<span class="sd">           Now can raise :exc`NoDataError` when no position data present</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_positions</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span>
@@ -660,13 +728,14 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">          A numpy.ndarray of shape (n_atoms, 3) of velocity data for each</span>
-<span class="sd">          atom</span>
+<span class="sd">        velocities : numpy.ndarray with dtype numpy.float32</span>
+<span class="sd">               velocity data of shape ``(n_atoms, 3)`` for all atoms</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
-<span class="sd">          :class:`MDAnalysis.exceptions.NoDataError`</span>
-<span class="sd">          When the Timestep does not contain velocity information</span>
+<span class="sd">        :exc:`MDAnalysis.exceptions.NoDataError`</span>
+<span class="sd">               if the Timestep has no velocity data</span>
+
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -709,13 +778,14 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        A numpy.ndarray of shape (n_atoms, 3) of force data for each</span>
-<span class="sd">        atom</span>
+<span class="sd">        forces : numpy.ndarray with dtype numpy.float32</span>
+<span class="sd">               force data of shape ``(n_atoms, 3)`` for all atoms</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
-<span class="sd">        :class:`MDAnalysis.NoDataError`</span>
-<span class="sd">        When the Timestep does not contain force information</span>
+<span class="sd">        :exc:`MDAnalysis.exceptions.NoDataError`</span>
+<span class="sd">               if the Timestep has no force data</span>
+
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -760,7 +830,8 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        A (3, 3) numpy.ndarray of unit cell vectors</span>
+<span class="sd">        numpy.ndarray</span>
+<span class="sd">             A (3, 3) numpy.ndarray of unit cell vectors</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
@@ -806,6 +877,7 @@
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
 <span class="sd">        This defaults to 1.0 ps in the absence of time data</span>
+
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -876,17 +948,20 @@
 <span class="sd">        ----------</span>
 <span class="sd">        x : array_like</span>
 <span class="sd">          Positions to transform</span>
-<span class="sd">        inplace : bool, optional</span>
+<span class="sd">        inplace : bool (optional)</span>
 <span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
-<span class="sd">        By default, the input *x* is modified in place and also returned.</span>
+<span class="sd">        By default, the input `x` is modified in place and also returned.</span>
+<span class="sd">        In-place operations improve performance because allocating new arrays</span>
+<span class="sd">        is avoided.</span>
+
 
 <span class="sd">        .. versionchanged:: 0.7.5</span>
-<span class="sd">           Keyword *inplace* can be set to ``False`` so that a</span>
+<span class="sd">           Keyword `inplace` can be set to ``False`` so that a</span>
 <span class="sd">           modified copy is returned *unless* no conversion takes</span>
-<span class="sd">           place, in which case the reference to the unmodified *x* is</span>
+<span class="sd">           place, in which case the reference to the unmodified `x` is</span>
 <span class="sd">           returned.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -906,12 +981,15 @@
 <span class="sd">        ----------</span>
 <span class="sd">        v : array_like</span>
 <span class="sd">          Velocities to transform</span>
-<span class="sd">        inplace : bool, optional</span>
+<span class="sd">        inplace : bool (optional)</span>
 <span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
 <span class="sd">        By default, the input *v* is modified in place and also returned.</span>
+<span class="sd">        In-place operations improve performance because allocating new arrays</span>
+<span class="sd">        is avoided.</span>
+
 
 <span class="sd">        .. versionadded:: 0.7.5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -931,12 +1009,14 @@
 <span class="sd">        ----------</span>
 <span class="sd">        force : array_like</span>
 <span class="sd">          Forces to transform</span>
-<span class="sd">        inplace : bool, optional</span>
+<span class="sd">        inplace : bool (optional)</span>
 <span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
 <span class="sd">        By default, the input *force* is modified in place and also returned.</span>
+<span class="sd">        In-place operations improve performance because allocating new arrays</span>
+<span class="sd">        is avoided.</span>
 
 <span class="sd">        .. versionadded:: 0.7.7</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -956,20 +1036,22 @@
 <span class="sd">        ----------</span>
 <span class="sd">        t : array_like</span>
 <span class="sd">          Time values to transform</span>
-<span class="sd">        inplace : bool, optional</span>
+<span class="sd">        inplace : bool (optional)</span>
 <span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
-<span class="sd">        By default, the input *t* is modified in place and also</span>
-<span class="sd">        returned (although note that scalar values *t* are passed by</span>
-<span class="sd">        value in Python and hence an in-place modification has no</span>
-<span class="sd">        effect on the caller.)</span>
+<span class="sd">        By default, the input `t` is modified in place and also returned</span>
+<span class="sd">        (although note that scalar values `t` are passed by value in Python and</span>
+<span class="sd">        hence an in-place modification has no effect on the caller.)  In-place</span>
+<span class="sd">        operations improve performance because allocating new arrays is</span>
+<span class="sd">        avoided.</span>
+
 
 <span class="sd">        .. versionchanged:: 0.7.5</span>
-<span class="sd">           Keyword *inplace* can be set to ``False`` so that a</span>
+<span class="sd">           Keyword `inplace` can be set to ``False`` so that a</span>
 <span class="sd">           modified copy is returned *unless* no conversion takes</span>
-<span class="sd">           place, in which case the reference to the unmodified *x* is</span>
+<span class="sd">           place, in which case the reference to the unmodified `x` is</span>
 <span class="sd">           returned.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -983,23 +1065,26 @@
         <span class="k">return</span> <span class="n">t</span></div>
 
 <div class="viewcode-block" id="IOBase.convert_pos_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_pos_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_pos_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Conversion of coordinate array x from base units to native units.</span>
+        <span class="sd">&quot;&quot;&quot;Conversion of coordinate array `x` from base units to native units.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x : array_like</span>
 <span class="sd">          Positions to transform</span>
-<span class="sd">        inplace : bool, optional</span>
+<span class="sd">        inplace : bool (optional)</span>
 <span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
-<span class="sd">        By default, the input *x* is modified in place and also returned.</span>
+<span class="sd">        By default, the input `x` is modified in place and also returned.</span>
+<span class="sd">        In-place operations improve performance because allocating new arrays</span>
+<span class="sd">        is avoided.</span>
+
 
 <span class="sd">        .. versionchanged:: 0.7.5</span>
-<span class="sd">           Keyword *inplace* can be set to ``False`` so that a</span>
+<span class="sd">           Keyword `inplace` can be set to ``False`` so that a</span>
 <span class="sd">           modified copy is returned *unless* no conversion takes</span>
-<span class="sd">           place, in which case the reference to the unmodified *x* is</span>
+<span class="sd">           place, in which case the reference to the unmodified `x` is</span>
 <span class="sd">           returned.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1013,18 +1098,21 @@
         <span class="k">return</span> <span class="n">x</span></div>
 
 <div class="viewcode-block" id="IOBase.convert_velocities_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IOBase.convert_velocities_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_velocities_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Conversion of coordinate array *v* from base to native units</span>
+        <span class="sd">&quot;&quot;&quot;Conversion of coordinate array `v` from base to native units</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        v : array_like</span>
 <span class="sd">          Velocities to transform</span>
-<span class="sd">        inplace : bool, optional</span>
+<span class="sd">        inplace : bool (optional)</span>
 <span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
-<span class="sd">        By default, the input *v* is modified in place and also returned.</span>
+<span class="sd">        By default, the input `v` is modified in place and also returned.</span>
+<span class="sd">        In-place operations improve performance because allocating new arrays</span>
+<span class="sd">        is avoided.</span>
+
 
 <span class="sd">        .. versionadded:: 0.7.5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1044,12 +1132,15 @@
 <span class="sd">        ----------</span>
 <span class="sd">        force : array_like</span>
 <span class="sd">          Forces to transform</span>
-<span class="sd">        inplace : bool, optional</span>
+<span class="sd">        inplace : bool (optional)</span>
 <span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
-<span class="sd">        By default, the input *force* is modified in place and also returned.</span>
+<span class="sd">        By default, the input `force` is modified in place and also returned.</span>
+<span class="sd">        In-place operations improve performance because allocating new arrays</span>
+<span class="sd">        is avoided.</span>
+
 
 <span class="sd">        .. versionadded:: 0.7.7</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1138,6 +1229,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`ReaderBase`</span>
 
+
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Frames now 0-based instead of 1-based</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1222,9 +1314,11 @@
 <span class="sd">        Sets the default keywords *start*, *step* and *dt* (if</span>
 <span class="sd">        available). *n_atoms* is always set from :attr:`Reader.n_atoms`.</span>
 
+
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        :meth:`Reader.Writer` and :func:`MDAnalysis.Writer`</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;n_atoms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span>  <span class="c1"># essential</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
@@ -1258,7 +1352,7 @@
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the Timestep corresponding to *frame*.</span>
 
-<span class="sd">        If *frame* is a integer then the corresponding frame is</span>
+<span class="sd">        If `frame` is a integer then the corresponding frame is</span>
 <span class="sd">        returned. Negative numbers are counted from the end.</span>
 
 <span class="sd">        If frame is a :class:`slice` then an iterator is returned that</span>
@@ -1277,7 +1371,7 @@
                                  <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
             <span class="k">return</span> <span class="n">frame</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
             <span class="n">frame</span> <span class="o">=</span> <span class="n">apply_limits</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame_with_aux</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
@@ -1289,7 +1383,7 @@
 
             <span class="k">def</span> <span class="nf">listiter</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
                         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Frames indices must be integers&quot;</span><span class="p">)</span>
                     <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame_with_aux</span><span class="p">(</span><span class="n">apply_limits</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 
@@ -1343,33 +1437,51 @@
                             <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
 
 <div class="viewcode-block" id="ProtoReader.check_slice_indices"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.check_slice_indices">[docs]</a>    <span class="k">def</span> <span class="nf">check_slice_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check frame indices are valid and clip to fit trajectory</span>
+        <span class="sd">&quot;&quot;&quot;Check frame indices are valid and clip to fit trajectory.</span>
+
+<span class="sd">        The usage follows standard Python conventions for :func:`range` but see</span>
+<span class="sd">        the warning below.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        start, stop, step : int or None</span>
-<span class="sd">          Values representing the slice indices.</span>
-<span class="sd">          Can use `None` to use defaults of (0, n_frames, and 1)</span>
-<span class="sd">          respectively.</span>
+<span class="sd">        start : int or None</span>
+<span class="sd">          Starting frame index (inclusive). ``None`` corresponds to the default</span>
+<span class="sd">          of 0, i.e., the initial frame.</span>
+<span class="sd">        stop : int or None</span>
+<span class="sd">          Last frame index (exclusive). ``None`` corresponds to the default</span>
+<span class="sd">          of n_frames, i.e., it includes the last frame of the trajectory.</span>
+<span class="sd">        step : int or None</span>
+<span class="sd">          step size of the slice, ``None`` corresponds to the default of 1, i.e,</span>
+<span class="sd">          include every frame in the range `start`, `stop`.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        start, stop, step : int</span>
+<span class="sd">        start, stop, step : tuple (int, int, int)</span>
 <span class="sd">          Integers representing the slice</span>
 
 <span class="sd">        Warning</span>
 <span class="sd">        -------</span>
-<span class="sd">        The returned values start, stop and step give the expected result when passed</span>
-<span class="sd">        in range() but gives unexpected behaviour when passed in a slice when stop=None</span>
-<span class="sd">        and step=-1</span>
+<span class="sd">        The returned values `start`, `stop` and `step` give the expected result</span>
+<span class="sd">        when passed in :func:`range` but gives unexpected behavior when passed</span>
+<span class="sd">        in a :class:`slice` when ``stop=None`` and ``step=-1``</span>
 
-<span class="sd">        This is because when we slice the trajectory (u.trajectory[::-1]), the values</span>
-<span class="sd">        returned by check_slice_indices are passed to range. Instead, in AnalysisBase</span>
-<span class="sd">        the values returned by check_slice_indices are used to splice the trajectory.</span>
-<span class="sd">        This creates a discrepancy because these two lines are not equivalent:</span>
+<span class="sd">        This can be a problem for downstream processing of the output from this</span>
+<span class="sd">        method. For example, slicing of trajectories is implemented by passing</span>
+<span class="sd">        the values returned by :meth:`check_slice_indices` to :func:`range` ::</span>
 
-<span class="sd">            range(10, -1, -1)  # [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span>
-<span class="sd">            range(10)[10:-1:-1]  # []</span>
+<span class="sd">          range(start, stop, step)</span>
+
+<span class="sd">        and using them as the indices to randomly seek to. On the other hand,</span>
+<span class="sd">        in :class:`MDAnalysis.analysis.base.AnalysisBase` the values returned</span>
+<span class="sd">        by :meth:`check_slice_indices` are used to splice the trajectory by</span>
+<span class="sd">        creating a :class:`slice` instance ::</span>
+
+<span class="sd">          slice(start, stop, step)</span>
+
+<span class="sd">        This creates a discrepancy because these two lines are not equivalent::</span>
+
+<span class="sd">            range(10, -1, -1)             # [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span>
+<span class="sd">            range(10)[slice(10, -1, -1)]  # []</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -1429,7 +1541,7 @@
 <span class="sd">        :class:`~MDAnalysis.auxiliary.base.AuxReader` instance, or the data</span>
 <span class="sd">        itself as e.g. a filename; in the latter case an appropriate</span>
 <span class="sd">        :class:`~MDAnalysis.auxiliary.base.AuxReader` is guessed from the</span>
-<span class="sd">        data/file format. An appropriate *format* may also be directly provided</span>
+<span class="sd">        data/file format. An appropriate `format` may also be directly provided</span>
 <span class="sd">        as a key word argument.</span>
 
 <span class="sd">        On adding, the AuxReader is initially matched to the current timestep</span>
@@ -1700,6 +1812,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`ProtoReader`</span>
 
+
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Most of the base Reader class definitions were offloaded to</span>
 <span class="sd">       :class:`ProtoReader` so as to allow the subclassing of ReaderBases without a</span>
@@ -1784,15 +1897,17 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">lengths</span><span class="p">,</span> <span class="n">angles</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="WriterBase.write"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.WriterBase.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write current timestep, using the supplied *obj*.</span>
+        <span class="sd">&quot;&quot;&quot;Write current timestep, using the supplied `obj`.</span>
 
-<span class="sd">        The argument should be a :class:`~MDAnalysis.core.groups.AtomGroup` or</span>
-<span class="sd">        a :class:`~MDAnalysis.core.universe.Universe` or a :class:`Timestep` instance.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        obj : :class:`~MDAnalysis.core.groups.AtomGroup` or :class:`~MDAnalysis.core.universe.Universe` or a :class:`Timestep`</span>
+<span class="sd">            write coordinate information associate with `obj`</span>
 
-<span class="sd">        .. Note::</span>
-
-<span class="sd">           The size of the *obj* must be the same as the number of atom</span>
-<span class="sd">           provided when setting up the trajectory.</span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        The size of the `obj` must be the same as the number of atoms provided</span>
+<span class="sd">        when setting up the trajectory.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Timestep</span><span class="p">):</span>
             <span class="n">ts</span> <span class="o">=</span> <span class="n">obj</span>
@@ -1825,12 +1940,16 @@
 
 <span class="sd">           min &lt; x &lt;= max</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">            *criteria*</span>
-<span class="sd">               dictionary containing the *max* and *min* values in native units</span>
-<span class="sd">            *x*</span>
-<span class="sd">               :class:`np.ndarray` of ``(x, y, z)`` coordinates of atoms selected to be written out.</span>
-<span class="sd">        :Returns: boolean</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        criteria : dict</span>
+<span class="sd">            dictionary containing the *max* and *min* values in native units</span>
+<span class="sd">        x : numpy.ndarray</span>
+<span class="sd">            ``(x, y, z)`` coordinates of atoms selected to be written out</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">criteria</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">])</span></div></div>
@@ -1838,7 +1957,7 @@
         <span class="c1"># def write_next_timestep(self, ts=None)</span>
 
 
-<span class="k">class</span> <span class="nc">SingleFrameReaderBase</span><span class="p">(</span><span class="n">ProtoReader</span><span class="p">):</span>
+<div class="viewcode-block" id="SingleFrameReaderBase"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.SingleFrameReaderBase">[docs]</a><span class="k">class</span> <span class="nc">SingleFrameReaderBase</span><span class="p">(</span><span class="n">ProtoReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class for Readers that only have one frame.</span>
 
 <span class="sd">    To use this base class, define the method :meth:`_read_first_frame` to</span>
@@ -1902,7 +2021,7 @@
         <span class="c1"># all single frame readers should use context managers to access</span>
         <span class="c1"># self.filename. Explicitly setting it to the null action in case</span>
         <span class="c1"># the IOBase.close method is ever changed from that.</span>
-        <span class="k">pass</span>
+        <span class="k">pass</span></div>
 </pre></div>
 
           </div>

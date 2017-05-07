@@ -199,25 +199,19 @@ vectors</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>dimensions</em></dt>
-<dd><p class="first last">list of box lengths and angles (in degrees) such as
-[A,B,C,alpha,beta,gamma]</p>
-</dd>
-</dl>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dimensions</strong> (<em></em><em>[</em><em>A</em><em>, </em><em>B</em><em>, </em><em>C</em><em>, </em><em>alpha</em><em>, </em><em>beta</em><em>, </em><em>gamma</em><em>]</em><em></em>) &#8211; list of box lengths and angles (in degrees) such as
+<code class="docutils literal"><span class="pre">[A,B,C,alpha,beta,gamma]</span></code></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy 3x3 array B, with B[0] = first box vector,
-B[1] = second vector, B[2] third box vector.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy 3x3 array B, with <code class="docutils literal"><span class="pre">B[0]</span></code> as first box vector,
+<code class="docutils literal"><span class="pre">B[1]``as</span> <span class="pre">second</span> <span class="pre">vector,</span> <span class="pre">``B[2]</span></code> as third box vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a></td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The first vector is always pointing along the X-axis
-i.e. parallel to (1,0,0).</p>
-</div>
+<p class="rubric">Notes</p>
+<p>The first vector is always pointing along the X-axis,
+i.e., parallel to (1, 0, 0).</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.6: </span>Null-vectors are returned for non-periodic (or missing) unit cell.</p>
 </div>
@@ -233,17 +227,12 @@ triclinic box vectors from <a class="reference internal" href="#MDAnalysis.lib.m
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>dimensions</em></dt>
-<dd><p class="first last">list of box lengths and angles (in degrees) such as
-[A,B,C,alpha,beta,gamma]</p>
-</dd>
-</dl>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dimensions</strong> (<em></em><em>[</em><em>A</em><em>, </em><em>B</em><em>, </em><em>C</em><em>, </em><em>alpha</em><em>, </em><em>beta</em><em>, </em><em>gamma</em><em>]</em><em></em>) &#8211; list of box lengths and angles (in degrees) such as
+[A,B,C,alpha,beta,gamma]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy 3x3 array B, with B[0] = first box vector,
-B[1] = second vector, B[2] third box vector.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>volume</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></td>
 </tr>
 </tbody>
 </table>
@@ -253,45 +242,7 @@ B[1] = second vector, B[2] third box vector.</p>
 <dt id="MDAnalysis.lib.mdamath.make_whole">
 <code class="descclassname">MDAnalysis.lib.mdamath.</code><code class="descname">make_whole</code><span class="sig-paren">(</span><em>atomgroup</em>, <em>reference_atom=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/mdamath.html#make_whole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.mdamath.make_whole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move all atoms in a single molecule so that bonds don&#8217;t split over images</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>atomgroup</em></dt>
-<dd><p class="first last">The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup</span></code></a> to work with.
-The positions of this are modified in place.  All these atoms
-must belong in the same molecule or fragment.</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
-<dt><em>reference_atom</em></dt>
-<dd><p class="first last">The atom around which all other atoms will be moved.
-Defaults to atom 0 in the atomgroup.</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">None</span></code>.  Atom positions are modified in place</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
-<dt><cite>NoDataError</cite></dt>
-<dd><p class="first last">if there are no bonds present.
-(See <code class="xref py py-func docutils literal"><span class="pre">guess_bonds()</span></code>)</p>
-</dd>
-<dt><cite>ValueError</cite></dt>
-<dd><p class="first last">if the algorithm fails to work.  This is usually
-caused by the atomgroup not being a single fragment.
-(ie the molecule can&#8217;t be traversed by following bonds)</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
+<p>Atoms are modified in place.</p>
 <p>This function is most useful when atoms have been packed into the primary
 unit cell, causing breaks mid molecule, with the molecule then appearing
 on either side of the unit cell. This is problematic for operations
@@ -307,7 +258,36 @@ such as calculating the center of mass of the molecule.</p>
 +-----------+     +-----------+
 </pre></div>
 </div>
-<p>Usage:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>atomgroup</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup</span></code></a> to work with.
+The positions of this are modified in place.  All these atoms
+must belong in the same molecule or fragment.</li>
+<li><strong>reference_atom</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a>) &#8211; The atom around which all other atoms will be moved.
+Defaults to atom 0 in the atomgroup.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code> &#8211; There are no bonds present.
+(See <code class="xref py py-func docutils literal"><span class="pre">guess_bonds()</span></code>)</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; The algorithm fails to work.  This is usually
+caused by the atomgroup not being a single fragment.
+(ie the molecule can&#8217;t be traversed by following bonds)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only orthogonal boxes are currently supported.</p>
+</div>
+<p class="rubric">Example</p>
+<p>Make fragments whole:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.util.mdamath</span> <span class="k">import</span> <span class="n">make_whole</span>
 
 <span class="c1"># This algorithm requires bonds, these can be guessed!</span>
@@ -318,7 +298,7 @@ such as calculating the center of mass of the molecule.</p>
 <span class="c1"># Note that this function will only handle a single fragment</span>
 <span class="c1"># at a time, necessitating a loop.</span>
 <span class="k">for</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">fragments</span><span class="p">:</span>
-    <span class="n">make_whole</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
+  <span class="n">make_whole</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, to keep a single atom in place as the anchor:</p>
@@ -326,10 +306,6 @@ such as calculating the center of mass of the molecule.</p>
 <span class="c1"># and all other atoms will move (if necessary).</span>
 <span class="n">make_whole</span><span class="p">(</span><span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference_atom</span><span class="o">=</span><span class="n">atomgroup</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Only orthogonal boxes are currently supported</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
@@ -358,17 +334,12 @@ triclinic box vectors from <a class="reference internal" href="#MDAnalysis.lib.m
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>dimensions</em></dt>
-<dd><p class="first last">list of box lengths and angles (in degrees) such as
-[A,B,C,alpha,beta,gamma]</p>
-</dd>
-</dl>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dimensions</strong> (<em></em><em>[</em><em>A</em><em>, </em><em>B</em><em>, </em><em>C</em><em>, </em><em>alpha</em><em>, </em><em>beta</em><em>, </em><em>gamma</em><em>]</em><em></em>) &#8211; list of box lengths and angles (in degrees) such as
+[A,B,C,alpha,beta,gamma]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy 3x3 array B, with B[0] = first box vector,
-B[1] = second vector, B[2] third box vector.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>volume</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></td>
 </tr>
 </tbody>
 </table>
@@ -400,45 +371,7 @@ B[1] = second vector, B[2] third box vector.</p>
 <dt>
 <code class="descclassname">MDAnalysis.lib.mdamath.</code><code class="descname">make_whole</code><span class="sig-paren">(</span><em>atomgroup</em>, <em>reference_atom=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/mdamath.html#make_whole"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Move all atoms in a single molecule so that bonds don&#8217;t split over images</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>atomgroup</em></dt>
-<dd><p class="first last">The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup</span></code></a> to work with.
-The positions of this are modified in place.  All these atoms
-must belong in the same molecule or fragment.</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
-<dt><em>reference_atom</em></dt>
-<dd><p class="first last">The atom around which all other atoms will be moved.
-Defaults to atom 0 in the atomgroup.</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">None</span></code>.  Atom positions are modified in place</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
-<dt><cite>NoDataError</cite></dt>
-<dd><p class="first last">if there are no bonds present.
-(See <code class="xref py py-func docutils literal"><span class="pre">guess_bonds()</span></code>)</p>
-</dd>
-<dt><cite>ValueError</cite></dt>
-<dd><p class="first last">if the algorithm fails to work.  This is usually
-caused by the atomgroup not being a single fragment.
-(ie the molecule can&#8217;t be traversed by following bonds)</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
+<p>Atoms are modified in place.</p>
 <p>This function is most useful when atoms have been packed into the primary
 unit cell, causing breaks mid molecule, with the molecule then appearing
 on either side of the unit cell. This is problematic for operations
@@ -454,7 +387,36 @@ such as calculating the center of mass of the molecule.</p>
 +-----------+     +-----------+
 </pre></div>
 </div>
-<p>Usage:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>atomgroup</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup</span></code></a> to work with.
+The positions of this are modified in place.  All these atoms
+must belong in the same molecule or fragment.</li>
+<li><strong>reference_atom</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a>) &#8211; The atom around which all other atoms will be moved.
+Defaults to atom 0 in the atomgroup.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code> &#8211; There are no bonds present.
+(See <code class="xref py py-func docutils literal"><span class="pre">guess_bonds()</span></code>)</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; The algorithm fails to work.  This is usually
+caused by the atomgroup not being a single fragment.
+(ie the molecule can&#8217;t be traversed by following bonds)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only orthogonal boxes are currently supported.</p>
+</div>
+<p class="rubric">Example</p>
+<p>Make fragments whole:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.util.mdamath</span> <span class="k">import</span> <span class="n">make_whole</span>
 
 <span class="c1"># This algorithm requires bonds, these can be guessed!</span>
@@ -465,7 +427,7 @@ such as calculating the center of mass of the molecule.</p>
 <span class="c1"># Note that this function will only handle a single fragment</span>
 <span class="c1"># at a time, necessitating a loop.</span>
 <span class="k">for</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">fragments</span><span class="p">:</span>
-    <span class="n">make_whole</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
+  <span class="n">make_whole</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, to keep a single atom in place as the anchor:</p>
@@ -473,10 +435,6 @@ such as calculating the center of mass of the molecule.</p>
 <span class="c1"># and all other atoms will move (if necessary).</span>
 <span class="n">make_whole</span><span class="p">(</span><span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference_atom</span><span class="o">=</span><span class="n">atomgroup</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Only orthogonal boxes are currently supported</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
@@ -527,14 +485,15 @@ linalg.norm does.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Nj - number of i and j components</strong> (<em>Ni</em><em>,</em><em></em>) &#8211; </li>
-<li><strong>- the array relating i to parent js</strong> (<em>i2j</em>) &#8211; </li>
+<li><strong>Ni</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of i  components</li>
+<li><strong>Nj</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of j components</li>
+<li><strong>i2j</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><em>numpy.ndarray</em></a>) &#8211; relates i to parent js</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><em>ordered - an ordered list of i indices [size (i,)]</em></li>
-<li><em>ptrs - the start and end index for each j [size (Nj, 2)]</em></li>
+<li><strong>ordered</strong> (<em>list</em>) &#8211; an ordered list of i indices [size (i,)]</li>
+<li><strong>ptrs</strong> (<em>list</em>) &#8211; the start and end index for each j [size (Nj, 2)]</li>
 </ul>
 </p>
 </td>
@@ -542,10 +501,13 @@ linalg.norm does.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<p># Residx - the resid of each Atom
-ordered, ptrs = one_to_many_pointers(Natoms, Nres, Residx)</p>
-<p># Returns an array of the atom indices that are in resid 7
-atoms = ordered[ptrs[7,0]:ptrs[7,1]]</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Residx - the resid of each Atom</span>
+<span class="n">ordered</span><span class="p">,</span> <span class="n">ptrs</span> <span class="o">=</span> <span class="n">one_to_many_pointers</span><span class="p">(</span><span class="n">Natoms</span><span class="p">,</span> <span class="n">Nres</span><span class="p">,</span> <span class="n">Residx</span><span class="p">)</span>
+
+<span class="c1"># Returns an array of the atom indices that are in resid 7</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">ordered</span><span class="p">[</span><span class="n">ptrs</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span><span class="n">ptrs</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -588,25 +550,19 @@ vectors</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>dimensions</em></dt>
-<dd><p class="first last">list of box lengths and angles (in degrees) such as
-[A,B,C,alpha,beta,gamma]</p>
-</dd>
-</dl>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dimensions</strong> (<em></em><em>[</em><em>A</em><em>, </em><em>B</em><em>, </em><em>C</em><em>, </em><em>alpha</em><em>, </em><em>beta</em><em>, </em><em>gamma</em><em>]</em><em></em>) &#8211; list of box lengths and angles (in degrees) such as
+<code class="docutils literal"><span class="pre">[A,B,C,alpha,beta,gamma]</span></code></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy 3x3 array B, with B[0] = first box vector,
-B[1] = second vector, B[2] third box vector.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy 3x3 array B, with <code class="docutils literal"><span class="pre">B[0]</span></code> as first box vector,
+<code class="docutils literal"><span class="pre">B[1]``as</span> <span class="pre">second</span> <span class="pre">vector,</span> <span class="pre">``B[2]</span></code> as third box vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.12)">numpy.array</a></td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The first vector is always pointing along the X-axis
-i.e. parallel to (1,0,0).</p>
-</div>
+<p class="rubric">Notes</p>
+<p>The first vector is always pointing along the X-axis,
+i.e., parallel to (1, 0, 0).</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.6: </span>Null-vectors are returned for non-periodic (or missing) unit cell.</p>
 </div>

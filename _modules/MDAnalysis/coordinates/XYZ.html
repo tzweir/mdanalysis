@@ -71,7 +71,7 @@
             
   <h1>Source code for MDAnalysis.coordinates.XYZ</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.mdanalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2016 The MDAnalysis Development Team and contributors</span>
@@ -136,15 +136,20 @@
 <span class="sd">    ...</span>
 <span class="sd">    atomN x y z [ ...         ]                                                 line N+2</span>
 
-<span class="sd">.. Note::</span>
-<span class="sd">   * comment lines not implemented (do not include them)</span>
-<span class="sd">   * molecule name: the line is required but the content is ignored</span>
-<span class="sd">     at the moment</span>
-<span class="sd">   * optional data (after the coordinates) are presently ignored</span>
+
+<span class="sd">Note</span>
+<span class="sd">----</span>
+<span class="sd">* comment lines not implemented (do not include them)</span>
+<span class="sd">* molecule name: the line is required but the content is ignored</span>
+<span class="sd">  at the moment</span>
+<span class="sd">* optional data (after the coordinates) are presently ignored</span>
 
 
 <span class="sd">.. Links</span>
 <span class="sd">.. _`VMD xyzplugin`: http://www.ks.uiuc.edu/Research/vmd/plugins/molfile/xyzplugin.html</span>
+
+<span class="sd">Classes</span>
+<span class="sd">-------</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
@@ -248,19 +253,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="XYZWriter.write"><a class="viewcode-back" href="../../../documentation_pages/coordinates/XYZ.html#MDAnalysis.coordinates.XYZ.XYZWriter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write object *obj* at current trajectory frame to file.</span>
+        <span class="sd">&quot;&quot;&quot;Write object `obj` at current trajectory frame to file.</span>
 
-<span class="sd">        *obj* can be a :class:`~MDAnalysis.core.groups.AtomGroup`)</span>
-<span class="sd">        or a whole :class:`~MDAnalysis.core.universe.Universe`.</span>
-
-<span class="sd">        Atom names in the output are taken from the *obj* or default</span>
-<span class="sd">        to the value of the *atoms* keyword supplied to the</span>
+<span class="sd">        Atom names in the output are taken from the `obj` or default</span>
+<span class="sd">        to the value of the `atoms` keyword supplied to the</span>
 <span class="sd">        :class:`XYZWriter` constructor.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *obj*</span>
-<span class="sd">            :class:`~MDAnalysis.core.groups.AtomGroup` or</span>
-<span class="sd">            :class:`~MDAnalysis.core.universe.Universe`</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        obj : Universe or AtomGroup</span>
+<span class="sd">            The :class:`~MDAnalysis.core.groups.AtomGroup` or</span>
+<span class="sd">            :class:`~MDAnalysis.core.universe.Universe` to write.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># prepare the Timestep and extract atom names if possible</span>
         <span class="c1"># (The way it is written it should be possible to write</span>

@@ -137,16 +137,13 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    A Reader object</span>
+<span class="sd">    :class:`~base.Reader`</span>
+<span class="sd">        A trajectory Reader instance</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    :ref:`Supported coordinate formats`</span>
 
-
-<span class="sd">    .. deprecated:: 0.15.0</span>
-<span class="sd">       The &quot;permissive&quot; flag is not used anymore (and effectively</span>
-<span class="sd">       defaults to True); it will be completely removed in 0.16.0.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
@@ -166,10 +163,10 @@
 <span class="sd">    filename : str</span>
 <span class="sd">        Output filename of the trajectory; the extension determines the</span>
 <span class="sd">        format.</span>
-<span class="sd">    n_atoms : int, optional</span>
+<span class="sd">    n_atoms : int (optional)</span>
 <span class="sd">        The number of atoms in the output trajectory; can be ommitted</span>
 <span class="sd">        for single-frame writers.</span>
-<span class="sd">    multiframe : bool, optional</span>
+<span class="sd">    multiframe : bool (optional)</span>
 <span class="sd">        ``True``: write a trajectory with multiple frames; ``False``</span>
 <span class="sd">        only write a single frame snapshot; ``None`` first try to get</span>
 <span class="sd">        a multiframe writer and then fall back to single frame [``None``]</span>
@@ -182,7 +179,8 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    A Writer object</span>
+<span class="sd">    :class:`~base.Writer`</span>
+<span class="sd">        A trajectory Writer instance</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -190,7 +188,7 @@
 
 
 <span class="sd">    .. versionchanged:: 0.7.6</span>
-<span class="sd">       Added *multiframe* keyword. See also :func:`get_writer_for`.</span>
+<span class="sd">       Added `multiframe` keyword. See also :func:`get_writer_for`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Writer</span> <span class="o">=</span> <span class="n">get_writer_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>

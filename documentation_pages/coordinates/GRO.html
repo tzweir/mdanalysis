@@ -62,7 +62,8 @@
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">6.7. GRO file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GRO</span></code></a><ul>
-<li><a class="reference internal" href="#growriter-format-strings">6.7.1. GROWriter format strings</a></li>
+<li><a class="reference internal" href="#classes">6.7.1. Classes</a></li>
+<li><a class="reference internal" href="#developer-notes-growriter-format-strings">6.7.2. Developer notes: <code class="docutils literal"><span class="pre">GROWriter</span></code> format strings</a></li>
 </ul>
 </li>
 </ul>
@@ -102,30 +103,58 @@
 <h1>6.7. GRO file format &#8212; <a class="reference internal" href="#module-MDAnalysis.coordinates.GRO" title="MDAnalysis.coordinates.GRO"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.GRO</span></code></a><a class="headerlink" href="#gro-file-format-mdanalysis-coordinates-gro" title="Permalink to this headline">¶</a></h1>
 <p>Classes to read and write <a class="reference external" href="http://www.gromacs.org">Gromacs</a> <a class="reference external" href="http://manual.gromacs.org/current/online/gro.html">GRO</a> coordinate files; see the notes on the
 <a class="reference external" href="http://chembytes.wikidot.com/g-grofile">GRO format</a> which includes a conversion routine for the box.</p>
-<div class="section" id="growriter-format-strings">
-<h2>6.7.1. GROWriter format strings<a class="headerlink" href="#growriter-format-strings" title="Permalink to this headline">¶</a></h2>
-<p>The GROWriter class has a .fmt attribute, which is a dictionary of different
-strings for writing lines in .gro files.  These are as follows:</p>
-<dl class="docutils">
-<dt>n_atoms</dt>
-<dd>For the first line of the gro file, supply the number of atoms in the system.
-Eg: fmt[&#8216;n_atoms&#8217;].format(42)</dd>
-<dt>xyz</dt>
-<dd>An atom line without velocities.  Requires that the &#8216;resid&#8217;, &#8216;resname&#8217;,
-&#8216;name&#8217;, &#8216;index&#8217; and &#8216;pos&#8217; keys be supplied.
-Eg: fmt[&#8216;xyz&#8217;].format(resid=1, resname=&#8217;SOL&#8217;, name=&#8217;OW2&#8217;, index=2, pos=(0.0, 1.0, 2.0))</dd>
-<dt>xyz_v</dt>
-<dd>As above, but with velocities.  Needs an additional keyword &#8216;vel&#8217;.</dd>
-<dt>box_orthorhombic</dt>
-<dd>The final line of the gro file which gives box dimensions.  Requires
-the box keyword to be given, which should be the three cartesian dimensions.
-Eg: fmt[&#8216;box_orthorhombic&#8217;].format(box=(10.0, 10.0, 10.0))</dd>
-<dt>box_triclinic</dt>
-<dd>As above, but for a non orthorhombic box. Requires the box keyword, but this
-time as a length 9 vector.  This is a flattened version of the (3,3) triclinic
-vector representation of the unit cell.  The rearrangement into the odd
-gromacs order is done automatically.</dd>
-</dl>
+<div class="section" id="classes">
+<h2>6.7.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="MDAnalysis.coordinates.GRO.Timestep">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.GRO.</code><code class="descname">Timestep</code><span class="sig-paren">(</span><em>n_atoms</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#Timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.Timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Timestep, representing a frame of a trajectory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
+<li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; A weak reference to the owning Reader.  Used for
+when attributes require trajectory manipulation (e.g. dt)</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The time difference between frames (ps).  If <code class="xref py py-attr docutils literal"><span class="pre">time</span></code>
+is set, then <cite>dt</cite> will be ignored.</li>
+<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The starting time from which to calculate time (in ps)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
+Can add and remove position/velocity/force information by using
+the <code class="docutils literal"><span class="pre">has_*</span></code> attribute.</p>
+</div>
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.GRO.Timestep.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#MDAnalysis.coordinates.GRO.Timestep.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>unitcell dimensions (A, B, C, alpha, beta, gamma)</p>
+<p>GRO:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">8.00170</span>   <span class="mf">8.00170</span>   <span class="mf">5.65806</span>   <span class="mf">0.00000</span>   <span class="mf">0.00000</span>   <span class="mf">0.00000</span>   <span class="mf">0.00000</span>   <span class="mf">4.00085</span>   <span class="mf">4.00085</span>
+</pre></div>
+</div>
+<p>PDB:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CRYST1</span>   <span class="mf">80.017</span>   <span class="mf">80.017</span>   <span class="mf">80.017</span>  <span class="mf">60.00</span>  <span class="mf">60.00</span>  <span class="mf">90.00</span> <span class="n">P</span> <span class="mi">1</span>           <span class="mi">1</span>
+</pre></div>
+</div>
+<p>XTC: c.trajectory.ts._unitcell:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span> <span class="mf">80.00515747</span><span class="p">,</span>   <span class="mf">0.</span>        <span class="p">,</span>   <span class="mf">0.</span>        <span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">0.</span>        <span class="p">,</span>  <span class="mf">80.00515747</span><span class="p">,</span>   <span class="mf">0.</span>        <span class="p">],</span>
+       <span class="p">[</span> <span class="mf">40.00257874</span><span class="p">,</span>  <span class="mf">40.00257874</span><span class="p">,</span>  <span class="mf">56.57218552</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="class">
 <dt id="MDAnalysis.coordinates.GRO.GROReader">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.GRO.</code><code class="descname">GROReader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=None</em>, <em>n_atoms=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GRO.html#GROReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GRO.GROReader" title="Permalink to this definition">¶</a></dt>
@@ -141,15 +170,11 @@ gromacs order is done automatically.</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>filename</em></dt>
-<dd><p class="first last">filename of the output GRO file</p>
-</dd>
-</dl>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the output GRO file</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.GRO.GROWriter" title="MDAnalysis.coordinates.GRO.GROWriter"><code class="xref py py-class docutils literal"><span class="pre">GROWriter</span></code></a></p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#MDAnalysis.coordinates.GRO.GROWriter" title="MDAnalysis.coordinates.GRO.GROWriter"><code class="xref py py-class docutils literal"><span class="pre">GROWriter</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -178,11 +203,11 @@ gromacs order is done automatically.</dd>
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.13.0: </span>Now strictly writes positions with 3dp precision
-and velocities with 4dp
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Now strictly writes positions with 3dp precision.
+and velocities with 4dp.
 Removed the <cite>convert_dimensions_to_unitcell</cite> method,
-use <cite>Timestep.triclinic_dimensions</cite> instead
-Now now writes velocities where possible</p>
+use <cite>Timestep.triclinic_dimensions</cite> instead.
+Now now writes velocities where possible.</p>
 </div>
 <p>Set up a GROWriter with a precision of 3 decimal places.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -192,6 +217,8 @@ Now now writes velocities where possible</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; output filename</li>
 <li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of atoms</li>
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
+the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [&#8216;convert_lengths&#8217;]</li>
 </ul>
 </td>
 </tr>
@@ -212,26 +239,63 @@ of 3 decimal places is hard-coded here.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<em>AtomGroup / Universe / Timestep</em>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (AtomGroup or Universe or <a class="reference internal" href="#MDAnalysis.coordinates.GRO.Timestep" title="MDAnalysis.coordinates.GRO.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>) &#8211; </td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The GRO format only allows 5 digits for resid and atom
-number. If these number become larger than 99,999 then this
+<p class="last">The GRO format only allows 5 digits for <em>resid</em> and <em>atom
+number</em>. If these numbers become larger than 99,999 then this
 routine will chop off the leading digits.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.6: </span>resName and atomName are truncated to a maximum of 5 characters</p>
+<p><span class="versionmodified">Changed in version 0.7.6: </span><em>resName</em> and <em>atomName</em> are truncated to a maximum of 5 characters</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.16.0: </span>frame kwarg has been removed</p>
+<p><span class="versionmodified">Changed in version 0.16.0: </span><cite>frame</cite> kwarg has been removed</p>
 </div>
 </dd></dl>
 
 </dd></dl>
 
+</div>
+<div class="section" id="developer-notes-growriter-format-strings">
+<h2>6.7.2. Developer notes: <code class="docutils literal"><span class="pre">GROWriter</span></code> format strings<a class="headerlink" href="#developer-notes-growriter-format-strings" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#MDAnalysis.coordinates.GRO.GROWriter" title="MDAnalysis.coordinates.GRO.GROWriter"><code class="xref py py-class docutils literal"><span class="pre">GROWriter</span></code></a> class has a <a class="reference internal" href="#MDAnalysis.coordinates.GRO.GROWriter.fmt" title="MDAnalysis.coordinates.GRO.GROWriter.fmt"><code class="xref py py-attr docutils literal"><span class="pre">GROWriter.fmt</span></code></a> attribute, which is a dictionary of different
+strings for writing lines in <code class="docutils literal"><span class="pre">.gro</span></code> files.  These are as follows:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">n_atoms</span></code></dt>
+<dd><p class="first">For the first line of the gro file, supply the number of atoms in the system.
+E.g.:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;n_atoms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">xyz</span></code></dt>
+<dd><p class="first">An atom line without velocities.  Requires that the &#8216;resid&#8217;, &#8216;resname&#8217;,
+&#8216;name&#8217;, &#8216;index&#8217; and &#8216;pos&#8217; keys be supplied.
+E.g.:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;xyz&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">resname</span><span class="o">=</span><span class="s1">&#39;SOL&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;OW2&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">xyz_v</span></code></dt>
+<dd>As above, but with velocities.  Needs an additional keyword &#8216;vel&#8217;.</dd>
+<dt><code class="docutils literal"><span class="pre">box_orthorhombic</span></code></dt>
+<dd><p class="first">The final line of the gro file which gives box dimensions.  Requires
+the box keyword to be given, which should be the three cartesian dimensions.
+E.g.:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;box_orthorhombic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">box</span><span class="o">=</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">box_triclinic</span></code></dt>
+<dd>As above, but for a non orthorhombic box. Requires the box keyword, but this
+time as a length 9 vector.  This is a flattened version of the (3,3) triclinic
+vector representation of the unit cell.  The rearrangement into the odd
+gromacs order is done automatically.</dd>
+</dl>
 </div>
 </div>
 

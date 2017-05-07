@@ -59,6 +59,16 @@
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/mdanalysis-logo-200x150.png" alt="Logo"/>
             </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.11. MOL2 file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MOL2</span></code></a><ul>
+<li><a class="reference internal" href="#example-for-working-with-mol2-files">6.11.1. Example for working with mol2 files</a></li>
+<li><a class="reference internal" href="#classes">6.11.2. Classes</a></li>
+<li><a class="reference internal" href="#mol2-format-notes">6.11.3. MOL2 format notes</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="MMTF.html"
                         title="previous chapter">6.10. MMTF trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MMTF</span></code></a></p>
@@ -92,16 +102,182 @@
             
   <span class="target" id="module-MDAnalysis.coordinates.MOL2"></span><div class="section" id="mol2-file-format-mdanalysis-coordinates-mol2">
 <h1>6.11. MOL2 file format &#8212; <a class="reference internal" href="#module-MDAnalysis.coordinates.MOL2" title="MDAnalysis.coordinates.MOL2"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.MOL2</span></code></a><a class="headerlink" href="#mol2-file-format-mdanalysis-coordinates-mol2" title="Permalink to this headline">¶</a></h1>
-<p>Classes to read <a class="reference external" href="http://www.tripos.com/">Tripos</a> molecule structure format (<a class="reference external" href="http://www.tripos.com/data/support/mol2.pdf">MOL2</a>)
-coordinate and topology files. Used by the <a class="reference external" href="http://dock.compbio.ucsf.edu/">DOCK</a> docking
-code.</p>
-<p class="rubric">Examples</p>
+<p>Classes to work with <a class="reference external" href="http://www.tripos.com/">Tripos</a> molecule structure format (<a class="reference external" href="http://www.tripos.com/data/support/mol2.pdf">MOL2</a>) coordinate and
+topology files. Used, for instance, by the <a class="reference external" href="http://dock.compbio.ucsf.edu/">DOCK</a> docking code.</p>
+<div class="section" id="example-for-working-with-mol2-files">
+<h2>6.11.1. Example for working with mol2 files<a class="headerlink" href="#example-for-working-with-mol2-files" title="Permalink to this headline">¶</a></h2>
 <p>To open a mol2, remove all hydrogens and save as a new file, use the following:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="s2">&quot;MDAnalysis/testsuite/MDAnalysisTests/data/mol2/Molecule.mol2&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="s2">&quot;Molecule.mol2&quot;</span><span class="p">)</span>
 <span class="n">gr</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;not name H*&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">gr</span><span class="p">))</span>
 <span class="n">gr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Molecule_noh.mol2&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="docutils">
+<dt><code class="xref py py-mod docutils literal"><span class="pre">rdkit</span></code></dt>
+<dd><a class="reference external" href="http://www.rdkit.org/docs/GettingStartedInPython.html">rdkit</a> is an open source cheminformatics toolkit with more mol2 functionality</dd>
+</dl>
+<p class="last"><code class="xref py py-mod docutils literal"></code></p>
+</div>
+</div>
+<div class="section" id="classes">
+<h2>6.11.2. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="MDAnalysis.coordinates.MOL2.MOL2Reader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.MOL2.</code><code class="descname">MOL2Reader</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/MOL2.html#MOL2Reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.MOL2.MOL2Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reader for MOL2 structure format.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based.
+MOL2 now reuses the same Timestep object for every frame,
+previously created a new instance of Timestep each frame.</p>
+</div>
+<p>Read coordinates from <cite>filename</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><em>NamedStream</em></a>) &#8211; name of the mol2 file or stream</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.coordinates.MOL2.MOL2Writer">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.MOL2.</code><code class="descname">MOL2Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms=None</em>, <em>convert_units=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/MOL2.html#MOL2Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.MOL2.MOL2Writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>mol2 format writer</p>
+<p>Write a file in the <a class="reference external" href="http://www.tripos.com/">Tripos</a> molecule structure format (<a class="reference external" href="http://www.tripos.com/data/support/mol2.pdf">MOL2</a>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><a class="reference internal" href="#MDAnalysis.coordinates.MOL2.MOL2Writer" title="MDAnalysis.coordinates.MOL2.MOL2Writer"><code class="xref py py-class docutils literal"><span class="pre">MOL2Writer</span></code></a> can only be used to write out previously loaded MOL2 files.
+If you&#8217;re trying to convert, for example, a PDB file to MOL you should
+use other tools, like <a class="reference external" href="http://www.rdkit.org/docs/GettingStartedInPython.html">rdkit</a>.</p>
+<p>Here is an example how to use <a class="reference external" href="http://www.rdkit.org/docs/GettingStartedInPython.html">rdkit</a> to convert a PDB to MOL:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="s2">&quot;molecule.pdb&quot;</span><span class="p">,</span> <span class="n">removeHs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Chem</span><span class="o">.</span><span class="n">MolToMolFile</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;molecule.mol&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">MOL2 writer is currently not available for rdkit master. It requires SYBYL
+atomtype generation.
+See page 7 for list of SYBYL atomtypes
+(<a class="reference external" href="http://tripos.com/tripos_resources/fileroot/pdfs/mol2_format2.pdf">http://tripos.com/tripos_resources/fileroot/pdfs/mol2_format2.pdf</a>).</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based</p>
+</div>
+<p>Create a new MOL2Writer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of output file</li>
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
+the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [&#8216;convert_lengths&#8217;]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="MDAnalysis.coordinates.MOL2.MOL2Writer.encode_block">
+<code class="descname">encode_block</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/MOL2.html#MOL2Writer.encode_block"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.MOL2.MOL2Writer.encode_block" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.MOL2.MOL2Writer.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/MOL2.html#MOL2Writer.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.MOL2.MOL2Writer.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a new frame to the MOL2 file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.MOL2.MOL2Writer.write_next_timestep">
+<code class="descname">write_next_timestep</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/MOL2.html#MOL2Writer.write_next_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.MOL2.MOL2Writer.write_next_timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a new frame to the MOL2 file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mol2-format-notes">
+<h2>6.11.3. MOL2 format notes<a class="headerlink" href="#mol2-format-notes" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">MOL2 Format Specification:  (<a class="reference external" href="http://www.tripos.com/data/support/mol2.pdf">http://www.tripos.com/data/support/mol2.pdf</a>)</p>
+</li>
+<li><p class="first">Example file (<a class="reference external" href="http://www.tripos.com/mol2/mol2_format3.html">http://www.tripos.com/mol2/mol2_format3.html</a>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="c1">#    Name: benzene</span>
+ <span class="c1">#    Creating user name: tom</span>
+ <span class="c1">#    Creation time: Wed Dec 28 00:18:30 1988</span>
+
+ <span class="c1">#    Modifying user name: tom</span>
+ <span class="c1">#    Modification time: Wed Dec 28 00:18:30 1988</span>
+
+ <span class="o">@&lt;</span><span class="n">TRIPOS</span><span class="o">&gt;</span><span class="n">MOLECULE</span>
+ <span class="n">benzene</span>
+ <span class="mi">12</span> <span class="mi">12</span> <span class="mi">1</span>  <span class="mi">0</span>   <span class="mi">0</span>
+ <span class="n">SMALL</span>
+ <span class="n">NO_CHARGES</span>
+
+
+ <span class="o">@&lt;</span><span class="n">TRIPOS</span><span class="o">&gt;</span><span class="n">ATOM</span>
+ <span class="mi">1</span>   <span class="n">C1</span>  <span class="mf">1.207</span>   <span class="mf">2.091</span>   <span class="mf">0.000</span>   <span class="n">C</span><span class="o">.</span><span class="n">ar</span>    <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">2</span>   <span class="n">C2</span>  <span class="mf">2.414</span>   <span class="mf">1.394</span>   <span class="mf">0.000</span>   <span class="n">C</span><span class="o">.</span><span class="n">ar</span>    <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">3</span>   <span class="n">C3</span>  <span class="mf">2.414</span>   <span class="mf">0.000</span>   <span class="mf">0.000</span>   <span class="n">C</span><span class="o">.</span><span class="n">ar</span>    <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">4</span>   <span class="n">C4</span>  <span class="mf">1.207</span>   <span class="o">-</span><span class="mf">0.697</span>  <span class="mf">0.000</span>   <span class="n">C</span><span class="o">.</span><span class="n">ar</span>    <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">5</span>   <span class="n">C5</span>  <span class="mf">0.000</span>   <span class="mf">0.000</span>   <span class="mf">0.000</span>   <span class="n">C</span><span class="o">.</span><span class="n">ar</span>    <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">6</span>   <span class="n">C6</span>  <span class="mf">0.000</span>   <span class="mf">1.394</span>   <span class="mf">0.000</span>   <span class="n">C</span><span class="o">.</span><span class="n">ar</span>    <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">7</span>   <span class="n">H1</span>  <span class="mf">1.207</span>   <span class="mf">3.175</span>   <span class="mf">0.000</span>   <span class="n">H</span>   <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">8</span>   <span class="n">H2</span>  <span class="mf">3.353</span>   <span class="mf">1.936</span>   <span class="mf">0.000</span>   <span class="n">H</span>   <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">9</span>   <span class="n">H3</span>  <span class="mf">3.353</span>   <span class="o">-</span><span class="mf">0.542</span>  <span class="mf">0.000</span>   <span class="n">H</span>   <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">10</span>  <span class="n">H4</span>  <span class="mf">1.207</span>   <span class="o">-</span><span class="mf">1.781</span>  <span class="mf">0.000</span>   <span class="n">H</span>   <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">11</span>  <span class="n">H5</span>  <span class="o">-</span><span class="mf">0.939</span>  <span class="o">-</span><span class="mf">0.542</span>  <span class="mf">0.000</span>   <span class="n">H</span>   <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="mi">12</span>  <span class="n">H6</span>  <span class="o">-</span><span class="mf">0.939</span>  <span class="mf">1.936</span>   <span class="mf">0.000</span>   <span class="n">H</span>   <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mf">0.000</span>
+ <span class="o">@&lt;</span><span class="n">TRIPOS</span><span class="o">&gt;</span><span class="n">BOND</span>
+ <span class="mi">1</span>   <span class="mi">1</span>   <span class="mi">2</span>   <span class="n">ar</span>
+ <span class="mi">2</span>   <span class="mi">1</span>   <span class="mi">6</span>   <span class="n">ar</span>
+ <span class="mi">3</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="n">ar</span>
+ <span class="mi">4</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">ar</span>
+ <span class="mi">5</span>   <span class="mi">4</span>   <span class="mi">5</span>   <span class="n">ar</span>
+ <span class="mi">6</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="n">ar</span>
+ <span class="mi">7</span>   <span class="mi">1</span>   <span class="mi">7</span>   <span class="mi">1</span>
+ <span class="mi">8</span>   <span class="mi">2</span>   <span class="mi">8</span>   <span class="mi">1</span>
+ <span class="mi">9</span>   <span class="mi">3</span>   <span class="mi">9</span>   <span class="mi">1</span>
+ <span class="mi">10</span>  <span class="mi">4</span>   <span class="mi">10</span>  <span class="mi">1</span>
+ <span class="mi">11</span>  <span class="mi">5</span>   <span class="mi">11</span>  <span class="mi">1</span>
+ <span class="mi">12</span>  <span class="mi">6</span>   <span class="mi">12</span>  <span class="mi">1</span>
+<span class="o">@&lt;</span><span class="n">TRIPOS</span><span class="o">&gt;</span><span class="n">SUBSTRUCTURE</span>
+ <span class="mi">1</span>   <span class="n">BENZENE</span> <span class="mi">1</span>   <span class="n">PERM</span>    <span class="mi">0</span>   <span class="o">****</span>    <span class="o">****</span>    <span class="mi">0</span>   <span class="n">ROOT</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 

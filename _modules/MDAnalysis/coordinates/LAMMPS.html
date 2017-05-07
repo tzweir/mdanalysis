@@ -71,7 +71,7 @@
             
   <h1>Source code for MDAnalysis.coordinates.LAMMPS</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.mdanalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2016 The MDAnalysis Development Team and contributors</span>
@@ -117,7 +117,8 @@
 <span class="sd">:class:`~MDAnalysis.core.universe.Universe` (which then calls</span>
 <span class="sd">:class:`DCDReader`).</span>
 
-<span class="sd">.. Rubric:: Example: Loading a LAMMPS simulation</span>
+<span class="sd">Example: Loading a LAMMPS simulation</span>
+<span class="sd">------------------------------------</span>
 
 <span class="sd">To load a LAMMPS simulation from a LAMMPS data file (using the</span>
 <span class="sd">:class:`~MDAnalysis.topology.LAMMPSParser.DATAParser`) together with a</span>
@@ -142,10 +143,9 @@
 
 <span class="sd">Note</span>
 <span class="sd">----</span>
-
-<span class="sd">   Lennard-Jones units are not implemented. See :mod:`MDAnalysis.units` for</span>
-<span class="sd">   other recognized values and the documentation for the LAMMPS `units</span>
-<span class="sd">   command`_.</span>
+<span class="sd">Lennard-Jones units are not implemented. See :mod:`MDAnalysis.units`</span>
+<span class="sd">for other recognized values and the documentation for the LAMMPS</span>
+<span class="sd">`units command`_.</span>
 
 <span class="sd">See Also</span>
 <span class="sd">--------</span>
@@ -176,6 +176,7 @@
 <span class="sd">.. autoclass:: DATAWriter</span>
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 
@@ -321,7 +322,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="s1">&#39;fs&#39;</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;lengthunit&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;timeunit&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;velocity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;velocityunit&#39;</span><span class="p">,</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;velocity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;velocityunit&#39;</span><span class="p">,</span>
                                  <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_write_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
@@ -416,11 +417,13 @@
 
     <span class="nd">@requires</span><span class="p">(</span><span class="s1">&#39;types&#39;</span><span class="p">,</span> <span class="s1">&#39;masses&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="DATAWriter.write"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.LAMMPS.DATAWriter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write selection at current trajectory frame to file, including</span>
-<span class="sd">        sections Atoms, Masses, Velocities, Bonds, Angles, Dihedrals, and</span>
-<span class="sd">        Impropers (if these are defined). Atoms section is written in the</span>
-<span class="sd">        &quot;full&quot; sub-style if charges are available or &quot;molecular&quot; sub-style if</span>
-<span class="sd">        they are not. Molecule id in atoms section is set to to 0.</span>
+        <span class="sd">&quot;&quot;&quot;Write selection at current trajectory frame to file.</span>
+
+<span class="sd">        The sections for Atoms, Masses, Velocities, Bonds, Angles,</span>
+<span class="sd">        Dihedrals, and Impropers (if these are defined) are</span>
+<span class="sd">        written. The Atoms section is written in the &quot;full&quot; sub-style</span>
+<span class="sd">        if charges are available or &quot;molecular&quot; sub-style if they are</span>
+<span class="sd">        not. Molecule id in atoms section is set to to 0.</span>
 
 <span class="sd">        No other sections are written to the DATA file.</span>
 <span class="sd">        As of this writing, other sections are not parsed into the topology</span>
@@ -428,15 +431,17 @@
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
-<span class="sd">           If the selection includes a partial fragment, then only the bonds, angles,</span>
-<span class="sd">           etc. whose atoms are contained within the selection will be included.</span>
+<span class="sd">        If the selection includes a partial fragment, then only the bonds,</span>
+<span class="sd">        angles, etc. whose atoms are contained within the selection will be</span>
+<span class="sd">        included.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        selection : AtomGroup</span>
+<span class="sd">        selection : AtomGroup or Universe</span>
 <span class="sd">            MDAnalysis AtomGroup (selection or Universe.atoms) or also Universe</span>
-<span class="sd">        frame : Optional[int]</span>
-<span class="sd">            optionally move to frame number *frame*</span>
+<span class="sd">        frame : int (optional)</span>
+<span class="sd">            optionally move to frame number `frame`</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">universe</span>
         <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

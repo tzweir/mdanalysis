@@ -263,24 +263,23 @@ duplication of the array.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
 <li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>reader</strong> (<em>Reader</em><em>, </em><em>optional</em>) &#8211; A weak reference to the owning Reader.  Used for
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; A weak reference to the owning Reader.  Used for
 when attributes require trajectory manipulation (e.g. dt)</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.memory.Timestep.time" title="MDAnalysis.coordinates.memory.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.memory.Timestep.time" title="MDAnalysis.coordinates.memory.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
 is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; <p>The starting time from which to calculate time (ps)</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
-Can add and remove position/velocity/force information by using
-the <code class="docutils literal"><span class="pre">has_*</span></code> attribute.</p>
-</div>
-</li>
+<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The starting time from which to calculate time (in ps)</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
+Can add and remove position/velocity/force information by using
+the <code class="docutils literal"><span class="pre">has_*</span></code> attribute.</p>
+</div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.memory.Timestep.copy">
 <code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Timestep.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.memory.Timestep.copy" title="Permalink to this definition">¶</a></dt>
@@ -290,32 +289,41 @@ the <code class="docutils literal"><span class="pre">has_*</span></code> attribu
 <dl class="method">
 <dt id="MDAnalysis.coordinates.memory.Timestep.copy_slice">
 <code class="descname">copy_slice</code><span class="sig-paren">(</span><em>sel</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Timestep.copy_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.memory.Timestep.copy_slice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a new Timestep containing a subset of the original Timestep.</p>
-<p><code class="docutils literal"><span class="pre">ts.copy_slice(slice(start,</span> <span class="pre">stop,</span> <span class="pre">skip))</span></code>
-<code class="docutils literal"><span class="pre">ts.copy_slice([list</span> <span class="pre">of</span> <span class="pre">indices])</span></code></p>
+<dd><p>Make a new <cite>Timestep</cite> containing a subset of the original <cite>Timestep</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>A Timestep object of the same type containing all header</em></li>
-<li><em>information and all atom information relevant to the selection.</em></li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sel</strong> (<em>array_like</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><em>slice</em></a>) &#8211; The underlying position, velocity, and force arrays are sliced
+using a <a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a>, or any array-like.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <cite>Timestep</cite> object of the same type containing all header
+information and all atom information relevant to the selection.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#MDAnalysis.coordinates.memory.Timestep" title="MDAnalysis.coordinates.memory.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The selection must be a 0 based slice or array of the atom indices
-in this Timestep</p>
+<p class="last">The selection must be a 0 based <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> or array of the atom indices
+in this <a class="reference internal" href="#MDAnalysis.coordinates.memory.Timestep" title="MDAnalysis.coordinates.memory.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a></p>
+</div>
+<p class="rubric">Example</p>
+<p>Using a Python <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">copy_slice</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Using a list of indices:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">copy_slice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">])</span>
+</pre></div>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.8.</span></p>
 </div>
-<div class="last versionchanged">
+<div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Reworked to follow new Timestep API.  Now will strictly only
 copy official attributes of the Timestep.</p>
-</div>
 </div>
 </dd></dl>
 
@@ -335,10 +343,10 @@ description of box dimensions</p>
 <dd><p>The time difference in ps between timesteps</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This defaults to 1.0 ps in the absence of time data</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
+<p class="last">This defaults to 1.0 ps in the absence of time data</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.11.0.</span></p>
 </div>
 </dd></dl>
 
@@ -352,27 +360,17 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li><em>A numpy.ndarray of shape (n_atoms, 3) of force data for each</em></li>
-<li><em>atom</em></li>
-</ul>
-</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>forces</strong> &#8211; force data of shape <code class="docutils literal"><span class="pre">(n_atoms,</span> <span class="pre">3)</span></code> for all atoms</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last">
-<li><p class="first"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.NoDataError</span></code></p>
-</li>
-<li><p class="first">When the Timestep does not contain force information</p>
-</li>
-<li><div class="first versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</li>
-</ul>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray with dtype numpy.float32</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a> &#8211; if the Timestep has no force data</td>
 </tr>
 </tbody>
 </table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.11.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -461,9 +459,9 @@ or remove the data.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A (3, 3) numpy.ndarray of unit cell vectors</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">A (3, 3) numpy.ndarray of unit cell vectors</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)">numpy.ndarray</a></td>
 </tr>
 </tbody>
 </table>
@@ -505,18 +503,11 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li><em>A numpy.ndarray of shape (n_atoms, 3) of velocity data for each</em></li>
-<li><em>atom</em></li>
-</ul>
-</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>velocities</strong> &#8211; velocity data of shape <code class="docutils literal"><span class="pre">(n_atoms,</span> <span class="pre">3)</span></code> for all atoms</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a></li>
-<li>When the Timestep does not contain velocity information</li>
-</ul>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray with dtype numpy.float32</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a> &#8211; if the Timestep has no velocity data</td>
 </tr>
 </tbody>
 </table>
@@ -540,29 +531,37 @@ weren&#8217;t originally present.</p>
 <p>A trajectory reader interface to a numpy array of the coordinates.
 For compatibility with the timeseries interface, support is provided for
 specifying the order of columns through the format option.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.16.0.</span></p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>coordinate_array</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a> object) &#8211; The underlying array of coordinates</li>
-<li><strong>order</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; the order/shape of the return data array, corresponding
+<li><strong>coordinate_array</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><em>numpy.ndarray</em></a>) &#8211; The underlying array of coordinates</li>
+<li><strong>order</strong> (<em>{&quot;afc&quot;</em><em>, </em><em>&quot;acf&quot;</em><em>, </em><em>&quot;caf&quot;</em><em>, </em><em>&quot;fac&quot;</em><em>, </em><em>&quot;fca&quot;</em><em>, </em><em>&quot;cfa&quot;}</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
-coordinates)</li>
-<li><strong>dimensions</strong> ((<em>A</em>, <em>B</em>, <em>C</em>, <em>alpha</em>, <em>beta</em>, <em>gamma</em>), optional) &#8211; unitcell dimensions (<em>A</em>, <em>B</em>, <em>C</em>, <em>alpha</em>, <em>beta</em>, <em>gamma</em>)
+coordinates).</li>
+<li><strong>dimensions</strong> (<em></em><em>[</em><em>A</em><em>, </em><em>B</em><em>, </em><em>C</em><em>, </em><em>alpha</em><em>, </em><em>beta</em><em>, </em><em>gamma</em><em>] </em><em></em><em>(</em><em>optional</em><em>)</em><em></em>) &#8211; unitcell dimensions (<em>A</em>, <em>B</em>, <em>C</em>, <em>alpha</em>, <em>beta</em>, <em>gamma</em>)
 lengths <em>A</em>, <em>B</em>, <em>C</em> are in the MDAnalysis length unit (Å), and
 angles are in degrees.</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.memory.MemoryReader.time" title="MDAnalysis.coordinates.memory.MemoryReader.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.memory.MemoryReader.time" title="MDAnalysis.coordinates.memory.MemoryReader.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
 is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; The name of the file from which this instance is created. Set to None
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The name of the file from which this instance is created. Set to <code class="docutils literal"><span class="pre">None</span></code>
 when created from an array</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">At the moment, only a fixed <cite>dimension</cite> is supported, i.e., the same
+unit cell for all frames in <cite>coordinate_array</cite>. See issue <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/1041">#1041</a>.</p>
+</div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.memory.MemoryReader.OtherWriter">
 <code class="descname">OtherWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader.OtherWriter" title="Permalink to this definition">¶</a></dt>
@@ -590,7 +589,7 @@ to that read in by the trajectory reader. <em>auxdata</em> can be an
 <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> instance, or the data
 itself as e.g. a filename; in the latter case an appropriate
 <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> is guessed from the
-data/file format. An appropriate <em>format</em> may also be directly provided
+data/file format. An appropriate <cite>format</cite> may also be directly provided
 as a key word argument.</p>
 <p>On adding, the AuxReader is initially matched to the current timestep
 of the trajectory, and will be updated when the trajectory timestep
@@ -626,33 +625,54 @@ the <a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><s
 <dl class="method">
 <dt id="MDAnalysis.coordinates.memory.MemoryReader.check_slice_indices">
 <code class="descname">check_slice_indices</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>step</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader.check_slice_indices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check frame indices are valid and clip to fit trajectory</p>
+<dd><p>Check frame indices are valid and clip to fit trajectory.</p>
+<p>The usage follows standard Python conventions for <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a> but see
+the warning below.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop</strong><strong>, </strong><strong>step</strong> (<em>start</em><em>,</em><em></em>) &#8211; Values representing the slice indices.
-Can use <cite>None</cite> to use defaults of (0, n_frames, and 1)
-respectively.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Starting frame index (inclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+of 0, i.e., the initial frame.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Last frame index (exclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+of n_frames, i.e., it includes the last frame of the trajectory.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; step size of the slice, <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default of 1, i.e,
+include every frame in the range <cite>start</cite>, <cite>stop</cite>.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211; Integers representing the slice</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>start, stop, step</strong> &#8211; Integers representing the slice</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>)</p>
+</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The returned values start, stop and step give the expected result when passed
-in range() but gives unexpected behaviour when passed in a slice when stop=None
-and step=-1</p>
-<p>This is because when we slice the trajectory (u.trajectory[::-1]), the values
-returned by check_slice_indices are passed to range. Instead, in AnalysisBase
-the values returned by check_slice_indices are used to splice the trajectory.
-This creates a discrepancy because these two lines are not equivalent:</p>
-<blockquote class="last">
-<div>range(10, -1, -1)  # [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-range(10)[10:-1:-1]  # []</div></blockquote>
+<p>The returned values <cite>start</cite>, <cite>stop</cite> and <cite>step</cite> give the expected result
+when passed in <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a> but gives unexpected behavior when passed
+in a <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> when <code class="docutils literal"><span class="pre">stop=None</span></code> and <code class="docutils literal"><span class="pre">step=-1</span></code></p>
+<p>This can be a problem for downstream processing of the output from this
+method. For example, slicing of trajectories is implemented by passing
+the values returned by <a class="reference internal" href="#MDAnalysis.coordinates.memory.MemoryReader.check_slice_indices" title="MDAnalysis.coordinates.memory.MemoryReader.check_slice_indices"><code class="xref py py-meth docutils literal"><span class="pre">check_slice_indices()</span></code></a> to <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and using them as the indices to randomly seek to. On the other hand,
+in <a class="reference internal" href="../analysis/base.html#MDAnalysis.analysis.base.AnalysisBase" title="MDAnalysis.analysis.base.AnalysisBase"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.analysis.base.AnalysisBase</span></code></a> the values returned
+by <a class="reference internal" href="#MDAnalysis.coordinates.memory.MemoryReader.check_slice_indices" title="MDAnalysis.coordinates.memory.MemoryReader.check_slice_indices"><code class="xref py py-meth docutils literal"><span class="pre">check_slice_indices()</span></code></a> are used to splice the trajectory by
+creating a <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> instance</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a discrepancy because these two lines are not equivalent:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="nb">slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>  <span class="c1"># []</span>
+</pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -672,7 +692,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -680,7 +700,9 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 <div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
@@ -697,7 +719,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -705,10 +727,12 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.7.</span></p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
 </dd></dl>
 
@@ -722,7 +746,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -730,27 +754,29 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.memory.MemoryReader.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array x from base units to native units.</p>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -758,13 +784,15 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -778,7 +806,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -786,16 +814,17 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>t</em> is modified in place and also
-returned (although note that scalar values <em>t</em> are passed by
-value in Python and hence an in-place modification has no
-effect on the caller.)</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -840,7 +869,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -848,24 +877,26 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.memory.MemoryReader.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.memory.MemoryReader.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -873,10 +904,12 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
@@ -1070,11 +1103,11 @@ list of added auxiliaries, and in the auxiliary reader itself.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>coordinate_array</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a> object) &#8211; The underlying array of coordinates</li>
-<li><strong>order</strong> &#8211; The order/shape of the return data array, corresponding
+<li><strong>order</strong> (<em>{&quot;afc&quot;</em><em>, </em><em>&quot;acf&quot;</em><em>, </em><em>&quot;caf&quot;</em><em>, </em><em>&quot;fac&quot;</em><em>, </em><em>&quot;fca&quot;</em><em>, </em><em>&quot;cfa&quot;}</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
-coordinates)</li>
+coordinates).</li>
 </ul>
 </td>
 </tr>
@@ -1124,12 +1157,14 @@ the underlying array, while a copy is returned otherwise.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>asel</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> object) &#8211; Atom selection. Defaults to None, in which case the full set of
+<li><strong>asel</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Atom selection. Defaults to <code class="docutils literal"><span class="pre">None</span></code>, in which case the full set of
 coordinate data is returned. Note that in this case, a view
 of the underlying numpy array is returned, while a copy of the
-data is returned whenever asel is different from None.</li>
-<li><strong>stop</strong><strong>, </strong><strong>skip</strong> (<em>start</em><em>,</em><em></em>) &#8211; range of trajectory to access, start and stop are inclusive</li>
-<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the order/shape of the return data array, corresponding
+data is returned whenever <cite>asel</cite> is different from <code class="docutils literal"><span class="pre">None</span></code>.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; </li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; </li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; range of trajectory to access, <cite>start</cite> and <cite>stop</cite> are <em>inclusive</em></li>
+<li><strong>format</strong> (<em>{&quot;afc&quot;</em><em>, </em><em>&quot;acf&quot;</em><em>, </em><em>&quot;caf&quot;</em><em>, </em><em>&quot;fac&quot;</em><em>, </em><em>&quot;fca&quot;</em><em>, </em><em>&quot;cfa&quot;}</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
@@ -1139,6 +1174,13 @@ coordinates).</li>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <cite>format</cite> parameter name is used to mimic the
+<code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.DCD.timeseries</span></code> interface. It is
+identical to the <cite>order</cite> parameter for <a class="reference internal" href="#MDAnalysis.coordinates.memory.MemoryReader" title="MDAnalysis.coordinates.memory.MemoryReader"><code class="xref py py-class docutils literal"><span class="pre">MemoryReader</span></code></a>. In a
+future version, <cite>format</cite> will be renamed to <cite>order</cite>.</p>
+</div>
 </dd></dl>
 
 <dl class="attribute">

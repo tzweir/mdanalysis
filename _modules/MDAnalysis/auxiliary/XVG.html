@@ -97,14 +97,14 @@
 <span class="sd">========================================================</span>
 
 <span class="sd">xvg files are produced by Gromacs during simulation or analysis, formatted</span>
-<span class="sd">for plotting data with Grace. </span>
+<span class="sd">for plotting data with Grace.</span>
 
-<span class="sd">Data is column-formatted; time/data selection is enabled by providing column </span>
-<span class="sd">indices. </span>
+<span class="sd">Data is column-formatted; time/data selection is enabled by providing column</span>
+<span class="sd">indices.</span>
 
 <span class="sd">Note</span>
 <span class="sd">----</span>
-<span class="sd">By default, the time of each step is assumed to be stored in the first column, </span>
+<span class="sd">By default, the time of each step is assumed to be stored in the first column,</span>
 <span class="sd">in units of ps.</span>
 
 
@@ -114,17 +114,17 @@
 
 <span class="sd">XVG Readers</span>
 <span class="sd">-----------</span>
-<span class="sd">The default :class:`XVGReader` reads and stores the full contents of the .xvg </span>
-<span class="sd">file on initialisation, while a second reader (:class:`XVGFileReader`) that </span>
-<span class="sd">reads steps one at a time as required is also provided for when a lower memory </span>
+<span class="sd">The default :class:`XVGReader` reads and stores the full contents of the .xvg</span>
+<span class="sd">file on initialisation, while a second reader (:class:`XVGFileReader`) that</span>
+<span class="sd">reads steps one at a time as required is also provided for when a lower memory</span>
 <span class="sd">footprint is desired.</span>
 
 <span class="sd">Note</span>
 <span class="sd">----</span>
 <span class="sd">Data is assumed to be time-ordered.</span>
 
-<span class="sd">Multiple datasets, separated in the .xvg file by &#39;&amp;&#39;, are currently not </span>
-<span class="sd">supported (the readers will stop at the first line starting &#39;&amp;&#39;). </span>
+<span class="sd">Multiple datasets, separated in the .xvg file by &#39;&amp;&#39;, are currently not</span>
+<span class="sd">supported (the readers will stop at the first line starting &#39;&amp;&#39;).</span>
 
 
 <span class="sd">.. autoclass:: XVGReader</span>
@@ -141,6 +141,7 @@
 
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span>
 
+<span class="kn">import</span> <span class="nn">numbers</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">base</span>
@@ -178,8 +179,8 @@
 <div class="viewcode-block" id="XVGStep"><a class="viewcode-back" href="../../../documentation_pages/auxiliary/XVG.html#MDAnalysis.auxiliary.XVG.XVGStep">[docs]</a><span class="k">class</span> <span class="nc">XVGStep</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">AuxStep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; AuxStep class for .xvg file format.</span>
 
-<span class="sd">    Extends the base AuxStep class to allow selection of time and </span>
-<span class="sd">    data-of-interest fields (by column index) from the full set of data read </span>
+<span class="sd">    Extends the base AuxStep class to allow selection of time and</span>
+<span class="sd">    data-of-interest fields (by column index) from the full set of data read</span>
 <span class="sd">    each step.</span>
 
 <span class="sd">    Parameters</span>
@@ -206,7 +207,7 @@
         <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># here so that None is a valid value; just return</span>
             <span class="k">return</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_data</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
              <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Time selector must be single index&#39;</span><span class="p">)</span>
@@ -215,7 +216,7 @@
         <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># here so that None is a valid value; just return</span>
             <span class="k">return</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
@@ -228,15 +229,15 @@
 <div class="viewcode-block" id="XVGReader"><a class="viewcode-back" href="../../../documentation_pages/auxiliary/XVG.html#MDAnalysis.auxiliary.XVG.XVGReader">[docs]</a><span class="k">class</span> <span class="nc">XVGReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">AuxReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Auxiliary reader to read data from an .xvg file.</span>
 
-<span class="sd">    Detault reader for .xvg files. All data from the file will be read and stored </span>
+<span class="sd">    Detault reader for .xvg files. All data from the file will be read and stored</span>
 <span class="sd">    on initialisation.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    filename : str</span>
 <span class="sd">        Location of the file containing the auxiliary data.</span>
 <span class="sd">    **kwargs</span>
-<span class="sd">       Other AuxReader options.    </span>
+<span class="sd">       Other AuxReader options.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -244,7 +245,7 @@
 
 <span class="sd">    Note</span>
 <span class="sd">    ----</span>
-<span class="sd">    The file is assumed to be of a size such that reading and storing the full </span>
+<span class="sd">    The file is assumed to be of a size such that reading and storing the full</span>
 <span class="sd">    contents is practical.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -265,7 +266,7 @@
            <span class="c1"># check the number of columns is consistent</span>
            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">auxdata_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">auxdata_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Step </span><span class="si">{0}</span><span class="s1"> has </span><span class="si">{1}</span><span class="s1"> columns instead of &#39;</span>
-                                 <span class="s1">&#39;</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">auxdata_values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                                 <span class="s1">&#39;</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">auxdata_values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
                                               <span class="n">auxdata_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_auxdata_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">auxdata_values</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_n_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auxdata_values</span><span class="p">)</span>
@@ -295,12 +296,16 @@
             <span class="k">raise</span> <span class="ne">StopIteration</span>
 
     <span class="k">def</span> <span class="nf">_go_to_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Move to and read i-th auxiliary step. </span>
+        <span class="sd">&quot;&quot;&quot; Move to and read i-th auxiliary step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        i : int</span>
+<span class="sd">        i: int</span>
 <span class="sd">            Step number (0-indexed) to move to</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`XVGStep`</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -328,16 +333,16 @@
 <div class="viewcode-block" id="XVGFileReader"><a class="viewcode-back" href="../../../documentation_pages/auxiliary/XVG.html#MDAnalysis.auxiliary.XVG.XVGFileReader">[docs]</a><span class="k">class</span> <span class="nc">XVGFileReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">AuxFileReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Auxiliary reader to read (step at a time) from an .xvg file.</span>
 
-<span class="sd">    An alternative XVG reader which reads each step from the .xvg file as </span>
-<span class="sd">    needed (rather than reading and storing all from the start), for a lower </span>
-<span class="sd">    memory footprint.     </span>
-<span class="sd">    </span>
+<span class="sd">    An alternative XVG reader which reads each step from the .xvg file as</span>
+<span class="sd">    needed (rather than reading and storing all from the start), for a lower</span>
+<span class="sd">    memory footprint.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    filename : str</span>
 <span class="sd">       Location of the file containing the auxiliary data.</span>
 <span class="sd">    **kwargs</span>
-<span class="sd">       Other AuxReader options.    </span>
+<span class="sd">       Other AuxReader options.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -408,7 +413,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_times</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-                <span class="c1"># might as well build _times now, since we&#39;ll need to iterate </span>
+                <span class="c1"># might as well build _times now, since we&#39;ll need to iterate</span>
                 <span class="c1"># through anyway</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_all_times</span><span class="p">()</span>
                 <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">read_all_times</span><span class="p">())</span>

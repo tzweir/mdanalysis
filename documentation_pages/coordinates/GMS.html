@@ -96,7 +96,64 @@
 GAMESS distributions: US-GAMESS, Firefly (PC-GAMESS) and GAMESS-UK.</p>
 <p>Current version was approbated with US-GAMESS &amp; Firefly only.</p>
 <p>There appears to be no rigid format definition so it is likely users
-will need to tweak this Class.</p>
+will need to tweak the <a class="reference internal" href="#MDAnalysis.coordinates.GMS.GMSReader" title="MDAnalysis.coordinates.GMS.GMSReader"><code class="xref py py-class docutils literal"><span class="pre">GMSReader</span></code></a>.</p>
+<dl class="class">
+<dt id="MDAnalysis.coordinates.GMS.GMSReader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.GMS.</code><code class="descname">GMSReader</code><span class="sig-paren">(</span><em>outfilename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GMS.html#GMSReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GMS.GMSReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads from an GAMESS output file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first docutils">
+<dt>ts</dt>
+<dd><p class="first last">Timestep object containing coordinates of current frame</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Methods:</th><td class="field-body"><dl class="first last docutils">
+<dt><code class="docutils literal"><span class="pre">len(out)</span></code></dt>
+<dd><p class="first last">return number of frames in out</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">out:</span></code></dt>
+<dd><p class="first last">iterate through trajectory</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.GMS.GMSReader" title="MDAnalysis.coordinates.GMS.GMSReader"><code class="xref py py-class docutils literal"><span class="pre">GMSReader</span></code></a> can read both uncompressed (<code class="docutils literal"><span class="pre">foo.out</span></code>) and
+compressed (<code class="docutils literal"><span class="pre">foo.out.bz2</span></code> or <code class="docutils literal"><span class="pre">foo.out.gz</span></code>) files;
+decompression is handled on the fly</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based.
+Added <cite>dt</cite> and <cite>time_offset</cite> keywords (passed to <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code>).</p>
+</div>
+<dl class="method">
+<dt id="MDAnalysis.coordinates.GMS.GMSReader.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/GMS.html#GMSReader.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.GMS.GMSReader.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close out trajectory file if it was open.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.GMS.GMSReader.n_atoms">
+<code class="descname">n_atoms</code><a class="headerlink" href="#MDAnalysis.coordinates.GMS.GMSReader.n_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of atoms in a frame</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.GMS.GMSReader.runtyp">
+<code class="descname">runtyp</code><a class="headerlink" href="#MDAnalysis.coordinates.GMS.GMSReader.runtyp" title="Permalink to this definition">¶</a></dt>
+<dd><p>RUNTYP property of the GAMESS run</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

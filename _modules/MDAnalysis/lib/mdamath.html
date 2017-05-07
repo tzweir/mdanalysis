@@ -71,7 +71,7 @@
             
   <h1>Source code for MDAnalysis.lib.mdamath</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.mdanalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2016 The MDAnalysis Development Team and contributors</span>
@@ -129,7 +129,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    v: array_like</span>
+<span class="sd">    v : array_like</span>
 <span class="sd">        1D array of shape (N) for a vector of length N</span>
 
 <span class="sd">    Returns</span>
@@ -258,18 +258,23 @@
 <span class="sd">    .. _code by Tsjerk Wassenaar:</span>
 <span class="sd">       http://www.mail-archive.com/gmx-users@gromacs.org/msg28032.html</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *dimensions*</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dimensions : [A, B, C, alpha, beta, gamma]</span>
 <span class="sd">        list of box lengths and angles (in degrees) such as</span>
-<span class="sd">        [A,B,C,alpha,beta,gamma]</span>
+<span class="sd">        ``[A,B,C,alpha,beta,gamma]``</span>
 
-<span class="sd">    :Returns: numpy 3x3 array B, with B[0] = first box vector,</span>
-<span class="sd">              B[1] = second vector, B[2] third box vector.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.array</span>
+<span class="sd">        numpy 3x3 array B, with ``B[0]`` as first box vector,</span>
+<span class="sd">        ``B[1]``as second vector, ``B[2]`` as third box vector.</span>
 
-<span class="sd">    .. note::</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The first vector is always pointing along the X-axis,</span>
+<span class="sd">    i.e., parallel to (1, 0, 0).</span>
 
-<span class="sd">       The first vector is always pointing along the X-axis</span>
-<span class="sd">       i.e. parallel to (1,0,0).</span>
 
 <span class="sd">    .. versionchanged:: 0.7.6</span>
 <span class="sd">       Null-vectors are returned for non-periodic (or missing) unit cell.</span>
@@ -303,13 +308,15 @@
 <span class="sd">    The volume is computed as `det(x1,x2,x2)` where the xi are the</span>
 <span class="sd">    triclinic box vectors from :func:`triclinic_vectors`.</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">       *dimensions*</span>
-<span class="sd">          list of box lengths and angles (in degrees) such as</span>
-<span class="sd">          [A,B,C,alpha,beta,gamma]</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dimensions : [A, B, C, alpha, beta, gamma]</span>
+<span class="sd">        list of box lengths and angles (in degrees) such as</span>
+<span class="sd">        [A,B,C,alpha,beta,gamma]</span>
 
-<span class="sd">    :Returns: numpy 3x3 array B, with B[0] = first box vector,</span>
-<span class="sd">              B[1] = second vector, B[2] third box vector.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    volume : float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">dimensions</span><span class="p">))</span></div>
 
@@ -317,10 +324,12 @@
 <span class="k">def</span> <span class="nf">_is_contiguous</span><span class="p">(</span><span class="n">atomgroup</span><span class="p">,</span> <span class="n">atom</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Walk through atomgroup, starting with atom.</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">       ``True`` if all of *atomgroup* is accessible through walking</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        ``True`` if all of *atomgroup* is accessible through walking</span>
 <span class="sd">        along bonds.</span>
-<span class="sd">       ``False`` otherwise.</span>
+<span class="sd">        ``False`` otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">atom</span><span class="p">])</span>
     <span class="n">walked</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -345,29 +354,7 @@
 <div class="viewcode-block" id="make_whole"><a class="viewcode-back" href="../../../documentation_pages/lib/mdamath.html#MDAnalysis.lib.mdamath.make_whole">[docs]</a><span class="k">def</span> <span class="nf">make_whole</span><span class="p">(</span><span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference_atom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Move all atoms in a single molecule so that bonds don&#39;t split over images</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *atomgroup*</span>
-<span class="sd">        The :class:`MDAnalysis.core.groups.AtomGroup` to work with.</span>
-<span class="sd">        The positions of this are modified in place.  All these atoms</span>
-<span class="sd">        must belong in the same molecule or fragment.</span>
-
-<span class="sd">    :Keywords:</span>
-<span class="sd">      *reference_atom*</span>
-<span class="sd">        The atom around which all other atoms will be moved.</span>
-<span class="sd">        Defaults to atom 0 in the atomgroup.</span>
-
-<span class="sd">    :Returns:</span>
-<span class="sd">       ``None``.  Atom positions are modified in place</span>
-
-<span class="sd">    :Raises:</span>
-<span class="sd">      `NoDataError`</span>
-<span class="sd">         if there are no bonds present.</span>
-<span class="sd">         (See :func:`~MDAnalysis.topology.core.guess_bonds`)</span>
-
-<span class="sd">      `ValueError`</span>
-<span class="sd">         if the algorithm fails to work.  This is usually</span>
-<span class="sd">         caused by the atomgroup not being a single fragment.</span>
-<span class="sd">         (ie the molecule can&#39;t be traversed by following bonds)</span>
+<span class="sd">    Atoms are modified in place.</span>
 
 <span class="sd">    This function is most useful when atoms have been packed into the primary</span>
 <span class="sd">    unit cell, causing breaks mid molecule, with the molecule then appearing</span>
@@ -384,29 +371,54 @@
 <span class="sd">       |           |     |           |</span>
 <span class="sd">       +-----------+     +-----------+</span>
 
-<span class="sd">    Usage::</span>
 
-<span class="sd">      from MDAnalysis.util.mdamath import make_whole</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    atomgroup : AtomGroup</span>
+<span class="sd">        The :class:`MDAnalysis.core.groups.AtomGroup` to work with.</span>
+<span class="sd">        The positions of this are modified in place.  All these atoms</span>
+<span class="sd">        must belong in the same molecule or fragment.</span>
+<span class="sd">    reference_atom : :class:`~MDAnalysis.core.groups.Atom`</span>
+<span class="sd">        The atom around which all other atoms will be moved.</span>
+<span class="sd">        Defaults to atom 0 in the atomgroup.</span>
 
-<span class="sd">      # This algorithm requires bonds, these can be guessed!</span>
-<span class="sd">      u = mda.Universe(......, guess_bonds=True)</span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NoDataError</span>
+<span class="sd">        There are no bonds present.</span>
+<span class="sd">        (See :func:`~MDAnalysis.topology.core.guess_bonds`)</span>
 
-<span class="sd">      # MDAnalysis can split molecules into their fragments</span>
-<span class="sd">      # based on bonding information.</span>
-<span class="sd">      # Note that this function will only handle a single fragment</span>
-<span class="sd">      # at a time, necessitating a loop.</span>
-<span class="sd">      for frag in u.fragments:</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        The algorithm fails to work.  This is usually</span>
+<span class="sd">        caused by the atomgroup not being a single fragment.</span>
+<span class="sd">        (ie the molecule can&#39;t be traversed by following bonds)</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    Only orthogonal boxes are currently supported.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    Make fragments whole::</span>
+
+<span class="sd">        from MDAnalysis.util.mdamath import make_whole</span>
+
+<span class="sd">        # This algorithm requires bonds, these can be guessed!</span>
+<span class="sd">        u = mda.Universe(......, guess_bonds=True)</span>
+
+<span class="sd">        # MDAnalysis can split molecules into their fragments</span>
+<span class="sd">        # based on bonding information.</span>
+<span class="sd">        # Note that this function will only handle a single fragment</span>
+<span class="sd">        # at a time, necessitating a loop.</span>
+<span class="sd">        for frag in u.fragments:</span>
 <span class="sd">          make_whole(frag)</span>
 
 <span class="sd">    Alternatively, to keep a single atom in place as the anchor::</span>
 
-<span class="sd">      # This will mean that atomgroup[10] will NOT get moved,</span>
-<span class="sd">      # and all other atoms will move (if necessary).</span>
-<span class="sd">      make_whole(atomgroup, reference_atom=atomgroup[10])</span>
+<span class="sd">        # This will mean that atomgroup[10] will NOT get moved,</span>
+<span class="sd">        # and all other atoms will move (if necessary).</span>
+<span class="sd">        make_whole(atomgroup, reference_atom=atomgroup[10])</span>
 
-<span class="sd">    .. Note::</span>
-
-<span class="sd">       Only orthogonal boxes are currently supported</span>
 
 <span class="sd">    .. versionadded:: 0.11.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -494,22 +506,30 @@
 
 <span class="sd">    Arguments</span>
 <span class="sd">    ---------</span>
-<span class="sd">    Ni, Nj - number of i and j components</span>
-<span class="sd">    i2j - the array relating i to parent js</span>
+<span class="sd">    Ni : int</span>
+<span class="sd">       number of i  components</span>
+<span class="sd">    Nj : int</span>
+<span class="sd">       number of j components</span>
+<span class="sd">    i2j : numpy.ndarray</span>
+<span class="sd">       relates i to parent js</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    ordered - an ordered list of i indices [size (i,)]</span>
-<span class="sd">    ptrs - the start and end index for each j [size (Nj, 2)]</span>
+<span class="sd">    ordered : list</span>
+<span class="sd">       an ordered list of i indices [size (i,)]</span>
+<span class="sd">    ptrs : list</span>
+<span class="sd">       the start and end index for each j [size (Nj, 2)]</span>
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
-<span class="sd">    # Residx - the resid of each Atom</span>
-<span class="sd">    ordered, ptrs = one_to_many_pointers(Natoms, Nres, Residx)</span>
+<span class="sd">    .. code:: python</span>
 
-<span class="sd">    # Returns an array of the atom indices that are in resid 7</span>
-<span class="sd">    atoms = ordered[ptrs[7,0]:ptrs[7,1]]</span>
-<span class="sd">    </span>
+<span class="sd">        # Residx - the resid of each Atom</span>
+<span class="sd">        ordered, ptrs = one_to_many_pointers(Natoms, Nres, Residx)</span>
+
+<span class="sd">        # Returns an array of the atom indices that are in resid 7</span>
+<span class="sd">        atoms = ordered[ptrs[7,0]:ptrs[7,1]]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ordered</span> <span class="o">=</span> <span class="n">i2j</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
     <span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">i2j</span><span class="p">[</span><span class="n">ordered</span><span class="p">]</span>

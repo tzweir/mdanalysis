@@ -98,6 +98,10 @@
 
 <span class="sd">Small helper functions that don&#39;t fit anywhere else.</span>
 
+<span class="sd">.. versionchanged:: 0.11.0</span>
+<span class="sd">   Moved mathematical functions into lib.mdamath</span>
+
+
 <span class="sd">Files and directories</span>
 <span class="sd">---------------------</span>
 
@@ -219,8 +223,6 @@
 <span class="sd">   close it.</span>
 
 
-<span class="sd">.. versionchanged:: 0.11.0</span>
-<span class="sd">   Moved mathematical functions into lib.mdamath</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
 <span class="kn">import</span> <span class="nn">six</span>
@@ -262,16 +264,18 @@
 <div class="viewcode-block" id="filename"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.filename">[docs]</a><span class="k">def</span> <span class="nf">filename</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a new name that has suffix attached; replaces other extensions.</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *name*</span>
-<span class="sd">           filename; extension is replaced unless keep=True;</span>
-<span class="sd">           *name* can also be a :class:`NamedStream` (and its</span>
-<span class="sd">           :attr:`NamedStream.name` will be changed accordingly)</span>
-<span class="sd">      *ext*</span>
-<span class="sd">           extension</span>
-<span class="sd">      *keep*</span>
-<span class="sd">           - ``False``: replace existing extension with *ext*;</span>
-<span class="sd">           - ``True``: keep old extension if one existed</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str or NamedStream</span>
+<span class="sd">        filename; extension is replaced unless ``keep=True``;</span>
+<span class="sd">        `name` can also be a :class:`NamedStream` (and its</span>
+<span class="sd">        :attr:`NamedStream.name` will be changed accordingly)</span>
+<span class="sd">    ext : None or str</span>
+<span class="sd">        extension to use in the new filename</span>
+<span class="sd">    keep : bool</span>
+<span class="sd">        - ``False``: replace existing extension with `ext`;</span>
+<span class="sd">        - ``True``: keep old extension if one existed</span>
+
 
 <span class="sd">    .. versionchanged:: 0.9.0</span>
 <span class="sd">       Also permits :class:`NamedStream` to pass through.</span>
@@ -293,10 +297,10 @@
 <div class="viewcode-block" id="openany"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.openany">[docs]</a><span class="k">def</span> <span class="nf">openany</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Context manager for :func:`anyopen`.</span>
 
-<span class="sd">    Open the *datasource* and close it when the context of the :keyword:`with`</span>
+<span class="sd">    Open the `datasource` and close it when the context of the :keyword:`with`</span>
 <span class="sd">    statement exits.</span>
 
-<span class="sd">    *datasource* can be a filename or a stream (see :func:`isstream`). A stream</span>
+<span class="sd">    `datasource` can be a filename or a stream (see :func:`isstream`). A stream</span>
 <span class="sd">    is reset to its start if possible (via :meth:`~io.IOBase.seek` or</span>
 <span class="sd">    :meth:`~cString.StringIO.reset`).</span>
 
@@ -308,10 +312,10 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    datasource : a file or a stream</span>
-<span class="sd">    mode : str</span>
-<span class="sd">        `r` or `w`</span>
-<span class="sd">    reset : bool</span>
-<span class="sd">        try to read (*mode* &#39;r&#39;) the stream from the start [``True``]</span>
+<span class="sd">    mode : {&#39;r&#39;, &#39;w&#39;} (optional)</span>
+<span class="sd">        open in r(ead) or w(rite) mode</span>
+<span class="sd">    reset : bool (optional)</span>
+<span class="sd">        try to read (`mode` &#39;r&#39;) the stream from the start [``True``]</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -325,7 +329,7 @@
 <span class="sd">    Open a URL and read it::</span>
 
 <span class="sd">       import urllib2</span>
-<span class="sd">       with openany(urllib2.urlopen(&quot;http://www.MDAnalysis.org/&quot;)) as html:</span>
+<span class="sd">       with openany(urllib2.urlopen(&quot;http://www.mdanalysis.org/&quot;)) as html:</span>
 <span class="sd">           print(html.read())</span>
 
 
@@ -362,24 +366,28 @@
 <div class="viewcode-block" id="anyopen"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.anyopen">[docs]</a><span class="k">def</span> <span class="nf">anyopen</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Open datasource (gzipped, bzipped, uncompressed) and return a stream.</span>
 
-<span class="sd">    *datasource* can be a filename or a stream (see :func:`isstream`). By</span>
+<span class="sd">    `datasource` can be a filename or a stream (see :func:`isstream`). By</span>
 <span class="sd">    default, a stream is reset to its start if possible (via</span>
 <span class="sd">    :meth:`~io.IOBase.seek` or :meth:`~cString.StringIO.reset`).</span>
 
 <span class="sd">    If possible, the attribute ``stream.name`` is set to the filename or</span>
 <span class="sd">    &quot;&lt;stream&gt;&quot; if no filename could be associated with the *datasource*.</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">     *datasource*</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    datasource</span>
 <span class="sd">        a file (from :class:`file` or :func:`open`) or a stream (e.g. from</span>
 <span class="sd">        :func:`urllib2.urlopen` or :class:`cStringIO.StringIO`)</span>
-<span class="sd">     *mode*</span>
-<span class="sd">        &#39;r&#39; or &#39;w&#39; or &#39;a&#39;, more complicated modes (&#39;r+&#39;, &#39;w+&#39; are not supported because</span>
-<span class="sd">        only the first letter is looked at) [``&#39;r&#39;``]</span>
-<span class="sd">     *reset*</span>
-<span class="sd">        try to read (*mode* &#39;r&#39;) the stream from the start [``True``]</span>
+<span class="sd">    mode: {&#39;r&#39;, &#39;w&#39;, &#39;a&#39;} (optional)</span>
+<span class="sd">        Open in r(ead), w(rite) or a(ppen) mode. More complicated</span>
+<span class="sd">        modes (&#39;r+&#39;, &#39;w+&#39;, ...) are not supported; only the first letter of</span>
+<span class="sd">        `mode` is used and thus any additional modifiers are silently ignored.</span>
+<span class="sd">    reset: bool (optional)</span>
+<span class="sd">        try to read (`mode` &#39;r&#39;) the stream from the start</span>
 
-<span class="sd">    :Returns: tuple ``stream`` which is a file-like object</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    file-like object</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -390,6 +398,7 @@
 <span class="sd">    .. versionchanged:: 0.9.0</span>
 <span class="sd">       Only returns the ``stream`` and tries to set ``stream.name = filename`` instead of the previous</span>
 <span class="sd">       behavior to return a tuple ``(stream, filename)``.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">handlers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bz2&#39;</span><span class="p">:</span> <span class="n">bz2_open</span><span class="p">,</span> <span class="s1">&#39;gz&#39;</span><span class="p">:</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">}</span>
 
@@ -483,18 +492,21 @@
 
 <span class="sd">    Arguments</span>
 <span class="sd">    ---------</span>
-<span class="sd">    p : path, string</span>
+<span class="sd">    p : str</span>
+<span class="sd">       path</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    Tuple ``(root, extension)`` where ``root`` is the full path and</span>
-<span class="sd">    filename with all extensions removed whereas ``extension`` is the</span>
-<span class="sd">    string of all extensions.</span>
+<span class="sd">    (root, extension) : tuple</span>
+<span class="sd">          where ``root`` is the full path and filename with all</span>
+<span class="sd">          extensions removed whereas ``extension`` is the string of</span>
+<span class="sd">          all extensions.</span>
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
 <span class="sd">    &gt;&gt;&gt; greedy_splitext(&quot;/home/joe/protein.pdb.bz2&quot;)</span>
 <span class="sd">    (&#39;/home/joe/protein&#39;, &#39;.pdb.bz2&#39;)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span><span class="p">,</span> <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="n">extension</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -512,7 +524,7 @@
 
 
 <div class="viewcode-block" id="isstream"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.isstream">[docs]</a><span class="k">def</span> <span class="nf">isstream</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Detect if *obj* is a stream.</span>
+    <span class="sd">&quot;&quot;&quot;Detect if `obj` is a stream.</span>
 
 <span class="sd">    We consider anything a stream that has the methods</span>
 
@@ -523,16 +535,19 @@
 <span class="sd">    - ``read()``, ``readline()``, ``readlines()``</span>
 <span class="sd">    - ``write()``, ``writeline()``, ``writelines()``</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj : stream or str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        ``True`` if `obj` is a stream, ``False`` otherwise</span>
+
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    :mod:`io`</span>
 
-
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *obj*</span>
-<span class="sd">          stream or string</span>
-
-<span class="sd">    :Returns: ``True`` is *obj* is a stream, ``False`` otherwise</span>
 
 <span class="sd">    .. versionadded:: 0.9.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -553,9 +568,20 @@
 
 
 <div class="viewcode-block" id="which"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.which">[docs]</a><span class="k">def</span> <span class="nf">which</span><span class="p">(</span><span class="n">program</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Determine full path of executable *program* on :envvar:`PATH`.</span>
+    <span class="sd">&quot;&quot;&quot;Determine full path of executable `program` on :envvar:`PATH`.</span>
 
 <span class="sd">    (Jay at http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    programe : str</span>
+<span class="sd">       name of the executable</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    path : str or None</span>
+<span class="sd">       absolute path to the executable if it can be found, else ``None``</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">is_exe</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
@@ -578,7 +604,7 @@
 <div class="viewcode-block" id="NamedStream"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream">[docs]</a><span class="k">class</span> <span class="nc">NamedStream</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stream that also provides a (fake) name.</span>
 
-<span class="sd">    By wrapping a stream *stream* in this class, it can be passed to</span>
+<span class="sd">    By wrapping a stream `stream` in this class, it can be passed to</span>
 <span class="sd">    code that uses inspection of the filename to make decisions. For</span>
 <span class="sd">    instance. :func:`os.path.split` will work correctly on a</span>
 <span class="sd">    :class:`NamedStream`.</span>
@@ -592,8 +618,8 @@
 <span class="sd">    and :func:`os.path.expanduser`, which will return the :class:`NamedStream`</span>
 <span class="sd">    itself instead of a string if no substitutions were made.</span>
 
-<span class="sd">    .. rubric:: Example</span>
-
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
 <span class="sd">    Wrap a :func:`cStringIO.StringIO` instance to write to::</span>
 
 <span class="sd">      import cStringIO</span>
@@ -616,26 +642,26 @@
 <span class="sd">         # ...</span>
 <span class="sd">      print f.closed     # --&gt; True</span>
 
-<span class="sd">    .. Note::</span>
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    This class uses its own :meth:`__getitem__` method so if `stream`</span>
+<span class="sd">    implements :meth:`stream.__getitem__` then that will be masked and</span>
+<span class="sd">    this class should not be used.</span>
 
-<span class="sd">       This class uses its own :meth:`__getitem__` method so if *stream*</span>
-<span class="sd">       implements :meth:`stream.__getitem__` then that will be masked and this</span>
-<span class="sd">       class should not be used.</span>
-
-<span class="sd">    .. Warning::</span>
-
-<span class="sd">       By default, :meth:`NamedStream.close` will **not close the</span>
-<span class="sd">       stream** but instead :meth:`~NamedStream.reset` it to the</span>
-<span class="sd">       beginning. [#NamedStreamClose]_ Provide the ``force=True`` keyword</span>
-<span class="sd">       to :meth:`NamedStream.close` to always close the stream.</span>
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    By default, :meth:`NamedStream.close` will **not close the</span>
+<span class="sd">    stream** but instead :meth:`~NamedStream.reset` it to the</span>
+<span class="sd">    beginning. [#NamedStreamClose]_ Provide the ``force=True`` keyword</span>
+<span class="sd">    to :meth:`NamedStream.close` to always close the stream.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize the :class:`NamedStream` from a *stream* and give it a *name*.</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the :class:`NamedStream` from a `stream` and give it a `name`.</span>
 
 <span class="sd">        The constructor attempts to rewind the stream to the beginning unless</span>
-<span class="sd">        the keyword *reset* is set to ``False``. If rewinding fails, a</span>
+<span class="sd">        the keyword `reset` is set to ``False``. If rewinding fails, a</span>
 <span class="sd">        :class:`MDAnalysis.StreamWarning` is issued.</span>
 
 <span class="sd">        Parameters</span>
@@ -644,10 +670,10 @@
 <span class="sd">            an open stream (e.g. :class:`file` or :func:`cStringIO.StringIO`)</span>
 <span class="sd">        filename : str</span>
 <span class="sd">            the filename that should be associated with the stream</span>
-<span class="sd">        reset : bool</span>
+<span class="sd">        reset : bool (optional)</span>
 <span class="sd">            start the stream from the beginning (either :meth:`reset` or :meth:`seek`)</span>
 <span class="sd">            when the class instance is constructed</span>
-<span class="sd">        close : bool</span>
+<span class="sd">        close : bool (optional)</span>
 <span class="sd">            close the stream when a :keyword:`with` block exits or when</span>
 <span class="sd">            :meth:`close` is called; note that the default is **not to close</span>
 <span class="sd">            the stream**</span>
@@ -741,19 +767,28 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NamedStream</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">closed</span>
 
 <div class="viewcode-block" id="NamedStream.seek"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream.seek">[docs]</a>    <span class="k">def</span> <span class="nf">seek</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">SEEK_SET</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Change the stream position to the given byte *offset* .</span>
+        <span class="sd">&quot;&quot;&quot;Change the stream position to the given byte `offset` .</span>
 
-<span class="sd">        *offset* is interpreted relative to the position indicated by</span>
-<span class="sd">        *whence*. Values for *whence* are:</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        offset : int</span>
+<span class="sd">             `offset` is interpreted relative to the position</span>
+<span class="sd">             indicated by `whence`.</span>
+<span class="sd">        whence : {0, 1, 2} (optional)</span>
+<span class="sd">             Values for `whence` are:</span>
 
-<span class="sd">        - :data:`io.SEEK_SET` or 0 – start of the stream (the default); *offset*</span>
-<span class="sd">          should be zero or positive</span>
-<span class="sd">        - :data:`io.SEEK_CUR` or 1 – current stream position; *offset* may be</span>
-<span class="sd">          negative</span>
-<span class="sd">        - :data:`io.SEEK_END` or 2 – end of the stream; *offset* is usually</span>
-<span class="sd">          negative</span>
+<span class="sd">               - :data:`io.SEEK_SET` or 0 – start of the stream (the default); `offset`</span>
+<span class="sd">                 should be zero or positive</span>
+<span class="sd">               - :data:`io.SEEK_CUR` or 1 – current stream position; `offset` may be</span>
+<span class="sd">                 negative</span>
+<span class="sd">               - :data:`io.SEEK_END` or 2 – end of the stream; `offset` is usually</span>
+<span class="sd">                 negative</span>
 
-<span class="sd">        :Returns: the new absolute position.</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            the new absolute position in bytes.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">whence</span><span class="p">)</span>  <span class="c1"># file.seek: no kw</span>
@@ -768,10 +803,14 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NamedStream</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="NamedStream.truncate"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream.truncate">[docs]</a>    <span class="k">def</span> <span class="nf">truncate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">size</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Truncate the stream&#39;s size to *size*.</span>
+        <span class="sd">&quot;&quot;&quot;Truncate the stream&#39;s size to `size`.</span>
 
-<span class="sd">        The size defaults to the current position (if no *size* argument is</span>
-<span class="sd">        supplied). The current file position is not changed.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        size : int (optional)</span>
+<span class="sd">             The `size` defaults to the current position (if no `size` argument</span>
+<span class="sd">             is supplied). The current file position is not changed.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="o">*</span><span class="n">size</span><span class="p">)</span>
@@ -781,7 +820,9 @@
 <div class="viewcode-block" id="NamedStream.seekable"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream.seekable">[docs]</a>    <span class="k">def</span> <span class="nf">seekable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return ``True`` if the stream supports random access.</span>
 
-<span class="sd">        If ``False``, :meth:`seek`, :meth:`tell` and :meth:`truncate` will raise :exc:`IOError`.</span>
+<span class="sd">        If ``False``, :meth:`seek`, :meth:`tell` and :meth:`truncate` will</span>
+<span class="sd">        raise :exc:`IOError`.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">seekable</span><span class="p">()</span>
@@ -870,9 +911,9 @@
 
 
 <div class="viewcode-block" id="realpath"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.realpath">[docs]</a><span class="k">def</span> <span class="nf">realpath</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Join all args and return the real path, rooted at /.</span>
+    <span class="sd">&quot;&quot;&quot;Join all args and return the real path, rooted at ``/``.</span>
 
-<span class="sd">    Expands &#39;~&#39;, &#39;~user&#39;, and environment variables such as :envvar`$HOME`.</span>
+<span class="sd">    Expands &#39;~&#39;, &#39;~user&#39;, and environment variables such as :envvar:`$HOME`.</span>
 
 <span class="sd">    Returns ``None`` if any of the args is ``None``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -882,9 +923,16 @@
 
 
 <span class="k">def</span> <span class="nf">get_ext</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the lower-cased extension of *filename* without a leading dot.</span>
+    <span class="sd">&quot;&quot;&quot;Return the lower-cased extension of `filename` without a leading dot.</span>
 
-<span class="sd">    :Returns: root, ext</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    root : str</span>
+<span class="sd">    ext : str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ext</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">extsep</span><span class="p">):</span>
@@ -893,7 +941,27 @@
 
 
 <span class="k">def</span> <span class="nf">check_compressed_format</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Check if this is a supported gzipped/bzip2ed file format and return UPPERCASE format.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Check if this is a supported gzipped/bzip2ed file format and return UPPERCASE format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    root : str</span>
+<span class="sd">       path of a file, without extension `ext`</span>
+<span class="sd">    ext : str</span>
+<span class="sd">       extension (currently only &quot;bz2&quot; and &quot;gz&quot; are recognized as compressed formats)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    format : str</span>
+<span class="sd">       upper case format extension *if* the compression can be handled by</span>
+<span class="sd">       :func:`openany`</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    openany : function that is used to open and decompress formats on the fly; only</span>
+<span class="sd">              compression formats implemented in :func:`openany` are recognized</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># XYZReader&amp;others are setup to handle both plain and compressed (bzip2, gz) files</span>
     <span class="c1"># ..so if the first file extension is bzip2 or gz, look at the one to the left of it</span>
     <span class="k">if</span> <span class="n">ext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;bz2&quot;</span><span class="p">,</span> <span class="s2">&quot;gz&quot;</span><span class="p">):</span>
@@ -907,7 +975,21 @@
 
 
 <span class="k">def</span> <span class="nf">format_from_filename_extension</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Guess file format from the file extension&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Guess file format from the file extension.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    format : str</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        if the file format cannot be determined</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">get_ext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
@@ -920,19 +1002,31 @@
 
 
 <div class="viewcode-block" id="guess_format"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.guess_format">[docs]</a><span class="k">def</span> <span class="nf">guess_format</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the format of *filename*</span>
+    <span class="sd">&quot;&quot;&quot;Return the format of `filename`</span>
 
-<span class="sd">    The current heuristic simply looks at the filename extension</span>
-<span class="sd">    and can work around compressed format extensions</span>
+<span class="sd">    The current heuristic simply looks at the filename extension and can work</span>
+<span class="sd">    around compressed format extensions.</span>
 
-<span class="sd">    *filename* can also be a stream, in which case</span>
-<span class="sd">    *filename.name* is looked at for a hint to the format</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str or stream</span>
+<span class="sd">        path to the file or a stream, in which case ``filename.name`` is looked</span>
+<span class="sd">        at for a hint to the format</span>
 
-<span class="sd">    :Raises:</span>
-<span class="sd">       *ValueError*</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    format : str</span>
+<span class="sd">        format specifier (upper case)</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        if the heuristics are insufficient to guess a supported format</span>
+
 
 <span class="sd">    .. versionadded:: 0.11.0</span>
 <span class="sd">       Moved into lib.util</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">isstream</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
         <span class="c1"># perhaps StringIO or open stream</span>
@@ -954,7 +1048,7 @@
 
 
 <div class="viewcode-block" id="iterable"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.iterable">[docs]</a><span class="k">def</span> <span class="nf">iterable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns ``True`` if *obj* can be iterated over and is *not* a  string</span>
+    <span class="sd">&quot;&quot;&quot;Returns ``True`` if `obj` can be iterated over and is *not* a  string</span>
 <span class="sd">    nor a :class:`NamedStream`&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">,</span> <span class="n">NamedStream</span><span class="p">)):</span>
         <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># avoid iterating over characters of a string</span>
@@ -969,7 +1063,16 @@
 
 
 <div class="viewcode-block" id="asiterable"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.asiterable">[docs]</a><span class="k">def</span> <span class="nf">asiterable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns obj so that it can be iterated over; a string is *not* treated as iterable&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns `obj` so that it can be iterated over.</span>
+
+<span class="sd">    A string is *not* detected as and iterable and is wrapped into a :class:`list`</span>
+<span class="sd">    with a single element.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    iterable</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">obj</span></div>
@@ -983,7 +1086,7 @@
 
 
 <span class="k">def</span> <span class="nf">strip</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert *s* to a string and return it white-space stripped.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Convert `s` to a string and return it white-space stripped.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
 
@@ -997,12 +1100,13 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">typespecifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *start*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start : int</span>
 <span class="sd">            first column</span>
-<span class="sd">         *stop*</span>
+<span class="sd">        stop : int</span>
 <span class="sd">            last column + 1</span>
-<span class="sd">         *typespecifier*</span>
+<span class="sd">        typespecifier : str</span>
 <span class="sd">            &#39;I&#39;: int, &#39;F&#39;: float, &#39;E&#39;: float, &#39;A&#39;: stripped string</span>
 
 <span class="sd">        The start/stop arguments follow standard Python convention in that</span>
@@ -1014,7 +1118,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">convertor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertors</span><span class="p">[</span><span class="n">typespecifier</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read the entry from *line* and convert to appropriate type.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Read the entry from `line` and convert to appropriate type.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertor</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
@@ -1031,13 +1135,8 @@
 <div class="viewcode-block" id="FORTRANReader"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.FORTRANReader">[docs]</a><span class="k">class</span> <span class="nc">FORTRANReader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;FORTRANReader provides a method to parse FORTRAN formatted lines in a file.</span>
 
-<span class="sd">    Usage::</span>
-
-<span class="sd">       atomformat = FORTRANReader(&#39;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#39;)</span>
-<span class="sd">       for line in open(&#39;coordinates.crd&#39;):</span>
-<span class="sd">           serial,TotRes,resName,name,x,y,z,chainID,resSeq,tempFactor = atomformat.read(line)</span>
-
-<span class="sd">    Fortran format edit descriptors; see `Fortran Formats`_ for the syntax.</span>
+<span class="sd">    The contents of lines in a file can be parsed according to FORTRAN format</span>
+<span class="sd">    edit descriptors (see `Fortran Formats`_ for the syntax).</span>
 
 <span class="sd">    Only simple one-character specifiers supported here: *I F E A X* (see</span>
 <span class="sd">    :data:`FORTRAN_format_regex`).</span>
@@ -1047,12 +1146,28 @@
 <span class="sd">    .. _`Fortran Formats`: http://www.webcitation.org/5xbaWMV2x</span>
 <span class="sd">    .. _`Fortran Formats (URL)`:</span>
 <span class="sd">       http://www.cs.mtu.edu/~shene/COURSES/cs201/NOTES/chap05/format.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up the reader with the FORTRAN format string.</span>
 
-<span class="sd">        The string *fmt* should look like &#39;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#39;.</span>
+<span class="sd">        The string `fmt` should look like &#39;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fmt : str</span>
+<span class="sd">           FORTRAN format edit descriptor for a line as described in `Fortran</span>
+<span class="sd">           Formats`_</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Parsing of a standard CRD file::</span>
+
+<span class="sd">           atomformat = FORTRANReader(&#39;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#39;)</span>
+<span class="sd">           for line in open(&#39;coordinates.crd&#39;):</span>
+<span class="sd">               serial,TotRes,resName,name,x,y,z,chainID,resSeq,tempFactor = atomformat.read(line)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fmt</span> <span class="o">=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
         <span class="n">descriptors</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_FORTRAN_format</span><span class="p">(</span><span class="n">descriptor</span><span class="p">)</span> <span class="k">for</span> <span class="n">descriptor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">]</span>
@@ -1068,13 +1183,23 @@
                 <span class="n">start</span> <span class="o">+=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;totallength&#39;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="FORTRANReader.read"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.FORTRANReader.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse *line* according to the format string and return list of values.</span>
+        <span class="sd">&quot;&quot;&quot;Parse `line` according to the format string and return list of values.</span>
 
 <span class="sd">        Values are converted to Python types according to the format specifier.</span>
 
-<span class="sd">        :Returns: list of entries with appropriate types</span>
-<span class="sd">        :Raises: :exc:`ValueError` if any of the conversions cannot be made</span>
-<span class="sd">                 (e.g. space for an int)</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        line : str</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            list of entries with appropriate types</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Any of the conversions cannot be made (e.g. space for an int)</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -1097,18 +1222,27 @@
 <div class="viewcode-block" id="FORTRANReader.parse_FORTRAN_format"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.FORTRANReader.parse_FORTRAN_format">[docs]</a>    <span class="k">def</span> <span class="nf">parse_FORTRAN_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edit_descriptor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the descriptor.</span>
 
-<span class="sd">          parse_FORTRAN_format(edit_descriptor) --&gt; dict</span>
 
-<span class="sd">        :Returns: dict with totallength (in chars), repeat, length,</span>
-<span class="sd">                  format, decimals</span>
-<span class="sd">        :Raises: :exc:`ValueError` if the *edit_descriptor* is not recognized</span>
-<span class="sd">                 and cannot be parsed</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        edit_descriptor : str</span>
+<span class="sd">            FORTRAN format edit descriptor</span>
 
-<span class="sd">        .. Note::</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            dict with totallength (in chars), repeat, length, format, decimals</span>
 
-<span class="sd">           Specifiers: *L ES EN T TL TR / r S SP SS BN BZ* are *not*</span>
-<span class="sd">           supported, and neither are the scientific notation *Ew.dEe*</span>
-<span class="sd">           forms.</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            The `edit_descriptor` is not recognized and cannot be parsed</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Specifiers: *L ES EN T TL TR / r S SP SS BN BZ* are *not* supported,</span>
+<span class="sd">        and neither are the scientific notation *Ew.dEe* forms.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">m</span> <span class="o">=</span> <span class="n">_FORTRAN_format_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">edit_descriptor</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
@@ -1143,11 +1277,38 @@
 
 
 <div class="viewcode-block" id="fixedwidth_bins"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.fixedwidth_bins">[docs]</a><span class="k">def</span> <span class="nf">fixedwidth_bins</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return bins of width delta that cover xmin,xmax (or a larger range).</span>
+    <span class="sd">&quot;&quot;&quot;Return bins of width `delta` that cover `xmin`, `xmax` (or a larger range).</span>
 
-<span class="sd">    dict = fixedwidth_bins(delta,xmin,xmax)</span>
+<span class="sd">    The bin parameters are computed such that the bin size `delta` is</span>
+<span class="sd">    guaranteed. In order to achieve this, the range `[xmin, xmax]` can be</span>
+<span class="sd">    increased.</span>
 
-<span class="sd">    The dict contains &#39;Nbins&#39;, &#39;delta&#39;, &#39;min&#39;, and &#39;max&#39;.</span>
+<span class="sd">    Bins can be calculated for 1D data (then all parameters are simple floats)</span>
+<span class="sd">    or nD data (then parameters are supplied as arrays, with each entry</span>
+<span class="sd">    correpsonding to one dimension).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    delta : float or array_like</span>
+<span class="sd">        desired spacing of the bins</span>
+<span class="sd">    xmin : float or array_like</span>
+<span class="sd">        lower bound (left boundary of first bin)</span>
+<span class="sd">    xmax : float or array_like</span>
+<span class="sd">        upper bound (right boundary of last bin)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        The dict contains &#39;Nbins&#39;, &#39;delta&#39;, &#39;min&#39;, and &#39;max&#39;; these are either</span>
+<span class="sd">        floats or arrays, depending on the input.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    Use with :func:`numpy.histogram`::</span>
+
+<span class="sd">       B = fixedwidth_bins(delta, xmin, xmax)</span>
+<span class="sd">       h, e = np.histogram(data, bins=B[&#39;Nbins&#39;], range=(B[&#39;min&#39;], B[&#39;max&#39;]))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">xmin</span> <span class="o">&lt;</span> <span class="n">xmax</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Boundaries are not sane: should be xmin &lt; xmax.&#39;</span><span class="p">)</span>
@@ -1196,6 +1357,21 @@
 <div class="viewcode-block" id="convert_aa_code"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.convert_aa_code">[docs]</a><span class="k">def</span> <span class="nf">convert_aa_code</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts between 3-letter and 1-letter amino acid codes.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : str</span>
+<span class="sd">        1-letter or 3-letter amino acid code</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        3-letter or 1-letter amino acid code</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        No conversion can be made; the amino acid code is not defined.</span>
+
 <span class="sd">    Note</span>
 <span class="sd">    ----</span>
 <span class="sd">    Data are defined in :data:`amino_acid_codes` and :data:`inverse_aa_codes`.</span>
@@ -1232,21 +1408,29 @@
 <div class="viewcode-block" id="parse_residue"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.parse_residue">[docs]</a><span class="k">def</span> <span class="nf">parse_residue</span><span class="p">(</span><span class="n">residue</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Process residue string.</span>
 
-<span class="sd">    Examples:</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    residue: str</span>
+<span class="sd">        The *residue* must contain a 1-letter or 3-letter or</span>
+<span class="sd">        4-letter residue string, a number (the resid) and</span>
+<span class="sd">        optionally an atom identifier, which must be separate</span>
+<span class="sd">        from the residue with a colon (&quot;:&quot;). White space is</span>
+<span class="sd">        allowed in between.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        `(3-letter aa string, resid, atomname)`; known 1-letter</span>
+<span class="sd">        aa codes are converted to 3-letter codes</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
 <span class="sd">     - &quot;LYS300:HZ1&quot; --&gt; (&quot;LYS&quot;, 300, &quot;HZ1&quot;)</span>
 <span class="sd">     - &quot;K300:HZ1&quot; --&gt; (&quot;LYS&quot;, 300, &quot;HZ1&quot;)</span>
 <span class="sd">     - &quot;K300&quot; --&gt; (&quot;LYS&quot;, 300, None)</span>
 <span class="sd">     - &quot;4GB300:H6O&quot; --&gt; (&quot;4GB&quot;, 300, &quot;H6O&quot;)</span>
 <span class="sd">     - &quot;4GB300&quot; --&gt; (&quot;4GB&quot;, 300, None)</span>
 
-<span class="sd">    :Argument: The *residue* must contain a 1-letter or 3-letter or</span>
-<span class="sd">               4-letter residue string, a number (the resid) and</span>
-<span class="sd">               optionally an atom identifier, which must be separate</span>
-<span class="sd">               from the residue with a colon (&quot;:&quot;). White space is</span>
-<span class="sd">               allowed in between.</span>
-
-<span class="sd">    :Returns: `(3-letter aa string, resid, atomname)`; known 1-letter</span>
-<span class="sd">              aa codes are converted to 3-letter codes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># XXX: use _translate_residue() ....</span>
@@ -1264,7 +1448,7 @@
 
 
 <div class="viewcode-block" id="conv_float"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.conv_float">[docs]</a><span class="k">def</span> <span class="nf">conv_float</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert an object *s* to float if possible.</span>
+    <span class="sd">&quot;&quot;&quot;Convert an object `s` to float if possible.</span>
 
 <span class="sd">    Function to be passed into :func:`map` or a list comprehension. If</span>
 <span class="sd">    the argument can be interpreted as a float it is converted,</span>
@@ -1277,11 +1461,14 @@
 
 
 <div class="viewcode-block" id="cached"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.cached">[docs]</a><span class="k">def</span> <span class="nf">cached</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Cache a property within a class</span>
+    <span class="sd">&quot;&quot;&quot;Cache a property within a class.</span>
 
 <span class="sd">    Requires the Class to have a cache dict called ``_cache``.</span>
 
-<span class="sd">    Usage::</span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    How to add a cache for a variable to a class by using the `@cached`</span>
+<span class="sd">    decorator::</span>
 
 <span class="sd">       class A(object):</span>
 <span class="sd">           def__init__(self):</span>
@@ -1295,7 +1482,9 @@
 <span class="sd">               # _cache with the key: &#39;keyname&#39;</span>
 <span class="sd">               size = 10.0</span>
 
+
 <span class="sd">    .. versionadded:: 0.9.0</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">cached_lookup</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
@@ -1319,11 +1508,15 @@
 <span class="sd">    ---------</span>
 <span class="sd">    arr : np.array of shape (n1, m)</span>
 <span class="sd">    return_index : bool, optional</span>
-<span class="sd">      If True, returns indices of arr that formed answer (see np.unique)</span>
+<span class="sd">      If ``True``, returns indices of array that formed answer (see</span>
+<span class="sd">      :func:`numpy.unique`)</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    unique_rows (n2, m)</span>
+<span class="sd">    unique_rows : numpy.array</span>
+<span class="sd">         shape (n2, m)</span>
+<span class="sd">    r_idx : numpy.array (optional)</span>
+<span class="sd">          index (if `return_index` was ``True``)</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -1332,6 +1525,11 @@
 <span class="sd">    &gt;&gt;&gt; b = unique_rows(a)</span>
 <span class="sd">    &gt;&gt;&gt; b</span>
 <span class="sd">    array([[0, 1], [1, 2], [2, 3]])</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.unique</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># From here, but adapted to handle any size rows</span>
     <span class="c1"># https://mail.scipy.org/pipermail/scipy-user/2011-December/031200.html</span>
@@ -1341,7 +1539,7 @@
     <span class="c1"># eg: idx = np.array([1, 2])[None, :]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">arr</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;OWNDATA&#39;</span><span class="p">]:</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    
+
     <span class="n">m</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">return_index</span><span class="p">:</span>
@@ -1368,15 +1566,15 @@
 <span class="sd">    m : int</span>
 <span class="sd">        size of block in second dimension</span>
 
-
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">      (nblocks, n, m) view of the original array.</span>
-<span class="sd">      Where nblocks is the number of times the miniblock fits in the original.</span>
+<span class="sd">    (nblocks, n, m) : tuple</span>
+<span class="sd">          view of the original array, where nblocks is the number of times the</span>
+<span class="sd">          miniblock fits in the original.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
-<span class="sd">      ValueError</span>
+<span class="sd">    ValueError</span>
 <span class="sd">        If the supplied `n` and `m` don&#39;t divide `a` into an integer number</span>
 <span class="sd">        of blocks.</span>
 
@@ -1393,13 +1591,15 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">      n, m must divide a into an identical integer number of blocks.</span>
+<span class="sd">    n, m must divide a into an identical integer number of blocks.</span>
 
-<span class="sd">      Uses strides so probably requires that the array is C contiguous</span>
+<span class="sd">    Uses strides so probably requires that the array is C contiguous.</span>
 
-<span class="sd">      Returns a view, so editing this modifies the original array</span>
+<span class="sd">    Returns a view, so editing this modifies the original array.</span>
+
 
 <span class="sd">    .. versionadded:: 0.12.0</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># based on:</span>
     <span class="c1"># http://stackoverflow.com/a/10862636</span>

@@ -71,7 +71,7 @@
             
   <h1>Source code for MDAnalysis.coordinates.GRO</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.mdanalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2016 The MDAnalysis Development Team and contributors</span>
@@ -99,30 +99,50 @@
 <span class="sd">Classes to read and write Gromacs_ GRO_ coordinate files; see the notes on the</span>
 <span class="sd">`GRO format`_ which includes a conversion routine for the box.</span>
 
-<span class="sd">GROWriter format strings</span>
-<span class="sd">------------------------</span>
 
-<span class="sd">The GROWriter class has a .fmt attribute, which is a dictionary of different</span>
-<span class="sd">strings for writing lines in .gro files.  These are as follows:</span>
+<span class="sd">Classes</span>
+<span class="sd">-------</span>
 
-<span class="sd">n_atoms</span>
+<span class="sd">.. autoclass:: Timestep</span>
+<span class="sd">   :members:</span>
+
+<span class="sd">.. autoclass:: GROReader</span>
+<span class="sd">   :members:</span>
+
+<span class="sd">.. autoclass:: GROWriter</span>
+<span class="sd">   :members:</span>
+
+
+<span class="sd">Developer notes: ``GROWriter`` format strings</span>
+<span class="sd">---------------------------------------------</span>
+
+<span class="sd">The :class:`GROWriter` class has a :attr:`GROWriter.fmt` attribute, which is a dictionary of different</span>
+<span class="sd">strings for writing lines in ``.gro`` files.  These are as follows:</span>
+
+<span class="sd">``n_atoms``</span>
 <span class="sd">  For the first line of the gro file, supply the number of atoms in the system.</span>
-<span class="sd">  Eg: fmt[&#39;n_atoms&#39;].format(42)</span>
+<span class="sd">  E.g.::</span>
 
-<span class="sd">xyz</span>
+<span class="sd">      fmt[&#39;n_atoms&#39;].format(42)</span>
+
+<span class="sd">``xyz``</span>
 <span class="sd">  An atom line without velocities.  Requires that the &#39;resid&#39;, &#39;resname&#39;,</span>
 <span class="sd">  &#39;name&#39;, &#39;index&#39; and &#39;pos&#39; keys be supplied.</span>
-<span class="sd">  Eg: fmt[&#39;xyz&#39;].format(resid=1, resname=&#39;SOL&#39;, name=&#39;OW2&#39;, index=2, pos=(0.0, 1.0, 2.0))</span>
+<span class="sd">  E.g.::</span>
 
-<span class="sd">xyz_v</span>
+<span class="sd">     fmt[&#39;xyz&#39;].format(resid=1, resname=&#39;SOL&#39;, name=&#39;OW2&#39;, index=2, pos=(0.0, 1.0, 2.0))</span>
+
+<span class="sd">``xyz_v``</span>
 <span class="sd">  As above, but with velocities.  Needs an additional keyword &#39;vel&#39;.</span>
 
-<span class="sd">box_orthorhombic</span>
+<span class="sd">``box_orthorhombic``</span>
 <span class="sd">  The final line of the gro file which gives box dimensions.  Requires</span>
 <span class="sd">  the box keyword to be given, which should be the three cartesian dimensions.</span>
-<span class="sd">  Eg: fmt[&#39;box_orthorhombic&#39;].format(box=(10.0, 10.0, 10.0))</span>
+<span class="sd">  E.g.::</span>
 
-<span class="sd">box_triclinic</span>
+<span class="sd">     fmt[&#39;box_orthorhombic&#39;].format(box=(10.0, 10.0, 10.0))</span>
+
+<span class="sd">``box_triclinic``</span>
 <span class="sd">  As above, but for a non orthorhombic box. Requires the box keyword, but this</span>
 <span class="sd">  time as a length 9 vector.  This is a flattened version of the (3,3) triclinic</span>
 <span class="sd">  vector representation of the unit cell.  The rearrangement into the odd</span>
@@ -132,6 +152,7 @@
 <span class="sd">.. _Gromacs: http://www.gromacs.org</span>
 <span class="sd">.. _GRO: http://manual.gromacs.org/current/online/gro.html</span>
 <span class="sd">.. _GRO format: http://chembytes.wikidot.com/g-grofile</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 
@@ -148,7 +169,7 @@
 <span class="kn">from</span> <span class="nn">..lib</span> <span class="k">import</span> <span class="n">util</span>
 
 
-<span class="k">class</span> <span class="nc">Timestep</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Timestep</span><span class="p">):</span>
+<div class="viewcode-block" id="Timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/GRO.html#MDAnalysis.coordinates.GRO.Timestep">[docs]</a><span class="k">class</span> <span class="nc">Timestep</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Timestep</span><span class="p">):</span>
     <span class="n">_ts_order_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
     <span class="n">_ts_order_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
     <span class="n">_ts_order_z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
@@ -188,12 +209,12 @@
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts_order_x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts_order_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts_order_z</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts_order_z</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="GROReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/GRO.html#MDAnalysis.coordinates.GRO.GROReader">[docs]</a><span class="k">class</span> <span class="nc">GROReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">SingleFrameReaderBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reader for the Gromacs GRO structure format.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Frames now 0-based instead of 1-based</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -262,11 +283,14 @@
 <div class="viewcode-block" id="GROReader.Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/GRO.html#MDAnalysis.coordinates.GRO.GROReader.Writer">[docs]</a>    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a CRDWriter for *filename*.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *filename*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename: str</span>
 <span class="sd">            filename of the output GRO file</span>
 
-<span class="sd">        :Returns: :class:`GROWriter`</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`GROWriter`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -282,18 +306,19 @@
 <span class="sd">     - resnames (defaults to &#39;UNK&#39;)</span>
 <span class="sd">     - resids (defaults to &#39;1&#39;)</span>
 
-<span class="sd">    .. Note::</span>
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    The precision is hard coded to three decimal places</span>
 
-<span class="sd">       The precision is hard coded to three decimal places</span>
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Frames now 0-based instead of 1-based</span>
 <span class="sd">    .. versionchanged:: 0.13.0</span>
-<span class="sd">       Now strictly writes positions with 3dp precision</span>
-<span class="sd">       and velocities with 4dp</span>
+<span class="sd">       Now strictly writes positions with 3dp precision.</span>
+<span class="sd">       and velocities with 4dp.</span>
 <span class="sd">       Removed the `convert_dimensions_to_unitcell` method,</span>
-<span class="sd">       use `Timestep.triclinic_dimensions` instead</span>
-<span class="sd">       Now now writes velocities where possible</span>
+<span class="sd">       use `Timestep.triclinic_dimensions` instead.</span>
+<span class="sd">       Now now writes velocities where possible.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;GRO&#39;</span>
@@ -323,6 +348,9 @@
 <span class="sd">        n_atoms : int (optional)</span>
 <span class="sd">            number of atoms</span>
 
+<span class="sd">        convert_units : str (optional)</span>
+<span class="sd">            units are converted to the MDAnalysis base format; ``None`` selects</span>
+<span class="sd">            the value of :data:`MDAnalysis.core.flags` [&#39;convert_lengths&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">filename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;gro&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="n">n_atoms</span>
@@ -336,19 +364,19 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        -----------</span>
-<span class="sd">        obj : AtomGroup / Universe / Timestep</span>
+<span class="sd">        obj : AtomGroup or Universe or :class:`Timestep`</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
-<span class="sd">        The GRO format only allows 5 digits for resid and atom</span>
-<span class="sd">        number. If these number become larger than 99,999 then this</span>
+<span class="sd">        The GRO format only allows 5 digits for *resid* and *atom</span>
+<span class="sd">        number*. If these numbers become larger than 99,999 then this</span>
 <span class="sd">        routine will chop off the leading digits.</span>
 
 
 <span class="sd">        .. versionchanged:: 0.7.6</span>
-<span class="sd">           resName and atomName are truncated to a maximum of 5 characters</span>
+<span class="sd">           *resName* and *atomName* are truncated to a maximum of 5 characters</span>
 <span class="sd">        .. versionchanged:: 0.16.0</span>
-<span class="sd">           frame kwarg has been removed</span>
+<span class="sd">           `frame` kwarg has been removed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># write() method that complies with the Trajectory API</span>
 

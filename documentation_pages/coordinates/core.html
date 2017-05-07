@@ -112,10 +112,10 @@ their documentation for details.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A trajectory Reader instance</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A Reader object</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></p>
 </td>
 </tr>
 </tbody>
@@ -123,10 +123,6 @@ their documentation for details.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="init.html#id1"><span class="std std-ref">Table of supported coordinate formats</span></a></p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 0.15.0: </span>The &#8220;permissive&#8221; flag is not used anymore (and effectively
-defaults to True); it will be completely removed in 0.16.0.</p>
 </div>
 </dd></dl>
 
@@ -141,9 +137,9 @@ defaults to True); it will be completely removed in 0.16.0.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Output filename of the trajectory; the extension determines the
 format.</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; The number of atoms in the output trajectory; can be ommitted
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The number of atoms in the output trajectory; can be ommitted
 for single-frame writers.</li>
-<li><strong>multiframe</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: write a trajectory with multiple frames; <code class="docutils literal"><span class="pre">False</span></code>
+<li><strong>multiframe</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: write a trajectory with multiple frames; <code class="docutils literal"><span class="pre">False</span></code>
 only write a single frame snapshot; <code class="docutils literal"><span class="pre">None</span></code> first try to get
 a multiframe writer and then fall back to single frame [<code class="docutils literal"><span class="pre">None</span></code>]</li>
 <li><strong>kwargs</strong> (<em>optional</em>) &#8211; Keyword arguments for the writer; all trajectory Writers accept
@@ -154,10 +150,10 @@ documentation of the reader.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A trajectory Writer instance</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A Writer object</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Writer</span></code></p>
 </td>
 </tr>
 </tbody>
@@ -167,7 +163,7 @@ documentation of the reader.</li>
 <p class="last"><a class="reference internal" href="init.html#id1"><span class="std std-ref">Table of supported coordinate formats</span></a></p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.6: </span>Added <em>multiframe</em> keyword. See also <a class="reference internal" href="#MDAnalysis.coordinates.core.get_writer_for" title="MDAnalysis.coordinates.core.get_writer_for"><code class="xref py py-func docutils literal"><span class="pre">get_writer_for()</span></code></a>.</p>
+<p><span class="versionmodified">Changed in version 0.7.6: </span>Added <cite>multiframe</cite> keyword. See also <a class="reference internal" href="#MDAnalysis.coordinates.core.get_writer_for" title="MDAnalysis.coordinates.core.get_writer_for"><code class="xref py py-func docutils literal"><span class="pre">get_writer_for()</span></code></a>.</p>
 </div>
 </dd></dl>
 
@@ -183,17 +179,17 @@ documentation of the reader.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>filename</strong> &#8211; filename of the input trajectory or coordinate file.  Also can
 handle a few special cases, see notes below.</li>
-<li><strong>format</strong> &#8211; Define the desired format.  Can be a string to request a given
+<li><strong>format</strong> (str or <code class="xref py py-class docutils literal"><span class="pre">Reader</span></code> (optional)) &#8211; Define the desired format.  Can be a string to request a given
 Reader.
 If a class is passed, it will be assumed that this is
 a Reader and will be returned.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A Reader object</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">A Reader object</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; If no appropriate Reader is found</p>
@@ -202,15 +198,19 @@ a Reader and will be returned.</li>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<dl class="docutils">
-<dt>There are a number of special cases that can be handled:</dt>
-<dd>If <cite>filename</cite> is a numpy array, MemoryReader is returned.
-If <cite>filename</cite> is an MMTF object, MMTFReader is returned.
-If <cite>filename</cite> is an iterable of filenames, ChainReader is returned.</dd>
-</dl>
-<p>Automatic detection is disabled when an explicit <cite>format</cite> is
-provided, unless a list of filenames is given, in which case
-ChainReader is returned and <cite>format</cite> passed to the ChainReader.</p>
+<p>There are a number of special cases that can be handled:</p>
+<ul class="simple">
+<li>If <cite>filename</cite> is a numpy array,
+<a class="reference internal" href="memory.html#MDAnalysis.coordinates.memory.MemoryReader" title="MDAnalysis.coordinates.memory.MemoryReader"><code class="xref py py-class docutils literal"><span class="pre">MemoryReader</span></code></a> is returned.</li>
+<li>If <cite>filename</cite> is an MMTF object,
+<a class="reference internal" href="MMTF.html#MDAnalysis.coordinates.MMTF.MMTFReader" title="MDAnalysis.coordinates.MMTF.MMTFReader"><code class="xref py py-class docutils literal"><span class="pre">MMTFReader</span></code></a> is returned.</li>
+<li>If <cite>filename</cite> is an iterable of filenames,
+<a class="reference internal" href="chain.html#MDAnalysis.coordinates.chain.ChainReader" title="MDAnalysis.coordinates.chain.ChainReader"><code class="xref py py-class docutils literal"><span class="pre">ChainReader</span></code></a> is returned.</li>
+</ul>
+<p>Automatic detection is disabled when an explicit <cite>format</cite> is provided,
+unless a list of filenames is given, in which case
+<a class="reference internal" href="chain.html#MDAnalysis.coordinates.chain.ChainReader" title="MDAnalysis.coordinates.chain.ChainReader"><code class="xref py py-class docutils literal"><span class="pre">ChainReader</span></code></a> is returned and <cite>format</cite>
+passed to the <a class="reference internal" href="chain.html#MDAnalysis.coordinates.chain.ChainReader" title="MDAnalysis.coordinates.chain.ChainReader"><code class="xref py py-class docutils literal"><span class="pre">ChainReader</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -218,7 +218,7 @@ ChainReader is returned and <cite>format</cite> passed to the ChainReader.</p>
 <code class="descclassname">MDAnalysis.coordinates.core.</code><code class="descname">get_writer_for</code><span class="sig-paren">(</span><em>filename</em>, <em>format=None</em>, <em>multiframe=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/_get_readers.html#get_writer_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.core.get_writer_for" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an appropriate trajectory or frame writer class for <cite>filename</cite>.</p>
 <p>The format is determined by the <cite>format</cite> argument or the extension of
-<cite>filename</cite>. If <cite>format</cite> is provided, it takes precedence over The
+<cite>filename</cite>. If <cite>format</cite> is provided, it takes precedence over the
 extension of <cite>filename</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -227,19 +227,20 @@ extension of <cite>filename</cite>.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>filename</strong> (str or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; If no <em>format</em> is supplied, then the filename for the trajectory is
 examined for its extension and the Writer is chosen accordingly.
-If <code class="docutils literal"><span class="pre">None</span></code> is provided, the
-<code class="xref py py-class docutils literal"><span class="pre">NullWriter</span></code> is selected.</li>
-<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; Explicitly set a format.</li>
-<li><strong>multiframe</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: write multiple frames to the trajectory; <code class="docutils literal"><span class="pre">False</span></code>: only
+If <code class="docutils literal"><span class="pre">None</span></code> is provided, then
+<a class="reference internal" href="null.html#MDAnalysis.coordinates.null.NullWriter" title="MDAnalysis.coordinates.null.NullWriter"><code class="xref py py-class docutils literal"><span class="pre">NullWriter</span></code></a> is selected (and
+all output is discarded silently).</li>
+<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Explicitly set a format.</li>
+<li><strong>multiframe</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: write multiple frames to the trajectory; <code class="docutils literal"><span class="pre">False</span></code>: only
 write a single coordinate frame; <code class="docutils literal"><span class="pre">None</span></code>: first try trajectory (multi
 frame writers), then the single frame ones. Default is <code class="docutils literal"><span class="pre">None</span></code>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A Writer object</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">A Writer object</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="xref py py-class docutils literal"><span class="pre">Writer</span></code></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">

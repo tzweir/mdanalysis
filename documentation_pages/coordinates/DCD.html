@@ -147,24 +147,23 @@ Trajectory API.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
 <li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>reader</strong> (<em>Reader</em><em>, </em><em>optional</em>) &#8211; A weak reference to the owning Reader.  Used for
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; A weak reference to the owning Reader.  Used for
 when attributes require trajectory manipulation (e.g. dt)</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.time" title="MDAnalysis.coordinates.DCD.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.time" title="MDAnalysis.coordinates.DCD.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
 is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; <p>The starting time from which to calculate time (ps)</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
-Can add and remove position/velocity/force information by using
-the <code class="docutils literal"><span class="pre">has_*</span></code> attribute.</p>
-</div>
-</li>
+<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The starting time from which to calculate time (in ps)</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
+Can add and remove position/velocity/force information by using
+the <code class="docutils literal"><span class="pre">has_*</span></code> attribute.</p>
+</div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.Timestep.copy">
 <code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Timestep.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.copy" title="Permalink to this definition">¶</a></dt>
@@ -174,32 +173,41 @@ the <code class="docutils literal"><span class="pre">has_*</span></code> attribu
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.Timestep.copy_slice">
 <code class="descname">copy_slice</code><span class="sig-paren">(</span><em>sel</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Timestep.copy_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.copy_slice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a new Timestep containing a subset of the original Timestep.</p>
-<p><code class="docutils literal"><span class="pre">ts.copy_slice(slice(start,</span> <span class="pre">stop,</span> <span class="pre">skip))</span></code>
-<code class="docutils literal"><span class="pre">ts.copy_slice([list</span> <span class="pre">of</span> <span class="pre">indices])</span></code></p>
+<dd><p>Make a new <cite>Timestep</cite> containing a subset of the original <cite>Timestep</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>A Timestep object of the same type containing all header</em></li>
-<li><em>information and all atom information relevant to the selection.</em></li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sel</strong> (<em>array_like</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><em>slice</em></a>) &#8211; The underlying position, velocity, and force arrays are sliced
+using a <a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a>, or any array-like.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <cite>Timestep</cite> object of the same type containing all header
+information and all atom information relevant to the selection.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The selection must be a 0 based slice or array of the atom indices
-in this Timestep</p>
+<p class="last">The selection must be a 0 based <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> or array of the atom indices
+in this <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a></p>
+</div>
+<p class="rubric">Example</p>
+<p>Using a Python <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">copy_slice</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Using a list of indices:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">copy_slice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">])</span>
+</pre></div>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.8.</span></p>
 </div>
-<div class="last versionchanged">
+<div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Reworked to follow new Timestep API.  Now will strictly only
 copy official attributes of the Timestep.</p>
-</div>
 </div>
 </dd></dl>
 
@@ -244,10 +252,10 @@ new CHARMM DCD unitcell format (see <a class="reference external" href="https://
 <dd><p>The time difference in ps between timesteps</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This defaults to 1.0 ps in the absence of time data</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
+<p class="last">This defaults to 1.0 ps in the absence of time data</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.11.0.</span></p>
 </div>
 </dd></dl>
 
@@ -261,27 +269,17 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li><em>A numpy.ndarray of shape (n_atoms, 3) of force data for each</em></li>
-<li><em>atom</em></li>
-</ul>
-</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>forces</strong> &#8211; force data of shape <code class="docutils literal"><span class="pre">(n_atoms,</span> <span class="pre">3)</span></code> for all atoms</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last">
-<li><p class="first"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.NoDataError</span></code></p>
-</li>
-<li><p class="first">When the Timestep does not contain force information</p>
-</li>
-<li><div class="first versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</li>
-</ul>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray with dtype numpy.float32</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a> &#8211; if the Timestep has no force data</td>
 </tr>
 </tbody>
 </table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.11.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -355,23 +353,16 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li><em>A numpy.ndarray of shape (n_atoms, 3) of position data for each</em></li>
-<li><em>atom</em></li>
-</ul>
-</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>positions</strong> &#8211; position data of shape <code class="docutils literal"><span class="pre">(n_atoms,</span> <span class="pre">3)</span></code> for all atoms</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a></li>
-<li>If the Timestep has no position data</li>
-</ul>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray with dtype numpy.float32</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a> &#8211; if the Timestep has no position data</td>
 </tr>
 </tbody>
 </table>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now can raise NoDataError when no position data present</p>
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Now can raise :exc`NoDataError` when no position data present</p>
 </div>
 </dd></dl>
 
@@ -400,9 +391,9 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A (3, 3) numpy.ndarray of unit cell vectors</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">A (3, 3) numpy.ndarray of unit cell vectors</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)">numpy.ndarray</a></td>
 </tr>
 </tbody>
 </table>
@@ -444,18 +435,11 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li><em>A numpy.ndarray of shape (n_atoms, 3) of velocity data for each</em></li>
-<li><em>atom</em></li>
-</ul>
-</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>velocities</strong> &#8211; velocity data of shape <code class="docutils literal"><span class="pre">(n_atoms,</span> <span class="pre">3)</span></code> for all atoms</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a></li>
-<li>When the Timestep does not contain velocity information</li>
-</ul>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray with dtype numpy.float32</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a> &#8211; if the Timestep has no velocity data</td>
 </tr>
 </tbody>
 </table>
@@ -516,13 +500,12 @@ weren&#8217;t originally present.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The DCD file format is not well defined. In particular, NAMD
-and CHARMM use it differently. Currently, MDAnalysis tries to
-guess the correct format for the unitcell representation but it
-can be wrong. <strong>Check the unitcell dimensions</strong>, especially for
-triclinic unitcells (see <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> and
-<a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.dimensions" title="MDAnalysis.coordinates.DCD.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">Timestep.dimensions</span></code></a>). A second potential issue are the
-units of time (TODO).</p>
+<p class="last">The DCD file format is not well defined. In particular, NAMD and CHARMM use
+it differently. Currently, MDAnalysis tries to guess the correct format for
+the unitcell representation but it can be wrong. <strong>Check the unitcell
+dimensions</strong>, especially for triclinic unitcells (see <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> and
+<a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.dimensions" title="MDAnalysis.coordinates.DCD.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">Timestep.dimensions</span></code></a>). A second potential issue are the units of
+time (TODO).</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.9.0: </span>The underlying DCD reader (written in C and derived from the
@@ -531,9 +514,9 @@ NAMD ordering: <code class="docutils literal"><span class="pre">[A,</span> <span
 <span class="pre">sin(alpha)]</span></code>. See <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> for further details.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based
-Native frame number read into ts._frame
-Removed skip keyword and functionality</p>
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based.
+Native frame number read into <cite>ts._frame</cite>.
+Removed <cite>skip</cite> keyword and functionality.</p>
 </div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.OtherWriter">
@@ -550,53 +533,44 @@ available). <em>n_atoms</em> is always set from <code class="xref py py-attr doc
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.Writer">
 <code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.Writer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a DCDWriter for <em>filename</em> with the same parameters as this DCD.</p>
-<p>All values can be changed through keyword arguments.</p>
+<dd><p>Returns a DCDWriter for <cite>filename</cite> with the same parameters as this DCD.</p>
+<p>Defaults for all values are obtained from the <cite>DCDReader</cite> itself but
+all values can be changed through keyword arguments.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>filename</em></dt>
-<dd><p class="first last">filename of the output DCD trajectory</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the output DCD trajectory</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of atoms</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of the first recorded MD step</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; indicate that <cite>step</cite> <strong>MD steps (!)</strong> make up one trajectory frame</li>
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <strong>MD integrator time step (!)</strong>, in AKMA units</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
+<cite>dt</cite> ps lie between two frames. (It sets <cite>step</cite> `` = 1`` and
+<cite>delta</cite> `` = AKMA(dt)``.) The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case
+<cite>step</cite> and <cite>delta</cite> are used.</li>
+<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; string that is stored in the DCD header</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
-<dt><em>n_atoms</em></dt>
-<dd><p class="first last">number of atoms</p>
-</dd>
-<dt><em>start</em></dt>
-<dd><p class="first last">number of the first recorded MD step</p>
-</dd>
-<dt><em>step</em></dt>
-<dd><p class="first last">indicate that <em>step</em> MD steps (!) make up one trajectory frame</p>
-</dd>
-<dt><em>delta</em></dt>
-<dd><p class="first last">MD integrator time step (!), in AKMA units</p>
-</dd>
-<dt><em>dt</em></dt>
-<dd><p class="first last"><strong>Override</strong> <em>step</em> and <em>delta</em> so that the DCD records that <em>dt</em> ps
-lie between two frames. (It sets <em>step</em> = 1 and <em>delta</em> = <code class="docutils literal"><span class="pre">AKMA(dt)</span></code>.)
-The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case <em>step</em> and <em>delta</em> are used.</p>
-</dd>
-<dt><em>remarks</em></dt>
-<dd><p class="first last">string that is stored in the DCD header [XXX &#8211; max length?]</p>
-</dd>
-</dl>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a></p>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The keyword arguments set the low-level attributes of the DCD
-according to the CHARMM format. The time between two frames would be
-<em>delta</em> * <em>step</em> !</p>
+<p>The keyword arguments set the low-level attributes of the DCD according
+to the CHARMM format. The time between two frames would be <cite>delta</cite> *
+<cite>step</cite>!</p>
+<p class="last">Here <cite>step</cite> is really the number of MD integrator time steps that
+occured after this frame, including the frame itself that is the
+coordinate snapshot and <cite>delta</cite> is the integrator stime step.  The DCD
+file format contains this information so it needs to be provided here.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -613,7 +587,7 @@ to that read in by the trajectory reader. <em>auxdata</em> can be an
 <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> instance, or the data
 itself as e.g. a filename; in the latter case an appropriate
 <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> is guessed from the
-data/file format. An appropriate <em>format</em> may also be directly provided
+data/file format. An appropriate <cite>format</cite> may also be directly provided
 as a key word argument.</p>
 <p>On adding, the AuxReader is initially matched to the current timestep
 of the trajectory, and will be updated when the trajectory timestep
@@ -649,33 +623,54 @@ the <a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><s
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.check_slice_indices">
 <code class="descname">check_slice_indices</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>step</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.check_slice_indices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check frame indices are valid and clip to fit trajectory</p>
+<dd><p>Check frame indices are valid and clip to fit trajectory.</p>
+<p>The usage follows standard Python conventions for <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a> but see
+the warning below.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop</strong><strong>, </strong><strong>step</strong> (<em>start</em><em>,</em><em></em>) &#8211; Values representing the slice indices.
-Can use <cite>None</cite> to use defaults of (0, n_frames, and 1)
-respectively.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Starting frame index (inclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+of 0, i.e., the initial frame.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Last frame index (exclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+of n_frames, i.e., it includes the last frame of the trajectory.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; step size of the slice, <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default of 1, i.e,
+include every frame in the range <cite>start</cite>, <cite>stop</cite>.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211; Integers representing the slice</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>start, stop, step</strong> &#8211; Integers representing the slice</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>)</p>
+</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The returned values start, stop and step give the expected result when passed
-in range() but gives unexpected behaviour when passed in a slice when stop=None
-and step=-1</p>
-<p>This is because when we slice the trajectory (u.trajectory[::-1]), the values
-returned by check_slice_indices are passed to range. Instead, in AnalysisBase
-the values returned by check_slice_indices are used to splice the trajectory.
-This creates a discrepancy because these two lines are not equivalent:</p>
-<blockquote class="last">
-<div>range(10, -1, -1)  # [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-range(10)[10:-1:-1]  # []</div></blockquote>
+<p>The returned values <cite>start</cite>, <cite>stop</cite> and <cite>step</cite> give the expected result
+when passed in <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a> but gives unexpected behavior when passed
+in a <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> when <code class="docutils literal"><span class="pre">stop=None</span></code> and <code class="docutils literal"><span class="pre">step=-1</span></code></p>
+<p>This can be a problem for downstream processing of the output from this
+method. For example, slicing of trajectories is implemented by passing
+the values returned by <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader.check_slice_indices" title="MDAnalysis.coordinates.DCD.DCDReader.check_slice_indices"><code class="xref py py-meth docutils literal"><span class="pre">check_slice_indices()</span></code></a> to <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and using them as the indices to randomly seek to. On the other hand,
+in <a class="reference internal" href="../analysis/base.html#MDAnalysis.analysis.base.AnalysisBase" title="MDAnalysis.analysis.base.AnalysisBase"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.analysis.base.AnalysisBase</span></code></a> the values returned
+by <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader.check_slice_indices" title="MDAnalysis.coordinates.DCD.DCDReader.check_slice_indices"><code class="xref py py-meth docutils literal"><span class="pre">check_slice_indices()</span></code></a> are used to splice the trajectory by
+creating a <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> instance</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a discrepancy because these two lines are not equivalent:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="nb">slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>  <span class="c1"># []</span>
+</pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -689,7 +684,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -697,7 +692,9 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 <div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
@@ -714,7 +711,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -722,10 +719,12 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.7.</span></p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
 </dd></dl>
 
@@ -739,7 +738,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -747,27 +746,29 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array x from base units to native units.</p>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -775,13 +776,15 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -795,7 +798,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -803,16 +806,17 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>t</em> is modified in place and also
-returned (although note that scalar values <em>t</em> are passed by
-value in Python and hence an in-place modification has no
-effect on the caller.)</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -857,7 +861,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -865,24 +869,26 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -890,41 +896,49 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.correl">
 <code class="descname">correl</code><span class="sig-paren">(</span><em>timeseries</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em>, <em>skip=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.correl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.correl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Populate a TimeseriesCollection object with timeseries computed from the trajectory</p>
+<dd><p>Populate a <a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">TimeseriesCollection</span></code></a> object
+with time series computed from the trajectory.</p>
+<p>Calling this method will iterate through the whole trajectory and
+perform the calculations prescribed in <cite>timeseries</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>timeseries</em></dt>
-<dd><p class="first last"><a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a></p>
-</dd>
-<dt><em>start, stop, step</em></dt>
-<dd><p class="first last">A subset of the trajectory to use, with start being inclusive
-and stop being exclusive.</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Deprecated:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>skip</em></dt>
-<dd><p class="first last">Skip has been deprecated in favor of the standard keyword step.</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>timeseries</strong> (<a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a>) &#8211; The <a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a> that defines what kind
+of computations should be performed on the data in this trajectory.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
+of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code> starts
+at the beginning.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
+The trajectory is read to the end with the default <code class="docutils literal"><span class="pre">None</span></code>.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
+read every frame.</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <cite>correl</cite> functionality is only implemented for DCD trajectories and
+the <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader" title="MDAnalysis.coordinates.DCD.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a>.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span><cite>skip</cite> has been deprecated in favor of the standard keyword <cite>step</cite>.</p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -1140,35 +1154,30 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>asel</em></dt>
-<dd><p class="first last"><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> object
-Defaults to None, in which case the full set of coordinate data
-is returned.</p>
-</dd>
-<dt><em>start</em>, <em>stop</em>, <em>step</em></dt>
-<dd><p class="first last">A range of the trajectory to access, with start being inclusive
-and stop being exclusive.</p>
-</dd>
-<dt><em>format</em></dt>
-<dd><p class="first last">the order/shape of the return data array, corresponding
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>asel</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>) &#8211; The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> to read the
+coordinates from. Defaults to None, in which case the full set of
+coordinate data is returned.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
+of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code> starts
+at the beginning.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
+The trajectory is read to the end with the default <code class="docutils literal"><span class="pre">None</span></code>.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
+read every frame.</li>
+<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
-coordinates)</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Deprecated:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>skip</em></dt>
-<dd><p class="first last">Skip has been deprecated in favor of the standard keyword step.</p>
-</dd>
-</dl>
+coordinates)</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span><cite>skip</cite> has been deprecated in favor of the standard keyword <cite>step</cite>.</p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -1186,7 +1195,52 @@ be considered to have a length of a single time step <cite>dt</cite> and a
 <dl class="class">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.DCD.</code><code class="descname">DCDWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>start=0</em>, <em>step=1</em>, <em>delta=20.45482949774598</em>, <em>dt=None</em>, <em>remarks=u'Created by DCDWriter'</em>, <em>convert_units=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes to a DCD file</p>
+<dd><p>Write to a CHARMM/NAMD DCD trajectory file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of output file</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of atoms in dcd file</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; starting frame number</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; skip between subsequent timesteps (indicate that <cite>step</cite> <strong>MD
+integrator steps (!)</strong> make up one trajectory frame); default is 1.</li>
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; timestep (<strong>MD integrator time step (!)</strong>, in AKMA units); default is
+20.45482949774598 (corresponding to 1 ps).</li>
+<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; comments to annotate dcd file</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
+<cite>dt</cite> ps lie between two frames. (It sets <cite>step</cite> = 1 and
+<cite>delta</cite> <code class="docutils literal"><span class="pre">=</span> <span class="pre">AKMA(dt)</span></code>.) The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case
+<cite>step</cite> and <cite>delta</cite> are used.</li>
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
+the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [&#8216;convert_lengths&#8217;].
+(see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The keyword arguments set the <strong>low-level attributes of the DCD</strong> according
+to the CHARMM format. The time between two frames would be <cite>delta</cite> *
+<cite>step</cite>!  For convenience, one can alternatively supply the <cite>dt</cite> keyword
+(see above) to just tell the writer that it should record &#8220;There are <cite>dt</cite>
+ps between each frame&#8221;.</p>
+<p>The Writer will write the <strong>unit cell information</strong> to the DCD in a format
+compatible with NAMD and older CHARMM versions, namely the unit cell
+lengths in Angstrom and the angle cosines (see <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>). Newer
+versions of CHARMM (at least c36b2) store the matrix of the box
+vectors. Writing this matrix to a DCD is currently not supported (although
+reading is supported with the <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader" title="MDAnalysis.coordinates.DCD.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a>); instead the angle
+cosines are written, which <em>might make the DCD file unusable in CHARMM
+itself</em>. See <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> for further information.</p>
+<p class="last">The writing behavior of the <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a> is identical to that of the
+DCD molfile plugin of VMD with the exception that by default it will use
+AKMA time units.</p>
+</div>
+<p class="rubric">Example</p>
 <p>Typical usage:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">DCDWriter</span><span class="p">(</span><span class="s2">&quot;new.dcd&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span>
@@ -1194,80 +1248,6 @@ be considered to have a length of a single time step <cite>dt</cite> and a
 </pre></div>
 </div>
 <p>Keywords are available to set some of the low-level attributes of the DCD.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Methods:</th><td class="field-body"><code class="docutils literal"><span class="pre">d</span> <span class="pre">=</span> <span class="pre">DCDWriter(dcdfilename,</span> <span class="pre">n_atoms,</span> <span class="pre">start,</span> <span class="pre">step,</span> <span class="pre">delta,</span> <span class="pre">remarks)</span></code></td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The Writer will write the <strong>unit cell information</strong> to the DCD in a
-format compatible with NAMD and older CHARMM versions, namely the unit
-cell lengths in Angstrom and the angle cosines (see
-<a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>). Newer versions of CHARMM (at least c36b2) store the
-matrix of the box vectors. Writing this matrix to a DCD is currently not
-supported (although reading is supported with the
-<a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader" title="MDAnalysis.coordinates.DCD.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a>); instead the angle cosines are written,
-which <em>might make the DCD file unusable in CHARMM itself</em>. See
-<a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> for further information.</p>
-<p class="last">The writing behavior of the <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a> is identical to
-that of the DCD molfile plugin of VMD with the exception that
-by default it will use AKMA time units.</p>
-</div>
-<p>Create a new DCDWriter</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>filename</em></dt>
-<dd><p class="first last">name of output file</p>
-</dd>
-<dt><em>n_atoms</em></dt>
-<dd><p class="first last">number of atoms in dcd file</p>
-</dd>
-<dt><em>start</em></dt>
-<dd><p class="first last">starting timestep</p>
-</dd>
-<dt><em>step</em></dt>
-<dd><p class="first last">skip between subsequent timesteps (indicate that <em>step</em> MD
-integrator steps (!) make up one trajectory frame); default is 1.</p>
-</dd>
-<dt><em>delta</em></dt>
-<dd><p class="first last">timestep (MD integrator time step (!), in AKMA units); default is
-20.45482949774598 (corresponding to 1 ps).</p>
-</dd>
-<dt><em>remarks</em></dt>
-<dd><p class="first last">comments to annotate dcd file</p>
-</dd>
-<dt><em>dt</em></dt>
-<dd><p class="first last"><strong>Override</strong> <em>step</em> and <em>delta</em> so that the DCD records that <em>dt</em> ps
-lie between two frames. (It sets <em>step</em> = 1 and <em>delta</em> = <code class="docutils literal"><span class="pre">AKMA(dt)</span></code>.)
-The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case <em>step</em> and <em>delta</em> are used.</p>
-</dd>
-<dt><em>convert_units</em></dt>
-<dd><p class="first last">units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
-the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [&#8216;convert_lengths&#8217;].
-(see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>)</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The keyword arguments set the low-level attributes of the DCD
-according to the CHARMM format. The time between two frames would be
-<em>delta</em> * <em>step</em> ! For convenience, one can alternatively supply the
-<em>dt</em> keyword (see above) to just tell the writer that it should
-record &#8220;There are dt ps between each frame&#8221;.</p>
-</div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter.close">
 <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.close" title="Permalink to this definition">¶</a></dt>
@@ -1294,7 +1274,7 @@ record &#8220;There are dt ps between each frame&#8221;.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1302,7 +1282,9 @@ record &#8220;There are dt ps between each frame&#8221;.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 <div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
@@ -1319,7 +1301,7 @@ record &#8220;There are dt ps between each frame&#8221;.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1327,10 +1309,12 @@ record &#8220;There are dt ps between each frame&#8221;.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.7.</span></p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
 </dd></dl>
 
@@ -1344,7 +1328,7 @@ record &#8220;There are dt ps between each frame&#8221;.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1352,27 +1336,29 @@ record &#8220;There are dt ps between each frame&#8221;.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array x from base units to native units.</p>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1380,13 +1366,15 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -1400,7 +1388,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1408,16 +1396,17 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>t</em> is modified in place and also
-returned (although note that scalar values <em>t</em> are passed by
-value in Python and hence an in-place modification has no
-effect on the caller.)</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -1462,7 +1451,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1470,24 +1459,26 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1495,10 +1486,12 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
@@ -1513,17 +1506,16 @@ returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>criteria</em></dt>
-<dd><p class="first last">dictionary containing the <em>max</em> and <em>min</em> values in native units</p>
-</dd>
-<dt><em>x</em></dt>
-<dd><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">np.ndarray</span></code> of <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out.</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>criteria</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary containing the <em>max</em> and <em>min</em> values in native units</li>
+<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><em>numpy.ndarray</em></a>) &#8211; <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">boolean</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></p>
 </td>
 </tr>
 </tbody>
@@ -1533,21 +1525,43 @@ returned.</p>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter.write">
 <code class="descname">write</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write current timestep, using the supplied <em>obj</em>.</p>
-<p>The argument should be a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or
-a <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> or a <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> instance.</p>
+<dd><p>Write current timestep, using the supplied <cite>obj</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> or a <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>) &#8211; write coordinate information associate with <cite>obj</cite></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The size of the <em>obj</em> must be the same as the number of atom
-provided when setting up the trajectory.</p>
+<p class="last">The size of the <cite>obj</cite> must be the same as the number of atoms provided
+when setting up the trajectory.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter.write_next_timestep">
 <code class="descname">write_next_timestep</code><span class="sig-paren">(</span><em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter.write_next_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.write_next_timestep" title="Permalink to this definition">¶</a></dt>
-<dd><p>write a new timestep to the dcd file</p>
-<p><em>ts</em> - timestep object containing coordinates to be written to dcd file</p>
+<dd><p>Write a new timestep to the DCD file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ts</strong> (<cite>Timestep</cite> (optional)) &#8211; <cite>Timestep</cite> object containing coordinates to be written to DCD file;
+by default it uses the current <cite>Timestep</cite> associated with the
+Writer.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if wrong number of atoms supplied</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code> &#8211; if no coordinates to be written.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Raises <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> instead of generic <code class="xref py py-exc docutils literal"><span class="pre">Exception</span></code>
 if wrong number of atoms supplied and <code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code>

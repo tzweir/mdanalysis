@@ -71,7 +71,7 @@
             
   <h1>Source code for MDAnalysis.coordinates.CRD</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.mdanalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2016 The MDAnalysis Development Team and contributors</span>
@@ -117,8 +117,8 @@
     <span class="sd">&quot;&quot;&quot;CRD reader that implements the standard and extended CRD coordinate formats</span>
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
-<span class="sd">       Now returns a ValueError instead of FormatError</span>
-<span class="sd">       Frames now 0-based instead of 1-based</span>
+<span class="sd">       Now returns a ValueError instead of FormatError.</span>
+<span class="sd">       Frames now 0-based instead of 1-based.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;CRD&#39;</span>
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
@@ -171,11 +171,14 @@
 <div class="viewcode-block" id="CRDReader.Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/CRD.html#MDAnalysis.coordinates.CRD.CRDReader.Writer">[docs]</a>    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a CRDWriter for *filename*.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *filename*</span>
-<span class="sd">              filename of the output CRD file</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename: str</span>
+<span class="sd">            filename of the output CRD file</span>
 
-<span class="sd">        :Returns: :class:`CRDWriter`</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`CRDWriter`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">CRDWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
@@ -187,7 +190,7 @@
 <span class="sd">    It automatically writes the CHARMM EXT extended format if there</span>
 <span class="sd">    are more than 99,999 atoms.</span>
 
-<span class="sd">    Requires the following attributes:</span>
+<span class="sd">    Requires the following attributes to be present:</span>
 <span class="sd">    - resids</span>
 <span class="sd">    - resnames</span>
 <span class="sd">    - names</span>
@@ -217,16 +220,27 @@
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str or :class:`~MDAnalysis.lib.util.NamedStream`</span>
+<span class="sd">             name of the output file or a stream</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">filename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;crd&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">crd</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="CRDWriter.write"><a class="viewcode-back" href="../../../documentation_pages/coordinates/CRD.html#MDAnalysis.coordinates.CRD.CRDWriter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write selection at current trajectory frame to file.</span>
 
-<span class="sd">        write(selection,frame=FRAME)</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        selection : AtomGroup</span>
+<span class="sd">             group of atoms to be written</span>
+<span class="sd">        frame : int (optional)</span>
+<span class="sd">             Move the trajectory to frame `frame`; by default, write</span>
+<span class="sd">             the current frame.</span>
 
-<span class="sd">        selection         MDAnalysis AtomGroup</span>
-<span class="sd">        frame             optionally move to frame FRAME</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">universe</span>
         <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

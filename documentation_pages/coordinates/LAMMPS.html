@@ -62,7 +62,8 @@
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">6.9. LAMMPS DCD trajectory and DATA I/O  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.LAMMPS</span></code></a><ul>
-<li><a class="reference internal" href="#classes">6.9.1. Classes</a></li>
+<li><a class="reference internal" href="#example-loading-a-lammps-simulation">6.9.1. Example: Loading a LAMMPS simulation</a></li>
+<li><a class="reference internal" href="#classes">6.9.2. Classes</a></li>
 </ul>
 </li>
 </ul>
@@ -118,7 +119,8 @@ not true then the user <em>should supply the appropriate units</em> in the
 keywords <em>timeunit</em> and/or <em>lengthunit</em> to <a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter" title="MDAnalysis.coordinates.LAMMPS.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a> and
 <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> (which then calls
 <a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DCDReader" title="MDAnalysis.coordinates.LAMMPS.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a>).</p>
-<p class="rubric">Example: Loading a LAMMPS simulation</p>
+<div class="section" id="example-loading-a-lammps-simulation">
+<h2>6.9.1. Example: Loading a LAMMPS simulation<a class="headerlink" href="#example-loading-a-lammps-simulation" title="Permalink to this headline">¶</a></h2>
 <p>To load a LAMMPS simulation from a LAMMPS data file (using the
 <a class="reference internal" href="../topology/LAMMPSParser.html#MDAnalysis.topology.LAMMPSParser.DATAParser" title="MDAnalysis.topology.LAMMPSParser.DATAParser"><code class="xref py py-class docutils literal"><span class="pre">DATAParser</span></code></a>) together with a
 LAMMPS DCD with &#8220;<em>real</em>&#8221; provide the keyword <em>format=&#8221;LAMMPS</em>&#8221;:</p>
@@ -142,12 +144,13 @@ data file,</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Lennard-Jones units are not implemented. See <a class="reference internal" href="../units.html#module-MDAnalysis.units" title="MDAnalysis.units"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.units</span></code></a> for
-other recognized values and the documentation for the LAMMPS <a class="reference external" href="http://lammps.sandia.gov/doc/units.html">units
-command</a>.</p>
+<p class="last">Lennard-Jones units are not implemented. See <a class="reference internal" href="../units.html#module-MDAnalysis.units" title="MDAnalysis.units"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.units</span></code></a>
+for other recognized values and the documentation for the LAMMPS
+<a class="reference external" href="http://lammps.sandia.gov/doc/units.html">units command</a>.</p>
+</div>
 </div>
 <div class="section" id="classes">
-<h2>6.9.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<h2>6.9.2. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.LAMMPS.</code><code class="descname">DCDReader</code><span class="sig-paren">(</span><em>dcdfilename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/LAMMPS.html#DCDReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader" title="Permalink to this definition">¶</a></dt>
@@ -171,53 +174,44 @@ available). <em>n_atoms</em> is always set from <code class="xref py py-attr doc
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.Writer">
 <code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.Writer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a DCDWriter for <em>filename</em> with the same parameters as this DCD.</p>
-<p>All values can be changed through keyword arguments.</p>
+<dd><p>Returns a DCDWriter for <cite>filename</cite> with the same parameters as this DCD.</p>
+<p>Defaults for all values are obtained from the <cite>DCDReader</cite> itself but
+all values can be changed through keyword arguments.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>filename</em></dt>
-<dd><p class="first last">filename of the output DCD trajectory</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the output DCD trajectory</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of atoms</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of the first recorded MD step</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; indicate that <cite>step</cite> <strong>MD steps (!)</strong> make up one trajectory frame</li>
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <strong>MD integrator time step (!)</strong>, in AKMA units</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
+<cite>dt</cite> ps lie between two frames. (It sets <cite>step</cite> `` = 1`` and
+<cite>delta</cite> `` = AKMA(dt)``.) The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case
+<cite>step</cite> and <cite>delta</cite> are used.</li>
+<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; string that is stored in the DCD header</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
-<dt><em>n_atoms</em></dt>
-<dd><p class="first last">number of atoms</p>
-</dd>
-<dt><em>start</em></dt>
-<dd><p class="first last">number of the first recorded MD step</p>
-</dd>
-<dt><em>step</em></dt>
-<dd><p class="first last">indicate that <em>step</em> MD steps (!) make up one trajectory frame</p>
-</dd>
-<dt><em>delta</em></dt>
-<dd><p class="first last">MD integrator time step (!), in AKMA units</p>
-</dd>
-<dt><em>dt</em></dt>
-<dd><p class="first last"><strong>Override</strong> <em>step</em> and <em>delta</em> so that the DCD records that <em>dt</em> ps
-lie between two frames. (It sets <em>step</em> = 1 and <em>delta</em> = <code class="docutils literal"><span class="pre">AKMA(dt)</span></code>.)
-The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case <em>step</em> and <em>delta</em> are used.</p>
-</dd>
-<dt><em>remarks</em></dt>
-<dd><p class="first last">string that is stored in the DCD header [XXX &#8211; max length?]</p>
-</dd>
-</dl>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter" title="MDAnalysis.coordinates.LAMMPS.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter" title="MDAnalysis.coordinates.LAMMPS.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a></p>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The keyword arguments set the low-level attributes of the DCD
-according to the CHARMM format. The time between two frames would be
-<em>delta</em> * <em>step</em> !</p>
+<p>The keyword arguments set the low-level attributes of the DCD according
+to the CHARMM format. The time between two frames would be <cite>delta</cite> *
+<cite>step</cite>!</p>
+<p class="last">Here <cite>step</cite> is really the number of MD integrator time steps that
+occured after this frame, including the frame itself that is the
+coordinate snapshot and <cite>delta</cite> is the integrator stime step.  The DCD
+file format contains this information so it needs to be provided here.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -234,7 +228,7 @@ to that read in by the trajectory reader. <em>auxdata</em> can be an
 <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> instance, or the data
 itself as e.g. a filename; in the latter case an appropriate
 <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> is guessed from the
-data/file format. An appropriate <em>format</em> may also be directly provided
+data/file format. An appropriate <cite>format</cite> may also be directly provided
 as a key word argument.</p>
 <p>On adding, the AuxReader is initially matched to the current timestep
 of the trajectory, and will be updated when the trajectory timestep
@@ -270,33 +264,54 @@ the <a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><s
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.check_slice_indices">
 <code class="descname">check_slice_indices</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>step</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.check_slice_indices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check frame indices are valid and clip to fit trajectory</p>
+<dd><p>Check frame indices are valid and clip to fit trajectory.</p>
+<p>The usage follows standard Python conventions for <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a> but see
+the warning below.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop</strong><strong>, </strong><strong>step</strong> (<em>start</em><em>,</em><em></em>) &#8211; Values representing the slice indices.
-Can use <cite>None</cite> to use defaults of (0, n_frames, and 1)
-respectively.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Starting frame index (inclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+of 0, i.e., the initial frame.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Last frame index (exclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+of n_frames, i.e., it includes the last frame of the trajectory.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; step size of the slice, <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default of 1, i.e,
+include every frame in the range <cite>start</cite>, <cite>stop</cite>.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211; Integers representing the slice</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>start, stop, step</strong> &#8211; Integers representing the slice</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>)</p>
+</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The returned values start, stop and step give the expected result when passed
-in range() but gives unexpected behaviour when passed in a slice when stop=None
-and step=-1</p>
-<p>This is because when we slice the trajectory (u.trajectory[::-1]), the values
-returned by check_slice_indices are passed to range. Instead, in AnalysisBase
-the values returned by check_slice_indices are used to splice the trajectory.
-This creates a discrepancy because these two lines are not equivalent:</p>
-<blockquote class="last">
-<div>range(10, -1, -1)  # [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-range(10)[10:-1:-1]  # []</div></blockquote>
+<p>The returned values <cite>start</cite>, <cite>stop</cite> and <cite>step</cite> give the expected result
+when passed in <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a> but gives unexpected behavior when passed
+in a <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> when <code class="docutils literal"><span class="pre">stop=None</span></code> and <code class="docutils literal"><span class="pre">step=-1</span></code></p>
+<p>This can be a problem for downstream processing of the output from this
+method. For example, slicing of trajectories is implemented by passing
+the values returned by <a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.check_slice_indices" title="MDAnalysis.coordinates.LAMMPS.DCDReader.check_slice_indices"><code class="xref py py-meth docutils literal"><span class="pre">check_slice_indices()</span></code></a> to <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and using them as the indices to randomly seek to. On the other hand,
+in <a class="reference internal" href="../analysis/base.html#MDAnalysis.analysis.base.AnalysisBase" title="MDAnalysis.analysis.base.AnalysisBase"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.analysis.base.AnalysisBase</span></code></a> the values returned
+by <a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.check_slice_indices" title="MDAnalysis.coordinates.LAMMPS.DCDReader.check_slice_indices"><code class="xref py py-meth docutils literal"><span class="pre">check_slice_indices()</span></code></a> are used to splice the trajectory by
+creating a <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> instance</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a discrepancy because these two lines are not equivalent:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="nb">slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>  <span class="c1"># []</span>
+</pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -310,7 +325,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -318,7 +333,9 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 <div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
@@ -335,7 +352,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -343,10 +360,12 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.7.</span></p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
 </dd></dl>
 
@@ -360,7 +379,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -368,27 +387,29 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array x from base units to native units.</p>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -396,13 +417,15 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -416,7 +439,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -424,16 +447,17 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>t</em> is modified in place and also
-returned (although note that scalar values <em>t</em> are passed by
-value in Python and hence an in-place modification has no
-effect on the caller.)</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -478,7 +502,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -486,24 +510,26 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -511,41 +537,49 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.correl">
 <code class="descname">correl</code><span class="sig-paren">(</span><em>timeseries</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em>, <em>skip=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.correl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.correl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Populate a TimeseriesCollection object with timeseries computed from the trajectory</p>
+<dd><p>Populate a <a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">TimeseriesCollection</span></code></a> object
+with time series computed from the trajectory.</p>
+<p>Calling this method will iterate through the whole trajectory and
+perform the calculations prescribed in <cite>timeseries</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>timeseries</em></dt>
-<dd><p class="first last"><a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a></p>
-</dd>
-<dt><em>start, stop, step</em></dt>
-<dd><p class="first last">A subset of the trajectory to use, with start being inclusive
-and stop being exclusive.</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Deprecated:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>skip</em></dt>
-<dd><p class="first last">Skip has been deprecated in favor of the standard keyword step.</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>timeseries</strong> (<a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a>) &#8211; The <a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a> that defines what kind
+of computations should be performed on the data in this trajectory.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
+of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code> starts
+at the beginning.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
+The trajectory is read to the end with the default <code class="docutils literal"><span class="pre">None</span></code>.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
+read every frame.</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <cite>correl</cite> functionality is only implemented for DCD trajectories and
+the <a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DCDReader" title="MDAnalysis.coordinates.LAMMPS.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a>.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span><cite>skip</cite> has been deprecated in favor of the standard keyword <cite>step</cite>.</p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -761,35 +795,30 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>asel</em></dt>
-<dd><p class="first last"><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> object
-Defaults to None, in which case the full set of coordinate data
-is returned.</p>
-</dd>
-<dt><em>start</em>, <em>stop</em>, <em>step</em></dt>
-<dd><p class="first last">A range of the trajectory to access, with start being inclusive
-and stop being exclusive.</p>
-</dd>
-<dt><em>format</em></dt>
-<dd><p class="first last">the order/shape of the return data array, corresponding
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>asel</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>) &#8211; The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> to read the
+coordinates from. Defaults to None, in which case the full set of
+coordinate data is returned.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
+of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code> starts
+at the beginning.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
+The trajectory is read to the end with the default <code class="docutils literal"><span class="pre">None</span></code>.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
+read every frame.</li>
+<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
-coordinates)</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Deprecated:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>skip</em></dt>
-<dd><p class="first last">Skip has been deprecated in favor of the standard keyword step.</p>
-</dd>
-</dl>
+coordinates)</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.0: </span><cite>skip</cite> has been deprecated in favor of the standard keyword <cite>step</cite>.</p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -838,7 +867,7 @@ values.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -846,7 +875,9 @@ values.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 <div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
@@ -863,7 +894,7 @@ values.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -871,10 +902,12 @@ values.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.7.</span></p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
 </dd></dl>
 
@@ -888,7 +921,7 @@ values.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -896,27 +929,29 @@ values.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array x from base units to native units.</p>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -924,13 +959,15 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -944,7 +981,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -952,16 +989,17 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>t</em> is modified in place and also
-returned (although note that scalar values <em>t</em> are passed by
-value in Python and hence an in-place modification has no
-effect on the caller.)</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -1006,7 +1044,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1014,24 +1052,26 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1039,10 +1079,12 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
@@ -1057,17 +1099,16 @@ returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>criteria</em></dt>
-<dd><p class="first last">dictionary containing the <em>max</em> and <em>min</em> values in native units</p>
-</dd>
-<dt><em>x</em></dt>
-<dd><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">np.ndarray</span></code> of <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out.</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>criteria</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary containing the <em>max</em> and <em>min</em> values in native units</li>
+<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><em>numpy.ndarray</em></a>) &#8211; <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">boolean</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></p>
 </td>
 </tr>
 </tbody>
@@ -1077,21 +1118,43 @@ returned.</p>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.write">
 <code class="descname">write</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write current timestep, using the supplied <em>obj</em>.</p>
-<p>The argument should be a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or
-a <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> or a <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code> instance.</p>
+<dd><p>Write current timestep, using the supplied <cite>obj</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> or a <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code>) &#8211; write coordinate information associate with <cite>obj</cite></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The size of the <em>obj</em> must be the same as the number of atom
-provided when setting up the trajectory.</p>
+<p class="last">The size of the <cite>obj</cite> must be the same as the number of atoms provided
+when setting up the trajectory.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.write_next_timestep">
 <code class="descname">write_next_timestep</code><span class="sig-paren">(</span><em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter.write_next_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.write_next_timestep" title="Permalink to this definition">¶</a></dt>
-<dd><p>write a new timestep to the dcd file</p>
-<p><em>ts</em> - timestep object containing coordinates to be written to dcd file</p>
+<dd><p>Write a new timestep to the DCD file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ts</strong> (<cite>Timestep</cite> (optional)) &#8211; <cite>Timestep</cite> object containing coordinates to be written to DCD file;
+by default it uses the current <cite>Timestep</cite> associated with the
+Writer.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if wrong number of atoms supplied</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code> &#8211; if no coordinates to be written.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Raises <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> instead of generic <code class="xref py py-exc docutils literal"><span class="pre">Exception</span></code>
 if wrong number of atoms supplied and <code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code>
@@ -1138,7 +1201,7 @@ to that read in by the trajectory reader. <em>auxdata</em> can be an
 <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> instance, or the data
 itself as e.g. a filename; in the latter case an appropriate
 <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> is guessed from the
-data/file format. An appropriate <em>format</em> may also be directly provided
+data/file format. An appropriate <cite>format</cite> may also be directly provided
 as a key word argument.</p>
 <p>On adding, the AuxReader is initially matched to the current timestep
 of the trajectory, and will be updated when the trajectory timestep
@@ -1174,33 +1237,54 @@ the <a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><s
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.check_slice_indices">
 <code class="descname">check_slice_indices</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>step</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.check_slice_indices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check frame indices are valid and clip to fit trajectory</p>
+<dd><p>Check frame indices are valid and clip to fit trajectory.</p>
+<p>The usage follows standard Python conventions for <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a> but see
+the warning below.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop</strong><strong>, </strong><strong>step</strong> (<em>start</em><em>,</em><em></em>) &#8211; Values representing the slice indices.
-Can use <cite>None</cite> to use defaults of (0, n_frames, and 1)
-respectively.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Starting frame index (inclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+of 0, i.e., the initial frame.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Last frame index (exclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+of n_frames, i.e., it includes the last frame of the trajectory.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; step size of the slice, <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default of 1, i.e,
+include every frame in the range <cite>start</cite>, <cite>stop</cite>.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211; Integers representing the slice</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>start, stop, step</strong> &#8211; Integers representing the slice</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>)</p>
+</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>The returned values start, stop and step give the expected result when passed
-in range() but gives unexpected behaviour when passed in a slice when stop=None
-and step=-1</p>
-<p>This is because when we slice the trajectory (u.trajectory[::-1]), the values
-returned by check_slice_indices are passed to range. Instead, in AnalysisBase
-the values returned by check_slice_indices are used to splice the trajectory.
-This creates a discrepancy because these two lines are not equivalent:</p>
-<blockquote class="last">
-<div>range(10, -1, -1)  # [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-range(10)[10:-1:-1]  # []</div></blockquote>
+<p>The returned values <cite>start</cite>, <cite>stop</cite> and <cite>step</cite> give the expected result
+when passed in <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a> but gives unexpected behavior when passed
+in a <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> when <code class="docutils literal"><span class="pre">stop=None</span></code> and <code class="docutils literal"><span class="pre">step=-1</span></code></p>
+<p>This can be a problem for downstream processing of the output from this
+method. For example, slicing of trajectories is implemented by passing
+the values returned by <a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.check_slice_indices" title="MDAnalysis.coordinates.LAMMPS.DATAReader.check_slice_indices"><code class="xref py py-meth docutils literal"><span class="pre">check_slice_indices()</span></code></a> to <a class="reference external" href="https://docs.python.org/2/library/functions.html#range" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">range()</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and using them as the indices to randomly seek to. On the other hand,
+in <a class="reference internal" href="../analysis/base.html#MDAnalysis.analysis.base.AnalysisBase" title="MDAnalysis.analysis.base.AnalysisBase"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.analysis.base.AnalysisBase</span></code></a> the values returned
+by <a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.check_slice_indices" title="MDAnalysis.coordinates.LAMMPS.DATAReader.check_slice_indices"><code class="xref py py-meth docutils literal"><span class="pre">check_slice_indices()</span></code></a> are used to splice the trajectory by
+creating a <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> instance</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a discrepancy because these two lines are not equivalent:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="nb">slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>  <span class="c1"># []</span>
+</pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -1214,7 +1298,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1222,7 +1306,9 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 <div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
@@ -1239,7 +1325,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1247,10 +1333,12 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.7.</span></p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
 </dd></dl>
 
@@ -1264,7 +1352,7 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1272,27 +1360,29 @@ range(10)[10:-1:-1]  # []</div></blockquote>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array x from base units to native units.</p>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1300,13 +1390,15 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -1320,7 +1412,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1328,16 +1420,17 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>t</em> is modified in place and also
-returned (although note that scalar values <em>t</em> are passed by
-value in Python and hence an in-place modification has no
-effect on the caller.)</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -1382,7 +1475,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1390,24 +1483,26 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1415,10 +1510,12 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
@@ -1684,7 +1781,7 @@ is not appropriate then this method has to be overriden.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1692,7 +1789,9 @@ is not appropriate then this method has to be overriden.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 <div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
@@ -1709,7 +1808,7 @@ is not appropriate then this method has to be overriden.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1717,10 +1816,12 @@ is not appropriate then this method has to be overriden.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.7.</span></p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
 </dd></dl>
 
@@ -1734,7 +1835,7 @@ is not appropriate then this method has to be overriden.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1742,27 +1843,29 @@ is not appropriate then this method has to be overriden.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAWriter.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAWriter.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array x from base units to native units.</p>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1770,13 +1873,15 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -1790,7 +1895,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1798,16 +1903,17 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>t</em> is modified in place and also
-returned (although note that scalar values <em>t</em> are passed by
-value in Python and hence an in-place modification has no
-effect on the caller.)</p>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
-modified copy is returned <em>unless</em> no conversion takes
-place, in which case the reference to the unmodified <em>x</em> is
-returned.</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
 </div>
 </dd></dl>
 
@@ -1852,7 +1958,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1860,24 +1966,26 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAWriter.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAWriter.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1885,10 +1993,12 @@ returned.</p>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.7.5.</span></p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
 </dd></dl>
 
@@ -1903,17 +2013,16 @@ returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>criteria</em></dt>
-<dd><p class="first last">dictionary containing the <em>max</em> and <em>min</em> values in native units</p>
-</dd>
-<dt><em>x</em></dt>
-<dd><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">np.ndarray</span></code> of <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out.</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>criteria</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary containing the <em>max</em> and <em>min</em> values in native units</li>
+<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><em>numpy.ndarray</em></a>) &#8211; <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">boolean</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></p>
 </td>
 </tr>
 </tbody>
@@ -1923,26 +2032,28 @@ returned.</p>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAWriter.write">
 <code class="descname">write</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/LAMMPS.html#DATAWriter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAWriter.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write selection at current trajectory frame to file, including
-sections Atoms, Masses, Velocities, Bonds, Angles, Dihedrals, and
-Impropers (if these are defined). Atoms section is written in the
-&#8220;full&#8221; sub-style if charges are available or &#8220;molecular&#8221; sub-style if
-they are not. Molecule id in atoms section is set to to 0.</p>
+<dd><p>Write selection at current trajectory frame to file.</p>
+<p>The sections for Atoms, Masses, Velocities, Bonds, Angles,
+Dihedrals, and Impropers (if these are defined) are
+written. The Atoms section is written in the &#8220;full&#8221; sub-style
+if charges are available or &#8220;molecular&#8221; sub-style if they are
+not. Molecule id in atoms section is set to to 0.</p>
 <p>No other sections are written to the DATA file.
 As of this writing, other sections are not parsed into the topology
 by the <a class="reference internal" href="#MDAnalysis.coordinates.LAMMPS.DATAReader" title="MDAnalysis.coordinates.LAMMPS.DATAReader"><code class="xref py py-class docutils literal"><span class="pre">DATAReader</span></code></a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If the selection includes a partial fragment, then only the bonds, angles,
-etc. whose atoms are contained within the selection will be included.</p>
+<p class="last">If the selection includes a partial fragment, then only the bonds,
+angles, etc. whose atoms are contained within the selection will be
+included.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>selection</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; MDAnalysis AtomGroup (selection or Universe.atoms) or also Universe</li>
-<li><strong>frame</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>]</em><em></em>) &#8211; optionally move to frame number <em>frame</em></li>
+<li><strong>selection</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; MDAnalysis AtomGroup (selection or Universe.atoms) or also Universe</li>
+<li><strong>frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; optionally move to frame number <cite>frame</cite></li>
 </ul>
 </td>
 </tr>

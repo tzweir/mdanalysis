@@ -196,6 +196,7 @@
 <span class="sd">        it is assumed it is a new-style CHARMM unitcell (at least since c36b2)</span>
 <span class="sd">        in which box vectors were recorded.</span>
 
+
 <span class="sd">        .. warning:: The DCD format is not well defined. Check your unit cell</span>
 <span class="sd">           dimensions carefully, especially when using triclinic</span>
 <span class="sd">           boxes. Different software packages implement different conventions</span>
@@ -244,8 +245,57 @@
 
 
 <div class="viewcode-block" id="DCDWriter"><a class="viewcode-back" href="../../../documentation_pages/coordinates/DCD.html#MDAnalysis.coordinates.DCD.DCDWriter">[docs]</a><span class="k">class</span> <span class="nc">DCDWriter</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">WriterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Writes to a DCD file</span>
+    <span class="sd">&quot;&quot;&quot;Write to a CHARMM/NAMD DCD trajectory file.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        name of output file</span>
+<span class="sd">    n_atoms : int (optional)</span>
+<span class="sd">        number of atoms in dcd file</span>
+<span class="sd">    start : int (optional)</span>
+<span class="sd">        starting frame number</span>
+<span class="sd">    step : int (optional)</span>
+<span class="sd">        skip between subsequent timesteps (indicate that `step` **MD</span>
+<span class="sd">        integrator steps (!)** make up one trajectory frame); default is 1.</span>
+<span class="sd">    delta : float (optional)</span>
+<span class="sd">        timestep (**MD integrator time step (!)**, in AKMA units); default is</span>
+<span class="sd">        20.45482949774598 (corresponding to 1 ps).</span>
+<span class="sd">    remarks : str (optional)</span>
+<span class="sd">        comments to annotate dcd file</span>
+<span class="sd">    dt : float (optional)</span>
+<span class="sd">        **Override** `step` and `delta` so that the DCD records that</span>
+<span class="sd">        `dt` ps lie between two frames. (It sets `step` = 1 and</span>
+<span class="sd">        `delta` ``= AKMA(dt)``.) The default is ``None``, in which case</span>
+<span class="sd">        `step` and `delta` are used.</span>
+<span class="sd">    convert_units : bool (optional)</span>
+<span class="sd">        units are converted to the MDAnalysis base format; ``None`` selects</span>
+<span class="sd">        the value of :data:`MDAnalysis.core.flags` [&#39;convert_lengths&#39;].</span>
+<span class="sd">        (see :ref:`flags-label`)</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    The keyword arguments set the **low-level attributes of the DCD** according</span>
+<span class="sd">    to the CHARMM format. The time between two frames would be `delta` *</span>
+<span class="sd">    `step`!  For convenience, one can alternatively supply the `dt` keyword</span>
+<span class="sd">    (see above) to just tell the writer that it should record &quot;There are `dt`</span>
+<span class="sd">    ps between each frame&quot;.</span>
+
+<span class="sd">    The Writer will write the **unit cell information** to the DCD in a format</span>
+<span class="sd">    compatible with NAMD and older CHARMM versions, namely the unit cell</span>
+<span class="sd">    lengths in Angstrom and the angle cosines (see :class:`Timestep`). Newer</span>
+<span class="sd">    versions of CHARMM (at least c36b2) store the matrix of the box</span>
+<span class="sd">    vectors. Writing this matrix to a DCD is currently not supported (although</span>
+<span class="sd">    reading is supported with the :class:`DCDReader`); instead the angle</span>
+<span class="sd">    cosines are written, which *might make the DCD file unusable in CHARMM</span>
+<span class="sd">    itself*. See `Issue 187`_ for further information.</span>
+
+<span class="sd">    The writing behavior of the :class:`DCDWriter` is identical to that of the</span>
+<span class="sd">    DCD molfile plugin of VMD with the exception that by default it will use</span>
+<span class="sd">    AKMA time units.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
 <span class="sd">    Typical usage::</span>
 
 <span class="sd">       with DCDWriter(&quot;new.dcd&quot;, u.atoms.n_atoms) as w:</span>
@@ -254,26 +304,8 @@
 
 <span class="sd">    Keywords are available to set some of the low-level attributes of the DCD.</span>
 
-<span class="sd">    :Methods:</span>
-<span class="sd">       ``d = DCDWriter(dcdfilename, n_atoms, start, step, delta, remarks)``</span>
-
-<span class="sd">    .. Note::</span>
-
-<span class="sd">       The Writer will write the **unit cell information** to the DCD in a</span>
-<span class="sd">       format compatible with NAMD and older CHARMM versions, namely the unit</span>
-<span class="sd">       cell lengths in Angstrom and the angle cosines (see</span>
-<span class="sd">       :class:`Timestep`). Newer versions of CHARMM (at least c36b2) store the</span>
-<span class="sd">       matrix of the box vectors. Writing this matrix to a DCD is currently not</span>
-<span class="sd">       supported (although reading is supported with the</span>
-<span class="sd">       :class:`DCDReader`); instead the angle cosines are written,</span>
-<span class="sd">       which *might make the DCD file unusable in CHARMM itself*. See</span>
-<span class="sd">       `Issue 187`_ for further information.</span>
-
-<span class="sd">       The writing behavior of the :class:`DCDWriter` is identical to</span>
-<span class="sd">       that of the DCD molfile plugin of VMD with the exception that</span>
-<span class="sd">       by default it will use AKMA time units.</span>
-
 <span class="sd">    .. _Issue 187: https://github.com/MDAnalysis/mdanalysis/issues/187</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;DCD&#39;</span>
     <span class="n">multiframe</span> <span class="o">=</span> <span class="kc">True</span>
@@ -283,41 +315,6 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">delta</span><span class="o">=</span><span class="n">mdaunits</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;AKMA&#39;</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">remarks</span><span class="o">=</span><span class="s2">&quot;Created by DCDWriter&quot;</span><span class="p">,</span> <span class="n">convert_units</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new DCDWriter</span>
-
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *filename*</span>
-<span class="sd">           name of output file</span>
-<span class="sd">         *n_atoms*</span>
-<span class="sd">           number of atoms in dcd file</span>
-<span class="sd">         *start*</span>
-<span class="sd">           starting timestep</span>
-<span class="sd">         *step*</span>
-<span class="sd">           skip between subsequent timesteps (indicate that *step* MD</span>
-<span class="sd">           integrator steps (!) make up one trajectory frame); default is 1.</span>
-<span class="sd">         *delta*</span>
-<span class="sd">           timestep (MD integrator time step (!), in AKMA units); default is</span>
-<span class="sd">           20.45482949774598 (corresponding to 1 ps).</span>
-<span class="sd">         *remarks*</span>
-<span class="sd">           comments to annotate dcd file</span>
-<span class="sd">         *dt*</span>
-<span class="sd">           **Override** *step* and *delta* so that the DCD records that *dt* ps</span>
-<span class="sd">           lie between two frames. (It sets *step* = 1 and *delta* = ``AKMA(dt)``.)</span>
-<span class="sd">           The default is ``None``, in which case *step* and *delta* are used.</span>
-<span class="sd">         *convert_units*</span>
-<span class="sd">           units are converted to the MDAnalysis base format; ``None`` selects</span>
-<span class="sd">           the value of :data:`MDAnalysis.core.flags` [&#39;convert_lengths&#39;].</span>
-<span class="sd">           (see :ref:`flags-label`)</span>
-
-<span class="sd">       .. Note::</span>
-
-<span class="sd">          The keyword arguments set the low-level attributes of the DCD</span>
-<span class="sd">          according to the CHARMM format. The time between two frames would be</span>
-<span class="sd">          *delta* * *step* ! For convenience, one can alternatively supply the</span>
-<span class="sd">          *dt* keyword (see above) to just tell the writer that it should</span>
-<span class="sd">          record &quot;There are dt ps between each frame&quot;.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;DCDWriter: no atoms in output trajectory&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -384,15 +381,29 @@
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;LLiiiiidiPPiiii&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcd_C_str</span><span class="p">)))</span>
 
 <div class="viewcode-block" id="DCDWriter.write_next_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.DCD.DCDWriter.write_next_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">write_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; write a new timestep to the dcd file</span>
+        <span class="sd">&quot;&quot;&quot;Write a new timestep to the DCD file.</span>
 
-<span class="sd">        *ts* - timestep object containing coordinates to be written to dcd file</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ts : `Timestep` (optional)</span>
+<span class="sd">            `Timestep` object containing coordinates to be written to DCD file;</span>
+<span class="sd">            by default it uses the current `Timestep` associated with the</span>
+<span class="sd">            Writer.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        :exc:`ValueError`</span>
+<span class="sd">           if wrong number of atoms supplied</span>
+<span class="sd">        :exc:`~MDAnalysis.NoDataError`</span>
+<span class="sd">           if no coordinates to be written.</span>
+
 
 <span class="sd">        .. versionchanged:: 0.7.5</span>
 <span class="sd">           Raises :exc:`ValueError` instead of generic :exc:`Exception`</span>
 <span class="sd">           if wrong number of atoms supplied and :exc:`~MDAnalysis.NoDataError`</span>
 <span class="sd">           if no coordinates to be written.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
@@ -463,15 +474,15 @@
 <span class="sd">        ``data = dcd.correl(...)``</span>
 <span class="sd">           populate a :class:`MDAnalysis.core.Timeseries.Collection` object with computed timeseries</span>
 
-<span class="sd">    .. Note::</span>
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    The DCD file format is not well defined. In particular, NAMD and CHARMM use</span>
+<span class="sd">    it differently. Currently, MDAnalysis tries to guess the correct format for</span>
+<span class="sd">    the unitcell representation but it can be wrong. **Check the unitcell</span>
+<span class="sd">    dimensions**, especially for triclinic unitcells (see `Issue 187`_ and</span>
+<span class="sd">    :attr:`Timestep.dimensions`). A second potential issue are the units of</span>
+<span class="sd">    time (TODO).</span>
 
-<span class="sd">       The DCD file format is not well defined. In particular, NAMD</span>
-<span class="sd">       and CHARMM use it differently. Currently, MDAnalysis tries to</span>
-<span class="sd">       guess the correct format for the unitcell representation but it</span>
-<span class="sd">       can be wrong. **Check the unitcell dimensions**, especially for</span>
-<span class="sd">       triclinic unitcells (see `Issue 187`_ and</span>
-<span class="sd">       :attr:`Timestep.dimensions`). A second potential issue are the</span>
-<span class="sd">       units of time (TODO).</span>
 
 <span class="sd">    .. versionchanged:: 0.9.0</span>
 <span class="sd">       The underlying DCD reader (written in C and derived from the</span>
@@ -482,9 +493,10 @@
 <span class="sd">    .. _Issue 187: https://github.com/MDAnalysis/mdanalysis/issues/187</span>
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
-<span class="sd">       Frames now 0-based instead of 1-based</span>
-<span class="sd">       Native frame number read into ts._frame</span>
-<span class="sd">       Removed skip keyword and functionality</span>
+<span class="sd">       Frames now 0-based instead of 1-based.</span>
+<span class="sd">       Native frame number read into `ts._frame`.</span>
+<span class="sd">       Removed `skip` keyword and functionality.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;DCD&#39;</span>
     <span class="n">flavor</span> <span class="o">=</span> <span class="s1">&#39;CHARMM&#39;</span>
@@ -588,23 +600,33 @@
                    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;afc&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a subset of coordinate data for an AtomGroup</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">            *asel*</span>
-<span class="sd">               :class:`~MDAnalysis.core.groups.AtomGroup` object</span>
-<span class="sd">               Defaults to None, in which case the full set of coordinate data</span>
-<span class="sd">               is returned.</span>
-<span class="sd">            *start*, *stop*, *step*</span>
-<span class="sd">               A range of the trajectory to access, with start being inclusive</span>
-<span class="sd">               and stop being exclusive.</span>
-<span class="sd">            *format*</span>
-<span class="sd">               the order/shape of the return data array, corresponding</span>
-<span class="sd">               to (a)tom, (f)rame, (c)oordinates all six combinations</span>
-<span class="sd">               of &#39;a&#39;, &#39;f&#39;, &#39;c&#39; are allowed ie &quot;fac&quot; - return array</span>
-<span class="sd">               where the shape is (frame, number of atoms,</span>
-<span class="sd">               coordinates)</span>
-<span class="sd">        :Deprecated:</span>
-<span class="sd">            *skip*</span>
-<span class="sd">                Skip has been deprecated in favor of the standard keyword step.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asel : :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">            The :class:`~MDAnalysis.core.groups.AtomGroup` to read the</span>
+<span class="sd">            coordinates from. Defaults to None, in which case the full set of</span>
+<span class="sd">            coordinate data is returned.</span>
+<span class="sd">        start :  int (optional)</span>
+<span class="sd">             Begin reading the trajectory at frame index `start` (where 0 is the index</span>
+<span class="sd">             of the first frame in the trajectory); the default ``None`` starts</span>
+<span class="sd">             at the beginning.</span>
+<span class="sd">        stop : int (optional)</span>
+<span class="sd">             End reading the trajectory at frame index `stop`-1, i.e, `stop` is excluded.</span>
+<span class="sd">             The trajectory is read to the end with the default ``None``.</span>
+<span class="sd">        step : int (optional)</span>
+<span class="sd">             Step size for reading; the default ``None`` is equivalent to 1 and means to</span>
+<span class="sd">             read every frame.</span>
+<span class="sd">        format : str (optional)</span>
+<span class="sd">            the order/shape of the return data array, corresponding</span>
+<span class="sd">            to (a)tom, (f)rame, (c)oordinates all six combinations</span>
+<span class="sd">            of &#39;a&#39;, &#39;f&#39;, &#39;c&#39; are allowed ie &quot;fac&quot; - return array</span>
+<span class="sd">            where the shape is (frame, number of atoms,</span>
+<span class="sd">            coordinates)</span>
+
+
+<span class="sd">        .. deprecated:: 0.16.0</span>
+<span class="sd">           `skip` has been deprecated in favor of the standard keyword `step`.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">skip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">step</span> <span class="o">=</span> <span class="n">skip</span>
@@ -629,17 +651,37 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_timeseries</span><span class="p">(</span><span class="n">atom_numbers</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="nb">format</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DCDReader.correl"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.DCD.DCDReader.correl">[docs]</a>    <span class="k">def</span> <span class="nf">correl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeseries</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Populate a TimeseriesCollection object with timeseries computed from the trajectory</span>
+        <span class="sd">&quot;&quot;&quot;Populate a :class:`~MDAnalysis.core.Timeseries.TimeseriesCollection` object</span>
+<span class="sd">        with time series computed from the trajectory.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">            *timeseries*</span>
-<span class="sd">               :class:`MDAnalysis.core.Timeseries.TimeseriesCollection`</span>
-<span class="sd">            *start, stop, step*</span>
-<span class="sd">               A subset of the trajectory to use, with start being inclusive</span>
-<span class="sd">               and stop being exclusive.</span>
-<span class="sd">        :Deprecated:</span>
-<span class="sd">            *skip*</span>
-<span class="sd">                Skip has been deprecated in favor of the standard keyword step.</span>
+<span class="sd">        Calling this method will iterate through the whole trajectory and</span>
+<span class="sd">        perform the calculations prescribed in `timeseries`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        timeseries : :class:`MDAnalysis.core.Timeseries.TimeseriesCollection`</span>
+<span class="sd">             The :class:`MDAnalysis.core.Timeseries.TimeseriesCollection` that defines what kind</span>
+<span class="sd">             of computations should be performed on the data in this trajectory.</span>
+<span class="sd">        start :  int (optional)</span>
+<span class="sd">             Begin reading the trajectory at frame index `start` (where 0 is the index</span>
+<span class="sd">             of the first frame in the trajectory); the default ``None`` starts</span>
+<span class="sd">             at the beginning.</span>
+<span class="sd">        stop : int (optional)</span>
+<span class="sd">             End reading the trajectory at frame index `stop`-1, i.e, `stop` is excluded.</span>
+<span class="sd">             The trajectory is read to the end with the default ``None``.</span>
+<span class="sd">        step : int (optional)</span>
+<span class="sd">             Step size for reading; the default ``None`` is equivalent to 1 and means to</span>
+<span class="sd">             read every frame.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        The `correl` functionality is only implemented for DCD trajectories and</span>
+<span class="sd">        the :class:`DCDReader`.</span>
+
+
+<span class="sd">        .. deprecated:: 0.16.0</span>
+<span class="sd">           `skip` has been deprecated in favor of the standard keyword `step`.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">skip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">step</span> <span class="o">=</span> <span class="n">skip</span>
@@ -664,40 +706,53 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">dcdfile</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="DCDReader.Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.DCD.DCDReader.Writer">[docs]</a>    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a DCDWriter for *filename* with the same parameters as this DCD.</span>
+        <span class="sd">&quot;&quot;&quot;Returns a DCDWriter for `filename` with the same parameters as this DCD.</span>
 
-<span class="sd">        All values can be changed through keyword arguments.</span>
+<span class="sd">        Defaults for all values are obtained from the `DCDReader` itself but</span>
+<span class="sd">        all values can be changed through keyword arguments.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *filename*</span>
-<span class="sd">              filename of the output DCD trajectory</span>
-<span class="sd">        :Keywords:</span>
-<span class="sd">          *n_atoms*</span>
-<span class="sd">              number of atoms</span>
-<span class="sd">          *start*</span>
-<span class="sd">              number of the first recorded MD step</span>
-<span class="sd">          *step*</span>
-<span class="sd">              indicate that *step* MD steps (!) make up one trajectory frame</span>
-<span class="sd">          *delta*</span>
-<span class="sd">              MD integrator time step (!), in AKMA units</span>
-<span class="sd">          *dt*</span>
-<span class="sd">             **Override** *step* and *delta* so that the DCD records that *dt* ps</span>
-<span class="sd">             lie between two frames. (It sets *step* = 1 and *delta* = ``AKMA(dt)``.)</span>
-<span class="sd">             The default is ``None``, in which case *step* and *delta* are used.</span>
-<span class="sd">          *remarks*</span>
-<span class="sd">              string that is stored in the DCD header [XXX -- max length?]</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            filename of the output DCD trajectory</span>
+<span class="sd">        n_atoms : int (optional)</span>
+<span class="sd">            number of atoms</span>
+<span class="sd">        start : int (optional)</span>
+<span class="sd">            number of the first recorded MD step</span>
+<span class="sd">        step : int (optional)</span>
+<span class="sd">            indicate that `step` **MD steps (!)** make up one trajectory frame</span>
+<span class="sd">        delta : float (optional)</span>
+<span class="sd">            **MD integrator time step (!)**, in AKMA units</span>
+<span class="sd">        dt : float (optional)</span>
+<span class="sd">            **Override** `step` and `delta` so that the DCD records that</span>
+<span class="sd">            `dt` ps lie between two frames. (It sets `step` `` = 1`` and</span>
+<span class="sd">            `delta` `` = AKMA(dt)``.) The default is ``None``, in which case</span>
+<span class="sd">            `step` and `delta` are used.</span>
 
-<span class="sd">        :Returns: :class:`DCDWriter`</span>
+<span class="sd">        remarks : str (optional)</span>
+<span class="sd">            string that is stored in the DCD header</span>
 
-<span class="sd">        .. Note::</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`DCDWriter`</span>
 
-<span class="sd">           The keyword arguments set the low-level attributes of the DCD</span>
-<span class="sd">           according to the CHARMM format. The time between two frames would be</span>
-<span class="sd">           *delta* * *step* !</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        The keyword arguments set the low-level attributes of the DCD according</span>
+<span class="sd">        to the CHARMM format. The time between two frames would be `delta` *</span>
+<span class="sd">        `step`!</span>
+
+<span class="sd">        Here `step` is really the number of MD integrator time steps that</span>
+<span class="sd">        occured after this frame, including the frame itself that is the</span>
+<span class="sd">        coordinate snapshot and `delta` is the integrator stime step.  The DCD</span>
+<span class="sd">        file format contains this information so it needs to be provided here.</span>
+
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        :class:`DCDWriter`</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;n_atoms&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_timestep</span><span class="p">)</span>

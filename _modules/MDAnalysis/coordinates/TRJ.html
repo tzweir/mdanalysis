@@ -91,26 +91,28 @@
 <span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
 <span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
 <span class="c1">#</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">AMBER trajectories --- :mod:`MDAnalysis.coordinates.TRJ`</span>
+<span class="sd">&quot;&quot;&quot;AMBER trajectories --- :mod:`MDAnalysis.coordinates.TRJ`</span>
 <span class="sd">========================================================</span>
 
 <span class="sd">AMBER_ can write :ref:`ASCII trajectories&lt;ascii-trajectories&gt;` (&quot;traj&quot;) and</span>
 <span class="sd">:ref:`binary trajectories&lt;netcdf-trajectories&gt;` (&quot;netcdf&quot;). MDAnalysis supports</span>
 <span class="sd">reading of both formats and writing for the binary trajectories.</span>
 
-<span class="sd">.. Note::</span>
+<span class="sd">Note</span>
+<span class="sd">----</span>
+<span class="sd">Support for AMBER is still somewhat *experimental* and feedback and</span>
+<span class="sd">contributions are highly appreciated. Use the `Issue Tracker`_ or get in touch</span>
+<span class="sd">on the `MDAnalysis mailinglist`_.</span>
 
-<span class="sd">   Support for AMBER is *experimental* and feedback and contributions</span>
-<span class="sd">   are highly appreciated. Use the `Issue Tracker`_ or get in touch on</span>
-<span class="sd">   the `MDAnalysis mailinglist`_.</span>
 
 <span class="sd">.. rubric:: Units</span>
+
+<span class="sd">AMBER trajectories are assumed to be in the following units:</span>
 
 <span class="sd">* lengths in Angstrom (Å)</span>
 <span class="sd">* time in ps (but see below)</span>
 
-<span class="sd">AMBER trajectory coordinate frames are based on a :class:`Timestep`</span>
+<span class="sd">AMBER trajectory coordinate frames are based on a custom :class:`Timestep`</span>
 <span class="sd">object.</span>
 
 <span class="sd">.. autoclass:: Timestep</span>
@@ -199,8 +201,6 @@
 <span class="sd">.. _Issue Tracker: https://github.com/MDAnalysis/mdanalysis/issues</span>
 <span class="sd">.. _MDAnalysis mailinglist: http://groups.google.com/group/mdnalysis-discussion</span>
 
-
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
                         <span class="n">unicode_literals</span><span class="p">)</span>
@@ -233,8 +233,8 @@
 <div class="viewcode-block" id="Timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRJ.html#MDAnalysis.coordinates.TRJ.Timestep">[docs]</a><span class="k">class</span> <span class="nc">Timestep</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Timestep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;AMBER trajectory Timestep.</span>
 
-<span class="sd">    The Timestep can be initialized with *arg* being an integer</span>
-<span class="sd">    (the number of atoms) and an optional keyword argument *velocities* to</span>
+<span class="sd">    The Timestep can be initialized with `arg` being an integer</span>
+<span class="sd">    (the number of atoms) and an optional keyword argument `velocities` to</span>
 <span class="sd">    allocate space for both coordinates and velocities;</span>
 
 <span class="sd">    .. versionchanged:: 0.10.0</span>
@@ -264,8 +264,8 @@
 <span class="sd">    .. _AMBER TRJ format: http://ambermd.org/formats.html#trajectory</span>
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
-<span class="sd">       Frames now 0-based instead of 1-based</span>
-<span class="sd">       kwarg &#39;delta&#39; renamed to &#39;dt&#39;, for uniformity with other Readers</span>
+<span class="sd">       Frames now 0-based instead of 1-based.</span>
+<span class="sd">       kwarg `delta` renamed to `dt`, for uniformity with other Readers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TRJ&#39;</span><span class="p">,</span> <span class="s1">&#39;MDCRD&#39;</span><span class="p">,</span> <span class="s1">&#39;CRDBOX&#39;</span><span class="p">]</span>
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
@@ -365,7 +365,8 @@
 <span class="sd">         - this WILL fail if we have exactly 1 atom in the trajectory because</span>
 <span class="sd">           there&#39;s no way to distinguish the coordinates from the box</span>
 <span class="sd">           so for 1 atom we always assume no box</span>
-<span class="sd">         XXX: needs a Timestep that knows about AMBER unitcells!</span>
+
+<span class="sd">        .. TODO:: needs a Timestep that knows about AMBER unitcells!</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># for 1 atom we cannot detect the box with the current approach</span>
@@ -457,7 +458,7 @@
 <span class="sd">    AMBER binary trajectories are automatically recognised by the</span>
 <span class="sd">    file extension &quot;.ncdf&quot;.</span>
 
-<span class="sd">    The number of atoms (*n_atoms*) does not have to be provided as it can</span>
+<span class="sd">    The number of atoms (`n_atoms`) does not have to be provided as it can</span>
 <span class="sd">    be read from the trajectory. The trajectory reader can randomly access</span>
 <span class="sd">    frames and therefore supports direct indexing (with 0-based frame</span>
 <span class="sd">    indices) and full-feature trajectory iteration, including slicing.</span>
@@ -484,12 +485,13 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`NCDFWriter`</span>
 
+
 <span class="sd">    .. versionadded: 0.7.6</span>
 <span class="sd">    .. versionchanged:: 0.10.0</span>
 <span class="sd">       Added ability to read Forces</span>
 <span class="sd">    .. versionchanged:: 0.11.0</span>
-<span class="sd">       Frame labels now 0-based instead of 1-based</span>
-<span class="sd">       kwarg &#39;delta&#39; renamed to &#39;dt&#39;, for uniformity with other Readers</span>
+<span class="sd">       Frame labels now 0-based instead of 1-based.</span>
+<span class="sd">       kwarg `delta` renamed to `dt`, for uniformity with other Readers.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NCDF&#39;</span><span class="p">,</span> <span class="s1">&#39;NC&#39;</span><span class="p">]</span>
@@ -640,22 +642,24 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="NCDFReader.Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRJ.html#MDAnalysis.coordinates.TRJ.NCDFReader.Writer">[docs]</a>    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a NCDFWriter for *filename* with the same parameters as this NCDF.</span>
+        <span class="sd">&quot;&quot;&quot;Returns a NCDFWriter for `filename` with the same parameters as this NCDF.</span>
 
 <span class="sd">        All values can be changed through keyword arguments.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *filename*</span>
-<span class="sd">              filename of the output NCDF trajectory</span>
-<span class="sd">        :Keywords:</span>
-<span class="sd">          *n_atoms*</span>
-<span class="sd">              number of atoms</span>
-<span class="sd">          *dt*</span>
-<span class="sd">              length of one timestep in picoseconds</span>
-<span class="sd">          *remarks*</span>
-<span class="sd">              string that is stored in the title field</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            filename of the output NCDF trajectory</span>
+<span class="sd">        n_atoms : int (optional)</span>
+<span class="sd">            number of atoms</span>
+<span class="sd">        dt : float (optional)</span>
+<span class="sd">            length of one timestep in picoseconds</span>
+<span class="sd">        remarks : str (optional)</span>
+<span class="sd">            string that is stored in the title field</span>
 
-<span class="sd">        :Returns: :class:`NCDFWriter`</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`NCDFWriter`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;n_atoms&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;remarks&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span><span class="p">)</span>
@@ -682,12 +686,13 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`NCDFReader`</span>
 
+
 <span class="sd">    .. versionadded: 0.7.6</span>
 
 <span class="sd">    .. versionchanged:: 0.10.0</span>
 <span class="sd">       Added ability to write velocities and forces</span>
 <span class="sd">    .. versionchanged:: 0.11.0</span>
-<span class="sd">       kwarg &#39;delta&#39; renamed to &#39;dt&#39;, for uniformity with other Readers</span>
+<span class="sd">       kwarg `delta` renamed to `dt`, for uniformity with other Readers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;NCDF&#39;</span>
@@ -711,30 +716,29 @@
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new NCDFWriter</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *filename*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
 <span class="sd">            name of output file</span>
-<span class="sd">         *n_atoms*</span>
+<span class="sd">        n_atoms : int</span>
 <span class="sd">            number of atoms in trajectory file</span>
-
-<span class="sd">        :Keywords:</span>
-<span class="sd">          *start*</span>
+<span class="sd">        start : int (optional)</span>
 <span class="sd">            starting timestep</span>
-<span class="sd">          *step*</span>
+<span class="sd">        step : int (optional)</span>
 <span class="sd">            skip between subsequent timesteps</span>
-<span class="sd">          *dt*</span>
+<span class="sd">        dt : float (optional)</span>
 <span class="sd">            timestep</span>
-<span class="sd">          *convert_units*</span>
+<span class="sd">        convert_units : bool (optional)</span>
 <span class="sd">            ``True``: units are converted to the AMBER base format; ``None``</span>
 <span class="sd">            selects the value of :data:`MDAnalysis.core.flags`</span>
 <span class="sd">            [&#39;convert_lengths&#39;] (see :ref:`flags-label`).</span>
-<span class="sd">          *zlib*</span>
+<span class="sd">        zlib : bool (optional)</span>
 <span class="sd">            compress data [``False``]</span>
-<span class="sd">          *cmplevel*</span>
+<span class="sd">        cmplevel : int (optional)</span>
 <span class="sd">            compression level (1-9) [1]</span>
-<span class="sd">          *velocities*</span>
+<span class="sd">        velocities : bool (optional)</span>
 <span class="sd">            Write velocities into the trajectory [``False``]</span>
-<span class="sd">          *forces*</span>
+<span class="sd">        forces : bool (optional)</span>
 <span class="sd">            Write forces into the trajectory [``False``]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
@@ -878,18 +882,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span> <span class="o">=</span> <span class="n">ncfile</span>
 
 <div class="viewcode-block" id="NCDFWriter.is_periodic"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRJ.html#MDAnalysis.coordinates.TRJ.NCDFWriter.is_periodic">[docs]</a>    <span class="k">def</span> <span class="nf">is_periodic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``True`` if :class:`Timestep` *ts* contains a valid</span>
-<span class="sd">        simulation box</span>
+        <span class="sd">&quot;&quot;&quot;Test if `Timestep` contains a periodic trajectory.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ts : :class:`Timestep`</span>
+<span class="sd">             :class:`Timestep` instance containing coordinates to</span>
+<span class="sd">             be written to trajectory file; default is the current</span>
+<span class="sd">             timestep</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Return ``True`` if `ts` contains a valid simulation box</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span> <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NCDFWriter.write_next_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRJ.html#MDAnalysis.coordinates.TRJ.NCDFWriter.write_next_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">write_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;write a new timestep to the trj file</span>
+        <span class="sd">&quot;&quot;&quot;write a new timestep to the trj file</span>
 
-<span class="sd">        *ts* is a :class:`Timestep` instance containing coordinates to</span>
-<span class="sd">        be written to trajectory file</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ts : :class:`Timestep`</span>
+<span class="sd">             :class:`Timestep` instance containing coordinates to</span>
+<span class="sd">             be written to trajectory file; default is the current</span>
+<span class="sd">             timestep</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
         <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>

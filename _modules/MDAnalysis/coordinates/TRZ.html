@@ -104,6 +104,9 @@
 <span class="sd">.. _IBIsCO: http://www.theo.chemie.tu-darmstadt.de/ibisco/IBISCO.html</span>
 <span class="sd">.. _YASP: http://www.theo.chemie.tu-darmstadt.de/group/services/yaspdoc/yaspdoc.html</span>
 
+<span class="sd">Classes</span>
+<span class="sd">-------</span>
+
 <span class="sd">.. autoclass:: MDAnalysis.coordinates.TRZ.Timestep</span>
 <span class="sd">   :members:</span>
 
@@ -223,12 +226,13 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trzfilename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates a TRZ Reader</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *trzfilename*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        trzfilename : str</span>
 <span class="sd">            name of input file</span>
-<span class="sd">          *n_atoms*</span>
-<span class="sd">            number of atoms in trajectory, must taken from topology file!</span>
-<span class="sd">          *convert_units*</span>
+<span class="sd">        n_atoms : int</span>
+<span class="sd">            number of atoms in trajectory, must be taken from topology file!</span>
+<span class="sd">        convert_units : bool (optional)</span>
 <span class="sd">            converts units to MDAnalysis defaults</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TRZReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">trzfilename</span><span class="p">,</span>  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -514,20 +518,19 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;TRZ&#39;</span><span class="p">,</span> <span class="n">convert_units</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a TRZWriter</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *filename*</span>
-<span class="sd">          name of output file</span>
-<span class="sd">         *n_atoms*</span>
-<span class="sd">          number of atoms in trajectory</span>
-
-<span class="sd">        :Keywords:</span>
-<span class="sd">         *title*</span>
-<span class="sd">          title of the trajectory; the title must be 80 characters or shorter,</span>
-<span class="sd">          a longer title raises a ValueError exception.</span>
-<span class="sd">         *convert_units*</span>
-<span class="sd">          units are converted to the MDAnalysis base format; ``None`` selects</span>
-<span class="sd">          the value of :data:`MDAnalysis.core.flags` [&#39;convert_lengths&#39;].</span>
-<span class="sd">          (see :ref:`flags-label`)</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            name of output file</span>
+<span class="sd">        n_atoms : int</span>
+<span class="sd">            number of atoms in trajectory</span>
+<span class="sd">        title : str (optional)</span>
+<span class="sd">            title of the trajectory; the title must be 80 characters or</span>
+<span class="sd">            shorter, a longer title raises a ValueError exception.</span>
+<span class="sd">        convert_units : bool (optional)</span>
+<span class="sd">            units are converted to the MDAnalysis base format; ``None`` selects</span>
+<span class="sd">            the value of :data:`MDAnalysis.core.flags` [&#39;convert_lengths&#39;].</span>
+<span class="sd">            (see :ref:`flags-label`)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>

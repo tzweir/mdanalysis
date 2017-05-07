@@ -110,14 +110,17 @@
 
 
 <div class="viewcode-block" id="TRRWriter"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRR.html#MDAnalysis.coordinates.TRR.TRRWriter">[docs]</a><span class="k">class</span> <span class="nc">TRRWriter</span><span class="p">(</span><span class="n">XDRBaseWriter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The Gromacs TRR trajectory format is a lossless format. The TRR format can</span>
+    <span class="sd">&quot;&quot;&quot;Writer for the Gromacs TRR format.</span>
+
+<span class="sd">    The Gromacs TRR trajectory format is a lossless format. The TRR format can</span>
 <span class="sd">    store *velocoties* and *forces* in addition to the coordinates. It is also</span>
 <span class="sd">    used by other Gromacs tools to store and process other data such as modes</span>
 <span class="sd">    from a principal component analysis.</span>
 
-<span class="sd">    If the data dictionary of a TimeStep contains the key &#39;lambda&#39; the</span>
-<span class="sd">    corresponding value will be used as the lambda value for written TRR file.</span>
-<span class="sd">    If None is found the lambda is set to 0.</span>
+<span class="sd">    If the data dictionary of a :class:`Timestep` contains the key</span>
+<span class="sd">    &#39;lambda&#39; the corresponding value will be used as the lambda value</span>
+<span class="sd">    for written TRR file.  If ``None`` is found the lambda is set to 0.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;TRR&#39;</span>
@@ -131,7 +134,7 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        ts : TimeStep</span>
+<span class="sd">        ts : :class:`~base.Timestep`</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -173,12 +176,15 @@
 
 
 <div class="viewcode-block" id="TRRReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRR.html#MDAnalysis.coordinates.TRR.TRRReader">[docs]</a><span class="k">class</span> <span class="nc">TRRReader</span><span class="p">(</span><span class="n">XDRBaseReader</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The Gromacs TRR trajectory format is a lossless format. The TRR format can</span>
+    <span class="sd">&quot;&quot;&quot;Reader for the Gromacs TRR format.</span>
+
+<span class="sd">    The Gromacs TRR trajectory format is a lossless format. The TRR format can</span>
 <span class="sd">    store *velocoties* and *forces* in addition to the coordinates. It is also</span>
 <span class="sd">    used by other Gromacs tools to store and process other data such as modes</span>
 <span class="sd">    from a principal component analysis.</span>
 
-<span class="sd">    The lambda value is written in the data dictionary of the returned TimeStep</span>
+<span class="sd">    The lambda value is written in the data dictionary of the returned</span>
+<span class="sd">    :class:`Timestep`</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>

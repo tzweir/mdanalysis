@@ -93,21 +93,20 @@
 <span class="c1">#</span>
 
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Core functions of MDAnalysis</span>
+<span class="sd">&quot;&quot;&quot;Core functions of MDAnalysis</span>
 <span class="sd">============================</span>
 
-<span class="sd">The basic class is an :class:`~MDAnalysis.core.groups.AtomGroup`;</span>
-<span class="sd">the whole simulation is called the</span>
-<span class="sd">:class:`~MDAnalysis.core.universe.Universe`. Selections are computed</span>
-<span class="sd">on an :class:`~MDAnalysis.core.groups.AtomGroup` and return another</span>
+<span class="sd">The basic class is an :class:`~MDAnalysis.core.groups.AtomGroup`; the whole</span>
+<span class="sd">simulation is called the</span>
+<span class="sd">:class:`~MDAnalysis.core.universe.Universe`. Selections are computed on an</span>
+<span class="sd">:class:`~MDAnalysis.core.groups.AtomGroup` and return another</span>
 <span class="sd">:class:`~MDAnalysis.core.groups.AtomGroup`.</span>
 
 <span class="sd">:mod:`~MDAnalysis.Timeseries` are a convenient way to analyse trajectories.</span>
 
 <span class="sd">To get started, load the Universe::</span>
 
-<span class="sd">  u = Universe(psffilename,dcdfilename)</span>
+<span class="sd">  u = Universe(topology_file, trajectory_file)</span>
 
 <span class="sd">A simple selection of all water oxygens within 4 A of the protein::</span>
 
@@ -115,9 +114,9 @@
 <span class="sd">  water_shell.n_atoms           # how many waters were selected</span>
 <span class="sd">  water_shell.total_mass()       # their total mass</span>
 
-<span class="sd">:class:`AtomGroup` instances have various methods that allow</span>
-<span class="sd">calculation of simple properties. For more complicated analysis,</span>
-<span class="sd">obtain the coordinates as a numpy array ::</span>
+<span class="sd">:class:`~MDAnalysis.core.groups.AtomGroup` instances have various methods that</span>
+<span class="sd">allow calculation of simple properties. For more complicated analysis, obtain</span>
+<span class="sd">the coordinates as a numpy array ::</span>
 
 <span class="sd">  coords = water_shell.positions</span>
 
@@ -156,7 +155,6 @@
 
 <span class="sd">.. autoclass:: Flag</span>
 <span class="sd">   :members:</span>
-
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
@@ -257,20 +255,19 @@
     <span class="sd">&quot;&quot;&quot;A Flag, essentially a variable that knows its default and legal values.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new flag which will be registered with FLags.</span>
+        <span class="sd">&quot;&quot;&quot;Create a new flag which will be registered with Flags.</span>
 
-<span class="sd">          newflag = Flag(name,default,mapping,doc)</span>
-
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *name*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
 <span class="sd">            name of the flag, must be a legal python name</span>
-<span class="sd">         *default*</span>
+<span class="sd">        default</span>
 <span class="sd">            default value</span>
-<span class="sd">         *mapping*</span>
+<span class="sd">        mapping : dict</span>
 <span class="sd">            dict that maps allowed input values to canonical values;</span>
 <span class="sd">            if ``None`` then no argument checking will be performed and</span>
 <span class="sd">            all values are directly set.</span>
-<span class="sd">         *doc*</span>
+<span class="sd">        doc : str</span>
 <span class="sd">            doc string; may contain string interpolation mappings for::</span>
 
 <span class="sd">                    %%(name)s        name of the flag</span>
@@ -279,6 +276,14 @@
 <span class="sd">                    %%(mapping)r     mapping</span>
 
 <span class="sd">            Doc strings are generated dynamically and reflect the current state.</span>
+
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        Create a new flag::</span>
+
+<span class="sd">            newflag = Flag(name, default, mapping, doc)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">default</span>
@@ -337,8 +342,8 @@
         <span class="s1">&#39;use_KDTree_routines&#39;</span><span class="p">,</span>
         <span class="s1">&#39;fast&#39;</span><span class="p">,</span>
         <span class="p">{</span><span class="kc">True</span><span class="p">:</span> <span class="s1">&#39;fast&#39;</span><span class="p">,</span> <span class="s1">&#39;fast&#39;</span><span class="p">:</span> <span class="s1">&#39;fast&#39;</span><span class="p">,</span>  <span class="c1"># only KDTree if advantageous</span>
-            <span class="s1">&#39;always&#39;</span><span class="p">:</span> <span class="s1">&#39;always&#39;</span><span class="p">,</span>  <span class="c1"># always even if slower (for testing)</span>
-            <span class="kc">False</span><span class="p">:</span> <span class="s1">&#39;never&#39;</span><span class="p">,</span> <span class="s1">&#39;never&#39;</span><span class="p">:</span> <span class="s1">&#39;never&#39;</span><span class="p">},</span>  <span class="c1"># never, only use (slower) alternatives</span>
+         <span class="s1">&#39;always&#39;</span><span class="p">:</span> <span class="s1">&#39;always&#39;</span><span class="p">,</span>  <span class="c1"># always even if slower (for testing)</span>
+         <span class="kc">False</span><span class="p">:</span> <span class="s1">&#39;never&#39;</span><span class="p">,</span> <span class="s1">&#39;never&#39;</span><span class="p">:</span> <span class="s1">&#39;never&#39;</span><span class="p">},</span>  <span class="c1"># never, only use (slower) alternatives</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Determines which KDTree routines are used for distance selections</span>
 
