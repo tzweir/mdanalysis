@@ -284,6 +284,9 @@
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Data file was missing Atoms section&quot;</span><span class="p">)</span>
 
+        <span class="c1"># create mapping of id to index (ie atom id 10 might be the 0th atom)</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">atom_id</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">atom_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top</span><span class="o">.</span><span class="n">ids</span><span class="o">.</span><span class="n">values</span><span class="p">)}</span>
+
         <span class="k">for</span> <span class="n">attr</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">nentries</span> <span class="ow">in</span> <span class="p">[</span>
                 <span class="p">(</span><span class="n">Bonds</span><span class="p">,</span> <span class="s1">&#39;Bonds&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
                 <span class="p">(</span><span class="n">Angles</span><span class="p">,</span> <span class="s1">&#39;Angles&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
@@ -291,7 +294,7 @@
                 <span class="p">(</span><span class="n">Impropers</span><span class="p">,</span> <span class="s1">&#39;Impropers&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
         <span class="p">]:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="nb">type</span><span class="p">,</span> <span class="n">sect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_bond_section</span><span class="p">(</span><span class="n">sects</span><span class="p">[</span><span class="n">L</span><span class="p">],</span> <span class="n">nentries</span><span class="p">)</span>
+                <span class="nb">type</span><span class="p">,</span> <span class="n">sect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_bond_section</span><span class="p">(</span><span class="n">sects</span><span class="p">[</span><span class="n">L</span><span class="p">],</span> <span class="n">nentries</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="k">else</span><span class="p">:</span>
@@ -314,60 +317,90 @@
 
         <span class="n">unitcell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_box</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
 
-        <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-                             <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_parse_pos</span><span class="p">(</span><span class="n">sects</span><span class="p">[</span><span class="s1">&#39;Atoms&#39;</span><span class="p">],</span> <span class="n">positions</span><span class="p">)</span>
+            <span class="n">positions</span><span class="p">,</span> <span class="n">ordering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_pos</span><span class="p">(</span><span class="n">sects</span><span class="p">[</span><span class="s1">&#39;Atoms&#39;</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Position information not found&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s1">&#39;Velocities&#39;</span> <span class="ow">in</span> <span class="n">sects</span><span class="p">:</span>
-            <span class="n">velocities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-                                  <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_parse_vel</span><span class="p">(</span><span class="n">sects</span><span class="p">[</span><span class="s1">&#39;Velocities&#39;</span><span class="p">],</span> <span class="n">velocities</span><span class="p">)</span>
+            <span class="n">velocities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_vel</span><span class="p">(</span><span class="n">sects</span><span class="p">[</span><span class="s1">&#39;Velocities&#39;</span><span class="p">],</span> <span class="n">ordering</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">velocities</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="n">ts</span> <span class="o">=</span> <span class="n">TS_class</span><span class="o">.</span><span class="n">from_coordinates</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span>
                                        <span class="n">velocities</span><span class="o">=</span><span class="n">velocities</span><span class="p">,</span>
                                        <span class="o">**</span><span class="n">TS_kwargs</span><span class="p">)</span>
-        <span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span> <span class="o">=</span> <span class="n">unitcell</span>
+        <span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="n">unitcell</span>
 
         <span class="k">return</span> <span class="n">ts</span></div>
 
-    <span class="k">def</span> <span class="nf">_parse_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datalines</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_parse_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datalines</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Strip coordinate info into np array&quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">datalines</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">datalines</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="c1"># TODO: could maybe store this from topology parsing?</span>
+        <span class="c1"># Or try to reach into Universe?</span>
+        <span class="c1"># but ugly because assumes lots of things, and Reader should be standalone</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datalines</span><span class="p">):</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
             <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
             <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-                <span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
+                <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
             <span class="k">elif</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
-                <span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+                <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">_parse_vel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datalines</span><span class="p">,</span> <span class="n">vel</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Strip velocity info into np array in place&quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">datalines</span><span class="p">:</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+
+        <span class="c1"># return order for velocities</span>
+        <span class="k">return</span> <span class="n">pos</span><span class="p">,</span> <span class="n">order</span>
+
+    <span class="k">def</span> <span class="nf">_parse_vel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datalines</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Strip velocity info into np array</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        datalines : list</span>
+<span class="sd">          list of strings from file</span>
+<span class="sd">        order : np.array</span>
+<span class="sd">          array which rearranges the velocities into correct order</span>
+<span class="sd">          (from argsort on atom ids)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        velocities : np.ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">datalines</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datalines</span><span class="p">):</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
-            <span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">,</span> <span class="n">vz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
-            <span class="n">vel</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">,</span> <span class="n">vz</span>
+            <span class="n">vel</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">_parse_bond_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datalines</span><span class="p">,</span> <span class="n">nentries</span><span class="p">):</span>
+        <span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">vel</span>
+
+    <span class="k">def</span> <span class="nf">_parse_bond_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datalines</span><span class="p">,</span> <span class="n">nentries</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read lines and strip information</span>
 
 <span class="sd">        Arguments</span>
 <span class="sd">        ---------</span>
-<span class="sd">        datalines - the raw lines from the data file</span>
-<span class="sd">        nentries - number of integers per line</span>
+<span class="sd">        datalines : list</span>
+<span class="sd">          the raw lines from the data file</span>
+<span class="sd">        nentries : int</span>
+<span class="sd">          number of integers per line</span>
+<span class="sd">        mapping : dict</span>
+<span class="sd">          converts atom_ids to index within topology</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">section</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="nb">type</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">datalines</span><span class="p">:</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
             <span class="c1"># map to 0 based int</span>
-            <span class="n">section</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span> <span class="o">+</span> <span class="n">nentries</span><span class="p">]]))</span>
+            <span class="n">section</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">([</span><span class="n">mapping</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span> <span class="o">+</span> <span class="n">nentries</span><span class="p">]]))</span>
             <span class="nb">type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">type</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
 
@@ -406,21 +439,36 @@
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datalines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
         <span class="n">has_charge</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
 
-        <span class="n">types</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;|S5&#39;</span><span class="p">)</span>
+        <span class="c1"># atom ids aren&#39;t necessarily sequential</span>
+        <span class="n">atom_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
         <span class="n">resids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">has_charge</span><span class="p">:</span>
             <span class="n">charges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">datalines</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datalines</span><span class="p">):</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-            <span class="n">idx</span><span class="p">,</span> <span class="n">resid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">(</span><span class="n">line</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
-            <span class="n">atype</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">idx</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="n">resids</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">resid</span>
-            <span class="n">types</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">atype</span>
+
+            <span class="c1"># these numpy array are already typed correctly,</span>
+            <span class="c1"># so just pass the raw strings</span>
+            <span class="c1"># and let numpy handle the conversion</span>
+            <span class="n">atom_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">resids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">has_charge</span><span class="p">:</span>
-                <span class="n">charge</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-                <span class="n">charges</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">charge</span>
+                <span class="n">charges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="c1"># at this point, we&#39;ve read the atoms section,</span>
+        <span class="c1"># but it&#39;s still (potentially) unordered</span>
+        <span class="c1"># TODO: Maybe we can optimise by checking if we need to sort</span>
+        <span class="c1"># ie `if np.any(np.diff(atom_ids) &gt; 1)`  but we want to search</span>
+        <span class="c1"># in a generatorish way, np.any() would check everything at once</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">atom_ids</span><span class="p">)</span>
+        <span class="n">atom_ids</span> <span class="o">=</span> <span class="n">atom_ids</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">types</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+        <span class="n">resids</span> <span class="o">=</span> <span class="n">resids</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">has_charge</span><span class="p">:</span>
+            <span class="n">charges</span> <span class="o">=</span> <span class="n">charges</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
 
         <span class="n">attrs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Atomtypes</span><span class="p">(</span><span class="n">types</span><span class="p">))</span>
@@ -439,7 +487,7 @@
         <span class="n">residx</span><span class="p">,</span> <span class="n">resids</span> <span class="o">=</span> <span class="n">squash_by</span><span class="p">(</span><span class="n">resids</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">n_residues</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">resids</span><span class="p">)</span>
 
-        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Atomids</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Atomids</span><span class="p">(</span><span class="n">atom_ids</span><span class="p">))</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Resids</span><span class="p">(</span><span class="n">resids</span><span class="p">))</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Resnums</span><span class="p">(</span><span class="n">resids</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Segids</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;SYSTEM&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)))</span>
