@@ -124,7 +124,7 @@
 
 <span class="kn">from</span> <span class="nn">..lib.util</span> <span class="k">import</span> <span class="n">openany</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">guessers</span>
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">TopologyReaderBase</span><span class="p">,</span> <span class="n">squash_by</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">TopologyReaderBase</span><span class="p">,</span> <span class="n">squash_by</span><span class="p">,</span> <span class="n">change_squash</span>
 <span class="kn">from</span> <span class="nn">..core.topologyattrs</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">Atomids</span><span class="p">,</span>
     <span class="n">Atomnames</span><span class="p">,</span>
@@ -383,8 +383,9 @@
 
         <span class="c1"># Residue</span>
         <span class="c1"># resids, resnames</span>
-        <span class="n">residx</span><span class="p">,</span> <span class="n">new_resids</span><span class="p">,</span> <span class="p">(</span><span class="n">new_resnames</span><span class="p">,</span> <span class="n">perres_segids</span><span class="p">)</span> <span class="o">=</span> <span class="n">squash_by</span><span class="p">(</span>
-            <span class="n">resids</span><span class="p">,</span> <span class="n">resnames</span><span class="p">,</span> <span class="n">segids</span><span class="p">)</span>
+        <span class="n">residx</span><span class="p">,</span> <span class="p">(</span><span class="n">new_resids</span><span class="p">,</span> <span class="n">new_resnames</span><span class="p">,</span> <span class="n">perres_segids</span><span class="p">)</span> <span class="o">=</span> <span class="n">change_squash</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">resids</span><span class="p">,</span> <span class="n">resnames</span><span class="p">,</span> <span class="n">segids</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">resids</span><span class="p">,</span> <span class="n">resnames</span><span class="p">,</span> <span class="n">segids</span><span class="p">))</span>
         <span class="c1"># transform from atom:Rid to atom:Rix</span>
         <span class="n">residueids</span> <span class="o">=</span> <span class="n">Resids</span><span class="p">(</span><span class="n">new_resids</span><span class="p">)</span>
         <span class="n">residuenums</span> <span class="o">=</span> <span class="n">Resnums</span><span class="p">(</span><span class="n">new_resids</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
