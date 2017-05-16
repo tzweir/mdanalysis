@@ -71,7 +71,7 @@
             
   <h1>Source code for MDAnalysis.visualization.streamlines</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.mdanalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2016 The MDAnalysis Development Team and contributors</span>
@@ -92,20 +92,34 @@
 <span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
 <span class="c1">#</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Multicore 2D streamplot Python library for MDAnalysis --- :mod:`MDAnalysis.visualization.streamlines`</span>
-<span class="sd">=====================================================================================================</span>
+<span class="sd">&quot;&quot;&quot;Streamplots (2D)  --- :mod:`MDAnalysis.visualization.streamlines`</span>
+<span class="sd">=================================================================</span>
 
 <span class="sd">:Authors: Tyler Reddy and Matthieu Chavent</span>
 <span class="sd">:Year: 2014</span>
 <span class="sd">:Copyright: GNU Public License v3</span>
 <span class="sd">:Citation: [Chavent2014]_</span>
 
+<span class="sd">The :func:`generate_streamlines` function can generate a 2D flow field from a</span>
+<span class="sd">MD trajectory, for instance, lipid molecules in a flat membrane. It can make</span>
+<span class="sd">use of multiple cores to perform the analyis in parallel (using</span>
+<span class="sd">:mod:`multiprocessing`).</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">MDAnalysis.visualization.streamlines_3D : streamplots in 3D</span>
+
+
 <span class="sd">.. autofunction:: generate_streamlines</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
+
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">matplotlib</span>
@@ -117,22 +131,63 @@
         <span class="s1">&#39;http://matplotlib.org/faq/installing_faq.html?highlight=install&#39;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">MDAnalysis</span>
-<span class="kn">import</span> <span class="nn">multiprocessing</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
+
 
 
 <span class="k">def</span> <span class="nf">produce_grid</span><span class="p">(</span><span class="n">tuple_of_limits</span><span class="p">,</span> <span class="n">grid_spacing</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Produce a grid for the simulation system based on the tuple of Cartesian Coordinate limits calculated in an</span>
-<span class="sd">    earlier step.&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Produce a 2D grid for the simulation system.</span>
+
+<span class="sd">    The grid is based on the tuple of Cartesian Coordinate limits calculated in</span>
+<span class="sd">    an earlier step.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tuple_of_limits : tuple</span>
+<span class="sd">        ``x_min, x_max, y_min, y_max``</span>
+<span class="sd">    grid_spacing : float</span>
+<span class="sd">        grid size in all directions in ångström</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    grid : array</span>
+<span class="sd">       ``numpy.mgrid[x_min:x_max:grid_spacing, y_min:y_max:grid_spacing]``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">tuple_of_limits</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="n">x_min</span><span class="p">:</span><span class="n">x_max</span><span class="p">:</span><span class="n">grid_spacing</span><span class="p">,</span> <span class="n">y_min</span><span class="p">:</span><span class="n">y_max</span><span class="p">:</span><span class="n">grid_spacing</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">grid</span>
 
 
 <span class="k">def</span> <span class="nf">split_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">num_cores</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Take the overall grid for the system and split it into lists of square vertices that can be distributed to</span>
-<span class="sd">    each core. Limited to 2D for now&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Split the grid into blocks of vertices.</span>
+
+<span class="sd">    Take the overall `grid` for the system and split it into lists of</span>
+<span class="sd">    square vertices that can be distributed to each core.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    grid : numpy.array</span>
+<span class="sd">        2D array</span>
+<span class="sd">    num_cores : int</span>
+<span class="sd">        number of partitions to generate</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list_square_vertex_arrays_per_core : array of arrays</span>
+<span class="sd">         split the list of square vertices</span>
+<span class="sd">         ``[[v1,v2,v3,v4],[v1,v2,v3,v4],...,...]`` into roughly equally-sized</span>
+<span class="sd">         sublists to be distributed over the available cores on the system</span>
+<span class="sd">    list_parent_index_values : array of arrays</span>
+<span class="sd">         arrays of `[[row, column], [row, column], ...]`` for each core</span>
+<span class="sd">    current_row : int</span>
+<span class="sd">         last row + 1</span>
+<span class="sd">    current_column : int</span>
+<span class="sd">         last column + 1</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    Limited to 2D for now.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># produce an array containing the cartesian coordinates of all vertices in the grid:</span>
     <span class="n">x_array</span><span class="p">,</span> <span class="n">y_array</span> <span class="o">=</span> <span class="n">grid</span>
@@ -169,11 +224,14 @@
     <span class="k">return</span> <span class="p">[</span><span class="n">list_square_vertex_arrays_per_core</span><span class="p">,</span> <span class="n">list_parent_index_values</span><span class="p">,</span> <span class="n">current_row</span><span class="p">,</span> <span class="n">current_column</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">per_core_work</span><span class="p">(</span><span class="n">coordinate_file_path</span><span class="p">,</span> <span class="n">trajectory_file_path</span><span class="p">,</span> <span class="n">list_square_vertex_arrays_this_core</span><span class="p">,</span> <span class="n">MDA_selection</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">per_core_work</span><span class="p">(</span><span class="n">topology_file_path</span><span class="p">,</span> <span class="n">trajectory_file_path</span><span class="p">,</span> <span class="n">list_square_vertex_arrays_this_core</span><span class="p">,</span> <span class="n">MDA_selection</span><span class="p">,</span>
                   <span class="n">start_frame</span><span class="p">,</span> <span class="n">end_frame</span><span class="p">,</span> <span class="n">reconstruction_index_list</span><span class="p">,</span> <span class="n">maximum_delta_magnitude</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;The code to perform on a given core given the list of square vertices assigned to it.&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Run the analysis on one core.</span>
+
+<span class="sd">    The code to perform on a given core given the list of square vertices assigned to it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># obtain the relevant coordinates for particles of interest</span>
-    <span class="n">universe_object</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">coordinate_file_path</span><span class="p">,</span> <span class="n">trajectory_file_path</span><span class="p">)</span>
+    <span class="n">universe_object</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">topology_file_path</span><span class="p">,</span> <span class="n">trajectory_file_path</span><span class="p">)</span>
     <span class="n">list_previous_frame_centroids</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">list_previous_frame_indices</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1">#define some utility functions for trajectory iteration:</span>
@@ -240,74 +298,93 @@
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">reconstruction_index_list</span><span class="p">,</span> <span class="n">xy_deltas_to_write</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
 
 
-<div class="viewcode-block" id="generate_streamlines"><a class="viewcode-back" href="../../../documentation_pages/visualization/streamlines.html#MDAnalysis.visualization.streamlines.generate_streamlines">[docs]</a><span class="k">def</span> <span class="nf">generate_streamlines</span><span class="p">(</span><span class="n">coordinate_file_path</span><span class="p">,</span> <span class="n">trajectory_file_path</span><span class="p">,</span> <span class="n">grid_spacing</span><span class="p">,</span> <span class="n">MDA_selection</span><span class="p">,</span> <span class="n">start_frame</span><span class="p">,</span>
+<div class="viewcode-block" id="generate_streamlines"><a class="viewcode-back" href="../../../documentation_pages/visualization/streamlines.html#MDAnalysis.visualization.streamlines.generate_streamlines">[docs]</a><span class="k">def</span> <span class="nf">generate_streamlines</span><span class="p">(</span><span class="n">topology_file_path</span><span class="p">,</span> <span class="n">trajectory_file_path</span><span class="p">,</span> <span class="n">grid_spacing</span><span class="p">,</span> <span class="n">MDA_selection</span><span class="p">,</span> <span class="n">start_frame</span><span class="p">,</span>
                          <span class="n">end_frame</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">maximum_delta_magnitude</span><span class="p">,</span> <span class="n">num_cores</span><span class="o">=</span><span class="s1">&#39;maximum&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Produce the x and y components of a 2D streamplot data set.</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Produce the x and y components of a 2D streamplot data set.</span>
 
-<span class="sd">    :Parameters:</span>
-<span class="sd">        **coordinate_file_path** : str</span>
-<span class="sd">            Absolute path to the coordinate file</span>
-<span class="sd">        **trajectory_file_path** : str</span>
-<span class="sd">            Absolute path to the trajectory file. It will normally be desirable to filter the trajectory with a tool</span>
-<span class="sd">            such as GROMACS g_filter (see [Chavent2014]_)</span>
-<span class="sd">        **grid_spacing** : float</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    topology_file_path : str</span>
+<span class="sd">            Absolute path to the topology file</span>
+<span class="sd">    trajectory_file_path : str</span>
+<span class="sd">            Absolute path to the trajectory file. It will normally be desirable</span>
+<span class="sd">            to filter the trajectory with a tool such as GROMACS</span>
+<span class="sd">            :program:`g_filter` (see [Chavent2014]_)</span>
+<span class="sd">    grid_spacing : float</span>
 <span class="sd">            The spacing between grid lines (angstroms)</span>
-<span class="sd">        **MDA_selection** : str</span>
+<span class="sd">    MDA_selection : str</span>
 <span class="sd">            MDAnalysis selection string</span>
-<span class="sd">        **start_frame** : int</span>
+<span class="sd">    start_frame : int</span>
 <span class="sd">            First frame number to parse</span>
-<span class="sd">        **end_frame** : int</span>
+<span class="sd">    end_frame : int</span>
 <span class="sd">            Last frame number to parse</span>
-<span class="sd">        **xmin** : float</span>
+<span class="sd">    xmin : float</span>
 <span class="sd">            Minimum coordinate boundary for x-axis (angstroms)</span>
-<span class="sd">        **xmax** : float</span>
+<span class="sd">    xmax : float</span>
 <span class="sd">            Maximum coordinate boundary for x-axis (angstroms)</span>
-<span class="sd">        **ymin** : float</span>
+<span class="sd">    ymin : float</span>
 <span class="sd">            Minimum coordinate boundary for y-axis (angstroms)</span>
-<span class="sd">        **ymax** : float</span>
+<span class="sd">    ymax : float</span>
 <span class="sd">            Maximum coordinate boundary for y-axis (angstroms)</span>
-<span class="sd">        **maximum_delta_magnitude** : float</span>
-<span class="sd">            Absolute value of the largest displacement tolerated for the centroid of a group of particles (</span>
-<span class="sd">            angstroms). Values above this displacement will not count in the streamplot (treated as excessively large</span>
-<span class="sd">            displacements crossing the periodic boundary)</span>
-<span class="sd">        **num_cores** : int, optional</span>
-<span class="sd">            The number of cores to use. (Default &#39;maximum&#39; uses all available cores)</span>
+<span class="sd">    maximum_delta_magnitude : float</span>
+<span class="sd">            Absolute value of the largest displacement tolerated for the</span>
+<span class="sd">            centroid of a group of particles ( angstroms). Values above this</span>
+<span class="sd">            displacement will not count in the streamplot (treated as</span>
+<span class="sd">            excessively large displacements crossing the periodic boundary)</span>
+<span class="sd">    num_cores : int or &#39;maximum&#39; (optional)</span>
+<span class="sd">            The number of cores to use. (Default &#39;maximum&#39; uses all available</span>
+<span class="sd">            cores)</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">        **dx_array** : array of floats</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dx_array : array of floats</span>
 <span class="sd">            An array object containing the displacements in the x direction</span>
-<span class="sd">        **dy_array** : array of floats</span>
+<span class="sd">    dy_array : array of floats</span>
 <span class="sd">            An array object containing the displacements in the y direction</span>
-<span class="sd">        **average_displacement** : float</span>
-<span class="sd">            :math:`\\frac {\\sum \\sqrt[]{dx^2 + dy^2}} {N}`</span>
-<span class="sd">        **standard_deviation_of_displacement** : float</span>
-<span class="sd">            standard deviation of :math:`\\sqrt[]{dx^2 + dy^2}`</span>
+<span class="sd">    average_displacement : float</span>
+<span class="sd">            :math:`\frac{\sum\sqrt[]{dx^2 + dy^2}}{N}`</span>
+<span class="sd">    standard_deviation_of_displacement : float</span>
+<span class="sd">            standard deviation of :math:`\sqrt[]{dx^2 + dy^2}`</span>
 
-<span class="sd">    :Examples:</span>
-
-<span class="sd">    ::</span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Generate 2D streamlines and plot::</span>
 
 <span class="sd">        import matplotlib, matplotlib.pyplot, np</span>
 <span class="sd">        import MDAnalysis, MDAnalysis.visualization.streamlines</span>
-<span class="sd">        u1, v1, average_displacement,standard_deviation_of_displacement =</span>
-<span class="sd">        MDAnalysis.visualization.streamlines.generate_streamlines(&#39;testing.gro&#39;,&#39;testing_filtered.xtc&#39;,grid_spacing =</span>
-<span class="sd">        20, MDA_selection = &#39;name PO4&#39;,start_frame=2,end_frame=3,xmin=-8.73000049591,xmax= 1225.96008301,</span>
-<span class="sd">        ymin= -12.5799999237, ymax=1224.34008789,maximum_delta_magnitude = 1.0,num_cores=16)</span>
-<span class="sd">        x = np.linspace(0,1200,61)</span>
-<span class="sd">        y = np.linspace(0,1200,61)</span>
+
+<span class="sd">        u1, v1, average_displacement, standard_deviation_of_displacement =</span>
+<span class="sd">            MDAnalysis.visualization.streamlines.generate_streamlines(&#39;testing.gro&#39;, &#39;testing_filtered.xtc&#39;,</span>
+<span class="sd">                    grid_spacing=20, MDA_selection=&#39;name PO4&#39;, start_frame=2, end_frame=3,</span>
+<span class="sd">                    xmin=-8.73000049591, xmax= 1225.96008301,</span>
+<span class="sd">                    ymin= -12.5799999237, ymax=1224.34008789,</span>
+<span class="sd">                    maximum_delta_magnitude=1.0, num_cores=16)</span>
+<span class="sd">        x = np.linspace(0, 1200, 61)</span>
+<span class="sd">        y = np.linspace(0, 1200, 61)</span>
 <span class="sd">        speed = np.sqrt(u1*u1 + v1*v1)</span>
 <span class="sd">        fig = matplotlib.pyplot.figure()</span>
-<span class="sd">        ax = fig.add_subplot(111,aspect=&#39;equal&#39;)</span>
+<span class="sd">        ax = fig.add_subplot(111, aspect=&#39;equal&#39;)</span>
 <span class="sd">        ax.set_xlabel(&#39;x ($\AA$)&#39;)</span>
 <span class="sd">        ax.set_ylabel(&#39;y ($\AA$)&#39;)</span>
-<span class="sd">        ax.streamplot(x,y,u1,v1,density=(10,10),color=speed,linewidth=3*speed/speed.max())</span>
+<span class="sd">        ax.streamplot(x, y, u1, v1, density=(10,10), color=speed, linewidth=3*speed/speed.max())</span>
 <span class="sd">        fig.savefig(&#39;testing_streamline.png&#39;,dpi=300)</span>
 
 <span class="sd">    .. image:: testing_streamline.png</span>
 
-<span class="sd">    .. [Chavent2014] Chavent, M.\*, Reddy, T.\*, Dahl, C.E., Goose, J., Jobard, B., and Sansom, M.S.P. (2014)</span>
-<span class="sd">       Methodologies for the analysis of instantaneous lipid diffusion in MD simulations of large membrane systems.</span>
-<span class="sd">       *Faraday Discussions* **169**: **Accepted**</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [Chavent2014] Chavent, M.*, Reddy, T.*, Dahl, C.E., Goose, J., Jobard,</span>
+<span class="sd">       B., and Sansom, M.S.P. Methodologies for the analysis of instantaneous</span>
+<span class="sd">       lipid diffusion in MD simulations of large membrane systems.  *Faraday</span>
+<span class="sd">       Discussions* **169** (2014), 455–475. doi: `10.1039/c3fd00145h`_</span>
+
+<span class="sd">    .. _`10.1039/c3fd00145h`: https://doi.org/10.1039/c3fd00145h</span>
+
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    MDAnalysis.visualization.streamlines_3D.generate_streamlines_3d</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># work out the number of cores to use:</span>
@@ -330,7 +407,7 @@
     <span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">num_cores</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">vertex_sublist</span><span class="p">,</span> <span class="n">index_sublist</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">list_square_vertex_arrays_per_core</span><span class="p">,</span> <span class="n">list_parent_index_values</span><span class="p">):</span>
         <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">per_core_work</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span>
-            <span class="n">coordinate_file_path</span><span class="p">,</span> <span class="n">trajectory_file_path</span><span class="p">,</span> <span class="n">vertex_sublist</span><span class="p">,</span> <span class="n">MDA_selection</span><span class="p">,</span> <span class="n">start_frame</span><span class="p">,</span> <span class="n">end_frame</span><span class="p">,</span>
+            <span class="n">topology_file_path</span><span class="p">,</span> <span class="n">trajectory_file_path</span><span class="p">,</span> <span class="n">vertex_sublist</span><span class="p">,</span> <span class="n">MDA_selection</span><span class="p">,</span> <span class="n">start_frame</span><span class="p">,</span> <span class="n">end_frame</span><span class="p">,</span>
             <span class="n">index_sublist</span><span class="p">,</span> <span class="n">maximum_delta_magnitude</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="n">log_result_to_parent</span><span class="p">)</span>
     <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
@@ -359,8 +436,6 @@
 
     <span class="k">return</span> <span class="p">(</span><span class="n">dx_array</span><span class="p">,</span> <span class="n">dy_array</span><span class="p">,</span> <span class="n">average_displacement</span><span class="p">,</span> <span class="n">standard_deviation_of_displacement</span><span class="p">)</span></div>
 
-<span class="c1"># if __name__ == &#39;__main__&#39;: #execute the main control function only if this file is called as a top-level script</span>
-<span class="c1">#will probably mostly use this for testing on a trajectory:</span>
 </pre></div>
 
           </div>

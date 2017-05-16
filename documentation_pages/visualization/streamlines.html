@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>10.1.1. 2D Streamplot &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
+    <title>10.1.1. Streamplots (2D) — MDAnalysis.visualization.streamlines &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="10.1.2. 3D Streamplot" href="streamlines_3D.html" />
+    <link rel="next" title="10.1.2. Streamplots (3D) — MDAnalysis.visualization.streamlines_3D" href="streamlines_3D.html" />
     <link rel="prev" title="10. Visualization modules" href="../visualization_modules.html" /> 
   </head>
   <body role="document">
@@ -45,7 +45,7 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="streamlines_3D.html" title="10.1.2. 3D Streamplot"
+          <a href="streamlines_3D.html" title="10.1.2. Streamplots (3D) — MDAnalysis.visualization.streamlines_3D"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../visualization_modules.html" title="10. Visualization modules"
@@ -64,7 +64,7 @@
                         title="previous chapter">10. Visualization modules</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="streamlines_3D.html"
-                        title="next chapter">10.1.2. 3D Streamplot</a></p>
+                        title="next chapter">10.1.2. Streamplots (3D) &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.visualization.streamlines_3D</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -90,11 +90,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="d-streamplot">
-<h1>10.1.1. 2D Streamplot<a class="headerlink" href="#d-streamplot" title="Permalink to this headline">¶</a></h1>
-<blockquote>
-<div><span class="target" id="module-MDAnalysis.visualization.streamlines"></span><div class="section" id="multicore-2d-streamplot-python-library-for-mdanalysis-mdanalysis-visualization-streamlines">
-<h2>10.1.1. Multicore 2D streamplot Python library for MDAnalysis &#8212; <a class="reference internal" href="#module-MDAnalysis.visualization.streamlines" title="MDAnalysis.visualization.streamlines"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.visualization.streamlines</span></code></a><a class="headerlink" href="#multicore-2d-streamplot-python-library-for-mdanalysis-mdanalysis-visualization-streamlines" title="Permalink to this headline">¶</a></h2>
+  <span class="target" id="module-MDAnalysis.visualization.streamlines"></span><div class="section" id="streamplots-2d-mdanalysis-visualization-streamlines">
+<h1>10.1.1. Streamplots (2D)  &#8212; <a class="reference internal" href="#module-MDAnalysis.visualization.streamlines" title="MDAnalysis.visualization.streamlines"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.visualization.streamlines</span></code></a><a class="headerlink" href="#streamplots-2d-mdanalysis-visualization-streamlines" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -109,107 +106,97 @@
 </tr>
 </tbody>
 </table>
+<p>The <a class="reference internal" href="#MDAnalysis.visualization.streamlines.generate_streamlines" title="MDAnalysis.visualization.streamlines.generate_streamlines"><code class="xref py py-func docutils literal"><span class="pre">generate_streamlines()</span></code></a> function can generate a 2D flow field from a
+MD trajectory, for instance, lipid molecules in a flat membrane. It can make
+use of multiple cores to perform the analyis in parallel (using
+<a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a>).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="streamlines_3D.html#module-MDAnalysis.visualization.streamlines_3D" title="MDAnalysis.visualization.streamlines_3D"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.visualization.streamlines_3D</span></code></a></dt>
+<dd>streamplots in 3D</dd>
+</dl>
+</div>
 <dl class="function">
 <dt id="MDAnalysis.visualization.streamlines.generate_streamlines">
-<code class="descclassname">MDAnalysis.visualization.streamlines.</code><code class="descname">generate_streamlines</code><span class="sig-paren">(</span><em>coordinate_file_path</em>, <em>trajectory_file_path</em>, <em>grid_spacing</em>, <em>MDA_selection</em>, <em>start_frame</em>, <em>end_frame</em>, <em>xmin</em>, <em>xmax</em>, <em>ymin</em>, <em>ymax</em>, <em>maximum_delta_magnitude</em>, <em>num_cores='maximum'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/visualization/streamlines.html#generate_streamlines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.visualization.streamlines.generate_streamlines" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.visualization.streamlines.</code><code class="descname">generate_streamlines</code><span class="sig-paren">(</span><em>topology_file_path</em>, <em>trajectory_file_path</em>, <em>grid_spacing</em>, <em>MDA_selection</em>, <em>start_frame</em>, <em>end_frame</em>, <em>xmin</em>, <em>xmax</em>, <em>ymin</em>, <em>ymax</em>, <em>maximum_delta_magnitude</em>, <em>num_cores='maximum'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/visualization/streamlines.html#generate_streamlines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.visualization.streamlines.generate_streamlines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Produce the x and y components of a 2D streamplot data set.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>coordinate_file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Absolute path to the coordinate file</p>
-</dd>
-<dt><strong>trajectory_file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Absolute path to the trajectory file. It will normally be desirable to filter the trajectory with a tool
-such as GROMACS g_filter (see <a class="reference internal" href="#chavent2014" id="id2">[Chavent2014]</a>)</p>
-</dd>
-<dt><strong>grid_spacing</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">The spacing between grid lines (angstroms)</p>
-</dd>
-<dt><strong>MDA_selection</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">MDAnalysis selection string</p>
-</dd>
-<dt><strong>start_frame</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">First frame number to parse</p>
-</dd>
-<dt><strong>end_frame</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">Last frame number to parse</p>
-</dd>
-<dt><strong>xmin</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">Minimum coordinate boundary for x-axis (angstroms)</p>
-</dd>
-<dt><strong>xmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">Maximum coordinate boundary for x-axis (angstroms)</p>
-</dd>
-<dt><strong>ymin</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">Minimum coordinate boundary for y-axis (angstroms)</p>
-</dd>
-<dt><strong>ymax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">Maximum coordinate boundary for y-axis (angstroms)</p>
-</dd>
-<dt><strong>maximum_delta_magnitude</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">Absolute value of the largest displacement tolerated for the centroid of a group of particles (
-angstroms). Values above this displacement will not count in the streamplot (treated as excessively large
-displacements crossing the periodic boundary)</p>
-</dd>
-<dt><strong>num_cores</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
-<dd><p class="first last">The number of cores to use. (Default &#8216;maximum&#8217; uses all available cores)</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>topology_file_path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Absolute path to the topology file</li>
+<li><strong>trajectory_file_path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Absolute path to the trajectory file. It will normally be desirable
+to filter the trajectory with a tool such as GROMACS
+<strong class="program">g_filter</strong> (see <a class="reference internal" href="#chavent2014" id="id2">[Chavent2014]</a>)</li>
+<li><strong>grid_spacing</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; The spacing between grid lines (angstroms)</li>
+<li><strong>MDA_selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; MDAnalysis selection string</li>
+<li><strong>start_frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; First frame number to parse</li>
+<li><strong>end_frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Last frame number to parse</li>
+<li><strong>xmin</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Minimum coordinate boundary for x-axis (angstroms)</li>
+<li><strong>xmax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Maximum coordinate boundary for x-axis (angstroms)</li>
+<li><strong>ymin</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Minimum coordinate boundary for y-axis (angstroms)</li>
+<li><strong>ymax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Maximum coordinate boundary for y-axis (angstroms)</li>
+<li><strong>maximum_delta_magnitude</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Absolute value of the largest displacement tolerated for the
+centroid of a group of particles ( angstroms). Values above this
+displacement will not count in the streamplot (treated as
+excessively large displacements crossing the periodic boundary)</li>
+<li><strong>num_cores</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><em>'maximum'</em><em> (</em><em>optional</em><em>)</em>) &#8211; The number of cores to use. (Default &#8216;maximum&#8217; uses all available
+cores)</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>dx_array</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array of floats</span></dt>
-<dd><p class="first last">An array object containing the displacements in the x direction</p>
-</dd>
-<dt><strong>dy_array</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array of floats</span></dt>
-<dd><p class="first last">An array object containing the displacements in the y direction</p>
-</dd>
-<dt><strong>average_displacement</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last"><span class="math">\(\frac {\sum \sqrt[]{dx^2 + dy^2}} {N}\)</span></p>
-</dd>
-<dt><strong>standard_deviation_of_displacement</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">standard deviation of <span class="math">\(\sqrt[]{dx^2 + dy^2}\)</span></p>
-</dd>
-</dl>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>dx_array</strong> (<em>array of floats</em>) &#8211; An array object containing the displacements in the x direction</li>
+<li><strong>dy_array</strong> (<em>array of floats</em>) &#8211; An array object containing the displacements in the y direction</li>
+<li><strong>average_displacement</strong> (<em>float</em>) &#8211; <span class="math">\(\frac{\sum\sqrt[]{dx^2 + dy^2}}{N}\)</span></li>
+<li><strong>standard_deviation_of_displacement</strong> (<em>float</em>) &#8211; standard deviation of <span class="math">\(\sqrt[]{dx^2 + dy^2}\)</span></li>
+</ul>
+</p>
 </td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Examples:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Examples</p>
+<p>Generate 2D streamlines and plot:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span><span class="o">,</span> <span class="nn">matplotlib.pyplot</span><span class="o">,</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">MDAnalysis</span><span class="o">,</span> <span class="nn">MDAnalysis.visualization.streamlines</span>
-<span class="n">u1</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">average_displacement</span><span class="p">,</span><span class="n">standard_deviation_of_displacement</span> <span class="o">=</span>
-<span class="n">MDAnalysis</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">streamlines</span><span class="o">.</span><span class="n">generate_streamlines</span><span class="p">(</span><span class="s1">&#39;testing.gro&#39;</span><span class="p">,</span><span class="s1">&#39;testing_filtered.xtc&#39;</span><span class="p">,</span><span class="n">grid_spacing</span> <span class="o">=</span>
-<span class="mi">20</span><span class="p">,</span> <span class="n">MDA_selection</span> <span class="o">=</span> <span class="s1">&#39;name PO4&#39;</span><span class="p">,</span><span class="n">start_frame</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">end_frame</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">xmin</span><span class="o">=-</span><span class="mf">8.73000049591</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span> <span class="mf">1225.96008301</span><span class="p">,</span>
-<span class="n">ymin</span><span class="o">=</span> <span class="o">-</span><span class="mf">12.5799999237</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mf">1224.34008789</span><span class="p">,</span><span class="n">maximum_delta_magnitude</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span><span class="n">num_cores</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">61</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">61</span><span class="p">)</span>
+
+<span class="n">u1</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">average_displacement</span><span class="p">,</span> <span class="n">standard_deviation_of_displacement</span> <span class="o">=</span>
+    <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">streamlines</span><span class="o">.</span><span class="n">generate_streamlines</span><span class="p">(</span><span class="s1">&#39;testing.gro&#39;</span><span class="p">,</span> <span class="s1">&#39;testing_filtered.xtc&#39;</span><span class="p">,</span>
+            <span class="n">grid_spacing</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">MDA_selection</span><span class="o">=</span><span class="s1">&#39;name PO4&#39;</span><span class="p">,</span> <span class="n">start_frame</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">end_frame</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">xmin</span><span class="o">=-</span><span class="mf">8.73000049591</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span> <span class="mf">1225.96008301</span><span class="p">,</span>
+            <span class="n">ymin</span><span class="o">=</span> <span class="o">-</span><span class="mf">12.5799999237</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mf">1224.34008789</span><span class="p">,</span>
+            <span class="n">maximum_delta_magnitude</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">num_cores</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">61</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">61</span><span class="p">)</span>
 <span class="n">speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">u1</span><span class="o">*</span><span class="n">u1</span> <span class="o">+</span> <span class="n">v1</span><span class="o">*</span><span class="n">v1</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x ($\AA$)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y ($\AA$)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="n">speed</span><span class="o">/</span><span class="n">speed</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="n">speed</span><span class="o">/</span><span class="n">speed</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;testing_streamline.png&#39;</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../../_images/testing_streamline.png" src="../../_images/testing_streamline.png" />
+<p class="rubric">References</p>
 <table class="docutils citation" frame="void" id="chavent2014" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Chavent2014]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> Chavent, M.*, Reddy, T.*, Dahl, C.E., Goose, J., Jobard, B., and Sansom, M.S.P. (2014)
-Methodologies for the analysis of instantaneous lipid diffusion in MD simulations of large membrane systems.
-<em>Faraday Discussions</em> <strong>169</strong>: <strong>Accepted</strong></td></tr>
+<tr><td class="label">[Chavent2014]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> Chavent, M.*, Reddy, T.*, Dahl, C.E., Goose, J., Jobard,
+B., and Sansom, M.S.P. Methodologies for the analysis of instantaneous
+lipid diffusion in MD simulations of large membrane systems.  <em>Faraday
+Discussions</em> <strong>169</strong> (2014), 455–475. doi: <a class="reference external" href="https://doi.org/10.1039/c3fd00145h">10.1039/c3fd00145h</a></td></tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="streamlines_3D.html#MDAnalysis.visualization.streamlines_3D.generate_streamlines_3d" title="MDAnalysis.visualization.streamlines_3D.generate_streamlines_3d"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.visualization.streamlines_3D.generate_streamlines_3d()</span></code></a></p>
+</div>
 </dd></dl>
 
-</div>
-</div></blockquote>
 </div>
 
 
@@ -228,7 +215,7 @@ Methodologies for the analysis of instantaneous lipid diffusion in MD simulation
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="streamlines_3D.html" title="10.1.2. 3D Streamplot"
+          <a href="streamlines_3D.html" title="10.1.2. Streamplots (3D) — MDAnalysis.visualization.streamlines_3D"
              >next</a> |</li>
         <li class="right" >
           <a href="../visualization_modules.html" title="10. Visualization modules"
