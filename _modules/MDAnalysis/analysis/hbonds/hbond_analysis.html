@@ -220,7 +220,8 @@
 <span class="sd">   =========== ==============  =========== ====================================</span>
 <span class="sd">   group       donor           acceptor    comments</span>
 <span class="sd">   =========== ==============  =========== ====================================</span>
-<span class="sd">   main chain  N               O</span>
+<span class="sd">   main chain  N               O, OC1, OC2 OC1, OC2 from amber99sb-ildn</span>
+<span class="sd">                                           (Gromacs)</span>
 <span class="sd">   water       OH2, OW         OH2, OW     SPC, TIP3P, TIP4P (CHARMM27,Gromacs)</span>
 
 <span class="sd">   ARG         NE, NH1, NH2</span>
@@ -458,6 +459,8 @@
 <span class="sd">        GLU OE1/OE2, HIS ND1/NE2, MET SD, SER OG, THR OG1, TYR OH</span>
 <span class="sd">      *GLYCAM06*</span>
 <span class="sd">        N,NT,O,O2,OH,OS,OW,OY,P,S,SM</span>
+<span class="sd">      *amber99sb-ildn(Gromacs)*</span>
+<span class="sd">        OC1, OC2 of the main chain</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -487,7 +490,7 @@
     <span class="c1">#: use the keyword `acceptors` to add a list of additional acceptor names.</span>
     <span class="n">DEFAULT_ACCEPTORS</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;CHARMM27&#39;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span>
-            <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;OH2&#39;</span><span class="p">,</span> <span class="s1">&#39;OW&#39;</span><span class="p">,</span> <span class="s1">&#39;OD1&#39;</span><span class="p">,</span> <span class="s1">&#39;OD2&#39;</span><span class="p">,</span> <span class="s1">&#39;SG&#39;</span><span class="p">,</span> <span class="s1">&#39;OE1&#39;</span><span class="p">,</span> <span class="s1">&#39;OE1&#39;</span><span class="p">,</span> <span class="s1">&#39;OE2&#39;</span><span class="p">,</span> <span class="s1">&#39;ND1&#39;</span><span class="p">,</span> <span class="s1">&#39;NE2&#39;</span><span class="p">,</span> <span class="s1">&#39;SD&#39;</span><span class="p">,</span> <span class="s1">&#39;OG&#39;</span><span class="p">,</span> <span class="s1">&#39;OG1&#39;</span><span class="p">,</span> <span class="s1">&#39;OH&#39;</span><span class="p">])),</span>
+            <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;OC1&#39;</span><span class="p">,</span> <span class="s1">&#39;OC2&#39;</span><span class="p">,</span> <span class="s1">&#39;OH2&#39;</span><span class="p">,</span> <span class="s1">&#39;OW&#39;</span><span class="p">,</span> <span class="s1">&#39;OD1&#39;</span><span class="p">,</span> <span class="s1">&#39;OD2&#39;</span><span class="p">,</span> <span class="s1">&#39;SG&#39;</span><span class="p">,</span> <span class="s1">&#39;OE1&#39;</span><span class="p">,</span> <span class="s1">&#39;OE1&#39;</span><span class="p">,</span> <span class="s1">&#39;OE2&#39;</span><span class="p">,</span> <span class="s1">&#39;ND1&#39;</span><span class="p">,</span> <span class="s1">&#39;NE2&#39;</span><span class="p">,</span> <span class="s1">&#39;SD&#39;</span><span class="p">,</span> <span class="s1">&#39;OG&#39;</span><span class="p">,</span> <span class="s1">&#39;OG1&#39;</span><span class="p">,</span> <span class="s1">&#39;OH&#39;</span><span class="p">])),</span>
         <span class="s1">&#39;GLYCAM06&#39;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;NT&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">,</span> <span class="s1">&#39;OH&#39;</span><span class="p">,</span> <span class="s1">&#39;OS&#39;</span><span class="p">,</span> <span class="s1">&#39;OW&#39;</span><span class="p">,</span> <span class="s1">&#39;OY&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">])),</span>
         <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">([]))}</span>
 
@@ -1593,7 +1596,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
     </div>
   </body>
 </html>

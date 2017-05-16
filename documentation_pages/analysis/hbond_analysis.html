@@ -237,8 +237,9 @@ search improved (<a class="reference internal" href="#MDAnalysis.analysis.hbonds
 <tbody valign="top">
 <tr class="row-even"><td>main chain</td>
 <td>N</td>
-<td>O</td>
-<td>&#160;</td>
+<td>O, OC1, OC2</td>
+<td>OC1, OC2 from amber99sb-ildn
+(Gromacs)</td>
 </tr>
 <tr class="row-odd"><td>water</td>
 <td>OH2, OW</td>
@@ -472,6 +473,8 @@ SER OG, TYR OH, CYS SG, THR OG1, GLN NE2, LYS NZ, TRP NE1</dd>
 GLU OE1/OE2, HIS ND1/NE2, MET SD, SER OG, THR OG1, TYR OH</dd>
 <dt><em>GLYCAM06</em></dt>
 <dd>N,NT,O,O2,OH,OS,OW,OY,P,S,SM</dd>
+<dt><em>amber99sb-ildn(Gromacs)</em></dt>
+<dd>OC1, OC2 of the main chain</dd>
 </dl>
 </dd>
 </dl>
@@ -504,56 +507,56 @@ customized <cite>donors</cite> and/or <cite>acceptors</cite>.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; Universe object</li>
-<li><strong>selection1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Selection string for first selection [&#8216;protein&#8217;]</li>
-<li><strong>selection2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Selection string for second selection [&#8216;all&#8217;]</li>
-<li><strong>selection1_type</strong> (<em>{&quot;donor&quot;</em><em>, </em><em>&quot;acceptor&quot;</em><em>, </em><em>&quot;both&quot;}</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Selection 1 can be &#8216;donor&#8217;, &#8216;acceptor&#8217; or &#8216;both&#8217;. Note that the
+<li><strong>selection1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Selection string for first selection [&#8216;protein&#8217;]</li>
+<li><strong>selection2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Selection string for second selection [&#8216;all&#8217;]</li>
+<li><strong>selection1_type</strong> (<em>{&quot;donor&quot;</em><em>, </em><em>&quot;acceptor&quot;</em><em>, </em><em>&quot;both&quot;}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Selection 1 can be &#8216;donor&#8217;, &#8216;acceptor&#8217; or &#8216;both&#8217;. Note that the
 value for <cite>selection1_type</cite> automatically determines how
 <cite>selection2</cite> handles donors and acceptors: If <cite>selection1</cite> contains
 &#8216;both&#8217; then <cite>selection2</cite> will also contain &#8216;both&#8217;. If <cite>selection1</cite>
 is set to &#8216;donor&#8217; then <cite>selection2</cite> is &#8216;acceptor&#8217; (and vice versa).
 [&#8216;both&#8217;].</li>
-<li><strong>update_selection1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Update selection 1 at each frame? Setting to <code class="docutils literal"><span class="pre">False</span></code> is recommended
+<li><strong>update_selection1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Update selection 1 at each frame? Setting to <code class="docutils literal"><span class="pre">False</span></code> is recommended
 for any static selection to increase performance. [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>update_selection2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Update selection 2 at each frame? Setting to <code class="docutils literal"><span class="pre">False</span></code> is recommended
+<li><strong>update_selection2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Update selection 2 at each frame? Setting to <code class="docutils literal"><span class="pre">False</span></code> is recommended
 for any static selection to increase performance. [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>filter_first</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Filter selection 2 first to only atoms 3 * <cite>distance</cite> away [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>distance</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Distance cutoff for hydrogen bonds; only interactions with a H-A distance
+<li><strong>filter_first</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Filter selection 2 first to only atoms 3 * <cite>distance</cite> away [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>distance</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Distance cutoff for hydrogen bonds; only interactions with a H-A distance
 &lt;= <cite>distance</cite> (and the appropriate D-H-A angle, see <cite>angle</cite>) are
 recorded. (Note: <cite>distance_type</cite> can change this to the D-A distance.) [3.0]</li>
-<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Angle cutoff for hydrogen bonds; an ideal H-bond has an angle of
+<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Angle cutoff for hydrogen bonds; an ideal H-bond has an angle of
 180º.  A hydrogen bond is only recorded if the D-H-A angle is
 &gt;=  <cite>angle</cite>. The default of 120º also finds fairly non-specific
 hydrogen interactions and a possibly better value is 150º. [120.0]</li>
-<li><strong>forcefield</strong> (<em>{&quot;CHARMM27&quot;</em><em>, </em><em>&quot;GLYCAM06&quot;</em><em>, </em><em>&quot;other&quot;}</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Name of the forcefield used. Switches between different
+<li><strong>forcefield</strong> (<em>{&quot;CHARMM27&quot;</em><em>, </em><em>&quot;GLYCAM06&quot;</em><em>, </em><em>&quot;other&quot;}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Name of the forcefield used. Switches between different
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS"><code class="xref py py-attr docutils literal"><span class="pre">DEFAULT_DONORS</span></code></a> and
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS"><code class="xref py py-attr docutils literal"><span class="pre">DEFAULT_ACCEPTORS</span></code></a> values.
 [&#8220;CHARMM27&#8221;]</li>
-<li><strong>donors</strong> (<em>sequence</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Extra H donor atom types (in addition to those in
+<li><strong>donors</strong> (<em>sequence</em><em> (</em><em>optional</em><em>)</em>) &#8211; Extra H donor atom types (in addition to those in
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS"><code class="xref py py-attr docutils literal"><span class="pre">DEFAULT_DONORS</span></code></a>), must be a sequence.</li>
-<li><strong>acceptors</strong> (<em>sequence</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Extra H acceptor atom types (in addition to those in
+<li><strong>acceptors</strong> (<em>sequence</em><em> (</em><em>optional</em><em>)</em>) &#8211; Extra H acceptor atom types (in addition to those in
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS"><code class="xref py py-attr docutils literal"><span class="pre">DEFAULT_ACCEPTORS</span></code></a>), must be a sequence.</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; starting frame-index for analysis, <code class="docutils literal"><span class="pre">None</span></code> is the first one, 0.
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; starting frame-index for analysis, <code class="docutils literal"><span class="pre">None</span></code> is the first one, 0.
 <cite>start</cite> and <cite>stop</cite> are 0-based frame indices and are used to slice
 the trajectory (if supported) [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; last trajectory frame for analysis, <code class="docutils literal"><span class="pre">None</span></code> is the last one [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; read every <cite>step</cite> between <cite>start</cite> (included) and <cite>stop</cite> (excluded),
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; last trajectory frame for analysis, <code class="docutils literal"><span class="pre">None</span></code> is the last one [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; read every <cite>step</cite> between <cite>start</cite> (included) and <cite>stop</cite> (excluded),
 <code class="docutils literal"><span class="pre">None</span></code> selects 1. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>detect_hydrogens</strong> (<em>{&quot;distance&quot;</em><em>, </em><em>&quot;heuristic&quot;}</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Determine the algorithm to find hydrogens connected to donor
+<li><strong>detect_hydrogens</strong> (<em>{&quot;distance&quot;</em><em>, </em><em>&quot;heuristic&quot;}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Determine the algorithm to find hydrogens connected to donor
 atoms. Can be &#8220;distance&#8221; (default; finds all hydrogens in the
 donor&#8217;s residue within a cutoff of the donor) or &#8220;heuristic&#8221;
 (looks for the next few atoms in the atom list). &#8220;distance&#8221; should
 always give the correct answer but &#8220;heuristic&#8221; is faster,
 especially when the donor list is updated each
 for each frame. [&#8220;distance&#8221;]</li>
-<li><strong>distance_type</strong> (<em>{&quot;hydrogen&quot;</em><em>, </em><em>&quot;heavy&quot;}</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Measure hydrogen bond lengths between donor and acceptor heavy
+<li><strong>distance_type</strong> (<em>{&quot;hydrogen&quot;</em><em>, </em><em>&quot;heavy&quot;}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Measure hydrogen bond lengths between donor and acceptor heavy
 attoms (&#8220;heavy&#8221;) or between donor hydrogen and acceptor heavy
 atom (&#8220;hydrogen&#8221;). If using &#8220;heavy&#8221; then one should set the <em>distance</em>
 cutoff to a higher value such as 3.5 Å. [&#8220;hydrogen&#8221;]</li>
-<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; If set to <code class="docutils literal"><span class="pre">True</span></code> enables per-frame debug logging. This is disabled
+<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; If set to <code class="docutils literal"><span class="pre">True</span></code> enables per-frame debug logging. This is disabled
 by default because it generates a very large amount of output in
 the log file. (Note that a logger must have been started to see
 the output, e.g. using <a class="reference internal" href="../lib/log.html#MDAnalysis.start_logging" title="MDAnalysis.start_logging"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.start_logging()</span></code></a>.)</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Toggle progress output. (Can also be given as keyword argument to
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Toggle progress output. (Can also be given as keyword argument to
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.run" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.run"><code class="xref py py-meth docutils literal"><span class="pre">run()</span></code></a>.)</li>
 </ul>
 </td>
@@ -782,7 +785,7 @@ and added <em>kwargs</em> so that it can be used instead of
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS">
-<code class="descname">DEFAULT_ACCEPTORS</code><em class="property"> = {'GLYCAM06': ('SM', 'OH', 'NT', 'O', 'N', 'OY', 'OW', 'OS', 'O2'), 'other': (), 'CHARMM27': ('OH', 'OG', 'OD1', 'OD2', 'OG1', 'O', 'ND1', 'NE2', 'OE2', 'OW', 'SG', 'OE1', 'OH2', 'SD')}</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS" title="Permalink to this definition">¶</a></dt>
+<code class="descname">DEFAULT_ACCEPTORS</code><em class="property"> = {'GLYCAM06': ('SM', 'OH', 'NT', 'O', 'N', 'OY', 'OW', 'OS', 'O2'), 'other': (), 'CHARMM27': ('OH', 'OG', 'OD1', 'OD2', 'SD', 'O', 'OW', 'NE2', 'OE2', 'OC1', 'OG1', 'OC2', 'SG', 'OE1', 'OH2', 'ND1')}</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS" title="Permalink to this definition">¶</a></dt>
 <dd><p>default atom names that are treated as hydrogen <em>acceptors</em>
 (see <a class="reference internal" href="#default-atom-names-for-hydrogen-bonding-analysis"><span class="std std-ref">Default heavy atom names for CHARMM27 force field.</span></a>);
 use the keyword <cite>acceptors</cite> to add a list of additional acceptor names.</p>
@@ -890,9 +893,9 @@ format).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; toggle progress meter output <a class="reference internal" href="../lib/log.html#MDAnalysis.lib.log.ProgressMeter" title="MDAnalysis.lib.log.ProgressMeter"><code class="xref py py-class docutils literal"><span class="pre">ProgressMeter</span></code></a>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; toggle progress meter output <a class="reference internal" href="../lib/log.html#MDAnalysis.lib.log.ProgressMeter" title="MDAnalysis.lib.log.ProgressMeter"><code class="xref py py-class docutils literal"><span class="pre">ProgressMeter</span></code></a>
 [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; enable detailed logging of debugging information; this can create
+<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; enable detailed logging of debugging information; this can create
 <em>very big</em> log files so it is disabled (<code class="docutils literal"><span class="pre">False</span></code>) by default; setting
 <cite>debug</cite> toggles the debug status for <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis"><code class="xref py py-class docutils literal"><span class="pre">HydrogenBondAnalysis</span></code></a>,
 namely the value of <code class="xref py py-attr docutils literal"><span class="pre">HydrogenBondAnalysis.debug</span></code>.</li>
@@ -940,7 +943,7 @@ argument <cite>debug</cite>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; path to the filename</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; path to the filename</td>
 </tr>
 </tbody>
 </table>
@@ -1090,7 +1093,7 @@ removal in 0.17.0.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
     </div>
   </body>
 </html>

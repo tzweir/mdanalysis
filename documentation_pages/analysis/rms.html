@@ -215,11 +215,11 @@ and reference structure are properly superimposed.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>b</strong> (<em>a</em><em>,</em><em></em>) &#8211; coordinates to align</li>
-<li><strong>weights</strong> (<em>array_like</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; 1D array with weights, use to compute weighted average</li>
-<li><strong>center</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; subtract center of geometry before calculation. With weights given
+<li><strong>b</strong> (<em>a</em><em>,</em>) &#8211; coordinates to align</li>
+<li><strong>weights</strong> (<em>array_like</em><em> (</em><em>optional</em><em>)</em>) &#8211; 1D array with weights, use to compute weighted average</li>
+<li><strong>center</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; subtract center of geometry before calculation. With weights given
 compute weighted average as center.</li>
-<li><strong>superposition</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; perform a rotational and translational superposition with the fast QCP
+<li><strong>superposition</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; perform a rotational and translational superposition with the fast QCP
 algorithm <a class="reference internal" href="../lib/qcprot.html#theobald2005" id="id3">[Theobald2005]</a> before calculating the RMSD</li>
 </ul>
 </td>
@@ -273,7 +273,7 @@ to be RMSD fit.</li>
 <li><strong>reference</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or) &#8211; <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>, optional
 Reference coordinates, if <code class="docutils literal"><span class="pre">None</span></code> current frame of <cite>atomgroup</cite> is
 used</li>
-<li><strong>select</strong> (<em>str / dict / tuple</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <p>The selection to operate on; can be one of:</p>
+<li><strong>select</strong> (<em>str / dict / tuple</em><em> (</em><em>optional</em><em>)</em>) &#8211; <p>The selection to operate on; can be one of:</p>
 <ol class="arabic">
 <li>any valid selection string for
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.select_atoms" title="MDAnalysis.core.groups.AtomGroup.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a> that
@@ -289,7 +289,7 @@ can also each be a list of selection strings (to generate a
 AtomGroup with defined atom order as described under
 <a class="reference internal" href="../selections.html#ordered-selections-label"><span class="std std-ref">Ordered selections</span></a>).</p>
 </li>
-<li><strong>groupselections</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <p>A list of selections as described for <cite>select</cite> Each selection
+<li><strong>groupselections</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <p>A list of selections as described for <cite>select</cite> Each selection
 describes additional RMSDs to be computed <em>after the structures
 have be superpositioned</em> according to <cite>select</cite>. The output contains
 one additional column for each selection. [<code class="docutils literal"><span class="pre">None</span></code>]</p>
@@ -300,11 +300,11 @@ implemented.</p>
 </div>
 </li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; write RSMD into file file <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSD.save" title="MDAnalysis.analysis.rms.RMSD.save"><code class="xref py py-meth docutils literal"><span class="pre">RMSD.save()</span></code></a></li>
-<li><strong>mass_weighted</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>deprecated</em><em>)</em><em></em>) &#8211; do a mass-weighted RMSD fit</li>
-<li><strong>weights</strong> (<em>str/array_like</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; choose weights. If &#8216;str&#8217; uses masses as weights</li>
-<li><strong>tol_mass</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Reject match if the atomic masses for matched atoms differ by more
+<li><strong>mass_weighted</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>deprecated</em><em>)</em>) &#8211; do a mass-weighted RMSD fit</li>
+<li><strong>weights</strong> (<em>str/array_like</em><em> (</em><em>optional</em><em>)</em>) &#8211; choose weights. If &#8216;str&#8217; uses masses as weights</li>
+<li><strong>tol_mass</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Reject match if the atomic masses for matched atoms differ by more
 than <cite>tol_mass</cite></li>
-<li><strong>ref_frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; frame index to select frame from <cite>reference</cite></li>
+<li><strong>ref_frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; frame index to select frame from <cite>reference</cite></li>
 </ul>
 </td>
 </tr>
@@ -358,7 +358,7 @@ array with content <code class="docutils literal"><span class="pre">[[frame,</sp
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; if no filename is given the default provided to the constructor is
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; if no filename is given the default provided to the constructor is
 used.</td>
 </tr>
 </tbody>
@@ -377,14 +377,14 @@ used.</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>atomgroup</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; Atoms for which RMSF is calculated</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; starting frame, default None becomes 0.</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Frame index to stop analysis. Default: None becomes
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; starting frame, default None becomes 0.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Frame index to stop analysis. Default: None becomes
 n_frames. Iteration stops <em>before</em> this frame number,
 which means that the trajectory would be read until the end.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; step between frames, default None becomes 1.</li>
-<li><strong>weights</strong> (<em>str / array_like</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; used weights. If <code class="docutils literal"><span class="pre">'mass'</span></code> use masses of atomgroup, it <code class="docutils literal"><span class="pre">None</span></code>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; step between frames, default None becomes 1.</li>
+<li><strong>weights</strong> (<em>str / array_like</em><em> (</em><em>optional</em><em>)</em>) &#8211; used weights. If <code class="docutils literal"><span class="pre">'mass'</span></code> use masses of atomgroup, it <code class="docutils literal"><span class="pre">None</span></code>
 use uniform weights.</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; if <code class="docutils literal"><span class="pre">False</span></code>, suppress all output</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; if <code class="docutils literal"><span class="pre">False</span></code>, suppress all output</li>
 </ul>
 </td>
 </tr>
@@ -462,7 +462,7 @@ giving RMSFs for each of the given atoms.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
     </div>
   </body>
 </html>

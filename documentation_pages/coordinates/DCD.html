@@ -147,13 +147,13 @@ Trajectory API.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
 <li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; A weak reference to the owning Reader.  Used for
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em>) &#8211; A weak reference to the owning Reader.  Used for
 when attributes require trajectory manipulation (e.g. dt)</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.time" title="MDAnalysis.coordinates.DCD.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.time" title="MDAnalysis.coordinates.DCD.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
 is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; The starting time from which to calculate time (in ps)</li>
+<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The starting time from which to calculate time (in ps)</li>
 </ul>
 </td>
 </tr>
@@ -542,15 +542,15 @@ all values can be changed through keyword arguments.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the output DCD trajectory</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of atoms</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of the first recorded MD step</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; indicate that <cite>step</cite> <strong>MD steps (!)</strong> make up one trajectory frame</li>
-<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <strong>MD integrator time step (!)</strong>, in AKMA units</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; number of atoms</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; number of the first recorded MD step</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; indicate that <cite>step</cite> <strong>MD steps (!)</strong> make up one trajectory frame</li>
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <strong>MD integrator time step (!)</strong>, in AKMA units</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
 <cite>dt</cite> ps lie between two frames. (It sets <cite>step</cite> `` = 1`` and
 <cite>delta</cite> `` = AKMA(dt)``.) The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case
 <cite>step</cite> and <cite>delta</cite> are used.</li>
-<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; string that is stored in the DCD header</li>
+<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; string that is stored in the DCD header</li>
 </ul>
 </td>
 </tr>
@@ -684,7 +684,7 @@ creating a <a class="reference external" href="https://docs.python.org/2/library
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -711,7 +711,7 @@ is avoided.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -738,7 +738,7 @@ is avoided.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -768,7 +768,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -798,7 +798,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -861,7 +861,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -888,7 +888,7 @@ is avoided.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -919,12 +919,12 @@ perform the calculations prescribed in <cite>timeseries</cite>.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>timeseries</strong> (<a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a>) &#8211; The <a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a> that defines what kind
 of computations should be performed on the data in this trajectory.</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
 of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code> starts
 at the beginning.</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
 The trajectory is read to the end with the default <code class="docutils literal"><span class="pre">None</span></code>.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
 read every frame.</li>
 </ul>
 </td>
@@ -1032,7 +1032,7 @@ through the trajectory.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to iterate over.</li>
-<li><strong>stop</strong><strong>, </strong><strong>step</strong><strong>)</strong><strong></strong> (<em></em><em>(</em><em>start</em><em>,</em><em></em>) &#8211; Options for iterating over a slice of the auxiliary.</li>
+<li><strong>stop</strong><strong>, </strong><strong>step</strong><strong>)</strong> (<em>(</em><em>start</em><em>,</em>) &#8211; Options for iterating over a slice of the auxiliary.</li>
 <li><strong>selected</strong> (<em>lst | ndarray</em><em>, </em><em>optional</em>) &#8211; List of steps to iterate over.</li>
 </ul>
 </td>
@@ -1158,14 +1158,14 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 <li><strong>asel</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>) &#8211; The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> to read the
 coordinates from. Defaults to None, in which case the full set of
 coordinate data is returned.</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
 of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code> starts
 at the beginning.</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
 The trajectory is read to the end with the default <code class="docutils literal"><span class="pre">None</span></code>.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
 read every frame.</li>
-<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; the order/shape of the return data array, corresponding
+<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
@@ -1202,18 +1202,18 @@ be considered to have a length of a single time step <cite>dt</cite> and a
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of output file</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; number of atoms in dcd file</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; starting frame number</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; skip between subsequent timesteps (indicate that <cite>step</cite> <strong>MD
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; number of atoms in dcd file</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; starting frame number</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; skip between subsequent timesteps (indicate that <cite>step</cite> <strong>MD
 integrator steps (!)</strong> make up one trajectory frame); default is 1.</li>
-<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; timestep (<strong>MD integrator time step (!)</strong>, in AKMA units); default is
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; timestep (<strong>MD integrator time step (!)</strong>, in AKMA units); default is
 20.45482949774598 (corresponding to 1 ps).</li>
-<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; comments to annotate dcd file</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
+<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; comments to annotate dcd file</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
 <cite>dt</cite> ps lie between two frames. (It sets <cite>step</cite> = 1 and
 <cite>delta</cite> <code class="docutils literal"><span class="pre">=</span> <span class="pre">AKMA(dt)</span></code>.) The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case
 <cite>step</cite> and <cite>delta</cite> are used.</li>
-<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
 the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [&#8216;convert_lengths&#8217;].
 (see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>)</li>
 </ul>
@@ -1274,7 +1274,7 @@ AKMA time units.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1301,7 +1301,7 @@ is avoided.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1328,7 +1328,7 @@ is avoided.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1358,7 +1358,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1388,7 +1388,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1451,7 +1451,7 @@ returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1478,7 +1478,7 @@ is avoided.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em><em></em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1601,7 +1601,7 @@ if no coordinates to be written.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
     </div>
   </body>
 </html>
