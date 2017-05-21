@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7.1. VMD selections &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
+    <title>7.2.1. VMD selections &#8212; MDAnalysis 0.16.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="7.2. PyMOL selections" href="pymol.html" />
+    <link rel="next" title="7.2.2. PyMOL selections" href="pymol.html" />
     <link rel="prev" title="7. Selection exporters" href="../selections_modules.html" /> 
   </head>
   <body role="document">
@@ -45,7 +45,7 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pymol.html" title="7.2. PyMOL selections"
+          <a href="pymol.html" title="7.2.2. PyMOL selections"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../selections_modules.html" title="7. Selection exporters"
@@ -64,7 +64,7 @@
                         title="previous chapter">7. Selection exporters</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="pymol.html"
-                        title="next chapter">7.2. PyMOL selections</a></p>
+                        title="next chapter">7.2.2. PyMOL selections</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -91,13 +91,17 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.selections.vmd"></span><div class="section" id="vmd-selections">
-<h1>7.1. VMD selections<a class="headerlink" href="#vmd-selections" title="Permalink to this headline">¶</a></h1>
+<h1>7.2.1. VMD selections<a class="headerlink" href="#vmd-selections" title="Permalink to this headline">¶</a></h1>
 <p>Write <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup</span></code></a> selection to a <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a> <cite>tcl</cite> file
-that defines <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/current/ug/node120.html">atomselect macros</a>. To be used in VMD like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">macros</span><span class="o">.</span><span class="n">vmd</span>
-<span class="nb">set</span> <span class="n">sel</span> <span class="p">[</span><span class="n">atomselect</span> <span class="n">top</span> <span class="n">mdanalysis001</span><span class="p">]</span>  <span class="c1"># use macro 001</span>
+(for example, &#8220;macros.vmd&#8221;) that defines <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/current/ug/node120.html">atomselect macros</a>. To be used in
+VMD like this (assuming the default macro name &#8220;mdanalysis001&#8221;):</p>
+<div class="highlight-tcl"><div class="highlight"><pre><span></span><span class="nb">source</span> macros.vmd
+<span class="k">set</span> sel <span class="k">[</span><span class="nv">atomselect</span> top mdanalysis001<span class="k">]</span>
 </pre></div>
 </div>
+<p>In the <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a> GUI the macro &#8220;mdanalysis001&#8221; appears in the
+<span class="menuselection">Graphics ‣ Representations</span> window under
+<span class="guilabel">Selections: Singlewords</span>.</p>
 <dl class="class">
 <dt id="MDAnalysis.selections.vmd.SelectionWriter">
 <em class="property">class </em><code class="descclassname">MDAnalysis.selections.vmd.</code><code class="descname">SelectionWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='w'</em>, <em>numterms=None</em>, <em>preamble=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/selections/vmd.html#SelectionWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.vmd.SelectionWriter" title="Permalink to this definition">¶</a></dt>
@@ -187,7 +191,7 @@ when appending) [<code class="docutils literal"><span class="pre">None</span></c
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pymol.html" title="7.2. PyMOL selections"
+          <a href="pymol.html" title="7.2.2. PyMOL selections"
              >next</a> |</li>
         <li class="right" >
           <a href="../selections_modules.html" title="7. Selection exporters"

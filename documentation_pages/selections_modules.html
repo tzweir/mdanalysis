@@ -31,7 +31,7 @@
     <link rel="shortcut icon" href="../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7.1. VMD selections" href="selections/vmd.html" />
+    <link rel="next" title="7.2.1. VMD selections" href="selections/vmd.html" />
     <link rel="prev" title="6.25. XDR based trajectory files — MDAnalysis.coordinates.XDR" href="coordinates/XDR.html" /> 
   </head>
   <body role="document">
@@ -45,7 +45,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="selections/vmd.html" title="7.1. VMD selections"
+          <a href="selections/vmd.html" title="7.2.1. VMD selections"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="coordinates/XDR.html" title="6.25. XDR based trajectory files — MDAnalysis.coordinates.XDR"
@@ -58,12 +58,25 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/mdanalysis-logo-200x150.png" alt="Logo"/>
             </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7. Selection exporters</a><ul>
+<li><a class="reference internal" href="#how-to-write-selections">7.1. How to write selections</a><ul>
+<li><a class="reference internal" href="#single-atomgroup">7.1.1. Single AtomGroup</a></li>
+<li><a class="reference internal" href="#multiple-selections">7.1.2. Multiple selections</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#selection-writers">7.2. Selection writers</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="coordinates/XDR.html"
                         title="previous chapter">6.25. XDR based trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XDR</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="selections/vmd.html"
-                        title="next chapter">7.1. VMD selections</a></p>
+                        title="next chapter">7.2.1. VMD selections</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -92,14 +105,10 @@
   <div class="section" id="selection-exporters">
 <span id="id1"></span><h1>7. Selection exporters<a class="headerlink" href="#selection-exporters" title="Permalink to this headline">¶</a></h1>
 <p>The classes in this module allow writing a selection to a file that can be read by
-<em>another programme</em> to select the atoms in a MDAnalysis
+<em>another program</em> to select the atoms in a MDAnalysis
 <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup</span></code></a>. Such cross-package interoperability
 allows a user to combine their favourite tools with MDAnalysis for further
 visualization or simulation.</p>
-<p>There exist different <a class="reference internal" href="selections/base.html#MDAnalysis.selections.base.SelectionWriterBase" title="MDAnalysis.selections.base.SelectionWriterBase"><code class="xref py py-class docutils literal"><span class="pre">SelectionWriterBase</span></code></a> classes
-for different packages. The <code class="xref py py-func docutils literal"><span class="pre">get_writer()</span></code> function
-can automatically pick the appropriate one, based on the file name extension in the
-table below.</p>
 <table border="1" class="docutils" id="id2">
 <span id="supported-selection-exporters"></span><caption><span class="caption-text">Table of supported exporters and recognized file name extensions.</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <colgroup>
@@ -148,16 +157,99 @@ module <a class="reference internal" href="selections/jmol.html#module-MDAnalysi
 </tr>
 </tbody>
 </table>
-<p class="rubric">Contents</p>
+<div class="section" id="how-to-write-selections">
+<h2>7.1. How to write selections<a class="headerlink" href="#how-to-write-selections" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="single-atomgroup">
+<h3>7.1.1. Single AtomGroup<a class="headerlink" href="#single-atomgroup" title="Permalink to this headline">¶</a></h3>
+<p>The typical situation is that one has an
+<a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> and wants to work with the
+same selection of atoms in a different package, for example, to
+visualize the atoms in <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>. First create an <code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code> (named
+<code class="docutils literal"><span class="pre">g</span></code> in the example below) and then use its
+<a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.AtomGroup.write" title="MDAnalysis.core.groups.AtomGroup.write"><code class="xref py py-class docutils literal"><span class="pre">write</span></code></a> method with the
+appropriate <em>file extension</em> (see <a class="reference internal" href="#supported-selection-exporters"><span class="std std-ref">Table of supported exporters and recognized file name extensions.</span></a> for the recognized <em>extension</em>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;protein&quot;)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;selections.vmd&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mda_protein&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>, sourcing the file <code class="docutils literal"><span class="pre">selections.vmd</span></code> (written in Tcl) defines
+the &#8220;macro&#8221; <code class="docutils literal"><span class="pre">mda_protein</span></code> that contains the atom indices to select</p>
+<div class="highlight-tcl"><div class="highlight"><pre><span></span><span class="nb">source</span> selection.vmd
+<span class="k">set</span> sel <span class="k">[</span><span class="nv">atomselect</span> top mda_mdanalysis<span class="k">]</span>
+</pre></div>
+</div>
+<p>and in the GUI the macro appears in the <span class="menuselection">Graphics ‣
+Representations</span> window in the list <span class="guilabel">Selections: Singlewords</span> as
+&#8220;mda_protein&#8221;.</p>
+</div>
+<div class="section" id="multiple-selections">
+<h3>7.1.2. Multiple selections<a class="headerlink" href="#multiple-selections" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.AtomGroup.write" title="MDAnalysis.core.groups.AtomGroup.write"><code class="xref py py-class docutils literal"><span class="pre">write</span></code></a> method can take
+additional keyword arguments, including <code class="docutils literal"><span class="pre">mode</span></code>. The default is
+<code class="docutils literal"><span class="pre">mode=&quot;w&quot;</span></code>, which will overwrite the provided file. If <code class="docutils literal"><span class="pre">mode=&quot;a&quot;</span></code>
+then the selection is <em>appended</em> to the file.</p>
+<p>Alternatively, one may use the
+<code class="xref py py-class docutils literal"><span class="pre">SelectionWriter</span></code> itself as a
+context manager and write each <code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code> inside the
+context. For example, to write multiple groups that were selected to
+mark different parts of a lipid bilayer to <a class="reference external" href="http://www.gromacs.org">Gromacs</a> index file named
+&#8220;leaflets.ndx&#8221;:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mda</span><span class="o">.</span><span class="n">selections</span><span class="o">.</span><span class="n">gromacs</span><span class="o">.</span><span class="n">SelectionWriter</span><span class="p">(</span><span class="s1">&#39;leaflets.ndx&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ndx</span><span class="p">:</span>
+    <span class="n">ndx</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">upper_saturated</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;upper_sat&#39;</span><span class="p">)</span>
+    <span class="n">ndx</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lower_saturated</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;lower_sat&#39;</span><span class="p">)</span>
+    <span class="n">ndx</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">upper_unsaturated</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;upper_unsat&#39;</span><span class="p">)</span>
+    <span class="n">ndx</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lower_unsaturated</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;lower_unsat&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There is a separate <code class="xref py py-class docutils literal"><span class="pre">SelectionWriter</span></code> for each format, as
+described next.</p>
+</div>
+</div>
+<div class="section" id="selection-writers">
+<h2>7.2. Selection writers<a class="headerlink" href="#selection-writers" title="Permalink to this headline">¶</a></h2>
+<p>There exist different <a class="reference internal" href="selections/base.html#MDAnalysis.selections.base.SelectionWriterBase" title="MDAnalysis.selections.base.SelectionWriterBase"><code class="xref py py-class docutils literal"><span class="pre">SelectionWriterBase</span></code></a>
+classes for different packages. The
+<a class="reference internal" href="#MDAnalysis.selections.get_writer" title="MDAnalysis.selections.get_writer"><code class="xref py py-func docutils literal"><span class="pre">get_writer()</span></code></a> function can automatically pick
+the appropriate one, based on the file name extension in the <a class="reference internal" href="#supported-selection-exporters"><span class="std std-ref">Table of supported exporters and recognized file name extensions.</span></a>.</p>
+<dl class="function">
+<dt id="MDAnalysis.selections.get_writer">
+<code class="descclassname">MDAnalysis.selections.</code><code class="descname">get_writer</code><span class="sig-paren">(</span><em>filename</em>, <em>defaultformat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MDAnalysis/selections.html#get_writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.selections.get_writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a SelectionWriter for <cite>filename</cite> or a <cite>defaultformat</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the output file; the extension is used to guess the file format</li>
+<li><strong>defaultformat</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; if <cite>filename</cite> does not have an extension, use <cite>defaultformat</cite> instead</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SelectionWriter</strong> &#8211; the writer <em>class</em> for the detected format</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><cite>type</cite></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> &#8211; for any format that is not defined</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Formats</p>
+<p>Each module implements a <code class="xref py py-class docutils literal"><span class="pre">SelectionWriter</span></code> for a specific format.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="selections/vmd.html">7.1. VMD selections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="selections/pymol.html">7.2. PyMOL selections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="selections/gromacs.html">7.3. Gromacs selections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="selections/charmm.html">7.4. CHARMM selections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="selections/jmol.html">7.5. Jmol selections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="selections/base.html">7.6. Base classes for the selection writers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selections/vmd.html">7.2.1. VMD selections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selections/pymol.html">7.2.2. PyMOL selections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selections/gromacs.html">7.2.3. Gromacs selections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selections/charmm.html">7.2.4. CHARMM selections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selections/jmol.html">7.2.5. Jmol selections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selections/base.html">7.2.6. Base classes for the selection writers</a></li>
 </ul>
+</div>
 </div>
 </div>
 
@@ -177,7 +269,7 @@ module <a class="reference internal" href="selections/jmol.html#module-MDAnalysi
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="selections/vmd.html" title="7.1. VMD selections"
+          <a href="selections/vmd.html" title="7.2.1. VMD selections"
              >next</a> |</li>
         <li class="right" >
           <a href="coordinates/XDR.html" title="6.25. XDR based trajectory files — MDAnalysis.coordinates.XDR"
