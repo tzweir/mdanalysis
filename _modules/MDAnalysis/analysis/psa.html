@@ -853,7 +853,7 @@
 
 <div class="viewcode-block" id="Path.fit_to_reference"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.fit_to_reference">[docs]</a>    <span class="k">def</span> <span class="nf">fit_to_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s1">&#39;_fit&#39;</span><span class="p">,</span>
                          <span class="n">rmsdfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span>
-                         <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+                         <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Align each trajectory frame to the reference structure</span>
 
 <span class="sd">        Parameters</span>
@@ -866,8 +866,10 @@
 <span class="sd">             prefix for auto-generating the new output filename</span>
 <span class="sd">        rmsdfile : str (optional)</span>
 <span class="sd">             file name for writing the RMSD time series [``None``]</span>
-<span class="sd">        mass_weighted : bool (optional)</span>
-<span class="sd">             do a mass-weighted RMSD fit, default is ``False``</span>
+<span class="sd">        mass_weighted : bool (deprecated)</span>
+<span class="sd">            do a mass-weighted RMSD fit</span>
+<span class="sd">        weights : str/array_like (optional)</span>
+<span class="sd">            choose weights. If &#39;str&#39; uses masses as weights</span>
 <span class="sd">        tol_mass : float (optional)</span>
 <span class="sd">             Reject match if the atomic masses for matched atoms differ by more</span>
 <span class="sd">             than `tol_mass` [0.1]</span>
@@ -880,7 +882,18 @@
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        Uses :class:`MDAnalysis.analysis.align.AlignTraj` for the fitting.</span>
+
+
+<span class="sd">        .. deprecated:: 0.16.1</span>
+<span class="sd">           Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;``;</span>
+<span class="sd">           refactored to fit with AnalysisBase API</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
+                          <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
+                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
+                <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
         <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trj_name</span><span class="p">)</span>
         <span class="n">oldname</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="n">oldname</span>
@@ -891,7 +904,7 @@
                                                        <span class="n">select</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_select</span><span class="p">,</span>
                                                        <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">newtrj_name</span><span class="p">,</span>
                                                        <span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span>
-                                                       <span class="n">mass_weighted</span><span class="o">=</span><span class="n">mass_weighted</span><span class="p">,</span>
+                                                       <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span>
                                                        <span class="n">tol_mass</span><span class="o">=</span><span class="n">tol_mass</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">rmsdfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">aligntrj</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">rmsdfile</span><span class="p">)</span>
@@ -952,7 +965,7 @@
 
 
 <div class="viewcode-block" id="Path.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s1">&#39;_fit&#39;</span><span class="p">,</span> <span class="n">rmsdfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
             <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate a path from a trajectory and reference structure.</span>
 
@@ -986,8 +999,10 @@
 <span class="sd">             prefix for auto-generating the new output filename</span>
 <span class="sd">        rmsdfile : str (optional)</span>
 <span class="sd">             file name for writing the RMSD time series [``None``]</span>
-<span class="sd">        mass_weighted : bool (optional)</span>
-<span class="sd">             do a mass-weighted RMSD fit</span>
+<span class="sd">        mass_weighted : bool (deprecated)</span>
+<span class="sd">            do a mass-weighted RMSD fit</span>
+<span class="sd">        weights : str/array_like (optional)</span>
+<span class="sd">            choose weights. If &#39;str&#39; uses masses as weights</span>
 <span class="sd">        tol_mass : float (optional)</span>
 <span class="sd">             Reject match if the atomic masses for matched atoms differ by more</span>
 <span class="sd">             than *tol_mass* [0.1]</span>
@@ -1000,12 +1015,23 @@
 <span class="sd">        -------</span>
 <span class="sd">        topology_trajectory : tuple</span>
 <span class="sd">             A tuple of the topology name and new trajectory name.</span>
+
+
+<span class="sd">        .. deprecated:: 0.16.1</span>
+<span class="sd">           Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;``;</span>
+<span class="sd">           refactored to fit with AnalysisBase API</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
+                          <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
+                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
+                <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
         <span class="k">if</span> <span class="n">align</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">u_fitted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_to_reference</span><span class="p">(</span>                              \
-                                <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="n">postfix</span><span class="p">,</span>             \
-                                <span class="n">rmsdfile</span><span class="o">=</span><span class="n">rmsdfile</span><span class="p">,</span> <span class="n">targetdir</span><span class="o">=</span><span class="n">targetdir</span><span class="p">,</span>         \
-                                <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">u_fitted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_to_reference</span><span class="p">(</span>
+                                <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="n">postfix</span><span class="p">,</span>
+                                <span class="n">rmsdfile</span><span class="o">=</span><span class="n">rmsdfile</span><span class="p">,</span> <span class="n">targetdir</span><span class="o">=</span><span class="n">targetdir</span><span class="p">,</span>
+                                <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_path</span><span class="p">(</span><span class="n">fitted</span><span class="o">=</span><span class="n">align</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="n">flat</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">newtrj_name</span></div>
 
@@ -1312,8 +1338,6 @@
 <span class="sd">             can also each be a list of selection strings (to generate an</span>
 <span class="sd">             AtomGroup with defined atom order as described under</span>
 <span class="sd">             :ref:`ordered-selections-label`).</span>
-<span class="sd">        mass_weighted : bool</span>
-<span class="sd">             do a mass-weighted RMSD fit [``False``]</span>
 <span class="sd">        tol_mass : float</span>
 <span class="sd">             Reject match if the atomic masses for matched atoms differ by more</span>
 <span class="sd">             than *tol_mass* [0.1]</span>
@@ -1399,7 +1423,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_psa_pairs</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># (distance vector order) list of all PSAPairs</span>
 
 
-<div class="viewcode-block" id="PSAnalysis.generate_paths"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.generate_paths">[docs]</a>    <span class="k">def</span> <span class="nf">generate_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="PSAnalysis.generate_paths"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.generate_paths">[docs]</a>    <span class="k">def</span> <span class="nf">generate_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;fitted&#39;</span><span class="p">,</span> <span class="n">infix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">tol_mass</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ref_frame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generate paths, aligning each to reference structure if necessary.</span>
 
 <span class="sd">        Parameters</span>
@@ -1413,8 +1438,10 @@
 <span class="sd">        infix : str</span>
 <span class="sd">             additional tag string that is inserted into the output filename of</span>
 <span class="sd">             the fitted trajectory files [&#39;&#39;]</span>
-<span class="sd">        mass_weighted : bool</span>
-<span class="sd">             do a mass-weighted RMSD fit</span>
+<span class="sd">        mass_weighted : bool (deprecated)</span>
+<span class="sd">            do a mass-weighted RMSD fit</span>
+<span class="sd">        weights : str/array_like (optional)</span>
+<span class="sd">            choose weights. If &#39;str&#39; uses masses as weights</span>
 <span class="sd">        tol_mass : float</span>
 <span class="sd">             Reject match if the atomic masses for matched atoms differ by more</span>
 <span class="sd">             than *tol_mass*</span>
@@ -1442,28 +1469,31 @@
 <span class="sd">        persistence and can be accessed as the attribute</span>
 <span class="sd">        :attr:`PSAnalysis.paths`.</span>
 
+
+<span class="sd">        .. deprecated:: 0.16.1</span>
+<span class="sd">           Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;``;</span>
+<span class="sd">           refactored to fit with AnalysisBase API</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">align</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;align&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;fitted&#39;</span><span class="p">)</span>
-        <span class="n">infix</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;infix&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="n">mass_weighted</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;mass_weighted&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="n">tol_mass</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;tol_mass&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="n">ref_frame</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ref_frame&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_frame</span><span class="p">)</span>
-        <span class="n">flat</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="n">save</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="n">store</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
+                          <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
+                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
+                <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
+        <span class="k">if</span> <span class="n">ref_frame</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ref_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_frame</span>
 
         <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">fit_trj_names</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">universes</span><span class="p">):</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_reference</span><span class="p">,</span> <span class="n">ref_select</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_select</span><span class="p">,</span>           \
+            <span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_reference</span><span class="p">,</span> <span class="n">ref_select</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_select</span><span class="p">,</span>
                      <span class="n">path_select</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_select</span><span class="p">,</span> <span class="n">ref_frame</span><span class="o">=</span><span class="n">ref_frame</span><span class="p">)</span>
             <span class="n">trj_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targetdir</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">datadirs</span><span class="p">[</span><span class="s1">&#39;fitted_trajs&#39;</span><span class="p">]</span>
             <span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}{1}{2:03n}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">infix</span><span class="p">,</span> <span class="s1">&#39;_psa&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">top_name</span><span class="p">,</span> <span class="n">fit_trj_name</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="n">align</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>      \
-                                           <span class="n">postfix</span><span class="o">=</span><span class="n">postfix</span><span class="p">,</span>                     \
-                                           <span class="n">targetdir</span><span class="o">=</span><span class="n">trj_dir</span><span class="p">,</span>                   \
-                                           <span class="n">mass_weighted</span><span class="o">=</span><span class="n">mass_weighted</span><span class="p">,</span>         \
+            <span class="n">top_name</span><span class="p">,</span> <span class="n">fit_trj_name</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="n">align</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+                                           <span class="n">postfix</span><span class="o">=</span><span class="n">postfix</span><span class="p">,</span>
+                                           <span class="n">targetdir</span><span class="o">=</span><span class="n">trj_dir</span><span class="p">,</span>
+                                           <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span>
                                            <span class="n">tol_mass</span><span class="o">=</span><span class="n">tol_mass</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="n">flat</span><span class="p">)</span>
             <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
             <span class="n">fit_trj_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fit_trj_name</span><span class="p">)</span>
@@ -1475,7 +1505,6 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_trjs_pkl</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
                 <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_trj_names</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">store</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">save_paths</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span></div>
 
 
