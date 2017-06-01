@@ -112,8 +112,8 @@
 <span class="sd">:data:`~MDAnalysis.tests.datafiles.PDB_small`). For all further</span>
 <span class="sd">examples execute first ::</span>
 
-<span class="sd">   &gt;&gt;&gt; from MDAnalysis import *</span>
-<span class="sd">   &gt;&gt;&gt; from MDAnalysis.analysis.align import *</span>
+<span class="sd">   &gt;&gt;&gt; import MDAnalysis as mda</span>
+<span class="sd">   &gt;&gt;&gt; from MDAnalysis.analysis import align</span>
 <span class="sd">   &gt;&gt;&gt; from MDAnalysis.analysis.rms import rmsd</span>
 <span class="sd">   &gt;&gt;&gt; from MDAnalysis.tests.datafiles import PSF, DCD, PDB_small</span>
 
@@ -121,8 +121,8 @@
 <span class="sd">In the simplest case, we can simply calculate the C-alpha RMSD between</span>
 <span class="sd">two structures, using :func:`rmsd`::</span>
 
-<span class="sd">   &gt;&gt;&gt; ref = Universe(PDB_small)</span>
-<span class="sd">   &gt;&gt;&gt; mobile = Universe(PSF,DCD)</span>
+<span class="sd">   &gt;&gt;&gt; ref = mda.Universe(PDB_small)</span>
+<span class="sd">   &gt;&gt;&gt; mobile = mda.Universe(PSF,DCD)</span>
 <span class="sd">   &gt;&gt;&gt; rmsd(mobile.atoms.CA.positions, ref.atoms.CA.positions)</span>
 <span class="sd">   16.282308620224068</span>
 
@@ -147,7 +147,7 @@
 
 <span class="sd">   &gt;&gt;&gt; mobile0 = mobile.atoms.CA.positions - mobile.atoms.center_of_mass()</span>
 <span class="sd">   &gt;&gt;&gt; ref0 = ref.atoms.CA.positions - ref.atoms.center_of_mass()</span>
-<span class="sd">   &gt;&gt;&gt; R, rmsd = rotation_matrix(mobile0, ref0)</span>
+<span class="sd">   &gt;&gt;&gt; R, rmsd = align.rotation_matrix(mobile0, ref0)</span>
 <span class="sd">   &gt;&gt;&gt; print rmsd</span>
 <span class="sd">   6.8093965864717951</span>
 <span class="sd">   &gt;&gt;&gt; print R</span>
@@ -168,9 +168,9 @@
 
 <span class="sd">To **fit a single structure** with :func:`alignto`::</span>
 
-<span class="sd">   &gt;&gt;&gt; ref = Universe(PSF, PDB_small)</span>
-<span class="sd">   &gt;&gt;&gt; mobile = Universe(PSF, DCD)     # we use the first frame</span>
-<span class="sd">   &gt;&gt;&gt; alignto(mobile, ref, select=&quot;protein and name CA&quot;, mass_weighted=True)</span>
+<span class="sd">   &gt;&gt;&gt; ref = mda.Universe(PSF, PDB_small)</span>
+<span class="sd">   &gt;&gt;&gt; mobile = mda.Universe(PSF, DCD)     # we use the first frame</span>
+<span class="sd">   &gt;&gt;&gt; align.alignto(mobile, ref, select=&quot;protein and name CA&quot;, mass_weighted=True)</span>
 
 <span class="sd">This will change *all* coordinates in *mobile* so that the protein</span>
 <span class="sd">C-alpha atoms are optimally superimposed (translation and rotation).</span>
@@ -178,10 +178,10 @@
 <span class="sd">To **fit a whole trajectory** to a reference structure with the</span>
 <span class="sd">:class:`AlignTraj` class::</span>
 
-<span class="sd">   &gt;&gt;&gt; ref = Universe(PSF, PDB_small)   # reference structure 1AKE</span>
-<span class="sd">   &gt;&gt;&gt; trj = Universe(PSF, DCD)         # trajectory of change 1AKE-&gt;4AKE</span>
-<span class="sd">   &gt;&gt;&gt; align =  AlignTraj(trj, ref, filename=&#39;rmsfit.dcd&#39;)</span>
-<span class="sd">   &gt;&gt;&gt; align.run()</span>
+<span class="sd">   &gt;&gt;&gt; ref = mda.Universe(PSF, PDB_small)   # reference structure 1AKE</span>
+<span class="sd">   &gt;&gt;&gt; trj = mda.Universe(PSF, DCD)         # trajectory of change 1AKE-&gt;4AKE</span>
+<span class="sd">   &gt;&gt;&gt; alignment = align.AlignTraj(trj, ref, filename=&#39;rmsfit.dcd&#39;)</span>
+<span class="sd">   &gt;&gt;&gt; alignment.run()</span>
 
 <span class="sd">It is also possible to align two arbitrary structures by providing a</span>
 <span class="sd">mapping between atoms based on a sequence alignment. This allows</span>
@@ -191,9 +191,9 @@
 <span class="sd">the appropriate MDAnalysis selections with the :func:`fasta2select`</span>
 <span class="sd">function and then feed the resulting dictionary to :class:`AlignTraj`::</span>
 
-<span class="sd">   &gt;&gt;&gt; seldict = fasta2select(&#39;sequences.aln&#39;)</span>
-<span class="sd">   &gt;&gt;&gt; align = AlignTraj(trj, ref, filename=&#39;rmsfit.dcd&#39;, select=seldict)</span>
-<span class="sd">   &gt;&gt;&gt; align.run()</span>
+<span class="sd">   &gt;&gt;&gt; seldict = align.fasta2select(&#39;sequences.aln&#39;)</span>
+<span class="sd">   &gt;&gt;&gt; alignment = align.AlignTraj(trj, ref, filename=&#39;rmsfit.dcd&#39;, select=seldict)</span>
+<span class="sd">   &gt;&gt;&gt; alignment.run()</span>
 
 <span class="sd">(See the documentation of the functions for this advanced usage.)</span>
 
