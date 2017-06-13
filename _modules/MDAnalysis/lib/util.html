@@ -1623,6 +1623,31 @@
         <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<span class="k">def</span> <span class="nf">ltruncate_int</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ndigits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Truncate an integer, retaining least significant digits</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    value : int</span>
+<span class="sd">      value to truncate</span>
+<span class="sd">    ndigits : int</span>
+<span class="sd">      number of digits to keep</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    truncated : int</span>
+<span class="sd">      only the `ndigits` least significant digits from `value`</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; ltruncate_int(123, 2)</span>
+<span class="sd">    23</span>
+<span class="sd">    &gt;&gt;&gt; ltruncate_int(1234, 5)</span>
+<span class="sd">    1234</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)[</span><span class="o">-</span><span class="n">ndigits</span><span class="p">:])</span>
 </pre></div>
 
           </div>
