@@ -155,16 +155,16 @@ def make_classes():
     #  patching applies automatically to all groups.
     GBase = bases[GroupBase] = _TopologyAttrContainer._subclass(singular=False)
     GBase._SETATTR_WHITELIST = {  # list of Group attributes we can set
-        'positions', 'velocities', 'forces',
-        'atoms', 'segments', 'residues',
+        'positions', 'velocities', 'forces', 'dimensions',
+        'residue', 'residues', 'segment', 'segments',
     }
     for cls in groups:
         bases[cls] = GBase._subclass(singular=False)
     # CBase for patching all components
     CBase = bases[ComponentBase] = _TopologyAttrContainer._subclass(singular=True)
     CBase._SETATTR_WHITELIST = {
-        'position', 'velocity', 'force',
-        'atoms', 'segments', 'residues',
+        'position', 'velocity', 'force', 'dimensions',
+        'residue', 'residues', 'segment', 'segments',
     }
     for cls in components:
         bases[cls] = CBase._subclass(singular=True)
