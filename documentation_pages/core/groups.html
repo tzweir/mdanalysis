@@ -69,9 +69,10 @@ these units ((<a class="reference internal" href="#MDAnalysis.core.groups.Residu
 <dt id="MDAnalysis.core.groups.AtomGroup">
 <em class="property">class </em><code class="descclassname">MDAnalysis.core.groups.</code><code class="descname">AtomGroup</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/groups.html#AtomGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.groups.AtomGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>A group of atoms.</p>
-<p>An AtomGroup is an ordered collection of atoms. Typically, an AtomGroup is
-generated from a selection, or by indexing/slcing the AtomGroup of all
-atoms in the Universe at <code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.core.universe.Universe.atoms</span></code>.</p>
+<p>An <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> is an ordered collection of atoms. Typically, an
+<a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> is generated from a selection, or by indexing/slicing
+the <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> of all atoms in the <code class="xref py py-class docutils literal"><span class="pre">Universe</span></code> at
+<code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.core.universe.Universe.atoms</span></code>.</p>
 <p>An AtomGroup can be indexed and sliced like a list:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
@@ -98,22 +99,6 @@ duplicate elements are removed. This is not true for AtomGroups
 produced by slicing. Thus slicing can be used when the order of
 atoms is crucial (for instance, in order to define angles or
 dihedrals).</p>
-</div>
-<p>Atoms can also be accessed in a Pythonic fashion by using the atom name as
-an attribute. For instance,</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="o">.</span><span class="n">CA</span>
-</pre></div>
-</div>
-<p>will provide a <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> of all CA atoms in the
-group. These <em>instant selector</em> attributes are auto-generated for
-each atom name encountered in the group.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The name-attribute instant selector access to atoms is mainly
-meant for quick interactive work. Thus it either returns a
-single <a class="reference internal" href="#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> if there is only one matching atom, <em>or</em> a
-new <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> for multiple matches.  This makes it
-difficult to use the feature consistently in scripts.</p>
 </div>
 <p>AtomGroups can be compared and combined using group operators. For
 instance, AtomGroups can be concatenated using <cite>+</cite> or <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup.concatenate" title="MDAnalysis.core.groups.AtomGroup.concatenate"><code class="xref py py-meth docutils literal"><span class="pre">concatenate()</span></code></a>:</p>
@@ -243,9 +228,29 @@ in <code class="docutils literal"><span class="pre">t</span></code></td>
 <p>The <cite>in</cite> operator allows to test if an <a class="reference internal" href="#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> is in the AtomGroup.</p>
 <p>AtomGroup instances are always bound to a
 <a class="reference internal" href="universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.universe.Universe</span></code></a>. They cannot exist in isolation.</p>
+<p class="rubric">Deprecated functionality</p>
+<p><em>Instant selectors</em> will be removed in the 1.0 release.  See issue <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/1377">#1377</a> for more details.</p>
+<p>Atoms can also be accessed in a Pythonic fashion by using the atom name as
+an attribute. For instance,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ag</span><span class="o">.</span><span class="n">CA</span>
+</pre></div>
+</div>
+<p>will provide a <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> of all CA atoms in the
+group. These <em>instant selector</em> attributes are auto-generated for
+each atom name encountered in the group.</p>
+<p class="rubric">Notes</p>
+<p>The name-attribute instant selector access to atoms is mainly
+meant for quick interactive work. Thus it either returns a
+single <a class="reference internal" href="#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> if there is only one matching atom, <em>or</em> a
+new <a class="reference internal" href="#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> for multiple matches.  This makes it
+difficult to use the feature consistently in scripts.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.universe.Universe</span></code></a></p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span><em>Instant selectors</em> of AtomGroup will be removed in the 1.0 release.
+See <a class="reference internal" href="../selections.html#instance-selectors"><span class="std std-ref">Instant selectors</span></a> for details and alternatives.</p>
 </div>
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.AtomGroup.angle">
@@ -1493,6 +1498,10 @@ Topology-specific <a class="reference internal" href="#MDAnalysis.core.groups.Re
 specific to ResidueGroups.</p>
 <p>ResidueGroups can be compared and combined using group operators. See the
 list of these operators on <code class="xref py py-class docutils literal"><span class="pre">GroupBase</span></code>.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span><em>Instant selectors</em> of Segments will be removed in the 1.0 release.
+See <a class="reference internal" href="../selections.html#instance-selectors"><span class="std std-ref">Instant selectors</span></a> for details and alternatives.</p>
+</div>
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.ResidueGroup.atoms">
 <code class="descname">atoms</code><a class="headerlink" href="#MDAnalysis.core.groups.ResidueGroup.atoms" title="Permalink to this definition">¶</a></dt>
@@ -2311,6 +2320,10 @@ GroupBase, so this class only includes ad-hoc methods specific to
 SegmentGroups.</p>
 <p>SegmentGroups can be compared and combined using group operators. See the
 list of these operators on <code class="xref py py-class docutils literal"><span class="pre">GroupBase</span></code>.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span><em>Instant selectors</em> of Segments will be removed in the 1.0 release.
+See <a class="reference internal" href="../selections.html#instance-selectors"><span class="std std-ref">Instant selectors</span></a> for details and alternatives.</p>
+</div>
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.SegmentGroup.atoms">
 <code class="descname">atoms</code><a class="headerlink" href="#MDAnalysis.core.groups.SegmentGroup.atoms" title="Permalink to this definition">¶</a></dt>
@@ -3286,6 +3299,10 @@ If it is a Segment, this is the index of the segment.</p>
 Segment class. All the TopologyAttr components are obtained from
 ComponentBase, so this class only includes ad-hoc methods specific to
 Segments.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span><em>Instant selectors</em> of Segments will be removed in the 1.0 release.
+See <a class="reference internal" href="../selections.html#instance-selectors"><span class="std std-ref">Instant selectors</span></a> for details and alternatives.</p>
+</div>
 <dl class="attribute">
 <dt id="MDAnalysis.core.groups.Segment.ix">
 <code class="descname">ix</code><a class="headerlink" href="#MDAnalysis.core.groups.Segment.ix" title="Permalink to this definition">¶</a></dt>

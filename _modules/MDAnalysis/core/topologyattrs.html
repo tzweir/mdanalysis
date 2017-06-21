@@ -90,6 +90,9 @@
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">numbers</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="k">import</span> <span class="n">deprecate</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">flags</span>
 <span class="kn">from</span> <span class="nn">..lib.util</span> <span class="k">import</span> <span class="n">cached</span><span class="p">,</span> <span class="n">convert_aa_code</span><span class="p">,</span> <span class="n">iterable</span>
@@ -466,6 +469,14 @@
 <span class="sd">        no atoms are found, a :exc:`SelectionError` is raised.</span>
 
 <span class="sd">        .. versionadded:: 0.9.2</span>
+
+<span class="sd">        .. deprecated:: 0.16.2</span>
+<span class="sd">           *Instant selectors* will be removed in the 1.0 release.</span>
+<span class="sd">           Use ``AtomGroup.select_atoms(&#39;name &lt;name&gt;&#39;)`` instead.</span>
+<span class="sd">           See issue `#1377</span>
+<span class="sd">           &lt;https://github.com/MDAnalysis/mdanalysis/issues/1377&gt;`_ for</span>
+<span class="sd">           more details.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># There can be more than one atom with the same name</span>
         <span class="n">atomlist</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">unique</span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">names</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
@@ -474,10 +485,12 @@
                 <span class="s2">&quot;No atoms with name &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">atomlist</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># XXX: keep this, makes more sense for names</span>
-            <span class="k">return</span> <span class="n">atomlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># XXX: but inconsistent (see residues and Issue 47)</span>
-            <span class="k">return</span> <span class="n">atomlist</span>
+            <span class="n">atomlist</span> <span class="o">=</span> <span class="n">atomlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Instant selector AtomGroup[&#39;&lt;name&gt;&#39;] or AtomGroup.&lt;name&gt; &quot;</span>
+                      <span class="s2">&quot;is deprecated and will be removed in 1.0. &quot;</span>
+                      <span class="s2">&quot;Use AtomGroup.select_atoms(&#39;name &lt;name&gt;&#39;) instead.&quot;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">atomlist</span>
 
     <span class="c1"># AtomGroup already has a getattr</span>
 <span class="c1">#    transplants[AtomGroup].append(</span>
@@ -1106,6 +1119,13 @@
     <span class="c1"># This transplant is hardcoded for now to allow for multiple getattr things</span>
     <span class="c1">#transplants[Segment].append((&#39;__getattr__&#39;, getattr__))</span>
 
+
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Instant selector ResidueGroup.&lt;name&gt; &quot;</span>
+               <span class="s2">&quot;or Segment.&lt;name&gt; &quot;</span>
+               <span class="s2">&quot;is deprecated and will be removed in 1.0. &quot;</span>
+               <span class="s2">&quot;Use ResidueGroup[ResidueGroup.resnames == &#39;&lt;name&gt;&#39;] &quot;</span>
+               <span class="s2">&quot;or Segment.residues[Segment.residues == &#39;&lt;name&gt;&#39;] &quot;</span>
+               <span class="s2">&quot;instead.&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_get_named_residue</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">resname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get all residues with name *resname* in the current ResidueGroup</span>
 <span class="sd">        or Segment.</span>
@@ -1116,6 +1136,15 @@
 <span class="sd">        If no residues are found, a :exc:`SelectionError` is raised.</span>
 
 <span class="sd">        .. versionadded:: 0.9.2</span>
+
+<span class="sd">        .. deprecated:: 0.16.2</span>
+<span class="sd">           *Instant selectors* will be removed in the 1.0 release.</span>
+<span class="sd">           Use ``ResidueGroup[ResidueGroup.resnames == &#39;&lt;name&gt;&#39;]``</span>
+<span class="sd">           or ``Segment.residues[Segment.residues == &#39;&lt;name&gt;&#39;]``</span>
+<span class="sd">           instead.</span>
+<span class="sd">           See issue `#1377</span>
+<span class="sd">           &lt;https://github.com/MDAnalysis/mdanalysis/issues/1377&gt;`_ for</span>
+<span class="sd">           more details.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># There can be more than one residue with the same name</span>
@@ -1293,6 +1322,10 @@
     <span class="n">transplants</span><span class="p">[</span><span class="n">SegmentGroup</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
         <span class="p">(</span><span class="s1">&#39;__getattr__&#39;</span><span class="p">,</span> <span class="n">getattr__</span><span class="p">))</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Instant selector SegmentGroup.&lt;name&gt; &quot;</span>
+               <span class="s2">&quot;is deprecated and will be removed in 1.0. &quot;</span>
+               <span class="s2">&quot;Use SegmentGroup[SegmentGroup.segids == &#39;&lt;name&gt;&#39;] &quot;</span>
+               <span class="s2">&quot;instead.&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_get_named_segment</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">segid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get all segments with name *segid* in the current SegmentGroup.</span>
 
@@ -1302,6 +1335,13 @@
 <span class="sd">        If no residues are found, a :exc:`SelectionError` is raised.</span>
 
 <span class="sd">        .. versionadded:: 0.9.2</span>
+
+<span class="sd">        .. deprecated:: 0.16.2</span>
+<span class="sd">           *Instant selectors* will be removed in the 1.0 release.</span>
+<span class="sd">           Use ``SegmentGroup[SegmentGroup.segids == &#39;&lt;name&gt;&#39;]`` instead.</span>
+<span class="sd">           See issue `#1377</span>
+<span class="sd">           &lt;https://github.com/MDAnalysis/mdanalysis/issues/1377&gt;`_ for</span>
+<span class="sd">           more details.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Undo adding &#39;s&#39; if segid started with digit</span>

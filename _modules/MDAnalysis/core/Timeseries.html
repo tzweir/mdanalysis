@@ -70,9 +70,18 @@
 <span class="c1">#</span>
 
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Compute observable timeseries from trajectories --- :mod:`MDAnalysis.core.Timeseries`</span>
+<span class="sd">&quot;&quot;&quot;Compute observable timeseries from trajectories --- :mod:`MDAnalysis.core.Timeseries`</span>
 <span class="sd">=======================================================================================</span>
+
+<span class="sd">.. deprecated:: 0.16.2</span>
+<span class="sd">   The Timeseries functionality (in particular correl) will be removed in the</span>
+<span class="sd">   0.17 release. See issue `#1372</span>
+<span class="sd">   &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more details.</span>
+<span class="sd">   To extract coordinates efficiently one can use</span>
+<span class="sd">   :class:`MDAnalysis.analysis.base.AnalysisFromFunction` as shown in</span>
+<span class="sd">   :ref:`Creating an in-memory trajectory with AnalysisFromFunction</span>
+<span class="sd">   &lt;create-in-memory-trajectory-with-AnalysisFromFunction&gt;`.</span>
+
 
 <span class="sd">The collection of timeseries (such as :class:`Atom`, :class:`Bond`,</span>
 <span class="sd">:class:`Dihedral`...)  can be computed from a trajectory in one go, foregoing</span>
@@ -110,7 +119,16 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
+<span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="k">import</span> <span class="n">deprecate</span>
+
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">groups</span>
+
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;always&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">((</span><span class="s1">&#39;The Timeseries module and TimeseriesCollection will be &#39;</span>
+                   <span class="s1">&#39;removed in the 0.17 release. See issue #1372 &#39;</span>
+                   <span class="s1">&#39;https://github.com/MDAnalysis/mdanalysis/issues/1373&#39;</span><span class="p">),</span>
+                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="TimeseriesCollection"><a class="viewcode-back" href="../../../documentation_pages/core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection">[docs]</a><span class="k">class</span> <span class="nc">TimeseriesCollection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -130,8 +148,17 @@
 <span class="sd">       collection.clear()                             - clear the collection</span>
 <span class="sd">       collection[i]                                  - access the i&#39;th timeseries</span>
 <span class="sd">       len(collection)                                - return the number of Timeseries added to the collection</span>
+
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -235,9 +262,17 @@
 
 
 <div class="viewcode-block" id="Timeseries"><a class="viewcode-back" href="../../../documentation_pages/core/Timeseries.html#MDAnalysis.core.Timeseries.Timeseries">[docs]</a><span class="k">class</span> <span class="nc">Timeseries</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Base timeseries class - define subclasses for specific timeseries computations</span>
+    <span class="sd">&#39;&#39;&#39;Base timeseries class - define subclasses for specific timeseries computations.</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="n">dsize</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">groups</span><span class="o">.</span><span class="n">AtomGroup</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">atoms</span>
@@ -302,8 +337,16 @@
 <span class="sd">          can be a single :class:`~MDAnalysis.core.groups.Atom` object,</span>
 <span class="sd">          a list of :class:`~MDAnalysis.core.groups.Atom` objects, or an</span>
 <span class="sd">          :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Bad code&quot;</span><span class="p">)</span>
@@ -330,10 +373,18 @@
 
 <span class="sd">           t = Bond(atoms)</span>
 
-<span class="sd">        *atoms* must contain 2 :class:`~MDAnalysis.core.groups.Atom` instances, either as a list or an</span>
-<span class="sd">        :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">    *atoms* must contain 2 :class:`~MDAnalysis.core.groups.Atom` instances, either as a list or an</span>
+<span class="sd">    :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Bond timeseries requires a 2 atom selection&quot;</span><span class="p">)</span>
@@ -345,10 +396,18 @@
 
 <span class="sd">           t = Angle(atoms)</span>
 
-<span class="sd">        atoms must contain 3 :class:`~MDAnalysis.core.groups.Atom` instances, either as a list or an</span>
-<span class="sd">        :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">    atoms must contain 3 :class:`~MDAnalysis.core.groups.Atom` instances,</span>
+<span class="sd">    either as a list or an :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Angle timeseries requires a 3 atom selection&quot;</span><span class="p">)</span>
@@ -360,10 +419,18 @@
 
 <span class="sd">           t = Dihedral(atoms)</span>
 
-<span class="sd">        atoms must contain 4 :class:`~MDAnalysis.core.groups.Atom` objects, either as a list or an</span>
-<span class="sd">        :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">    atoms must contain 4 :class:`~MDAnalysis.core.groups.Atom` objects, either</span>
+<span class="sd">    as a list or an :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Dihedral timeseries requires a 4 atom selection&quot;</span><span class="p">)</span>
@@ -375,11 +442,19 @@
 
 <span class="sd">           t = Distance(code, atoms)</span>
 
-<span class="sd">        code is one of &#39;d&#39; (distance vector), or &#39;r&#39; (scalar distance)</span>
-<span class="sd">        atoms must contain 2 :class:`~MDAnalysis.core.groups.Atom` objects, either as a list or an</span>
-<span class="sd">        :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">    code is one of &#39;d&#39; (distance vector), or &#39;r&#39; (scalar distance) atoms must</span>
+<span class="sd">    contain 2 :class:`~MDAnalysis.core.groups.Atom` objects, either as a list</span>
+<span class="sd">    or an :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Bad code&quot;</span><span class="p">)</span>
@@ -397,10 +472,19 @@
 
 <span class="sd">           t = CenterOfGeometry(atoms)</span>
 
-<span class="sd">        *atoms* can be a list of :class:`~MDAnalysis.core.groups.Atom`</span>
-<span class="sd">        objects, or a :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">    *atoms* can be a list of :class:`~MDAnalysis.core.groups.Atom` objects, or</span>
+<span class="sd">    a :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="n">Timeseries</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
@@ -413,10 +497,18 @@
 
 <span class="sd">           t = CenterOfMass(atoms)</span>
 
-<span class="sd">        *atoms* can be a list of :class:`~MDAnalysis.core.groups.Atom`</span>
-<span class="sd">        objects or a :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+<span class="sd">    *atoms* can be a list of :class:`~MDAnalysis.core.groups.Atom` objects or a</span>
+<span class="sd">    :class:`~MDAnalysis.core.groups.AtomGroup`</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="n">Timeseries</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
@@ -429,41 +521,47 @@
 
 <span class="sd">           d = WaterDipole(atoms)</span>
 
-<span class="sd">        *atoms* must contain 3 :class:`~MDAnalysis.core.groups.Atom`</span>
-<span class="sd">        objects, either as a list or an</span>
-<span class="sd">        :class:`~MDAnalysis.core.groups.AtomGroup`; the first one *must* be</span>
-<span class="sd">        the oxygen, the other two are the hydrogens.</span>
+<span class="sd">    *atoms* must contain 3 :class:`~MDAnalysis.core.groups.Atom` objects,</span>
+<span class="sd">    either as a list or an :class:`~MDAnalysis.core.groups.AtomGroup`; the</span>
+<span class="sd">    first one *must* be the oxygen, the other two are the hydrogens.</span>
 
-<span class="sd">        The vector ``d``, multiplied by the partial charge on the oxygen atom</span>
-<span class="sd">        (e.g. *q* = -0.0.834 for TIP3P water), gives the actual dipole moment.</span>
+<span class="sd">    The vector ``d``, multiplied by the partial charge on the oxygen atom</span>
+<span class="sd">    (e.g. *q* = -0.0.834 for TIP3P water), gives the actual dipole moment.</span>
 
-<span class="sd">        The vector is calculated from the positions of the oxygen atom</span>
-<span class="sd">        (:math:`\mathbf{x}_{\text{O}}`) and the two hydrogen atoms</span>
-<span class="sd">        (:math:`\mathbf{x}_{\text{H}_1}`, :math:`\mathbf{x}_{\text{H}_2}`) as</span>
+<span class="sd">    The vector is calculated from the positions of the oxygen atom</span>
+<span class="sd">    (:math:`\mathbf{x}_{\text{O}}`) and the two hydrogen atoms</span>
+<span class="sd">    (:math:`\mathbf{x}_{\text{H}_1}`, :math:`\mathbf{x}_{\text{H}_2}`) as</span>
 
-<span class="sd">        .. math::</span>
+<span class="sd">    .. math::</span>
 
-<span class="sd">           \mathbf{d} = \mathbf{x}_{\text{O}} - \frac{1}{2}(\mathbf{x}_{\text{H}_1} + \mathbf{x}_{\text{H}_2})</span>
+<span class="sd">       \mathbf{d} = \mathbf{x}_{\text{O}} - \frac{1}{2}(\mathbf{x}_{\text{H}_1} + \mathbf{x}_{\text{H}_2})</span>
 
-<span class="sd">        and the dipole moment vector is</span>
+<span class="sd">    and the dipole moment vector is</span>
 
-<span class="sd">         .. math::</span>
+<span class="sd">    .. math::</span>
 
-<span class="sd">           \boldsymbol{\mu} = q_{\text{O}} \mathbf{d}</span>
+<span class="sd">       \boldsymbol{\mu} = q_{\text{O}} \mathbf{d}</span>
 
-<span class="sd">        .. Note::</span>
+<span class="sd">    .. Note::</span>
 
-<span class="sd">           This will only work for water models that have half of the oxygen</span>
-<span class="sd">           charge on each hydrogen. The vector :math:`\mathbf{d}` has the</span>
-<span class="sd">           opposite direction of the dipole moment; multiplying with the oxygen</span>
-<span class="sd">           charge (:math:`q_{\text{O}}&lt;0`) will flip the direction and produce</span>
-<span class="sd">           the correct orientation.</span>
+<span class="sd">       This will only work for water models that have half of the oxygen charge</span>
+<span class="sd">       on each hydrogen. The vector :math:`\mathbf{d}` has the opposite</span>
+<span class="sd">       direction of the dipole moment; multiplying with the oxygen charge</span>
+<span class="sd">       (:math:`q_{\text{O}}&lt;0`) will flip the direction and produce the correct</span>
+<span class="sd">       orientation.</span>
 
-<span class="sd">           There are no sanity checks; *if the first atom in a water</span>
-<span class="sd">           molecule is not oxygen then results will be wrong.*</span>
+<span class="sd">       There are no sanity checks; *if the first atom in a water</span>
+<span class="sd">       molecule is not oxygen then results will be wrong.*</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The Timeseries functionality (in particular correl) will be removed in</span>
+<span class="sd">       the 0.17 release. See issue `#1372</span>
+<span class="sd">       &lt;https://github.com/MDAnalysis/mdanalysis/issues/1373&gt;`_ for more</span>
+<span class="sd">       details. Use :class:`MDAnalysis.analysis.base.AnalysisFromFunction` instead.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;WaterDipole timeseries requires a 3 atom selection&quot;</span><span class="p">)</span>

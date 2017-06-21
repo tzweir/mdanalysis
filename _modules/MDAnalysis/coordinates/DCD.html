@@ -130,6 +130,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">errno</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="k">import</span> <span class="n">deprecate</span>
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">import</span> <span class="nn">types</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
@@ -627,37 +628,39 @@
         <span class="c1"># XXX needs to be implemented</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_timeseries</span><span class="p">(</span><span class="n">atom_numbers</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="nb">format</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DCDReader.correl"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.DCD.DCDReader.correl">[docs]</a>    <span class="k">def</span> <span class="nf">correl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeseries</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Populate a :class:`~MDAnalysis.core.Timeseries.TimeseriesCollection` object</span>
-<span class="sd">        with time series computed from the trajectory.</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;This method will be removed in 0.17&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">correl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeseries</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Populate a :class:`~MDAnalysis.core.Timeseries.TimeseriesCollection` object</span>
+<span class="sd">with time series computed from the trajectory.</span>
 
-<span class="sd">        Calling this method will iterate through the whole trajectory and</span>
-<span class="sd">        perform the calculations prescribed in `timeseries`.</span>
+<span class="sd">Calling this method will iterate through the whole trajectory and</span>
+<span class="sd">perform the calculations prescribed in `timeseries`.</span>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        timeseries : :class:`MDAnalysis.core.Timeseries.TimeseriesCollection`</span>
-<span class="sd">             The :class:`MDAnalysis.core.Timeseries.TimeseriesCollection` that defines what kind</span>
-<span class="sd">             of computations should be performed on the data in this trajectory.</span>
-<span class="sd">        start :  int (optional)</span>
-<span class="sd">             Begin reading the trajectory at frame index `start` (where 0 is the index</span>
-<span class="sd">             of the first frame in the trajectory); the default ``None`` starts</span>
-<span class="sd">             at the beginning.</span>
-<span class="sd">        stop : int (optional)</span>
-<span class="sd">             End reading the trajectory at frame index `stop`-1, i.e, `stop` is excluded.</span>
-<span class="sd">             The trajectory is read to the end with the default ``None``.</span>
-<span class="sd">        step : int (optional)</span>
-<span class="sd">             Step size for reading; the default ``None`` is equivalent to 1 and means to</span>
-<span class="sd">             read every frame.</span>
+<span class="sd">Parameters</span>
+<span class="sd">----------</span>
+<span class="sd">timeseries : :class:`MDAnalysis.core.Timeseries.TimeseriesCollection`</span>
+<span class="sd">     The :class:`MDAnalysis.core.Timeseries.TimeseriesCollection` that defines what kind</span>
+<span class="sd">     of computations should be performed on the data in this trajectory.</span>
+<span class="sd">start :  int (optional)</span>
+<span class="sd">     Begin reading the trajectory at frame index `start` (where 0 is the index</span>
+<span class="sd">     of the first frame in the trajectory); the default ``None`` starts</span>
+<span class="sd">     at the beginning.</span>
+<span class="sd">stop : int (optional)</span>
+<span class="sd">     End reading the trajectory at frame index `stop`-1, i.e, `stop` is excluded.</span>
+<span class="sd">     The trajectory is read to the end with the default ``None``.</span>
+<span class="sd">step : int (optional)</span>
+<span class="sd">     Step size for reading; the default ``None`` is equivalent to 1 and means to</span>
+<span class="sd">     read every frame.</span>
 
-<span class="sd">        Note</span>
-<span class="sd">        ----</span>
-<span class="sd">        The `correl` functionality is only implemented for DCD trajectories and</span>
-<span class="sd">        the :class:`DCDReader`.</span>
+<span class="sd">Note</span>
+<span class="sd">----</span>
+<span class="sd">The `correl` functionality is only implemented for DCD trajectories and</span>
+<span class="sd">the :class:`DCDReader`.</span>
 
 
-<span class="sd">        .. deprecated:: 0.16.0</span>
-<span class="sd">           `skip` has been deprecated in favor of the standard keyword `step`.</span>
+<span class="sd">.. deprecated:: 0.16.0</span>
+<span class="sd">   `skip` has been deprecated in favor of the standard keyword `step`.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">skip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -674,7 +677,7 @@
         <span class="n">atomcounts</span> <span class="o">=</span> <span class="n">timeseries</span><span class="o">.</span><span class="n">_getAtomCounts</span><span class="p">()</span>
         <span class="n">auxdata</span> <span class="o">=</span> <span class="n">timeseries</span><span class="o">.</span><span class="n">_getAuxData</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_timecorrel</span><span class="p">(</span><span class="n">atomlist</span><span class="p">,</span> <span class="n">atomcounts</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="n">auxdata</span><span class="p">,</span>
-                                     <span class="n">sizedata</span><span class="p">,</span> <span class="n">lowerb</span><span class="p">,</span> <span class="n">upperb</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span></div>
+                                     <span class="n">sizedata</span><span class="p">,</span> <span class="n">lowerb</span><span class="p">,</span> <span class="n">upperb</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcdfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

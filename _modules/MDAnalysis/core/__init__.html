@@ -79,8 +79,6 @@
 <span class="sd">:class:`~MDAnalysis.core.groups.AtomGroup` and return another</span>
 <span class="sd">:class:`~MDAnalysis.core.groups.AtomGroup`.</span>
 
-<span class="sd">:mod:`~MDAnalysis.Timeseries` are a convenient way to analyse trajectories.</span>
-
 <span class="sd">To get started, load the Universe::</span>
 
 <span class="sd">  u = Universe(topology_file, trajectory_file)</span>
@@ -104,6 +102,12 @@
 
 <span class="sd">Flags</span>
 <span class="sd">-----</span>
+
+<span class="sd">.. deprecated:: 0.16.2</span>
+<span class="sd">   The flags registry will be removed in release 1.0.</span>
+<span class="sd">   Use keyword arguments for functions to obtain the desired behavior.</span>
+<span class="sd">   See issue `#782 &lt;https://github.com/MDAnalysis/mdanalysis/issues/782&gt;`_</span>
+<span class="sd">   for more details.</span>
 
 <span class="sd">(This is an advanced topic and can probably be skipped by most people.)</span>
 
@@ -141,8 +145,9 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AtomGroup&#39;</span><span class="p">,</span> <span class="s1">&#39;Selection&#39;</span><span class="p">,</span> <span class="s1">&#39;Timeseries&#39;</span><span class="p">]</span>
 
 
-<span class="c1"># set up flags for core routines (more convoluted than strictly necessary but should</span>
-<span class="c1"># be clean to add more flags if needed)</span>
+<span class="c1"># set up flags for core routines (more convoluted than strictly necessary but</span>
+<span class="c1"># should be clean to add more flags if needed)</span>
+
 <div class="viewcode-block" id="Flags"><a class="viewcode-back" href="../../../documentation_pages/core/init.html#MDAnalysis.core.__init__.Flags">[docs]</a><span class="k">class</span> <span class="nc">Flags</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Global registry of flags. Acts like a dict for item access.</span>
 
@@ -158,6 +163,13 @@
 
 <span class="sd">    New flags are added with the :meth:`Flags.register` method which takes a new :class:`Flag`</span>
 <span class="sd">    instance as an argument.</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The flags registry will be removed in release 1.0.</span>
+<span class="sd">       Use keyword arguments for functions to obtain the desired behavior.</span>
+<span class="sd">       See issue `#782 &lt;https://github.com/MDAnalysis/mdanalysis/issues/782&gt;`_</span>
+<span class="sd">       for more details.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -229,7 +241,14 @@
 
 
 <div class="viewcode-block" id="Flag"><a class="viewcode-back" href="../../../documentation_pages/core/init.html#MDAnalysis.core.__init__.Flag">[docs]</a><span class="k">class</span> <span class="nc">Flag</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A Flag, essentially a variable that knows its default and legal values.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A Flag, essentially a variable that knows its default and legal values.</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       The flags registry will be removed in release 1.0.</span>
+<span class="sd">       Use keyword arguments for functions to obtain the desired behavior.</span>
+<span class="sd">       See issue `#782 &lt;https://github.com/MDAnalysis/mdanalysis/issues/782&gt;`_</span>
+<span class="sd">       for more details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new flag which will be registered with Flags.</span>
@@ -478,7 +497,6 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">groups</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">selection</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Timeseries</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">AtomGroup</span>
 </pre></div>
 

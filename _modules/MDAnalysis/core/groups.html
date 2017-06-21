@@ -150,6 +150,8 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
+<span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="k">import</span> <span class="n">deprecate</span>
+
 <span class="kn">import</span> <span class="nn">MDAnalysis</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">_ANCHOR_UNIVERSES</span>
 <span class="kn">from</span> <span class="nn">..lib</span> <span class="k">import</span> <span class="n">util</span>
@@ -391,7 +393,7 @@
 <span class="k">class</span> <span class="nc">GroupBase</span><span class="p">(</span><span class="n">_MutableBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class from which a Universe&#39;s Group class is built.</span>
 
-<span class="sd">	Instances of :class:`GroupBase` provide the following operations that</span>
+<span class="sd">    Instances of :class:`GroupBase` provide the following operations that</span>
 <span class="sd">    conserve element repetitions and order:</span>
 
 <span class="sd">    +-------------------------------+------------+----------------------------+</span>
@@ -1038,7 +1040,7 @@
                              <span class="s2">&quot;Please use one of &#39;group&#39; &#39;residues&#39; &#39;segments&#39;&quot;</span>
                              <span class="s2">&quot;or &#39;fragments&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">compound</span><span class="p">))</span>
 
-<span class="c1"># TODO: ADD TRY-EXCEPT FOR MASSES PRESENCE</span>
+        <span class="c1"># TODO: ADD TRY-EXCEPT FOR MASSES PRESENCE</span>
         <span class="k">if</span> <span class="n">center</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;com&#39;</span><span class="p">,</span> <span class="s1">&#39;centerofmass&#39;</span><span class="p">):</span>
             <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">o</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">objects</span><span class="p">])</span>
         <span class="k">elif</span> <span class="n">center</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;cog&#39;</span><span class="p">,</span> <span class="s1">&#39;centroid&#39;</span><span class="p">,</span> <span class="s1">&#39;centerofgeometry&#39;</span><span class="p">):</span>
@@ -1401,9 +1403,10 @@
 <div class="viewcode-block" id="AtomGroup"><a class="viewcode-back" href="../../../documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup">[docs]</a><span class="k">class</span> <span class="nc">AtomGroup</span><span class="p">(</span><span class="n">GroupBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A group of atoms.</span>
 
-<span class="sd">    An AtomGroup is an ordered collection of atoms. Typically, an AtomGroup is</span>
-<span class="sd">    generated from a selection, or by indexing/slcing the AtomGroup of all</span>
-<span class="sd">    atoms in the Universe at :attr:`MDAnalysis.core.universe.Universe.atoms`.</span>
+<span class="sd">    An :class:`AtomGroup` is an ordered collection of atoms. Typically, an</span>
+<span class="sd">    :class:`AtomGroup` is generated from a selection, or by indexing/slicing</span>
+<span class="sd">    the :class:`AtomGroup` of all atoms in the :class:`Universe` at</span>
+<span class="sd">    :attr:`MDAnalysis.core.universe.Universe.atoms`.</span>
 
 <span class="sd">    An AtomGroup can be indexed and sliced like a list::</span>
 
@@ -1433,23 +1436,6 @@
 <span class="sd">        produced by slicing. Thus slicing can be used when the order of</span>
 <span class="sd">        atoms is crucial (for instance, in order to define angles or</span>
 <span class="sd">        dihedrals).</span>
-
-<span class="sd">    Atoms can also be accessed in a Pythonic fashion by using the atom name as</span>
-<span class="sd">    an attribute. For instance, ::</span>
-
-<span class="sd">        ag.CA</span>
-
-<span class="sd">    will provide a :class:`AtomGroup` of all CA atoms in the</span>
-<span class="sd">    group. These *instant selector* attributes are auto-generated for</span>
-<span class="sd">    each atom name encountered in the group.</span>
-
-<span class="sd">    .. note::</span>
-
-<span class="sd">        The name-attribute instant selector access to atoms is mainly</span>
-<span class="sd">        meant for quick interactive work. Thus it either returns a</span>
-<span class="sd">        single :class:`Atom` if there is only one matching atom, *or* a</span>
-<span class="sd">        new :class:`AtomGroup` for multiple matches.  This makes it</span>
-<span class="sd">        difficult to use the feature consistently in scripts.</span>
 
 <span class="sd">    AtomGroups can be compared and combined using group operators. For</span>
 <span class="sd">    instance, AtomGroups can be concatenated using `+` or :meth:`concatenate`::</span>
@@ -1536,12 +1522,44 @@
 <span class="sd">    AtomGroup instances are always bound to a</span>
 <span class="sd">    :class:`MDAnalysis.core.universe.Universe`. They cannot exist in isolation.</span>
 
+
+<span class="sd">    .. rubric:: Deprecated functionality</span>
+
+<span class="sd">    *Instant selectors* will be removed in the 1.0 release.  See issue `#1377</span>
+<span class="sd">    &lt;https://github.com/MDAnalysis/mdanalysis/issues/1377&gt;`_ for more details.</span>
+
+<span class="sd">    Atoms can also be accessed in a Pythonic fashion by using the atom name as</span>
+<span class="sd">    an attribute. For instance, ::</span>
+
+<span class="sd">        ag.CA</span>
+
+<span class="sd">    will provide a :class:`AtomGroup` of all CA atoms in the</span>
+<span class="sd">    group. These *instant selector* attributes are auto-generated for</span>
+<span class="sd">    each atom name encountered in the group.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The name-attribute instant selector access to atoms is mainly</span>
+<span class="sd">    meant for quick interactive work. Thus it either returns a</span>
+<span class="sd">    single :class:`Atom` if there is only one matching atom, *or* a</span>
+<span class="sd">    new :class:`AtomGroup` for multiple matches.  This makes it</span>
+<span class="sd">    difficult to use the feature consistently in scripts.</span>
+
+
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    :class:`MDAnalysis.core.universe.Universe`</span>
 
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       *Instant selectors* of AtomGroup will be removed in the 1.0 release.</span>
+<span class="sd">       See :ref:`Instant selectors &lt;instance-selectors&gt;` for details and alternatives.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="c1"># DEPRECATED in 0.16.2</span>
+        <span class="c1"># REMOVE in 1.0</span>
+        <span class="c1">#</span>
         <span class="c1"># u.atoms[&#39;HT1&#39;] access, otherwise default</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
@@ -1551,6 +1569,9 @@
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="c1"># DEPRECATED in 0.16.2</span>
+        <span class="c1"># REMOVE in 1.0</span>
+        <span class="c1">#</span>
         <span class="c1"># is this a known attribute failure?</span>
         <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;fragments&#39;</span><span class="p">,):</span>  <span class="c1"># TODO: Generalise this to cover many attributes</span>
             <span class="c1"># eg:</span>
@@ -2227,6 +2248,11 @@
 
 <span class="sd">    ResidueGroups can be compared and combined using group operators. See the</span>
 <span class="sd">    list of these operators on :class:`GroupBase`.</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       *Instant selectors* of Segments will be removed in the 1.0 release.</span>
+<span class="sd">       See :ref:`Instant selectors &lt;instance-selectors&gt;` for details and alternatives.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
@@ -2341,6 +2367,11 @@
 
 <span class="sd">    SegmentGroups can be compared and combined using group operators. See the</span>
 <span class="sd">    list of these operators on :class:`GroupBase`.</span>
+
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       *Instant selectors* of Segments will be removed in the 1.0 release.</span>
+<span class="sd">       See :ref:`Instant selectors &lt;instance-selectors&gt;` for details and alternatives.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
@@ -2509,7 +2540,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ix_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Unique index of this component as an array.</span>
-<span class="sd">        </span>
+
 <span class="sd">        This method gives a consistent API between components and groups.</span>
 
 <span class="sd">        See Also</span>
@@ -2686,6 +2717,10 @@
 <span class="sd">    ComponentBase, so this class only includes ad-hoc methods specific to</span>
 <span class="sd">    Segments.</span>
 
+<span class="sd">    .. deprecated:: 0.16.2</span>
+<span class="sd">       *Instant selectors* of Segments will be removed in the 1.0 release.</span>
+<span class="sd">       See :ref:`Instant selectors &lt;instance-selectors&gt;` for details and alternatives.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">me</span> <span class="o">=</span> <span class="s1">&#39;&lt;Segment&#39;</span>
@@ -2702,10 +2737,17 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">resindices</span><span class="p">[</span><span class="bp">self</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
 
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="c1"># DEPRECATED in 0.16.2</span>
+        <span class="c1"># REMOVE in 1.0</span>
+        <span class="c1">#</span>
         <span class="c1"># Segment.r1 access</span>
         <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
             <span class="n">resnum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">attr</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">resnum</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># convert to 0 based</span>
+            <span class="n">rg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">resnum</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># convert to 0 based</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Instant selectors Segment.r&lt;N&gt; will be removed in 1.0. &quot;</span>
+                          <span class="s2">&quot;Use Segment.residues[N-1] instead.&quot;</span><span class="p">,</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">rg</span>
         <span class="c1"># Resname accesss</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">,</span> <span class="s1">&#39;resnames&#39;</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>

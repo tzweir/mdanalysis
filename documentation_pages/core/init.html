@@ -55,7 +55,6 @@ simulation is called the
 <a class="reference internal" href="universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>. Selections are computed on an
 <a class="reference internal" href="groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> and return another
 <a class="reference internal" href="groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
-<p><code class="xref py py-mod docutils literal"><span class="pre">Timeseries</span></code> are a convenient way to analyse trajectories.</p>
 <p>To get started, load the Universe:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">trajectory_file</span><span class="p">)</span>
 </pre></div>
@@ -75,6 +74,12 @@ the coordinates as a numpy array</p>
 <p>and write your own Python code.</p>
 <div class="section" id="flags">
 <span id="flags-label"></span><h2>9.4.1.1. Flags<a class="headerlink" href="#flags" title="Permalink to this headline">¶</a></h2>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span>The flags registry will be removed in release 1.0.
+Use keyword arguments for functions to obtain the desired behavior.
+See issue <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/782">#782</a>
+for more details.</p>
+</div>
 <p>(This is an advanced topic and can probably be skipped by most people.)</p>
 <p>There are a number flags that influence how MDAnalysis behaves. They are accessible
 through the pseudo-dictionary <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code>.</p>
@@ -229,6 +234,12 @@ raise a <code class="xref py py-exc docutils literal"><span class="pre">ValueErr
 </div>
 <p>New flags are added with the <a class="reference internal" href="#MDAnalysis.core.__init__.Flags.register" title="MDAnalysis.core.__init__.Flags.register"><code class="xref py py-meth docutils literal"><span class="pre">Flags.register()</span></code></a> method which takes a new <a class="reference internal" href="#MDAnalysis.core.__init__.Flag" title="MDAnalysis.core.__init__.Flag"><code class="xref py py-class docutils literal"><span class="pre">Flag</span></code></a>
 instance as an argument.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span>The flags registry will be removed in release 1.0.
+Use keyword arguments for functions to obtain the desired behavior.
+See issue <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/782">#782</a>
+for more details.</p>
+</div>
 <p>For DEVELOPERS: Initialize Flags registry with a <em>list</em> of <a class="reference internal" href="#MDAnalysis.core.__init__.Flag" title="MDAnalysis.core.__init__.Flag"><code class="xref py py-class docutils literal"><span class="pre">Flag</span></code></a> instances.</p>
 <dl class="method">
 <dt id="MDAnalysis.core.__init__.Flags.doc">
@@ -254,6 +265,12 @@ instance as an argument.</p>
 <dt id="MDAnalysis.core.__init__.Flag">
 <em class="property">class </em><code class="descclassname">MDAnalysis.core.__init__.</code><code class="descname">Flag</code><span class="sig-paren">(</span><em>name</em>, <em>default</em>, <em>mapping=None</em>, <em>doc=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/__init__.html#Flag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.__init__.Flag" title="Permalink to this definition">¶</a></dt>
 <dd><p>A Flag, essentially a variable that knows its default and legal values.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span>The flags registry will be removed in release 1.0.
+Use keyword arguments for functions to obtain the desired behavior.
+See issue <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/782">#782</a>
+for more details.</p>
+</div>
 <p>Create a new flag which will be registered with Flags.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

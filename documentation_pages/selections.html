@@ -307,7 +307,15 @@ across frames:</p>
 </div>
 </div>
 <div class="section" id="instant-selectors">
-<h2>3.3. Instant selectors<a class="headerlink" href="#instant-selectors" title="Permalink to this headline">¶</a></h2>
+<span id="instance-selectors"></span><h2>3.3. Instant selectors<a class="headerlink" href="#instant-selectors" title="Permalink to this headline">¶</a></h2>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span><em>Instant selectors</em> will be removed in the 1.0 release in order to
+streamline the MDAnalysis user interface. They do not seem to be
+widely used anymore, can produce cryptic error messages, and are
+not considered &#8220;Pythonic&#8221; (and therefore not very intuitive for new
+users). See issue <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/1377">#1377</a> for more
+details.</p>
+</div>
 <p>For interactive work it becomes rather tedious to type common selection strings
 repeatedly. MDAnalysis automatically generates a number of <em>instant selectors</em>
 as attributes of the <a class="reference internal" href="core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> and number of
@@ -319,6 +327,11 @@ other levels of the structural hierarchy, namely for
 <a class="reference internal" href="core/groups.html#MDAnalysis.core.groups.SegmentGroup" title="MDAnalysis.core.groups.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>.</p>
 <div class="section" id="segment-selector">
 <h3>3.3.1. Segment selector<a class="headerlink" href="#segment-selector" title="Permalink to this headline">¶</a></h3>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span>Use <code class="docutils literal"><span class="pre">SegmentGroup[SegmentGroup.segids</span> <span class="pre">==</span> <span class="pre">'&lt;name&gt;']</span></code> instead. Note that this
+<em>always</em> returns a <code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code> and <em>never</em> a <code class="xref py py-class docutils literal"><span class="pre">Segment</span></code>
+(unlike the instant selector).</p>
+</div>
 <ul>
 <li><p class="first"><code class="docutils literal"><span class="pre">universe.&lt;segid&gt;</span></code> or <code class="docutils literal"><span class="pre">universe.s&lt;segid&gt;</span></code> (if <em>&lt;segid&gt;</em> starts with a
 number)</p>
@@ -340,6 +353,9 @@ number)</p>
 </div>
 <div class="section" id="resid-selector">
 <h3>3.3.2. Resid selector<a class="headerlink" href="#resid-selector" title="Permalink to this headline">¶</a></h3>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span>Use <code class="docutils literal"><span class="pre">Segment.residues[N-1]</span></code> instead.</p>
+</div>
 <ul>
 <li><p class="first"><code class="docutils literal"><span class="pre">seg.r&lt;N&gt;</span></code> selects residue with number <code class="docutils literal"><span class="pre">&lt;N&gt;</span></code></p>
 </li>
@@ -360,6 +376,12 @@ number)</p>
 </div>
 <div class="section" id="residue-name-selector">
 <h3>3.3.3. Residue name selector<a class="headerlink" href="#residue-name-selector" title="Permalink to this headline">¶</a></h3>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span>Use <code class="docutils literal"><span class="pre">ResidueGroup[ResidueGroup.resnames</span> <span class="pre">==</span> <span class="pre">'&lt;name&gt;']</span></code> or
+<code class="docutils literal"><span class="pre">Segment.residues[Segment.residues</span> <span class="pre">==</span> <span class="pre">'&lt;name&gt;']</span></code> instead. Note that this
+<em>always</em> returns a <code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code> and <em>never</em> a <code class="xref py py-class docutils literal"><span class="pre">Residue</span></code>
+(unlike the instant selector).</p>
+</div>
 <ul>
 <li><p class="first"><code class="docutils literal"><span class="pre">seg.&lt;resname&gt;</span></code> selects residues with residue name <code class="docutils literal"><span class="pre">&lt;resname&gt;</span></code></p>
 </li>
@@ -387,6 +409,11 @@ residues can be found then a <code class="xref py py-exc docutils literal"><span
 </div>
 <div class="section" id="atom-name-selector">
 <h3>3.3.4. Atom name selector<a class="headerlink" href="#atom-name-selector" title="Permalink to this headline">¶</a></h3>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.16.2: </span>Use <code class="docutils literal"><span class="pre">AtomGroup.select_atoms('name</span> <span class="pre">&lt;name&gt;')</span></code> instead. Note that this
+<em>always</em> returns an <code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code> and <em>never</em> an <code class="xref py py-class docutils literal"><span class="pre">Atom</span></code> (unlike
+the instant selector).</p>
+</div>
 <ul>
 <li><p class="first"><code class="docutils literal"><span class="pre">g.&lt;atomname&gt;</span></code> selects a single atom or a group of atoms with name
 <code class="docutils literal"><span class="pre">&lt;atomname&gt;</span></code></p>

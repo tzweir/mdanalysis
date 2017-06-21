@@ -96,6 +96,11 @@
 <span class="sd">Quick segid selection</span>
 <span class="sd">---------------------</span>
 
+<span class="sd">.. deprecated:: 0.16.2</span>
+<span class="sd">   Instant selectors will be removed in the 1.0 release.  See issue `#1377</span>
+<span class="sd">   &lt;https://github.com/MDAnalysis/mdanalysis/issues/1377&gt;`_ for more details.</span>
+
+
 <span class="sd">If the loaded topology provided segids, then these are made accessible</span>
 <span class="sd">as attributes of the Universe.  If the segid starts with a number such</span>
 <span class="sd">as &#39;4AKE&#39;, the letter &#39;s&#39; will be prepended to the segid.</span>
@@ -362,6 +367,10 @@
 
         <span class="c1"># Update Universe namespace with segids</span>
         <span class="c1"># Many segments can have same segid, so group together first</span>
+        <span class="c1">#</span>
+        <span class="c1"># DEPRECATED in 0.16.2</span>
+        <span class="c1"># REMOVE in 1.0</span>
+        <span class="c1"># See https://github.com/MDAnalysis/mdanalysis/issues/1377</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># returns dict of segid:segment</span>
             <span class="n">segids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;segids&#39;</span><span class="p">)</span>
@@ -541,7 +550,7 @@
             <span class="c1"># object, to provide fast access and allow coordinates</span>
             <span class="c1"># to be manipulated</span>
             <span class="k">if</span> <span class="n">step</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span> 
+                <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span> <span class="o">=</span> <span class="n">MemoryReader</span><span class="p">(</span>
                 <span class="n">coordinates</span><span class="p">,</span>
                 <span class="n">dimensions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span>
