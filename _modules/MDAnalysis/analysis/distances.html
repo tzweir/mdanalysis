@@ -91,6 +91,7 @@
            <span class="s1">&#39;contact_matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span><span class="p">,</span> <span class="s1">&#39;between&#39;</span><span class="p">]</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span>
 
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.distances</span> <span class="k">import</span> <span class="n">distance_array</span><span class="p">,</span> <span class="n">self_distance_array</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.c_distances</span> <span class="k">import</span> <span class="n">contact_matrix_no_pbc</span><span class="p">,</span> <span class="n">contact_matrix_pbc</span>
@@ -100,15 +101,6 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis.analysis.distances&quot;</span><span class="p">)</span>
 
-<span class="k">try</span><span class="p">:</span>
-   <span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">sparse</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-   <span class="n">sparse</span> <span class="o">=</span> <span class="kc">None</span>
-   <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;scipy.sparse could not be imported: some functionality will &quot;</span> \
-         <span class="s2">&quot;not be available in contact_matrix()&quot;</span>
-   <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">ImportWarning</span><span class="p">)</span>
-   <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-   <span class="k">del</span> <span class="n">msg</span>
 
 <div class="viewcode-block" id="contact_matrix"><a class="viewcode-back" href="../../../documentation_pages/analysis/distances.html#MDAnalysis.analysis.distances.contact_matrix">[docs]</a><span class="k">def</span> <span class="nf">contact_matrix</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">returntype</span><span class="o">=</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Calculates a matrix of contacts.</span>
@@ -142,12 +134,6 @@
 <span class="sd">       The contact matrix is returned in a format determined by the `returntype`</span>
 <span class="sd">       keyword.</span>
 
-
-<span class="sd">    Note</span>
-<span class="sd">    ----</span>
-<span class="sd">    :mod:`scipy.sparse` is require for using *sparse* matrices; if it cannot</span>
-<span class="sd">    be imported then an `ImportError` is raised.</span>
-
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    :mod:`MDAnalysis.analysis.contacts` for native contact analysis</span>
@@ -161,14 +147,9 @@
         <span class="n">adj</span> <span class="o">=</span> <span class="p">(</span><span class="n">distance_array</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">box</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">cutoff</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">adj</span>
     <span class="k">elif</span> <span class="n">returntype</span> <span class="o">==</span> <span class="s2">&quot;sparse&quot;</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">sparse</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># hack: if we are running with minimal dependencies then scipy was</span>
-            <span class="c1">#       not imported and we have to bail here (see scipy import at top)</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;For sparse matrix functionality you need to &quot;</span>
-                              <span class="s2">&quot;import scipy.&quot;</span><span class="p">)</span>
         <span class="c1"># Initialize square List of Lists matrix of dimensions equal to number</span>
         <span class="c1"># of coordinates passed</span>
-        <span class="n">sparse_contacts</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;bool&#39;</span><span class="p">)</span>
+        <span class="n">sparse_contacts</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;bool&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># with PBC</span>
             <span class="n">contact_matrix_pbc</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">sparse_contacts</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span>

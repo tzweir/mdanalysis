@@ -223,13 +223,18 @@ characteristic time</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>p_guess</strong> (<em>tuple of floats</em><em>, </em><em>optional</em>) &#8211; Initial guess for the leastsq fit, must match the shape of the
-expected coefficients</li>
-<li><strong>defition results are fitted to a double exponential</strong><strong>,</strong> (<em>Continuous</em>) &#8211; </li>
-<li><strong>definition are fit to a triple exponential.</strong> (<em>intermittent</em>) &#8211; </li>
-<li><strong>results of this fitting procedure are saved into the fit</strong><strong>,</strong> (<em>The</em>) &#8211; </li>
-<li><strong>and estimate keywords in the solution dict.</strong> (<em>*tau*</em>) &#8211; <ul>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p_guess</strong> (<em>tuple of floats</em><em>, </em><em>optional</em>) &#8211; Initial guess for the leastsq fit, must match the shape of the
+expected coefficients</td>
+</tr>
+</tbody>
+</table>
+<p>Continuous defition results are fitted to a double exponential with
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq" title="(in SciPy v0.19.1)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.leastsq()</span></code></a>, intermittent definition are fit to a
+triple exponential.</p>
+<p>The results of this fitting procedure are saved into the <em>fit</em>,
+<em>tau</em> and <em>estimate</em> keywords in the solution dict.</p>
+<blockquote>
+<div><ul class="simple">
 <li><em>fit</em> contains the coefficients, (A1, tau1, tau2) or
 (A1, A2, tau1, tau2, tau3)</li>
 <li><em>tau</em> contains the calculated lifetime in ps for the hydrogen
@@ -237,19 +242,16 @@ bonding</li>
 <li><em>estimate</em> contains the estimate provided by the fit of the time
 autocorrelation function</li>
 </ul>
-</li>
-<li><strong>addition</strong><strong>, </strong><strong>the output of the leastsq function is saved into the</strong> (<em>In</em>) &#8211; </li>
-<li><strong>dict</strong> (<em>solution</em>) &#8211; <ul>
+</div></blockquote>
+<p>In addition, the output of the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq" title="(in SciPy v0.19.1)"><code class="xref py py-func docutils literal"><span class="pre">leastsq()</span></code></a> function
+is saved into the solution dict</p>
+<blockquote>
+<div><ul class="simple">
 <li><em>infodict</em></li>
 <li><em>mesg</em></li>
 <li><em>ier</em></li>
 </ul>
-</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">

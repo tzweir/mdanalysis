@@ -294,7 +294,6 @@
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span><span class="p">,</span> <span class="n">cPickle</span>
 <span class="kn">import</span> <span class="nn">six</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">errno</span>
@@ -306,6 +305,10 @@
 <span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">cycle</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="k">import</span> <span class="n">Universe</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.exceptions</span> <span class="k">import</span> <span class="n">ApplicationError</span>
@@ -419,8 +422,6 @@
         <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">),</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_process_plot_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">matplotlib.colors</span>
-
         <span class="n">kw</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">frames</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;frames&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">frames</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -497,9 +498,6 @@
 <span class="sd">           Returns ``ax``.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
         <span class="n">kw</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_plot_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="n">ax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ax&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -566,8 +564,7 @@
 <span class="sd">           Returns ``ax``.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="c1"># installed with matplotlib; imported here to enable 3D axes</span>
         <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
 
         <span class="n">kw</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_plot_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
@@ -589,8 +586,7 @@
                 <span class="n">rxncoord</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">rxncoord</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># does not seem to work with masked arrays but with nan hack!</span>
-                <span class="c1"># http://stackoverflow.com/questions/4913306/python-matplotlib-mplot3d-how-do-i-set-a-maximum-value</span>
-                <span class="c1"># -for-the-z-axis</span>
+                <span class="c1"># http://stackoverflow.com/questions/4913306/python-matplotlib-mplot3d-how-do-i-set-a-maximum-value-for-the-z-axis</span>
                 <span class="c1">#radius = np.ma.masked_greater(profile.radius, rmax)</span>
                 <span class="c1">#rxncoord = np.ma.array(profile.rxncoord, mask=radius.mask)</span>
                 <span class="n">rxncoord</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">rxncoord</span>

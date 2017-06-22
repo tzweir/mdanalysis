@@ -265,7 +265,11 @@
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">range</span><span class="p">,</span> <span class="n">cPickle</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">warnings</span><span class="o">,</span><span class="nn">numbers</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">spatial</span><span class="p">,</span> <span class="n">cluster</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">numbers</span>
 
 <span class="kn">import</span> <span class="nn">MDAnalysis</span>
 <span class="kn">import</span> <span class="nn">MDAnalysis.analysis.align</span>
@@ -445,13 +449,15 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    - The Hausdorff distance is calculated in a brute force manner from the</span>
-<span class="sd">      distance matrix without further optimizations, essentially following</span>
-<span class="sd">      [Huttenlocher1993]_.</span>
-<span class="sd">    - :func:`scipy.spatial.distance.directed_hausdorff` is an optimized</span>
-<span class="sd">      implementation of the early break algorithm of [Taha2015]_; note that</span>
-<span class="sd">      one still has to calculate the *symmetric* Hausdorff distance as</span>
-<span class="sd">      `max(directed_hausdorff(P, Q)[0], directed_hausdorff(Q, P)[0])`.</span>
+<span class="sd">    The Hausdorff distance is calculated in a brute force manner from the</span>
+<span class="sd">    distance matrix without further optimizations, essentially following</span>
+<span class="sd">    [Huttenlocher1993]_.</span>
+
+<span class="sd">    :func:`scipy.spatial.distance.directed_hausdorff` is an optimized</span>
+<span class="sd">    implementation of the early break algorithm of [Taha2015]_; note that one</span>
+<span class="sd">    still has to calculate the *symmetric* Hausdorff distance as</span>
+<span class="sd">    `max(directed_hausdorff(P, Q)[0], directed_hausdorff(Q, P)[0])`.</span>
+
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
@@ -459,16 +465,20 @@
 <span class="sd">        W. J. Rucklidge. Comparing images using the Hausdorff distance. IEEE</span>
 <span class="sd">        Transactions on Pattern Analysis and Machine Intelligence,</span>
 <span class="sd">        15(9):850–863, 1993.</span>
-
 <span class="sd">    .. [Taha2015] A. A. Taha and A. Hanbury. An efficient algorithm for</span>
 <span class="sd">       calculating the exact Hausdorff distance. IEEE Transactions On Pattern</span>
 <span class="sd">       Analysis And Machine Intelligence, 37:2153-63, 2015.</span>
 
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    scipy.spatial.distance.directed_hausdorff</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">N</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">get_coord_axes</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">get_msd_matrix</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span> <span class="nb">max</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>                                  \
-                  <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="p">)</span> <span class="o">/</span> <span class="n">N</span>  <span class="p">)</span><span class="o">**</span><span class="mf">0.5</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span> <span class="o">/</span> <span class="n">N</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span></div>
 
 
 <div class="viewcode-block" id="hausdorff_wavg"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.hausdorff_wavg">[docs]</a><span class="k">def</span> <span class="nf">hausdorff_wavg</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
@@ -1699,7 +1709,7 @@
 
 <span class="sd">        If `filename` is supplied then the figure is also written to file (the</span>
 <span class="sd">        suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>
-<span class="sd">        keyword arguments are passed on to :func:`matplotlib.pyplot.imshow`.</span>
+<span class="sd">        keyword arguments are passed on to :func:`matplotlib.pyplot.matshow`.</span>
 
 
 <span class="sd">        Parameters</span>
@@ -1717,6 +1727,15 @@
 <span class="sd">        labelsize : float</span>
 <span class="sd">             set the font size for colorbar labels; font size for path labels on</span>
 <span class="sd">             dendrogram default to 3 points smaller [``12``]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Z</span>
+<span class="sd">          `Z` from :meth:`cluster`</span>
+<span class="sd">        dgram</span>
+<span class="sd">          `dgram` from :meth:`cluster`</span>
+<span class="sd">        dist_matrix_clus</span>
+<span class="sd">          clustered distance matrix (reordered)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">cm</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">clf</span>
@@ -1819,6 +1838,23 @@
 <span class="sd">        annot_size : float</span>
 <span class="sd">             font size of annotation labels on heat map [``6.5``]</span>
 
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Z</span>
+<span class="sd">          `Z` from :meth:`cluster`</span>
+<span class="sd">        dgram</span>
+<span class="sd">          `dgram` from :meth:`cluster`</span>
+<span class="sd">        dist_matrix_clus</span>
+<span class="sd">          clustered distance matrix (reordered)</span>
+
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        This function requires the seaborn_ package, which can be installed</span>
+<span class="sd">        with `pip install seaborn` or `conda install seaborn`.</span>
+
+<span class="sd">        .. _seaborn: https://seaborn.pydata.org/</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">cm</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">clf</span>
 
@@ -1919,6 +1955,17 @@
 <span class="sd">             set the font size for colorbar labels; font size for path labels on</span>
 <span class="sd">             dendrogram default to 3 points smaller [``12``]</span>
 
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ax : axes</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        This function requires the seaborn_ package, which can be installed</span>
+<span class="sd">        with `pip install seaborn` or `conda install seaborn`.</span>
+
+<span class="sd">        .. _seaborn: https://seaborn.pydata.org/</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="k">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">tight_layout</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">show</span>
         <span class="k">try</span><span class="p">:</span>
@@ -1976,7 +2023,8 @@
             <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targetdir</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">datadirs</span><span class="p">[</span><span class="s1">&#39;plots&#39;</span><span class="p">]</span>
             <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
             <span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-        <span class="n">show</span><span class="p">()</span></div>
+
+        <span class="k">return</span> <span class="n">ax</span></div>
 
 
 <div class="viewcode-block" id="PSAnalysis.cluster"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.cluster">[docs]</a>    <span class="k">def</span> <span class="nf">cluster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distArray</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">,</span> <span class="n">count_sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>               \
@@ -2004,21 +2052,27 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        list</span>
+<span class="sd">        Z</span>
+<span class="sd">            output from :func:`scipy.cluster.hierarchy.linkage`;</span>
 <span class="sd">            list of indices representing the row-wise order of the objects</span>
 <span class="sd">            after clustering</span>
+<span class="sd">        dgram</span>
+<span class="sd">            output from :func:`scipy.cluster.hierarchy.dendrogram`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">matplotlib</span>
-        <span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="k">import</span> <span class="n">linkage</span><span class="p">,</span> <span class="n">dendrogram</span>
-
+        <span class="c1"># perhaps there is a better way to manipulate the plot... or perhaps it</span>
+        <span class="c1"># is not even necessary? In any case, the try/finally makes sure that</span>
+        <span class="c1"># we are not permanently changing the user&#39;s global state</span>
+        <span class="n">orig_linewidth</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.linewidth&#39;</span><span class="p">]</span>
         <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
-
-        <span class="n">Z</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">distArray</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
-        <span class="n">dgram</span> <span class="o">=</span> <span class="n">dendrogram</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">no_labels</span><span class="o">=</span><span class="n">no_labels</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>          \
-                           <span class="n">count_sort</span><span class="o">=</span><span class="n">count_sort</span><span class="p">,</span> <span class="n">distance_sort</span><span class="o">=</span><span class="n">distance_sort</span><span class="p">,</span>  \
-                           <span class="n">no_plot</span><span class="o">=</span><span class="n">no_plot</span><span class="p">,</span> <span class="n">color_threshold</span><span class="o">=</span><span class="n">color_threshold</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Z</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">hierarchy</span><span class="o">.</span><span class="n">linkage</span><span class="p">(</span><span class="n">distArray</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+            <span class="n">dgram</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">hierarchy</span><span class="o">.</span><span class="n">dendrogram</span><span class="p">(</span>
+                <span class="n">Z</span><span class="p">,</span> <span class="n">no_labels</span><span class="o">=</span><span class="n">no_labels</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+                <span class="n">count_sort</span><span class="o">=</span><span class="n">count_sort</span><span class="p">,</span> <span class="n">distance_sort</span><span class="o">=</span><span class="n">distance_sort</span><span class="p">,</span>
+                <span class="n">no_plot</span><span class="o">=</span><span class="n">no_plot</span><span class="p">,</span> <span class="n">color_threshold</span><span class="o">=</span><span class="n">color_threshold</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">orig_linewidth</span>
         <span class="k">return</span> <span class="n">Z</span><span class="p">,</span> <span class="n">dgram</span></div>
-
 
     <span class="k">def</span> <span class="nf">_get_plot_obj_locs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Find and return coordinates for dendrogram, heat map, and colorbar.</span>
@@ -2054,7 +2108,8 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        the number of atoms</span>
+<span class="sd">        int</span>
+<span class="sd">            the number of atoms</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
@@ -2126,8 +2181,7 @@
             <span class="n">err_str</span> <span class="o">=</span> <span class="s2">&quot;No distance data; do &#39;PSAnalysis.run(store=True)&#39; first.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">vectorform</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="k">import</span> <span class="n">squareform</span>
-            <span class="k">return</span> <span class="n">squareform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">squareform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span></div>
 

@@ -204,6 +204,8 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span>
+
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="k">import</span> <span class="n">ProgressMeter</span>
@@ -211,7 +213,7 @@
 
 
 <div class="viewcode-block" id="HydrogenBondAutoCorrel"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel">[docs]</a><span class="k">class</span> <span class="nc">HydrogenBondAutoCorrel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Perform a time autocorrelation of the hydrogen bonds in the system. </span>
+    <span class="sd">&quot;&quot;&quot;Perform a time autocorrelation of the hydrogen bonds in the system.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -470,8 +472,10 @@
 <span class="sd">            Initial guess for the leastsq fit, must match the shape of the</span>
 <span class="sd">            expected coefficients</span>
 
-<span class="sd">        Continuous defition results are fitted to a double exponential,</span>
-<span class="sd">        intermittent definition are fit to a triple exponential.</span>
+
+<span class="sd">        Continuous defition results are fitted to a double exponential with</span>
+<span class="sd">        :func:`scipy.optimize.leastsq`, intermittent definition are fit to a</span>
+<span class="sd">        triple exponential.</span>
 
 <span class="sd">        The results of this fitting procedure are saved into the *fit*,</span>
 <span class="sd">        *tau* and *estimate* keywords in the solution dict.</span>
@@ -483,14 +487,14 @@
 <span class="sd">         - *estimate* contains the estimate provided by the fit of the time</span>
 <span class="sd">           autocorrelation function</span>
 
-<span class="sd">        In addition, the output of the leastsq function is saved into the</span>
-<span class="sd">        solution dict</span>
+<span class="sd">        In addition, the output of the :func:`~scipy.optimize.leastsq` function</span>
+<span class="sd">        is saved into the solution dict</span>
 
 <span class="sd">         - *infodict*</span>
 <span class="sd">         - *mesg*</span>
 <span class="sd">         - *ier*</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">leastsq</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -547,9 +551,8 @@
             <span class="k">if</span> <span class="n">p_guess</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">p_guess</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">)</span>
 
-            <span class="n">p</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">p_guess</span><span class="p">,</span>
-                                                  <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">),</span>
-                                                  <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">p</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">leastsq</span><span class="p">(</span>
+                <span class="n">err</span><span class="p">,</span> <span class="n">p_guess</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">),</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;fit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">A1</span><span class="p">,</span> <span class="n">tau1</span><span class="p">,</span> <span class="n">tau2</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">A2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">A1</span>
@@ -561,9 +564,8 @@
                 <span class="n">p_guess</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span>
                            <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">)</span>
 
-            <span class="n">p</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">p_guess</span><span class="p">,</span>
-                                                  <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">),</span>
-                                                  <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">leastsq</span><span class="p">(</span>
+                <span class="n">err</span><span class="p">,</span> <span class="n">p_guess</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">),</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;fit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">,</span> <span class="n">tau1</span><span class="p">,</span> <span class="n">tau2</span><span class="p">,</span> <span class="n">tau3</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">A3</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">A1</span> <span class="o">-</span> <span class="n">A2</span>
