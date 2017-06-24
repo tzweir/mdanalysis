@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.19. TRZ trajectory I/O — MDAnalysis.coordinates.TRZ &#8212; MDAnalysis 0.16.2-dev0 documentation</title>
+    <title>6.19. TRZ trajectory I/O — MDAnalysis.coordinates.TRZ &#8212; MDAnalysis 0.17.0-dev documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.16.2-dev0',
+        VERSION:     '0.17.0-dev',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MDAnalysis 0.16.2-dev0 documentation"
+          title="Search within MDAnalysis 0.17.0-dev documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -50,9 +50,11 @@
             
   <span class="target" id="module-MDAnalysis.coordinates.TRZ"></span><div class="section" id="trz-trajectory-i-o-mdanalysis-coordinates-trz">
 <h1>6.19. TRZ trajectory I/O  &#8212; <a class="reference internal" href="#module-MDAnalysis.coordinates.TRZ" title="MDAnalysis.coordinates.TRZ"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.TRZ</span></code></a><a class="headerlink" href="#trz-trajectory-i-o-mdanalysis-coordinates-trz" title="Permalink to this headline">¶</a></h1>
-<p>Classes to read <a class="reference external" href="http://www.theo.chemie.tu-darmstadt.de/ibisco/IBISCO.html">IBIsCO</a> / <a class="reference external" href="http://www.theo.chemie.tu-darmstadt.de/group/services/yaspdoc/yaspdoc.html">YASP</a> binary trajectories.</p>
-<p>Reads coordinates, velocities and more (see attributes of the
-<a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>).</p>
+<p>Classes to read <a class="reference external" href="http://www.theo.chemie.tu-darmstadt.de/ibisco/IBISCO.html">IBIsCO</a> / <a class="reference external" href="http://www.theo.chemie.tu-darmstadt.de/group/services/yaspdoc/yaspdoc.html">YASP</a> TRZ binary trajectories, including
+coordinates, velocities and more (see attributes of the <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>).</p>
+<p>Data are read and written in binary representation but because this depends on
+the machine hardware architecture, MDAnalysis <em>always</em> reads and writes TRZ
+trajectories in <em>little-endian</em> byte order.</p>
 <div class="section" id="classes">
 <h2>6.19.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -150,41 +152,23 @@ the <code class="docutils literal"><span class="pre">has_*</span></code> attribu
 <dt id="MDAnalysis.coordinates.TRZ.TRZReader">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRZ.</code><code class="descname">TRZReader</code><span class="sig-paren">(</span><em>trzfilename</em>, <em>n_atoms=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRZ.html#TRZReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRZ.TRZReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an IBIsCO or YASP trajectory file</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first docutils">
-<dt>ts</dt>
-<dd><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object
-containing coordinates of current frame</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Methods:</th><td class="field-body"><dl class="first last docutils">
-<dt><code class="docutils literal"><span class="pre">len(trz)</span></code></dt>
-<dd><p class="first last">returns the number of frames</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">trz</span></code></dt>
-<dd><p class="first last">iterates through the trajectory</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">trz[start:stop:skip]</span></code></dt>
-<dd><p class="first last">iterate through a trajectory using slicing</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">trz[i]</span></code></dt>
-<dd><p class="first last">random access of a trajectory frame</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.TRZ.TRZReader.ts">
+<code class="descname">ts</code><a class="headerlink" href="#MDAnalysis.coordinates.TRZ.TRZReader.ts" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>TRZ.Timestep</em> &#8211; <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object containing
+coordinates of current frame</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Binary TRZ trajectories are <em>always</em> assumed to be written in
+<em>little-endian</em> byte order and are read as such.</p>
+</div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based.
 Extra data (Temperature, Energies, Pressures, etc) now read
-into ts.data dictionary
-Now passes a weakref of self to ts (ts._reader)</p>
+into ts.data dictionary.
+Now passes a weakref of self to ts (ts._reader).</p>
 </div>
 <p>Creates a TRZ Reader</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -242,14 +226,10 @@ Now passes a weakref of self to ts (ts._reader)</p>
 <dt id="MDAnalysis.coordinates.TRZ.TRZWriter">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRZ.</code><code class="descname">TRZWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>title='TRZ'</em>, <em>convert_units=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRZ.html#TRZWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRZ.TRZWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a TRZ format trajectory.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Methods:</th><td class="field-body"><code class="docutils literal"><span class="pre">W</span> <span class="pre">=</span> <span class="pre">TRZWriter(trzfilename,</span> <span class="pre">n_atoms,</span> <span class="pre">title='TRZ')</span></code></td>
-</tr>
-</tbody>
-</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Binary TRZ trajectories are <em>always</em> written in <em>little-endian</em> byte order.</p>
+</div>
 <p>Create a TRZWriter</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -280,41 +260,23 @@ the value of <code class="xref py py-data docutils literal"><span class="pre">MD
 <dt>
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRZ.</code><code class="descname">TRZReader</code><span class="sig-paren">(</span><em>trzfilename</em>, <em>n_atoms=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRZ.html#TRZReader"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Reads an IBIsCO or YASP trajectory file</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first docutils">
-<dt>ts</dt>
-<dd><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object
-containing coordinates of current frame</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Methods:</th><td class="field-body"><dl class="first last docutils">
-<dt><code class="docutils literal"><span class="pre">len(trz)</span></code></dt>
-<dd><p class="first last">returns the number of frames</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">trz</span></code></dt>
-<dd><p class="first last">iterates through the trajectory</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">trz[start:stop:skip]</span></code></dt>
-<dd><p class="first last">iterate through a trajectory using slicing</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">trz[i]</span></code></dt>
-<dd><p class="first last">random access of a trajectory frame</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
+<dl class="attribute">
+<dt>
+<code class="descname">ts</code></dt>
+<dd><p><em>TRZ.Timestep</em> &#8211; <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object containing
+coordinates of current frame</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Binary TRZ trajectories are <em>always</em> assumed to be written in
+<em>little-endian</em> byte order and are read as such.</p>
+</div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based.
 Extra data (Temperature, Energies, Pressures, etc) now read
-into ts.data dictionary
-Now passes a weakref of self to ts (ts._reader)</p>
+into ts.data dictionary.
+Now passes a weakref of self to ts (ts._reader).</p>
 </div>
 <p>Creates a TRZ Reader</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -372,14 +334,10 @@ Now passes a weakref of self to ts (ts._reader)</p>
 <dt>
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRZ.</code><code class="descname">TRZWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>title='TRZ'</em>, <em>convert_units=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRZ.html#TRZWriter"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Writes a TRZ format trajectory.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Methods:</th><td class="field-body"><code class="docutils literal"><span class="pre">W</span> <span class="pre">=</span> <span class="pre">TRZWriter(trzfilename,</span> <span class="pre">n_atoms,</span> <span class="pre">title='TRZ')</span></code></td>
-</tr>
-</tbody>
-</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Binary TRZ trajectories are <em>always</em> written in <em>little-endian</em> byte order.</p>
+</div>
 <p>Create a TRZWriter</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
