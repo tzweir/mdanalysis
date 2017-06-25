@@ -202,24 +202,24 @@
         <span class="c1"># Open and check top validity</span>
         <span class="c1"># Reading header info POINTERS</span>
         <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">:</span>
-            <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;%VE&quot;</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> is not a valid TOP file. %VE Missing in header&quot;</span>
                     <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
-            <span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">title</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;TITLE&quot;</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> is not a valid TOP file. &#39;TITLE&#39; missing in header&quot;</span>
                     <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
             <span class="k">while</span> <span class="ow">not</span> <span class="n">header</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%F</span><span class="s1">LAG POINTERS&#39;</span><span class="p">):</span>
-                <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
+            <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
 
-            <span class="n">topremarks</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+            <span class="n">topremarks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
             <span class="n">sys_info</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">topremarks</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
 
-            <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
             <span class="c1"># grab the next section title</span>
             <span class="n">next_section</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%F</span><span class="s2">LAG&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
@@ -228,7 +228,8 @@
                     <span class="p">(</span><span class="n">atoms_per</span><span class="p">,</span> <span class="n">per_line</span><span class="p">,</span>
                      <span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">sect_num</span><span class="p">)</span> <span class="o">=</span> <span class="n">sections</span><span class="p">[</span><span class="n">next_section</span><span class="p">]</span>
                 <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                    <span class="n">next_getter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skipper</span>
+                    <span class="k">def</span> <span class="nf">next_getter</span><span class="p">():</span>
+                        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">skipper</span><span class="p">()</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">num</span> <span class="o">=</span> <span class="n">sys_info</span><span class="p">[</span><span class="n">sect_num</span><span class="p">]</span>
                     <span class="n">numlines</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span> <span class="o">//</span> <span class="n">per_line</span><span class="p">)</span>
@@ -237,7 +238,8 @@
 
                     <span class="n">attrs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">atoms_per</span><span class="p">,</span> <span class="n">numlines</span><span class="p">)</span>
 
-                    <span class="n">next_getter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span>
+                    <span class="k">def</span> <span class="nf">next_getter</span><span class="p">():</span>
+                        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
 
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">line</span> <span class="o">=</span> <span class="n">next_getter</span><span class="p">()</span>
@@ -270,7 +272,7 @@
         <span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;segids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Segids</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;SYSTEM&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">))</span>
 
         <span class="n">top</span> <span class="o">=</span> <span class="n">Topology</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">n_res</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
-                       <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+                       <span class="n">attrs</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
                        <span class="n">atom_resindex</span><span class="o">=</span><span class="n">residx</span><span class="p">,</span>
                        <span class="n">residue_segindex</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
@@ -278,9 +280,9 @@
 
 <div class="viewcode-block" id="TOPParser.skipper"><a class="viewcode-back" href="../../../documentation_pages/topology/TOPParser.html#MDAnalysis.topology.TOPParser.TOPParser.skipper">[docs]</a>    <span class="k">def</span> <span class="nf">skipper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Skip until we find the next %FLAG entry and return that&quot;&quot;&quot;</span>
-        <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
         <span class="k">while</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%F</span><span class="s2">LAG&quot;</span><span class="p">):</span>
-            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">line</span></div>
 
     <span class="k">def</span> <span class="nf">parse_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms_per</span><span class="p">,</span> <span class="n">numlines</span><span class="p">):</span>
@@ -333,10 +335,10 @@
         <span class="k">return</span> <span class="n">vals</span>
 
     <span class="k">def</span> <span class="nf">parsebond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms_per</span><span class="p">,</span> <span class="n">numlines</span><span class="p">):</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%F</span><span class="s2">ORMAT(&quot;</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%F</span><span class="s2">ORMAT(&quot;</span><span class="p">)</span>
         <span class="n">section</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
             <span class="c1"># Subtract 1 from each number to ensure zero-indexing for the atoms</span>
             <span class="n">fields</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">),</span> <span class="n">atoms_per</span><span class="p">):</span>
@@ -345,11 +347,11 @@
 
     <span class="k">def</span> <span class="nf">parsesection_mapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms_per</span><span class="p">,</span> <span class="n">numlines</span><span class="p">,</span> <span class="n">mapper</span><span class="p">):</span>
         <span class="n">section</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%F</span><span class="s2">ORMAT(&quot;</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%F</span><span class="s2">ORMAT(&quot;</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">FORTRANReader</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topfile</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span><span class="p">)):</span>
                 <span class="n">val</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">stop</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
