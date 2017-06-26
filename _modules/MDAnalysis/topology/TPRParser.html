@@ -194,7 +194,7 @@
 <span class="kn">import</span> <span class="nn">xdrlib</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">guessers</span>
-<span class="kn">from</span> <span class="nn">..lib.util</span> <span class="k">import</span> <span class="n">anyopen</span>
+<span class="kn">from</span> <span class="nn">..lib.util</span> <span class="k">import</span> <span class="n">openany</span>
 <span class="kn">from</span> <span class="nn">.tpr</span> <span class="k">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">tpr_utils</span>
 <span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">TopologyReaderBase</span>
 <span class="kn">from</span> <span class="nn">..core.topologyattrs</span> <span class="k">import</span> <span class="n">Resnums</span>
@@ -218,7 +218,8 @@
 <span class="sd">        -------</span>
 <span class="sd">        structure : dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tprf</span> <span class="o">=</span> <span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+            <span class="n">tprf</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">xdrlib</span><span class="o">.</span><span class="n">Unpacker</span><span class="p">(</span><span class="n">tprf</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">th</span> <span class="o">=</span> <span class="n">tpr_utils</span><span class="o">.</span><span class="n">read_tpxheader</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>                    <span class="c1"># tpxheader</span>
