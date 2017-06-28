@@ -73,12 +73,10 @@
 <span class="sd">&quot;&quot;&quot;TRZ trajectory I/O  --- :mod:`MDAnalysis.coordinates.TRZ`</span>
 <span class="sd">============================================================</span>
 
-<span class="sd">Classes to read `IBIsCO`_ / `YASP`_ TRZ binary trajectories, including</span>
-<span class="sd">coordinates, velocities and more (see attributes of the :class:`Timestep`).</span>
+<span class="sd">Classes to read `IBIsCO`_ / `YASP`_ binary trajectories.</span>
 
-<span class="sd">Data are read and written in binary representation but because this depends on</span>
-<span class="sd">the machine hardware architecture, MDAnalysis *always* reads and writes TRZ</span>
-<span class="sd">trajectories in *little-endian* byte order.</span>
+<span class="sd">Reads coordinates, velocities and more (see attributes of the</span>
+<span class="sd">:class:`Timestep`).</span>
 
 <span class="sd">.. _IBIsCO: http://www.theo.chemie.tu-darmstadt.de/ibisco/IBISCO.html</span>
 <span class="sd">.. _YASP: http://www.theo.chemie.tu-darmstadt.de/group/services/yaspdoc/yaspdoc.html</span>
@@ -130,7 +128,6 @@
 
 <span class="sd">.. autoclass:: TRZWriter</span>
 <span class="sd">   :members:</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span>
 <span class="kn">import</span> <span class="nn">six</span>
@@ -175,26 +172,28 @@
 
 
 <div class="viewcode-block" id="TRZReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRZ.html#MDAnalysis.coordinates.TRZ.TRZReader">[docs]</a><span class="k">class</span> <span class="nc">TRZReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">ReaderBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reads an IBIsCO or YASP trajectory file</span>
+    <span class="sd">&quot;&quot;&quot; Reads an IBIsCO or YASP trajectory file</span>
 
-<span class="sd">    Attributes</span>
-<span class="sd">    ----------</span>
-<span class="sd">    ts : TRZ.Timestep</span>
-<span class="sd">         :class:`~MDAnalysis.coordinates.TRZ.Timestep` object containing</span>
-<span class="sd">         coordinates of current frame</span>
+<span class="sd">    :Data:</span>
+<span class="sd">        ts</span>
+<span class="sd">          :class:`~MDAnalysis.coordinates.TRZ.Timestep` object</span>
+<span class="sd">          containing coordinates of current frame</span>
 
-<span class="sd">    Note</span>
-<span class="sd">    ----</span>
-<span class="sd">    Binary TRZ trajectories are *always* assumed to be written in</span>
-<span class="sd">    *little-endian* byte order and are read as such.</span>
-
+<span class="sd">    :Methods:</span>
+<span class="sd">      ``len(trz)``</span>
+<span class="sd">        returns the number of frames</span>
+<span class="sd">      ``for ts in trz``</span>
+<span class="sd">        iterates through the trajectory</span>
+<span class="sd">      ``for ts in trz[start:stop:skip]``</span>
+<span class="sd">        iterate through a trajectory using slicing</span>
+<span class="sd">      ``trz[i]``</span>
+<span class="sd">        random access of a trajectory frame</span>
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
-<span class="sd">       Frames now 0-based instead of 1-based.</span>
+<span class="sd">       Frames now 0-based instead of 1-based</span>
 <span class="sd">       Extra data (Temperature, Energies, Pressures, etc) now read</span>
-<span class="sd">       into ts.data dictionary.</span>
-<span class="sd">       Now passes a weakref of self to ts (ts._reader).</span>
-
+<span class="sd">       into ts.data dictionary</span>
+<span class="sd">       Now passes a weakref of self to ts (ts._reader)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;TRZ&quot;</span>
@@ -230,46 +229,46 @@
                            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_ts_kwargs</span><span class="p">)</span>
 
         <span class="c1"># structured dtype of a single trajectory frame</span>
-        <span class="n">readarg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&lt;f4&#39;</span>
+        <span class="n">readarg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;f4&#39;</span>
         <span class="n">frame_contents</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;nframe&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;ntrj&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;natoms&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;treal&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;9f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;ptensor&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;6f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;3i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;etot&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;ptot&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;ek&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p5&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;6i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;nframe&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ntrj&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;natoms&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;treal&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="s1">&#39;9f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ptensor&#39;</span><span class="p">,</span> <span class="s1">&#39;6f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span> <span class="s1">&#39;3i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;etot&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ptot&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ek&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p5&#39;</span><span class="p">,</span> <span class="s1">&#39;6i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;pad2&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad2&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;ry&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;pad3&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad3&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;rz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;pad4&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad4&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;vx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;pad5&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad5&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;vy&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;pad6&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad6&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;vz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">)]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_force</span><span class="p">:</span>
-            <span class="n">frame_contents</span> <span class="o">+=</span> <span class="p">[(</span><span class="s1">&#39;pad7&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">)]</span>
+            <span class="n">frame_contents</span> <span class="o">+=</span> <span class="p">[(</span><span class="s1">&#39;pad7&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">frame_contents</span> <span class="o">+=</span> <span class="p">[</span>
-                <span class="p">(</span><span class="s1">&#39;pad7&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;pad7&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
                 <span class="p">(</span><span class="s1">&#39;fx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-                <span class="p">(</span><span class="s1">&#39;pad8&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;pad8&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
                 <span class="p">(</span><span class="s1">&#39;fy&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-                <span class="p">(</span><span class="s1">&#39;pad9&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;pad9&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
                 <span class="p">(</span><span class="s1">&#39;fz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-                <span class="p">(</span><span class="s1">&#39;pad10&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">)]</span>
+                <span class="p">(</span><span class="s1">&#39;pad10&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">frame_contents</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_read_next_timestep</span><span class="p">()</span>
@@ -277,11 +276,11 @@
     <span class="k">def</span> <span class="nf">_read_trz_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads the header of the trz trajectory&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_headerdtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([</span>
-            <span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;80c&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">)])</span>
+            <span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)])</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headerdtype</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;force&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
@@ -484,10 +483,8 @@
 <div class="viewcode-block" id="TRZWriter"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRZ.html#MDAnalysis.coordinates.TRZ.TRZWriter">[docs]</a><span class="k">class</span> <span class="nc">TRZWriter</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">WriterBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Writes a TRZ format trajectory.</span>
 
-<span class="sd">    Note</span>
-<span class="sd">    ----</span>
-<span class="sd">    Binary TRZ trajectories are *always* written in *little-endian* byte order.</span>
-
+<span class="sd">    :Methods:</span>
+<span class="sd">       ``W = TRZWriter(trzfilename, n_atoms, title=&#39;TRZ&#39;)``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;TRZ&#39;</span>
@@ -530,52 +527,52 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_writeheader</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
 
-        <span class="n">floatsize</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&lt;f4&#39;</span>
+        <span class="n">floatsize</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;f4&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frameDtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([</span>
-            <span class="p">(</span><span class="s1">&#39;p1a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;nframe&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;ntrj&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;natoms&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;treal&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p1b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p2a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;9f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p2b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p3a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;ptensor&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;6f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p3b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p4a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;six&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;etot&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;ptot&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;ek&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;blanks&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;2f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p4b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p5a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p1a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;nframe&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ntrj&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;natoms&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;treal&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p1b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p2a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="s1">&#39;9f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p2b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p3a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ptensor&#39;</span><span class="p">,</span> <span class="s1">&#39;6f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p3b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p4a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;six&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;etot&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ptot&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ek&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;blanks&#39;</span><span class="p">,</span> <span class="s1">&#39;2f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p4b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p5a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p5b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p6a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p5b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p6a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;ry&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p6b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p7a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p6b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p7a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;rz&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p7b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p8a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p7b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p8a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;vx&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p8b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p9a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p8b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p9a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;vy&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p9b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p10a&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p9b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p10a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;vz&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;p10b&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">)])</span>
+            <span class="p">(</span><span class="s1">&#39;p10b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)])</span>
 
     <span class="k">def</span> <span class="nf">_writeheader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
         <span class="n">hdt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([</span>
-            <span class="p">(</span><span class="s1">&#39;pad1&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;80c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pad2&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;pad3&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;nrec&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pad4&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;i4&#39;</span><span class="p">)])</span>
+            <span class="p">(</span><span class="s1">&#39;pad1&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;80c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pad2&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad3&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;nrec&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pad4&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)])</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">hdt</span><span class="p">)</span>
         <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad1&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span>
         <span class="n">out</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">80</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">))</span>

@@ -703,6 +703,209 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Wrote RMSD timeseries  to file </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rmsdfile</span><span class="p">)</span></div>
 
 
+<span class="nd">@deprecate</span><span class="p">(</span>
+    <span class="n">new_name</span><span class="o">=</span><span class="s2">&quot;AlignTraj&quot;</span><span class="p">,</span>
+    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This function will be removed in 0.17&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">rms_fit_trj</span><span class="p">(</span>
+        <span class="n">traj</span><span class="p">,</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">select</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span>
+        <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">rmsdfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;rmsfit_&#39;</span><span class="p">,</span>
+        <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">in_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">quiet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;RMS-fit trajectory to a reference structure using a selection.</span>
+
+<span class="sd">    Both reference *ref* and trajectory *traj* must be</span>
+<span class="sd">    :class:`MDAnalysis.Universe` instances. If they contain a</span>
+<span class="sd">    trajectory then it is used. The output file format is determined</span>
+<span class="sd">    by the file extension of *filename*. One can also use the same</span>
+<span class="sd">    universe if one wants to fit to the current frame.</span>
+
+<span class="sd">    :Arguments:</span>
+<span class="sd">      *traj*</span>
+<span class="sd">         trajectory, :class:`MDAnalysis.Universe` object</span>
+<span class="sd">      *reference*</span>
+<span class="sd">         reference coordinates; :class:`MDAnalysis.Universe` object</span>
+<span class="sd">         (uses the current time step of the object)</span>
+<span class="sd">      *select*</span>
+<span class="sd">         1. any valid selection string for</span>
+<span class="sd">            :meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` that</span>
+<span class="sd">            produces identical selections in `mobile` and `reference`; or</span>
+<span class="sd">         2. a dictionary ``{&#39;mobile&#39;:sel1, &#39;reference&#39;:sel2}`` (the</span>
+<span class="sd">            :func:`fasta2select` function returns such a</span>
+<span class="sd">            dictionary based on a ClustalW_ or STAMP_ sequence alignment); or</span>
+<span class="sd">         3. a tuple ``(sel1, sel2)``</span>
+<span class="sd">         When using 2. or 3. with *sel1* and *sel2* then these selections can</span>
+<span class="sd">         also each be a list of selection strings (to generate a AtomGroup with</span>
+<span class="sd">         defined atom order as described under :ref:`ordered-selections-label`).</span>
+<span class="sd">      *filename*</span>
+<span class="sd">         file name for the RMS-fitted trajectory or pdb; defaults to the</span>
+<span class="sd">         original trajectory filename (from *traj*) with *prefix* prepended</span>
+<span class="sd">      *rmsdfile*</span>
+<span class="sd">         file name for writing the RMSD timeseries [``None``]</span>
+<span class="sd">      *prefix*</span>
+<span class="sd">         prefix for autogenerating the new output filename</span>
+<span class="sd">      *mass_weighted*</span>
+<span class="sd">         do a mass-weighted RMSD fit</span>
+<span class="sd">      *tol_mass*</span>
+<span class="sd">         Reject match if the atomic masses for matched atoms differ by more than</span>
+<span class="sd">         *tol_mass* [0.1]</span>
+<span class="sd">      *strict*</span>
+<span class="sd">         Default: ``False``</span>
+<span class="sd">         - ``True``: Will raise :exc:`SelectionError` if a single atom does not</span>
+<span class="sd">           match between the two selections.</span>
+<span class="sd">         - ``False``: Will try to prepare a matching selection by dropping</span>
+<span class="sd">           residues with non-matching atoms. See :func:`get_matching_atoms`</span>
+<span class="sd">           for details.</span>
+<span class="sd">      *force*</span>
+<span class="sd">         - ``True``: Overwrite an existing output trajectory (default)</span>
+<span class="sd">         - ``False``: simply return if the file already exists</span>
+<span class="sd">      *verbose*</span>
+<span class="sd">         - ``False``: suppress progress and logging for levels INFO and below.</span>
+<span class="sd">         - ``True``: show all status messages and do not change the the logging</span>
+<span class="sd">           level (default)</span>
+<span class="sd">      *in_memory*</span>
+<span class="sd">         Default: ``False``</span>
+<span class="sd">         - ``True``: Switch to an in-memory trajectory so that alignment can</span>
+<span class="sd">           be done in-place, which can improve performance substantially in</span>
+<span class="sd">           some cases.</span>
+
+<span class="sd">      *kwargs*</span>
+<span class="sd">         All other keyword arguments are passed on the trajectory</span>
+<span class="sd">         :class:`~MDAnalysis.coordinates.base.Writer`; this allows manipulating/fixing</span>
+<span class="sd">         trajectories on the fly (e.g. change the output format by changing the extension of *filename*</span>
+<span class="sd">         and setting different parameters as described for the corresponding writer).</span>
+
+<span class="sd">    :Returns: *filename* (either provided or auto-generated), or None if in_memory=True</span>
+
+<span class="sd">    .. _ClustalW: http://www.clustal.org/</span>
+<span class="sd">    .. _STAMP: http://www.compbio.dundee.ac.uk/manuals/stamp.4.2/</span>
+
+<span class="sd">    .. versionchanged:: 0.8</span>
+<span class="sd">       Added *kwargs* to be passed to the trajectory :class:`~MDAnalysis.coordinates.base.Writer` and</span>
+<span class="sd">       *filename* is returned.</span>
+
+<span class="sd">    .. versionchanged:: 0.10.0</span>
+<span class="sd">       Uses :func:`get_matching_atoms` to work with incomplete selections</span>
+<span class="sd">       and new *strict* keyword. The new default is to be lenient whereas</span>
+<span class="sd">       the old behavior was the equivalent of *strict* = ``True``.</span>
+
+<span class="sd">    .. deprecated:: 0.16::</span>
+<span class="sd">       The keyword argument *quiet* is deprecated in vafor of *verbose*.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frames</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">trajectory</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="n">_set_verbose</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="n">quiet</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="c1"># should be part of a try ... finally to guarantee restoring the log</span>
+        <span class="c1"># level</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">disable</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARN</span><span class="p">)</span>
+
+    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;remarks&#39;</span><span class="p">,</span> <span class="s1">&#39;RMS fitted trajectory to reference&#39;</span><span class="p">)</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">in_memory</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">traj</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">MemoryReader</span><span class="p">):</span>
+        <span class="n">traj</span><span class="o">.</span><span class="n">transfer_to_memory</span><span class="p">()</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">trajectory</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Moved trajectory to in-memory representation&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span><span class="p">,</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">frames</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">fn</span><span class="p">)</span>
+            <span class="n">_Writer</span> <span class="o">=</span> <span class="n">frames</span><span class="o">.</span><span class="n">Writer</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_Writer</span> <span class="o">=</span> <span class="n">frames</span><span class="o">.</span><span class="n">OtherWriter</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> already exists and will NOT be overwritten; use force=True if you want this&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">filename</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">_Writer</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">_Writer</span>
+    <span class="n">select</span> <span class="o">=</span> <span class="n">rms</span><span class="o">.</span><span class="n">process_selection</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
+    <span class="n">ref_atoms</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="o">*</span><span class="n">select</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">])</span>
+    <span class="n">traj_atoms</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="o">*</span><span class="n">select</span><span class="p">[</span><span class="s1">&#39;mobile&#39;</span><span class="p">])</span>
+    <span class="n">natoms</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">n_atoms</span>
+
+    <span class="n">ref_atoms</span><span class="p">,</span> <span class="n">traj_atoms</span> <span class="o">=</span> <span class="n">get_matching_atoms</span><span class="p">(</span>
+        <span class="n">ref_atoms</span><span class="p">,</span> <span class="n">traj_atoms</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="n">tol_mass</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;RMS-fitting on </span><span class="si">{0:d}</span><span class="s2"> atoms.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ref_atoms</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
+        <span class="c1"># if performing a mass-weighted alignment/rmsd calculation</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ref_atoms</span><span class="o">.</span><span class="n">masses</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># reference centre of mass system</span>
+    <span class="n">ref_com</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
+    <span class="n">ref_coordinates</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref_com</span>
+
+    <span class="c1"># allocate the array for selection atom coords</span>
+    <span class="n">traj_coordinates</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># RMSD timeseries</span>
+    <span class="n">n_frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+    <span class="n">rmsd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_frames</span><span class="p">,))</span>
+
+    <span class="c1"># R: rotation matrix that aligns r-r_com, x~-x~com</span>
+    <span class="c1">#    (x~: selected coordinates, x: all coordinates)</span>
+    <span class="c1"># Final transformed traj coordinates: x&#39; = (x-x~_com)*R + ref_com</span>
+    <span class="n">rot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>  <span class="c1"># allocate space for calculation</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">rot</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+    <span class="n">percentage</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span>
+        <span class="n">n_frames</span><span class="p">,</span>
+        <span class="n">interval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;Fitted frame </span><span class="si">%(step)5d</span><span class="s2">/</span><span class="si">%(numsteps)d</span><span class="s2">  [</span><span class="si">%(percentage)5.1f%%</span><span class="s2">]      r&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
+        <span class="c1"># shift coordinates for rotation fitting</span>
+        <span class="c1"># selection is updated with the time frame</span>
+        <span class="n">x_com</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
+        <span class="n">traj_coordinates</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">x_com</span>
+
+        <span class="c1"># qcp requires that the dtype be float64</span>
+        <span class="c1"># (I think we swapped the position of ref and traj in CalcRMSDRotationalMatrix</span>
+        <span class="c1"># so that R acts **to the left** and can be broadcasted; we&#39;re saving</span>
+        <span class="c1"># one transpose. [orbeckst])</span>
+        <span class="n">rmsd</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">qcp</span><span class="o">.</span><span class="n">CalcRMSDRotationalMatrix</span><span class="p">(</span>
+            <span class="n">ref_coordinates</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
+            <span class="n">traj_coordinates</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">natoms</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="n">R</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">rot</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1"># Transform each atom in the trajectory (use inplace ops to avoid copying arrays)</span>
+        <span class="c1"># (Marginally (~3%) faster than &quot;ts.positions[:] = (ts.positions - x_com) * R + ref_com&quot;.)</span>
+        <span class="n">ts</span><span class="o">.</span><span class="n">positions</span> <span class="o">-=</span> <span class="n">x_com</span>
+        <span class="c1"># R acts to the left &amp; is broadcasted N times.</span>
+        <span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">positions</span> <span class="o">*</span> <span class="n">R</span>
+        <span class="n">ts</span><span class="o">.</span><span class="n">positions</span> <span class="o">+=</span> <span class="n">ref_com</span>
+
+        <span class="k">if</span> <span class="n">writer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">traj</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>  <span class="c1"># write whole input trajectory system</span>
+            <span class="n">percentage</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Wrote </span><span class="si">%d</span><span class="s2"> RMS-fitted coordinate frames to file </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">frames</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">rmsdfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">rmsdfile</span><span class="p">,</span> <span class="n">rmsd</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Wrote RMSD timeseries  to file </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rmsdfile</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="c1"># should be part of a try ... finally to guarantee restoring the log</span>
+        <span class="c1"># level</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">disable</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filename</span>
+
+
 <div class="viewcode-block" id="sequence_alignment"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.sequence_alignment">[docs]</a><span class="k">def</span> <span class="nf">sequence_alignment</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mismatch_penalty</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
                        <span class="n">gap_penalty</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">gapextension_penalty</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate a global sequence alignment between two residue groups.</span>
