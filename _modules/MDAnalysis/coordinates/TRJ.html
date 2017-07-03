@@ -194,18 +194,13 @@
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis.coordinates.AMBER&quot;</span><span class="p">)</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">netCDF4</span> <span class="k">as</span> <span class="nn">netcdf</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="c1"># Just to notify the user; the module will still load. However, NCDFReader</span>
-    <span class="c1"># and NCDFWriter will raise a proper ImportError if they are called without</span>
-    <span class="c1"># the netCDF4 library present. See Issue 122 for a discussion.</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-        <span class="s2">&quot;Failed to import netCDF4; AMBER NETCDFReader/Writer will not work. &quot;</span>
-        <span class="s2">&quot;Install netCDF4 from https://github.com/Unidata/netcdf4-python.&quot;</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-        <span class="s2">&quot;See also https://github.com/MDAnalysis/mdanalysis/wiki/netcdf&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scipy.io.netcdf</span>
 
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">netCDF4</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">netCDF4</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;netCDF4 is not available. Writing AMBER ncdf files will be slow.&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRJ.html#MDAnalysis.coordinates.TRJ.Timestep">[docs]</a><span class="k">class</span> <span class="nc">Timestep</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Timestep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;AMBER trajectory Timestep.</span>
@@ -456,6 +451,15 @@
 <span class="sd">    * only trajectories with time in ps and lengths in Angstroem are processed</span>
 <span class="sd">    * scale_factors are not supported (and not checked)</span>
 
+<span class="sd">    The NCDF reader uses :mod:`scipy.io.netcdf` and therefore :mod:`scipy` must</span>
+<span class="sd">    be installed. It supports the *mmap* keyword argument (when reading):</span>
+<span class="sd">    ``mmap=True`` is memory efficient and directly maps the trajectory on disk</span>
+<span class="sd">    to memory; ``mmap=False`` may consume large amounts of memory because it</span>
+<span class="sd">    loads the whole trajectory into memory but it might be faster. The default</span>
+<span class="sd">    is ``mmap=None`` and then default behavior of</span>
+<span class="sd">    :class:`scipy.io.netcdf.netcdf_file` prevails, i.e. ``True`` when</span>
+<span class="sd">    *filename* is a file name, ``False`` when *filename* is a file-like object.</span>
+
 <span class="sd">    .. _AMBER NETCDF format: http://ambermd.org/netcdf/nctraj.html</span>
 
 <span class="sd">    See Also</span>
@@ -469,6 +473,8 @@
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Frame labels now 0-based instead of 1-based.</span>
 <span class="sd">       kwarg `delta` renamed to `dt`, for uniformity with other Readers.</span>
+<span class="sd">    .. versionchanged:: 0.17.0</span>
+<span class="sd">       Uses :mod:`scipy.io.netcdf` and supports the *mmap* kwarg.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NCDF&#39;</span><span class="p">,</span> <span class="s1">&#39;NC&#39;</span><span class="p">]</span>
@@ -481,20 +487,12 @@
     <span class="n">_Timestep</span> <span class="o">=</span> <span class="n">Timestep</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="kn">import</span> <span class="nn">netCDF4</span> <span class="k">as</span> <span class="nn">netcdf</span>
-        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-            <span class="n">errmsg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;netCDF4 package missing.</span><span class="se">\n</span><span class="s2">&quot;</span>
-                      <span class="s2">&quot;netcdf4-python with the netCDF and HDF5 libraries must&quot;</span>
-                      <span class="s2">&quot; be installed for the AMBER ncdf Reader.</span><span class="se">\n</span><span class="s2">&quot;</span>
-                      <span class="s2">&quot;See installation instructions at &quot;</span>
-                      <span class="s2">&quot;https://github.com/MDAnalysis/mdanalysis/wiki/netcdf&quot;</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mmap</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;mmap&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">NCDFReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span> <span class="o">=</span> <span class="n">netcdf</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">netcdf</span><span class="o">.</span><span class="n">netcdf_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                                                   <span class="n">mmap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_mmap</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="s1">&#39;AMBER&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">Conventions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="ow">or</span>
                 <span class="s1">&#39;AMBER&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">Conventions</span><span class="o">.</span><span class="n">split</span><span class="p">()):</span>
@@ -511,10 +509,15 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">wmsg</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">wmsg</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;atom&#39;</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;frame&#39;</span><span class="p">])</span>
-        <span class="c1"># also records time steps in data.variables[&#39;time&#39;] and unit</span>
-        <span class="c1"># but my example only has 0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;atom&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;frame&#39;</span><span class="p">]</span>
+        <span class="c1"># example trajectory when read with scipy.io.netcdf has</span>
+        <span class="c1"># dimensions[&#39;frame&#39;] == None (indicating a record dimension that can</span>
+        <span class="c1"># grow) whereas if read with netCDF4 I get len(dimensions[&#39;frame&#39;]) ==</span>
+        <span class="c1"># 10: in any case, we need to get the number of frames from somewhere</span>
+        <span class="c1"># such as the time variable:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">title</span>
@@ -530,22 +533,20 @@
         <span class="c1"># hacked into MDAnalysis.units)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span> <span class="o">!=</span> <span class="s2">&quot;picosecond&quot;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                <span class="s2">&quot;NETCDFReader currently assumes that the trajectory was &quot;</span>
-                <span class="s2">&quot;written with a time unit of picoseconds and &quot;</span>
-                <span class="s2">&quot;not </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">))</span>
+                <span class="s2">&quot;NETCDFReader currently assumes that the trajectory was written &quot;</span>
+                <span class="s2">&quot;with a time unit of picoseconds and not </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span> <span class="o">!=</span> <span class="s2">&quot;angstrom&quot;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                <span class="s2">&quot;NETCDFReader currently assumes that the trajectory was &quot;</span>
-                <span class="s2">&quot;written with a length unit of Angstroem and &quot;</span>
-                <span class="s2">&quot;not </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">))</span>
+                <span class="s2">&quot;NETCDFReader currently assumes that the trajectory was written &quot;</span>
+                <span class="s2">&quot;with a length unit of Angstroem and not </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">],</span> <span class="s1">&#39;scale_factor&#39;</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;scale_factors are not implemented&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">n_atoms</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;Supplied n_atoms (</span><span class="si">{0}</span><span class="s2">) != natom from ncdf (</span><span class="si">{1}</span><span class="s2">). Note: &quot;</span>
-                    <span class="s2">&quot;n_atoms can be None and then the ncdf value is used!&quot;</span>
-                    <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n_atoms</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Supplied n_atoms (</span><span class="si">{0}</span><span class="s2">) != natom from ncdf (</span><span class="si">{1}</span><span class="s2">). &quot;</span>
+                             <span class="s2">&quot;Note: n_atoms can be None and then the ncdf value &quot;</span>
+                             <span class="s2">&quot;is used!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">has_velocities</span> <span class="o">=</span> <span class="s1">&#39;velocities&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_forces</span> <span class="o">=</span> <span class="s1">&#39;forces&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span>
@@ -567,9 +568,12 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Trajectory is closed&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">frame</span><span class="p">))</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">int</span><span class="p">):</span>
+            <span class="c1"># convention... for netcdf could also be a slice</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;frame must be a positive integer or zero&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">frame</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="ow">or</span> <span class="n">frame</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;frame index must be 0 &lt;= frame &lt; </span><span class="si">{0}</span><span class="s2">&quot;</span>
-                             <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;frame index must be 0 &lt;= frame &lt; </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">))</span>
         <span class="c1"># note: self.trjfile.variables[&#39;coordinates&#39;].shape == (frames, n_atoms, 3)</span>
         <span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">[:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">][</span><span class="n">frame</span><span class="p">]</span>
         <span class="n">ts</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][</span><span class="n">frame</span><span class="p">]</span>
@@ -613,7 +617,12 @@
         <span class="k">return</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
 
 <div class="viewcode-block" id="NCDFReader.close"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRJ.html#MDAnalysis.coordinates.TRJ.NCDFReader.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Close trajectory; any further access will raise an :exc:`IOError`&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Close trajectory; any further access will raise an :exc:`IOError`.</span>
+
+<span class="sd">        .. Note:: The underlying :mod:`scipy.io.netcdf` module open netcdf</span>
+<span class="sd">                  files with `mmap()`. Hence *any* reference to an array</span>
+<span class="sd">                  *must* be removed before the file can be closed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">trjfile</span> <span class="o">=</span> <span class="kc">None</span></div>
@@ -659,17 +668,84 @@
 
 <span class="sd">    .. _AMBER NETCDF format: http://ambermd.org/netcdf/nctraj.html</span>
 
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        name of output file</span>
+<span class="sd">    n_atoms : int</span>
+<span class="sd">        number of atoms in trajectory file</span>
+<span class="sd">    start : int (optional)</span>
+<span class="sd">        starting timestep</span>
+<span class="sd">    step : int (optional)</span>
+<span class="sd">        skip between subsequent timesteps</span>
+<span class="sd">    dt : float (optional)</span>
+<span class="sd">        timestep</span>
+<span class="sd">    convert_units : bool (optional)</span>
+<span class="sd">        ``True``: units are converted to the AMBER base format; ``None``</span>
+<span class="sd">        selects the value of :data:`MDAnalysis.core.flags`</span>
+<span class="sd">        [&#39;convert_lengths&#39;] (see :ref:`flags-label`).</span>
+<span class="sd">    velocities : bool (optional)</span>
+<span class="sd">        Write velocities into the trajectory [``False``]</span>
+<span class="sd">    forces : bool (optional)</span>
+<span class="sd">        Write forces into the trajectory [``False``]</span>
+
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    MDAnalysis uses :mod:`scipy.io.netcdf` to access Amber files, which are in</span>
+<span class="sd">    netcdf 3 format. Although :mod:`scipy.io.netcdf` is very fast at reading</span>
+<span class="sd">    these files, it is *very* slow when writing, and it becomes slower the</span>
+<span class="sd">    longer the files are. On the other hand, the netCDF4_ package (which</span>
+<span class="sd">    requires the compiled netcdf library to be installed) is fast at writing</span>
+<span class="sd">    but slow at reading. Therefore, we try to use :mod:`netCDF4` for writing if</span>
+<span class="sd">    available but otherwise fall back to the slower :mod:`scipy.io.netcdf`.</span>
+
+<span class="sd">    **Amber users** might have a hard time getting netCDF4 to work with a</span>
+<span class="sd">    conda-based installation (as discussed in `Issue #506`_) because of the way</span>
+<span class="sd">    that Amber itself handles netcdf: When the Amber environment is loaded, the</span>
+<span class="sd">    following can happen when trying to import netCDF4::</span>
+
+<span class="sd">      &gt;&gt;&gt; import netCDF4</span>
+<span class="sd">      Traceback (most recent call last):</span>
+<span class="sd">        File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="sd">        File &quot;/scratch2/miniconda/envs/py35/lib/python3.5/site-packages/netCDF4/__init__.py&quot;, line 3, in &lt;module&gt;</span>
+<span class="sd">          from ._netCDF4 import *</span>
+<span class="sd">      ImportError: /scratch2/miniconda/envs/py35/lib/python3.5/site-packages/netCDF4/_netCDF4.cpython-35m-x86_64-linux-gnu.so: undefined symbol: nc_inq_var_fletcher32</span>
+
+<span class="sd">    The reason for this (figured out via :program:`ldd`) is that Amber builds</span>
+<span class="sd">    its own NetCDF library that it now inserts into :envvar:`LD_LIBRARY_PATH`</span>
+<span class="sd">    *without the NetCDF4 API and HDF5 bindings*. Since the conda version of</span>
+<span class="sd">    :mod:`netCDF4` was built against the full NetCDF package, the one</span>
+<span class="sd">    :program:`ld` tries to link to at runtime (because Amber requires</span>
+<span class="sd">    :envvar:`LD_LIBRARY_PATH`) is missing some symbols. Removing Amber from the</span>
+<span class="sd">    environment fixes the import but is not really a convenient solution for</span>
+<span class="sd">    users of Amber.</span>
+
+<span class="sd">    At the moment there is no obvious solution if one wants to use</span>
+<span class="sd">    :mod:`netCDF4` and Amber in the same shell session. If you need the fast</span>
+<span class="sd">    writing capabilities of :mod:`netCDF4` then you need to unload your Amber</span>
+<span class="sd">    environment before importing MDAnalysis.</span>
+
+
+<span class="sd">    .. _netCDF4: https://unidata.github.io/netcdf4-python/</span>
+<span class="sd">    .. _`Issue #506`:</span>
+<span class="sd">       https://github.com/MDAnalysis/mdanalysis/issues/506#issuecomment-225081416</span>
+
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    :class:`NCDFReader`</span>
 
 
 <span class="sd">    .. versionadded: 0.7.6</span>
-
 <span class="sd">    .. versionchanged:: 0.10.0</span>
 <span class="sd">       Added ability to write velocities and forces</span>
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       kwarg `delta` renamed to `dt`, for uniformity with other Readers</span>
+<span class="sd">    .. versionchanged:: 0.17.0</span>
+<span class="sd">       Use fast :mod:`netCDF4` for writing but fall back to slow</span>
+<span class="sd">       :mod:`scipy.io.netcdf` if :mod:`netCDF4` is not available.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;NCDF&#39;</span>
@@ -688,36 +764,7 @@
                  <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
                  <span class="n">remarks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">convert_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">zlib</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">cmplevel</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new NCDFWriter</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        filename : str</span>
-<span class="sd">            name of output file</span>
-<span class="sd">        n_atoms : int</span>
-<span class="sd">            number of atoms in trajectory file</span>
-<span class="sd">        start : int (optional)</span>
-<span class="sd">            starting timestep</span>
-<span class="sd">        step : int (optional)</span>
-<span class="sd">            skip between subsequent timesteps</span>
-<span class="sd">        dt : float (optional)</span>
-<span class="sd">            timestep</span>
-<span class="sd">        convert_units : bool (optional)</span>
-<span class="sd">            ``True``: units are converted to the AMBER base format; ``None``</span>
-<span class="sd">            selects the value of :data:`MDAnalysis.core.flags`</span>
-<span class="sd">            [&#39;convert_lengths&#39;] (see :ref:`flags-label`).</span>
-<span class="sd">        zlib : bool (optional)</span>
-<span class="sd">            compress data [``False``]</span>
-<span class="sd">        cmplevel : int (optional)</span>
-<span class="sd">            compression level (1-9) [1]</span>
-<span class="sd">        velocities : bool (optional)</span>
-<span class="sd">            Write velocities into the trajectory [``False``]</span>
-<span class="sd">        forces : bool (optional)</span>
-<span class="sd">            Write forces into the trajectory [``False``]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;NCDFWriter: no atoms in output trajectory&quot;</span><span class="p">)</span>
@@ -731,9 +778,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>  <span class="c1"># do we use those?</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span> <span class="o">=</span> <span class="n">remarks</span> <span class="ow">or</span> <span class="s2">&quot;AMBER NetCDF format (MDAnalysis.coordinates.trj.NCDFWriter)&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">zlib</span> <span class="o">=</span> <span class="n">zlib</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cmplevel</span> <span class="o">=</span> <span class="n">cmplevel</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ts</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># when/why would this be assigned??</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_first_frame</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># signals to open trajectory</span>
@@ -751,36 +795,32 @@
 <span class="sd">        output should contain periodicity information (i.e. the unit</span>
 <span class="sd">        cell dimensions).</span>
 
-<span class="sd">        Based on Joshua Adelman&#39;s `netcdf4storage.py`_ in `Issue 109`_.</span>
+<span class="sd">        Based on Joshua Adelman&#39;s `netcdf4storage.py`_ in `Issue 109`_ and uses</span>
+<span class="sd">        Jason Swail&#39;s hack from `ParmEd/ParmEd#722`_ to switch between</span>
+<span class="sd">        :mod:`scipy.io.netcdf` and :mod:`netCDF4`.</span>
 
 <span class="sd">        .. _`Issue 109`:</span>
 <span class="sd">           https://github.com/MDAnalysis/mdanalysis/issues/109</span>
 <span class="sd">        .. _`netcdf4storage.py`:</span>
 <span class="sd">           https://storage.googleapis.com/google-code-attachments/mdanalysis/issue-109/comment-2/netcdf4storage.py</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="kn">import</span> <span class="nn">netCDF4</span> <span class="k">as</span> <span class="nn">netcdf</span>
-        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s2">&quot;netcdf4-python with the netCDF and HDF5 libraries &quot;</span>
-                         <span class="s2">&quot;must be installed for the AMBER ncdf Writer.&quot;</span>
-                         <span class="s2">&quot;See installation instructions at &quot;</span>
-                         <span class="s2">&quot;https://github.com/MDAnalysis/mdanalysis/wiki/netcdf&quot;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                <span class="s2">&quot;netCDF4 package missing.</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="s2">&quot;netcdf4-python with the netCDF and HDF5 libraries must be &quot;</span>
-                <span class="s2">&quot;installed for the AMBER ncdf Writer.</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="s2">&quot;See installation instructions at &quot;</span>
-                <span class="s2">&quot;https://github.com/MDAnalysis/mdanalysis/wiki/netcdf&quot;</span><span class="p">)</span>
+<span class="sd">        .. _`ParmEd/ParmEd#722`: https://github.com/ParmEd/ParmEd/pull/722</span>
 
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_frame</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span>
                 <span class="n">errno</span><span class="o">.</span><span class="n">EIO</span><span class="p">,</span>
                 <span class="s2">&quot;Attempt to write to closed file </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
 
-        <span class="n">ncfile</span> <span class="o">=</span> <span class="n">netcdf</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
-                                <span class="n">clobber</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
-                                <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;NETCDF3_64BIT&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">netCDF4</span><span class="p">:</span>
+            <span class="n">ncfile</span> <span class="o">=</span> <span class="n">netCDF4</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;NETCDF3_64BIT&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ncfile</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">netcdf</span><span class="o">.</span><span class="n">netcdf_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                                                 <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                                 <span class="n">mmap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">wmsg</span> <span class="o">=</span> <span class="s2">&quot;Could not find netCDF4 module. Falling back to MUCH slower &quot;</span>\
+                   <span class="s2">&quot;scipy.io.netcdf implementation for writing.&quot;</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">wmsg</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">wmsg</span><span class="p">)</span>
 
         <span class="c1"># Set global attributes.</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span> <span class="s1">&#39;program&#39;</span><span class="p">,</span> <span class="s1">&#39;MDAnalysis.coordinates.TRJ.NCDFWriter&#39;</span><span class="p">)</span>
@@ -800,39 +840,28 @@
         <span class="n">ncfile</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># needed for cell_angular</span>
 
         <span class="c1"># Create variables.</span>
-        <span class="n">coords</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;coordinates&#39;</span><span class="p">,</span>
-                                       <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;atom&#39;</span><span class="p">,</span> <span class="s1">&#39;spatial&#39;</span><span class="p">),</span>
-                                       <span class="n">zlib</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zlib</span><span class="p">,</span>
-                                       <span class="n">complevel</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmplevel</span><span class="p">)</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;coordinates&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span>
+                                       <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;atom&#39;</span><span class="p">,</span> <span class="s1">&#39;spatial&#39;</span><span class="p">))</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span> <span class="s1">&#39;angstrom&#39;</span><span class="p">)</span>
 
         <span class="n">spatial</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;spatial&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;spatial&#39;</span><span class="p">,</span> <span class="p">))</span>
         <span class="n">spatial</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;xyz&#39;</span><span class="p">))</span>
 
-        <span class="n">time</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="p">),</span>
-                                     <span class="n">zlib</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zlib</span><span class="p">,</span>
-                                     <span class="n">complevel</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmplevel</span><span class="p">)</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,))</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span> <span class="s1">&#39;picosecond&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span> <span class="o">=</span> <span class="n">periodic</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-            <span class="n">cell_lengths</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;cell_lengths&#39;</span><span class="p">,</span>
-                                                 <span class="s1">&#39;f8&#39;</span><span class="p">,</span>
-                                                 <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;cell_spatial&#39;</span><span class="p">),</span>
-                                                 <span class="n">zlib</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zlib</span><span class="p">,</span>
-                                                 <span class="n">complevel</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmplevel</span><span class="p">)</span>
+            <span class="n">cell_lengths</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;cell_lengths&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span>
+                                                 <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;cell_spatial&#39;</span><span class="p">))</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">cell_lengths</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span> <span class="s1">&#39;angstrom&#39;</span><span class="p">)</span>
 
             <span class="n">cell_spatial</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;cell_spatial&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span>
                                                  <span class="p">(</span><span class="s1">&#39;cell_spatial&#39;</span><span class="p">,</span> <span class="p">))</span>
             <span class="n">cell_spatial</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
 
-            <span class="n">cell_angles</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;cell_angles&#39;</span><span class="p">,</span>
-                                                <span class="s1">&#39;f8&#39;</span><span class="p">,</span>
-                                                <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;cell_angular&#39;</span><span class="p">),</span>
-                                                <span class="n">zlib</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zlib</span><span class="p">,</span>
-                                                <span class="n">complevel</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmplevel</span><span class="p">)</span>
+            <span class="n">cell_angles</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;cell_angles&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">,</span>
+                                                <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;cell_angular&#39;</span><span class="p">))</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">cell_angles</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
 
             <span class="n">cell_angular</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;cell_angular&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span>
@@ -842,16 +871,12 @@
 
         <span class="c1"># These properties are optional, and are specified on Writer creation</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_velocities</span><span class="p">:</span>
-            <span class="n">velocs</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;velocities&#39;</span><span class="p">,</span>
-                                           <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;atom&#39;</span><span class="p">,</span> <span class="s1">&#39;spatial&#39;</span><span class="p">),</span>
-                                           <span class="n">zlib</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zlib</span><span class="p">,</span>
-                                           <span class="n">complevel</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmplevel</span><span class="p">)</span>
+            <span class="n">velocs</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;velocities&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span>
+                                           <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;atom&#39;</span><span class="p">,</span> <span class="s1">&#39;spatial&#39;</span><span class="p">))</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">velocs</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span> <span class="s1">&#39;angstrom/picosecond&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_forces</span><span class="p">:</span>
-            <span class="n">forces</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;forces&#39;</span><span class="p">,</span>
-                                           <span class="s1">&#39;f8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;atom&#39;</span><span class="p">,</span> <span class="s1">&#39;spatial&#39;</span><span class="p">),</span>
-                                           <span class="n">zlib</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zlib</span><span class="p">,</span>
-                                           <span class="n">complevel</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmplevel</span><span class="p">)</span>
+            <span class="n">forces</span> <span class="o">=</span> <span class="n">ncfile</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;forces&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">,</span>
+                                           <span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;atom&#39;</span><span class="p">,</span> <span class="s1">&#39;spatial&#39;</span><span class="p">))</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">,</span> <span class="s1">&#39;kilocalorie/mole/angstrom&#39;</span><span class="p">)</span>
 
         <span class="n">ncfile</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
