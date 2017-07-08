@@ -54,27 +54,13 @@
 CHARMM, NAMD, and also LAMMPS. Trajectories can be read regardless of
 system-endianness as this is auto-detected.</p>
 <p>Generally, DCD trajectories produced by any code can be read (with the
-<a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader" title="MDAnalysis.coordinates.DCD.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a>) although there can be issues with the unitcell
-(simulation box) representation (see
-<a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.dimensions" title="MDAnalysis.coordinates.DCD.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">Timestep.dimensions</span></code></a>). DCDs can also be written but the
-<a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a> follows recent NAMD/VMD convention for the unitcell
-but still writes AKMA time. Reading and writing these trajectories
-within MDAnalysis will work seamlessly but if you process those
-trajectories with other tools you might need to watch out that time
-and unitcell dimensions are correctly interpreted.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The DCD file format is not well defined. In particular, NAMD and
-CHARMM use it differently. Currently, MDAnalysis tries to guess the
-correct <strong>format for the unitcell representation</strong> but it can be
-wrong. <strong>Check the unitcell dimensions</strong>, especially for triclinic
-unitcells (see <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> and <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.dimensions" title="MDAnalysis.coordinates.DCD.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">Timestep.dimensions</span></code></a>). A
-second potential issue are the units of time which are AKMA for the
-<a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader" title="MDAnalysis.coordinates.DCD.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a> (following CHARMM) but ps for NAMD. As a
-workaround one can employ the configurable
-<a class="reference internal" href="LAMMPS.html#MDAnalysis.coordinates.LAMMPS.DCDReader" title="MDAnalysis.coordinates.LAMMPS.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.LAMMPS.DCDReader</span></code></a> for NAMD
-trajectories.</p>
-</div>
+<a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader" title="MDAnalysis.coordinates.DCD.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a>) although there can be issues with the unitcell (simulation
+box) representation (see <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader.dimensions" title="MDAnalysis.coordinates.DCD.DCDReader.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">DCDReader.dimensions</span></code></a>). DCDs can also be
+written but the <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a> follows recent NAMD/VMD convention for the
+unitcell but still writes AKMA time. Reading and writing these trajectories
+within MDAnalysis will work seamlessly but if you process those trajectories
+with other tools you might need to watch out that time and unitcell dimensions
+are correctly interpreted.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
@@ -82,388 +68,56 @@ trajectories.</p>
 <dd>module provides a more flexible DCD reader/writer.</dd>
 </dl>
 </div>
-<p>The classes in this module are the reference implementations for the
-Trajectory API.</p>
 <div class="section" id="classes">
 <h2>6.3.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="MDAnalysis.coordinates.DCD.Timestep">
-<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.DCD.</code><code class="descname">Timestep</code><span class="sig-paren">(</span><em>n_atoms</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#Timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a Timestep, representing a frame of a trajectory</p>
+<dt id="MDAnalysis.coordinates.DCD.DCDReader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.DCD.</code><code class="descname">DCDReader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=True</em>, <em>dt=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reader for the DCD format.</p>
+<p>DCD is used by NAMD, CHARMM and LAMMPS as the default trajectory format.
+The DCD file format is not well defined. In particular, NAMD and CHARMM use
+it differently. Currently, MDAnalysis tries to guess the correct <strong>format
+for the unitcell representation</strong> but it can be wrong. <strong>Check the unitcell
+dimensions</strong>, especially for triclinic unitcells (see <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a>). DCD
+trajectories produced by CHARMM and NAMD( &gt;2.5) record time in AKMA units.
+If other units have been recorded (e.g., ps) then employ the configurable
+:class:MDAnalysis.coordinates.LAMMPS.DCDReader and set the time unit as a
+optional argument. You can find a list of units used in the DCD formats on
+the MDAnalysis <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/wiki/FileFormats#dcd">wiki</a>.</p>
+<p>MDAnalysis always uses <code class="docutils literal"><span class="pre">(*A*,</span> <span class="pre">*B*,</span> <span class="pre">*C*,</span> <span class="pre">*alpha*,</span> <span class="pre">*beta*,</span> <span class="pre">*gamma*)</span></code> to
+represent the unit cell. Lengths <em>A</em>, <em>B</em>, <em>C</em> are in the MDAnalysis length
+unit (Å), and angles are in degrees.</p>
+<p>The ordering of the angles in the unitcell is the same as in recent
+versions of VMD&#8217;s <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/plugins/doxygen/dcdplugin_8c-source.html#l00947">DCDplugin</a> (2013), namely the <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/plugins/molfile/dcdplugin.html">X-PLOR DCD format</a>: The
+original unitcell is read as <code class="docutils literal"><span class="pre">[A,</span> <span class="pre">gamma,</span> <span class="pre">B,</span> <span class="pre">beta,</span> <span class="pre">alpha,</span> <span class="pre">C]</span></code> from the DCD
+file. If any of these values are &lt; 0 or if any of the angles are &gt; 180
+degrees then it is assumed it is a new-style CHARMM unitcell (at least
+since c36b2) in which box vectors were recorded.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The DCD format is not well defined. Check your unit cell
+dimensions carefully, especially when using triclinic boxes.
+Different software packages implement different conventions and
+MDAnalysis is currently implementing the newer NAMD/VMD convention
+and tries to guess the new CHARMM one. Old CHARMM trajectories might
+give wrong unitcell values. For more details see <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a>.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
-<li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em>) &#8211; A weak reference to the owning Reader.  Used for
-when attributes require trajectory manipulation (e.g. dt)</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.time" title="MDAnalysis.coordinates.DCD.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
-is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The starting time from which to calculate time (in ps)</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; trajectory filename</li>
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; convert units to MDAnalysis units</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; overwrite time delta stored in DCD</li>
+<li><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; General reader arguments.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for <cite>positions</cite>, <cite>velocities</cite> and <cite>forces</cite>.
-Can add and remove position/velocity/force information by using
-the <code class="docutils literal"><span class="pre">has_*</span></code> attribute.</p>
-</div>
-<dl class="method">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Timestep.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.copy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make an independent (&#8220;deep&#8221;) copy of the whole <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.copy_slice">
-<code class="descname">copy_slice</code><span class="sig-paren">(</span><em>sel</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Timestep.copy_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.copy_slice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a new <cite>Timestep</cite> containing a subset of the original <cite>Timestep</cite>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sel</strong> (<em>array_like</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><em>slice</em></a>) &#8211; The underlying position, velocity, and force arrays are sliced
-using a <code class="xref py py-class docutils literal"><span class="pre">list</span></code>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a>, or any array-like.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <cite>Timestep</cite> object of the same type containing all header
-information and all atom information relevant to the selection.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a></td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The selection must be a 0 based <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> or array of the atom indices
-in this <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a></p>
-</div>
-<p class="rubric">Example</p>
-<p>Using a Python <a class="reference external" href="https://docs.python.org/2/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> object:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">copy_slice</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Using a list of indices:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">copy_slice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">])</span>
-</pre></div>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.8.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Reworked to follow new Timestep API.  Now will strictly only
-copy official attributes of the Timestep.</p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.dimensions">
-<code class="descname">dimensions</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>unitcell dimensions (<em>A</em>, <em>B</em>, <em>C</em>, <em>alpha</em>, <em>beta</em>, <em>gamma</em>)</p>
-<p>lengths <em>A</em>, <em>B</em>, <em>C</em> are in the MDAnalysis length unit (Å), and
-angles are in degrees.</p>
-<p><a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.dimensions" title="MDAnalysis.coordinates.DCD.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">dimensions</span></code></a> is read-only because it transforms the actual format
-of the unitcell (which differs between different trajectory formats) to
-the representation described here, which is used everywhere in
-MDAnalysis.</p>
-<p>The ordering of the angles in the unitcell is the same as in recent
-versions of VMD&#8217;s <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/plugins/doxygen/dcdplugin_8c-source.html#l00947">DCDplugin</a> (2013), namely the <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/plugins/molfile/dcdplugin.html">X-PLOR DCD format</a>:
-The original unitcell is read as <code class="docutils literal"><span class="pre">[A,</span> <span class="pre">gamma,</span> <span class="pre">B,</span> <span class="pre">beta,</span> <span class="pre">alpha,</span> <span class="pre">C]</span></code> from
-the DCD file (actually, the direction cosines are stored instead of the
-angles but the underlying C code already does this conversion); if any
-of these values are &lt; 0 or if any of the angles are &gt; 180 degrees then
-it is assumed it is a new-style CHARMM unitcell (at least since c36b2)
-in which box vectors were recorded.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The DCD format is not well defined. Check your unit cell
-dimensions carefully, especially when using triclinic
-boxes. Different software packages implement different conventions
-and MDAnalysis is currently implementing the newer NAMD/VMD convention
-and tries to guess the new CHARMM one. Old CHARMM trajectories might
-give wrong unitcell values. For more details see <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a>.</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.9.0: </span>Unitcell is now interpreted in the newer NAMD DCD format as <code class="docutils literal"><span class="pre">[A,</span>
-<span class="pre">gamma,</span> <span class="pre">B,</span> <span class="pre">beta,</span> <span class="pre">alpha,</span> <span class="pre">C]</span></code> instead of the old MDAnalysis/CHARMM
-ordering <code class="docutils literal"><span class="pre">[A,</span> <span class="pre">alpha,</span> <span class="pre">B,</span> <span class="pre">beta,</span> <span class="pre">gamma,</span> <span class="pre">C]</span></code>. We attempt to detect the
-new CHARMM DCD unitcell format (see <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> for a discussion).</p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.dt">
-<code class="descname">dt</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.dt" title="Permalink to this definition">¶</a></dt>
-<dd><p>The time difference in ps between timesteps</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This defaults to 1.0 ps in the absence of time data</p>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.forces">
-<code class="descname">forces</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.forces" title="Permalink to this definition">¶</a></dt>
-<dd><p>A record of the forces of all atoms in this Timestep</p>
-<p>Setting this attribute will add forces to the Timestep if they
-weren&#8217;t originally present.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>forces</strong> &#8211; force data of shape <code class="docutils literal"><span class="pre">(n_atoms,</span> <span class="pre">3)</span></code> for all atoms</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray with dtype numpy.float32</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a> &#8211; if the Timestep has no force data</td>
-</tr>
-</tbody>
-</table>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.from_coordinates">
-<code class="descname">from_coordinates</code><span class="sig-paren">(</span><em>positions=None</em>, <em>velocities=None</em>, <em>forces=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Timestep.from_coordinates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.from_coordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an instance of this Timestep, from coordinate data</p>
-<p>Can pass position, velocity and force data to form a Timestep.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.from_timestep">
-<code class="descname">from_timestep</code><span class="sig-paren">(</span><em>other</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Timestep.from_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.from_timestep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a copy of another Timestep, in the format of this Timestep</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.has_forces">
-<code class="descname">has_forces</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.has_forces" title="Permalink to this definition">¶</a></dt>
-<dd><p>A boolean of whether this Timestep has force data</p>
-<p>This can be changed to <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code> to allocate space for
-or remove the data.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.has_positions">
-<code class="descname">has_positions</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.has_positions" title="Permalink to this definition">¶</a></dt>
-<dd><p>A boolean of whether this Timestep has position data</p>
-<p>This can be changed to <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code> to allocate space for
-or remove the data.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.has_velocities">
-<code class="descname">has_velocities</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.has_velocities" title="Permalink to this definition">¶</a></dt>
-<dd><p>A boolean of whether this Timestep has velocity data</p>
-<p>This can be changed to <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code> to allocate space for
-or remove the data.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.n_atoms">
-<code class="descname">n_atoms</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.n_atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p>A read only view of the number of atoms this Timestep has</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Changed to read only property</p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.positions">
-<code class="descname">positions</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.positions" title="Permalink to this definition">¶</a></dt>
-<dd><p>A record of the positions of all atoms in this Timestep</p>
-<p>Setting this attribute will add positions to the Timestep if they
-weren&#8217;t originally present.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>positions</strong> &#8211; position data of shape <code class="docutils literal"><span class="pre">(n_atoms,</span> <span class="pre">3)</span></code> for all atoms</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray with dtype numpy.float32</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a> &#8211; if the Timestep has no position data</td>
-</tr>
-</tbody>
-</table>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now can raise :exc`NoDataError` when no position data present</p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.time">
-<code class="descname">time</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.time" title="Permalink to this definition">¶</a></dt>
-<dd><p>The time in ps of this timestep</p>
-<p>This is calculated as:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;time_offset&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ts</span><span class="o">.</span><span class="n">time</span>
-</pre></div>
-</div>
-<p>Or, if the trajectory doesn&#8217;t provide time information:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;time_offset&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">*</span> <span class="n">ts</span><span class="o">.</span><span class="n">dt</span>
-</pre></div>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.triclinic_dimensions">
-<code class="descname">triclinic_dimensions</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.triclinic_dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>The unitcell dimensions represented as triclinic vectors</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A (3, 3) numpy.ndarray of unit cell vectors</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<p>The unitcell for a given system can be queried as either three
-vectors lengths followed by their respective angle, or as three
-triclinic vectors.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span>
-<span class="go">array([ 13.,  14.,  15.,  90.,  90.,  90.], dtype=float32)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">triclinic_dimensions</span>
-<span class="go">array([[ 13.,   0.,   0.],</span>
-<span class="go">       [  0.,  14.,   0.],</span>
-<span class="go">       [  0.,   0.,  15.]], dtype=float32)</span>
-</pre></div>
-</div>
-<p>Setting the attribute also works:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">triclinic_dimensions</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span>
-<span class="go">array([ 15.        ,  15.81138802,  16.58312416,  67.58049774,</span>
-<span class="go">        72.45159912,  71.56504822], dtype=float32)</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../lib/mdamath.html#MDAnalysis.lib.mdamath.triclinic_vectors" title="MDAnalysis.lib.mdamath.triclinic_vectors"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.lib.mdamath.triclinic_vectors()</span></code></a></p>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.velocities">
-<code class="descname">velocities</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.velocities" title="Permalink to this definition">¶</a></dt>
-<dd><p>A record of the velocities of all atoms in this Timestep</p>
-<p>Setting this attribute will add velocities to the Timestep if they
-weren&#8217;t originally present.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>velocities</strong> &#8211; velocity data of shape <code class="docutils literal"><span class="pre">(n_atoms,</span> <span class="pre">3)</span></code> for all atoms</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray with dtype numpy.float32</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a> &#8211; if the Timestep has no velocity data</td>
-</tr>
-</tbody>
-</table>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.DCD.Timestep.volume">
-<code class="descname">volume</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.volume" title="Permalink to this definition">¶</a></dt>
-<dd><p>volume of the unitcell</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="MDAnalysis.coordinates.DCD.DCDReader">
-<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.DCD.</code><code class="descname">DCDReader</code><span class="sig-paren">(</span><em>dcdfilename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads from a DCD file</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first docutils">
-<dt>ts</dt>
-<dd><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object containing coordinates of current frame</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Methods:</th><td class="field-body"><dl class="first last docutils">
-<dt><code class="docutils literal"><span class="pre">dcd</span> <span class="pre">=</span> <span class="pre">DCD(dcdfilename)</span></code></dt>
-<dd><p class="first last">open dcd file and read header</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">len(dcd)</span></code></dt>
-<dd><p class="first last">return number of frames in dcd</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">dcd:</span></code></dt>
-<dd><p class="first last">iterate through trajectory</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">dcd[start:stop:skip]:</span></code></dt>
-<dd><p class="first last">iterate through a trajectory</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">dcd[i]</span></code></dt>
-<dd><p class="first last">random access into the trajectory (i corresponds to frame number)</p>
-</dd>
-<dt><code class="docutils literal"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">dcd.timeseries(...)</span></code></dt>
-<dd><p class="first last">retrieve a subset of coordinate information for a group of atoms</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The DCD file format is not well defined. In particular, NAMD and CHARMM use
-it differently. Currently, MDAnalysis tries to guess the correct format for
-the unitcell representation but it can be wrong. <strong>Check the unitcell
-dimensions</strong>, especially for triclinic unitcells (see <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> and
-<a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.dimensions" title="MDAnalysis.coordinates.DCD.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">Timestep.dimensions</span></code></a>). A second potential issue are the units of
-time (TODO).</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.9.0: </span>The underlying DCD reader (written in C and derived from the
-catdcd/molfile plugin code of VMD) is now reading the unitcell in
-NAMD ordering: <code class="docutils literal"><span class="pre">[A,</span> <span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">sin(gamma),</span> <span class="pre">sin(beta),</span>
-<span class="pre">sin(alpha)]</span></code>. See <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> for further details.</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based.
-Native frame number read into <cite>ts._frame</cite>.
-Removed <cite>skip</cite> keyword and functionality.</p>
+<p><span class="versionmodified">Changed in version 0.17.0: </span>Changed to use libdcd.pyx library and removed the correl function</p>
 </div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.OtherWriter">
@@ -479,50 +133,8 @@ available). <em>n_atoms</em> is always set from <code class="xref py py-attr doc
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.Writer">
-<code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.Writer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a DCDWriter for <cite>filename</cite> with the same parameters as this DCD.</p>
-<p>Defaults for all values are obtained from the <cite>DCDReader</cite> itself but
-all values can be changed through keyword arguments.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the output DCD trajectory</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; number of atoms</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; number of the first recorded MD step</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; indicate that <cite>step</cite> <strong>MD steps (!)</strong> make up one trajectory frame</li>
-<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <strong>MD integrator time step (!)</strong>, in AKMA units</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
-<cite>dt</cite> ps lie between two frames. (It sets <cite>step</cite> `` = 1`` and
-<cite>delta</cite> `` = AKMA(dt)``.) The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case
-<cite>step</cite> and <cite>delta</cite> are used.</li>
-<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; string that is stored in the DCD header</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a></p>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The keyword arguments set the low-level attributes of the DCD according
-to the CHARMM format. The time between two frames would be <cite>delta</cite> *
-<cite>step</cite>!</p>
-<p class="last">Here <cite>step</cite> is really the number of MD integrator time steps that
-occured after this frame, including the frame itself that is the
-coordinate snapshot and <cite>delta</cite> is the integrator stime step.  The DCD
-file format contains this information so it needs to be provided here.</p>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a></p>
-</div>
+<code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.Writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return writer for trajectory format</p>
 </dd></dl>
 
 <dl class="method">
@@ -619,6 +231,12 @@ creating a <a class="reference external" href="https://docs.python.org/2/library
 </pre></div>
 </div>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.DCD.DCDReader.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>close reader</p>
 </dd></dl>
 
 <dl class="method">
@@ -853,9 +471,15 @@ is avoided.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="MDAnalysis.coordinates.DCD.DCDReader.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>unitcell dimensions (<em>A</em>, <em>B</em>, <em>C</em>, <em>alpha</em>, <em>beta</em>, <em>gamma</em>)</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.dt">
 <code class="descname">dt</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.dt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Time between two trajectory frames in picoseconds.</p>
+<dd><p>timestep between frames</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -959,6 +583,12 @@ through the trajectory.</p>
 </div>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.DCD.DCDReader.n_frames">
+<code class="descname">n_frames</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.n_frames" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of frames in trajectory</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDReader.next">
 <code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.next" title="Permalink to this definition">¶</a></dt>
@@ -1054,7 +684,7 @@ list of added auxiliaries, and in the auxiliary reader itself.</p>
 <code class="descname">time</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDReader.time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Time of the current frame in MDAnalysis time units (typically ps).</p>
 <p>This is either read straight from the Timestep, or calculated as
-time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep.frame</span></code> * <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.dt" title="MDAnalysis.coordinates.DCD.Timestep.dt"><code class="xref py py-attr docutils literal"><span class="pre">Timestep.dt</span></code></a></p>
+time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep.frame</span></code> * <code class="xref py py-attr docutils literal"><span class="pre">Timestep.dt</span></code></p>
 </dd></dl>
 
 <dl class="method">
@@ -1069,13 +699,14 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 <li><strong>asel</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>) &#8211; The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> to read the
 coordinates from. Defaults to None, in which case the full set of
 coordinate data is returned.</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the index
-of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code> starts
-at the beginning.</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is excluded.
-The trajectory is read to the end with the default <code class="docutils literal"><span class="pre">None</span></code>.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and means to
-read every frame.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the
+index of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code>
+starts at the beginning.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is
+excluded. The trajectory is read to the end with the default
+<code class="docutils literal"><span class="pre">None</span></code>.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and
+means to read every frame.</li>
 <li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
@@ -1105,74 +736,46 @@ be considered to have a length of a single time step <cite>dt</cite> and a
 
 <dl class="class">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter">
-<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.DCD.</code><code class="descname">DCDWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>start=0</em>, <em>step=1</em>, <em>delta=20.45482949774598</em>, <em>dt=None</em>, <em>remarks=u'Created by DCDWriter'</em>, <em>convert_units=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write to a CHARMM/NAMD DCD trajectory file.</p>
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.DCD.</code><code class="descname">DCDWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>convert_units=True</em>, <em>step=1</em>, <em>dt=1</em>, <em>remarks=u''</em>, <em>nsavc=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>DCD Writer class</p>
+<p>The writer follows recent NAMD/VMD convention for the unitcell (box lengths
+in Å and angle-cosines, <code class="docutils literal"><span class="pre">[A,</span> <span class="pre">cos(gamma),</span> <span class="pre">B,</span> <span class="pre">cos(beta),</span> <span class="pre">cos(alpha),</span> <span class="pre">C]</span></code>)
+and writes positions in Å and time in AKMA time units.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of output file</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; number of atoms in dcd file</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; starting frame number</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; skip between subsequent timesteps (indicate that <cite>step</cite> <strong>MD
-integrator steps (!)</strong> make up one trajectory frame); default is 1.</li>
-<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; timestep (<strong>MD integrator time step (!)</strong>, in AKMA units); default is
-20.45482949774598 (corresponding to 1 ps).</li>
-<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; comments to annotate dcd file</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <strong>Override</strong> <cite>step</cite> and <cite>delta</cite> so that the DCD records that
-<cite>dt</cite> ps lie between two frames. (It sets <cite>step</cite> = 1 and
-<cite>delta</cite> <code class="docutils literal"><span class="pre">=</span> <span class="pre">AKMA(dt)</span></code>.) The default is <code class="docutils literal"><span class="pre">None</span></code>, in which case
-<cite>step</cite> and <cite>delta</cite> are used.</li>
-<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
-the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [&#8216;convert_lengths&#8217;].
-(see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>)</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of trajectory</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of atoms to be written</li>
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; convert from MDAnalysis units to format specific units</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; number of steps between frames to be written</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; time between two frames. If <code class="docutils literal"><span class="pre">None</span></code> guess from first written
+<code class="xref py py-class docutils literal"><span class="pre">TimeStep</span></code></li>
+<li><strong>remarks</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; remarks to be stored in DCD. Shouldn&#8217;t be more then 240 characters</li>
+<li><strong>nsavc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; DCD files can also store the number of integrator time steps that
+correspond to the interval between two frames as nsavc (i.e., every
+how many MD steps is a frame saved to the DCD). By default, this
+number is just set to one and this should be sufficient for almost
+all cases but if required, nsavc can be changed.</li>
+<li><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; General writer arguments</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The keyword arguments set the <strong>low-level attributes of the DCD</strong> according
-to the CHARMM format. The time between two frames would be <cite>delta</cite> *
-<cite>step</cite>!  For convenience, one can alternatively supply the <cite>dt</cite> keyword
-(see above) to just tell the writer that it should record &#8220;There are <cite>dt</cite>
-ps between each frame&#8221;.</p>
-<p>The Writer will write the <strong>unit cell information</strong> to the DCD in a format
-compatible with NAMD and older CHARMM versions, namely the unit cell
-lengths in Angstrom and the angle cosines (see <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>). Newer
-versions of CHARMM (at least c36b2) store the matrix of the box
-vectors. Writing this matrix to a DCD is currently not supported (although
-reading is supported with the <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDReader" title="MDAnalysis.coordinates.DCD.DCDReader"><code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code></a>); instead the angle
-cosines are written, which <em>might make the DCD file unusable in CHARMM
-itself</em>. See <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues/187">Issue 187</a> for further information.</p>
-<p class="last">The writing behavior of the <a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter" title="MDAnalysis.coordinates.DCD.DCDWriter"><code class="xref py py-class docutils literal"><span class="pre">DCDWriter</span></code></a> is identical to that of the
-DCD molfile plugin of VMD with the exception that by default it will use
-AKMA time units.</p>
-</div>
-<p class="rubric">Example</p>
-<p>Typical usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">DCDWriter</span><span class="p">(</span><span class="s2">&quot;new.dcd&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span>
-        <span class="n">w</span><span class="o">.</span><span class="n">write_next_timestep</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Keywords are available to set some of the low-level attributes of the DCD.</p>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter.close">
 <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close trajectory and flush buffers.</p>
+<dd><p>close trajectory</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter.convert_dimensions_to_unitcell">
-<code class="descname">convert_dimensions_to_unitcell</code><span class="sig-paren">(</span><em>ts, _ts_order=[0, 2, 5, 4, 3, 1]</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter.convert_dimensions_to_unitcell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.convert_dimensions_to_unitcell" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read dimensions from timestep <em>ts</em> and return appropriate native unitcell.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep.dimensions" title="MDAnalysis.coordinates.DCD.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">Timestep.dimensions</span></code></a></p>
-</div>
+<code class="descname">convert_dimensions_to_unitcell</code><span class="sig-paren">(</span><em>ts</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.convert_dimensions_to_unitcell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read dimensions from timestep <em>ts</em> and return appropriate unitcell.</p>
+<p>The default is to return <code class="docutils literal"><span class="pre">[A,B,C,alpha,beta,gamma]</span></code>; if this
+is not appropriate then this method has to be overriden.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1441,7 +1044,7 @@ is avoided.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> or a <a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>) &#8211; write coordinate information associate with <cite>obj</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> or a <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code>) &#8211; write coordinate information associate with <cite>obj</cite></td>
 </tr>
 </tbody>
 </table>
@@ -1454,29 +1057,19 @@ when setting up the trajectory.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.DCD.DCDWriter.write_next_timestep">
-<code class="descname">write_next_timestep</code><span class="sig-paren">(</span><em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter.write_next_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.write_next_timestep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write a new timestep to the DCD file.</p>
+<code class="descname">write_next_timestep</code><span class="sig-paren">(</span><em>ts</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDWriter.write_next_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.DCD.DCDWriter.write_next_timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write timestep object into trajectory.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ts</strong> (<cite>Timestep</cite> (optional)) &#8211; <cite>Timestep</cite> object containing coordinates to be written to DCD file;
-by default it uses the current <cite>Timestep</cite> associated with the
-Writer.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if wrong number of atoms supplied</li>
-<li><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code> &#8211; if no coordinates to be written.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ts</strong> (<em>TimeStep</em>) &#8211; </td>
 </tr>
 </tbody>
 </table>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.5: </span>Raises <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> instead of generic <code class="xref py py-exc docutils literal"><span class="pre">Exception</span></code>
-if wrong number of atoms supplied and <code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code>
-if no coordinates to be written.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.DCDWriter.write" title="MDAnalysis.coordinates.DCD.DCDWriter.write"><code class="xref py py-meth docutils literal"><span class="pre">DCDWriter.write()</span></code></a></p>
 </div>
 </dd></dl>
 
