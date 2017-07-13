@@ -1119,13 +1119,6 @@
     <span class="c1"># This transplant is hardcoded for now to allow for multiple getattr things</span>
     <span class="c1">#transplants[Segment].append((&#39;__getattr__&#39;, getattr__))</span>
 
-
-    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Instant selector ResidueGroup.&lt;name&gt; &quot;</span>
-               <span class="s2">&quot;or Segment.&lt;name&gt; &quot;</span>
-               <span class="s2">&quot;is deprecated and will be removed in 1.0. &quot;</span>
-               <span class="s2">&quot;Use ResidueGroup[ResidueGroup.resnames == &#39;&lt;name&gt;&#39;] &quot;</span>
-               <span class="s2">&quot;or Segment.residues[Segment.residues == &#39;&lt;name&gt;&#39;] &quot;</span>
-               <span class="s2">&quot;instead.&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_get_named_residue</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">resname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get all residues with name *resname* in the current ResidueGroup</span>
 <span class="sd">        or Segment.</span>
@@ -1153,7 +1146,14 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">residues</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">selection</span><span class="o">.</span><span class="n">SelectionError</span><span class="p">(</span>
                 <span class="s2">&quot;No residues with resname &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resname</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">residues</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Instant selector ResidueGroup.&lt;name&gt; &quot;</span>
+                      <span class="s2">&quot;or Segment.&lt;name&gt; &quot;</span>
+                      <span class="s2">&quot;is deprecated and will be removed in 1.0. &quot;</span>
+                      <span class="s2">&quot;Use ResidueGroup[ResidueGroup.resnames == &#39;&lt;name&gt;&#39;] &quot;</span>
+                      <span class="s2">&quot;or Segment.residues[Segment.residues == &#39;&lt;name&gt;&#39;] &quot;</span>
+                      <span class="s2">&quot;instead.&quot;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">residues</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># XXX: keep this, makes more sense for names</span>
             <span class="k">return</span> <span class="n">residues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1322,10 +1322,6 @@
     <span class="n">transplants</span><span class="p">[</span><span class="n">SegmentGroup</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
         <span class="p">(</span><span class="s1">&#39;__getattr__&#39;</span><span class="p">,</span> <span class="n">getattr__</span><span class="p">))</span>
 
-    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Instant selector SegmentGroup.&lt;name&gt; &quot;</span>
-               <span class="s2">&quot;is deprecated and will be removed in 1.0. &quot;</span>
-               <span class="s2">&quot;Use SegmentGroup[SegmentGroup.segids == &#39;&lt;name&gt;&#39;] &quot;</span>
-               <span class="s2">&quot;instead.&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_get_named_segment</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">segid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get all segments with name *segid* in the current SegmentGroup.</span>
 
@@ -1354,7 +1350,12 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">selection</span><span class="o">.</span><span class="n">SelectionError</span><span class="p">(</span>
                 <span class="s2">&quot;No segments with segid &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">segid</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Instant selector SegmentGroup.&lt;name&gt; &quot;</span>
+                      <span class="s2">&quot;is deprecated and will be removed in 1.0. &quot;</span>
+                      <span class="s2">&quot;Use SegmentGroup[SegmentGroup.segids == &#39;&lt;name&gt;&#39;] &quot;</span>
+                      <span class="s2">&quot;instead.&quot;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># XXX: keep this, makes more sense for names</span>
             <span class="k">return</span> <span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
