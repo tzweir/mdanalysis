@@ -137,6 +137,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">MDAnalysis</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -254,6 +255,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Store the segments for the deprecated instant selector feature.</span>
+        <span class="c1"># This attribute has to be defined early to avoid recursion in</span>
+        <span class="c1"># __getattr__.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instant_selectors</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="c1"># hold on to copy of kwargs; used by external libraries that</span>
         <span class="c1"># reinitialize universes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
@@ -391,7 +396,26 @@
                 <span class="c1"># if len 1 SegmentGroup, convert to Segment</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">segment</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_instant_selectors</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">segment</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="c1"># This implements the instant selector of segments from a Universe.</span>
+        <span class="c1"># It is implemented as __getattr__ so a deprecation warning can be</span>
+        <span class="c1"># issued when the feature is used. Instant selectors are deprecated</span>
+        <span class="c1"># since version 0.16.2 and are tareted to be deleted in version 1.0.</span>
+        <span class="c1"># self._instant_selectors is populated in self._process_attr and</span>
+        <span class="c1"># created at the beginning of __init__.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instant_selectors</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;No attribute &quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Instant selector Universe.&lt;segid&gt; &quot;</span>
+                          <span class="s2">&quot;is deprecated and will be removed in 1.0. &quot;</span>
+                          <span class="s2">&quot;Use SegmentGroup[SegmentGroup.segids == &#39;&lt;segid&gt;&#39;] &quot;</span>
+                          <span class="s2">&quot;instead.&quot;</span><span class="p">,</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">segment</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">universe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
