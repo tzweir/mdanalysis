@@ -237,6 +237,13 @@
     <span class="k">def</span> <span class="nf">callable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Callable</span><span class="p">)</span>
 
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">PathLike</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+   <span class="k">class</span> <span class="nc">PathLike</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+       <span class="k">pass</span>
+
+
 
 <div class="viewcode-block" id="filename"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.filename">[docs]</a><span class="k">def</span> <span class="nf">filename</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a new name that has suffix attached; replaces other extensions.</span>
@@ -578,7 +585,7 @@
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">total_ordering</span>
-<div class="viewcode-block" id="NamedStream"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream">[docs]</a><span class="k">class</span> <span class="nc">NamedStream</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
+<div class="viewcode-block" id="NamedStream"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.NamedStream">[docs]</a><span class="k">class</span> <span class="nc">NamedStream</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">PathLike</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stream that also provides a (fake) name.</span>
 
 <span class="sd">    By wrapping a stream `stream` in this class, it can be passed to</span>
@@ -709,6 +716,9 @@
         <span class="c1">#except AttributeError:</span>
         <span class="c1">#    super(NamedStream, self).__exit__(*args)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__fspath__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
     <span class="c1"># override more IOBase methods, as these are provided by IOBase and are not</span>
     <span class="c1"># caught with __getattr__ (ugly...)</span>
