@@ -212,9 +212,11 @@
     <span class="k">elif</span> <span class="nb">format</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_ext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
             <span class="c1"># An AttributeError is raised if filename cannot</span>
             <span class="c1"># be manipulated as a string.</span>
+            <span class="c1"># A TypeError is raised in py3.6</span>
+            <span class="c1"># &quot;TypeError: expected str, bytes or os.PathLike object&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;File format could not be guessed from &quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span>
                              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
