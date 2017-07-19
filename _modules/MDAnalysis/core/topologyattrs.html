@@ -523,8 +523,8 @@
         <span class="c1"># the additions later</span>
         <span class="n">sel_str</span> <span class="o">=</span> <span class="s2">&quot;segid </span><span class="si">{}</span><span class="s2"> and resid </span><span class="si">{}</span><span class="s2"> and name C&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">residue</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">segid</span><span class="p">,</span> <span class="n">residue</span><span class="o">.</span><span class="n">resid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">sel</span> <span class="o">=</span> <span class="n">residue</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel_str</span><span class="p">)</span> <span class="o">+</span> \
-            <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span><span class="n">residue</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel_str</span><span class="p">)</span> <span class="o">+</span>
+               <span class="n">residue</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">,</span> <span class="s1">&#39;name CA&#39;</span><span class="p">,</span> <span class="s1">&#39;name C&#39;</span><span class="p">))</span>
 
         <span class="c1"># select_atoms doesnt raise errors if nothing found, so check size</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
@@ -547,8 +547,8 @@
         <span class="n">sel_str</span> <span class="o">=</span> <span class="s2">&quot;segid </span><span class="si">{}</span><span class="s2"> and resid </span><span class="si">{}</span><span class="s2"> and name N&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">residue</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">segid</span><span class="p">,</span> <span class="n">residue</span><span class="o">.</span><span class="n">resid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="n">sel</span> <span class="o">=</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span> <span class="o">+</span> \
-            <span class="n">residue</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel_str</span><span class="p">)</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span><span class="n">residue</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">,</span> <span class="s1">&#39;name CA&#39;</span><span class="p">,</span> <span class="s1">&#39;name C&#39;</span><span class="p">)</span> <span class="o">+</span>
+               <span class="n">residue</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel_str</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">sel</span>
@@ -574,10 +574,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">nextres</span> <span class="o">=</span> <span class="n">residue</span><span class="o">.</span><span class="n">resid</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">segid</span> <span class="o">=</span> <span class="n">residue</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">segid</span>
-        <span class="n">sel</span> <span class="o">=</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span> <span class="o">+</span> \
-              <span class="n">residue</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
-                  <span class="s1">&#39;segid </span><span class="si">%s</span><span class="s1"> and resid </span><span class="si">%d</span><span class="s1"> and name N&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">segid</span><span class="p">,</span> <span class="n">nextres</span><span class="p">),</span>
-                  <span class="s1">&#39;segid </span><span class="si">%s</span><span class="s1"> and resid </span><span class="si">%d</span><span class="s1"> and name CA&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">segid</span><span class="p">,</span> <span class="n">nextres</span><span class="p">))</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span><span class="n">residue</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA&#39;</span><span class="p">,</span> <span class="s1">&#39;name C&#39;</span><span class="p">)</span> <span class="o">+</span>
+               <span class="n">residue</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
+                   <span class="s1">&#39;segid </span><span class="si">{}</span><span class="s1"> and resid </span><span class="si">{}</span><span class="s1"> and name N&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">segid</span><span class="p">,</span> <span class="n">nextres</span><span class="p">),</span>
+                   <span class="s1">&#39;segid </span><span class="si">{}</span><span class="s1"> and resid </span><span class="si">{}</span><span class="s1"> and name CA&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">segid</span><span class="p">,</span> <span class="n">nextres</span><span class="p">)))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">sel</span>
         <span class="k">else</span><span class="p">:</span>
@@ -596,9 +596,11 @@
 
 <span class="sd">        .. versionadded:: 0.7.5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;CB&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">residue</span><span class="p">[</span><span class="s1">&#39;CG&#39;</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">ag</span> <span class="o">=</span> <span class="n">residue</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">,</span> <span class="s1">&#39;name CA&#39;</span><span class="p">,</span>
+                                        <span class="s1">&#39;name CB&#39;</span><span class="p">,</span> <span class="s1">&#39;name CG&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ag</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
     <span class="n">transplants</span><span class="p">[</span><span class="n">Residue</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">&#39;chi1_selection&#39;</span><span class="p">,</span> <span class="n">chi1_selection</span><span class="p">))</span></div>
