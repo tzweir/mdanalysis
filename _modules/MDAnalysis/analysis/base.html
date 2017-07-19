@@ -355,13 +355,21 @@
 <span class="sd">    ------</span>
 <span class="sd">    ValueError : if ``function`` has the same kwargs as ``BaseAnalysis``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">base_argspec</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">AnalysisBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">base_argspec</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="n">AnalysisBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">base_argspec</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">AnalysisBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
+
     <span class="n">n_base_defaults</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_argspec</span><span class="o">.</span><span class="n">defaults</span><span class="p">)</span>
     <span class="n">base_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">val</span>
                    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_argspec</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="o">-</span><span class="n">n_base_defaults</span><span class="p">:],</span>
                                         <span class="n">base_argspec</span><span class="o">.</span><span class="n">defaults</span><span class="p">)}</span>
 
-    <span class="n">argspec</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">argspec</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">argspec</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+
     <span class="k">for</span> <span class="n">base_kw</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">base_kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">base_kw</span> <span class="ow">in</span> <span class="n">argspec</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
