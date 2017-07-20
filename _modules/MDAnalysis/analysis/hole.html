@@ -234,8 +234,9 @@
 
 <span class="sd">      After running :meth:`HOLE.collect`, this dict contains all the</span>
 <span class="sd">      HOLE profiles, indexed by the frame number. If only a single</span>
-<span class="sd">      frame was analyzed then this will be ``HOLE.profiles[0]``. Note</span>
-<span class="sd">      that the order is random; one needs to sort the keys first.</span>
+<span class="sd">      frame was analyzed then this will be ``HOLE.profiles[0]``.</span>
+<span class="sd">      The entries are stored in order of calculation, but one can</span>
+<span class="sd">      also sort it by the keys.</span>
 
 <span class="sd">      .. Note::</span>
 <span class="sd">         Duplicate keys are not possible. The last key overwrites</span>
@@ -249,8 +250,9 @@
 
 <span class="sd">      After running :meth:`HOLE.collect`, this dict contains all the</span>
 <span class="sd">      HOLE profiles, indexed by the frame number or the order</span>
-<span class="sd">      parameter (if *orderparameters* was supplied). Note that the</span>
-<span class="sd">      order is random; one needs to sort the keys first.</span>
+<span class="sd">      parameter (if *orderparameters* was supplied).</span>
+<span class="sd">      The entries are stored in order of calculation, but one can</span>
+<span class="sd">      also sort it by the keys.</span>
 
 <span class="sd">      .. Note::</span>
 <span class="sd">         Duplicate keys are not possible. The last key overwrites</span>
@@ -305,6 +307,7 @@
 <span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">cycle</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
@@ -425,7 +428,7 @@
         <span class="n">kw</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">frames</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;frames&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">frames</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="o">.</span><span class="n">keys</span><span class="p">()[::</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+            <span class="n">frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="o">.</span><span class="n">keys</span><span class="p">())[::</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">frames</span> <span class="o">=</span> <span class="n">asiterable</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
         <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;frames&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">frames</span>
@@ -911,7 +914,7 @@
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Executable </span><span class="si">%(program)r</span><span class="s2"> not found, should have been </span><span class="si">%(path)r</span><span class="s2">.&quot;</span><span class="p">,</span>
                              <span class="nb">vars</span><span class="p">())</span>
         <span class="c1"># results</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
 
 <div class="viewcode-block" id="HOLE.check_and_fix_long_filename"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLE.check_and_fix_long_filename">[docs]</a>    <span class="k">def</span> <span class="nf">check_and_fix_long_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">tmpdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a file name suitable for HOLE.</span>
@@ -997,7 +1000,7 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &lt;</span><span class="si">%s</span><span class="s2"> &gt;</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exe</span><span class="p">[</span><span class="s1">&#39;hole&#39;</span><span class="p">],</span> <span class="p">(</span><span class="n">inpname</span> <span class="k">if</span> <span class="n">inpname</span> <span class="k">else</span> <span class="s2">&quot;(input)&quot;</span><span class="p">),</span> <span class="n">outname</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outname</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
             <span class="n">hole</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">exe</span><span class="p">[</span><span class="s1">&#39;hole&#39;</span><span class="p">]],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
-            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">hole</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">hole</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outname</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
             <span class="c1"># HOLE is not very good at setting returncodes so check ourselves</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
@@ -1124,8 +1127,7 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%d</span><span class="s2"> input frames in DCD trajectory </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcd</span><span class="p">)</span>
 
         <span class="c1"># one recarray for each frame, indexed by frame number</span>
-        <span class="c1"># TODO: use ordered dict</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Run </span><span class="si">%s</span><span class="s2">: Reading </span><span class="si">%d</span><span class="s2"> HOLE profiles from </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">hole_output</span><span class="p">)</span>
         <span class="n">hole_profile_no</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1313,7 +1315,7 @@
         <span class="n">hole_kw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hole_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">hole_kw</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="n">profiles</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># index by orderparameters: NOTE: can overwrite!</span>
+        <span class="n">profiles</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>  <span class="c1"># index by orderparameters: NOTE: can overwrite!</span>
 
         <span class="c1"># better: if not a DCD, convert to DCD because HOLE can read it (does it need a PSF?)</span>
         <span class="c1"># ... maybe faster than splittinginto PDBs...</span>
@@ -1342,7 +1344,7 @@
                     <span class="nb">len</span><span class="p">(</span><span class="n">hole_profiles</span><span class="p">),</span> <span class="n">hole_profiles</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">ts</span><span class="p">)</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
-            <span class="n">profiles</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">hole_profiles</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">profiles</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">hole_profiles</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="n">profiles</span></div>
 
 <div class="viewcode-block" id="HOLEtraj.run_hole"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLEtraj.run_hole">[docs]</a>    <span class="k">def</span> <span class="nf">run_hole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdbfile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
