@@ -43,6 +43,7 @@ from numpy.testing import (
 
 import MDAnalysis as mda
 from MDAnalysis.lib import transformations
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysis.core.topologyobjects import (
     Bond,
     Angle,
@@ -55,7 +56,7 @@ from MDAnalysisTests.datafiles import (
     TRZ_psf, TRZ,
     two_water_gro,
 )
-from MDAnalysisTests import parser_not_found, tempdir, make_Universe
+from MDAnalysisTests import parser_not_found, tempdir
 
 import pytest
 

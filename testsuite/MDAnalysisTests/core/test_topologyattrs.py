@@ -36,12 +36,13 @@ from numpy.testing import (
 )
 import pytest
 from MDAnalysisTests.datafiles import PSF, DCD
-from MDAnalysisTests import parser_not_found, make_Universe
+from MDAnalysisTests import parser_not_found
 
 import MDAnalysis as mda
 import MDAnalysis.core.topologyattrs as tpattrs
 from MDAnalysis.core import groups
 from MDAnalysis.core.topology import Topology
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysis.exceptions import NoDataError
 
 

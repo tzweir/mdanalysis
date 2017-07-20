@@ -33,7 +33,6 @@ from numpy.testing import (
     assert_raises,
 )
 
-from MDAnalysisTests import make_Universe
 from MDAnalysisTests.datafiles import (
     COORDINATES_XYZ, COORDINATES_TRR,
     GRO, TRR,
@@ -42,6 +41,7 @@ from MDAnalysisTests.datafiles import (
 
 import MDAnalysis
 from MDAnalysis import NoDataError
+from MDAnalysis.core.dummy import make_Universe
 
 
 def assert_not_view(arr):

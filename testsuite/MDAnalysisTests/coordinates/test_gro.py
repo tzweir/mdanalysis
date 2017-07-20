@@ -26,7 +26,8 @@ from unittest import TestCase
 import MDAnalysis as mda
 import numpy as np
 from MDAnalysis.coordinates.GRO import GROReader, GROWriter
-from MDAnalysisTests import make_Universe, tempdir
+from MDAnalysis.core.dummy import make_Universe
+from MDAnalysisTests import tempdir
 from MDAnalysisTests.coordinates.base import (
     BaseReference, BaseReaderTest, BaseWriterTest, BaseTimestepTest,
 )

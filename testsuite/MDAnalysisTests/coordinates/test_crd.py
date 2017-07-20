@@ -29,10 +29,11 @@ from numpy.testing import (
     assert_warns,
 )
 
+from MDAnalysis.core.dummy import make_Universe
 import MDAnalysis as mda
 
 from MDAnalysisTests.datafiles import CRD
-from MDAnalysisTests import tempdir, make_Universe
+from MDAnalysisTests import tempdir
 
 from unittest import TestCase
 

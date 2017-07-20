@@ -143,7 +143,7 @@ the OPLS/AA force field.
 """
 from __future__ import absolute_import
 
-__all__ = ['Universe', 'as_Universe', 'Writer', 'fetch_mmtf']
+__all__ = ['Universe', 'as_Universe', 'make_Universe', 'Writer', 'fetch_mmtf']
 
 import logging
 import warnings
@@ -192,6 +192,7 @@ from . import units
 
 # Bring some often used objects into the current namespace
 from .core.universe import Universe, as_Universe, Merge
+from .core.dummy import make_Universe
 from .coordinates.core import writer as Writer
 
 # After Universe import

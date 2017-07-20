@@ -16,7 +16,6 @@ from numpy.testing import (
 )
 import numpy as np
 
-from MDAnalysisTests import make_Universe
 
 from MDAnalysis.core.topology import (
     Topology,
@@ -25,6 +24,7 @@ from MDAnalysis.core.topology import (
 )
 from MDAnalysis.core import topologyattrs as ta
 from MDAnalysis.core import groups
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysis import NoDataError
 import MDAnalysis
 

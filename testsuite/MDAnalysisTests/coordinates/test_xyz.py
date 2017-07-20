@@ -35,11 +35,12 @@ from numpy.testing import (
 )
 
 from MDAnalysis.coordinates.XYZ import XYZWriter
+from MDAnalysis.core.dummy import make_Universe
 
 from MDAnalysisTests.datafiles import COORDINATES_XYZ, COORDINATES_XYZ_BZ2
 from MDAnalysisTests.coordinates.base import (MultiframeReaderTest, BaseReference,
                                               BaseWriterTest)
-from MDAnalysisTests import tempdir, make_Universe
+from MDAnalysisTests import tempdir
 from numpy.testing import TestCase
 
 

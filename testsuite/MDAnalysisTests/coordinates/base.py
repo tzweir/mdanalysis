@@ -31,12 +31,13 @@ from numpy.testing import (assert_equal, assert_raises, assert_almost_equal,
 
 import MDAnalysis as mda
 from MDAnalysis.coordinates.base import Timestep
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysis import NoDataError
 from MDAnalysis.lib.mdamath import triclinic_vectors
 
 from MDAnalysisTests.coordinates.reference import RefAdKSmall
 from MDAnalysisTests.datafiles import AUX_XVG_HIGHF, AUX_XVG_LOWF
-from MDAnalysisTests import tempdir, make_Universe
+from MDAnalysisTests import tempdir
 
 
 class _SingleFrameReader(TestCase, RefAdKSmall):

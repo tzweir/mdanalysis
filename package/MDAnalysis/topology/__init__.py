@@ -287,3 +287,4 @@ from . import GMSParser
 from . import DLPolyParser
 from . import HoomdXMLParser
 from . import MMTFParser
+from . import MinimalParser

@@ -31,9 +31,9 @@ from numpy.testing import (
 
 from MDAnalysis.core.topologyattrs import Bonds
 from MDAnalysis.core import groups
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysis import NoDataError
 
-from MDAnalysisTests import make_Universe
 
 # Also used in topology/test_guessers
 def make_starshape():

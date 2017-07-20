@@ -118,8 +118,8 @@ from MDAnalysisTests.util import (
     in_dir,
     assert_nowarns,
 )
-from MDAnalysisTests.core.util import make_Universe
 
 
 def run(*args, **kwargs):
     pytest.main()
+

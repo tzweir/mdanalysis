@@ -34,7 +34,7 @@ import numpy as np
 from numpy.testing import (
     assert_,
 )
-from MDAnalysisTests import make_Universe
+from MDAnalysis.core.dummy import make_Universe
 
 
 class TestIndexDtype(TestCase):

@@ -21,6 +21,7 @@
 #
 from __future__ import absolute_import
 import MDAnalysis as mda
+from MDAnalysis.core.dummy import make_Universe
 import os
 
 from numpy.testing import (
@@ -33,7 +34,7 @@ from numpy.testing import (
 from MDAnalysisTests.coordinates.reference import RefAdKSmall
 from MDAnalysisTests.coordinates.base import _SingleFrameReader
 from MDAnalysisTests.datafiles import PQR
-from MDAnalysisTests import tempdir, make_Universe
+from MDAnalysisTests import tempdir
 from numpy.testing import TestCase
 
 class TestPQRReader(_SingleFrameReader):

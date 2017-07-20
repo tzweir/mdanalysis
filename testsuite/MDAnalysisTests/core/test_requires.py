@@ -9,9 +9,9 @@ from numpy.testing import (
 )
 
 from MDAnalysis.core.groups import requires
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysis import NoDataError
 
-from MDAnalysisTests import make_Universe
 
 
 class TestRequires(object):

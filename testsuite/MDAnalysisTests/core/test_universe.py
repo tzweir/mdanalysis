@@ -44,7 +44,7 @@ from numpy.testing import (
 )
 import pytest
 
-from MDAnalysisTests import make_Universe
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysisTests.datafiles import (
     PSF, DCD,
     PSF_BAD,
@@ -115,11 +115,12 @@ class TestUniverseCreation(object):
         assert_raises(AttributeError, getattr, u, 'trajectory')
 
     def test_Universe_topology_unrecognizedformat_VE(self):
-        assert_raises(ValueError, mda.Universe, 'some.weird.not.pdb.but.converted.xtc')
+        assert_raises(ValueError, mda.Universe,
+                      'some.file.without.parser_or_coordinate_extension')
 
     def test_Universe_topology_unrecognizedformat_VE_msg(self):
         try:
-            mda.Universe('some.weird.not.pdb.but.converted.xtc')
+            mda.Universe('some.file.without.parser_or_coordinate_extension')
         except ValueError as e:
             assert_('isn\'t a valid topology format' in e.args[0])
         else:

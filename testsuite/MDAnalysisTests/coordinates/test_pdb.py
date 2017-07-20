@@ -27,7 +27,10 @@ from unittest import TestCase
 
 import MDAnalysis as mda
 import numpy as np
-from MDAnalysisTests import parser_not_found, tempdir, make_Universe
+
+from MDAnalysis.core.dummy import make_Universe
+
+from MDAnalysisTests import parser_not_found, tempdir
 from MDAnalysisTests.coordinates.base import _SingleFrameReader
 from MDAnalysisTests.coordinates.reference import (RefAdKSmall, Ref4e43,
                                                    RefAdK)

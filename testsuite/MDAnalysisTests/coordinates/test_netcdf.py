@@ -35,11 +35,13 @@ from numpy.testing import (assert_, assert_equal, assert_array_almost_equal,
                            assert_almost_equal, assert_raises, dec)
 from unittest import TestCase
 
+from MDAnalysis.core.dummy import make_Universe
+
 from MDAnalysisTests.datafiles import (PRMncdf, NCDF, PFncdf_Top, PFncdf_Trj,
                                        GRO, TRR, XYZ_mini)
 from MDAnalysisTests.coordinates.test_trj import _TRJReaderTest
 from MDAnalysisTests.coordinates.reference import (RefVGV, RefTZ2)
-from MDAnalysisTests import module_not_found, tempdir, make_Universe
+from MDAnalysisTests import module_not_found, tempdir
 
 
 

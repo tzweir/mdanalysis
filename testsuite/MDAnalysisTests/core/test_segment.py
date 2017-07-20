@@ -31,8 +31,9 @@ from numpy.testing import (
 import pytest
 
 import MDAnalysis as mda
+from MDAnalysis.core.dummy import make_Universe
 
-from MDAnalysisTests import parser_not_found, make_Universe
+from MDAnalysisTests import parser_not_found
 from MDAnalysis.tests.datafiles import PSF, DCD
 
 

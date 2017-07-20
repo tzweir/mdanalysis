@@ -31,8 +31,8 @@ import numpy as np
 
 from MDAnalysis.topology import guessers
 from MDAnalysis.core.topologyattrs import Angles
+from MDAnalysis.core.dummy import make_Universe
 
-from MDAnalysisTests import make_Universe
 from MDAnalysisTests.core.test_fragments import make_starshape
 
 class TestGuessMasses(object):

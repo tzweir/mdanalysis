@@ -39,11 +39,12 @@ import operator
 import six
 
 import MDAnalysis as mda
-from MDAnalysisTests import make_Universe, parser_not_found, assert_nowarns
+from MDAnalysisTests import parser_not_found, assert_nowarns
 from MDAnalysisTests.datafiles import PSF, DCD
 from MDAnalysis.core import groups
 from MDAnalysis.core.topology import Topology
 from MDAnalysis.core.topologyattrs import Segids
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysis.topology.base import change_squash
 
 

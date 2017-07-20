@@ -34,7 +34,7 @@ import mock
 
 
 from MDAnalysisTests.datafiles import PSF, GRO, XTC
-from MDAnalysisTests import make_Universe
+from MDAnalysis.core.dummy import make_Universe
 
 import MDAnalysis
 import MDAnalysis as mda

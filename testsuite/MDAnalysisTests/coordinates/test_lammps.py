@@ -26,11 +26,12 @@ import pytest
 
 import MDAnalysis as mda
 from MDAnalysis import NoDataError
+from MDAnalysis.core.dummy import make_Universe
 
 from numpy.testing import (assert_equal, assert_almost_equal, assert_raises,
                            assert_, assert_array_almost_equal)
 
-from MDAnalysisTests import tempdir, make_Universe
+from MDAnalysisTests import tempdir
 from MDAnalysisTests.coordinates.reference import (
     RefLAMMPSData, RefLAMMPSDataMini, RefLAMMPSDataDCD,
 )

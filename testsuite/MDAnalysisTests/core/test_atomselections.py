@@ -42,6 +42,7 @@ import MDAnalysis as mda
 import MDAnalysis.core.selection
 from MDAnalysis.lib.distances import distance_array
 from MDAnalysis.core.topologyobjects import TopologyGroup
+from MDAnalysis.core.dummy import make_Universe
 from MDAnalysis.core.selection import Parser
 from MDAnalysis import SelectionError
 
@@ -54,7 +55,7 @@ from MDAnalysis.tests.datafiles import (
     PDB_full,
     PDB_icodes,
 )
-from MDAnalysisTests import parser_not_found, make_Universe
+from MDAnalysisTests import parser_not_found
 
 import pytest
 

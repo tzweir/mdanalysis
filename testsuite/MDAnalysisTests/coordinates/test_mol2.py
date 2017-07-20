@@ -34,8 +34,9 @@ from MDAnalysisTests.datafiles import (
     mol2_zinc,
 )
 from MDAnalysis import Universe
+from MDAnalysis.core.dummy import make_Universe
 import MDAnalysis as mda
-from MDAnalysisTests import tempdir, make_Universe
+from MDAnalysisTests import tempdir
 
 
 class TestMol2(TestCase):

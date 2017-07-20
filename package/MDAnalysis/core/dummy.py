@@ -19,9 +19,7 @@
 # MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.
 # J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787
 #
-"""Mock Universe and Topology for testing purposes
-
-Avoids import of MDAnalysis at base level because of Issue #344
+"""Mock Universe and Topology generated from scratch with default values
 
 """
 from __future__ import absolute_import
@@ -33,7 +31,12 @@ import numpy as np
 import string
 import itertools
 
-# Dimensions of the standard mock Universe
+import MDAnalysis as mda
+from MDAnalysis.core.topology import Topology
+import MDAnalysis.core.topologyattrs as ta
+from MDAnalysis.coordinates.base import SingleFrameReaderBase
+
+# Elements  of the standard mock Universe
 # 5 atoms per residues, 5 residues per segment
 _N_ATOMS = 125
 _N_RESIDUES = 25
@@ -42,12 +45,12 @@ _ATOMS_PER_RES = _N_ATOMS // _N_RESIDUES
 _RESIDUES_PER_SEG = _N_RESIDUES // _N_SEGMENTS
 
 
-def make_Universe(extras=None, size=None, trajectory=False, velocities=False, forces=False):
+def make_Universe(extras=None, size=None, trajectory=False, velocities=False,
+                  forces=False):
     """Make a dummy reference Universe
 
-    u = make_Universe(('masses', 'charges'))
-
-    Creates a lightweight Universe with only masses and charges.
+    Allows the construction of arbitrary-sized Universes. Suitable for
+    the generation of structures for output.
 
     Preferable for testing core components because:
       * minimises dependencies within the package
@@ -56,9 +59,11 @@ def make_Universe(extras=None, size=None, trajectory=False, velocities=False, fo
     Parameters
     ----------
     extras : list of strings
-      extra attributes to add to Universe
+      extra attributes to add to Universe:
+      u = make_Universe(('masses', 'charges'))
+      Creates a lightweight Universe with only masses and charges.
     size : tuple of int
-      dimensions of the Universe (n_atoms, n_residues, n_segments)
+      number of elements of the Universe (n_atoms, n_residues, n_segments)
     trajectory : bool
       create a fake Reader object attached to Universe
     velocities : bool
@@ -71,15 +76,12 @@ def make_Universe(extras=None, size=None, trajectory=False, velocities=False, fo
     MDAnalysis.core.universe.Universe object
 
     """
-    import MDAnalysis as mda
-
     u = mda.Universe(make_topology(extras, size=size))
     if trajectory:
-        u.trajectory = make_FakeReader(len(u.atoms), velocities, forces)
+        u.trajectory = FakeReader(len(u.atoms), velocities, forces)
     return u
 
-
-def make_topology(extras=None, size=None):
+def make_topology(extras=None, size=None, **kwargs):
     """Reference topology system
 
     Parameters
@@ -93,7 +95,6 @@ def make_topology(extras=None, size=None):
     -------
     MDAnalysis.core.topology.Topology object
     """
-    from MDAnalysis.core.topology import Topology
 
     if extras is None:
         extras = []
@@ -110,26 +111,21 @@ def make_topology(extras=None, size=None):
 
 def make_altLocs(size):
     """AltLocs cycling through A B C D E"""
-    import MDAnalysis.core.topologyattrs as ta
-
     na, nr, ns = size
     alts = itertools.cycle(('A', 'B', 'C', 'D', 'E'))
     return ta.AltLocs(np.array(['{}'.format(next(alts)) for _ in range(na)],
                                dtype=object))
 
 def make_bfactors(size):
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Bfactors(np.tile(np.array([1.0, 2, 3, 4, 5]), nr))
 
 def make_tempfactors(size):
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Tempfactors(np.tile(np.array([1.0, 2, 3, 4, 5]), nr))
 
 def make_charges(size):
     """Atom charges (-1.5, -0.5, 0.0, 0.5, 1.5) repeated"""
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     charges = itertools.cycle([-1.5, -0.5, 0.0, 0.5, 1.5])
     return ta.Charges(np.array([next(charges)
@@ -137,21 +133,18 @@ def make_charges(size):
 
 def make_resnames(size):
     """Creates residues named RsA RsB ... """
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Resnames(np.array(['Rs{}'.format(string.ascii_uppercase[i])
                                  for i in range(nr)], dtype=object))
 
 def make_segids(size):
     """Segids SegA -> SegY"""
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Segids(np.array(['Seg{}'.format(string.ascii_uppercase[i])
                                for i in range(ns)], dtype=object))
 
 def make_types(size):
     """Atoms are given types TypeA -> TypeE on a loop"""
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     types = itertools.cycle(string.ascii_uppercase[:5])
     return ta.Atomtypes(np.array(
@@ -160,7 +153,6 @@ def make_types(size):
 
 def make_names(size):
     """Atom names AAA -> ZZZ (all unique)"""
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     # produces, AAA, AAB, AAC, ABA etc
     names = itertools.product(*[string.ascii_uppercase] * 3)
@@ -169,24 +161,20 @@ def make_names(size):
          for _ in range(na)], dtype=object))
 
 def make_occupancies(size):
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Occupancies(np.tile(np.array([1.0, 2, 3, 4, 5]), nr))
 
 def make_radii(size):
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Radii(np.tile(np.array([1.0, 2, 3, 4, 5]), nr))
 
 def make_serials(size):
     """Serials go from 10 to size+10"""
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Atomids(np.arange(na) + 10)
 
 def make_masses(size):
     """Atom masses (5.1, 4.2, 3.3, 1.5, 0.5) repeated"""
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     masses = itertools.cycle([5.1, 4.2, 3.3, 1.5, 0.5])
     return ta.Masses(np.array([next(masses)
@@ -194,13 +182,11 @@ def make_masses(size):
 
 def make_resnums(size):
     """Resnums 1 and upwards"""
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Resnums(np.arange(nr, dtype=np.int64) + 1)
 
 def make_resids(size):
     """Resids 1 and upwards"""
-    import MDAnalysis.core.topologyattrs as ta
     na, nr, ns = size
     return ta.Resids(np.arange(nr, dtype=np.int64) + 1)
 
@@ -225,24 +211,20 @@ _MENU = {
     'segids': make_segids,
 }
 
-def make_FakeReader(n_atoms=None, velocities=False, forces=False):
-    from MDAnalysis.coordinates.base import SingleFrameReaderBase
+class FakeReader(SingleFrameReaderBase):
+    def __init__(self, n_atoms=None, velocities=False, forces=False):
+        self.n_atoms = n_atoms if not n_atoms is None else _N_ATOMS
+        self.filename = 'FakeReader'
+        self.n_frames = 1
+        self._read_first_frame(velocities, forces)
 
-    class FakeReader(SingleFrameReaderBase):
-        def __init__(self, n_atoms=None, velocities=False, forces=False):
-            self.n_atoms = n_atoms if not n_atoms is None else _N_ATOMS
-            self.filename = 'FakeReader'
-            self.n_frames = 1
-            self._read_first_frame(velocities, forces)
+    def _read_first_frame(self, velocities=False, forces=False):
+        ts = self.ts = self._Timestep(self.n_atoms, positions=True,
+                                      velocities=velocities, forces=forces)
+        ts.positions = np.arange(3 * self.n_atoms).reshape(self.n_atoms, 3)
+        if velocities:
+            ts.velocities = np.arange(3 * self.n_atoms).reshape(self.n_atoms, 3) + 100
+        if forces:
+            ts.forces = np.arange(3 * self.n_atoms).reshape(self.n_atoms, 3) + 10000
+        ts.frame = 0
 
-        def _read_first_frame(self, velocities=False, forces=False):
-            ts = self.ts = self._Timestep(self.n_atoms, positions=True,
-                                          velocities=velocities, forces=forces)
-            ts.positions = np.arange(3 * self.n_atoms).reshape(self.n_atoms, 3)
-            if velocities:
-                ts.velocities = np.arange(3 * self.n_atoms).reshape(self.n_atoms, 3) + 100
-            if forces:
-                ts.forces = np.arange(3 * self.n_atoms).reshape(self.n_atoms, 3) + 10000
-            ts.frame = 0
-
-    return FakeReader(n_atoms, velocities, forces)

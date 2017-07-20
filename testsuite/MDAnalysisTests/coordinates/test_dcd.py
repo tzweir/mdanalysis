@@ -48,7 +48,7 @@ class DCDReference(BaseReference):
         self.topology = COORDINATES_TOPOLOGY
         self.reader = mda.coordinates.DCD.DCDReader
         self.writer = mda.coordinates.DCD.DCDWriter
-        self.ext = 'xtc'
+        self.ext = 'dcd'
         self.prec = 3
         self.changing_dimensions = True
 
