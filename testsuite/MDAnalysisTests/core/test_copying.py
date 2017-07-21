@@ -26,6 +26,10 @@ import numpy as np
 from numpy.testing import assert_equal
 import pytest
 
+from MDAnalysisTests.datafiles import (
+    PSF, DCD
+)
+
 import MDAnalysis as mda
 from MDAnalysis.core import topology
 from MDAnalysis.core import topologyattrs as ta
@@ -157,3 +161,17 @@ def test_topology_copy_n_attrs(refTop):
 def test_topology_copy_unique_attrs(refTop, attr):
     new = refTop.copy()
     assert getattr(refTop, attr) is not getattr(new, attr)
+
+
+
+@pytest.fixture(params=[
+    (PSF, DCD)
+])
+def refUniverse(request):
+    return mda.Universe(*request.param)
+
+
+def test_universe_copy(refUniverse):
+    new = refUniverse.copy()
+
+    assert len(new.atoms) == len(refUniverse.atoms)
