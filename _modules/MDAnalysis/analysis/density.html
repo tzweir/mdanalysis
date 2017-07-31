@@ -412,7 +412,7 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;isDensity&#39;</span><span class="p">]:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Running make_density() makes no sense: Grid is already a density. Nothing done.&quot;</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">return</span>
 
@@ -980,7 +980,7 @@
             <span class="c1"># with the appropriate B-factor</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">bfactors</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">):</span>
                 <span class="n">wmsg</span> <span class="o">=</span> <span class="s2">&quot;Some B-factors are Zero (will be skipped).&quot;</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">wmsg</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">wmsg</span><span class="p">)</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">wmsg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">MissingDataWarning</span><span class="p">)</span>
             <span class="n">rmsf</span> <span class="o">=</span> <span class="n">Bfactor2RMSF</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">bfactors</span><span class="p">)</span>
             <span class="n">grid</span> <span class="o">*=</span> <span class="mf">0.0</span>  <span class="c1"># reset grid</span>

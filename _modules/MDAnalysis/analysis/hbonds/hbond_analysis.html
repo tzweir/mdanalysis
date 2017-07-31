@@ -710,7 +710,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">errmsg</span> <span class="o">+=</span> <span class="s2">&quot; Selection will update so continuing with fingers crossed.&quot;</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">errmsg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">SelectionWarning</span><span class="p">)</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_log_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Log important parameters to the logfile.&quot;&quot;&quot;</span>
@@ -856,7 +856,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_s1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s2">&quot;Size of selection 1: </span><span class="si">{0}</span><span class="s2"> atoms&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="p">)))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Selection 1 &#39;</span><span class="si">{0}</span><span class="s2">&#39; did not select any atoms.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1</span><span class="p">)[:</span><span class="mi">80</span><span class="p">]))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Selection 1 &#39;</span><span class="si">{0}</span><span class="s2">&#39; did not select any atoms.&quot;</span>
+                           <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection1</span><span class="p">)[:</span><span class="mi">80</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s1_donors_h</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s1_acceptors</span> <span class="o">=</span> <span class="p">{}</span>
@@ -884,8 +885,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_s2</span> <span class="o">=</span> <span class="n">ns_selection_2</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s1</span><span class="p">,</span> <span class="mf">3.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger_debug</span><span class="p">(</span><span class="s1">&#39;Size of selection 2: </span><span class="si">{0}</span><span class="s1"> atoms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">)))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s2</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Selection 2 &quot;</span><span class="si">{0}</span><span class="s1">&quot; did not select any atoms.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection2</span><span class="p">)[:</span><span class="mi">80</span><span class="p">]))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Selection 2 &quot;</span><span class="si">{0}</span><span class="s1">&quot; did not select any atoms.&#39;</span>
+                           <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection2</span><span class="p">)[:</span><span class="mi">80</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors_h</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_s2_acceptors</span> <span class="o">=</span> <span class="p">{}</span>
@@ -962,7 +963,7 @@
 
         <span class="n">remove_duplicates</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;remove_duplicates&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># False: old behaviour</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">remove_duplicates</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Hidden feature remove_duplicates=False activated: you will probably get duplicate H-bonds.&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Hidden feature remove_duplicates=False activated: you will probably get duplicate H-bonds.&quot;</span><span class="p">)</span>
 
         <span class="n">debug</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">debug</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">debug</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
@@ -997,7 +998,7 @@
             <span class="c1"># chained reader or xyz(?) cannot do time yet</span>
             <span class="k">def</span> <span class="nf">_get_timestep</span><span class="p">():</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frame</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;HBond analysis is recording frame number instead of time step&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;HBond analysis is recording frame number instead of time step&quot;</span><span class="p">)</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting analysis (frame index start=</span><span class="si">%d</span><span class="s2"> stop=</span><span class="si">%d</span><span class="s2">, step=</span><span class="si">%d</span><span class="s2">)&quot;</span><span class="p">,</span>
                     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">traj_slice</span><span class="o">.</span><span class="n">start</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">),</span>
@@ -1191,7 +1192,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeseries</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No timeseries computed, do run() first.&quot;</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">MissingDataWarning</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">return</span>
 
         <span class="n">num_records</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">hframe</span><span class="p">)</span> <span class="k">for</span> <span class="n">hframe</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeseries</span><span class="p">])</span>
@@ -1246,7 +1247,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">has_timeseries</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No timeseries computed, do run() first.&quot;</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">MissingDataWarning</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">has_timeseries</span>
 
 <div class="viewcode-block" id="HydrogenBondAnalysis.count_by_time"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_analysis.html#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.count_by_time">[docs]</a>    <span class="k">def</span> <span class="nf">count_by_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

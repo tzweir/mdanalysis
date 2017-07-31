@@ -1152,14 +1152,12 @@
             <span class="c1"># note: ag[arange(len(ag))[boolean]] is ~2x faster than</span>
             <span class="c1"># ag[where[boolean]]</span>
             <span class="n">mismatch_resindex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ag1</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)[</span><span class="n">mismatch_mask</span><span class="p">]</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Removed </span><span class="si">{0}</span><span class="s2"> residues with non-matching numbers of atoms&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">mismatch_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-                <span class="s2">&quot;Removed residue ids: group 1: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">ag1</span><span class="o">.</span><span class="n">resids</span><span class="p">[</span><span class="n">mismatch_resindex</span><span class="p">]))</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-                <span class="s2">&quot;Removed residue ids: group 2: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">ag2</span><span class="o">.</span><span class="n">resids</span><span class="p">[</span><span class="n">mismatch_resindex</span><span class="p">]))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Removed </span><span class="si">{0}</span><span class="s2"> residues with non-matching numbers of atoms&quot;</span>
+                           <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mismatch_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Removed residue ids: group 1: </span><span class="si">{0}</span><span class="s2">&quot;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ag1</span><span class="o">.</span><span class="n">resids</span><span class="p">[</span><span class="n">mismatch_resindex</span><span class="p">]))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Removed residue ids: group 2: </span><span class="si">{0}</span><span class="s2">&quot;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ag2</span><span class="o">.</span><span class="n">resids</span><span class="p">[</span><span class="n">mismatch_resindex</span><span class="p">]))</span>
             <span class="c1"># replace after logging (still need old ag1 and ag2 for</span>
             <span class="c1"># diagnostics)</span>
             <span class="n">ag1</span> <span class="o">=</span> <span class="n">_ag1</span>
