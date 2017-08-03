@@ -413,26 +413,39 @@ class TestSelectionsGRO(TestCase):
         assert_equal(len(sel), 1556)
 
 
-class TestSelectionsTPR(TestCase):
-    def setUp(self):
-        self.universe = MDAnalysis.Universe(TPR,XTC)
+class TestSelectionsTPR(object):
+    @staticmethod
+    @pytest.fixture
+    def universe():
+        return MDAnalysis.Universe(TPR,XTC)
 
-    def test_same_fragment(self):
+    def test_same_fragment(self, universe):
         """Test the 'same ... as' construct (Issue 217)"""
         # This test comes here because it's a system with solvent,
         # and thus multiple fragments.
-        sel = self.universe.select_atoms("same fragment as bynum 1")
+        sel = universe.select_atoms("same fragment as bynum 1")
         assert_equal(
             len(sel), 3341,
             "Found a wrong number of atoms on the same fragment as id 1")
-        assert_array_equal(
-            sel.indices, self.universe.atoms[0].fragment.indices,
+        assert_equal(
+            sel.indices, universe.atoms[0].fragment.indices,
             "Found a different set of atoms when using the 'same fragment as' construct vs. the .fragment prperty")
 
-    def test_moltype(self):
-        sel = self.universe.select_atoms("moltype NA+")
+    def test_moltype(self, universe):
+        sel = universe.select_atoms("moltype NA+")
         ref = np.array([47677, 47678, 47679, 47680], dtype=np.int32)
-        assert_array_equal(sel.ids, ref)
+        assert_equal(sel.ids, ref)
+
+    @pytest.mark.parametrize(
+        'selection_string,reference',
+        (('molnum 1', [3341, 3342, 3343, 3344]),
+         ('molnum 2:4', [3345, 3346, 3347, 3348, 3349, 3350,
+                         3351, 3352, 3353, 3354, 3355, 3356]),
+         )
+    )
+    def test_molnum(self, universe, selection_string, reference):
+        sel = universe.select_atoms(selection_string)
+        assert_equal(sel.ids, np.array(reference, dtype=np.int32))
 
 
 class TestSelectionsNucleicAcids(TestCase):

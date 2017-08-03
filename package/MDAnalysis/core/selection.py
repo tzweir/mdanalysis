@@ -752,6 +752,8 @@ class ResidSelection(Selection):
 
 
 class RangeSelection(Selection):
+    value_offset=0
+
     def __init__(self, parser, tokens):
         values = grab_not_keywords(tokens)
         if not values:
@@ -778,13 +780,9 @@ class RangeSelection(Selection):
         self.lowers = lowers
         self.uppers = uppers
 
-
-class ResnumSelection(RangeSelection):
-    token = 'resnum'
-
     def apply(self, group):
         mask = np.zeros(len(group), dtype=np.bool)
-        vals = group.resnums
+        vals = getattr(group, self.field) + self.value_offset
 
         for upper, lower in zip(self.uppers, self.lowers):
             if upper is not None:
@@ -795,25 +793,22 @@ class ResnumSelection(RangeSelection):
 
             mask |= thismask
         return group[mask].unique
+
+
+class ResnumSelection(RangeSelection):
+    token = 'resnum'
+    field = 'resnums'
 
 
 class ByNumSelection(RangeSelection):
     token = 'bynum'
+    field = 'indices'
+    value_offset = 1  # queries are in 1 based indices
 
-    def apply(self, group):
-        mask = np.zeros(len(group), dtype=np.bool)
-        vals = group.indices + 1  # queries are in 1 based indices
 
-        for upper, lower in zip(self.uppers, self.lowers):
-            if upper is not None:
-                thismask = vals >= lower
-                thismask &= vals <= upper
-            else:
-                thismask = vals == lower
-
-            mask |= thismask
-        return group[mask].unique
-
+class MolidSelection(RangeSelection):
+    token = 'molnum'
+    field = 'molnums'
 
 
 class ProteinSelection(Selection):

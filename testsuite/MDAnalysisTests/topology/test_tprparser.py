@@ -20,7 +20,7 @@
 # J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787
 #
 from __future__ import absolute_import
-from numpy.testing import assert_, assert_array_equal
+from numpy.testing import assert_, assert_equal
 import functools
 
 import numpy as np
@@ -38,14 +38,18 @@ import MDAnalysis.topology.TPRParser
 
 class TPRAttrs(ParserBase):
     parser = MDAnalysis.topology.TPRParser.TPRParser
-    expected_attrs = ['ids', 'names', 'resids', 'resnames', 'moltypes']
+    expected_attrs = ['ids', 'names',
+                      'resids', 'resnames',
+                      'moltypes', 'molnums']
     guessed_attrs = ['elements']
 
     def test_moltypes(self, top):
         moltypes = top.moltypes.values
-        assert_array_equal(moltypes, self.ref_moltypes)
+        assert_equal(moltypes, self.ref_moltypes)
 
-
+    def test_molnums(self, top):
+        molnums = top.molnums.values
+        assert_equal(molnums, self.ref_molnums)
 
 
 class TestTPR(TPRAttrs):
@@ -61,6 +65,7 @@ class TestTPR(TPRAttrs):
     expected_n_segments = 3
     ref_moltypes = np.array(['AKeco'] * 214 + ['SOL'] * 11084 + ['NA+'] * 4,
                             dtype=object)
+    ref_molnums = np.array([0] * 214 + list(range(1, 1 + 11084 + 4)))
 
 
 # The follow test the same system grompped by different version of gromacs
@@ -72,6 +77,7 @@ class TPRBase(TPRAttrs):
     expected_n_residues = 230
     expected_n_segments = 2
     ref_moltypes = np.array(['Protein_A'] * 129 + ['SOL'] * 101, dtype=object)
+    ref_molnums = np.array([0] * 129 + list(range(1, 1 + 101)))
 
 
 # All these classes should be generated in a loop.
@@ -161,6 +167,7 @@ class TPRDouble(TPRAttrs):
                             + ['DOPC'] * 21 + ['DPPC'] * 10 + ['CHOL'] * 3
                             + ['SOL'] * 4284,
                             dtype=object)
+    ref_molnums = np.arange(4352)
 
 class TestTPR455Double(TPRDouble):
 
@@ -178,6 +185,8 @@ class TPR46xBase(TPRAttrs):
                             + ['Protein_E'] * 27
                             + ['SOL'] * 10530 + ['NA+'] * 26 + ['CL-'] * 21,
                             dtype=object)
+    ref_molnums = np.array([0] * 27 + [1] * 27 + [2] * 27 + [3] * 27 + [4] * 27
+                           + list(range(5, 5 + 10530 + 26 + 21)))
 
 
 class TestTPR460(TPR46xBase):
