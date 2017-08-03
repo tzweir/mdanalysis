@@ -415,7 +415,7 @@ class TestSelectionsGRO(TestCase):
 
 class TestSelectionsTPR(object):
     @staticmethod
-    @pytest.fixture
+    @pytest.fixture(scope='class')
     def universe():
         return MDAnalysis.Universe(TPR,XTC)
 
