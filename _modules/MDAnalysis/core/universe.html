@@ -460,8 +460,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        filename : str or list</span>
-<span class="sd">        trajectory_format : str</span>
+<span class="sd">        universe : Universe</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -478,17 +477,13 @@
 <span class="sd">           features than the</span>
 <span class="sd">           :class:`~MDAnalysis.coordinates.chain.ChainReader`.</span>
 
+<span class="sd">        .. versionchanged:: 0.17.0</span>
+<span class="sd">           Now returns a :class:`Universe` instead of the tuple of file/array</span>
+<span class="sd">           and detected file type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># the following was in the doc string:</span>
-        <span class="c1"># TODO</span>
-        <span class="c1"># ----</span>
-        <span class="c1"># - check what happens if filename is ``None``</span>
-        <span class="c1"># - look up raises doc formating</span>
-        <span class="c1">#</span>
-        <span class="c1">#</span>
-        <span class="c1"># TODO: is this really sensible? Why not require a filename arg?</span>
+        <span class="c1"># filename==None happens when only a topology is provided</span>
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span>
+            <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">asiterable</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># make sure a single filename is not handed to the ChainReader</span>
@@ -519,7 +514,7 @@
         <span class="k">if</span> <span class="n">in_memory</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">transfer_to_memory</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;in_memory_step&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">format</span></div>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Universe.transfer_to_memory"><a class="viewcode-back" href="../../../documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe.transfer_to_memory">[docs]</a>    <span class="k">def</span> <span class="nf">transfer_to_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
