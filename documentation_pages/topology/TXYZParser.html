@@ -51,8 +51,285 @@
   <span class="target" id="module-MDAnalysis.topology.TXYZParser"></span><div class="section" id="txyz-topology-parser">
 <h1>5.18. TXYZ topology parser<a class="headerlink" href="#txyz-topology-parser" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://dasher.wustl.edu/tinker/">Tinker</a> topology parser: reads information from .txyz and .arc files.
-Atom types are read from column 6, while bond connectivity is read from column 7 onwards.
-see <a class="reference internal" href="../coordinates/TXYZ.html#module-MDAnalysis.coordinates.TXYZ" title="MDAnalysis.coordinates.TXYZ"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.TXYZ</span></code></a> for further documentation about the Tinker format.</p>
+Atom types are read from column 6, while bond connectivity is read from column 7
+onwards.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="../coordinates/TXYZ.html#module-MDAnalysis.coordinates.TXYZ" title="MDAnalysis.coordinates.TXYZ"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.TXYZ</span></code></a></dt>
+<dd>further documentation on the Tinker format</dd>
+</dl>
+</div>
+<div class="section" id="classes">
+<h2>5.18.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser">
+<em class="property">class </em><code class="descclassname">MDAnalysis.topology.TXYZParser.</code><code class="descname">TXYZParser</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/topology/TXYZParser.html#TXYZParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a list of atoms from a Tinker XYZ file.</p>
+<p>Creates the following attributes:</p>
+<ul class="simple">
+<li>Atomnames</li>
+<li>Atomtypes</li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17.0.</span></p>
+</div>
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the trajectory file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.convert_forces_from_native">
+<code class="descname">convert_forces_from_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.convert_forces_from_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion of forces array <em>force</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>By default, the input <em>force</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.convert_forces_to_native">
+<code class="descname">convert_forces_to_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.convert_forces_to_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion of force array <em>force</em> from base to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the input <cite>force</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.convert_pos_from_native">
+<code class="descname">convert_pos_from_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.convert_pos_from_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion of coordinate array x from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.convert_pos_to_native">
+<code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion of coordinate array <cite>x</cite> from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the input <cite>x</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.convert_time_from_native">
+<code class="descname">convert_time_from_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.convert_time_from_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert time <em>t</em> from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the input <cite>t</cite> is modified in place and also returned
+(although note that scalar values <cite>t</cite> are passed by value in Python and
+hence an in-place modification has no effect on the caller.)  In-place
+operations improve performance because allocating new arrays is
+avoided.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <cite>inplace</cite> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <cite>x</cite> is
+returned.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.convert_time_to_native">
+<code class="descname">convert_time_to_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.convert_time_to_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert time <em>t</em> from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>By default, the input <em>t</em> is modified in place and also
+returned. (Also note that scalar values <em>t</em> are passed by
+value in Python and hence an in-place modification has no
+effect on the caller.)</p>
+<div class="last versionchanged">
+<p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
+modified copy is returned <em>unless</em> no conversion takes
+place, in which case the reference to the unmodified <em>x</em> is
+returned.</p>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.convert_velocities_from_native">
+<code class="descname">convert_velocities_from_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.convert_velocities_from_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion of velocities array <em>v</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the input <em>v</em> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.convert_velocities_to_native">
+<code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion of coordinate array <cite>v</cite> from base to native units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the input <cite>v</cite> is modified in place and also returned.
+In-place operations improve performance because allocating new arrays
+is avoided.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.topology.TXYZParser.TXYZParser.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/topology/TXYZParser.html#TXYZParser.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.topology.TXYZParser.TXYZParser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the file and return the structure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">MDAnalysis Topology object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -106,7 +383,10 @@ see <a class="reference internal" href="../coordinates/TXYZ.html#module-MDAnalys
 <li class="toctree-l2"><a class="reference internal" href="PSFParser.html">5.15. PSF topology parser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="TOPParser.html">5.16. AMBER PRMTOP topology parser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="TPRParser.html">5.17. Gromacs portable run input TPR format parser</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5.18. TXYZ topology parser</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.18. TXYZ topology parser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes">5.18.1. Classes</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="XYZParser.html">5.19. XYZ Topology Parser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="base.html">5.20. Base topology reader classes &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.topology.base</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html">5.21. Common functions for topology building &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.topology.core</span></code></a></li>

@@ -72,17 +72,25 @@
 <span class="sd">TXYZ file format --- :mod:`MDAnalysis.coordinates.TXYZ`</span>
 <span class="sd">=======================================================</span>
 
-<span class="sd">Coordinate reader for Tinker_ xyz files .txyz and trajectory .arc files</span>
-<span class="sd">Differences between Tinker format_ and normal xyz files: </span>
+<span class="sd">Coordinate reader for Tinker_ xyz files .txyz and trajectory .arc files.</span>
+<span class="sd">Differences between Tinker format_ and normal xyz files:</span>
 
 <span class="sd">- there is only one header line containing both the number of atoms and a comment</span>
 <span class="sd">- column 1 contains atom numbers (starting from 1)</span>
-<span class="sd">- column 6 contains atoms types </span>
+<span class="sd">- column 6 contains atoms types</span>
 <span class="sd">- the following columns indicate connectivity (atoms to which that particular atom is</span>
 <span class="sd">  bonded, according to numbering in column 1)</span>
 
 <span class="sd">.. _format: http://chembytes.wikidot.com/tnk-tut00#toc2</span>
 <span class="sd">.. _Tinker: https://dasher.wustl.edu/tinker/</span>
+
+
+<span class="sd">Classes</span>
+<span class="sd">-------</span>
+
+<span class="sd">.. autoclass:: TXYZReader</span>
+<span class="sd">   :members:</span>
+<span class="sd">   :inherited-members:</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span>
@@ -90,7 +98,7 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">errno</span> 
+<span class="kn">import</span> <span class="nn">errno</span>
 
 <span class="kn">from</span> <span class="nn">..lib</span> <span class="k">import</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">base</span>
@@ -201,7 +209,7 @@
         <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xyzfile</span>
-    
+
 <div class="viewcode-block" id="TXYZReader.close"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TXYZ.html#MDAnalysis.coordinates.TXYZ.TXYZReader.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Close arc trajectory file if it was open.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xyzfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
