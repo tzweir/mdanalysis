@@ -863,7 +863,7 @@
 
 <div class="viewcode-block" id="Path.fit_to_reference"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.fit_to_reference">[docs]</a>    <span class="k">def</span> <span class="nf">fit_to_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s1">&#39;_fit&#39;</span><span class="p">,</span>
                          <span class="n">rmsdfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span>
-                         <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+                         <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Align each trajectory frame to the reference structure</span>
 
 <span class="sd">        Parameters</span>
@@ -871,15 +871,17 @@
 <span class="sd">        filename : str (optional)</span>
 <span class="sd">             file name for the RMS-fitted trajectory or pdb; defaults to the</span>
 <span class="sd">             original trajectory filename (from :attr:`Path.u_original`) with</span>
-<span class="sd">             *prefix* prepended</span>
+<span class="sd">             `prefix` prepended</span>
 <span class="sd">        prefix : str (optional)</span>
 <span class="sd">             prefix for auto-generating the new output filename</span>
 <span class="sd">        rmsdfile : str (optional)</span>
 <span class="sd">             file name for writing the RMSD time series [``None``]</span>
-<span class="sd">        mass_weighted : bool (deprecated)</span>
-<span class="sd">            do a mass-weighted RMSD fit</span>
-<span class="sd">        weights : str/array_like (optional)</span>
-<span class="sd">            choose weights. If &#39;str&#39; uses masses as weights</span>
+<span class="sd">        weights : {&quot;mass&quot;, ``None``} or array_like (optional)</span>
+<span class="sd">             choose weights. With ``&quot;mass&quot;`` uses masses as weights; with</span>
+<span class="sd">             ``None`` weigh each atom equally. If a float array of the same</span>
+<span class="sd">             length as the selected AtomGroup is provided, use each element of</span>
+<span class="sd">             the `array_like` as a weight for the corresponding atom in the</span>
+<span class="sd">             AtomGroup.</span>
 <span class="sd">        tol_mass : float (optional)</span>
 <span class="sd">             Reject match if the atomic masses for matched atoms differ by more</span>
 <span class="sd">             than `tol_mass` [0.1]</span>
@@ -897,13 +899,10 @@
 <span class="sd">        .. deprecated:: 0.16.1</span>
 <span class="sd">           Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;``;</span>
 <span class="sd">           refactored to fit with AnalysisBase API</span>
+
+<span class="sd">        .. versionchanged:: 0.17.0</span>
+<span class="sd">           Deprecated keyword `mass_weighted` was removed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
-                          <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
-                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
-                <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
         <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trj_name</span><span class="p">)</span>
         <span class="n">oldname</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="n">oldname</span>
@@ -975,7 +974,7 @@
 
 
 <div class="viewcode-block" id="Path.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.Path.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s1">&#39;_fit&#39;</span><span class="p">,</span> <span class="n">rmsdfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
             <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate a path from a trajectory and reference structure.</span>
 
@@ -1009,10 +1008,12 @@
 <span class="sd">             prefix for auto-generating the new output filename</span>
 <span class="sd">        rmsdfile : str (optional)</span>
 <span class="sd">             file name for writing the RMSD time series [``None``]</span>
-<span class="sd">        mass_weighted : bool (deprecated)</span>
-<span class="sd">            do a mass-weighted RMSD fit</span>
-<span class="sd">        weights : str/array_like (optional)</span>
-<span class="sd">            choose weights. If &#39;str&#39; uses masses as weights</span>
+<span class="sd">        weights : {&quot;mass&quot;, ``None``} or array_like (optional)</span>
+<span class="sd">             choose weights. With ``&quot;mass&quot;`` uses masses as weights; with</span>
+<span class="sd">             ``None`` weigh each atom equally. If a float array of the same</span>
+<span class="sd">             length as the selected AtomGroup is provided, use each element of</span>
+<span class="sd">             the `array_like` as a weight for the corresponding atom in the</span>
+<span class="sd">             AtomGroup.</span>
 <span class="sd">        tol_mass : float (optional)</span>
 <span class="sd">             Reject match if the atomic masses for matched atoms differ by more</span>
 <span class="sd">             than *tol_mass* [0.1]</span>
@@ -1030,13 +1031,10 @@
 <span class="sd">        .. deprecated:: 0.16.1</span>
 <span class="sd">           Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;``;</span>
 <span class="sd">           refactored to fit with AnalysisBase API</span>
+
+<span class="sd">        .. versionchanged:: 0.17.0</span>
+<span class="sd">           Deprecated keyword `mass_weighted` was removed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
-                          <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
-                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
-                <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
         <span class="k">if</span> <span class="n">align</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">u_fitted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_to_reference</span><span class="p">(</span>
                                 <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="n">postfix</span><span class="p">,</span>
@@ -1433,7 +1431,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_psa_pairs</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># (distance vector order) list of all PSAPairs</span>
 
 
-<div class="viewcode-block" id="PSAnalysis.generate_paths"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.generate_paths">[docs]</a>    <span class="k">def</span> <span class="nf">generate_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;fitted&#39;</span><span class="p">,</span> <span class="n">infix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="PSAnalysis.generate_paths"><a class="viewcode-back" href="../../../documentation_pages/analysis/psa.html#MDAnalysis.analysis.psa.PSAnalysis.generate_paths">[docs]</a>    <span class="k">def</span> <span class="nf">generate_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;fitted&#39;</span><span class="p">,</span> <span class="n">infix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">tol_mass</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ref_frame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generate paths, aligning each to reference structure if necessary.</span>
 
@@ -1448,10 +1446,12 @@
 <span class="sd">        infix : str</span>
 <span class="sd">             additional tag string that is inserted into the output filename of</span>
 <span class="sd">             the fitted trajectory files [&#39;&#39;]</span>
-<span class="sd">        mass_weighted : bool (deprecated)</span>
-<span class="sd">            do a mass-weighted RMSD fit</span>
-<span class="sd">        weights : str/array_like (optional)</span>
-<span class="sd">            choose weights. If &#39;str&#39; uses masses as weights</span>
+<span class="sd">        weights : {&quot;mass&quot;, ``None``} or array_like (optional)</span>
+<span class="sd">             choose weights. With ``&quot;mass&quot;`` uses masses as weights; with</span>
+<span class="sd">             ``None`` weigh each atom equally. If a float array of the same</span>
+<span class="sd">             length as the selected AtomGroup is provided, use each element of</span>
+<span class="sd">             the `array_like` as a weight for the corresponding atom in the</span>
+<span class="sd">             AtomGroup.</span>
 <span class="sd">        tol_mass : float</span>
 <span class="sd">             Reject match if the atomic masses for matched atoms differ by more</span>
 <span class="sd">             than *tol_mass*</span>
@@ -1483,13 +1483,10 @@
 <span class="sd">        .. deprecated:: 0.16.1</span>
 <span class="sd">           Instead of ``mass_weighted=True`` use new ``weights=&#39;mass&#39;``;</span>
 <span class="sd">           refactored to fit with AnalysisBase API</span>
+
+<span class="sd">        .. versionchanged:: 0.17.0</span>
+<span class="sd">           Deprecated keyword `mass_weighted` was removed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">mass_weighted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mass weighted is deprecated argument. Please use &quot;</span>
-                          <span class="s2">&quot; &#39;weights=</span><span class="se">\&quot;</span><span class="s2">mass</span><span class="se">\&quot;</span><span class="s2"> instead. Will be removed in 0.17.0&quot;</span><span class="p">,</span>
-                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">mass_weighted</span><span class="p">:</span>
-                <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
         <span class="k">if</span> <span class="n">ref_frame</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ref_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_frame</span>
 

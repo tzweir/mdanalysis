@@ -700,6 +700,45 @@ floats or arrays, depending on the input.</p>
 </div>
 </dd></dl>
 
+<dl class="function">
+<dt id="MDAnalysis.lib.util.get_weights">
+<code class="descclassname">MDAnalysis.lib.util.</code><code class="descname">get_weights</code><span class="sig-paren">(</span><em>atoms</em>, <em>weights</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/util.html#get_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.util.get_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that a <cite>weights</cite> argument is compatible with <cite>atoms</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>atoms</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><em>array_like</em>) &#8211; The atoms that the <cite>weights</cite> should be applied to. Typically this
+is a <code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code> but because only the length is compared,
+any sequence for which <code class="docutils literal"><span class="pre">len(atoms)</span></code> is defined is acceptable.</li>
+<li><strong>weights</strong> (<em>{&quot;mass&quot;</em><em>, </em><em>None}</em><em> or </em><em>array_like</em>) &#8211; All MDAnalysis functions or classes understand &#8220;mass&#8221; and will then
+use <code class="docutils literal"><span class="pre">atoms.masses</span></code>. <code class="docutils literal"><span class="pre">None</span></code> indicates equal weights for all atoms.
+Using an <code class="docutils literal"><span class="pre">array_like</span></code> assigns a custom weight to each element of
+<cite>atoms</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>weights</strong> &#8211; If &#8220;mass&#8221; was selected, <code class="docutils literal"><span class="pre">atoms.masses</span></code> is returned, otherwise the
+value of <cite>weights</cite> (which can be <code class="docutils literal"><span class="pre">None</span></code>).</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">array_like or <a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> &#8211; If <cite>weights</cite> is not one of the allowed values or if &#8220;mass&#8221; is
+selected but <code class="docutils literal"><span class="pre">atoms.masses</span></code> is not available.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; If <cite>weights</cite> is not a 1D array with the same length as
+<cite>atoms</cite>, then the exception is raised.  <code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> is
+also raised if <code class="docutils literal"><span class="pre">atoms.masses</span></code> is not defined.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="strings">
 <h2>11.2.8.6. Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
