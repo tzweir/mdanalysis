@@ -350,7 +350,10 @@ class RMSD(AnalysisBase):
             described under :ref:`ordered-selections-label`).
 
         groupselections : list (optional)
-            A list of selections as described for `select`. Each selection
+            A list of selections as described for `select`, with the differemce that
+            these selections are *always applied to the full universes*, i.e., 
+            ``atomgroup.universe.select_atoms(sel1)`` and 
+            ``reference.universe.select_atoms(sel2)``. Each selection
             describes additional RMSDs to be computed *after the
             structures have been superimposed* according to `select`. No
             additional fitting is performed.The output contains one
@@ -436,8 +439,8 @@ class RMSD(AnalysisBase):
         """
         super(RMSD, self).__init__(atomgroup.universe.trajectory,
                                    **kwargs)
-        self.universe = atomgroup.universe
-        self.reference = reference if reference is not None else self.universe
+        self.atomgroup = atomgroup
+        self.reference = reference if reference is not None else self.atomgroup
 
         select = process_selection(select)
         self.groupselections = ([process_selection(s) for s in groupselections]
@@ -448,7 +451,7 @@ class RMSD(AnalysisBase):
         self.filename = filename
 
         self.ref_atoms = self.reference.select_atoms(*select['reference'])
-        self.mobile_atoms = self.universe.select_atoms(*select['mobile'])
+        self.mobile_atoms = self.atomgroup.select_atoms(*select['mobile'])
 
         if len(self.ref_atoms) != len(self.mobile_atoms):
             err = ("Reference and trajectory atom selections do "
@@ -488,8 +491,8 @@ class RMSD(AnalysisBase):
         #   *groupselections* groups each a dict with reference/mobile
         self._groupselections_atoms = [
             {
-                'reference': self.reference.select_atoms(*s['reference']),
-                'mobile': self.universe.select_atoms(*s['mobile']),
+                'reference': self.reference.universe.select_atoms(*s['reference']),
+                'mobile': self.atomgroup.universe.select_atoms(*s['mobile']),
             }
             for s in self.groupselections]
         # sanity check
@@ -529,13 +532,13 @@ class RMSD(AnalysisBase):
         if self.weights is not None:
             self.weights = np.asarray(self.weights, dtype=np.float64) / np.mean(self.weights)
 
-        current_frame = self.reference.trajectory.ts.frame
+        current_frame = self.reference.universe.trajectory.ts.frame
 
         try:
             # Move to the ref_frame
             # (coordinates MUST be stored in case the ref traj is advanced
             # elsewhere or if ref == mobile universe)
-            self.reference.trajectory[self.ref_frame]
+            self.reference.universe.trajectory[self.ref_frame]
             self._ref_com = self.ref_atoms.center(self.weights)
             # makes a copy
             self._ref_coordinates = self.ref_atoms.positions - self._ref_com
@@ -546,7 +549,7 @@ class RMSD(AnalysisBase):
                     self.groupselections]
         finally:
             # Move back to the original frame
-            self.reference.trajectory[current_frame]
+            self.reference.universe.trajectory[current_frame]
 
         self._ref_coordinates64 = self._ref_coordinates.astype(np.float64)
 
