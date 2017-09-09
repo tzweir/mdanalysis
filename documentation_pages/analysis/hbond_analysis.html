@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>4.3.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,7 +46,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.hbonds.hbond_analysis"></span><div class="section" id="hydrogen-bond-analysis-mdanalysis-analysis-hbonds-hbond-analysis">
-<h1>4.3.1. Hydrogen Bond analysis &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.hbonds.hbond_analysis" title="MDAnalysis.analysis.hbonds.hbond_analysis"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a><a class="headerlink" href="#hydrogen-bond-analysis-mdanalysis-analysis-hbonds-hbond-analysis" title="Permalink to this headline">¶</a></h1>
+<h1>4.3.1. Hydrogen Bond analysis — <a class="reference internal" href="#module-MDAnalysis.analysis.hbonds.hbond_analysis" title="MDAnalysis.analysis.hbonds.hbond_analysis"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a><a class="headerlink" href="#hydrogen-bond-analysis-mdanalysis-analysis-hbonds-hbond-analysis" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -71,7 +68,7 @@ HBONDS plugin</a>.</p>
 <dt>Options:</dt>
 <dd><ul class="first last simple">
 <li><em>update_selections</em> (<code class="docutils literal"><span class="pre">True</span></code>): update selections at each frame?</li>
-<li><em>selection_1_type</em> (&#8220;both&#8221;): selection 1 is the: &#8220;donor&#8221;, &#8220;acceptor&#8221;, &#8220;both&#8221;</li>
+<li><em>selection_1_type</em> (“both”): selection 1 is the: “donor”, “acceptor”, “both”</li>
 <li>donor-acceptor <em>distance</em> (Å): 3.0</li>
 <li>Angle <em>cutoff</em> (degrees): 120.0</li>
 <li><em>forcefield</em> to switch between default values for different force fields</li>
@@ -116,7 +113,7 @@ indicates comments that are not part of the output.):</p>
 </pre></div>
 </div>
 <p>Using the <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.generate_table" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.generate_table"><code class="xref py py-meth docutils literal"><span class="pre">HydrogenBondAnalysis.generate_table()</span></code></a> method one can reformat
-the results as a flat &#8220;normalised&#8221; table that is easier to import into a
+the results as a flat “normalised” table that is easier to import into a
 database or dataframe for further processing.
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.save_table" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.save_table"><code class="xref py py-meth docutils literal"><span class="pre">HydrogenBondAnalysis.save_table()</span></code></a> saves the table to a pickled file. The
 table itself is a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.html#numpy.recarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.recarray</span></code></a>.</p>
@@ -138,14 +135,14 @@ in Table <a class="reference internal" href="#default-atom-names-for-hydrogen-bo
 <p>Hydrogen atoms bonded to a donor are searched with one of two algorithms,
 selected with the <cite>detect_hydrogens</cite> keyword.</p>
 <dl class="docutils">
-<dt>&#8220;distance&#8221;</dt>
-<dd>Searches for all hydrogens (name &#8220;H*&#8221; or name &#8220;[123]H&#8221; or type &#8220;H&#8221;) in the
+<dt>“distance”</dt>
+<dd>Searches for all hydrogens (name “H*” or name “[123]H” or type “H”) in the
 same residue as the donor atom within a cut-off distance of 1.2 Å.</dd>
-<dt>&#8220;heuristic&#8221;</dt>
+<dt>“heuristic”</dt>
 <dd>Looks at the next three atoms in the list of atoms following the donor and
-selects any atom whose name matches (name &#8220;H*&#8221; or name &#8220;[123]H&#8221;). For</dd>
+selects any atom whose name matches (name “H*” or name “[123]H”). For</dd>
 </dl>
-<p>The &#8220;distance&#8221; search is more rigorous but slower and is set as the
+<p>The “distance” search is more rigorous but slower and is set as the
 default. Until release 0.7.6, only the heuristic search was implemented.</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.6: </span>Distance search added (see
@@ -305,7 +302,7 @@ donors/acceptors for residues such as histidine or cytosine.</p>
 atom names in the <cite>donors</cite> and <cite>acceptors</cite> keywords to
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis"><code class="xref py py-class docutils literal"><span class="pre">HydrogenBondAnalysis</span></code></a>. If the lists are entirely inappropriate
 (e.g. when analysing simulations done with a force field that uses very
-different atom names) then one should either use the value &#8220;other&#8221; for <cite>forcefield</cite>
+different atom names) then one should either use the value “other” for <cite>forcefield</cite>
 to set no default values, or derive a new class and set the default list oneself:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HydrogenBondAnalysis_OtherFF</span><span class="p">(</span><span class="n">HydrogenBondAnalysis</span><span class="p">):</span>
       <span class="n">DEFAULT_DONORS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OtherFF&quot;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="o">...</span><span class="p">]))}</span>
@@ -313,7 +310,7 @@ to set no default values, or derive a new class and set the default list oneself
 </pre></div>
 </div>
 <p>Then simply use the new class instead of the parent class and call it with
-<cite>forcefield</cite> = &#8220;OtherFF&#8221;. Please also consider to contribute the list of heavy
+<cite>forcefield</cite> = “OtherFF”. Please also consider to contribute the list of heavy
 atom names to MDAnalysis.</p>
 <p class="rubric">References</p>
 <table class="docutils citation" frame="void" id="gregoret1991" rules="none">
@@ -439,62 +436,62 @@ customized <cite>donors</cite> and/or <cite>acceptors</cite>.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; Universe object</li>
-<li><strong>selection1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Selection string for first selection [&#8216;protein&#8217;]</li>
-<li><strong>selection2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Selection string for second selection [&#8216;all&#8217;]</li>
-<li><strong>selection1_type</strong> (<em>{&quot;donor&quot;</em><em>, </em><em>&quot;acceptor&quot;</em><em>, </em><em>&quot;both&quot;}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Selection 1 can be &#8216;donor&#8217;, &#8216;acceptor&#8217; or &#8216;both&#8217;. Note that the
+<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) – Universe object</li>
+<li><strong>selection1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – Selection string for first selection [‘protein’]</li>
+<li><strong>selection2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – Selection string for second selection [‘all’]</li>
+<li><strong>selection1_type</strong> (<em>{&quot;donor&quot;</em><em>, </em><em>&quot;acceptor&quot;</em><em>, </em><em>&quot;both&quot;}</em><em> (</em><em>optional</em><em>)</em>) – Selection 1 can be ‘donor’, ‘acceptor’ or ‘both’. Note that the
 value for <cite>selection1_type</cite> automatically determines how
 <cite>selection2</cite> handles donors and acceptors: If <cite>selection1</cite> contains
-&#8216;both&#8217; then <cite>selection2</cite> will also contain &#8216;both&#8217;. If <cite>selection1</cite>
-is set to &#8216;donor&#8217; then <cite>selection2</cite> is &#8216;acceptor&#8217; (and vice versa).
-[&#8216;both&#8217;].</li>
-<li><strong>update_selection1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Update selection 1 at each frame? Setting to <code class="docutils literal"><span class="pre">False</span></code> is recommended
+‘both’ then <cite>selection2</cite> will also contain ‘both’. If <cite>selection1</cite>
+is set to ‘donor’ then <cite>selection2</cite> is ‘acceptor’ (and vice versa).
+[‘both’].</li>
+<li><strong>update_selection1</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Update selection 1 at each frame? Setting to <code class="docutils literal"><span class="pre">False</span></code> is recommended
 for any static selection to increase performance. [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>update_selection2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Update selection 2 at each frame? Setting to <code class="docutils literal"><span class="pre">False</span></code> is recommended
+<li><strong>update_selection2</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Update selection 2 at each frame? Setting to <code class="docutils literal"><span class="pre">False</span></code> is recommended
 for any static selection to increase performance. [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>filter_first</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Filter selection 2 first to only atoms 3 * <cite>distance</cite> away [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>distance</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Distance cutoff for hydrogen bonds; only interactions with a H-A distance
+<li><strong>filter_first</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Filter selection 2 first to only atoms 3 * <cite>distance</cite> away [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>distance</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – Distance cutoff for hydrogen bonds; only interactions with a H-A distance
 &lt;= <cite>distance</cite> (and the appropriate D-H-A angle, see <cite>angle</cite>) are
 recorded. (Note: <cite>distance_type</cite> can change this to the D-A distance.) [3.0]</li>
-<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Angle cutoff for hydrogen bonds; an ideal H-bond has an angle of
+<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – Angle cutoff for hydrogen bonds; an ideal H-bond has an angle of
 180º.  A hydrogen bond is only recorded if the D-H-A angle is
 &gt;=  <cite>angle</cite>. The default of 120º also finds fairly non-specific
 hydrogen interactions and a possibly better value is 150º. [120.0]</li>
-<li><strong>forcefield</strong> (<em>{&quot;CHARMM27&quot;</em><em>, </em><em>&quot;GLYCAM06&quot;</em><em>, </em><em>&quot;other&quot;}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Name of the forcefield used. Switches between different
+<li><strong>forcefield</strong> (<em>{&quot;CHARMM27&quot;</em><em>, </em><em>&quot;GLYCAM06&quot;</em><em>, </em><em>&quot;other&quot;}</em><em> (</em><em>optional</em><em>)</em>) – Name of the forcefield used. Switches between different
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS"><code class="xref py py-attr docutils literal"><span class="pre">DEFAULT_DONORS</span></code></a> and
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS"><code class="xref py py-attr docutils literal"><span class="pre">DEFAULT_ACCEPTORS</span></code></a> values.
-[&#8220;CHARMM27&#8221;]</li>
-<li><strong>donors</strong> (<em>sequence</em><em> (</em><em>optional</em><em>)</em>) &#8211; Extra H donor atom types (in addition to those in
+[“CHARMM27”]</li>
+<li><strong>donors</strong> (<em>sequence</em><em> (</em><em>optional</em><em>)</em>) – Extra H donor atom types (in addition to those in
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS"><code class="xref py py-attr docutils literal"><span class="pre">DEFAULT_DONORS</span></code></a>), must be a sequence.</li>
-<li><strong>acceptors</strong> (<em>sequence</em><em> (</em><em>optional</em><em>)</em>) &#8211; Extra H acceptor atom types (in addition to those in
+<li><strong>acceptors</strong> (<em>sequence</em><em> (</em><em>optional</em><em>)</em>) – Extra H acceptor atom types (in addition to those in
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS"><code class="xref py py-attr docutils literal"><span class="pre">DEFAULT_ACCEPTORS</span></code></a>), must be a sequence.</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; starting frame-index for analysis, <code class="docutils literal"><span class="pre">None</span></code> is the first one, 0.
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – starting frame-index for analysis, <code class="docutils literal"><span class="pre">None</span></code> is the first one, 0.
 <cite>start</cite> and <cite>stop</cite> are 0-based frame indices and are used to slice
 the trajectory (if supported) [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; last trajectory frame for analysis, <code class="docutils literal"><span class="pre">None</span></code> is the last one [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; read every <cite>step</cite> between <cite>start</cite> (included) and <cite>stop</cite> (excluded),
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – last trajectory frame for analysis, <code class="docutils literal"><span class="pre">None</span></code> is the last one [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – read every <cite>step</cite> between <cite>start</cite> (included) and <cite>stop</cite> (excluded),
 <code class="docutils literal"><span class="pre">None</span></code> selects 1. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>detect_hydrogens</strong> (<em>{&quot;distance&quot;</em><em>, </em><em>&quot;heuristic&quot;}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Determine the algorithm to find hydrogens connected to donor
-atoms. Can be &#8220;distance&#8221; (default; finds all hydrogens in the
-donor&#8217;s residue within a cutoff of the donor) or &#8220;heuristic&#8221;
-(looks for the next few atoms in the atom list). &#8220;distance&#8221; should
-always give the correct answer but &#8220;heuristic&#8221; is faster,
+<li><strong>detect_hydrogens</strong> (<em>{&quot;distance&quot;</em><em>, </em><em>&quot;heuristic&quot;}</em><em> (</em><em>optional</em><em>)</em>) – Determine the algorithm to find hydrogens connected to donor
+atoms. Can be “distance” (default; finds all hydrogens in the
+donor’s residue within a cutoff of the donor) or “heuristic”
+(looks for the next few atoms in the atom list). “distance” should
+always give the correct answer but “heuristic” is faster,
 especially when the donor list is updated each
-for each frame. [&#8220;distance&#8221;]</li>
-<li><strong>distance_type</strong> (<em>{&quot;hydrogen&quot;</em><em>, </em><em>&quot;heavy&quot;}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Measure hydrogen bond lengths between donor and acceptor heavy
-attoms (&#8220;heavy&#8221;) or between donor hydrogen and acceptor heavy
-atom (&#8220;hydrogen&#8221;). If using &#8220;heavy&#8221; then one should set the <em>distance</em>
-cutoff to a higher value such as 3.5 Å. [&#8220;hydrogen&#8221;]</li>
-<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; If set to <code class="docutils literal"><span class="pre">True</span></code> enables per-frame debug logging. This is disabled
+for each frame. [“distance”]</li>
+<li><strong>distance_type</strong> (<em>{&quot;hydrogen&quot;</em><em>, </em><em>&quot;heavy&quot;}</em><em> (</em><em>optional</em><em>)</em>) – Measure hydrogen bond lengths between donor and acceptor heavy
+attoms (“heavy”) or between donor hydrogen and acceptor heavy
+atom (“hydrogen”). If using “heavy” then one should set the <em>distance</em>
+cutoff to a higher value such as 3.5 Å. [“hydrogen”]</li>
+<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – If set to <code class="docutils literal"><span class="pre">True</span></code> enables per-frame debug logging. This is disabled
 by default because it generates a very large amount of output in
 the log file. (Note that a logger must have been started to see
 the output, e.g. using <a class="reference internal" href="../lib/log.html#MDAnalysis.start_logging" title="MDAnalysis.start_logging"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.start_logging()</span></code></a>.)</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Toggle progress output. (Can also be given as keyword argument to
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Toggle progress output. (Can also be given as keyword argument to
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.run" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.run"><code class="xref py py-meth docutils literal"><span class="pre">run()</span></code></a>.)</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">SelectionError</span></code> &#8211; is raised for each static selection without the required
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">SelectionError</span></code> – is raised for each static selection without the required
 donors and/or acceptors.</p>
 </td>
 </tr>
@@ -517,13 +514,13 @@ involved or if the optimization is disabled (<cite>filter_first</cite> =
 <p><span class="versionmodified">Changed in version 0.7.6: </span>New <cite>verbose</cite> keyword (and per-frame debug logging disabled by
 default).</p>
 <p>New <cite>detect_hydrogens</cite> keyword to switch between two different
-algorithms to detect hydrogens bonded to donor. &#8220;distance&#8221; is a new,
+algorithms to detect hydrogens bonded to donor. “distance” is a new,
 rigorous distance search within the residue of the donor atom,
-&#8220;heuristic&#8221; is the previous list scan (improved with an additional
+“heuristic” is the previous list scan (improved with an additional
 distance check).</p>
 <p>New <cite>forcefield</cite> keyword to switch between different values of
 DEFAULT_DONORS/ACCEPTORS to accomodate different force fields.
-Also has an option &#8220;other&#8221; for no default values.</p>
+Also has an option “other” for no default values.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.8: </span>The new default for <cite>update_selection1</cite> and <cite>update_selection2</cite> is now
@@ -533,7 +530,7 @@ need to be determined once (will increase performance).</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.9.0: </span>New keyword <cite>distance_type</cite> to select between calculation between
 heavy atoms or hydrogen-acceptor. It defaults to the previous
-behavior (i.e. &#8220;hydrogen&#8221;).</p>
+behavior (i.e. “hydrogen”).</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Initial checks for selections that potentially raise <code class="xref py py-exc docutils literal"><span class="pre">SelectionError</span></code>.</p>
@@ -563,17 +560,17 @@ of a hydrogen bond existence, or see <a class="reference internal" href="#MDAnal
 <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.html#numpy.recarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.recarray</span></code></a> with the following columns:</p>
 <blockquote>
 <div><ol class="arabic simple" start="0">
-<li>&#8220;time&#8221;</li>
-<li>&#8220;donor_index&#8221;</li>
-<li>&#8220;acceptor_index&#8221;</li>
-<li>&#8220;donor_resnm&#8221;</li>
-<li>&#8220;donor_resid&#8221;</li>
-<li>&#8220;donor_atom&#8221;</li>
-<li>&#8220;acceptor_resnm&#8221;</li>
-<li>&#8220;acceptor_resid&#8221;</li>
-<li>&#8220;acceptor_atom&#8221;</li>
-<li>&#8220;distance&#8221;</li>
-<li>&#8220;angle&#8221;</li>
+<li>“time”</li>
+<li>“donor_index”</li>
+<li>“acceptor_index”</li>
+<li>“donor_resnm”</li>
+<li>“donor_resid”</li>
+<li>“donor_atom”</li>
+<li>“acceptor_resnm”</li>
+<li>“acceptor_resid”</li>
+<li>“acceptor_atom”</li>
+<li>“distance”</li>
+<li>“angle”</li>
 </ol>
 </div></blockquote>
 <p>It takes up more space than <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.timeseries" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.timeseries"><code class="xref py py-attr docutils literal"><span class="pre">timeseries</span></code></a> but
@@ -602,13 +599,13 @@ facilitate understanding of the internals of
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>atom</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><em>groups.Atom</em></a>) &#8211; heavy atom</li>
-<li><strong>**kwargs</strong> &#8211; passed through to the calculation method that was selected with
+<li><strong>atom</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><em>groups.Atom</em></a>) – heavy atom</li>
+<li><strong>**kwargs</strong> – passed through to the calculation method that was selected with
 the <cite>detect_hydrogens</cite> kwarg of <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis"><code class="xref py py-class docutils literal"><span class="pre">HydrogenBondAnalysis</span></code></a>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hydrogen_atoms</strong> &#8211; list of hydrogens (can be a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>)
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hydrogen_atoms</strong> – list of hydrogens (can be a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>)
 or empty list <code class="docutils literal"><span class="pre">[]</span></code> if none were found.</p>
 </td>
 </tr>
@@ -631,7 +628,7 @@ constructor. <em>kwargs</em> can be used to supply arguments for algorithm.</p>
 <dt id="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis._get_bonded_hydrogens_dist">
 <code class="descname">_get_bonded_hydrogens_dist</code><span class="sig-paren">(</span><em>atom</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/hbonds/hbond_analysis.html#HydrogenBondAnalysis._get_bonded_hydrogens_dist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis._get_bonded_hydrogens_dist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find hydrogens bonded within cutoff to <cite>atom</cite>.</p>
-<p>Hydrogens are detected by either name (&#8220;H*&#8221;, &#8220;[123]H*&#8221;) or type (&#8220;H&#8221;);
+<p>Hydrogens are detected by either name (“H*”, “[123]H*”) or type (“H”);
 this is not fool-proof as the atom type is not always a character but
 the name pattern should catch most typical occurrences.</p>
 <p>The distance from <cite>atom</cite> is calculated for all hydrogens in the residue
@@ -644,9 +641,9 @@ default of 1.5 Å is used.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>atom</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><em>groups.Atom</em></a>) &#8211; heavy atom</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>atom</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><em>groups.Atom</em></a>) – heavy atom</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>hydrogen_atoms</strong> &#8211; list of hydrogens (can be a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>)
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>hydrogen_atoms</strong> – list of hydrogens (can be a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>)
 or empty list <code class="docutils literal"><span class="pre">[]</span></code> if none were found.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup">AtomGroup</a> or []</td>
@@ -656,7 +653,7 @@ or empty list <code class="docutils literal"><span class="pre">[]</span></code> 
 <p class="rubric">Notes</p>
 <p>The performance of this implementation could be improved once the
 topology always contains bonded information; it currently uses the
-selection parser with an &#8220;around&#8221; selection.</p>
+selection parser with an “around” selection.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.6.</span></p>
 </div>
@@ -665,7 +662,7 @@ selection parser with an &#8220;around&#8221; selection.</p>
 <dl class="method">
 <dt id="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis._get_bonded_hydrogens_list">
 <code class="descname">_get_bonded_hydrogens_list</code><span class="sig-paren">(</span><em>atom</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/hbonds/hbond_analysis.html#HydrogenBondAnalysis._get_bonded_hydrogens_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis._get_bonded_hydrogens_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find &#8220;bonded&#8221; hydrogens to the donor <em>atom</em>.</p>
+<dd><p>Find “bonded” hydrogens to the donor <em>atom</em>.</p>
 <p>At the moment this relies on the <strong>assumption</strong> that the
 hydrogens are listed directly after the heavy atom in the
 topology. If this is not the case then this function will
@@ -679,12 +676,12 @@ depends on the heavy atom and is parameterized in
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>atom</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><em>groups.Atom</em></a>) &#8211; heavy atom</li>
-<li><strong>**kwargs</strong> &#8211; ignored</li>
+<li><strong>atom</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.Atom" title="MDAnalysis.core.groups.Atom"><em>groups.Atom</em></a>) – heavy atom</li>
+<li><strong>**kwargs</strong> – ignored</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hydrogen_atoms</strong> &#8211; list of hydrogens (can be a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>)
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hydrogen_atoms</strong> – list of hydrogens (can be a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>)
 or empty list <code class="docutils literal"><span class="pre">[]</span></code> if none were found.</p>
 </td>
 </tr>
@@ -708,7 +705,7 @@ and added <em>kwargs</em> so that it can be used instead of
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS">
-<code class="descname">DEFAULT_ACCEPTORS</code><em class="property"> = {'CHARMM27': ('OC1', 'O', 'OC2', 'OG', 'SG', 'OW', 'OE1', 'OE2', 'ND1', 'OG1', 'OH2', 'OD1', 'OD2', 'NE2', 'OH', 'SD'), 'GLYCAM06': ('O', 'O2', 'OY', 'OW', 'SM', 'N', 'OH', 'NT', 'OS'), 'other': ()}</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS" title="Permalink to this definition">¶</a></dt>
+<code class="descname">DEFAULT_ACCEPTORS</code><em class="property"> = {'CHARMM27': ('OG1', 'OC2', 'OE2', 'SD', 'O', 'OD2', 'OD1', 'SG', 'OW', 'NE2', 'OG', 'OH', 'OC1', 'OH2', 'OE1', 'ND1'), 'GLYCAM06': ('O', 'OY', 'OW', 'N', 'OH', 'NT', 'SM', 'O2', 'OS'), 'other': ()}</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_ACCEPTORS" title="Permalink to this definition">¶</a></dt>
 <dd><p>default atom names that are treated as hydrogen <em>acceptors</em>
 (see <a class="reference internal" href="#default-atom-names-for-hydrogen-bonding-analysis"><span class="std std-ref">Default heavy atom names for CHARMM27 force field.</span></a>);
 use the keyword <cite>acceptors</cite> to add a list of additional acceptor names.</p>
@@ -716,7 +713,7 @@ use the keyword <cite>acceptors</cite> to add a list of additional acceptor name
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS">
-<code class="descname">DEFAULT_DONORS</code><em class="property"> = {'CHARMM27': ('NE', 'OG', 'SG', 'OW', 'ND2', 'NZ', 'ND1', 'NE1', 'OG1', 'OH2', 'OH', 'NH2', 'N', 'NE2', 'NH1'), 'GLYCAM06': ('OW', 'N', 'N3', 'OH', 'NT'), 'other': ()}</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS" title="Permalink to this definition">¶</a></dt>
+<code class="descname">DEFAULT_DONORS</code><em class="property"> = {'CHARMM27': ('OG1', 'ND2', 'SG', 'OW', 'N', 'NE', 'NE2', 'OG', 'NH1', 'NE1', 'NZ', 'OH', 'OH2', 'ND1', 'NH2'), 'GLYCAM06': ('N3', 'OW', 'N', 'OH', 'NT'), 'other': ()}</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.DEFAULT_DONORS" title="Permalink to this definition">¶</a></dt>
 <dd><p>default heavy atom names whose hydrogens are treated as <em>donors</em>
 (see <a class="reference internal" href="#default-atom-names-for-hydrogen-bonding-analysis"><span class="std std-ref">Default heavy atom names for CHARMM27 force field.</span></a>);
 use the keyword <cite>donors</cite> to add a list of additional donor names.</p>
@@ -745,7 +742,7 @@ time <code class="docutils literal"><span class="pre">t</span></code>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>counts</strong> &#8211; The resulting array can be thought of as rows <code class="docutils literal"><span class="pre">(time,</span> <span class="pre">N)</span></code> where
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>counts</strong> – The resulting array can be thought of as rows <code class="docutils literal"><span class="pre">(time,</span> <span class="pre">N)</span></code> where
 <code class="docutils literal"><span class="pre">time</span></code> is the time (in ps) of the time step and <code class="docutils literal"><span class="pre">N</span></code> is the
 total number of hydrogen bonds.</td>
 </tr>
@@ -767,7 +764,7 @@ during which the hydrogen bond was detected.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>counts</strong> &#8211; Each row of the array contains data to define a unique hydrogen
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>counts</strong> – Each row of the array contains data to define a unique hydrogen
 bond together with the frequency (fraction of the total time) that
 it has been observed.</td>
 </tr>
@@ -776,7 +773,7 @@ it has been observed.</td>
 </tbody>
 </table>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.17.0: </span>The 1-based indices &#8220;donor_idx&#8221; and &#8220;acceptor_idx&#8221; are being
+<p><span class="versionmodified">Changed in version 0.17.0: </span>The 1-based indices “donor_idx” and “acceptor_idx” are being
 deprecated in favor of zero-based indices.</p>
 </div>
 </dd></dl>
@@ -815,9 +812,9 @@ format).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; toggle progress meter output <a class="reference internal" href="../lib/log.html#MDAnalysis.lib.log.ProgressMeter" title="MDAnalysis.lib.log.ProgressMeter"><code class="xref py py-class docutils literal"><span class="pre">ProgressMeter</span></code></a>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – toggle progress meter output <a class="reference internal" href="../lib/log.html#MDAnalysis.lib.log.ProgressMeter" title="MDAnalysis.lib.log.ProgressMeter"><code class="xref py py-class docutils literal"><span class="pre">ProgressMeter</span></code></a>
 [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; enable detailed logging of debugging information; this can create
+<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – enable detailed logging of debugging information; this can create
 <em>very big</em> log files so it is disabled (<code class="docutils literal"><span class="pre">False</span></code>) by default; setting
 <cite>debug</cite> toggles the debug status for <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis"><code class="xref py py-class docutils literal"><span class="pre">HydrogenBondAnalysis</span></code></a>,
 namely the value of <code class="xref py py-attr docutils literal"><span class="pre">HydrogenBondAnalysis.debug</span></code>.</li>
@@ -825,7 +822,7 @@ namely the value of <code class="xref py py-attr docutils literal"><span class="
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first last"><strong>remove_duplicates</strong> (<em>bool (optional)</em>) &#8211; duplicate hydrogen bonds are removed from output if set to the
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first last"><strong>remove_duplicates</strong> (<em>bool (optional)</em>) – duplicate hydrogen bonds are removed from output if set to the
 default value <code class="docutils literal"><span class="pre">True</span></code>; normally, this should not be changed.</p>
 </td>
 </tr>
@@ -865,7 +862,7 @@ argument <cite>debug</cite>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; path to the filename</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – path to the filename</td>
 </tr>
 </tbody>
 </table>
@@ -942,9 +939,9 @@ assign to a variable:</p>
 acceptor atom specifiers as tuples <cite>(resname, resid, atomid)</cite> instead of strings.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.17.0: </span>The 1-based indices &#8220;donor_idx&#8221; and &#8220;acceptor_idx&#8221; are being
-removed in favor of the 0-based indices &#8220;donor_index&#8221; and
-&#8220;acceptor_index&#8221;.</p>
+<p><span class="versionmodified">Changed in version 0.17.0: </span>The 1-based indices “donor_idx” and “acceptor_idx” are being
+removed in favor of the 0-based indices “donor_index” and
+“acceptor_index”.</p>
 </div>
 </dd></dl>
 
@@ -970,7 +967,7 @@ but sorted by hydrogen bond and with additional data for the
 </tbody>
 </table>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.17.0: </span>The 1-based indices &#8220;donor_idx&#8221; and &#8220;acceptor_idx&#8221; are being
+<p><span class="versionmodified">Changed in version 0.17.0: </span>The 1-based indices “donor_idx” and “acceptor_idx” are being
 replaced in favor of zero-based indices.</p>
 </div>
 </dd></dl>
@@ -1016,14 +1013,14 @@ replaced in favor of zero-based indices.</p>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#building-blocks-for-analysis">4.1. Building blocks for Analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#distances-and-contacts">4.2. Distances and contacts</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../analysis_modules.html#hydrogen-bonding">4.3. Hydrogen bonding</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4.3.1. Hydrogen Bond analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.3.1. Hydrogen Bond analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#output">4.3.1.1. Output</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#detection-of-hydrogen-bonds">4.3.1.2. Detection of hydrogen bonds</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-perform-hydrogenbondanalysis">4.3.1.3. How to perform HydrogenBondAnalysis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#classes">4.3.1.4. Classes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="hbond_autocorrel.html">4.3.2. Hydrogen bond autocorrelation &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hbond_autocorrel.html">4.3.2. Hydrogen bond autocorrelation — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#membranes-and-membrane-proteins">4.4. Membranes and membrane proteins</a></li>
@@ -1041,10 +1038,10 @@ replaced in favor of zero-based indices.</p>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -1054,7 +1051,7 @@ replaced in favor of zero-based indices.</p>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../analysis_modules.html">4. Analysis modules</a><ul>
       <li>Previous: <a href="encore/utils.html" title="previous chapter">4.2.6.1.7. Utility functions for ENCORE</a></li>
-      <li>Next: <a href="hbond_autocorrel.html" title="next chapter">4.3.2. Hydrogen bond autocorrelation &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a></li>
+      <li>Next: <a href="hbond_autocorrel.html" title="next chapter">4.3.2. Hydrogen bond autocorrelation — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -1077,7 +1074,7 @@ replaced in favor of zero-based indices.</p>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

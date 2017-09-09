@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>11.2.8. Helper functions — MDAnalysis.lib.util &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,8 +46,8 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.lib.util"></span><div class="section" id="helper-functions-mdanalysis-lib-util">
-<h1>11.2.8. Helper functions &#8212; <a class="reference internal" href="#module-MDAnalysis.lib.util" title="MDAnalysis.lib.util"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.util</span></code></a><a class="headerlink" href="#helper-functions-mdanalysis-lib-util" title="Permalink to this headline">¶</a></h1>
-<p>Small helper functions that don&#8217;t fit anywhere else.</p>
+<h1>11.2.8. Helper functions — <a class="reference internal" href="#module-MDAnalysis.lib.util" title="MDAnalysis.lib.util"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.util</span></code></a><a class="headerlink" href="#helper-functions-mdanalysis-lib-util" title="Permalink to this headline">¶</a></h1>
+<p>Small helper functions that don’t fit anywhere else.</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Moved mathematical functions into lib.mdamath</p>
 </div>
@@ -65,11 +62,11 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><em>NamedStream</em></a>) &#8211; filename; extension is replaced unless <code class="docutils literal"><span class="pre">keep=True</span></code>;
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><em>NamedStream</em></a>) – filename; extension is replaced unless <code class="docutils literal"><span class="pre">keep=True</span></code>;
 <cite>name</cite> can also be a <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a> (and its
 <code class="xref py py-attr docutils literal"><span class="pre">NamedStream.name</span></code> will be changed accordingly)</li>
-<li><strong>ext</strong> (<a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; extension to use in the new filename</li>
-<li><strong>keep</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <ul>
+<li><strong>ext</strong> (<a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – extension to use in the new filename</li>
+<li><strong>keep</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – <ul>
 <li><code class="docutils literal"><span class="pre">False</span></code>: replace existing extension with <cite>ext</cite>;</li>
 <li><code class="docutils literal"><span class="pre">True</span></code>: keep old extension if one existed</li>
 </ul>
@@ -94,17 +91,17 @@ statement exits.</p>
 is reset to its start if possible (via <a class="reference external" href="https://docs.python.org/2/library/io.html#io.IOBase.seek" title="(in Python v2.7)"><code class="xref py py-meth docutils literal"><span class="pre">seek()</span></code></a> or
 <code class="xref py py-meth docutils literal"><span class="pre">reset()</span></code>).</p>
 <p>The advantage of this function is that very different input sources
-(&#8220;streams&#8221;) can be used for a &#8220;file&#8221;, ranging from files on disk (including
-compressed files) to open file objects to sockets and strings&#8212;as long as
+(“streams”) can be used for a “file”, ranging from files on disk (including
+compressed files) to open file objects to sockets and strings—as long as
 they have a file-like interface.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>datasource</strong> (<em>a file</em><em> or </em><em>a stream</em>) &#8211; </li>
-<li><strong>mode</strong> (<em>{'r'</em><em>, </em><em>'w'}</em><em> (</em><em>optional</em><em>)</em>) &#8211; open in r(ead) or w(rite) mode</li>
-<li><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; try to read (<cite>mode</cite> &#8216;r&#8217;) the stream from the start [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>datasource</strong> (<em>a file</em><em> or </em><em>a stream</em>) – </li>
+<li><strong>mode</strong> (<em>{'r'</em><em>, </em><em>'w'}</em><em> (</em><em>optional</em><em>)</em>) – open in r(ead) or w(rite) mode</li>
+<li><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – try to read (<cite>mode</cite> ‘r’) the stream from the start [<code class="docutils literal"><span class="pre">True</span></code>]</li>
 </ul>
 </td>
 </tr>
@@ -138,18 +135,18 @@ they have a file-like interface.</p>
 default, a stream is reset to its start if possible (via
 <a class="reference external" href="https://docs.python.org/2/library/io.html#io.IOBase.seek" title="(in Python v2.7)"><code class="xref py py-meth docutils literal"><span class="pre">seek()</span></code></a> or <code class="xref py py-meth docutils literal"><span class="pre">reset()</span></code>).</p>
 <p>If possible, the attribute <code class="docutils literal"><span class="pre">stream.name</span></code> is set to the filename or
-&#8220;&lt;stream&gt;&#8221; if no filename could be associated with the <em>datasource</em>.</p>
+“&lt;stream&gt;” if no filename could be associated with the <em>datasource</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>datasource</strong> &#8211; a file (from <code class="xref py py-class docutils literal"><span class="pre">file</span></code> or <a class="reference external" href="https://docs.python.org/2/library/functions.html#open" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">open()</span></code></a>) or a stream (e.g. from
+<li><strong>datasource</strong> – a file (from <code class="xref py py-class docutils literal"><span class="pre">file</span></code> or <a class="reference external" href="https://docs.python.org/2/library/functions.html#open" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">open()</span></code></a>) or a stream (e.g. from
 <a class="reference external" href="https://docs.python.org/2/library/urllib2.html#urllib2.urlopen" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">urllib2.urlopen()</span></code></a> or <code class="xref py py-class docutils literal"><span class="pre">cStringIO.StringIO</span></code>)</li>
-<li><strong>mode</strong> (<em>{'r'</em><em>, </em><em>'w'</em><em>, </em><em>'a'}</em><em> (</em><em>optional</em><em>)</em>) &#8211; Open in r(ead), w(rite) or a(ppen) mode. More complicated
-modes (&#8216;r+&#8217;, &#8216;w+&#8217;, ...) are not supported; only the first letter of
+<li><strong>mode</strong> (<em>{'r'</em><em>, </em><em>'w'</em><em>, </em><em>'a'}</em><em> (</em><em>optional</em><em>)</em>) – Open in r(ead), w(rite) or a(ppen) mode. More complicated
+modes (‘r+’, ‘w+’, …) are not supported; only the first letter of
 <cite>mode</cite> is used and thus any additional modifiers are silently ignored.</li>
-<li><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; try to read (<cite>mode</cite> &#8216;r&#8217;) the stream from the start</li>
+<li><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – try to read (<cite>mode</cite> ‘r’) the stream from the start</li>
 </ul>
 </td>
 </tr>
@@ -184,9 +181,9 @@ separator <a class="reference external" href="https://docs.python.org/2/library/
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; path</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – path</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>(root, extension)</strong> &#8211; where <code class="docutils literal"><span class="pre">root</span></code> is the full path and filename with all
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>(root, extension)</strong> – where <code class="docutils literal"><span class="pre">root</span></code> is the full path and filename with all
 extensions removed whereas <code class="docutils literal"><span class="pre">extension</span></code> is the string of
 all extensions.</td>
 </tr>
@@ -210,9 +207,9 @@ all extensions.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>programe</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the executable</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>programe</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – name of the executable</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>path</strong> &#8211; absolute path to the executable if it can be found, else <code class="docutils literal"><span class="pre">None</span></code></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>path</strong> – absolute path to the executable if it can be found, else <code class="docutils literal"><span class="pre">None</span></code></td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a> or <a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></td>
 </tr>
@@ -224,7 +221,7 @@ all extensions.</td>
 <dt id="MDAnalysis.lib.util.realpath">
 <code class="descclassname">MDAnalysis.lib.util.</code><code class="descname">realpath</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/util.html#realpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.util.realpath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Join all args and return the real path, rooted at <code class="docutils literal"><span class="pre">/</span></code>.</p>
-<p>Expands &#8216;~&#8217;, &#8216;~user&#8217;, and environment variables such as <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal"><span class="pre">$HOME</span></code>.</p>
+<p>Expands ‘~’, ‘~user’, and environment variables such as <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal"><span class="pre">$HOME</span></code>.</p>
 <p>Returns <code class="docutils literal"><span class="pre">None</span></code> if any of the args is <code class="docutils literal"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
@@ -238,14 +235,14 @@ around compressed format extensions.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><em>stream</em>) &#8211; path to the file or a stream, in which case <code class="docutils literal"><span class="pre">filename.name</span></code> is looked
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><em>stream</em>) – path to the file or a stream, in which case <code class="docutils literal"><span class="pre">filename.name</span></code> is looked
 at for a hint to the format</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>format</strong> &#8211; format specifier (upper case)</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>format</strong> – format specifier (upper case)</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if the heuristics are insufficient to guess a supported format</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – if the heuristics are insufficient to guess a supported format</td>
 </tr>
 </tbody>
 </table>
@@ -280,7 +277,7 @@ class:<cite>~MDAnalysis.core.universe.Universe</cite> but it is also possible to
 </pre></div>
 </div>
 <p>It is important to provide a proper pseudo file name with the correct extension
-(&#8221;.pdb&#8221;) to <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a> because the file type recognition uses the
+(“.pdb”) to <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a> because the file type recognition uses the
 extension of the file name to determine the file format or alternatively
 provide the <code class="docutils literal"><span class="pre">format=&quot;pdb&quot;</span></code> keyword argument to the
 <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>.</p>
@@ -291,7 +288,7 @@ remain in memory via e.g. <a class="reference external" href="https://docs.pytho
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">A remote connection created by <a class="reference external" href="https://docs.python.org/2/library/urllib2.html#urllib2.urlopen" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">urllib2.urlopen()</span></code></a> is not seekable
-and therefore will often not work as an input. But try it...</p>
+and therefore will often not work as an input. But try it…</p>
 </div>
 <dl class="class">
 <dt id="MDAnalysis.lib.util.NamedStream">
@@ -353,11 +350,11 @@ the keyword <cite>reset</cite> is set to <code class="docutils literal"><span cl
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>stream</strong> (<em>stream</em>) &#8211; an open stream (e.g. <code class="xref py py-class docutils literal"><span class="pre">file</span></code> or <a class="reference external" href="https://docs.python.org/2/library/stringio.html#cStringIO.StringIO" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">cStringIO.StringIO()</span></code></a>)</li>
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the filename that should be associated with the stream</li>
-<li><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; start the stream from the beginning (either <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.reset" title="MDAnalysis.lib.util.NamedStream.reset"><code class="xref py py-meth docutils literal"><span class="pre">reset()</span></code></a> or <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.seek" title="MDAnalysis.lib.util.NamedStream.seek"><code class="xref py py-meth docutils literal"><span class="pre">seek()</span></code></a>)
+<li><strong>stream</strong> (<em>stream</em>) – an open stream (e.g. <code class="xref py py-class docutils literal"><span class="pre">file</span></code> or <a class="reference external" href="https://docs.python.org/2/library/stringio.html#cStringIO.StringIO" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">cStringIO.StringIO()</span></code></a>)</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the filename that should be associated with the stream</li>
+<li><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – start the stream from the beginning (either <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.reset" title="MDAnalysis.lib.util.NamedStream.reset"><code class="xref py py-meth docutils literal"><span class="pre">reset()</span></code></a> or <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.seek" title="MDAnalysis.lib.util.NamedStream.seek"><code class="xref py py-meth docutils literal"><span class="pre">seek()</span></code></a>)
 when the class instance is constructed</li>
-<li><strong>close</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; close the stream when a <a class="reference external" href="https://docs.python.org/2/reference/compound_stmts.html#with" title="(in Python v2.7)"><code class="xref std std-keyword docutils literal"><span class="pre">with</span></code></a> block exits or when
+<li><strong>close</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – close the stream when a <a class="reference external" href="https://docs.python.org/2/reference/compound_stmts.html#with" title="(in Python v2.7)"><code class="xref std std-keyword docutils literal"><span class="pre">with</span></code></a> block exits or when
 <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.close" title="MDAnalysis.lib.util.NamedStream.close"><code class="xref py py-meth docutils literal"><span class="pre">close()</span></code></a> is called; note that the default is <strong>not to close
 the stream</strong></li>
 </ul>
@@ -431,9 +428,9 @@ disk.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; <cite>offset</cite> is interpreted relative to the position
+<li><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – <cite>offset</cite> is interpreted relative to the position
 indicated by <cite>whence</cite>.</li>
-<li><strong>whence</strong> (<em>{0</em><em>, </em><em>1</em><em>, </em><em>2}</em><em> (</em><em>optional</em><em>)</em>) &#8211; <p>Values for <cite>whence</cite> are:</p>
+<li><strong>whence</strong> (<em>{0</em><em>, </em><em>1</em><em>, </em><em>2}</em><em> (</em><em>optional</em><em>)</em>) – <p>Values for <cite>whence</cite> are:</p>
 <blockquote>
 <div><ul>
 <li><code class="xref py py-data docutils literal"><span class="pre">io.SEEK_SET</span></code> or 0 – start of the stream (the default); <cite>offset</cite>
@@ -475,12 +472,12 @@ raise <code class="xref py py-exc docutils literal"><span class="pre">IOError</s
 <dl class="method">
 <dt id="MDAnalysis.lib.util.NamedStream.truncate">
 <code class="descname">truncate</code><span class="sig-paren">(</span><em>*size</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/util.html#NamedStream.truncate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.util.NamedStream.truncate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Truncate the stream&#8217;s size to <cite>size</cite>.</p>
+<dd><p>Truncate the stream’s size to <cite>size</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The <cite>size</cite> defaults to the current position (if no <cite>size</cite> argument
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – The <cite>size</cite> defaults to the current position (if no <cite>size</cite> argument
 is supplied). The current file position is not changed.</td>
 </tr>
 </tbody>
@@ -513,7 +510,7 @@ is supplied). The current file position is not changed.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<em>stream</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<em>stream</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="docutils literal"><span class="pre">True</span></code> if <cite>obj</cite> is a stream, <code class="docutils literal"><span class="pre">False</span></code> otherwise</td>
 </tr>
@@ -577,12 +574,12 @@ edit descriptors (see <a class="reference external" href="http://www.webcitation
 <a class="reference internal" href="#MDAnalysis.lib.util.FORTRAN_format_regex" title="MDAnalysis.lib.util.FORTRAN_format_regex"><code class="xref py py-data docutils literal"><span class="pre">FORTRAN_format_regex</span></code></a>).</p>
 <p>Strings are stripped of leading and trailing white space.</p>
 <p>Set up the reader with the FORTRAN format string.</p>
-<p>The string <cite>fmt</cite> should look like &#8216;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#8217;.</p>
+<p>The string <cite>fmt</cite> should look like ‘2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10’.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; FORTRAN format edit descriptor for a line as described in <a class="reference external" href="http://www.webcitation.org/5xbaWMV2x">Fortran
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – FORTRAN format edit descriptor for a line as described in <a class="reference external" href="http://www.webcitation.org/5xbaWMV2x">Fortran
 Formats</a></td>
 </tr>
 </tbody>
@@ -608,13 +605,13 @@ Formats</a></td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>edit_descriptor</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; FORTRAN format edit descriptor</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>edit_descriptor</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – FORTRAN format edit descriptor</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict with totallength (in chars), repeat, length, format, decimals</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; The <cite>edit_descriptor</cite> is not recognized and cannot be parsed</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – The <cite>edit_descriptor</cite> is not recognized and cannot be parsed</td>
 </tr>
 </tbody>
 </table>
@@ -634,13 +631,13 @@ and neither are the scientific notation <em>Ew.dEe</em> forms.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>line</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>line</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of entries with appropriate types</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; Any of the conversions cannot be made (e.g. space for an int)</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – Any of the conversions cannot be made (e.g. space for an int)</td>
 </tr>
 </tbody>
 </table>
@@ -677,13 +674,13 @@ correpsonding to one dimension).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><em>array_like</em>) &#8211; desired spacing of the bins</li>
-<li><strong>xmin</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><em>array_like</em>) &#8211; lower bound (left boundary of first bin)</li>
-<li><strong>xmax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><em>array_like</em>) &#8211; upper bound (right boundary of last bin)</li>
+<li><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><em>array_like</em>) – desired spacing of the bins</li>
+<li><strong>xmin</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><em>array_like</em>) – lower bound (left boundary of first bin)</li>
+<li><strong>xmax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><em>array_like</em>) – upper bound (right boundary of last bin)</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The dict contains &#8216;Nbins&#8217;, &#8216;delta&#8217;, &#8216;min&#8217;, and &#8216;max&#8217;; these are either
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The dict contains ‘Nbins’, ‘delta’, ‘min’, and ‘max’; these are either
 floats or arrays, depending on the input.</p>
 </td>
 </tr>
@@ -709,17 +706,17 @@ floats or arrays, depending on the input.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>atoms</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><em>array_like</em>) &#8211; The atoms that the <cite>weights</cite> should be applied to. Typically this
+<li><strong>atoms</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><em>array_like</em>) – The atoms that the <cite>weights</cite> should be applied to. Typically this
 is a <code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code> but because only the length is compared,
 any sequence for which <code class="docutils literal"><span class="pre">len(atoms)</span></code> is defined is acceptable.</li>
-<li><strong>weights</strong> (<em>{&quot;mass&quot;</em><em>, </em><em>None}</em><em> or </em><em>array_like</em>) &#8211; All MDAnalysis functions or classes understand &#8220;mass&#8221; and will then
+<li><strong>weights</strong> (<em>{&quot;mass&quot;</em><em>, </em><em>None}</em><em> or </em><em>array_like</em>) – All MDAnalysis functions or classes understand “mass” and will then
 use <code class="docutils literal"><span class="pre">atoms.masses</span></code>. <code class="docutils literal"><span class="pre">None</span></code> indicates equal weights for all atoms.
 Using an <code class="docutils literal"><span class="pre">array_like</span></code> assigns a custom weight to each element of
 <cite>atoms</cite>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>weights</strong> &#8211; If &#8220;mass&#8221; was selected, <code class="docutils literal"><span class="pre">atoms.masses</span></code> is returned, otherwise the
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>weights</strong> – If “mass” was selected, <code class="docutils literal"><span class="pre">atoms.masses</span></code> is returned, otherwise the
 value of <cite>weights</cite> (which can be <code class="docutils literal"><span class="pre">None</span></code>).</p>
 </td>
 </tr>
@@ -727,9 +724,9 @@ value of <cite>weights</cite> (which can be <code class="docutils literal"><span
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> &#8211; If <cite>weights</cite> is not one of the allowed values or if &#8220;mass&#8221; is
+<li><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> – If <cite>weights</cite> is not one of the allowed values or if “mass” is
 selected but <code class="docutils literal"><span class="pre">atoms.masses</span></code> is not available.</li>
-<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; If <cite>weights</cite> is not a 1D array with the same length as
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>weights</cite> is not a 1D array with the same length as
 <cite>atoms</cite>, then the exception is raised.  <code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> is
 also raised if <code class="docutils literal"><span class="pre">atoms.masses</span></code> is not defined.</li>
 </ul>
@@ -750,13 +747,13 @@ also raised if <code class="docutils literal"><span class="pre">atoms.masses</sp
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; 1-letter or 3-letter amino acid code</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – 1-letter or 3-letter amino acid code</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">3-letter or 1-letter amino acid code</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; No conversion can be made; the amino acid code is not defined.</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – No conversion can be made; the amino acid code is not defined.</td>
 </tr>
 </tbody>
 </table>
@@ -774,10 +771,10 @@ also raised if <code class="docutils literal"><span class="pre">atoms.masses</sp
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>residue</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The <em>residue</em> must contain a 1-letter or 3-letter or
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>residue</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The <em>residue</em> must contain a 1-letter or 3-letter or
 4-letter residue string, a number (the resid) and
 optionally an atom identifier, which must be separate
-from the residue with a colon (&#8221;:&#8221;). White space is
+from the residue with a colon (“:”). White space is
 allowed in between.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>(3-letter aa string, resid, atomname)</cite>; known 1-letter
@@ -789,11 +786,11 @@ aa codes are converted to 3-letter codes</td>
 </table>
 <p class="rubric">Examples</p>
 <ul class="simple">
-<li>&#8220;LYS300:HZ1&#8221; &#8211;&gt; (&#8220;LYS&#8221;, 300, &#8220;HZ1&#8221;)</li>
-<li>&#8220;K300:HZ1&#8221; &#8211;&gt; (&#8220;LYS&#8221;, 300, &#8220;HZ1&#8221;)</li>
-<li>&#8220;K300&#8221; &#8211;&gt; (&#8220;LYS&#8221;, 300, None)</li>
-<li>&#8220;4GB300:H6O&#8221; &#8211;&gt; (&#8220;4GB&#8221;, 300, &#8220;H6O&#8221;)</li>
-<li>&#8220;4GB300&#8221; &#8211;&gt; (&#8220;4GB&#8221;, 300, None)</li>
+<li>“LYS300:HZ1” –&gt; (“LYS”, 300, “HZ1”)</li>
+<li>“K300:HZ1” –&gt; (“LYS”, 300, “HZ1”)</li>
+<li>“K300” –&gt; (“LYS”, 300, None)</li>
+<li>“4GB300:H6O” –&gt; (“4GB”, 300, “H6O”)</li>
+<li>“4GB300” –&gt; (“4GB”, 300, None)</li>
 </ul>
 </dd></dl>
 
@@ -893,17 +890,17 @@ close it.</td></tr>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../lib_modules.html#overview">11.1. Overview</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../lib_modules.html#list-of-modules">11.2. List of modules</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="distances.html">11.2.1. Fast distance array computation &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">11.2.1. Fast distance array computation — <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="distances.html#low-level-modules-for-mdanalysis-lib-distances">11.2.2. Low-level modules for <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="NeighborSearch.html">11.2.3. Neighbor Search wrapper for MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.NeighborSearch</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="log.html">11.2.4. Setting up logging &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.log</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="mdamath.html">11.2.5. Mathematical helper functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.mdamath</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="transformations.html">11.2.6. Homogeneous Transformation Matrices and Quaternions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.transformations</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qcprot.html">11.2.7. Fast QCP RMSD structure alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">11.2.8. Helper functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.util</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NeighborSearch.html">11.2.3. Neighbor Search wrapper for MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.lib.NeighborSearch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">11.2.4. Setting up logging — <code class="docutils literal"><span class="pre">MDAnalysis.lib.log</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mdamath.html">11.2.5. Mathematical helper functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib.mdamath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformations.html">11.2.6. Homogeneous Transformation Matrices and Quaternions — <code class="docutils literal"><span class="pre">MDAnalysis.lib.transformations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qcprot.html">11.2.7. Fast QCP RMSD structure alignment — <code class="docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">11.2.8. Helper functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib.util</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#files-and-directories">11.2.8.1. Files and directories</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#streams">11.2.8.2. Streams</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#containers-and-lists">11.2.8.3. Containers and lists</a></li>
@@ -919,8 +916,8 @@ close it.</td></tr>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -928,8 +925,8 @@ close it.</td></tr>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a><ul>
-      <li>Previous: <a href="qcprot.html" title="previous chapter">11.2.7. Fast QCP RMSD structure alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></li>
+  <li><a href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a><ul>
+      <li>Previous: <a href="qcprot.html" title="previous chapter">11.2.7. Fast QCP RMSD structure alignment — <code class="docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></li>
       <li>Next: <a href="formats/libmdaxdr.html" title="next chapter">11.3.1. Low-level Gromacs XDR trajectory reading — <code class="docutils literal"><span class="pre">MDAnalysis.lib.formats.libmdaxdr</span></code></a></li>
   </ul></li>
   </ul></li>
@@ -953,7 +950,7 @@ close it.</td></tr>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

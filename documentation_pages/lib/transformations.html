@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>11.2.6. Homogeneous Transformation Matrices and Quaternions — MDAnalysis.lib.transformations &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,7 +46,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.lib.transformations"></span><div class="section" id="homogeneous-transformation-matrices-and-quaternions-mdanalysis-lib-transformations">
-<h1>11.2.6. Homogeneous Transformation Matrices and Quaternions &#8212; <a class="reference internal" href="#module-MDAnalysis.lib.transformations" title="MDAnalysis.lib.transformations"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.transformations</span></code></a><a class="headerlink" href="#homogeneous-transformation-matrices-and-quaternions-mdanalysis-lib-transformations" title="Permalink to this headline">¶</a></h1>
+<h1>11.2.6. Homogeneous Transformation Matrices and Quaternions — <a class="reference internal" href="#module-MDAnalysis.lib.transformations" title="MDAnalysis.lib.transformations"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.transformations</span></code></a><a class="headerlink" href="#homogeneous-transformation-matrices-and-quaternions-mdanalysis-lib-transformations" title="Permalink to this headline">¶</a></h1>
 <p>A library for calculating 4x4 matrices for translating, rotating, reflecting,
 scaling, shearing, projecting, orthogonalizing, and superimposing arrays of
 3D homogeneous coordinates as well as for converting between rotation matrices,
@@ -83,28 +80,28 @@ module for a faster implementation of some functions.</p>
 <p>Documentation in HTML format can be generated with epydoc.</p>
 <p>Matrices (M) can be inverted using numpy.linalg.inv(M), concatenated using
 numpy.dot(M0, M1), or used to transform homogeneous coordinates (v) using
-numpy.dot(M, v) for shape (4, *) &#8220;point of arrays&#8221;, respectively
-numpy.dot(v, M.T) for shape (*, 4) &#8220;array of points&#8221;.</p>
+numpy.dot(M, v) for shape (4, *) “point of arrays”, respectively
+numpy.dot(v, M.T) for shape (*, 4) “array of points”.</p>
 <p>Use the transpose of transformation matrices for OpenGL glMultMatrixd().</p>
 <p>Calculations are carried out with numpy.float64 precision.</p>
 <p>Vector, point, quaternion, and matrix function arguments are expected to be
-&#8220;array like&#8221;, i.e. tuple, list, or numpy arrays.</p>
+“array like”, i.e. tuple, list, or numpy arrays.</p>
 <p>Return types are numpy arrays unless specified otherwise.</p>
 <p>Angles are in radians unless specified otherwise.</p>
 <p>Quaternions w+ix+jy+kz are represented as [w, x, y, z].</p>
 <p>A triple of Euler angles can be applied/interpreted in 24 ways, which can
 be specified using a 4 character string or encoded 4-tuple:</p>
 <blockquote>
-<div><p><em>Axes 4-string</em>: e.g. &#8216;sxyz&#8217; or &#8216;ryxy&#8217;</p>
+<div><p><em>Axes 4-string</em>: e.g. ‘sxyz’ or ‘ryxy’</p>
 <ul class="simple">
-<li>first character : rotations are applied to &#8216;s&#8217;tatic or &#8216;r&#8217;otating frame</li>
-<li>remaining characters : successive rotation axis &#8216;x&#8217;, &#8216;y&#8217;, or &#8216;z&#8217;</li>
+<li>first character : rotations are applied to ‘s’tatic or ‘r’otating frame</li>
+<li>remaining characters : successive rotation axis ‘x’, ‘y’, or ‘z’</li>
 </ul>
 <p><em>Axes 4-tuple</em>: e.g. (0, 0, 0, 0) or (1, 1, 1, 1)</p>
 <ul class="simple">
-<li>inner axis: code of axis (&#8216;x&#8217;:0, &#8216;y&#8217;:1, &#8216;z&#8217;:2) of rightmost matrix.</li>
-<li>parity : even (0) if inner axis &#8216;x&#8217; is followed by &#8216;y&#8217;, &#8216;y&#8217; is followed
-by &#8216;z&#8217;, or &#8216;z&#8217; is followed by &#8216;x&#8217;. Otherwise odd (1).</li>
+<li>inner axis: code of axis (‘x’:0, ‘y’:1, ‘z’:2) of rightmost matrix.</li>
+<li>parity : even (0) if inner axis ‘x’ is followed by ‘y’, ‘y’ is followed
+by ‘z’, or ‘z’ is followed by ‘x’. Otherwise odd (1).</li>
 <li>repetition : first and last axis are same (1) or different (0).</li>
 <li>frame : rotations are applied to static (0) or rotating (1) frame.</li>
 </ul>
@@ -112,17 +109,17 @@ by &#8216;z&#8217;, or &#8216;z&#8217; is followed by &#8216;x&#8217;. Otherwise
 <p class="rubric">References</p>
 <ol class="arabic simple">
 <li>Matrices and transformations. Ronald Goldman.
-In &#8220;Graphics Gems I&#8221;, pp 472-475. Morgan Kaufmann, 1990.</li>
+In “Graphics Gems I”, pp 472-475. Morgan Kaufmann, 1990.</li>
 <li>More matrices and transformations: shear and pseudo-perspective.
-Ronald Goldman. In &#8220;Graphics Gems II&#8221;, pp 320-323. Morgan Kaufmann, 1991.</li>
+Ronald Goldman. In “Graphics Gems II”, pp 320-323. Morgan Kaufmann, 1991.</li>
 <li>Decomposing a matrix into simple transformations. Spencer Thomas.
-In &#8220;Graphics Gems II&#8221;, pp 320-323. Morgan Kaufmann, 1991.</li>
+In “Graphics Gems II”, pp 320-323. Morgan Kaufmann, 1991.</li>
 <li>Recovering the data from the transformation matrix. Ronald Goldman.
-In &#8220;Graphics Gems II&#8221;, pp 324-331. Morgan Kaufmann, 1991.</li>
+In “Graphics Gems II”, pp 324-331. Morgan Kaufmann, 1991.</li>
 <li>Euler angle conversion. Ken Shoemake.
-In &#8220;Graphics Gems IV&#8221;, pp 222-229. Morgan Kaufmann, 1994.</li>
+In “Graphics Gems IV”, pp 222-229. Morgan Kaufmann, 1994.</li>
 <li>Arcball rotation control. Ken Shoemake.
-In &#8220;Graphics Gems IV&#8221;, pp 175-192. Morgan Kaufmann, 1994.</li>
+In “Graphics Gems IV”, pp 175-192. Morgan Kaufmann, 1994.</li>
 <li>Representing attitude: Euler angles, unit quaternions, and rotation
 vectors. James Diebel. 2006.</li>
 <li>A discussion of the solution for the best rotation to relate two sets
@@ -134,7 +131,7 @@ BKP Horn. J Opt Soc Am A. 1987. 4(4):629-642.</li>
 <li>From quaternion to matrix and back. JMP van Waveren. 2005.
 <a class="reference external" href="http://www.intel.com/cd/ids/developer/asmo-na/eng/293748.htm">http://www.intel.com/cd/ids/developer/asmo-na/eng/293748.htm</a></li>
 <li>Uniform random rotations. Ken Shoemake.
-In &#8220;Graphics Gems III&#8221;, pp 124-132. Morgan Kaufmann, 1992.</li>
+In “Graphics Gems III”, pp 124-132. Morgan Kaufmann, 1992.</li>
 <li>Quaternion in molecular modeling. CFF Karney.
 J Mol Graph Mod, 25(5):595-604</li>
 <li>New method for extracting the quaternion from a rotation matrix.
@@ -456,9 +453,9 @@ point, normal, direction, perspective, and pseudo.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>b</strong> (<em>a</em><em>,</em>) &#8211; two vectors</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>b</strong> (<em>a</em><em>,</em>) – two vectors</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>c</strong> &#8211; vector to rotate a into b</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>c</strong> – vector to rotate a into b</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.ndarray</td>
 </tr>
@@ -562,29 +559,29 @@ point, normal, direction, perspective, and pseudo.</p>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../lib_modules.html#overview">11.1. Overview</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../lib_modules.html#list-of-modules">11.2. List of modules</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="distances.html">11.2.1. Fast distance array computation &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">11.2.1. Fast distance array computation — <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="distances.html#low-level-modules-for-mdanalysis-lib-distances">11.2.2. Low-level modules for <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="NeighborSearch.html">11.2.3. Neighbor Search wrapper for MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.NeighborSearch</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="log.html">11.2.4. Setting up logging &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.log</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="mdamath.html">11.2.5. Mathematical helper functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.mdamath</span></code></a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">11.2.6. Homogeneous Transformation Matrices and Quaternions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.transformations</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NeighborSearch.html">11.2.3. Neighbor Search wrapper for MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.lib.NeighborSearch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">11.2.4. Setting up logging — <code class="docutils literal"><span class="pre">MDAnalysis.lib.log</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mdamath.html">11.2.5. Mathematical helper functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib.mdamath</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">11.2.6. Homogeneous Transformation Matrices and Quaternions — <code class="docutils literal"><span class="pre">MDAnalysis.lib.transformations</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">11.2.6.1. Requirements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#functions">11.2.6.2. Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="qcprot.html">11.2.7. Fast QCP RMSD structure alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="util.html">11.2.8. Helper functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.util</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qcprot.html">11.2.7. Fast QCP RMSD structure alignment — <code class="docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="util.html">11.2.8. Helper functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib.util</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../lib_modules.html#low-level-file-formats">11.3. Low level file formats</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -592,9 +589,9 @@ point, normal, direction, perspective, and pseudo.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a><ul>
-      <li>Previous: <a href="mdamath.html" title="previous chapter">11.2.5. Mathematical helper functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.mdamath</span></code></a></li>
-      <li>Next: <a href="qcprot.html" title="next chapter">11.2.7. Fast QCP RMSD structure alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></li>
+  <li><a href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a><ul>
+      <li>Previous: <a href="mdamath.html" title="previous chapter">11.2.5. Mathematical helper functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib.mdamath</span></code></a></li>
+      <li>Next: <a href="qcprot.html" title="next chapter">11.2.7. Fast QCP RMSD structure alignment — <code class="docutils literal"><span class="pre">MDAnalysis.lib.qcprot</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -617,7 +614,7 @@ point, normal, direction, perspective, and pseudo.</p>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

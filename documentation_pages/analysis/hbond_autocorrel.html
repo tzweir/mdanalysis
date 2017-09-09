@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>4.3.2. Hydrogen bond autocorrelation — MDAnalysis.analysis.hbonds.hbond_autocorrel &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,7 +46,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.hbonds.hbond_autocorrel"></span><div class="section" id="hydrogen-bond-autocorrelation-mdanalysis-analysis-hbonds-hbond-autocorrel">
-<h1>4.3.2. Hydrogen bond autocorrelation &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.hbonds.hbond_autocorrel" title="MDAnalysis.analysis.hbonds.hbond_autocorrel"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a><a class="headerlink" href="#hydrogen-bond-autocorrelation-mdanalysis-analysis-hbonds-hbond-autocorrel" title="Permalink to this headline">¶</a></h1>
+<h1>4.3.2. Hydrogen bond autocorrelation — <a class="reference internal" href="#module-MDAnalysis.analysis.hbonds.hbond_autocorrel" title="MDAnalysis.analysis.hbonds.hbond_autocorrel"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a><a class="headerlink" href="#hydrogen-bond-autocorrelation-mdanalysis-analysis-hbonds-hbond-autocorrel" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -173,28 +170,28 @@ used.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; MDAnalysis Universe that all selections belong to</li>
-<li><strong>hydrogens</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; AtomGroup of Hydrogens which can form hydrogen bonds</li>
-<li><strong>acceptors</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; AtomGroup of all Acceptor atoms</li>
-<li><strong>donors</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; The atoms which are connected to the hydrogens.  This group
+<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) – MDAnalysis Universe that all selections belong to</li>
+<li><strong>hydrogens</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – AtomGroup of Hydrogens which can form hydrogen bonds</li>
+<li><strong>acceptors</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – AtomGroup of all Acceptor atoms</li>
+<li><strong>donors</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – The atoms which are connected to the hydrogens.  This group
 must be identical in length to the hydrogen group and matched,
 ie hydrogens[0] is bonded to donors[0].
 For many cases, this will mean a donor appears twice in this
 group.</li>
-<li><strong>bond_type</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Which definition of hydrogen bond lifetime to consider, either
-&#8216;continuous&#8217; or &#8216;intermittent&#8217;.</li>
-<li><strong>exclusions</strong> (<em>ndarray</em><em>, </em><em>optional</em>) &#8211; Indices of Hydrogen-Acceptor pairs to be excluded.
+<li><strong>bond_type</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Which definition of hydrogen bond lifetime to consider, either
+‘continuous’ or ‘intermittent’.</li>
+<li><strong>exclusions</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Indices of Hydrogen-Acceptor pairs to be excluded.
 With nH and nA Hydrogens and Acceptors, a (nH x nA) array of distances
 is calculated, <em>exclusions</em> is used as a mask on this array to exclude
 some pairs.</li>
-<li><strong>angle_crit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The angle (in degrees) which all bonds must be greater than [130.0]</li>
-<li><strong>dist_crit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The maximum distance (in Angstroms) for a hydrogen bond [3.0]</li>
-<li><strong>sample_time</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; The amount of time, in ps, that you wish to observe hydrogen
+<li><strong>angle_crit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – The angle (in degrees) which all bonds must be greater than [130.0]</li>
+<li><strong>dist_crit</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – The maximum distance (in Angstroms) for a hydrogen bond [3.0]</li>
+<li><strong>sample_time</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – The amount of time, in ps, that you wish to observe hydrogen
 bonds for [100]</li>
-<li><strong>nruns</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; The number of different start points within the trajectory
+<li><strong>nruns</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – The number of different start points within the trajectory
 to use [1]</li>
-<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Within each run, the number of frames to analyse [50]</li>
-<li><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to consider periodic boundaries in calculations [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>nsamples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Within each run, the number of frames to analyse [50]</li>
+<li><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to consider periodic boundaries in calculations [<code class="docutils literal"><span class="pre">True</span></code>]</li>
 </ul>
 </td>
 </tr>
@@ -208,7 +205,7 @@ to use [1]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>force</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Will overwrite previous results if they exist</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>force</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Will overwrite previous results if they exist</td>
 </tr>
 </tbody>
 </table>
@@ -223,7 +220,7 @@ characteristic time</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p_guess</strong> (<em>tuple of floats</em><em>, </em><em>optional</em>) &#8211; Initial guess for the leastsq fit, must match the shape of the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p_guess</strong> (<em>tuple of floats</em><em>, </em><em>optional</em>) – Initial guess for the leastsq fit, must match the shape of the
 expected coefficients</td>
 </tr>
 </tbody>
@@ -263,7 +260,7 @@ is saved into the solution dict</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; The desired filename [hbond_autocorrel]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) – The desired filename [hbond_autocorrel]</td>
 </tr>
 </tbody>
 </table>
@@ -310,8 +307,8 @@ is saved into the solution dict</p>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#building-blocks-for-analysis">4.1. Building blocks for Analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#distances-and-contacts">4.2. Distances and contacts</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../analysis_modules.html#hydrogen-bonding">4.3. Hydrogen bonding</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="hbond_analysis.html">4.3.1. Hydrogen Bond analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4.3.2. Hydrogen bond autocorrelation &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hbond_analysis.html">4.3.1. Hydrogen Bond analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.3.2. Hydrogen bond autocorrelation — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#description">4.3.2.1. Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#input">4.3.2.2. Input</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#output">4.3.2.3. Output</a></li>
@@ -334,10 +331,10 @@ is saved into the solution dict</p>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -346,8 +343,8 @@ is saved into the solution dict</p>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../analysis_modules.html">4. Analysis modules</a><ul>
-      <li>Previous: <a href="hbond_analysis.html" title="previous chapter">4.3.1. Hydrogen Bond analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a></li>
-      <li>Next: <a href="hole.html" title="next chapter">4.4.1. Generation and Analysis of HOLE pore profiles &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hole</span></code></a></li>
+      <li>Previous: <a href="hbond_analysis.html" title="previous chapter">4.3.1. Hydrogen Bond analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a></li>
+      <li>Next: <a href="hole.html" title="next chapter">4.4.1. Generation and Analysis of HOLE pore profiles — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hole</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -370,7 +367,7 @@ is saved into the solution dict</p>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

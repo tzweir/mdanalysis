@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>4.9.2. Principal Component Analysis (PCA) — MDAnalysis.analysis.pca &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,7 +46,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.pca"></span><div class="section" id="principal-component-analysis-pca-mdanalysis-analysis-pca">
-<h1>4.9.2. Principal Component Analysis (PCA) &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.pca" title="MDAnalysis.analysis.pca"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.pca</span></code></a><a class="headerlink" href="#principal-component-analysis-pca-mdanalysis-analysis-pca" title="Permalink to this headline">¶</a></h1>
+<h1>4.9.2. Principal Component Analysis (PCA) — <a class="reference internal" href="#module-MDAnalysis.analysis.pca" title="MDAnalysis.analysis.pca"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.pca</span></code></a><a class="headerlink" href="#principal-component-analysis-pca-mdanalysis-analysis-pca" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -141,21 +138,21 @@ instructions.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.pca.PCA.p_components">
 <code class="descname">p_components</code><a class="headerlink" href="#MDAnalysis.analysis.pca.PCA.p_components" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array, (n_components, n_atoms * 3)</em> &#8211; The principal components of the feature space,
+<dd><p><em>array, (n_components, n_atoms * 3)</em> – The principal components of the feature space,
 representing the directions of maximum variance in the data.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.pca.PCA.variance">
 <code class="descname">variance</code><a class="headerlink" href="#MDAnalysis.analysis.pca.PCA.variance" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array (n_components, )</em> &#8211; The raw variance explained by each eigenvector of the covariance
+<dd><p><em>array (n_components, )</em> – The raw variance explained by each eigenvector of the covariance
 matrix.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.pca.PCA.cumulated_variance">
 <code class="descname">cumulated_variance</code><a class="headerlink" href="#MDAnalysis.analysis.pca.PCA.cumulated_variance" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array, (n_components, )</em> &#8211; Percentage of variance explained by the selected components and the sum
+<dd><p><em>array, (n_components, )</em> – Percentage of variance explained by the selected components and the sum
 of the components preceding it. If a subset of components is not chosen
 then all components are stored and the cumulated variance will converge
 to 1.</p>
@@ -164,14 +161,14 @@ to 1.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.pca.PCA.pca_space">
 <code class="descname">pca_space</code><a class="headerlink" href="#MDAnalysis.analysis.pca.PCA.pca_space" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>array (n_frames, n_components)</em> &#8211; After running <code class="xref py py-meth docutils literal"><span class="pre">pca.transform()</span></code> the projection of the
+<dd><p><em>array (n_frames, n_components)</em> – After running <code class="xref py py-meth docutils literal"><span class="pre">pca.transform()</span></code> the projection of the
 positions onto the principal components will exist here.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.pca.PCA.mean_atoms">
 <code class="descname">mean_atoms</code><a class="headerlink" href="#MDAnalysis.analysis.pca.PCA.mean_atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>MDAnalyis atomgroup</em> &#8211; After running <code class="xref py py-meth docutils literal"><span class="pre">PCA.run()</span></code>, the mean position of all the atoms
+<dd><p><em>MDAnalyis atomgroup</em> – After running <code class="xref py py-meth docutils literal"><span class="pre">PCA.run()</span></code>, the mean position of all the atoms
 used for the creation of the covariance matrix will exist here.</p>
 </dd></dl>
 
@@ -190,20 +187,20 @@ principal components.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; Universe</li>
-<li><strong>select</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; A valid selection statement for choosing a subset of atoms from
+<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) – Universe</li>
+<li><strong>select</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – A valid selection statement for choosing a subset of atoms from
 the atomgroup.</li>
-<li><strong>align</strong> (<em>boolean</em><em>, </em><em>optional</em>) &#8211; If True, the trajectory will be aligned to a reference
+<li><strong>align</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If True, the trajectory will be aligned to a reference
 structure.</li>
-<li><strong>mean</strong> (<em>MDAnalysis atomgroup</em><em>, </em><em>optional</em>) &#8211; An optional reference structure to be used as the mean of the
+<li><strong>mean</strong> (<em>MDAnalysis atomgroup</em><em>, </em><em>optional</em>) – An optional reference structure to be used as the mean of the
 covariance matrix.</li>
-<li><strong>n_components</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; The number of principal components to be saved, default saves
+<li><strong>n_components</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – The number of principal components to be saved, default saves
 all principal components, Default: None</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; First frame of trajectory to use for generation
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – First frame of trajectory to use for generation
 of covariance matrix, Default: None</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Last frame of trajectory to use for generation
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Last frame of trajectory to use for generation
 of covariance matrix, Default: None</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Step between frames of trajectory to use for generation
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Step between frames of trajectory to use for generation
 of covariance matrix, Default: None</li>
 </ul>
 </td>
@@ -218,15 +215,15 @@ of covariance matrix, Default: None</li>
 <dd><p>Measure the cosine content of the PCA projection.</p>
 <p>The cosine content of pca projections can be used as an indicator if a
 simulation is converged. Values close to 1 are an indicator that the
-simulation isn&#8217;t converged. For values below 0.7 no statement can be made.
+simulation isn’t converged. For values below 0.7 no statement can be made.
 If you use this function please cite <a class="reference internal" href="#berkhess1" id="id2">[BerkHess1]</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pca_space</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>shape</em><em> (</em><em>number of frames</em><em>, </em><em>number of components</em><em>)</em>) &#8211; The PCA space to be analyzed.</li>
-<li><strong>i</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The index of the pca_component projectection to be analyzed.</li>
+<li><strong>pca_space</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em>, </em><em>shape</em><em> (</em><em>number of frames</em><em>, </em><em>number of components</em><em>)</em>) – The PCA space to be analyzed.</li>
+<li><strong>i</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The index of the pca_component projectection to be analyzed.</li>
 </ul>
 </td>
 </tr>
@@ -295,8 +292,8 @@ Phys. Rev. E 65, 031910 (2002).</td></tr>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#structure">4.7. Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#volumetric-analysis">4.8. Volumetric analysis</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../analysis_modules.html#dimensionality-reduction">4.9. Dimensionality Reduction</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="diffusionmap.html">4.9.1. Diffusion map &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.diffusionmap</span></code></a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4.9.2. Principal Component Analysis (PCA) &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.pca</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="diffusionmap.html">4.9.1. Diffusion map — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.diffusionmap</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.9.2. Principal Component Analysis (PCA) — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.pca</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pca-tutorial">4.9.2.1. PCA Tutorial</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#classes-and-functions">4.9.2.2. Classes and Functions</a></li>
 </ul>
@@ -312,10 +309,10 @@ Phys. Rev. E 65, 031910 (2002).</td></tr>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -324,8 +321,8 @@ Phys. Rev. E 65, 031910 (2002).</td></tr>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../analysis_modules.html">4. Analysis modules</a><ul>
-      <li>Previous: <a href="diffusionmap.html" title="previous chapter">4.9.1. Diffusion map &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.diffusionmap</span></code></a></li>
-      <li>Next: <a href="legacy_modules.html" title="next chapter">4.10.1. <code class="docutils literal"><span class="pre">MDAnalysis.analysis.legacy</span></code> &#8212; Legacy analysis code</a></li>
+      <li>Previous: <a href="diffusionmap.html" title="previous chapter">4.9.1. Diffusion map — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.diffusionmap</span></code></a></li>
+      <li>Next: <a href="legacy_modules.html" title="next chapter">4.10.1. <code class="docutils literal"><span class="pre">MDAnalysis.analysis.legacy</span></code> — Legacy analysis code</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -348,7 +345,7 @@ Phys. Rev. E 65, 031910 (2002).</td></tr>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

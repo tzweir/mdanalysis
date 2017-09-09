@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>4.2.1. Coordinate fitting and alignment — MDAnalysis.analysis.align &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,14 +46,14 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.align"></span><div class="section" id="coordinate-fitting-and-alignment-mdanalysis-analysis-align">
-<h1>4.2.1. Coordinate fitting and alignment &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.align" title="MDAnalysis.analysis.align"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a><a class="headerlink" href="#coordinate-fitting-and-alignment-mdanalysis-analysis-align" title="Permalink to this headline">¶</a></h1>
+<h1>4.2.1. Coordinate fitting and alignment — <a class="reference internal" href="#module-MDAnalysis.analysis.align" title="MDAnalysis.analysis.align"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a><a class="headerlink" href="#coordinate-fitting-and-alignment-mdanalysis-analysis-align" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Oliver Beckstein, Joshua Adelman</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Year:</th><td class="field-body">2010&#8211;2013</td>
+<tr class="field-even field"><th class="field-name">Year:</th><td class="field-body">2010–2013</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Copyright:</th><td class="field-body">GNU Public License v3</td>
 </tr>
@@ -163,7 +160,7 @@ C-alpha atoms are optimally superimposed (translation and rotation).</p>
 <p>It is also possible to align two arbitrary structures by providing a
 mapping between atoms based on a sequence alignment. This allows
 fitting of structural homologs or wild type and mutant.</p>
-<p>If a alignment was provided as &#8220;sequences.aln&#8221; one would first produce
+<p>If a alignment was provided as “sequences.aln” one would first produce
 the appropriate MDAnalysis selections with the <a class="reference internal" href="#MDAnalysis.analysis.align.fasta2select" title="MDAnalysis.analysis.align.fasta2select"><code class="xref py py-func docutils literal"><span class="pre">fasta2select()</span></code></a>
 function and then feed the resulting dictionary to <a class="reference internal" href="#MDAnalysis.analysis.align.AlignTraj" title="MDAnalysis.analysis.align.AlignTraj"><code class="xref py py-class docutils literal"><span class="pre">AlignTraj</span></code></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">seldict</span> <span class="o">=</span> <span class="n">align</span><span class="o">.</span><span class="n">fasta2select</span><span class="p">(</span><span class="s1">&#39;sequences.aln&#39;</span><span class="p">)</span>
@@ -206,14 +203,14 @@ contain <cite>mobile</cite> are shifted and rotated. (See below for how
 to change this behavior through the <cite>subselection</cite> keyword.)</li>
 </ol>
 <p>The <cite>mobile</cite> and <cite>reference</cite> atom groups can be constructed so that they
-already match atom by atom. In this case, <cite>select</cite> should be set to &#8220;all&#8221;
+already match atom by atom. In this case, <cite>select</cite> should be set to “all”
 (or <code class="docutils literal"><span class="pre">None</span></code>) so that no further selections are applied to <cite>mobile</cite> and
 <cite>reference</cite>, therefore preserving the exact atom ordering (see
 <a class="reference internal" href="../selections.html#ordered-selections-label"><span class="std std-ref">Ordered selections</span></a>).</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The atom order for <cite>mobile</cite> and <cite>reference</cite> is <em>only</em>
-preserved when <cite>select</cite> is either &#8220;all&#8221; or <code class="docutils literal"><span class="pre">None</span></code>. In any other case,
+preserved when <cite>select</cite> is either “all” or <code class="docutils literal"><span class="pre">None</span></code>. In any other case,
 a new selection will be made that will sort the resulting AtomGroup by
 index and therefore destroy the correspondence between the two groups.
 <strong>It is safest not to mix ordered AtomGroups with selection strings.</strong></p>
@@ -223,12 +220,12 @@ index and therefore destroy the correspondence between the two groups.
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mobile</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a><em> or </em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; structure to be aligned, a
+<li><strong>mobile</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a><em> or </em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – structure to be aligned, a
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or a whole
 <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a></li>
-<li><strong>reference</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a><em> or </em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; reference structure, a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<li><strong>reference</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a><em> or </em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – reference structure, a <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 or a whole <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a></li>
-<li><strong>select</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <p>The selection to operate on; can be one of:</p>
+<li><strong>select</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a><em> (</em><em>optional</em><em>)</em>) – <p>The selection to operate on; can be one of:</p>
 <ol class="arabic">
 <li>any valid selection string for
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.select_atoms" title="MDAnalysis.core.groups.AtomGroup.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a> that
@@ -247,13 +244,13 @@ be a <em>list of selection strings</em> to generate a
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> with defined atom order as
 described under <a class="reference internal" href="../selections.html#ordered-selections-label"><span class="std std-ref">Ordered selections</span></a>).</p>
 </li>
-<li><strong>weights</strong> ({&#8220;mass&#8221;, <code class="docutils literal"><span class="pre">None</span></code>} or array_like (optional)) &#8211; choose weights. With <code class="docutils literal"><span class="pre">&quot;mass&quot;</span></code> uses masses as weights; with <code class="docutils literal"><span class="pre">None</span></code>
+<li><strong>weights</strong> ({“mass”, <code class="docutils literal"><span class="pre">None</span></code>} or array_like (optional)) – choose weights. With <code class="docutils literal"><span class="pre">&quot;mass&quot;</span></code> uses masses as weights; with <code class="docutils literal"><span class="pre">None</span></code>
 weigh each atom equally. If a float array of the same length as
 <cite>mobile</cite> is provided, use each element of the <cite>array_like</cite> as a
 weight for the corresponding atom in <cite>mobile</cite>.</li>
-<li><strong>tol_mass</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Reject match if the atomic masses for matched atoms differ by more than
+<li><strong>tol_mass</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – Reject match if the atomic masses for matched atoms differ by more than
 <cite>tol_mass</cite>, default [0.1]</li>
-<li><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <dl class="docutils">
+<li><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – <dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">True</span></code></dt>
 <dd>Will raise <code class="xref py py-exc docutils literal"><span class="pre">SelectionError</span></code> if a single atom does not
 match between the two selections.</dd>
@@ -263,7 +260,7 @@ residues with non-matching atoms. See <a class="reference internal" href="#MDAna
 for details.</dd>
 </dl>
 </li>
-<li><strong>subselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <p>Apply the transformation only to this selection.</p>
+<li><strong>subselection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a><em> (</em><em>optional</em><em>)</em>) – <p>Apply the transformation only to this selection.</p>
 <dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">None</span></code> [default]</dt>
 <dd>Apply to <code class="docutils literal"><span class="pre">mobile.universe.atoms</span></code> (i.e., all atoms in the
@@ -279,8 +276,8 @@ protein, ligands and the surrounding water)</dd>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>old_rmsd</strong> (<em>float</em>) &#8211; RMSD before spatial alignment</li>
-<li><strong>new_rmsd</strong> (<em>float</em>) &#8211; RMSD after spatial alignment</li>
+<li><strong>old_rmsd</strong> (<em>float</em>) – RMSD before spatial alignment</li>
+<li><strong>new_rmsd</strong> (<em>float</em>) – RMSD after spatial alignment</li>
 </ul>
 </p>
 </td>
@@ -304,7 +301,7 @@ and new <cite>strict</cite> keyword. The new default is to be lenient whereas
 the old behavior was the equivalent of <code class="docutils literal"><span class="pre">strict</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.16.0: </span>new general &#8216;weights&#8217; kwarg replace <cite>mass_weighted</cite>, deprecated <cite>mass_weighted</cite></p>
+<p><span class="versionmodified">Changed in version 0.16.0: </span>new general ‘weights’ kwarg replace <cite>mass_weighted</cite>, deprecated <cite>mass_weighted</cite></p>
 </div>
 <div class="deprecated">
 <p><span class="versionmodified">Deprecated since version 0.16.0: </span>Instead of <code class="docutils literal"><span class="pre">mass_weighted=True</span></code> use new <code class="docutils literal"><span class="pre">weights='mass'</span></code></p>
@@ -328,27 +325,27 @@ current frame.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>mobile</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; Universe containing trajectory to be fitted to reference</li>
-<li><strong>reference</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; Universe containing trajectory frame to be used as reference</li>
-<li><strong>select</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Set as default to all, is used for Universe.select_atoms to choose
+<li><strong>mobile</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) – Universe containing trajectory to be fitted to reference</li>
+<li><strong>reference</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) – Universe containing trajectory frame to be used as reference</li>
+<li><strong>select</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – Set as default to all, is used for Universe.select_atoms to choose
 subdomain to be fitted against</li>
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Provide a filename for results to be written to</li>
-<li><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Provide a string to prepend to filename for results to be written
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – Provide a filename for results to be written to</li>
+<li><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – Provide a string to prepend to filename for results to be written
 to</li>
-<li><strong>weights</strong> ({&#8220;mass&#8221;, <code class="docutils literal"><span class="pre">None</span></code>} or array_like (optional)) &#8211; choose weights. With <code class="docutils literal"><span class="pre">&quot;mass&quot;</span></code> uses masses of <cite>reference</cite> as
+<li><strong>weights</strong> ({“mass”, <code class="docutils literal"><span class="pre">None</span></code>} or array_like (optional)) – choose weights. With <code class="docutils literal"><span class="pre">&quot;mass&quot;</span></code> uses masses of <cite>reference</cite> as
 weights; with <code class="docutils literal"><span class="pre">None</span></code> weigh each atom equally. If a float array of
 the same length as the selection is provided, use each element of
 the <cite>array_like</cite> as a weight for the corresponding atom in the
 selection.</li>
-<li><strong>tol_mass</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Tolerance given to <cite>get_matching_atoms</cite> to find appropriate atoms</li>
-<li><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Force <cite>get_matching_atoms</cite> to fail if atoms can&#8217;t be found using
+<li><strong>tol_mass</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – Tolerance given to <cite>get_matching_atoms</cite> to find appropriate atoms</li>
+<li><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Force <cite>get_matching_atoms</cite> to fail if atoms can’t be found using
 exact methods</li>
-<li><strong>force</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Force overwrite of filename for rmsd-fitting</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Set logger to show more information</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; First frame of trajectory to analyse, Default: 0</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Last frame of trajectory to analyse, Default: -1</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Step between frames to analyse, Default: 1</li>
-<li><strong>in_memory</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <em>Permanently</em> switch <cite>mobile</cite> to an in-memory trajectory
+<li><strong>force</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Force overwrite of filename for rmsd-fitting</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Set logger to show more information</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – First frame of trajectory to analyse, Default: 0</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – Last frame of trajectory to analyse, Default: -1</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – Step between frames to analyse, Default: 1</li>
+<li><strong>in_memory</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – <em>Permanently</em> switch <cite>mobile</cite> to an in-memory trajectory
 so that alignment can be done in-place, which can improve
 performance substantially in some cases. In this case, no file
 is written out (<cite>filename</cite> and <cite>prefix</cite> are ignored) and only
@@ -361,26 +358,26 @@ the coordinates of <cite>mobile</cite> are <em>changed in memory</em>.</li>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.align.AlignTraj.reference_atoms">
 <code class="descname">reference_atoms</code><a class="headerlink" href="#MDAnalysis.analysis.align.AlignTraj.reference_atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>AtomGroup</em> &#8211; Atoms of the reference structure to be aligned against</p>
+<dd><p><em>AtomGroup</em> – Atoms of the reference structure to be aligned against</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.align.AlignTraj.mobile_atoms">
 <code class="descname">mobile_atoms</code><a class="headerlink" href="#MDAnalysis.analysis.align.AlignTraj.mobile_atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>AtomGroup</em> &#8211; Atoms inside each trajectory frame to be rmsd_aligned</p>
+<dd><p><em>AtomGroup</em> – Atoms inside each trajectory frame to be rmsd_aligned</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.align.AlignTraj.rmsd">
 <code class="descname">rmsd</code><a class="headerlink" href="#MDAnalysis.analysis.align.AlignTraj.rmsd" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Array</em> &#8211; Array of the rmsd values of the least rmsd between the mobile_atoms
+<dd><p><em>Array</em> – Array of the rmsd values of the least rmsd between the mobile_atoms
 and reference_atoms after superposition and minimimization of rmsd</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.align.AlignTraj.filename">
 <code class="descname">filename</code><a class="headerlink" href="#MDAnalysis.analysis.align.AlignTraj.filename" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em> &#8211; String reflecting the filename of the file where mobile_atoms
+<dd><p><em>str</em> – String reflecting the filename of the file where mobile_atoms
 positions will be written to upon running RMSD alignment</p>
 </dd></dl>
 
@@ -420,19 +417,19 @@ vector <cite>b</cite> (i.e., <cite>b</cite> is the reference structure):</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> (<em>array_like</em>) &#8211; coordinates that are to be rotated (&#8220;mobile set&#8221;); array of N atoms
+<li><strong>a</strong> (<em>array_like</em>) – coordinates that are to be rotated (“mobile set”); array of N atoms
 of shape N*3 as generated by, e.g.,
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.positions" title="MDAnalysis.core.groups.AtomGroup.positions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup.positions</span></code></a>.</li>
-<li><strong>b</strong> (<em>array_like</em>) &#8211; reference coordinates; array of N atoms of shape N*3 as generated by,
+<li><strong>b</strong> (<em>array_like</em>) – reference coordinates; array of N atoms of shape N*3 as generated by,
 e.g., <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.positions" title="MDAnalysis.core.groups.AtomGroup.positions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.core.groups.AtomGroup.positions</span></code></a>.</li>
-<li><strong>weights</strong> (<em>array_like</em><em> (</em><em>optional</em><em>)</em>) &#8211; array of floats of size N for doing weighted RMSD fitting (e.g. the
+<li><strong>weights</strong> (<em>array_like</em><em> (</em><em>optional</em><em>)</em>) – array of floats of size N for doing weighted RMSD fitting (e.g. the
 masses of the atoms)</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>R</strong> (<em>ndarray</em>) &#8211; rotation matrix</li>
-<li><strong>rmsd</strong> (<em>float</em>) &#8211; RMSD between <cite>a</cite> and <cite>b</cite> before rotation</li>
+<li><strong>R</strong> (<em>ndarray</em>) – rotation matrix</li>
+<li><strong>rmsd</strong> (<em>float</em>) – RMSD between <cite>a</cite> and <cite>b</cite> before rotation</li>
 <li><code class="docutils literal"><span class="pre">(R,</span> <span class="pre">rmsd)</span></code> rmsd and rotation matrix <em>R</em></li>
 </ul>
 </p>
@@ -481,12 +478,12 @@ normal users.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mobile_coordinates</strong> (<em>ndarray</em>) &#8211; Coordinates of atoms to be aligned</li>
-<li><strong>ref_coordinates</strong> (<em>ndarray</em>) &#8211; Coordinates of atoms to be fit against</li>
-<li><strong>mobile_atoms</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; Atoms to be translated</li>
-<li><strong>mobile_com</strong> (<em>ndarray</em>) &#8211; array of xyz coordinate of mobile center of mass</li>
-<li><strong>ref_com</strong> (<em>ndarray</em>) &#8211; array of xyz coordinate of reference center of mass</li>
-<li><strong>weights</strong> (<em>array_like</em><em> (</em><em>optional</em><em>)</em>) &#8211; choose weights. With <code class="docutils literal"><span class="pre">None</span></code> weigh each atom equally. If a float array
+<li><strong>mobile_coordinates</strong> (<em>ndarray</em>) – Coordinates of atoms to be aligned</li>
+<li><strong>ref_coordinates</strong> (<em>ndarray</em>) – Coordinates of atoms to be fit against</li>
+<li><strong>mobile_atoms</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – Atoms to be translated</li>
+<li><strong>mobile_com</strong> (<em>ndarray</em>) – array of xyz coordinate of mobile center of mass</li>
+<li><strong>ref_com</strong> (<em>ndarray</em>) – array of xyz coordinate of reference center of mass</li>
+<li><strong>weights</strong> (<em>array_like</em><em> (</em><em>optional</em><em>)</em>) – choose weights. With <code class="docutils literal"><span class="pre">None</span></code> weigh each atom equally. If a float array
 of the same length as <cite>mobile_coordinates</cite> is provided, use each element
 of the <cite>array_like</cite> as a weight for the corresponding atom in
 <cite>mobile_coordinates</cite>.</li>
@@ -494,8 +491,8 @@ of the <cite>array_like</cite> as a weight for the corresponding atom in
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>mobile_atoms</strong> (<em>AtomGroup</em>) &#8211; AtomGroup of translated and rotated atoms</li>
-<li><strong>min_rmsd</strong> (<em>float</em>) &#8211; Minimum rmsd of coordinates</li>
+<li><strong>mobile_atoms</strong> (<em>AtomGroup</em>) – AtomGroup of translated and rotated atoms</li>
+<li><strong>min_rmsd</strong> (<em>float</em>) – Minimum rmsd of coordinates</li>
 </ul>
 </p>
 </td>
@@ -552,34 +549,34 @@ sequence of resids as they appear in the topology in <cite>ref_resids</cite> or
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>fastafilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>path to filename</em>) &#8211; FASTA file with first sequence as reference and
+<li><strong>fastafilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>path to filename</em>) – FASTA file with first sequence as reference and
 second the one to be aligned (ORDER IS IMPORTANT!)</li>
-<li><strong>is_aligned</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <dl class="docutils">
+<li><strong>is_aligned</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – <dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">False</span></code> (default)</dt>
 <dd>run clustalw for sequence alignment;</dd>
 <dt><code class="docutils literal"><span class="pre">True</span></code></dt>
 <dd>use the alignment in the file (e.g. from STAMP) [<code class="docutils literal"><span class="pre">False</span></code>]</dd>
 </dl>
 </li>
-<li><strong>ref_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; add this number to the column number in the FASTA file
+<li><strong>ref_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – add this number to the column number in the FASTA file
 to get the original residue number, default: 0</li>
-<li><strong>target_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; add this number to the column number in the FASTA file
+<li><strong>target_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – add this number to the column number in the FASTA file
 to get the original residue number, default: 0</li>
-<li><strong>ref_resids</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; sequence of resids as they appear in the reference structure</li>
-<li><strong>target_resids</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; sequence of resids as they appear in the target</li>
-<li><strong>alnfilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; filename of ClustalW alignment (clustal format) that is
+<li><strong>ref_resids</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – sequence of resids as they appear in the reference structure</li>
+<li><strong>target_resids</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – sequence of resids as they appear in the target</li>
+<li><strong>alnfilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – filename of ClustalW alignment (clustal format) that is
 produced by <em>clustalw</em> when <em>is_aligned</em> = <code class="docutils literal"><span class="pre">False</span></code>.
 default <code class="docutils literal"><span class="pre">None</span></code> uses the name and path of <em>fastafilename</em> and
-subsititutes the suffix with &#8216;.aln&#8217;.</li>
-<li><strong>treefilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; filename of ClustalW guide tree (Newick format);
+subsititutes the suffix with ‘.aln’.</li>
+<li><strong>treefilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – filename of ClustalW guide tree (Newick format);
 if default <code class="docutils literal"><span class="pre">None</span></code>  the the filename is generated from <em>alnfilename</em>
-with the suffix &#8216;.dnd&#8217; instead of &#8216;.aln&#8217;</li>
-<li><strong>clustalw</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; path to the ClustalW (or ClustalW2) binary; only
-needed for <cite>is_aligned</cite> = <code class="docutils literal"><span class="pre">False</span></code>, default: &#8220;ClustalW2&#8221;</li>
+with the suffix ‘.dnd’ instead of ‘.aln’</li>
+<li><strong>clustalw</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – path to the ClustalW (or ClustalW2) binary; only
+needed for <cite>is_aligned</cite> = <code class="docutils literal"><span class="pre">False</span></code>, default: “ClustalW2”</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>select_dict</strong> &#8211; dictionary with &#8216;reference&#8217; and &#8216;mobile&#8217; selection string
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>select_dict</strong> – dictionary with ‘reference’ and ‘mobile’ selection string
 that can be used immediately in <a class="reference internal" href="#MDAnalysis.analysis.align.AlignTraj" title="MDAnalysis.analysis.align.AlignTraj"><code class="xref py py-class docutils literal"><span class="pre">AlignTraj</span></code></a> as
 <code class="docutils literal"><span class="pre">select=select_dict</span></code>.</p>
 </td>
@@ -611,18 +608,18 @@ muscle, tcoffee, or similar should be used.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mobile</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; Atom group to be aligned</li>
-<li><strong>reference</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; Atom group to be aligned against</li>
-<li><strong>match_score</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em>, </em><em>default 2</em>) &#8211; score for matching residues, default 2</li>
-<li><strong>mismatch_penalty</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em>, </em><em>default -1</em>) &#8211; penalty for residues that do not match , default : -1</li>
-<li><strong>gap_penalty</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em>, </em><em>default -2</em>) &#8211; penalty for opening a gap; the high default value creates compact
+<li><strong>mobile</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – Atom group to be aligned</li>
+<li><strong>reference</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – Atom group to be aligned against</li>
+<li><strong>match_score</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em>, </em><em>default 2</em>) – score for matching residues, default 2</li>
+<li><strong>mismatch_penalty</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em>, </em><em>default -1</em>) – penalty for residues that do not match , default : -1</li>
+<li><strong>gap_penalty</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em>, </em><em>default -2</em>) – penalty for opening a gap; the high default value creates compact
 alignments for highly identical sequences but might not be suitable
 for sequences with low identity, default : -2</li>
-<li><strong>gapextension_penalty</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em>, </em><em>default -0.1</em>) &#8211; penalty for extending a gap, default: -0.1</li>
+<li><strong>gapextension_penalty</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em><em>, </em><em>default -0.1</em>) – penalty for extending a gap, default: -0.1</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>alignment</strong> &#8211; Tuple of top sequence matching output <cite>(&#8216;Sequence A&#8217;, &#8216;Sequence B&#8217;, score,
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>alignment</strong> – Tuple of top sequence matching output <cite>(‘Sequence A’, ‘Sequence B’, score,
 begin, end)</cite></p>
 </td>
 </tr>
@@ -665,13 +662,13 @@ information about mismatches.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ag1</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; First <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> instance that is
+<li><strong>ag1</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – First <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> instance that is
 compared</li>
-<li><strong>ag2</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) &#8211; Second <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> instance that is
+<li><strong>ag2</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – Second <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> instance that is
 compared</li>
-<li><strong>tol_mass</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Reject if the atomic masses for matched atoms differ by more than
+<li><strong>tol_mass</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – Reject if the atomic masses for matched atoms differ by more than
 <cite>tol_mass</cite> [0.1]</li>
-<li><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; <dl class="docutils">
+<li><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – <dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">True</span></code></dt>
 <dd>Will raise <code class="xref py py-exc docutils literal"><span class="pre">SelectionError</span></code> if a single atom does not
 match between the two selections.</dd>
@@ -684,7 +681,7 @@ for details.</dd>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>(g1, g2)</strong> &#8211; Tuple with <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>(g1, g2)</strong> – Tuple with <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 instances that match, atom by atom. The groups are either the
 original groups if all matche or slices of the original
 groups.</p>
@@ -693,7 +690,7 @@ groups.</p>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">SelectionError</span></code> &#8211; Error raised if the number of residues does not match or if in the final
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">SelectionError</span></code> – Error raised if the number of residues does not match or if in the final
 matching masses differ by more than <em>tol</em>.</p>
 </td>
 </tr>
@@ -751,18 +748,18 @@ global alignment is too expensive).</p>
 <li class="toctree-l1 current"><a class="reference internal" href="../analysis_modules.html">4. Analysis modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#building-blocks-for-analysis">4.1. Building blocks for Analysis</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../analysis_modules.html#distances-and-contacts">4.2. Distances and contacts</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.1. Coordinate fitting and alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.1. Coordinate fitting and alignment — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#rms-fitting-tutorial">4.2.1.1. RMS-fitting tutorial</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#common-usage">4.2.1.2. Common usage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#functions-and-classes">4.2.1.3. Functions and Classes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#helper-functions">4.2.1.4. Helper functions</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="contacts.html">4.2.2. Native contacts analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="distances.html">4.2.3. Distance analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="rms.html">4.2.4. Calculating root mean square quantities &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="psa.html">4.2.5. Calculating path similarity &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="encore.html">4.2.6. ENCORE Ensemble Similarity Calculations &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="contacts.html">4.2.2. Native contacts analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">4.2.3. Distance analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rms.html">4.2.4. Calculating root mean square quantities — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="psa.html">4.2.5. Calculating path similarity — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="encore.html">4.2.6. ENCORE Ensemble Similarity Calculations — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#hydrogen-bonding">4.3. Hydrogen bonding</a></li>
@@ -781,10 +778,10 @@ global alignment is too expensive).</p>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -793,8 +790,8 @@ global alignment is too expensive).</p>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../analysis_modules.html">4. Analysis modules</a><ul>
-      <li>Previous: <a href="base.html" title="previous chapter">4.1.1. Analysis building blocks &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.base</span></code></a></li>
-      <li>Next: <a href="contacts.html" title="next chapter">4.2.2. Native contacts analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a></li>
+      <li>Previous: <a href="base.html" title="previous chapter">4.1.1. Analysis building blocks — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.base</span></code></a></li>
+      <li>Next: <a href="contacts.html" title="next chapter">4.2.2. Native contacts analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -817,7 +814,7 @@ global alignment is too expensive).</p>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

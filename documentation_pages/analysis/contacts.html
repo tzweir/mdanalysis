@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>4.2.2. Native contacts analysis — MDAnalysis.analysis.contacts &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,7 +46,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.contacts"></span><div class="section" id="native-contacts-analysis-mdanalysis-analysis-contacts">
-<h1>4.2.2. Native contacts analysis &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.contacts" title="MDAnalysis.analysis.contacts"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><a class="headerlink" href="#native-contacts-analysis-mdanalysis-analysis-contacts" title="Permalink to this headline">¶</a></h1>
+<h1>4.2.2. Native contacts analysis — <a class="reference internal" href="#module-MDAnalysis.analysis.contacts" title="MDAnalysis.analysis.contacts"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><a class="headerlink" href="#native-contacts-analysis-mdanalysis-analysis-contacts" title="Permalink to this headline">¶</a></h1>
 <p>This module contains classes to analyze native contacts <em>Q</em> over a
 trajectory. Native contacts of a conformation are contacts that exist
 in a reference structure and in the conformation. Contacts in the
@@ -67,14 +64,14 @@ potential and parameters have a look at function <a class="reference internal" h
 <li><em>Radius Cut</em>: To count as a contact the atoms <em>i</em> and <em>j</em> cannot be further
 apart than some distance <cite>radius</cite>.</li>
 </ol>
-<p>The &#8220;fraction of native contacts&#8221; <em>Q(t)</em> is a number between 0 and 1 and
+<p>The “fraction of native contacts” <em>Q(t)</em> is a number between 0 and 1 and
 calculated as the total number of native contacts for a given time frame
 divided by the total number of contacts in the reference structure.</p>
 <div class="section" id="examples-for-contact-analysis">
 <h2>4.2.2.1. Examples for contact analysis<a class="headerlink" href="#examples-for-contact-analysis" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="one-dimensional-contact-analysis">
 <h3>4.2.2.1.1. One-dimensional contact analysis<a class="headerlink" href="#one-dimensional-contact-analysis" title="Permalink to this headline">¶</a></h3>
-<p>As an example we analyze the opening (&#8220;unzipping&#8221;) of salt bridges
+<p>As an example we analyze the opening (“unzipping”) of salt bridges
 when the AdK enzyme opens up; this is one of the example trajectories
 in MDAnalysis.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
@@ -202,13 +199,13 @@ shape as <cite>r</cite>.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>r</strong> (<em>ndarray</em>) &#8211; distance matrix</li>
-<li><strong>cutoff</strong> (<em>ndarray | float</em>) &#8211; cut off value to count distances. Can either be a float of a ndarray of
+<li><strong>r</strong> (<em>ndarray</em>) – distance matrix</li>
+<li><strong>cutoff</strong> (<em>ndarray | float</em>) – cut off value to count distances. Can either be a float of a ndarray of
 the same size as distances</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Q</strong> &#8211; fraction of contacts</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Q</strong> – fraction of contacts</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
@@ -235,14 +232,14 @@ the same size as distances</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>r</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Contact distances at time t</li>
-<li><strong>r0</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) &#8211; Contact distances at time t=0, reference distances</li>
-<li><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>default 5.0 Angstrom</em><em>)</em>) &#8211; Softness of the switching function</li>
-<li><strong>lambda_constant</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>default 1.8</em><em>, </em><em>unitless</em><em>)</em>) &#8211; Reference distance tolerance</li>
+<li><strong>r</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) – Contact distances at time t</li>
+<li><strong>r0</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a>) – Contact distances at time t=0, reference distances</li>
+<li><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>default 5.0 Angstrom</em><em>)</em>) – Softness of the switching function</li>
+<li><strong>lambda_constant</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>default 1.8</em><em>, </em><em>unitless</em><em>)</em>) – Reference distance tolerance</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Q</strong> &#8211; fraction of native contacts</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Q</strong> – fraction of native contacts</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
@@ -254,8 +251,8 @@ the same size as distances</li>
 <table class="docutils citation" frame="void" id="best2013" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[Best2013]</a></td><td>RB Best, G Hummer, and WA Eaton, &#8220;Native contacts determine protein
-folding mechanisms in atomistic simulations&#8221; _PNAS_ <strong>110</strong> (2013),
+<tr><td class="label"><a class="fn-backref" href="#id3">[Best2013]</a></td><td>RB Best, G Hummer, and WA Eaton, “Native contacts determine protein
+folding mechanisms in atomistic simulations” _PNAS_ <strong>110</strong> (2013),
 17874–17879. doi: <a class="reference external" href="http://doi.org/10.1073/pnas.1311599110">10.1073/pnas.1311599110</a>.</td></tr>
 </tbody>
 </table>
@@ -270,13 +267,13 @@ folding mechanisms in atomistic simulations&#8221; _PNAS_ <strong>110</strong> (
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>r</strong> (<em>ndarray</em>) &#8211; distance array between atoms</li>
-<li><strong>r0</strong> (<em>ndarray</em>) &#8211; unused to fullfill <a class="reference internal" href="#MDAnalysis.analysis.contacts.Contacts" title="MDAnalysis.analysis.contacts.Contacts"><code class="xref py py-class docutils literal"><span class="pre">Contacts</span></code></a> API</li>
-<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Distance between atoms at which a contact is formed</li>
+<li><strong>r</strong> (<em>ndarray</em>) – distance array between atoms</li>
+<li><strong>r0</strong> (<em>ndarray</em>) – unused to fullfill <a class="reference internal" href="#MDAnalysis.analysis.contacts.Contacts" title="MDAnalysis.analysis.contacts.Contacts"><code class="xref py py-class docutils literal"><span class="pre">Contacts</span></code></a> API</li>
+<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Distance between atoms at which a contact is formed</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Q</strong> &#8211; fraction of contacts</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Q</strong> – fraction of contacts</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
@@ -306,15 +303,15 @@ doi: <a class="reference external" href="http://doi.org/10.1093/nar/gkm342">10.1
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>d</strong> (<em>array-like</em>) &#8211; distance matrix</li>
-<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; distance below which a contact is formed.</li>
-<li><strong>out</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; If <cite>out</cite> is supplied as a pre-allocated array of the correct
+<li><strong>d</strong> (<em>array-like</em>) – distance matrix</li>
+<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – distance below which a contact is formed.</li>
+<li><strong>out</strong> (<a class="reference external" href="https://docs.python.org/2/library/array.html#module-array" title="(in Python v2.7)"><em>array</em></a><em> (</em><em>optional</em><em>)</em>) – If <cite>out</cite> is supplied as a pre-allocated array of the correct
 shape then it is filled instead of allocating a new one in
 order to increase performance.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>contacts</strong> &#8211; boolean array of formed contacts</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>contacts</strong> – boolean array of formed contacts</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
@@ -335,16 +332,16 @@ of a trajectory <a class="reference internal" href="#franklin2007" id="id4">[Fra
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>u</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; Universe with a trajectory</li>
-<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; atoms to do analysis on</li>
-<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; distance at which contact is formed</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; First frame of trajectory to analyse, Default: 0</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Last frame of trajectory to analyse, Default: -1</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Step between frames to analyse, Default: 1</li>
+<li><strong>u</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) – Universe with a trajectory</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – atoms to do analysis on</li>
+<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – distance at which contact is formed</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – First frame of trajectory to analyse, Default: 0</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Last frame of trajectory to analyse, Default: -1</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Step between frames to analyse, Default: 1</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>contacts</strong> &#8211; Contact Analysis that is set up for a q1-q2 analysis</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>contacts</strong> – Contact Analysis that is set up for a q1-q2 analysis</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.analysis.contacts.Contacts" title="MDAnalysis.analysis.contacts.Contacts"><code class="xref py py-class docutils literal"><span class="pre">Contacts</span></code></a></p>
@@ -372,7 +369,7 @@ argument <cite>method</cite>.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.contacts.Contacts.timeseries">
 <code class="descname">timeseries</code><a class="headerlink" href="#MDAnalysis.analysis.contacts.Contacts.timeseries" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list</em> &#8211; list containing <em>Q</em> for all refgroup pairs and analyzed frames</p>
+<dd><p><em>list</em> – list containing <em>Q</em> for all refgroup pairs and analyzed frames</p>
 </dd></dl>
 
 <table class="docutils field-list" frame="void" rules="none">
@@ -380,20 +377,20 @@ argument <cite>method</cite>.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>u</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; trajectory</li>
-<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a><em>(</em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>)</em>) &#8211; two contacting groups that change over time</li>
-<li><strong>refgroup</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a><em>(</em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em>, </em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em>)</em>) &#8211; two contacting atomgroups in their reference conformation. This
+<li><strong>u</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) – trajectory</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a><em>(</em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>)</em>) – two contacting groups that change over time</li>
+<li><strong>refgroup</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a><em>(</em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em>, </em><a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em>)</em>) – two contacting atomgroups in their reference conformation. This
 can also be a list of tuples containing different atom groups</li>
-<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em><em> (</em><em>4.5 Angstroms</em><em>)</em>) &#8211; radius within which contacts exist in refgroup</li>
-<li><strong>method</strong> (<em>string | callable</em><em> (</em><em>optional</em><em>)</em>) &#8211; Can either be one of <code class="docutils literal"><span class="pre">['hard_cut'</span> <span class="pre">,</span> <span class="pre">'soft_cut']</span></code> or a callable
-with call signature <code class="docutils literal"><span class="pre">func(r,</span> <span class="pre">r0,</span> <span class="pre">**kwargs)</span></code> (the &#8220;Contacts API&#8221;).</li>
-<li><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>, </em><em>optional</em>) &#8211; dictionary of additional kwargs passed to <cite>method</cite>. Check
+<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em><em> (</em><em>4.5 Angstroms</em><em>)</em>) – radius within which contacts exist in refgroup</li>
+<li><strong>method</strong> (<em>string | callable</em><em> (</em><em>optional</em><em>)</em>) – Can either be one of <code class="docutils literal"><span class="pre">['hard_cut'</span> <span class="pre">,</span> <span class="pre">'soft_cut']</span></code> or a callable
+with call signature <code class="docutils literal"><span class="pre">func(r,</span> <span class="pre">r0,</span> <span class="pre">**kwargs)</span></code> (the “Contacts API”).</li>
+<li><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>, </em><em>optional</em>) – dictionary of additional kwargs passed to <cite>method</cite>. Check
 respective functions for reasonable values.</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; First frame of trajectory to analyse, Default: None becomes 0.</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Frame index to stop analysis. Default: None becomes
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – First frame of trajectory to analyse, Default: None becomes 0.</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Frame index to stop analysis. Default: None becomes
 n_frames. Iteration stops <em>before</em> this frame number,
 which means that the trajectory would be read until the end.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Step between frames to analyse, Default: None becomes 1.</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Step between frames to analyse, Default: None becomes 1.</li>
 </ul>
 </td>
 </tr>
@@ -407,7 +404,7 @@ which means that the trajectory would be read until the end.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; file to save contacts</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – file to save contacts</td>
 </tr>
 </tbody>
 </table>
@@ -453,17 +450,17 @@ which means that the trajectory would be read until the end.</li>
 <li class="toctree-l1 current"><a class="reference internal" href="../analysis_modules.html">4. Analysis modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#building-blocks-for-analysis">4.1. Building blocks for Analysis</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../analysis_modules.html#distances-and-contacts">4.2. Distances and contacts</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="align.html">4.2.1. Coordinate fitting and alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.2. Native contacts analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="align.html">4.2.1. Coordinate fitting and alignment — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.2. Native contacts analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#examples-for-contact-analysis">4.2.2.1. Examples for contact analysis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#functions">4.2.2.2. Functions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#classes">4.2.2.3. Classes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="distances.html">4.2.3. Distance analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="rms.html">4.2.4. Calculating root mean square quantities &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="psa.html">4.2.5. Calculating path similarity &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="encore.html">4.2.6. ENCORE Ensemble Similarity Calculations &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="distances.html">4.2.3. Distance analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rms.html">4.2.4. Calculating root mean square quantities — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="psa.html">4.2.5. Calculating path similarity — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="encore.html">4.2.6. ENCORE Ensemble Similarity Calculations — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#hydrogen-bonding">4.3. Hydrogen bonding</a></li>
@@ -482,10 +479,10 @@ which means that the trajectory would be read until the end.</li>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -494,8 +491,8 @@ which means that the trajectory would be read until the end.</li>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../analysis_modules.html">4. Analysis modules</a><ul>
-      <li>Previous: <a href="align.html" title="previous chapter">4.2.1. Coordinate fitting and alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a></li>
-      <li>Next: <a href="distances.html" title="next chapter">4.2.3. Distance analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></li>
+      <li>Previous: <a href="align.html" title="previous chapter">4.2.1. Coordinate fitting and alignment — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a></li>
+      <li>Next: <a href="distances.html" title="next chapter">4.2.3. Distance analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -518,7 +515,7 @@ which means that the trajectory would be read until the end.</li>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

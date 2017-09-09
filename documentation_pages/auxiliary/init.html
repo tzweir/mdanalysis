@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>8.1. Auxiliary Readers — MDAnalysis.auxiliary &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,8 +46,8 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.auxiliary.__init__"></span><div class="section" id="auxiliary-readers-mdanalysis-auxiliary">
-<h1>8.1. Auxiliary Readers &#8212; <code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.auxiliary</span></code><a class="headerlink" href="#auxiliary-readers-mdanalysis-auxiliary" title="Permalink to this headline">¶</a></h1>
-<p>The auxiliary submodule contains code for reading &#8216;auxiliary&#8217; data from a
+<h1>8.1. Auxiliary Readers — <code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.auxiliary</span></code><a class="headerlink" href="#auxiliary-readers-mdanalysis-auxiliary" title="Permalink to this headline">¶</a></h1>
+<p>The auxiliary submodule contains code for reading ‘auxiliary’ data from a
 trajectory and allowing alignment with trajectory timesteps. Additional
 methods in <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.ProtoReader</span></code></a> allow auxiliary data
 to be added and read alongside a trajectory.</p>
@@ -148,9 +145,9 @@ function <a class="reference internal" href="core.html#MDAnalysis.auxiliary.core
 <h3>8.1.2.1. Auxiliaries and trajectories<a class="headerlink" href="#auxiliaries-and-trajectories" title="Permalink to this headline">¶</a></h3>
 <p>For alignment with trajectory data, auxiliary readers provide methods to
 assign each auxiliary step to the nearest trajectory timestep, read all steps
-assigned to a trajectory timestep and calculate &#8216;representative&#8217; value(s) of
+assigned to a trajectory timestep and calculate ‘representative’ value(s) of
 the auxiliary data for that timestep.</p>
-<p>&#8216;Assignment&#8217; of auxiliary steps to trajectory timesteps is determined from the time
+<p>‘Assignment’ of auxiliary steps to trajectory timesteps is determined from the time
 of the auxiliary step, <code class="docutils literal"><span class="pre">dt</span></code> of the trajectory and time at the first frame of the
 trajectory (obtained through a <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>
 instance from the trajectory), as:</p>
@@ -225,7 +222,7 @@ timestep after iteration is complete.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">trajectory</span><span class="o">.</span><span class="n">set_aux_attribute</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;data_selector&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>The auxiliary may be renamed using <code class="docutils literal"><span class="pre">set_aux_attribute</span></code> with &#8216;auxname&#8217;, or more
+<p>The auxiliary may be renamed using <code class="docutils literal"><span class="pre">set_aux_attribute</span></code> with ‘auxname’, or more
 directly by using <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.rename_aux" title="MDAnalysis.coordinates.base.ProtoReader.rename_aux"><code class="xref py py-meth docutils literal"><span class="pre">rename_aux()</span></code></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">trajectory</span><span class="o">.</span><span class="n">rename_aux</span><span class="p">(</span><span class="s1">&#39;pullforce&#39;</span><span class="p">,</span> <span class="s1">&#39;pullf&#39;</span><span class="p">)</span>
 </pre></div>
@@ -244,7 +241,7 @@ original auxiliary reader:</p>
 <span class="n">reload_aux</span> <span class="o">=</span> <span class="n">auxiliary</span><span class="o">.</span><span class="n">auxreader</span><span class="p">(</span><span class="o">**</span><span class="n">description</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The &#8216;description&#8217; of any or all the auxiliaries added to a trajectory can be
+<p>The ‘description’ of any or all the auxiliaries added to a trajectory can be
 obtained using <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ProtoReader.get_aux_descriptions" title="MDAnalysis.coordinates.base.ProtoReader.get_aux_descriptions"><code class="xref py py-meth docutils literal"><span class="pre">get_aux_descriptions()</span></code></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">descriptions</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">get_aux_descriptions</span><span class="p">()</span>
 </pre></div>
@@ -299,7 +296,7 @@ determine from auxiliary data; otherwise defaults to 0 ps.</dd>
 <dd>Selection key to get time from full set of auxiliary data read with each
 step(<code class="docutils literal"><span class="pre">_data</span></code>) (ignored if time selection is not enabled by the reader).
 Type depends on the auxiliary format - e.g. where data is stored in
-columns, time_selector may be an index of &#8216;time&#8217; column.
+columns, time_selector may be an index of ‘time’ column.
 Default value is <code class="docutils literal"><span class="pre">None</span></code>, in which case step time is calculated from
 <code class="docutils literal"><span class="pre">dt</span></code>, <code class="docutils literal"><span class="pre">initial_time</span></code> and <code class="docutils literal"><span class="pre">step</span></code>.</dd>
 <dt><code class="docutils literal"><span class="pre">_data_selector</span></code></dt>
@@ -333,7 +330,7 @@ set of data read in from the current step). Raise <code class="docutils literal"
 not a valid time selector for the auxiliary format.</dd>
 <dt><code class="docutils literal"><span class="pre">_select_data(key)</span></code></dt>
 <dd>Return, as a ndarray, the value(s) indicated by <em>key</em> (may be e.g. a list of
-multiple individual &#8216;keys&#8217;) from <code class="docutils literal"><span class="pre">_data</span></code>. Raise <code class="docutils literal"><span class="pre">ValueError</span></code> if <em>key</em> is
+multiple individual ‘keys’) from <code class="docutils literal"><span class="pre">_data</span></code>. Raise <code class="docutils literal"><span class="pre">ValueError</span></code> if <em>key</em> is
 not a valid data selector for the auxiliary format.</dd>
 </dl>
 </div></blockquote>
@@ -374,7 +371,7 @@ these should be added.</p>
 <dd>Name under which auxiliary data will be stored in trajectory.</dd>
 <dt><code class="docutils literal"><span class="pre">represent_ts_as</span></code></dt>
 <dd>Method to use in calculating representative auxiliary value for a
-timestep. Default is &#8216;closest&#8217;.</dd>
+timestep. Default is ‘closest’.</dd>
 <dt><code class="docutils literal"><span class="pre">cutoff</span></code></dt>
 <dd>Cutoff (in ps) for ignoring auxiliary steps when calculating
 representative value(s) for a timestep.</dd>
@@ -414,8 +411,8 @@ reader; see the <a class="reference internal" href="#auxstep-api"><span class="s
 <blockquote>
 <div><dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">_auxdata</span></code></dt>
-<dd>Value of &#8216;auxdata&#8217; used to load the auxiliary - e.g. path to the file
-containing the auxiliary data. Will be used when getting the &#8216;description&#8217;
+<dd>Value of ‘auxdata’ used to load the auxiliary - e.g. path to the file
+containing the auxiliary data. Will be used when getting the ‘description’
 of the auxiliary for recreating.</dd>
 </dl>
 </div></blockquote>
@@ -572,7 +569,7 @@ following (these may be overwritten by subclasses as appropriate):</p>
 <li class="toctree-l1"><a class="reference internal" href="../coordinates_modules.html">6. Coordinates modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../selections_modules.html">7. Selection exporters</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8.1. Auxiliary Readers &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary</span></code></a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.1. Auxiliary Readers — <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#supported-formats">8.1.1. Supported formats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#auxiliary-api">8.1.2. Auxiliary API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#auxiliaries-and-trajectories">8.1.2.1. Auxiliaries and trajectories</a></li>
@@ -583,17 +580,17 @@ following (these may be overwritten by subclasses as appropriate):</p>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="base.html">8.2. Auxiliary Readers &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.base</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="core.html">8.3. Common functions for auxiliary reading &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.core</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="XVG.html">8.4. XVG auxiliary reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.XVG</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html">8.2. Auxiliary Readers — <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.base</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">8.3. Common functions for auxiliary reading — <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="XVG.html">8.4. XVG auxiliary reader — <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.XVG</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -603,7 +600,7 @@ following (these may be overwritten by subclasses as appropriate):</p>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../auxiliary_modules.html">8. Auxiliary modules</a><ul>
       <li>Previous: <a href="../auxiliary_modules.html" title="previous chapter">8. Auxiliary modules</a></li>
-      <li>Next: <a href="base.html" title="next chapter">8.2. Auxiliary Readers &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.base</span></code></a></li>
+      <li>Next: <a href="base.html" title="next chapter">8.2. Auxiliary Readers — <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.base</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -626,7 +623,7 @@ following (these may be overwritten by subclasses as appropriate):</p>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

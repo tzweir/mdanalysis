@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>4.2.6.1.7. Utility functions for ENCORE &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -58,20 +55,20 @@ arguments to functions and kwargs to functions.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.encore.utils.ParallelCalculation.n_jobs">
 <code class="descname">n_jobs</code><a class="headerlink" href="#MDAnalysis.analysis.encore.utils.ParallelCalculation.n_jobs" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>int</em> &#8211; Number of cores to be used for parallel calculation. If -1 use all
+<dd><p><em>int</em> – Number of cores to be used for parallel calculation. If -1 use all
 available cores.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.encore.utils.ParallelCalculation.function">
 <code class="descname">function</code><a class="headerlink" href="#MDAnalysis.analysis.encore.utils.ParallelCalculation.function" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>callable object</em> &#8211; Function to be run in parallel.</p>
+<dd><p><em>callable object</em> – Function to be run in parallel.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.encore.utils.ParallelCalculation.args">
 <code class="descname">args</code><a class="headerlink" href="#MDAnalysis.analysis.encore.utils.ParallelCalculation.args" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list of tuples</em> &#8211; Each tuple contains the arguments that will be passed to
+<dd><p><em>list of tuples</em> – Each tuple contains the arguments that will be passed to
 function(). This means that a call to function() is performed for
 each tuple. function is called as function(*args, **kwargs). Runs
 are distributed on the requested numbers of cores.</p>
@@ -80,14 +77,14 @@ are distributed on the requested numbers of cores.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.encore.utils.ParallelCalculation.kwargs">
 <code class="descname">kwargs</code><a class="headerlink" href="#MDAnalysis.analysis.encore.utils.ParallelCalculation.kwargs" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list of dicts</em> &#8211; Each tuple contains the named arguments that will be passed to
+<dd><p><em>list of dicts</em> – Each tuple contains the named arguments that will be passed to
 function, similarly as described for the args attribute.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.encore.utils.ParallelCalculation.nruns">
 <code class="descname">nruns</code><a class="headerlink" href="#MDAnalysis.analysis.encore.utils.ParallelCalculation.nruns" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>int</em> &#8211; Number of runs to be performed. Must be equal to len(args) and
+<dd><p><em>int</em> – Number of runs to be performed. Must be equal to len(args) and
 len(kwargs).</p>
 </dd></dl>
 
@@ -96,12 +93,12 @@ len(kwargs).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of cores to be used for parallel calculation. If -1 use all
+<li><strong>n_jobs</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Number of cores to be used for parallel calculation. If -1 use all
 available cores.</li>
-<li><strong>function</strong> (<em>object that supports __call__</em><em>, </em><em>as functions</em>) &#8211; function to be run in parallel.</li>
-<li><strong>args</strong> (<em>list of tuples</em>) &#8211; Arguments for function; see the ParallelCalculation class
+<li><strong>function</strong> (<em>object that supports __call__</em><em>, </em><em>as functions</em>) – function to be run in parallel.</li>
+<li><strong>args</strong> (<em>list of tuples</em>) – Arguments for function; see the ParallelCalculation class
 description.</li>
-<li><strong>kwargs</strong> (<em>list of dicts</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; kwargs for function; see the ParallelCalculation
+<li><strong>kwargs</strong> (<em>list of dicts</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – kwargs for function; see the ParallelCalculation
 class description.</li>
 </ul>
 </td>
@@ -116,7 +113,7 @@ class description.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>results</strong> &#8211; int is the number of the calculation corresponding to a
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>results</strong> – int is the number of the calculation corresponding to a
 certain argument in the args list, and object is the result of
 corresponding calculation. For instance, in (3, output), output
 is the return of function(*args[3], **kwargs[3]).</td>
@@ -136,9 +133,9 @@ is the return of function(*args[3], **kwargs[3]).</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>q</strong> (<em>multiprocessing.Manager.Queue object</em>) &#8211; work queue, from which the worker fetches arguments and
+<li><strong>q</strong> (<em>multiprocessing.Manager.Queue object</em>) – work queue, from which the worker fetches arguments and
 messages</li>
-<li><strong>results</strong> (<em>multiprocessing.Manager.Queue object</em>) &#8211; results queue, where results are put after each calculation is
+<li><strong>results</strong> (<em>multiprocessing.Manager.Queue object</em>) – results queue, where results are put after each calculation is
 finished</li>
 </ul>
 </td>
@@ -164,12 +161,12 @@ accessed using the [] and () operators, similarly to a normal numpy array.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>size</strong> (<em>int / array_like</em>) &#8211; Size of the matrix (number of rows or columns). If an
+<li><strong>size</strong> (<em>int / array_like</em>) – Size of the matrix (number of rows or columns). If an
 array is provided instead, the size of the triangular matrix
 will be calculated and the array copied as the matrix
 elements. Otherwise, the matrix is just initialized to zero.</li>
-<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Metadata dictionary. Used to generate the metadata attribute.</li>
-<li><strong>loadfile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Load the matrix from this file. All the attributes and data will
+<li><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Metadata dictionary. Used to generate the metadata attribute.</li>
+<li><strong>loadfile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Load the matrix from this file. All the attributes and data will
 be determined by the matrix file itself (i.e. metadata will be
 ignored); size has to be provided though.</li>
 </ul>
@@ -191,7 +188,7 @@ ignored); size has to be provided though.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the file to be loaded.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the file to be loaded.</td>
 </tr>
 </tbody>
 </table>
@@ -206,7 +203,7 @@ data as well.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the file to be saved.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the file to be saved.</td>
 </tr>
 </tbody>
 </table>
@@ -222,7 +219,7 @@ data as well.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universes</strong> (<em>list of Universe objects</em>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universes</strong> (<em>list of Universe objects</em>) – </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
 </tr>
@@ -244,8 +241,8 @@ For instance: trm_indices((0,0),(2,1)) yields (0,0) (1,0) (1,1) (2,0)
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>a</strong> (<em>(</em><em>int i</em><em>, </em><em>int j</em><em>) </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a>) &#8211; starting matrix element.</li>
-<li><strong>b</strong> (<em>(</em><em>int i</em><em>, </em><em>int j</em><em>) </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a>) &#8211; final matrix element.</li>
+<li><strong>a</strong> (<em>(</em><em>int i</em><em>, </em><em>int j</em><em>) </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a>) – starting matrix element.</li>
+<li><strong>b</strong> (<em>(</em><em>int i</em><em>, </em><em>int j</em><em>) </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a>) – final matrix element.</li>
 </ul>
 </td>
 </tr>
@@ -262,7 +259,7 @@ with diagonal</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Matrix size</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Matrix size</td>
 </tr>
 </tbody>
 </table>
@@ -272,12 +269,12 @@ with diagonal</p>
 <dt id="MDAnalysis.analysis.encore.utils.trm_indices_nodiag">
 <code class="descclassname">MDAnalysis.analysis.encore.utils.</code><code class="descname">trm_indices_nodiag</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/analysis/encore/utils.html#trm_indices_nodiag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.encore.utils.trm_indices_nodiag" title="Permalink to this definition">¶</a></dt>
 <dd><p>generate (i,j) indeces of a triangular matrix of n rows (or columns),
-without diagonal (e.g. no elements (0,0),(1,1),...,(n,n))</p>
+without diagonal (e.g. no elements (0,0),(1,1),…,(n,n))</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Matrix size</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Matrix size</td>
 </tr>
 </tbody>
 </table>
@@ -325,12 +322,12 @@ without diagonal (e.g. no elements (0,0),(1,1),...,(n,n))</p>
 <li class="toctree-l1 current"><a class="reference internal" href="../../analysis_modules.html">4. Analysis modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../analysis_modules.html#building-blocks-for-analysis">4.1. Building blocks for Analysis</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../analysis_modules.html#distances-and-contacts">4.2. Distances and contacts</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../align.html">4.2.1. Coordinate fitting and alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contacts.html">4.2.2. Native contacts analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../distances.html">4.2.3. Distance analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../rms.html">4.2.4. Calculating root mean square quantities &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../psa.html">4.2.5. Calculating path similarity &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../encore.html">4.2.6. ENCORE Ensemble Similarity Calculations &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../align.html">4.2.1. Coordinate fitting and alignment — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contacts.html">4.2.2. Native contacts analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../distances.html">4.2.3. Distance analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rms.html">4.2.4. Calculating root mean square quantities — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psa.html">4.2.5. Calculating path similarity — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../encore.html">4.2.6. ENCORE Ensemble Similarity Calculations — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../encore.html#modules">4.2.6.1. Modules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../encore.html#references">4.2.6.2. References</a></li>
 </ul>
@@ -353,10 +350,10 @@ without diagonal (e.g. no elements (0,0),(1,1),...,(n,n))</p>
 <li class="toctree-l1"><a class="reference internal" href="../../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">15. References</a></li>
 </ul>
 
@@ -365,9 +362,9 @@ without diagonal (e.g. no elements (0,0),(1,1),...,(n,n))</p>
 <ul>
   <li><a href="../../../index.html">Documentation overview</a><ul>
   <li><a href="../../analysis_modules.html">4. Analysis modules</a><ul>
-  <li><a href="../encore.html">4.2.6. ENCORE Ensemble Similarity Calculations &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a><ul>
-      <li>Previous: <a href="bootstrap.html" title="previous chapter">4.2.6.1.6. bootstrap procedures &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.ensemble.bootstrap</span></code></a></li>
-      <li>Next: <a href="../hbond_analysis.html" title="next chapter">4.3.1. Hydrogen Bond analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a></li>
+  <li><a href="../encore.html">4.2.6. ENCORE Ensemble Similarity Calculations — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.encore</span></code></a><ul>
+      <li>Previous: <a href="bootstrap.html" title="previous chapter">4.2.6.1.6. bootstrap procedures — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.ensemble.bootstrap</span></code></a></li>
+      <li>Next: <a href="../hbond_analysis.html" title="next chapter">4.3.1. Hydrogen Bond analysis — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -391,7 +388,7 @@ without diagonal (e.g. no elements (0,0),(1,1),...,(n,n))</p>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

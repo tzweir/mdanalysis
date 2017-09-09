@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>7. Selection exporters &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -119,14 +116,14 @@ appropriate <em>file extension</em> (see <a class="reference internal" href="#su
 </pre></div>
 </div>
 <p>In <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>, sourcing the file <code class="docutils literal"><span class="pre">selections.vmd</span></code> (written in Tcl) defines
-the &#8220;macro&#8221; <code class="docutils literal"><span class="pre">mda_protein</span></code> that contains the atom indices to select</p>
+the “macro” <code class="docutils literal"><span class="pre">mda_protein</span></code> that contains the atom indices to select</p>
 <div class="highlight-tcl"><div class="highlight"><pre><span></span><span class="nb">source</span> selection.vmd
 <span class="k">set</span> sel <span class="k">[</span><span class="nv">atomselect</span> top mda_mdanalysis<span class="k">]</span>
 </pre></div>
 </div>
 <p>and in the GUI the macro appears in the <span class="menuselection">Graphics ‣
 Representations</span> window in the list <span class="guilabel">Selections: Singlewords</span> as
-&#8220;mda_protein&#8221;.</p>
+“mda_protein”.</p>
 </div>
 <div class="section" id="multiple-selections">
 <h3>7.1.2. Multiple selections<a class="headerlink" href="#multiple-selections" title="Permalink to this headline">¶</a></h3>
@@ -139,7 +136,7 @@ then the selection is <em>appended</em> to the file.</p>
 context manager and write each <code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code> inside the
 context. For example, to write multiple groups that were selected to
 mark different parts of a lipid bilayer to <a class="reference external" href="http://www.gromacs.org">Gromacs</a> index file named
-&#8220;leaflets.ndx&#8221;:</p>
+“leaflets.ndx”:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mda</span><span class="o">.</span><span class="n">selections</span><span class="o">.</span><span class="n">gromacs</span><span class="o">.</span><span class="n">SelectionWriter</span><span class="p">(</span><span class="s1">&#39;leaflets.ndx&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ndx</span><span class="p">:</span>
     <span class="n">ndx</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">upper_saturated</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;upper_sat&#39;</span><span class="p">)</span>
     <span class="n">ndx</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lower_saturated</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;lower_sat&#39;</span><span class="p">)</span>
@@ -166,18 +163,18 @@ the appropriate one, based on the file name extension in the <a class="reference
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the output file; the extension is used to guess the file format</li>
-<li><strong>defaultformat</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; if <cite>filename</cite> does not have an extension, use <cite>defaultformat</cite> instead</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – name of the output file; the extension is used to guess the file format</li>
+<li><strong>defaultformat</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – if <cite>filename</cite> does not have an extension, use <cite>defaultformat</cite> instead</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SelectionWriter</strong> &#8211; the writer <em>class</em> for the detected format</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SelectionWriter</strong> – the writer <em>class</em> for the detected format</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><cite>type</cite></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> &#8211; for any format that is not defined</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> – for any format that is not defined</p>
 </td>
 </tr>
 </tbody>
@@ -254,10 +251,10 @@ the appropriate one, based on the file name extension in the <a class="reference
 <li class="toctree-l1"><a class="reference internal" href="auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
 </ul>
 
@@ -265,7 +262,7 @@ the appropriate one, based on the file name extension in the <a class="reference
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="coordinates/XDR.html" title="previous chapter">6.26. XDR based trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XDR</span></code></a></li>
+      <li>Previous: <a href="coordinates/XDR.html" title="previous chapter">6.26. XDR based trajectory files — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XDR</span></code></a></li>
       <li>Next: <a href="selections/vmd.html" title="next chapter">7.2.1. VMD selections</a></li>
   </ul></li>
 </ul>
@@ -288,7 +285,7 @@ the appropriate one, based on the file name extension in the <a class="reference
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

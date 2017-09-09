@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>9.4.1. Core functions of MDAnalysis &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -83,7 +80,7 @@ for more details.</p>
 <p>(This is an advanced topic and can probably be skipped by most people.)</p>
 <p>There are a number flags that influence how MDAnalysis behaves. They are accessible
 through the pseudo-dictionary <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code>.</p>
-<p>The entries appear as &#8216;name&#8217;-&#8216;value&#8217; pairs. Flags check values and illegal ones
+<p>The entries appear as ‘name’-‘value’ pairs. Flags check values and illegal ones
 raise a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code>. Documentation on all flags can be obtained with</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">doc</span><span class="p">())</span>
 </pre></div>
@@ -109,9 +106,9 @@ raise a <code class="xref py py-exc docutils literal"><span class="pre">ValueErr
 </dl>
 <p>The MDAnalysis preset of this flag is True.</p>
 <p>Note that KD-tree based distance selections always ignore this flag. (For
-details see the docs for the &#8216;use_KDTree_routines&#8217; flag.)</p>
+details see the docs for the ‘use_KDTree_routines’ flag.)</p>
 </div></blockquote>
-<p><strong>use_KDTree_routines</strong> = <em>&#8216;fast&#8217;</em></p>
+<p><strong>use_KDTree_routines</strong> = <em>‘fast’</em></p>
 <blockquote>
 <div><p>Determines which KDTree routines are used for distance selections</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;use_KDTree_routines&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
@@ -119,13 +116,13 @@ details see the docs for the &#8216;use_KDTree_routines&#8217; flag.)</p>
 </div>
 <p>Values for flag:</p>
 <ul class="simple">
-<li>True, &#8216;fast&#8217;   - only use KDTree routines that are typically faster than others
+<li>True, ‘fast’   - only use KDTree routines that are typically faster than others
 -               POINT      uses distance matrix routines (with periodicity)
 -               AROUND     uses KDTree routines (always ignores periodicity)</li>
-<li>&#8216;always&#8217;       - always use KDTree routines where available (eg for benchmarking)</li>
-<li>False, &#8216;never&#8217; - always use alternatives</li>
+<li>‘always’       - always use KDTree routines where available (eg for benchmarking)</li>
+<li>False, ‘never’ - always use alternatives</li>
 </ul>
-<p>The preset value for MDAnalysis is &#8216;fast&#8217;.</p>
+<p>The preset value for MDAnalysis is ‘fast’.</p>
 <p><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.KDTree</span></code> routines are significantly faster for some distance
 selections. However, they cannot deal with periodic boxes and thus ignore
 periodicity; if periodicity is crucial, disable KDTree routines with</p>
@@ -149,7 +146,7 @@ presented as read from the trajectories.</p>
 <p class="last">The conversion of lengths also affects conversion of velocities.</p>
 </div>
 </div></blockquote>
-<p><strong>length_unit</strong> = <em>&#8216;Angstrom&#8217;</em></p>
+<p><strong>length_unit</strong> = <em>‘Angstrom’</em></p>
 <blockquote>
 <div><p>Base unit for lengths (in particular coordinates in trajectories)</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;length_unit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
@@ -160,28 +157,28 @@ presented as read from the trajectories.</p>
 <p class="last">Do not change, only Angstrom fully supported.</p>
 </div>
 </div></blockquote>
-<p><strong>time_unit</strong> = <em>&#8216;ps&#8217;</em></p>
+<p><strong>time_unit</strong> = <em>‘ps’</em></p>
 <blockquote>
 <div><p>Base unit for times (in particular time steps in trajectories)</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;time_unit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>speed_unit</strong> = <em>&#8216;Angstrom/ps&#8217;</em></p>
+<p><strong>speed_unit</strong> = <em>‘Angstrom/ps’</em></p>
 <blockquote>
 <div><p>Base unit for speed (in particular velocities in trajectories)</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;speed_unit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>force_unit</strong> = <em>&#8216;kJ/(mol*Angstrom)&#8217;</em></p>
+<p><strong>force_unit</strong> = <em>‘kJ/(mol*Angstrom)’</em></p>
 <blockquote>
 <div><p>Base unit for forces (in particular forces in trajectories)</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;force_unit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>charge_unit</strong> = <em>&#8216;e&#8217;</em></p>
+<p><strong>charge_unit</strong> = <em>‘e’</em></p>
 <blockquote>
 <div><p>Base unit for charge</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;charge_unit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
@@ -227,7 +224,7 @@ and <a class="reference internal" href="groups.html#MDAnalysis.core.groups.AtomG
 accessible through the pseudo-dictionary</p>
 <blockquote>
 <div><code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code></div></blockquote>
-<p>The entries appear as &#8216;name&#8217;-&#8216;value&#8217; pairs. Flags check values and illegal ones
+<p>The entries appear as ‘name’-‘value’ pairs. Flags check values and illegal ones
 raise a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code>. Documentation on all flags can be obtained with</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
 </pre></div>
@@ -277,12 +274,12 @@ for more details.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the flag, must be a legal python name</li>
-<li><strong>default</strong> &#8211; default value</li>
-<li><strong>mapping</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dict that maps allowed input values to canonical values;
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – name of the flag, must be a legal python name</li>
+<li><strong>default</strong> – default value</li>
+<li><strong>mapping</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – dict that maps allowed input values to canonical values;
 if <code class="docutils literal"><span class="pre">None</span></code> then no argument checking will be performed and
 all values are directly set.</li>
-<li><strong>doc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>doc string; may contain string interpolation mappings for:</p>
+<li><strong>doc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – <p>doc string; may contain string interpolation mappings for:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="n">s</span>        <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">flag</span>
 <span class="o">%%</span><span class="p">(</span><span class="n">default</span><span class="p">)</span><span class="n">r</span>     <span class="n">default</span> <span class="n">value</span>
 <span class="o">%%</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="n">r</span>       <span class="n">current</span> <span class="n">value</span>
@@ -364,10 +361,10 @@ all values are directly set.</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -376,7 +373,7 @@ all values are directly set.</li>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../core_modules.html">9. Core modules</a><ul>
-      <li>Previous: <a href="selection.html" title="previous chapter">9.3.1. Atom selection Hierarchy &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.core.selection</span></code></a></li>
+      <li>Previous: <a href="selection.html" title="previous chapter">9.3.1. Atom selection Hierarchy — <code class="docutils literal"><span class="pre">MDAnalysis.core.selection</span></code></a></li>
       <li>Next: <a href="../visualization_modules.html" title="next chapter">10. Visualization modules</a></li>
   </ul></li>
   </ul></li>
@@ -400,7 +397,7 @@ all values are directly set.</li>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

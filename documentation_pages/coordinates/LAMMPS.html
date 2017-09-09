@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>6.9. LAMMPS DCD trajectory and DATA I/O — MDAnalysis.coordinates.LAMMPS &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,13 +46,13 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.coordinates.LAMMPS"></span><div class="section" id="lammps-dcd-trajectory-and-data-i-o-mdanalysis-coordinates-lammps">
-<h1>6.9. LAMMPS DCD trajectory and DATA I/O  &#8212; <a class="reference internal" href="#module-MDAnalysis.coordinates.LAMMPS" title="MDAnalysis.coordinates.LAMMPS"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.LAMMPS</span></code></a><a class="headerlink" href="#lammps-dcd-trajectory-and-data-i-o-mdanalysis-coordinates-lammps" title="Permalink to this headline">¶</a></h1>
+<h1>6.9. LAMMPS DCD trajectory and DATA I/O  — <a class="reference internal" href="#module-MDAnalysis.coordinates.LAMMPS" title="MDAnalysis.coordinates.LAMMPS"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.LAMMPS</span></code></a><a class="headerlink" href="#lammps-dcd-trajectory-and-data-i-o-mdanalysis-coordinates-lammps" title="Permalink to this headline">¶</a></h1>
 <p>Classes to read and write <a class="reference external" href="http://lammps.sandia.gov/">LAMMPS</a> DCD binary trajectories and LAMMPS DATA
 files. Trajectories can be read regardless of system-endianness
 as this is auto-detected.</p>
 <p>LAMMPS can <a class="reference external" href="http://lammps.sandia.gov/doc/dump.html">write DCD</a> trajectories but unlike a <a class="reference external" href="http://www.charmm.org/documentation/c36b1/dynamc.html#%20Trajectory">CHARMM trajectory</a>
 (which is often called a DCD even though CHARMM itself calls them
-&#8220;trj&#8221;) the time unit is not fixed to be the <a class="reference external" href="http://www.charmm.org/documentation/c36b1/usage.html#%20AKMA">AKMA</a> time unit (20 AKMA
+“trj”) the time unit is not fixed to be the <a class="reference external" href="http://www.charmm.org/documentation/c36b1/usage.html#%20AKMA">AKMA</a> time unit (20 AKMA
 is 0.978 picoseconds or 1 AKMA = 4.888821e-14 s) but can depend on
 settings in LAMMPS. The most common case for biomolecular simulations
 appears to be that the time step is recorded in femtoseconds (command
@@ -72,7 +69,7 @@ keywords <em>timeunit</em> and/or <em>lengthunit</em> to <a class="reference int
 <h2>6.9.1. Example: Loading a LAMMPS simulation<a class="headerlink" href="#example-loading-a-lammps-simulation" title="Permalink to this headline">¶</a></h2>
 <p>To load a LAMMPS simulation from a LAMMPS data file (using the
 <a class="reference internal" href="../topology/LAMMPSParser.html#MDAnalysis.topology.LAMMPSParser.DATAParser" title="MDAnalysis.topology.LAMMPSParser.DATAParser"><code class="xref py py-class docutils literal"><span class="pre">DATAParser</span></code></a>) together with a
-LAMMPS DCD with &#8220;<em>real</em>&#8221; provide the keyword <em>format=&#8221;LAMMPS</em>&#8221;:</p>
+LAMMPS DCD with “<em>real</em>” provide the keyword <em>format=”LAMMPS</em>”:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s2">&quot;lammps.data&quot;</span><span class="p">,</span> <span class="s2">&quot;lammps_real.dcd&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;LAMMPS&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -105,8 +102,8 @@ for other recognized values and the documentation for the LAMMPS
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.LAMMPS.</code><code class="descname">DCDReader</code><span class="sig-paren">(</span><em>dcdfilename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/LAMMPS.html#DCDReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a <a class="reference external" href="http://lammps.sandia.gov/">LAMMPS</a> DCD trajectory.</p>
 <p>The units can be set from the constructor with the keyword
-arguments <em>timeunit</em> and <em>lengthunit</em>. The defaults are &#8220;fs&#8221; and
-&#8220;Angstrom&#8221;, corresponding to LAMMPS <a class="reference external" href="http://lammps.sandia.gov/doc/units.html">units style</a> &#8220;<strong>real</strong>&#8221;. See
+arguments <em>timeunit</em> and <em>lengthunit</em>. The defaults are “fs” and
+“Angstrom”, corresponding to LAMMPS <a class="reference external" href="http://lammps.sandia.gov/doc/units.html">units style</a> “<strong>real</strong>”. See
 <a class="reference internal" href="../units.html#module-MDAnalysis.units" title="MDAnalysis.units"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.units</span></code></a> for other recognized values.</p>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.OtherWriter">
@@ -179,16 +176,16 @@ the warning below.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Starting frame index (inclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Starting frame index (inclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
 of 0, i.e., the initial frame.</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Last frame index (exclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Last frame index (exclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
 of n_frames, i.e., it includes the last frame of the trajectory.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; step size of the slice, <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default of 1, i.e,
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – step size of the slice, <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default of 1, i.e,
 include every frame in the range <cite>start</cite>, <cite>stop</cite>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>start, stop, step</strong> &#8211; Integers representing the slice</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>start, stop, step</strong> – Integers representing the slice</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>)</p>
@@ -237,8 +234,8 @@ creating a <a class="reference external" href="https://docs.python.org/2/library
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>force</strong> (<em>array_like</em>) – Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -264,8 +261,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>force</strong> (<em>array_like</em>) – Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -291,8 +288,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>x</strong> (<em>array_like</em>) – Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -321,8 +318,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>x</strong> (<em>array_like</em>) – Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -351,8 +348,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>t</strong> (<em>array_like</em>) – Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -383,8 +380,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>t</strong> (<em>array_like</em>) – Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -414,8 +411,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>v</strong> (<em>array_like</em>) – Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -441,8 +438,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>v</strong> (<em>array_like</em>) – Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -487,8 +484,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to get value for</li>
-<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of gettable attribute in the auxiliary reader</li>
+<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the auxiliary to get value for</li>
+<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of gettable attribute in the auxiliary reader</li>
 </ul>
 </td>
 </tr>
@@ -555,9 +552,9 @@ through the trajectory.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to iterate over.</li>
-<li><strong>stop</strong><strong>, </strong><strong>step</strong><strong>)</strong> (<em>(</em><em>start</em><em>,</em>) &#8211; Options for iterating over a slice of the auxiliary.</li>
-<li><strong>selected</strong> (<em>lst | ndarray</em><em>, </em><em>optional</em>) &#8211; List of steps to iterate over.</li>
+<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the auxiliary to iterate over.</li>
+<li><strong>stop</strong><strong>, </strong><strong>step</strong><strong>)</strong> (<em>(</em><em>start</em><em>,</em>) – Options for iterating over a slice of the auxiliary.</li>
+<li><strong>selected</strong> (<em>lst | ndarray</em><em>, </em><em>optional</em>) – List of steps to iterate over.</li>
 </ul>
 </td>
 </tr>
@@ -620,19 +617,19 @@ for the auxiliary <em>auxname</em>.</p>
 <code class="descname">rename_aux</code><span class="sig-paren">(</span><em>auxname</em>, <em>new</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.rename_aux" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change the name of the auxiliary <em>auxname</em> to <em>new</em>.</p>
 <p>Provided there is not already an auxiliary named <em>new</em>, the auxiliary
-name will be changed in ts.aux namespace, the trajectory&#8217;s
+name will be changed in ts.aux namespace, the trajectory’s
 list of added auxiliaries, and in the auxiliary reader itself.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to rename</li>
-<li><strong>new</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; New name to try set</li>
+<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the auxiliary to rename</li>
+<li><strong>new</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – New name to try set</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; If the name <em>new</em> is already in use by an existing auxiliary.</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If the name <em>new</em> is already in use by an existing auxiliary.</p>
 </td>
 </tr>
 </tbody>
@@ -654,9 +651,9 @@ list of added auxiliaries, and in the auxiliary reader itself.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to alter</li>
-<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of settable attribute in the auxiliary reader</li>
-<li><strong>new</strong> &#8211; New value to try set <em>attrname</em> to</li>
+<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the auxiliary to alter</li>
+<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of settable attribute in the auxiliary reader</li>
+<li><strong>new</strong> – New value to try set <em>attrname</em> to</li>
 </ul>
 </td>
 </tr>
@@ -685,20 +682,20 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>asel</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>) &#8211; The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> to read the
+<li><strong>asel</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>) – The <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> to read the
 coordinates from. Defaults to None, in which case the full set of
 coordinate data is returned.</li>
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – Begin reading the trajectory at frame index <cite>start</cite> (where 0 is the
 index of the first frame in the trajectory); the default <code class="docutils literal"><span class="pre">None</span></code>
 starts at the beginning.</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – End reading the trajectory at frame index <cite>stop</cite>-1, i.e, <cite>stop</cite> is
 excluded. The trajectory is read to the end with the default
 <code class="docutils literal"><span class="pre">None</span></code>.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – Step size for reading; the default <code class="docutils literal"><span class="pre">None</span></code> is equivalent to 1 and
 means to read every frame.</li>
-<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; the order/shape of the return data array, corresponding
+<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
-of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
+of ‘a’, ‘f’, ‘c’ are allowed ie “fac” - return array
 where the shape is (frame, number of atoms,
 coordinates)</li>
 </ul>
@@ -718,7 +715,7 @@ coordinates)</li>
 <p>The time is calculated as <code class="docutils literal"><span class="pre">(n_frames</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">dt</span></code>, i.e., we assume that
 the first frame no time as elapsed. Thus, a trajectory with two frames will
 be considered to have a length of a single time step <cite>dt</cite> and a
-&#8220;trajectory&#8221; with a single frame will be reported as length 0.</p>
+“trajectory” with a single frame will be reported as length 0.</p>
 </dd></dl>
 
 </dd></dl>
@@ -728,8 +725,8 @@ be considered to have a length of a single time step <cite>dt</cite> and a
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.LAMMPS.</code><code class="descname">DCDWriter</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/LAMMPS.html#DCDWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write a <a class="reference external" href="http://lammps.sandia.gov/">LAMMPS</a> DCD trajectory.</p>
 <p>The units can be set from the constructor with the keyword
-arguments <em>timeunit</em> and <em>lengthunit</em>. The defaults are &#8220;fs&#8221; and
-&#8220;Angstrom&#8221;. See <a class="reference internal" href="../units.html#module-MDAnalysis.units" title="MDAnalysis.units"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.units</span></code></a> for other recognized
+arguments <em>timeunit</em> and <em>lengthunit</em>. The defaults are “fs” and
+“Angstrom”. See <a class="reference internal" href="../units.html#module-MDAnalysis.units" title="MDAnalysis.units"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.units</span></code></a> for other recognized
 values.</p>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.close">
@@ -754,8 +751,8 @@ is not appropriate then this method has to be overriden.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>force</strong> (<em>array_like</em>) – Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -781,8 +778,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>force</strong> (<em>array_like</em>) – Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -808,8 +805,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>x</strong> (<em>array_like</em>) – Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -838,8 +835,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>x</strong> (<em>array_like</em>) – Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -868,8 +865,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>t</strong> (<em>array_like</em>) – Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -900,8 +897,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>t</strong> (<em>array_like</em>) – Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -931,8 +928,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>v</strong> (<em>array_like</em>) – Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -958,8 +955,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>v</strong> (<em>array_like</em>) – Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -988,8 +985,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>criteria</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary containing the <em>max</em> and <em>min</em> values in native units</li>
-<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) &#8211; <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out</li>
+<li><strong>criteria</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – dictionary containing the <em>max</em> and <em>min</em> values in native units</li>
+<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out</li>
 </ul>
 </td>
 </tr>
@@ -1011,7 +1008,7 @@ is avoided.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> or a <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code>) &#8211; write coordinate information associate with <cite>obj</cite></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> or a <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code>) – write coordinate information associate with <cite>obj</cite></td>
 </tr>
 </tbody>
 </table>
@@ -1030,7 +1027,7 @@ when setting up the trajectory.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ts</strong> (<em>TimeStep</em>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ts</strong> (<em>TimeStep</em>) – </td>
 </tr>
 </tbody>
 </table>
@@ -1123,16 +1120,16 @@ the warning below.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Starting frame index (inclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Starting frame index (inclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
 of 0, i.e., the initial frame.</li>
-<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; Last frame index (exclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Last frame index (exclusive). <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default
 of n_frames, i.e., it includes the last frame of the trajectory.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; step size of the slice, <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default of 1, i.e,
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – step size of the slice, <code class="docutils literal"><span class="pre">None</span></code> corresponds to the default of 1, i.e,
 include every frame in the range <cite>start</cite>, <cite>stop</cite>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>start, stop, step</strong> &#8211; Integers representing the slice</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>start, stop, step</strong> – Integers representing the slice</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>, <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a>)</p>
@@ -1175,8 +1172,8 @@ creating a <a class="reference external" href="https://docs.python.org/2/library
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>force</strong> (<em>array_like</em>) – Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1202,8 +1199,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>force</strong> (<em>array_like</em>) – Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1229,8 +1226,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>x</strong> (<em>array_like</em>) – Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1259,8 +1256,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>x</strong> (<em>array_like</em>) – Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1289,8 +1286,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>t</strong> (<em>array_like</em>) – Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1321,8 +1318,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>t</strong> (<em>array_like</em>) – Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1352,8 +1349,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>v</strong> (<em>array_like</em>) – Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1379,8 +1376,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>v</strong> (<em>array_like</em>) – Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1419,8 +1416,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to get value for</li>
-<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of gettable attribute in the auxiliary reader</li>
+<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the auxiliary to get value for</li>
+<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of gettable attribute in the auxiliary reader</li>
 </ul>
 </td>
 </tr>
@@ -1487,9 +1484,9 @@ through the trajectory.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to iterate over.</li>
-<li><strong>stop</strong><strong>, </strong><strong>step</strong><strong>)</strong> (<em>(</em><em>start</em><em>,</em>) &#8211; Options for iterating over a slice of the auxiliary.</li>
-<li><strong>selected</strong> (<em>lst | ndarray</em><em>, </em><em>optional</em>) &#8211; List of steps to iterate over.</li>
+<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the auxiliary to iterate over.</li>
+<li><strong>stop</strong><strong>, </strong><strong>step</strong><strong>)</strong> (<em>(</em><em>start</em><em>,</em>) – Options for iterating over a slice of the auxiliary.</li>
+<li><strong>selected</strong> (<em>lst | ndarray</em><em>, </em><em>optional</em>) – List of steps to iterate over.</li>
 </ul>
 </td>
 </tr>
@@ -1540,19 +1537,19 @@ for the auxiliary <em>auxname</em>.</p>
 <code class="descname">rename_aux</code><span class="sig-paren">(</span><em>auxname</em>, <em>new</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.rename_aux" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change the name of the auxiliary <em>auxname</em> to <em>new</em>.</p>
 <p>Provided there is not already an auxiliary named <em>new</em>, the auxiliary
-name will be changed in ts.aux namespace, the trajectory&#8217;s
+name will be changed in ts.aux namespace, the trajectory’s
 list of added auxiliaries, and in the auxiliary reader itself.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to rename</li>
-<li><strong>new</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; New name to try set</li>
+<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the auxiliary to rename</li>
+<li><strong>new</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – New name to try set</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; If the name <em>new</em> is already in use by an existing auxiliary.</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If the name <em>new</em> is already in use by an existing auxiliary.</p>
 </td>
 </tr>
 </tbody>
@@ -1568,9 +1565,9 @@ list of added auxiliaries, and in the auxiliary reader itself.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to alter</li>
-<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of settable attribute in the auxiliary reader</li>
-<li><strong>new</strong> &#8211; New value to try set <em>attrname</em> to</li>
+<li><strong>auxname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of the auxiliary to alter</li>
+<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of settable attribute in the auxiliary reader</li>
+<li><strong>new</strong> – New value to try set <em>attrname</em> to</li>
 </ul>
 </td>
 </tr>
@@ -1597,7 +1594,7 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 <p>The time is calculated as <code class="docutils literal"><span class="pre">(n_frames</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">dt</span></code>, i.e., we assume that
 the first frame no time as elapsed. Thus, a trajectory with two frames will
 be considered to have a length of a single time step <cite>dt</cite> and a
-&#8220;trajectory&#8221; with a single frame will be reported as length 0.</p>
+“trajectory” with a single frame will be reported as length 0.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1609,11 +1606,11 @@ be considered to have a length of a single time step <cite>dt</cite> and a
 <p>This writer supports the sections Atoms, Masses, Velocities, Bonds,
 Angles, Dihedrals, and Impropers. This writer will write the header
 and these sections (if applicable). Atoms section is written in the
-&#8220;full&#8221; sub-style if charges are available or &#8220;molecular&#8221; sub-style
+“full” sub-style if charges are available or “molecular” sub-style
 if they are not. Molecule id is set to 0 for all atoms.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This writer assumes &#8220;conventional&#8221; or &#8220;real&#8221; LAMMPS units where length
+<p>This writer assumes “conventional” or “real” LAMMPS units where length
 is measured in Angstroms and velocity is measured in Angstroms per
 femtosecond. To write in different units, specify <cite>lengthunit</cite></p>
 <p>If atom types are not already positive integers, the user must set them
@@ -1622,7 +1619,7 @@ assign new types.</p>
 <p>To preserve numerical atom types when writing a selection, the Masses
 section will have entries for each atom type up to the maximum atom type.
 If the universe does not contain atoms of some type in
-{1, ... max(atom_types)}, then the mass for that type will be set to 1.</p>
+{1, … max(atom_types)}, then the mass for that type will be set to 1.</p>
 <p class="last">In order to write bonds, each selected bond type must be explicitly set to
 an integer &gt;= 1.</p>
 </div>
@@ -1631,7 +1628,7 @@ an integer &gt;= 1.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; output filename</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – output filename</td>
 </tr>
 </tbody>
 </table>
@@ -1658,8 +1655,8 @@ is not appropriate then this method has to be overriden.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>force</strong> (<em>array_like</em>) – Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1685,8 +1682,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>force</strong> (<em>array_like</em>) – Forces to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1712,8 +1709,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>x</strong> (<em>array_like</em>) – Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1742,8 +1739,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>x</strong> (<em>array_like</em>) – Positions to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1772,8 +1769,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>t</strong> (<em>array_like</em>) – Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1804,8 +1801,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>t</strong> (<em>array_like</em>) – Time values to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1835,8 +1832,8 @@ returned.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>v</strong> (<em>array_like</em>) – Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1862,8 +1859,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
-<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+<li><strong>v</strong> (<em>array_like</em>) – Velocities to transform</li>
+<li><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether to modify the array inplace, overwriting previous data</li>
 </ul>
 </td>
 </tr>
@@ -1892,8 +1889,8 @@ is avoided.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>criteria</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dictionary containing the <em>max</em> and <em>min</em> values in native units</li>
-<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) &#8211; <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out</li>
+<li><strong>criteria</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – dictionary containing the <em>max</em> and <em>min</em> values in native units</li>
+<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out</li>
 </ul>
 </td>
 </tr>
@@ -1913,8 +1910,8 @@ is avoided.</p>
 <dd><p>Write selection at current trajectory frame to file.</p>
 <p>The sections for Atoms, Masses, Velocities, Bonds, Angles,
 Dihedrals, and Impropers (if these are defined) are
-written. The Atoms section is written in the &#8220;full&#8221; sub-style
-if charges are available or &#8220;molecular&#8221; sub-style if they are
+written. The Atoms section is written in the “full” sub-style
+if charges are available or “molecular” sub-style if they are
 not. Molecule id in atoms section is set to to 0.</p>
 <p>No other sections are written to the DATA file.
 As of this writing, other sections are not parsed into the topology
@@ -1930,8 +1927,8 @@ included.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>selection</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) &#8211; MDAnalysis AtomGroup (selection or Universe.atoms) or also Universe</li>
-<li><strong>frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; optionally move to frame number <cite>frame</cite></li>
+<li><strong>selection</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a><em> or </em><a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><em>Universe</em></a>) – MDAnalysis AtomGroup (selection or Universe.atoms) or also Universe</li>
+<li><strong>frame</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – optionally move to frame number <cite>frame</cite></li>
 </ul>
 </td>
 </tr>
@@ -1979,46 +1976,46 @@ included.</p>
 <li class="toctree-l1"><a class="reference internal" href="../analysis_modules.html">4. Analysis modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../topology_modules.html">5. Topology modules</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../coordinates_modules.html">6. Coordinates modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="init.html">6.1. Trajectory Readers and Writers  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="CRD.html">6.2. CRD structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.CRD</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="DCD.html">6.3. DCD trajectory I/O  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DCD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="init.html">6.1. Trajectory Readers and Writers  — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="CRD.html">6.2. CRD structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.CRD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="DCD.html">6.3. DCD trajectory I/O  — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DCD</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="DLPoly.html">6.4. DL_Poly format reader <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DLPoly</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="DMS.html">6.5. DESRES file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DMS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="GMS.html">6.6. GAMESS trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GMS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="GRO.html">6.7. GRO file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GRO</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="INPCRD.html">6.8. INPCRD structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.INPCRD</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.9. LAMMPS DCD trajectory and DATA I/O  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.LAMMPS</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DMS.html">6.5. DESRES file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DMS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="GMS.html">6.6. GAMESS trajectory reader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GMS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="GRO.html">6.7. GRO file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GRO</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="INPCRD.html">6.8. INPCRD structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.INPCRD</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.9. LAMMPS DCD trajectory and DATA I/O  — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.LAMMPS</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-loading-a-lammps-simulation">6.9.1. Example: Loading a LAMMPS simulation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#classes">6.9.2. Classes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="MMTF.html">6.10. MMTF trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MMTF</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="MOL2.html">6.11. MOL2 file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MOL2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="PDB.html">6.12. PDB structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PDB</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="PDBQT.html">6.13. PDBQT structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PDBQT</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="PQR.html">6.14. PQR file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PQR</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="TRJ.html">6.15. AMBER trajectories &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRJ</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="TRR.html">6.16. TRR trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRR</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="TXYZ.html">6.17. TXYZ file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TXYZ</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="XTC.html">6.18. XTC trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XTC</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="XYZ.html">6.19. XYZ trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XYZ</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="TRZ.html">6.20. TRZ trajectory I/O  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRZ</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="memory.html">6.21. Reading trajectories from memory &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.memory</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="null.html">6.22. Null output &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.null</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="base.html">6.23. Base classes &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.base</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="core.html">6.24. Common functions for coordinate reading &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.core</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="chain.html">6.25. ChainReader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.chain</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="XDR.html">6.26. XDR based trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XDR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MMTF.html">6.10. MMTF trajectory reader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MMTF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MOL2.html">6.11. MOL2 file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MOL2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="PDB.html">6.12. PDB structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PDB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="PDBQT.html">6.13. PDBQT structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PDBQT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="PQR.html">6.14. PQR file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PQR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="TRJ.html">6.15. AMBER trajectories — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRJ</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="TRR.html">6.16. TRR trajectory files — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="TXYZ.html">6.17. TXYZ file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TXYZ</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="XTC.html">6.18. XTC trajectory files — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XTC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="XYZ.html">6.19. XYZ trajectory reader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XYZ</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="TRZ.html">6.20. TRZ trajectory I/O  — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRZ</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html">6.21. Reading trajectories from memory — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.memory</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="null.html">6.22. Null output — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.null</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html">6.23. Base classes — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.base</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">6.24. Common functions for coordinate reading — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="chain.html">6.25. ChainReader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.chain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="XDR.html">6.26. XDR based trajectory files — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XDR</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../selections_modules.html">7. Selection exporters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -2027,8 +2024,8 @@ included.</p>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../coordinates_modules.html">6. Coordinates modules</a><ul>
-      <li>Previous: <a href="INPCRD.html" title="previous chapter">6.8. INPCRD structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.INPCRD</span></code></a></li>
-      <li>Next: <a href="MMTF.html" title="next chapter">6.10. MMTF trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MMTF</span></code></a></li>
+      <li>Previous: <a href="INPCRD.html" title="previous chapter">6.8. INPCRD structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.INPCRD</span></code></a></li>
+      <li>Next: <a href="MMTF.html" title="next chapter">6.10. MMTF trajectory reader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MMTF</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -2051,7 +2048,7 @@ included.</p>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

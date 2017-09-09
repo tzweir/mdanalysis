@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>6.20. TRZ trajectory I/O — MDAnalysis.coordinates.TRZ &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,7 +46,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.coordinates.TRZ"></span><div class="section" id="trz-trajectory-i-o-mdanalysis-coordinates-trz">
-<h1>6.20. TRZ trajectory I/O  &#8212; <a class="reference internal" href="#module-MDAnalysis.coordinates.TRZ" title="MDAnalysis.coordinates.TRZ"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.TRZ</span></code></a><a class="headerlink" href="#trz-trajectory-i-o-mdanalysis-coordinates-trz" title="Permalink to this headline">¶</a></h1>
+<h1>6.20. TRZ trajectory I/O  — <a class="reference internal" href="#module-MDAnalysis.coordinates.TRZ" title="MDAnalysis.coordinates.TRZ"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.TRZ</span></code></a><a class="headerlink" href="#trz-trajectory-i-o-mdanalysis-coordinates-trz" title="Permalink to this headline">¶</a></h1>
 <p>Classes to read <a class="reference external" href="http://www.theo.chemie.tu-darmstadt.de/ibisco/IBISCO.html">IBIsCO</a> / <a class="reference external" href="http://www.theo.chemie.tu-darmstadt.de/group/services/yaspdoc/yaspdoc.html">YASP</a> TRZ binary trajectories, including
 coordinates, velocities and more (see attributes of the <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a>).</p>
 <p>Data are read and written in binary representation but because this depends on
@@ -67,15 +64,15 @@ trajectories in <em>little-endian</em> byte order.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
-<li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em>) &#8211; A weak reference to the owning Reader.  Used for
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The total number of atoms this Timestep describes</li>
+<li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em>) – A weak reference to the owning Reader.  Used for
 when attributes require trajectory manipulation (e.g. dt)</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep.time" title="MDAnalysis.coordinates.TRZ.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep.time" title="MDAnalysis.coordinates.TRZ.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
 is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The starting time from which to calculate time (in ps)</li>
+<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – The starting time from which to calculate time (in ps)</li>
 </ul>
 </td>
 </tr>
@@ -155,7 +152,7 @@ the <code class="docutils literal"><span class="pre">has_*</span></code> attribu
 <dl class="attribute">
 <dt id="MDAnalysis.coordinates.TRZ.TRZReader.ts">
 <code class="descname">ts</code><a class="headerlink" href="#MDAnalysis.coordinates.TRZ.TRZReader.ts" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>TRZ.Timestep</em> &#8211; <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object containing
+<dd><p><em>TRZ.Timestep</em> – <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object containing
 coordinates of current frame</p>
 </dd></dl>
 
@@ -176,9 +173,9 @@ Now passes a weakref of self to ts (ts._reader).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>trzfilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of input file</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of atoms in trajectory, must be taken from topology file!</li>
-<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; converts units to MDAnalysis defaults</li>
+<li><strong>trzfilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – name of input file</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – number of atoms in trajectory, must be taken from topology file!</li>
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – converts units to MDAnalysis defaults</li>
 </ul>
 </td>
 </tr>
@@ -236,12 +233,12 @@ Now passes a weakref of self to ts (ts._reader).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of output file</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of atoms in trajectory</li>
-<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; title of the trajectory; the title must be 80 characters or
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – name of output file</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – number of atoms in trajectory</li>
+<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – title of the trajectory; the title must be 80 characters or
 shorter, a longer title raises a ValueError exception.</li>
-<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
-the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [&#8216;convert_lengths&#8217;].
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
+the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [‘convert_lengths’].
 (see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>)</li>
 </ul>
 </td>
@@ -263,7 +260,7 @@ the value of <code class="xref py py-data docutils literal"><span class="pre">MD
 <dl class="attribute">
 <dt>
 <code class="descname">ts</code></dt>
-<dd><p><em>TRZ.Timestep</em> &#8211; <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object containing
+<dd><p><em>TRZ.Timestep</em> – <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object containing
 coordinates of current frame</p>
 </dd></dl>
 
@@ -284,9 +281,9 @@ Now passes a weakref of self to ts (ts._reader).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>trzfilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of input file</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of atoms in trajectory, must be taken from topology file!</li>
-<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; converts units to MDAnalysis defaults</li>
+<li><strong>trzfilename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – name of input file</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – number of atoms in trajectory, must be taken from topology file!</li>
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – converts units to MDAnalysis defaults</li>
 </ul>
 </td>
 </tr>
@@ -344,12 +341,12 @@ Now passes a weakref of self to ts (ts._reader).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of output file</li>
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of atoms in trajectory</li>
-<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; title of the trajectory; the title must be 80 characters or
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – name of output file</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – number of atoms in trajectory</li>
+<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> (</em><em>optional</em><em>)</em>) – title of the trajectory; the title must be 80 characters or
 shorter, a longer title raises a ValueError exception.</li>
-<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
-the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [&#8216;convert_lengths&#8217;].
+<li><strong>convert_units</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – units are converted to the MDAnalysis base format; <code class="docutils literal"><span class="pre">None</span></code> selects
+the value of <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> [‘convert_lengths’].
 (see <a class="reference internal" href="../core/init.html#flags-label"><span class="std std-ref">Flags</span></a>)</li>
 </ul>
 </td>
@@ -374,15 +371,15 @@ the value of <code class="xref py py-data docutils literal"><span class="pre">MD
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
-<li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em>) &#8211; A weak reference to the owning Reader.  Used for
+<li><strong>n_atoms</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The total number of atoms this Timestep describes</li>
+<li><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader</em><em> (</em><em>optional</em><em>)</em>) – A weak reference to the owning Reader.  Used for
 when attributes require trajectory manipulation (e.g. dt)</li>
-<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep.time" title="MDAnalysis.coordinates.TRZ.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep.time" title="MDAnalysis.coordinates.TRZ.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
 is set, then <cite>dt</cite> will be ignored.</li>
-<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) &#8211; The starting time from which to calculate time (in ps)</li>
+<li><strong>time_offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> (</em><em>optional</em><em>)</em>) – The starting time from which to calculate time (in ps)</li>
 </ul>
 </td>
 </tr>
@@ -439,45 +436,45 @@ the <code class="docutils literal"><span class="pre">has_*</span></code> attribu
 <li class="toctree-l1"><a class="reference internal" href="../analysis_modules.html">4. Analysis modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../topology_modules.html">5. Topology modules</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../coordinates_modules.html">6. Coordinates modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="init.html">6.1. Trajectory Readers and Writers  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="CRD.html">6.2. CRD structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.CRD</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="DCD.html">6.3. DCD trajectory I/O  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DCD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="init.html">6.1. Trajectory Readers and Writers  — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="CRD.html">6.2. CRD structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.CRD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="DCD.html">6.3. DCD trajectory I/O  — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DCD</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="DLPoly.html">6.4. DL_Poly format reader <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DLPoly</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="DMS.html">6.5. DESRES file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DMS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="GMS.html">6.6. GAMESS trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GMS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="GRO.html">6.7. GRO file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GRO</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="INPCRD.html">6.8. INPCRD structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.INPCRD</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="LAMMPS.html">6.9. LAMMPS DCD trajectory and DATA I/O  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.LAMMPS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="MMTF.html">6.10. MMTF trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MMTF</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="MOL2.html">6.11. MOL2 file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MOL2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="PDB.html">6.12. PDB structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PDB</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="PDBQT.html">6.13. PDBQT structure files in MDAnalysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PDBQT</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="PQR.html">6.14. PQR file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PQR</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="TRJ.html">6.15. AMBER trajectories &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRJ</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="TRR.html">6.16. TRR trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRR</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="TXYZ.html">6.17. TXYZ file format &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TXYZ</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="XTC.html">6.18. XTC trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XTC</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="XYZ.html">6.19. XYZ trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XYZ</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.20. TRZ trajectory I/O  &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRZ</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DMS.html">6.5. DESRES file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.DMS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="GMS.html">6.6. GAMESS trajectory reader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GMS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="GRO.html">6.7. GRO file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.GRO</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="INPCRD.html">6.8. INPCRD structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.INPCRD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="LAMMPS.html">6.9. LAMMPS DCD trajectory and DATA I/O  — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.LAMMPS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MMTF.html">6.10. MMTF trajectory reader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MMTF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="MOL2.html">6.11. MOL2 file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.MOL2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="PDB.html">6.12. PDB structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PDB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="PDBQT.html">6.13. PDBQT structure files in MDAnalysis — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PDBQT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="PQR.html">6.14. PQR file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.PQR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="TRJ.html">6.15. AMBER trajectories — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRJ</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="TRR.html">6.16. TRR trajectory files — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="TXYZ.html">6.17. TXYZ file format — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TXYZ</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="XTC.html">6.18. XTC trajectory files — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XTC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="XYZ.html">6.19. XYZ trajectory reader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XYZ</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.20. TRZ trajectory I/O  — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRZ</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#classes">6.20.1. Classes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="memory.html">6.21. Reading trajectories from memory &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.memory</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="null.html">6.22. Null output &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.null</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="base.html">6.23. Base classes &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.base</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="core.html">6.24. Common functions for coordinate reading &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.core</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="chain.html">6.25. ChainReader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.chain</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="XDR.html">6.26. XDR based trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XDR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html">6.21. Reading trajectories from memory — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.memory</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="null.html">6.22. Null output — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.null</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html">6.23. Base classes — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.base</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">6.24. Common functions for coordinate reading — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="chain.html">6.25. ChainReader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.chain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="XDR.html">6.26. XDR based trajectory files — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XDR</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../selections_modules.html">7. Selection exporters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -486,8 +483,8 @@ the <code class="docutils literal"><span class="pre">has_*</span></code> attribu
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../coordinates_modules.html">6. Coordinates modules</a><ul>
-      <li>Previous: <a href="XYZ.html" title="previous chapter">6.19. XYZ trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XYZ</span></code></a></li>
-      <li>Next: <a href="memory.html" title="next chapter">6.21. Reading trajectories from memory &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.memory</span></code></a></li>
+      <li>Previous: <a href="XYZ.html" title="previous chapter">6.19. XYZ trajectory reader — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XYZ</span></code></a></li>
+      <li>Next: <a href="memory.html" title="next chapter">6.21. Reading trajectories from memory — <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.memory</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -510,7 +507,7 @@ the <code class="docutils literal"><span class="pre">has_*</span></code> attribu
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

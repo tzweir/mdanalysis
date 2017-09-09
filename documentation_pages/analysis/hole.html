@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>4.4.1. Generation and Analysis of HOLE pore profiles — MDAnalysis.analysis.hole &#8212; MDAnalysis 0.17.0-dev documentation</title>
-    
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
@@ -40,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -49,7 +46,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.hole"></span><div class="section" id="generation-and-analysis-of-hole-pore-profiles-mdanalysis-analysis-hole">
-<h1>4.4.1. Generation and Analysis of HOLE pore profiles &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.hole" title="MDAnalysis.analysis.hole"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.hole</span></code></a><a class="headerlink" href="#generation-and-analysis-of-hole-pore-profiles-mdanalysis-analysis-hole" title="Permalink to this headline">¶</a></h1>
+<h1>4.4.1. Generation and Analysis of HOLE pore profiles — <a class="reference internal" href="#module-MDAnalysis.analysis.hole" title="MDAnalysis.analysis.hole"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.hole</span></code></a><a class="headerlink" href="#generation-and-analysis-of-hole-pore-profiles-mdanalysis-analysis-hole" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -67,7 +64,7 @@ of tools <a class="reference internal" href="#smart1993" id="id1">[Smart1993]</a
 can be combined and analyzed.</p>
 <p><a class="reference external" href="http://www.smartsci.uk/hole/">HOLE</a> must be installed separately and can be obtained in binary form from
 <a class="reference external" href="http://www.smartsci.uk/hole/">http://www.smartsci.uk/hole/</a>. (HOLE is not open source and must be used under
-licence but for academic work, a free (as in &#8220;no costs&#8221;) version is available.)</p>
+licence but for academic work, a free (as in “no costs”) version is available.)</p>
 <div class="section" id="examples-for-using-hole">
 <h2>4.4.1.1. Examples for using HOLE<a class="headerlink" href="#examples-for-using-hole" title="Permalink to this headline">¶</a></h2>
 <p>The two classes <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE" title="MDAnalysis.analysis.hole.HOLE"><code class="xref py py-class docutils literal"><span class="pre">HOLE</span></code></a> and <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLEtraj" title="MDAnalysis.analysis.hole.HOLEtraj"><code class="xref py py-class docutils literal"><span class="pre">HOLEtraj</span></code></a> in this module primarily
@@ -227,7 +224,7 @@ data such as <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE.
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a>) &#8211; The <cite>filename</cite> is used as input for HOLE in the &#8220;COORD&#8221; card of the
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a>) – The <cite>filename</cite> is used as input for HOLE in the “COORD” card of the
 input file.  It specifies the name of a PDB co-ordinate file to be
 used. This must be in Brookhaven protein databank format or
 something closely approximating this. Both ATOM and HETATM records
@@ -248,7 +245,7 @@ independently so that they need not have an identical number of
 atoms or atom order etc. (though they should be sufficiently
 similar for a HOLE run from identical starting conditions to be
 useful).</li>
-<li><strong>dcd</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; File name of DCD trajectory (must be supplied together with a
+<li><strong>dcd</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – File name of DCD trajectory (must be supplied together with a
 matching PDB file <cite>filename</cite>) and then HOLE runs its analysis on
 each frame.
 It does multiple HOLE runs on positions taken from a CHARMM binary
@@ -263,28 +260,28 @@ a <strong class="program">grep</strong> command. The reading of the file can be
 controlled by the <cite>step</cite> keyword and/or setting
 <code class="xref py py-attr docutils literal"><span class="pre">HOLE.dcd_iniskip</span></code> to the number of frames to be skipped
 initially.</li>
-<li><strong>logfile</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; file name of the file collecting HOLE&#8217;s output (which can be
-parsed using <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE.collect" title="MDAnalysis.analysis.hole.HOLE.collect"><code class="xref py py-meth docutils literal"><span class="pre">HOLE.collect()</span></code></a>);  the default is &#8220;hole.out&#8221;.</li>
-<li><strong>sphpdb</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; path to the HOLE sph file, a PDB-like file containig the
-coordinates of the pore centers; the default is &#8220;hole.sph&#8221;.
+<li><strong>logfile</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – file name of the file collecting HOLE’s output (which can be
+parsed using <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE.collect" title="MDAnalysis.analysis.hole.HOLE.collect"><code class="xref py py-meth docutils literal"><span class="pre">HOLE.collect()</span></code></a>);  the default is “hole.out”.</li>
+<li><strong>sphpdb</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – path to the HOLE sph file, a PDB-like file containig the
+coordinates of the pore centers; the default is “hole.sph”.
 This keyword specifies the filename for output of the sphere centre
-information in pdb form. Its typical suffix is &#8221;.sph&#8221;. The
+information in pdb form. Its typical suffix is “.sph”. The
 co-ordinates are set to the sphere centres and the occupancies are
 the sphere radii. All centres are assigned the atom name QSS and
 residue name SPH and the residue number is set to the storage
 number of the centre. The file can be imported into molecular
 graphics programs but are likely to be bonded together in a awful
 manner - as the points are very close to one another. In VMD sph
-objects are best displayed as &#8220;Points&#8221;. Displaying .sph objects
+objects are best displayed as “Points”. Displaying .sph objects
 rather than rendered or dot surfaces can be useful to analyze the
 distance of particular atoms from the sphere-centre line.
 Most usefully .sph files can be used to produce molecular graphical
 output from a hole run. This is achieved by using the
 <strong class="program">sph_process</strong> program to read the .sph file.</li>
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; step size for going through the trajectory (skips <cite>step</cite> - 1
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – step size for going through the trajectory (skips <cite>step</cite> - 1
 frames); the default is 1.</li>
-<li><strong>cpoint</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; coordinates of a point inside the pore, e.g. <code class="docutils literal"><span class="pre">[12.3,</span> <span class="pre">0.7,</span>
-<span class="pre">18.55]</span></code>. If set to <code class="docutils literal"><span class="pre">None</span></code> (the default) then HOLE&#8217;s own search
+<li><strong>cpoint</strong> (<em>array_like</em><em>, </em><em>optional</em>) – coordinates of a point inside the pore, e.g. <code class="docutils literal"><span class="pre">[12.3,</span> <span class="pre">0.7,</span>
+<span class="pre">18.55]</span></code>. If set to <code class="docutils literal"><span class="pre">None</span></code> (the default) then HOLE’s own search
 algorithm is used.
 <cite>cpoint</cite> specifies a point which lies within the channel. For
 simple channels such as gramicidin results do not show great
@@ -298,14 +295,14 @@ calculation).
 If this card is not specified then HOLE now (from version 2.2)
 attempts to make a guess where the channel will be. The procedure
 assumes the channel is reasonably symmetric. The initial guess on
-cpoint will be the centroid of all alpha carbon atoms (name &#8216;CA&#8217;
+cpoint will be the centroid of all alpha carbon atoms (name ‘CA’
 in pdb file). This is then refined by a crude grid search up to 5
 Å from the original position. This procedure works most of the
 time but is clearly far from infallible — results should be
 careful checked (with molecular graphics) if it is used.</li>
-<li><strong>cvect</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; Search direction, should be parallel to the pore axis,
+<li><strong>cvect</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Search direction, should be parallel to the pore axis,
 e.g. <code class="docutils literal"><span class="pre">[0,0,1]</span></code> for the z-axis. The default is <code class="docutils literal"><span class="pre">None</span></code> so that
-HOLE&#8217;s built-in procedure is used.
+HOLE’s built-in procedure is used.
 If this keyword is <code class="docutils literal"><span class="pre">None</span></code> then HOLE attempts to make a guess
 where the channel will be. The procedure assumes the channel is
 reasonably symmetric. The guess will be either along the X axis
@@ -313,14 +310,14 @@ reasonably symmetric. The guess will be either along the X axis
 aligned on one of these axis the results will clearly be
 approximate. If a guess is used then results should be carefully
 checked.</li>
-<li><strong>sample</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; distance of sample points in Å; the default is 0.2 Å.
+<li><strong>sample</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – distance of sample points in Å; the default is 0.2 Å.
 Specifies the distance between the planes used in the HOLE
 procedure. The default value should be reasonable for most
 purposes. However, if you wish to visualize a very tight
 constriction then specify a smaller value.
 This value determines how many points in the pore profile are
 calculated.</li>
-<li><strong>dotden</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; density of facettes for generating a 3D pore representation;
+<li><strong>dotden</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – density of facettes for generating a 3D pore representation;
 default is 15.
 This number controls the density of dots which will be used by
 the program. A sphere of dots is placed on each centre
@@ -329,35 +326,35 @@ lie within any other sphere are considered. The actual number of
 dots written is therefore controlled by <cite>dotden</cite> and
 <cite>sample</cite>. <cite>dotden</cite> should be set to between 5 (few dots per
 sphere) and 35 (large number of dots per sphere).</li>
-<li><strong>endrad</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; Radius which is considered to be the end of the pore. This
+<li><strong>endrad</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – Radius which is considered to be the end of the pore. This
 keyword can be used to specify the radius above which the
 program regards a result as indicating that the end of the pore
 has been reached. The default value is 22.0 Å. This may need to
 be increased for large channels or reduced for small.</li>
-<li><strong>shorto</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; Determines the output of output in the <cite>logfile</cite>; for automated processing
+<li><strong>shorto</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Determines the output of output in the <cite>logfile</cite>; for automated processing
 this must be &lt; 3. The default is 0, which shows all output.
 0: Full text output,
-1: All text output given except &#8220;run in progress&#8221; (i.e.,
+1: All text output given except “run in progress” (i.e.,
 detailed contemporary description of what HOLE is doing).
 2: Ditto plus no graph type output - only leaving minimum
 radius and conductance calculations.
 3: All text output other than input card mirroring and error messages
 turned off.</li>
-<li><strong>ignore_residues</strong> (<em>array_like</em><em>, </em><em>optional</em>) &#8211; sequence of three-letter residues that are not taken into
+<li><strong>ignore_residues</strong> (<em>array_like</em><em>, </em><em>optional</em>) – sequence of three-letter residues that are not taken into
 account during the calculation; wildcards are <em>not</em>
 supported. The default is <code class="docutils literal"><span class="pre">[&quot;SOL&quot;,&quot;WAT&quot;,</span> <span class="pre">&quot;TIP&quot;,</span> <span class="pre">&quot;HOH&quot;,</span> <span class="pre">&quot;K</span> <span class="pre">&quot;,</span>
 <span class="pre">&quot;NA</span> <span class="pre">&quot;,</span> <span class="pre">&quot;CL</span> <span class="pre">&quot;]</span></code>.</li>
-<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; path to the file specifying van der Waals radii for each atom. If
+<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – path to the file specifying van der Waals radii for each atom. If
 set to <code class="docutils literal"><span class="pre">None</span></code> (the default) then a set of default radii,
 <a class="reference internal" href="#MDAnalysis.analysis.hole.SIMPLE2_RAD" title="MDAnalysis.analysis.hole.SIMPLE2_RAD"><code class="xref py py-data docutils literal"><span class="pre">SIMPLE2_RAD</span></code></a>, is used (an extension of <code class="docutils literal"><span class="pre">simple.rad</span></code> from
 the HOLE distribution)</li>
-<li><strong>executable</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; Path to the <strong class="program">hole</strong> executable
+<li><strong>executable</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – Path to the <strong class="program">hole</strong> executable
 (e.g. <code class="docutils literal"><span class="pre">~/hole2/exe/hole</span></code>); the other programs
 <strong class="program">sph_process</strong> and <strong class="program">sos_triangle</strong> are assumed
 to live in the same directory as <strong class="program">hole</strong>. If
 <strong class="program">hole</strong> is found on the <span class="target" id="index-0"></span><a class="reference external" href="http://matplotlib.org/faq/environment_variables_faq.html#envvar-PATH" title="(in Matplotlib v2.0.2)"><code class="xref std std-envvar docutils literal"><span class="pre">PATH</span></code></a> then the bare
-executable name is sufficient. The default is &#8220;hole&#8221;.</li>
-<li><strong>raseed</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; integer number to start the random number generator; by default,
+executable name is sufficient. The default is “hole”.</li>
+<li><strong>raseed</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – integer number to start the random number generator; by default,
 <strong class="program">hole</strong> will use the time of the day (default value
 <code class="docutils literal"><span class="pre">None</span></code>) but for reproducible runs (e.g., for testing) set it to
 an integer.</li>
@@ -415,10 +412,10 @@ and deleted when the <a class="reference internal" href="#MDAnalysis.analysis.ho
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a>) &#8211; file name to be processed</li>
-<li><strong>tmpdir</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; By default the temporary directory is created inside the current
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a>) – file name to be processed</li>
+<li><strong>tmpdir</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – By default the temporary directory is created inside the current
 directory in order to keep that path name short. This can be changed
-with the <cite>tmpdir</cite> keyword (e.g. one can use &#8220;/tmp&#8221;). The default is
+with the <cite>tmpdir</cite> keyword (e.g. one can use “/tmp”). The default is
 the current directory <code class="xref py py-data docutils literal"><span class="pre">os.path.curdir</span></code>.</li>
 </ul>
 </td>
@@ -430,7 +427,7 @@ the current directory <code class="xref py py-data docutils literal"><span class
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)">string</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></code> &#8211; If none of the tricks for filename shortening worked. In this case,
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></code> – If none of the tricks for filename shortening worked. In this case,
 manually rename the file or recompile your version of HOLE.</p>
 </td>
 </tr>
@@ -450,15 +447,15 @@ manually rename the file or recompile your version of HOLE.</p>
 <p>The method saves the result as <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE.profiles" title="MDAnalysis.analysis.hole.HOLE.profiles"><code class="xref py py-attr docutils literal"><span class="pre">HOLE.profiles</span></code></a>, a dictionary
 indexed by the frame number. Each entry is a
 <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.html#numpy.recarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.recarray</span></code></a>.</p>
-<p>If the keyword <cite>outdir</cite> is supplied (e.g. &#8221;.&#8221;) then each profile is
+<p>If the keyword <cite>outdir</cite> is supplied (e.g. “.”) then each profile is
 saved to a gzipped data file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>run</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; identifier, free form; default is 1</li>
-<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; save output data under <cite>outdir</cite>/<cite>run</cite> if set to any other value but
+<li><strong>run</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – identifier, free form; default is 1</li>
+<li><strong>outdir</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – save output data under <cite>outdir</cite>/<cite>run</cite> if set to any other value but
 <code class="docutils literal"><span class="pre">None</span></code>; the default is <code class="docutils literal"><span class="pre">None</span></code>.</li>
 </ul>
 </td>
@@ -510,30 +507,30 @@ plotted for each trajectory frame (unless <cite>step</cite> is changed).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>step</strong> (<em>integer</em><em>, </em><em>optional</em>) &#8211; only plot every <cite>step</cite> profiles; default is 1.</li>
-<li><strong>color</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><em>iterable</em></a><em>, </em><em>optional</em>) &#8211; color or iterable of colors to specify graph colors; The default
+<li><strong>step</strong> (<em>integer</em><em>, </em><em>optional</em>) – only plot every <cite>step</cite> profiles; default is 1.</li>
+<li><strong>color</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><em>iterable</em></a><em>, </em><em>optional</em>) – color or iterable of colors to specify graph colors; The default
 <code class="docutils literal"><span class="pre">None</span></code> will use the color map <cite>cmap</cite> instead.</li>
-<li><strong>cmap</strong> (<a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a>) &#8211; Pick colors from the matplotlib color map <cite>cmap</cite>; the default is
+<li><strong>cmap</strong> (<a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a>) – Pick colors from the matplotlib color map <cite>cmap</cite>; the default is
 <em>viridis</em>.</li>
-<li><strong>linestyle</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><em>iterable</em></a><em>, </em><em>optional</em>) &#8211; linestyle supported by <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v2.0.2)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>; an
+<li><strong>linestyle</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><em>iterable</em></a><em>, </em><em>optional</em>) – linestyle supported by <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v2.0.2)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>; an
 iterable that is not a string (e.g., <code class="docutils literal"><span class="pre">('-',</span> <span class="pre">'--',</span> <span class="pre">'.')</span></code>) will
-be applied in turn. The default is &#8216;-&#8216; to draw a simple line.</li>
-<li><strong>yshift</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; displace each <span class="math">\(R(\zeta)\)</span> profile by <cite>yshift</cite> in the
+be applied in turn. The default is ‘-‘ to draw a simple line.</li>
+<li><strong>yshift</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – displace each <span class="math">\(R(\zeta)\)</span> profile by <cite>yshift</cite> in the
 <span class="math">\(y\)</span>-direction for clearer visualization. The default is 0,
 i.e., not to shift any graph.</li>
-<li><strong>frames</strong> (<em>integer</em><em> or </em><em>array_like</em><em>, </em><em>optional</em>) &#8211; only plot these specific frame(s); the default <code class="docutils literal"><span class="pre">None</span></code> is to
+<li><strong>frames</strong> (<em>integer</em><em> or </em><em>array_like</em><em>, </em><em>optional</em>) – only plot these specific frame(s); the default <code class="docutils literal"><span class="pre">None</span></code> is to
 plot everything (see also <cite>step</cite>)</li>
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; If it is set to &#8220;_nolegend_&#8221; or <code class="docutils literal"><span class="pre">False</span></code> then no legend is
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – If it is set to “_nolegend_” or <code class="docutils literal"><span class="pre">False</span></code> then no legend is
 displayed. Any other value is ignored and the frame number is
 used as a label. The default is <code class="docutils literal"><span class="pre">True</span></code> to plot the legend even
 though this can become rather messy.</li>
-<li><strong>ax</strong> (<a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a>) &#8211; If no <cite>ax</cite> is supplied or set to <code class="docutils literal"><span class="pre">None</span></code> then the plot will
+<li><strong>ax</strong> (<a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a>) – If no <cite>ax</cite> is supplied or set to <code class="docutils literal"><span class="pre">None</span></code> then the plot will
 be added to the current active axes.</li>
-<li><strong>kwargs</strong> (<cite>**kwargs</cite>) &#8211; All other <cite>kwargs</cite> are passed to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v2.0.2)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>.</li>
+<li><strong>kwargs</strong> (<cite>**kwargs</cite>) – All other <cite>kwargs</cite> are passed to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v2.0.2)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> &#8211; Axes with the plot, either <cite>ax</cite> or the current axes.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> – Axes with the plot, either <cite>ax</cite> or the current axes.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">Axes</span></code></a></p>
@@ -557,19 +554,19 @@ be added to the current active axes.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; only plot every <em>step</em> profile; default: 1</li>
-<li><strong>cmap</strong> (<a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a>, optional) &#8211; matplotlib color map ;  the default is <em>viridis</em></li>
-<li><strong>rmax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; only display radii up to <cite>rmax</cite>; the default is <code class="docutils literal"><span class="pre">None</span></code>, which
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – only plot every <em>step</em> profile; default: 1</li>
+<li><strong>cmap</strong> (<a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a>, optional) – matplotlib color map ;  the default is <em>viridis</em></li>
+<li><strong>rmax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – only display radii up to <cite>rmax</cite>; the default is <code class="docutils literal"><span class="pre">None</span></code>, which
 means to show all radii.</li>
-<li><strong>ylabel</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; label of the reaction coordinate axis; the default is &#8220;frames&#8221;</li>
-<li><strong>ax</strong> (<a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a>) &#8211; axes instance to plot into, which <em>must</em> have been generated
-with the <cite>projection=&#8216;3d&#8217;</cite> keyword set (see
+<li><strong>ylabel</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – label of the reaction coordinate axis; the default is “frames”</li>
+<li><strong>ax</strong> (<a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a>) – axes instance to plot into, which <em>must</em> have been generated
+with the <cite>projection=‘3d’</cite> keyword set (see
 <a class="reference external" href="http://matplotlib.org/mpl_toolkits/mplot3d/api.html#module-mpl_toolkits.mplot3d.axes3d" title="(in Matplotlib v2.0.2)"><code class="xref py py-mod docutils literal"><span class="pre">mpl_toolkits.mplot3d.axes3d</span></code></a> and the <a class="reference external" href="http://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html">mplot3d tutorial</a>
 for details)</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> &#8211; Axes with the plot, either <cite>ax</cite> or the current axes.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> – Axes with the plot, either <cite>ax</cite> or the current axes.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">Axes</span></code></a></p>
@@ -633,28 +630,28 @@ RMSD) in order to group the HOLE profiles by order parameter (see the
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>) &#8211; The input trajectory is taken from a
+<li><strong>universe</strong> (<a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>) – The input trajectory is taken from a
 <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe" title="MDAnalysis.core.universe.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>. The trajectory is
 converted to a sequence of PDB files and <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE" title="MDAnalysis.analysis.hole.HOLE"><code class="xref py py-class docutils literal"><span class="pre">HOLE</span></code></a> is run on
 each individual file.</li>
-<li><strong>orderparameters</strong> (<em>array_like</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; Sequence or text file containing order parameters (float
+<li><strong>orderparameters</strong> (<em>array_like</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – Sequence or text file containing order parameters (float
 numbers) corresponding to the frames in the trajectory.</li>
-<li><strong>stop</strong><strong>, </strong><strong>step</strong> (<em>start</em><em>,</em>) &#8211; slice the trajectory as
+<li><strong>stop</strong><strong>, </strong><strong>step</strong> (<em>start</em><em>,</em>) – slice the trajectory as
 <code class="docutils literal"><span class="pre">universe.trajectory[start:stop:step]</span></code>. The default is <code class="docutils literal"><span class="pre">None</span></code>
 so that the whole trajectory is analyzed</li>
-<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; selection string for
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – selection string for
 <a class="reference internal" href="../core/universe.html#MDAnalysis.core.universe.Universe.select_atoms" title="MDAnalysis.core.universe.Universe.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a> to select
 the group of atoms that is to be analysed by HOLE. The default is
-&#8220;protein&#8221; to include all protein residues.</li>
-<li><strong>cpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> or </em><em>array_like</em><em>, </em><em>optional</em>) &#8211; <p>Point inside the pore to start the HOLE search procedure. The
-default is <code class="docutils literal"><span class="pre">None</span></code> to select HOLE&#8217;s internal search procedure.</p>
+“protein” to include all protein residues.</li>
+<li><strong>cpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> or </em><em>array_like</em><em>, </em><em>optional</em>) – <p>Point inside the pore to start the HOLE search procedure. The
+default is <code class="docutils literal"><span class="pre">None</span></code> to select HOLE’s internal search procedure.</p>
 <p>If set to <code class="docutils literal"><span class="pre">True</span></code> then <em>cpoint</em> is guessed as the
 <a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup.center_of_geometry" title="MDAnalysis.core.groups.AtomGroup.center_of_geometry"><code class="xref py py-meth docutils literal"><span class="pre">center_of_geometry()</span></code></a> of
 the <cite>selection</cite> from the first frame of the trajectory.</p>
 <p>If <cite>cpoint</cite> is not set or set to <code class="docutils literal"><span class="pre">None</span></code> then HOLE guesses it
 with its own algorithm (for each individual frame).</p>
 </li>
-<li><strong>kwargs</strong> (<cite>**kwargs</cite>) &#8211; All other keywords are passed on to <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE" title="MDAnalysis.analysis.hole.HOLE"><code class="xref py py-class docutils literal"><span class="pre">HOLE</span></code></a> (see there for
+<li><strong>kwargs</strong> (<cite>**kwargs</cite>) – All other keywords are passed on to <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE" title="MDAnalysis.analysis.hole.HOLE"><code class="xref py py-class docutils literal"><span class="pre">HOLE</span></code></a> (see there for
 description).</li>
 </ul>
 </td>
@@ -681,7 +678,7 @@ previous values. This is arguably a bug.</p>
 <code class="descname">guess_cpoint</code><span class="sig-paren">(</span><em>selection='protein'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/hole.html#HOLEtraj.guess_cpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.hole.HOLEtraj.guess_cpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Guess a point inside the pore.</p>
 <p>This method simply uses the center of geometry of the selection as a
-guess. <cite>selection</cite> is &#8220;protein&#8221; by default.</p>
+guess. <cite>selection</cite> is “protein” by default.</p>
 </dd></dl>
 
 <dl class="method">
@@ -701,30 +698,30 @@ plotted for each trajectory frame (unless <cite>step</cite> is changed).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>step</strong> (<em>integer</em><em>, </em><em>optional</em>) &#8211; only plot every <cite>step</cite> profiles; default is 1.</li>
-<li><strong>color</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><em>iterable</em></a><em>, </em><em>optional</em>) &#8211; color or iterable of colors to specify graph colors; The default
+<li><strong>step</strong> (<em>integer</em><em>, </em><em>optional</em>) – only plot every <cite>step</cite> profiles; default is 1.</li>
+<li><strong>color</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><em>iterable</em></a><em>, </em><em>optional</em>) – color or iterable of colors to specify graph colors; The default
 <code class="docutils literal"><span class="pre">None</span></code> will use the color map <cite>cmap</cite> instead.</li>
-<li><strong>cmap</strong> (<a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a>) &#8211; Pick colors from the matplotlib color map <cite>cmap</cite>; the default is
+<li><strong>cmap</strong> (<a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a>) – Pick colors from the matplotlib color map <cite>cmap</cite>; the default is
 <em>viridis</em>.</li>
-<li><strong>linestyle</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><em>iterable</em></a><em>, </em><em>optional</em>) &#8211; linestyle supported by <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v2.0.2)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>; an
+<li><strong>linestyle</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> or </em><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><em>iterable</em></a><em>, </em><em>optional</em>) – linestyle supported by <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v2.0.2)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>; an
 iterable that is not a string (e.g., <code class="docutils literal"><span class="pre">('-',</span> <span class="pre">'--',</span> <span class="pre">'.')</span></code>) will
-be applied in turn. The default is &#8216;-&#8216; to draw a simple line.</li>
-<li><strong>yshift</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; displace each <span class="math">\(R(\zeta)\)</span> profile by <cite>yshift</cite> in the
+be applied in turn. The default is ‘-‘ to draw a simple line.</li>
+<li><strong>yshift</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – displace each <span class="math">\(R(\zeta)\)</span> profile by <cite>yshift</cite> in the
 <span class="math">\(y\)</span>-direction for clearer visualization. The default is 0,
 i.e., not to shift any graph.</li>
-<li><strong>frames</strong> (<em>integer</em><em> or </em><em>array_like</em><em>, </em><em>optional</em>) &#8211; only plot these specific frame(s); the default <code class="docutils literal"><span class="pre">None</span></code> is to
+<li><strong>frames</strong> (<em>integer</em><em> or </em><em>array_like</em><em>, </em><em>optional</em>) – only plot these specific frame(s); the default <code class="docutils literal"><span class="pre">None</span></code> is to
 plot everything (see also <cite>step</cite>)</li>
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; If it is set to &#8220;_nolegend_&#8221; or <code class="docutils literal"><span class="pre">False</span></code> then no legend is
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – If it is set to “_nolegend_” or <code class="docutils literal"><span class="pre">False</span></code> then no legend is
 displayed. Any other value is ignored and the frame number is
 used as a label. The default is <code class="docutils literal"><span class="pre">True</span></code> to plot the legend even
 though this can become rather messy.</li>
-<li><strong>ax</strong> (<a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a>) &#8211; If no <cite>ax</cite> is supplied or set to <code class="docutils literal"><span class="pre">None</span></code> then the plot will
+<li><strong>ax</strong> (<a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a>) – If no <cite>ax</cite> is supplied or set to <code class="docutils literal"><span class="pre">None</span></code> then the plot will
 be added to the current active axes.</li>
-<li><strong>kwargs</strong> (<cite>**kwargs</cite>) &#8211; All other <cite>kwargs</cite> are passed to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v2.0.2)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>.</li>
+<li><strong>kwargs</strong> (<cite>**kwargs</cite>) – All other <cite>kwargs</cite> are passed to <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v2.0.2)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> &#8211; Axes with the plot, either <cite>ax</cite> or the current axes.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> – Axes with the plot, either <cite>ax</cite> or the current axes.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">Axes</span></code></a></p>
@@ -748,19 +745,19 @@ be added to the current active axes.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) &#8211; only plot every <em>step</em> profile; default: 1</li>
-<li><strong>cmap</strong> (<a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a>, optional) &#8211; matplotlib color map ;  the default is <em>viridis</em></li>
-<li><strong>rmax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) &#8211; only display radii up to <cite>rmax</cite>; the default is <code class="docutils literal"><span class="pre">None</span></code>, which
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – only plot every <em>step</em> profile; default: 1</li>
+<li><strong>cmap</strong> (<a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a>, optional) – matplotlib color map ;  the default is <em>viridis</em></li>
+<li><strong>rmax</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – only display radii up to <cite>rmax</cite>; the default is <code class="docutils literal"><span class="pre">None</span></code>, which
 means to show all radii.</li>
-<li><strong>ylabel</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; label of the reaction coordinate axis; the default is &#8220;frames&#8221;</li>
-<li><strong>ax</strong> (<a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a>) &#8211; axes instance to plot into, which <em>must</em> have been generated
-with the <cite>projection=&#8216;3d&#8217;</cite> keyword set (see
+<li><strong>ylabel</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – label of the reaction coordinate axis; the default is “frames”</li>
+<li><strong>ax</strong> (<a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a>) – axes instance to plot into, which <em>must</em> have been generated
+with the <cite>projection=‘3d’</cite> keyword set (see
 <a class="reference external" href="http://matplotlib.org/mpl_toolkits/mplot3d/api.html#module-mpl_toolkits.mplot3d.axes3d" title="(in Matplotlib v2.0.2)"><code class="xref py py-mod docutils literal"><span class="pre">mpl_toolkits.mplot3d.axes3d</span></code></a> and the <a class="reference external" href="http://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html">mplot3d tutorial</a>
 for details)</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> &#8211; Axes with the plot, either <cite>ax</cite> or the current axes.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> – Axes with the plot, either <cite>ax</cite> or the current axes.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v2.0.2)"><code class="xref py py-class docutils literal"><span class="pre">Axes</span></code></a></p>
@@ -823,9 +820,9 @@ analyse part of the trajectory.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) &#8211; output file name; the default is &#8220;simple2.rad&#8221;</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em>, </em><em>optional</em>) – output file name; the default is “simple2.rad”</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filename</strong> &#8211; returns the name of the data file</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>filename</strong> – returns the name of the data file</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)">string</a></td>
 </tr>
@@ -836,7 +833,7 @@ analyse part of the trajectory.</p>
 <dl class="data">
 <dt id="MDAnalysis.analysis.hole.SIMPLE2_RAD">
 <code class="descclassname">MDAnalysis.analysis.hole.</code><code class="descname">SIMPLE2_RAD</code><em class="property"> = '\nremark: Time-stamp: &lt;2005-11-21 13:57:55 oliver&gt; [OB]\nremark: van der Waals radii: AMBER united atom\nremark: from Weiner et al. (1984), JACS, vol 106 pp765-768\nremark: Simple - Only use one value for each element C O H etc.\nremark: van der Waals radii\nremark: general last\nVDWR C??? ??? 1.85\nVDWR O??? ??? 1.65\nVDWR S??? ??? 2.00\nVDWR N??? ??? 1.75\nVDWR H??? ??? 1.00\nVDWR H?   ??? 1.00\nVDWR P??? ??? 2.10\nremark: ASN, GLN polar H (odd names for these atoms in xplor)\nVDWR E2?  GLN 1.00\nVDWR D2?  ASN 1.00\nremark: amber lone pairs on sulphurs\nVDWR LP?? ??? 0.00\nremark: for some funny reason it wants radius for K even though\nremark: it is on the exclude list\nremark: Use Pauling hydration radius (Hille 2001) [OB]\nVDWR K?   ??? 1.33\nVDWR NA?  ??? 0.95\nVDWR CL?  ??? 1.81\nremark: funny hydrogens in gA structure [OB]\nVDWR 1H?  ??? 1.00\nVDWR 2H?  ??? 1.00\nVDWR 3H?  ??? 1.00\nremark: need bond rad for molqpt option\nBOND C??? 0.85\nBOND N??? 0.75\nBOND O??? 0.7\nBOND S??? 1.1\nBOND H??? 0.5\nBOND P??? 1.0\nBOND ???? 0.85\n'</em><a class="headerlink" href="#MDAnalysis.analysis.hole.SIMPLE2_RAD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Built-in HOLE radii (based on <code class="docutils literal"><span class="pre">simple.rad</span></code> from the <a class="reference external" href="http://www.smartsci.uk/hole/">HOLE</a> distribution) &#8211; van der Waals radii are AMBER united atom from Weiner et al. (1984), JACS, vol 106 pp765-768.
+<dd><p>Built-in HOLE radii (based on <code class="docutils literal"><span class="pre">simple.rad</span></code> from the <a class="reference external" href="http://www.smartsci.uk/hole/">HOLE</a> distribution) – van der Waals radii are AMBER united atom from Weiner et al. (1984), JACS, vol 106 pp765-768.
 <em>Simple</em> - Only use one value for each element C O H etc.
 Added radii for K+, NA+, CL- (Pauling hydration radius from Hille 2002).
 The data file can be written with the convenience function <a class="reference internal" href="#MDAnalysis.analysis.hole.write_simplerad2" title="MDAnalysis.analysis.hole.write_simplerad2"><code class="xref py py-func docutils literal"><span class="pre">write_simplerad2()</span></code></a>.</p>
@@ -846,12 +843,12 @@ The data file can be written with the convenience function <a class="reference i
 <dt id="MDAnalysis.analysis.hole.seq2str">
 <code class="descclassname">MDAnalysis.analysis.hole.</code><code class="descname">seq2str</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/hole.html#seq2str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.hole.seq2str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return sequence as a string of numbers with spaces as separators.</p>
-<p>In the special case of <code class="docutils literal"><span class="pre">None</span></code>, the empty string &#8220;&#8221; is returned.</p>
+<p>In the special case of <code class="docutils literal"><span class="pre">None</span></code>, the empty string “” is returned.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> (<em>sequence</em><em> or </em><em>array_like</em>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> (<em>sequence</em><em> or </em><em>array_like</em>) – </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
 </tr>
@@ -942,14 +939,14 @@ each of them in turn.</td></tr>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#distances-and-contacts">4.2. Distances and contacts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#hydrogen-bonding">4.3. Hydrogen bonding</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../analysis_modules.html#membranes-and-membrane-proteins">4.4. Membranes and membrane proteins</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4.4.1. Generation and Analysis of HOLE pore profiles &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hole</span></code></a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.4.1. Generation and Analysis of HOLE pore profiles — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hole</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#examples-for-using-hole">4.4.1.1. Examples for using HOLE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#data-structures">4.4.1.2. Data structures</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#analysis">4.4.1.3. Analysis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#utilities">4.4.1.4. Utilities</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="leaflet.html">4.4.2. Leaflet identification &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.leaflet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="leaflet.html">4.4.2. Leaflet identification — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.leaflet</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../analysis_modules.html#nucleic-acids">4.5. Nucleic acids</a></li>
@@ -966,10 +963,10 @@ each of them in turn.</td></tr>
 <li class="toctree-l1"><a class="reference internal" href="../auxiliary_modules.html">8. Auxiliary modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules.html">9. Core modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization_modules.html">10. Visualization modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib_modules.html">11. Library functions — <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../version.html">12. Version information for MDAnalysis - <code class="docutils literal"><span class="pre">MDAnalysis.version</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../units.html">13. Constants and unit conversion — <code class="docutils literal"><span class="pre">MDAnalysis.units</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">14. Custom exceptions and warnings — <code class="docutils literal"><span class="pre">MDAnalysis.exceptions</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">15. References</a></li>
 </ul>
 
@@ -978,8 +975,8 @@ each of them in turn.</td></tr>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../analysis_modules.html">4. Analysis modules</a><ul>
-      <li>Previous: <a href="hbond_autocorrel.html" title="previous chapter">4.3.2. Hydrogen bond autocorrelation &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a></li>
-      <li>Next: <a href="leaflet.html" title="next chapter">4.4.2. Leaflet identification &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.leaflet</span></code></a></li>
+      <li>Previous: <a href="hbond_autocorrel.html" title="previous chapter">4.3.2. Hydrogen bond autocorrelation — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_autocorrel</span></code></a></li>
+      <li>Next: <a href="leaflet.html" title="next chapter">4.4.2. Leaflet identification — <code class="docutils literal"><span class="pre">MDAnalysis.analysis.leaflet</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -1002,7 +999,7 @@ each of them in turn.</td></tr>
       &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
