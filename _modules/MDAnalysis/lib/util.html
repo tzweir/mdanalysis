@@ -668,6 +668,13 @@
 
 <span class="sd">        .. versionadded:: 0.9.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># constructing the class from an instance of itself has weird behavior</span>
+        <span class="c1"># on __del__ and super on python 3. Let&#39;s warn the user and ensure the</span>
+        <span class="c1"># class works normally.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">NamedStream</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Constructed NamedStream from a NamedStream&quot;</span><span class="p">,</span>
+                          <span class="ne">RuntimeWarning</span><span class="p">)</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">stream</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close_stream</span> <span class="o">=</span> <span class="n">close</span>
