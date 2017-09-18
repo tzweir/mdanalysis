@@ -51,18 +51,21 @@
 <cite>AtomGroup</cite> objects from <cite>MDAnalysis</cite>.</p>
 <dl class="class">
 <dt id="MDAnalysis.lib.NeighborSearch.AtomNeighborSearch">
-<em class="property">class </em><code class="descclassname">MDAnalysis.lib.NeighborSearch.</code><code class="descname">AtomNeighborSearch</code><span class="sig-paren">(</span><em>atom_group</em>, <em>bucket_size=10</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/NeighborSearch.html#AtomNeighborSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.NeighborSearch.AtomNeighborSearch" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class can be used to find all atoms/residues/segements within the
+<em class="property">class </em><code class="descclassname">MDAnalysis.lib.NeighborSearch.</code><code class="descname">AtomNeighborSearch</code><span class="sig-paren">(</span><em>atom_group</em>, <em>box=None</em>, <em>bucket_size=10</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/NeighborSearch.html#AtomNeighborSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.NeighborSearch.AtomNeighborSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class can be used to find all atoms/residues/segments within the
 radius of a given query position.</p>
-<p>This class is using the BioPython KDTree for the neighborsearch. This class
-also does not apply PBC to the distance calculattions. So you have to ensure
-yourself that the trajectory has been corrected for PBC artifacts.</p>
+<p>For the neighbor search, this class uses the BioPython KDTree and its
+wrapper PeriodicKDTree for non-periodic and periodic systems, respectively.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>atom_list</strong> (<a class="reference internal" href="../core/groups.html#MDAnalysis.core.groups.AtomGroup" title="MDAnalysis.core.groups.AtomGroup"><em>AtomGroup</em></a>) – list of atoms</li>
+<li><strong>box</strong> (array-like or <code class="docutils literal"><span class="pre">None</span></code>, optional, default <code class="docutils literal"><span class="pre">None</span></code>) – Simulation cell dimensions in the form of
+<code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.trajectory.base.Timestep.dimensions</span></code> when
+periodic boundary conditions should be taken into account for
+the calculation of contacts.</li>
 <li><strong>bucket_size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Number of entries in leafs of the KDTree. If you suffer poor
 performance you can play around with this number. Increasing the
 <cite>bucket_size</cite> will speed up the construction of the KDTree but
@@ -184,7 +187,7 @@ atoms in <em>atoms</em>.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Jose Borreguero, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>

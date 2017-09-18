@@ -441,7 +441,7 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    inputcoords : array</span>
-<span class="sd">        A n x 3 array of coordinate data, of type ``np.float32``.</span>
+<span class="sd">        A (3,) coordinate or (n x 3) array of coordinates, type ``np.float32``.</span>
 <span class="sd">    box : array</span>
 <span class="sd">        The unitcell dimesions for this system.</span>
 <span class="sd">        The dimensions must be provided in the same format as returned</span>
@@ -460,7 +460,11 @@
 <span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="n">inputcoords</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
-    <span class="n">numcoords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">is_1d</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># True if only one vector coordinate</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">))</span>
+        <span class="n">is_1d</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">boxtype</span> <span class="o">=</span> <span class="n">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
     <span class="c1"># Convert [A,B,C,alpha,beta,gamma] to [[A],[B],[C]]</span>
@@ -481,6 +485,8 @@
            <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">inv</span><span class="p">),</span>
            <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">is_1d</span><span class="p">:</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">)</span>
     <span class="k">return</span> <span class="n">coords</span></div>
 
 
@@ -494,7 +500,7 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    inputcoords : array</span>
-<span class="sd">        A n x 3 array of coordinate data, of type np.float32</span>
+<span class="sd">        A (3,) coordinate or (n x 3) array of coordinates, type ``np.float32``.</span>
 <span class="sd">    box : array</span>
 <span class="sd">        The unitcell dimesions for this system.</span>
 <span class="sd">        The dimensions must be provided in the same format as returned</span>
@@ -514,7 +520,11 @@
 <span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="n">inputcoords</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
-    <span class="n">numcoords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">is_1d</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># True if only one vector coordinate</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">))</span>
+        <span class="n">is_1d</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">boxtype</span> <span class="o">=</span> <span class="n">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
     <span class="c1"># Convert [A,B,C,alpha,beta,gamma] to [[A],[B],[C]]</span>
@@ -529,6 +539,8 @@
            <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">box</span><span class="p">),</span>
            <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">is_1d</span><span class="p">:</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]),)</span>
     <span class="k">return</span> <span class="n">coords</span></div>
 
 
@@ -856,9 +868,9 @@
     <span class="c1"># determine boxtype</span>
     <span class="n">boxtype</span> <span class="o">=</span> <span class="n">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
     <span class="c1"># Convert [A,B,C,alpha,beta,gamma] to [[A],[B],[C]]</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_box&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_box&#39;</span><span class="p">:</span>
         <span class="n">box</span> <span class="o">=</span> <span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_vecs_bad&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s1">&#39;tri_vecs_bad&#39;</span><span class="p">:</span>
         <span class="n">box</span> <span class="o">=</span> <span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">triclinic_box</span><span class="p">(</span><span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
 
     <span class="n">box_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -949,7 +961,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
+      &copy;2005-2017, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Shobhit Agarwal, Balasubramanian, Utkarsh Bansal, Jonathan Barnoud, Tone Bengtsen, Alejandro Bernardin, Wouter Boomsma, Jose Borreguero, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Kathleen Clark, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Akshay Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Jon Kapla, Andrew William King, Max Linke, Jinju Lu, Micaela Matta, Robert McGibbon, Manuel Nuno Melo, Dominik 'Rathann' Mierzejewski, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Sang Young Noh, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Vedant Rathore, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Shantanu Srivastava, Lukas Stelzl, Gorman Stock, Xiki Tempula, Matteo Tiberti, Isaac Virshup, Nestor Wendt, Zhuyi Xue, Juan Eiros Zamora, and Oliver Beckstein.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
